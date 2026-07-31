@@ -1,12 +1,42 @@
+export type StudentRole = 'student' | 'admin';
+
 export interface StudentProfile {
   uid: string;
   fullName: string;
   username: string;
-  email?: string;
+  email: string;
   className?: string;
   school?: string;
+  role?: StudentRole;
   createdAt: number;
   lastSeenAt: number;
+}
+
+export interface LmsSession {
+  uid: string;
+  fullName: string;
+  username: string;
+  email: string;
+  role: StudentRole;
+  createdAt: number;
+}
+
+export interface QuestionProgress {
+  answer: string;
+  attempts: number;
+  correct: boolean;
+  locked: boolean;
+}
+
+export interface PageDraft {
+  uid: string;
+  pageNumber: number;
+  startedAt: number;
+  updatedAt: number;
+  activeSeconds: number;
+  questions: Record<string, QuestionProgress>;
+  submitted: boolean;
+  score?: number;
 }
 
 export interface ActivityEvent {
@@ -18,7 +48,9 @@ export interface ActivityEvent {
     | 'answer_check'
     | 'page_submit'
     | 'page_leave'
-    | 'heartbeat';
+    | 'heartbeat'
+    | 'registration'
+    | 'login';
   createdAt: number;
   metadata?: Record<string, unknown>;
 }
@@ -31,4 +63,18 @@ export interface PageResult {
   submittedAt: number;
   activeSeconds: number;
   attempts: Record<string, number>;
+  answers: Record<string, string>;
+}
+
+export type AnswerKey = Record<string, string[]>;
+
+export interface DashboardStudent {
+  profile: StudentProfile;
+  results: PageResult[];
+}
+
+export interface DashboardSnapshot {
+  students: DashboardStudent[];
+  generatedAt: number;
+  source: 'firebase' | 'local';
 }
