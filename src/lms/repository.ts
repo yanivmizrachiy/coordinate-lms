@@ -342,3 +342,82 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
     return localDashboard();
   }
 }
+
+
+export async function loadUserResults(
+  uid: string,
+): Promise<PageResult[]> {
+  const localResults = Object.values(
+    loadMap<PageResult>(RESULTS_KEY),
+  ).filter((result) => result.uid === uid);
+
+  if (!db || uid === 'guest') {
+    return localResults.sort(
+      (a, b) => a.pageNumber - b.pageNumber,
+    );
+  }
+
+  try {
+    const snapshot = await getDocs(
+      collection(db, 'students', uid, 'results'),
+    );
+
+    const merged = new Map<number, PageResult>();
+
+    for (const result of localResults) {
+      merged.set(result.pageNumber, result);
+    }
+
+    for (const document of snapshot.docs) {
+      const result = document.data() as PageResult;
+      merged.set(result.pageNumber, result);
+    }
+
+    return [...merged.values()].sort(
+      (a, b) => a.pageNumber - b.pageNumber,
+    );
+  } catch {
+    return localResults.sort(
+      (a, b) => a.pageNumber - b.pageNumber,
+    );
+  }
+}
+
+export async function loadUserDrafts(
+  uid: string,
+): Promise<PageDraft[]> {
+  const localDrafts = Object.values(
+    loadMap<PageDraft>(DRAFTS_KEY),
+  ).filter((draft) => draft.uid === uid);
+
+  if (!db || uid === 'guest') {
+    return localDrafts.sort(
+      (a, b) => a.pageNumber - b.pageNumber,
+    );
+  }
+
+  try {
+    const snapshot = await getDocs(
+      collection(db, 'students', uid, 'drafts'),
+    );
+
+    const merged = new Map<number, PageDraft>();
+
+    for (const draft of localDrafts) {
+      merged.set(draft.pageNumber, draft);
+    }
+
+    for (const document of snapshot.docs) {
+      const draft = document.data() as PageDraft;
+      merged.set(draft.pageNumber, draft);
+    }
+
+    return [...merged.values()].sort(
+      (a, b) => a.pageNumber - b.pageNumber,
+    );
+  } catch {
+    return localDrafts.sort(
+      (a, b) => a.pageNumber - b.pageNumber,
+    );
+  }
+}

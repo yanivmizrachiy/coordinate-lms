@@ -6,6 +6,8 @@ import './styles/actions.css';
 import './styles/flipbook.css';
 import './styles/workbook.css';
 import './styles/grayscale.css';
+import './styles/lms.css';
+import './styles/lms-phase3.css';
 
 import { startRouter, navigate, type RouteMatch } from './router';
 import { elem, clear } from './lib/dom';
@@ -16,6 +18,10 @@ import { pageViewer } from './views/pageViewer';
 import { book } from './views/book';
 import { flipbook } from './views/flipbook';
 import { ensureFreshBuild } from './lib/freshBuild';
+import { lmsLogin } from './views/lmsLogin';
+import { lmsAdmin } from './views/lmsAdmin';
+import { lmsProgress } from './views/lmsProgress';
+import { lmsKeys } from './views/lmsKeys';
 
 const app = document.getElementById('app');
 if (!app) throw new Error('#app root missing');
@@ -53,6 +59,10 @@ function resolve(match: RouteMatch): View {
     case 'page': return pageViewer(Number(match.params['n'] ?? '1'));
     case 'book': return flipbook;
     case 'print': return book;
+    case 'login': return lmsLogin;
+    case 'admin': return lmsAdmin;
+    case 'progress': return lmsProgress;
+    case 'keys': return lmsKeys;
   }
 }
 

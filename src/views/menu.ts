@@ -73,6 +73,24 @@ export function menu({ outlet, setTitle }: ViewContext): void {
   actions.append(wa);
   c.append(actions);
 
+  const lmsActions = elem('div', { class: 'lms-menu-actions no-print' });
+  const practiceButton = elem('button', {
+    class: 'btn btn--gold',
+    type: 'button',
+    text: '✍️ התחלת תרגול מתוקשב',
+  });
+  practiceButton.addEventListener('click', () => navigate('#/workbook/1'));
+
+  const accountButton = elem('button', {
+    class: 'btn btn--ghost',
+    type: 'button',
+    text: '👤 הרשמה, התחברות והתקדמות',
+  });
+  accountButton.addEventListener('click', () => navigate('#/login'));
+
+  lmsActions.append(practiceButton, accountButton);
+  c.append(lmsActions);
+
   /* ---- paging: jump straight to any page ---- */
   const nav = elem('div', { class: 'jump' });
   const select = elem('select', { class: 'jump__select', 'aria-label': 'בחירת עמוד' }) as HTMLSelectElement;

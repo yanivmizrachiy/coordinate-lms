@@ -29,3 +29,14 @@ Updated: 2026-07-31 11:17:56
 8. Registration is mandatory before continuing.
 9. Store students, attempts, activity and results centrally.
 10. Never delete the Perplexity prototype.
+
+
+## LMS Phase 3 Extreme
+
+- Added a student progress page with scores, drafts, active time and continue action.
+- Added an admin answer-key studio covering all workbook pages.
+- Added full answer-target manifest export.
+- Added JSON answer-key import and export.
+- Added page-level key coverage reporting.
+- Added remote/local result and draft merging.
+- Added Firebase and Vercel bootstrap automation.

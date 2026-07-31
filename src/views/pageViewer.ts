@@ -8,6 +8,11 @@ import { lastPage, sheetZoom } from '../lib/storage';
 import { gameById } from '../games';
 import type { ViewContext } from './context';
 import { goToContents } from './tocSheet';
+import {
+  attachLmsToPage,
+  canAccessPage,
+  renderAccessGate,
+} from '../lms/engine';
 
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
@@ -15,6 +20,10 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     const data = pageByNumber(page);
     const topic = topicOfPage(page);
     setTitle(`עמוד ${page}${topic ? ' · ' + topic.title : ''}`);
+    if (!canAccessPage(page)) {
+      renderAccessGate(outlet, page);
+      return;
+    }
     lastPage.set(page);
 
     const c = elem('div', { class: 'container' });
@@ -26,7 +35,7 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     const zoomIn = elem('button', { class: 'zoombtn', type: 'button', text: '+', 'aria-label': 'הגדלת העמוד' });
     const zoomLabel = elem('button', { class: 'zoombtn zoombtn--label', type: 'button', text: 'התאמה למסך', title: 'חזרה להתאמה למסך' });
     const zoom = elem('div', { class: 'zoomer', role: 'group', 'aria-label': 'גודל התצוגה' }, zoomOut, zoomLabel, zoomIn);
-    let cleanup: (() => void) | undefined;
+    let gameCleanup: (() => void) | undefined;
     if (data) {
       sheetWrap.append(fromHTML(data.html));
       hydrateGrids(sheetWrap);
@@ -34,11 +43,15 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       if (data.gameId) {
         const host = sheetWrap.querySelector<HTMLElement>('[data-game-host]');
         const g = gameById(data.gameId);
-        if (host && g) cleanup = g.mount(host);
+        if (host && g) gameCleanup = g.mount(host);
       }
     } else {
       sheetWrap.append(elem('div', { class: 'empty-note', text: 'העמוד לא נמצא.' }));
     }
+
+    const lms = data
+      ? attachLmsToPage(sheetWrap, page)
+      : undefined;
 
     /* The bottom row: page-turning MUST be comfortable from here too —
        „אפשרי לדפדף עמוד הבא ועמוד קודם באופן נוח גם מתחתית העמוד" — on a
@@ -72,7 +85,9 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       iconOnly('⛶', 'מסך מלא', () => toggleFullscreen(sheetWrap)),
     );
 
-    viewer.append(readerBar(page), sheetWrap, nav);
+    viewer.append(readerBar(page), sheetWrap);
+    if (lms) viewer.append(lms.panel);
+    viewer.append(nav);
     c.append(viewer);
     outlet.append(c);
     window.scrollTo({ top: 0 });
@@ -126,7 +141,8 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     return () => {
       window.clearTimeout(settle);
       window.removeEventListener('resize', applyZoom);
-      cleanup?.();
+      gameCleanup?.();
+      lms?.cleanup();
     };
   };
 }

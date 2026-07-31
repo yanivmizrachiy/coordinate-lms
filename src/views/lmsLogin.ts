@@ -53,6 +53,16 @@ export function lmsLogin({
       navigate('#/workbook/2');
     });
 
+    const progressButton = elem('button', {
+      class: 'btn btn--ghost',
+      type: 'button',
+      text: 'ההתקדמות שלי',
+    });
+
+    progressButton.addEventListener('click', () => {
+      navigate('#/progress');
+    });
+
     const adminButton = elem('button', {
       class: 'btn btn--ghost',
       type: 'button',
@@ -75,10 +85,19 @@ export function lmsLogin({
       });
     });
 
-    actions.append(continueButton);
+    actions.append(continueButton, progressButton);
 
     if (existingSession.role === 'admin') {
       actions.append(adminButton);
+      const keysButton = elem('button', {
+        class: 'btn btn--teacher',
+        type: 'button',
+        text: 'סטודיו מפתחות תשובה',
+      });
+      keysButton.addEventListener('click', () => {
+        navigate('#/keys');
+      });
+      actions.append(keysButton);
     }
 
     actions.append(logoutButton);
