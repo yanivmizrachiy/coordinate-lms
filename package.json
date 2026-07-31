@@ -1,0 +1,29 @@
+{
+  "name": "coordinate-lms",
+  "version": "1.0.0",
+  "description": "מערכת צירים — הרביע הראשון: חוברת 34 עמודים, שעשועונים אינטראקטיביים, מובייל והדפסת A4 — אפליקציה אחת מאוחדת.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4319 --strictPort",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:visual": "playwright test",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run typecheck && npm test && npm run build && npm run test:visual",
+    "pdf": "node scripts/build-pdf.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^26.1.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "firebase": "^12.17.0",
+    "pdf-lib": "^1.17.1"
+  }
+}

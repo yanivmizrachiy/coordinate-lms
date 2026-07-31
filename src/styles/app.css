@@ -1,0 +1,331 @@
+/* ===========================================================================
+   App views — home, tables of contents, games hub, game shell, page navigator.
+   =========================================================================== */
+
+/* A screen arrives with one short fade and a hair of travel. Anything longer is
+   the app making the reader wait for a decoration. Never on paper. */
+.app-main { opacity: 0; translate: 0 6px; }
+.app-main--in { opacity: 1; translate: none; transition: opacity var(--dur-quick) ease, translate var(--dur-quick) var(--ease); }
+@media (prefers-reduced-motion: reduce) { .app-main { opacity: 1; translate: none; } }
+@media print { .app-main { opacity: 1 !important; translate: none !important; } }
+
+/* The landing brings its own top bar, so the app bar steps aside on home. The
+   rule lived inside the old opening block and was nearly lost with it — the
+   class kept being applied while nothing hid the bar. */
+.appbar--hidden { display: none; }
+
+/* The full-screen opening lived here — the film, the letter-by-letter credit,
+   the counting 74, התחל. The landing (landing.css) replaced that screen with
+   the misparim site language, where the film is one section among the unit's
+   materials, so the ~230 lines that styled it went with it. */
+
+/* ---------- The menu ---------- */
+.menu { padding-top: 6px; }
+.menu__head {
+  display: flex; align-items: center; gap: 14px;
+  width: min(94vw, 720px); margin: 6px auto 16px;
+}
+.menu__badge img {
+  display: block; width: clamp(46px, 11vw, 60px); height: auto; border-radius: 50%;
+  background: #fff; filter: brightness(1.1) saturate(1.1);
+  box-shadow: 0 0 0 2px #ffffff, 0 4px 16px #1f2a4433;
+  animation: badge-turn 18s linear infinite;
+}
+.menu__title { margin: 0; font-size: clamp(18px, 4.6vw, 24px); font-weight: 900; color: var(--brand-ink); line-height: 1.15; }
+.menu__sub { margin: 3px 0 0; font-size: clamp(12.5px, 3vw, 14px); font-weight: 700; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .menu__badge img { animation: none; } }
+
+/* The four things you can do.
+   One shape, one motion, four jobs. The face is a soft white gradient with a
+   hairline of light along its top edge and a warm ring beneath it, so the tile
+   reads as a raised object rather than a painted rectangle; a sheen crosses it
+   on hover, and the whole thing presses in on tap. */
+.act-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 12px;
+  width: min(94vw, 720px); margin: 0 auto 16px;
+}
+.act {
+  position: relative; overflow: hidden;
+  min-height: 96px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  padding: 14px 12px; border-radius: 20px; text-decoration: none;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f7faff 52%, #eef4fd 100%);
+  border: 1px solid #dbe6f7; color: var(--brand-ink);
+  box-shadow:
+    0 1px 0 #ffffff inset,
+    0 -1px 0 #ffffffB3 inset,
+    0 2px 5px #1f2a4414,
+    0 12px 28px #1f2a4414;
+  cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  transition: transform var(--dur-move) var(--ease), box-shadow var(--dur-move) ease, border-color var(--dur-move) ease;
+  opacity: 0; translate: 0 14px;
+}
+.menu--in .act {
+  opacity: 1; translate: none;
+  transition: opacity var(--dur-enter) ease, translate var(--dur-enter) var(--ease),
+              transform var(--dur-move) var(--ease), box-shadow var(--dur-move) ease, border-color var(--dur-move) ease;
+}
+.menu--in .act:nth-child(1) { transition-delay: .06s; }
+.menu--in .act:nth-child(2) { transition-delay: .12s; }
+.menu--in .act:nth-child(3) { transition-delay: .18s; }
+.menu--in .act:nth-child(4) { transition-delay: .24s; }
+
+.act:hover {
+  transform: translateY(-4px);
+  border-color: #bed3f2;
+  box-shadow:
+    0 1px 0 #ffffff inset,
+    0 -1px 0 #ffffffB3 inset,
+    0 4px 10px #1f2a441f,
+    0 22px 44px #1f2a4426;
+}
+.act:active { transform: translateY(-1px) scale(.975); transition-duration: var(--dur-press); }
+.act:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+
+/* The sheen: a band of light that crosses the face once per hover. */
+.act__sheen {
+  position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(115deg, transparent 36%, #ffffffE6 50%, transparent 64%);
+  translate: -130% 0; opacity: 0;
+}
+.act:hover .act__sheen { animation: act-sheen var(--dur-slow) var(--ease-sweep); }
+@keyframes act-sheen {
+  0% { translate: -130% 0; opacity: 0; }
+  18% { opacity: .85; }
+  100% { translate: 130% 0; opacity: 0; }
+}
+
+.act__icon {
+  font-size: 27px; line-height: 1;
+  filter: drop-shadow(0 3px 6px #1f2a4426);
+  transition: transform var(--dur-move) var(--ease);
+}
+.act:hover .act__icon { transform: translateY(-3px) scale(1.1); }
+.act__label { font-size: 15px; font-weight: 900; letter-spacing: .1px; }
+.act__note { font-size: 11.5px; font-weight: 700; color: var(--muted); }
+
+/* The one that opens the booklet leads, in the brand colour. */
+.act--view {
+  background: linear-gradient(180deg, #2f6bff 0%, #1d4ed8 100%);
+  border-color: #1a44bd; color: #fff;
+  box-shadow: 0 1px 0 #ffffff59 inset, 0 2px 6px #1d4ed83D, 0 14px 32px #1d4ed83D;
+}
+.act--view .act__note { color: #ffffffc7; }
+.act--view:hover { border-color: #163ba6; box-shadow: 0 1px 0 #ffffff73 inset, 0 4px 12px #1d4ed84D, 0 24px 48px #1d4ed84D; }
+
+.act--wa {
+  background: linear-gradient(180deg, #34e07d 0%, #10a94e 100%);
+  border-color: #0c8f42; color: #fff;
+  box-shadow: 0 1px 0 #ffffff59 inset, 0 2px 6px #10a94e3D, 0 14px 32px #10a94e3D;
+}
+.act--wa .act__note { color: #ffffffc7; }
+.act--wa:hover { border-color: #0a7a39; box-shadow: 0 1px 0 #ffffff73 inset, 0 4px 12px #10a94e4D, 0 24px 48px #10a94e4D; }
+
+@media (prefers-reduced-motion: reduce) {
+  .act { opacity: 1; translate: none; transition: none; }
+  .act:hover { transform: none; }
+  .act:hover .act__icon { transform: none; }
+  .act:hover .act__sheen { animation: none; }
+}
+
+/* Paging — jump straight to any page. */
+.jump {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px;
+  width: min(94vw, 720px); margin: 0 auto 28px;
+  opacity: 0; translate: 0 10px;
+}
+.menu--in .jump {
+  opacity: 1; translate: none;
+  transition: opacity var(--dur-enter) ease .58s, translate var(--dur-enter) var(--ease) .58s;
+}
+@media (prefers-reduced-motion: reduce) { .jump { opacity: 1; translate: none; transition: none; } }
+.jump__select, .jump__go, .jump__first, .jump__toc {
+  min-height: 50px; padding: 0 16px; border-radius: 14px; font: inherit; font-weight: 800;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 100%);
+  border: 1px solid #dde7f8; color: var(--brand-ink);
+  box-shadow: 0 1px 0 #ffffff inset, 0 2px 5px #1f2a440F, 0 8px 20px #1f2a440D;
+  cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  transition: transform var(--dur-quick) var(--ease), box-shadow var(--dur-quick) ease, border-color var(--dur-quick) ease;
+}
+.jump__go:hover, .jump__first:hover, .jump__toc:hover {
+  transform: translateY(-2px); border-color: #c3d6f5;
+  box-shadow: 0 1px 0 #ffffff inset, 0 4px 9px #1f2a4417, 0 14px 30px #1f2a4417;
+}
+.jump__go:active, .jump__first:active, .jump__toc:active { transform: translateY(0) scale(.97); transition-duration: var(--dur-press); }
+.jump__select { flex: 1 1 130px; min-width: 120px; }
+.jump__go {
+  background: linear-gradient(180deg, #2f6bff 0%, #1d4ed8 100%);
+  border-color: #1a44bd; color: #fff;
+  box-shadow: 0 1px 0 #ffffff59 inset, 0 2px 6px #1d4ed833, 0 8px 20px #1d4ed833;
+}
+.jump__first, .jump__toc { flex: 1 1 130px; }
+.jump__select:focus-visible, .jump__go:focus-visible, .jump__first:focus-visible, .jump__toc:focus-visible {
+  outline: 3px solid var(--brand); outline-offset: 2px;
+}
+
+/* The home grid, the entry cards, the chapter-list page and the games hub all
+   used to live here. Every one of those screens was removed — the app opens on
+   the film, the contents page is the booklet's second sheet, and the games are
+   numbered worksheet pages. Their styles went with them: 86 lines, fourteen
+   class names, none of which appears anywhere in src/, tests/ or index.html. */
+
+/* ---------- Game shell ---------- */
+.game { max-width: 760px; margin: 0 auto; }
+.game__intro {
+  background: var(--brand-tint); border: 1px solid #cfe0ff; border-radius: var(--r-md);
+  padding: 14px 16px; margin-bottom: 18px; line-height: 1.6;
+}
+.game__intro h2 { font-size: 20px; color: var(--brand-ink); margin-bottom: 4px; }
+.game__board { display: grid; gap: 14px; }
+.game__row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 12px 14px; background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-md); }
+.game__prompt { font-weight: 800; }
+/* No bullet discs on a sheet — same rule as .tasks in workbook.css. */
+.game__hintlist { margin: 0; padding-inline-start: 0; list-style: none; }
+
+.answer-input {
+  min-height: var(--tapsize); min-width: 72px; padding: 8px 12px;
+  border: 2px solid var(--hairline); border-radius: 10px; font: inherit; font-weight: 800;
+  text-align: center; background: #fff; color: var(--ink);
+}
+.answer-input:focus { border-color: var(--brand); outline: none; }
+.answer-input.is-correct { border-color: var(--ok); background: #f0fdf4; }
+.answer-input.is-wrong { border-color: var(--danger); background: #fef2f2; }
+
+.chip-choice {
+  display: inline-flex; align-items: center; min-height: var(--tapsize);
+  padding: 8px 16px; border-radius: 999px; border: 2px solid var(--hairline);
+  background: #fff; font-weight: 800; color: var(--ink);
+}
+.chip-choice[aria-pressed="true"] { border-color: var(--brand); background: var(--brand-tint); color: var(--brand-ink); }
+.chip-choice.is-correct { border-color: var(--ok); background: #f0fdf4; color: var(--ok); }
+.chip-choice.is-wrong { border-color: var(--danger); background: #fef2f2; color: var(--danger); }
+
+.reveal {
+  margin-top: 16px; padding: 16px; border-radius: var(--r-md);
+  background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; font-weight: 800;
+  text-align: center; font-size: 20px;
+}
+.reveal--pending { background: var(--surface-2); border-color: var(--hairline); color: var(--muted); font-weight: 700; font-size: 16px; }
+
+.word-slots { display: inline-flex; gap: 6px; flex-wrap: wrap; direction: rtl; }
+.word-slot {
+  width: 38px; height: 46px; border-radius: 8px; border: 2px solid var(--hairline);
+  display: grid; place-items: center; font-size: 24px; font-weight: 900; background: #fff;
+}
+.word-slot.is-filled { border-color: var(--brand); color: var(--brand-ink); background: var(--brand-tint); }
+
+/* ---------- Page navigator (single-sheet workbook viewer) ---------- */
+.pageviewer { max-width: 210mm; margin: 0 auto; }
+
+/* The single-page view scales the sheet down to whatever room the screen has,
+   so a whole A4 is visible instead of two thirds of one. The booklet view is
+   deliberately NOT scaled — that is the one that goes to the printer. */
+.pageviewer__sheetwrap {
+  display: flex; justify-content: center;
+  --sheet-scale: 1;
+}
+.pageviewer__sheetwrap > .sheet {
+  transform: scale(var(--sheet-scale));
+  transform-origin: top center;
+}
+@media print {
+  .pageviewer__sheetwrap { height: auto !important; }
+  .pageviewer__sheetwrap > .sheet { transform: none !important; }
+}
+.pagenav {
+  position: sticky; bottom: 0; z-index: 40;
+  /* wrap: הקודם/הבא החדשים הוסיפו רוחב, ובלי גלישת-שורה הסרגל חרג ב-41px
+     מרוחב הטלפון — הכלל הוא בלי גלילה אופקית באף מסך קריאה. */
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px;
+  padding: 10px 12px; margin-top: 10px;
+  background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--hairline);
+}
+.pagenav__indicator { font-weight: 900; color: var(--brand-ink); min-width: 108px; text-align: center; }
+.pagenav select { min-height: var(--tapsize); border: 1px solid var(--hairline); border-radius: 10px; padding: 6px 10px; font: inherit; font-weight: 700; }
+
+.toolbar-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 14px; }
+
+.empty-note { text-align: center; color: var(--muted); padding: 40px 20px; }
+
+/* ---------- Print: hide all app chrome ---------- */
+@media print {
+  .hero, .appbar, .pagenav, .toolbar-row, .section-title, .home-grid, .games-grid,
+  .toc-topic, .skip-link, .no-print { display: none !important; }
+  .container { padding: 0; max-width: none; }
+  .app-main { min-height: 0; }
+}
+
+/* ---- print bar -----------------------------------------------------------
+   Choosing pages and printing them, in one row that never leaves the booklet.
+   The controls keep their colour: black and white is for the SHEETS. */
+.printbar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  max-width: 210mm; margin: 0 auto 8px; padding: 6px;
+  background: var(--paper); border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: 0 2px 10px #1f2a4412;
+}
+.printbar__range {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight: 700; color: var(--muted);
+}
+.printbar__num {
+  width: 3.4rem; padding: 6px 4px; font: inherit; font-weight: 800; text-align: center;
+  border: 1.5px solid var(--border); border-radius: 8px; background: #fff; color: var(--ink);
+}
+.printbar__num:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.printbar__go, .printbar__toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 12px; font: inherit; font-weight: 800; cursor: pointer;
+  border: 1.5px solid var(--blue); border-radius: 10px;
+  background: var(--blue); color: #fff;
+}
+.printbar__toggle { background: #fff; color: var(--blue); }
+.printbar__toggle.is-on { background: #1f2a44; border-color: #1f2a44; color: #fff; }
+.printbar__go:hover, .printbar__toggle:hover { filter: brightness(1.08); }
+.printbar__go:active, .printbar__toggle:active { transform: translateY(1px); }
+/* the second print button is the quieter one */
+.printbar__go + .printbar__go { background: #fff; color: var(--blue); }
+/* pushes the print controls to the far end, away from the navigation */
+.printbar__gap { flex: 1 1 8px; }
+
+/* --- how big the sheet is drawn on screen --- */
+.zoomer { display: inline-flex; align-items: center; gap: 0; }
+.zoombtn {
+  padding: 7px 11px; font: inherit; font-weight: 800; line-height: 1; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff; color: var(--ink);
+}
+.zoombtn:first-child { border-radius: 0 10px 10px 0; }
+.zoombtn:last-child { border-radius: 10px 0 0 10px; }
+.zoombtn + .zoombtn { border-right: 0; }
+.zoombtn--label { min-width: 5.2rem; font-size: 13px; color: var(--muted); }
+.zoombtn:hover { background: var(--screen); }
+
+@media (max-width: 620px) {
+  .printbar { gap: 6px; padding: 7px 8px; }
+  /* A phone already shows the sheet at the width it has, so there is nothing
+     for the zoom control to do — and four rows of buttons on an 812px screen
+     is a fifth of the page the reader came for. */
+  .zoomer, .printbar__gap { display: none; }
+  .printbar__go, .printbar__toggle { flex: 1 1 auto; justify-content: center; padding: 10px 10px; }
+  .printbar__range { width: 100%; justify-content: center; }
+}
+
+/* ---- a game sheet on paper ------------------------------------------------
+   The games are a screen experience, but every one of them is also a numbered
+   page in a printed booklet. A text field and a „בדקו” button mean nothing on
+   paper — Yaniv's point: „זה לא עבודה מתוקשבת”. In print the controls give way
+   to a ruled box the learner writes the answer in, by hand. */
+@media print {
+  .game .answer-input {
+    border: 0; border-bottom: 1.4px solid var(--ink); border-radius: 0;
+    background: transparent; min-width: 9ch;
+  }
+  .game .answer-input::placeholder { color: transparent; }
+  .game button,
+  .game .reveal--pending,
+  .game__prompt:empty { display: none !important; }
+  .game .word-slots .slot { border: 1.4px solid var(--ink); background: #fff; }
+}

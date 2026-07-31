@@ -1,0 +1,93 @@
+/* ===========================================================================
+   Design tokens — single source of truth for color, type and spacing.
+   Ported from the original workbook palette and extended for the app shell.
+   =========================================================================== */
+:root {
+  /* Core workbook palette (kept identical to the original booklet) */
+  --ink: #1f2a44;
+  --muted: #5f6b7a;
+  --grid: #e7eaf1;
+  --blue: #1d4ed8;
+  --paper: #fff;
+  --screen: #eef1f5;
+  --border: #cbd3df;
+  --soft: #f6f8fb;
+
+  /* Brand / app shell */
+  --brand: #1d4ed8;
+  --brand-strong: #1740b0;
+  --brand-ink: #0b2a6b;
+  --brand-tint: #eaf2ff;
+  --accent: #0f9d8f;
+  --warn: #b45309;
+  --danger: #dc2626;
+  --ok: #15803d;
+
+  /* Surfaces */
+  --bg: #eef2f8;
+  --surface: #ffffff;
+  --surface-2: #f6f8fb;
+  --hairline: #d8dfea;
+
+  /* Type */
+  --font-he: "Noto Sans Hebrew", "Noto Sans", "Segoe UI", Arial, sans-serif;
+  --font-math: "Noto Sans", "Segoe UI", Arial, sans-serif;
+
+  /* Radius & shadow */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --shadow-1: 0 2px 10px rgba(31, 42, 68, 0.08);
+  --shadow-2: 0 10px 30px rgba(31, 42, 68, 0.14);
+  --shadow-3: 0 18px 48px rgba(31, 42, 68, 0.20);
+
+  /* Spacing scale */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+
+  /* Layout */
+  --tapsize: 44px; /* minimum comfortable touch target */
+  --header-h: 58px;
+  --maxw: 1040px;
+
+  /* ---- Motion -------------------------------------------------------------
+     One vocabulary, so the whole app moves the same way and a new control
+     inherits the feel instead of inventing it.
+
+     --ease is the signature curve: it leaves fast and lands softly, which is
+     what makes a press feel answered rather than animated. --ease-pop
+     overshoots slightly and is for something ARRIVING that should be noticed
+     once (the page count). --ease-sweep is flat in the middle and belongs to a
+     band of light crossing a surface.
+
+     The four durations are the only ones the app uses. Anything longer than
+     --dur-slow is a film, not an interaction.
+     ------------------------------------------------------------------------ */
+  --ease: cubic-bezier(.16, .84, .34, 1);
+  --ease-pop: cubic-bezier(.2, 1.5, .5, 1);
+  --ease-sweep: cubic-bezier(.3, .7, .4, 1);
+
+  --dur-press: .08s;   /* the answer to a finger — must beat the eye */
+  --dur-quick: .16s;   /* hover, colour, small movement */
+  --dur-move: .3s;     /* something changing place or size */
+  --dur-enter: .45s;   /* something arriving on screen */
+  --dur-slow: .7s;     /* a title landing, a scrim deepening */
+}
+
+/* Nobody gets motion they asked not to have. One rule, at the root, so a new
+   component cannot forget it. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-press: 0s;
+    --dur-quick: 0s;
+    --dur-move: 0s;
+    --dur-enter: 0s;
+    --dur-slow: 0s;
+  }
+}

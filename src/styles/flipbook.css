@@ -1,0 +1,1061 @@
+/* גיליון הסגנון הזה הועתק מפרויקט "זוויות" (zav-digital), כדי ששני הפרויקטים
+   ידברו שפת-עיצוב אחת. כל שינוי כאן צריך להישקל גם שם, ולהפך. */
+
+/* ============================================================================
+   החוברת המדפדפת — "הגאומטריה של היוקרה"
+   מערכת עיצוב עצמאית וסקופית (.lxbook) של הספר הדיגיטלי בלבד — אינה נוגעת
+   בשאר האתר. Design tokens לפי מפרט יניב; Frank Ruhl Libre + Heebo.
+   השער הקדמי של החוברת הוא עמוד 1 האמיתי (מכתב המורה) — אין עמוד שער נוסף.
+   ========================================================================== */
+
+.lxbook {
+  /* --- Design tokens ---
+     המסגרת בנייבי העמוק של הפרויקט (--ink ‏#11203c) והזהב של הכותרת הראשית
+     (--gold ‏#c2a24e) — אחידות מלאה עם הטופבר, ה-pdfframe והפוטר של שני האתרים. */
+  --color-obsidian: #0c1730;
+  --color-charcoal: #11203c;
+  --color-graphite: #29292d;
+  --color-warm-ivory: #f5f1e8;
+  --color-paper: #fbf9f4;
+  --color-champagne: #c2a24e;
+  --color-antique-gold: #a9863a;
+  --color-taupe: #91877a;
+  --color-muted-text: #6d6962;
+  --color-deep-blue: #12243a;
+  --color-white: #ffffff;
+  --color-error: #a64141;
+  --color-success: #35664a;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* במקור next/font מזריק את --font-frank / --font-heebo. כאן אין next/font,
+     ולכן לכל משתנה נוסף fallback מקומי; כשהמשתנה כן מוגדר — התוצאה זהה למקור. */
+  --lx-serif: var(--font-frank, var(--font-frank-ruhl, "Frank Ruhl Libre", "David Libre", Georgia, serif)), "Noto Serif Hebrew", Georgia, serif;
+  --lx-sans: var(--font-heebo, "Heebo", "Rubik", system-ui, sans-serif), "Assistant", Arial, sans-serif;
+  --lx-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* משתני ריצה (מוזנים מ-JS): התקדמות קיפול + הצללות */
+  --fold-shade: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   הבמה — מסך קולנועי כהה
+--------------------------------------------------------------------------- */
+.lx-stage {
+  position: relative;
+  isolation: isolate;
+  border-radius: 16px;
+  overflow: hidden;
+  /* קו-זהב דק סביב הבמה — אותה שפה של .pdfframe (מסגרת המצגת) */
+  border: 1px solid var(--gold-line, #e3d3a4);
+  background:
+    radial-gradient(115% 90% at 50% 8%, #18294e 0%, var(--color-charcoal) 34%, var(--color-obsidian) 78%);
+  /* גובה הבמה נגזר דינמית מגובה המסך (בניכוי הניווט הדביק ושולי המקטע) —
+     הדפים גדולים ככל שהמסך מאפשר, בלי גלילה מיותרת ובלי גודל קשיח לרזולוציה
+     אחת. הרצפה 560px שומרת על חוויה תקינה בחלונות נמוכים. */
+  min-height: clamp(560px, 100dvh - 150px, 1120px);
+  display: flex;
+  flex-direction: column;
+  touch-action: pan-y;
+}
+.lx-stage:fullscreen {
+  border-radius: 0;
+  min-height: 100vh;
+}
+.lx-stage--fsfallback {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  border-radius: 0;
+  min-height: 100dvh;
+}
+
+/* תאורה רכה מאחורי החוברת */
+.lx-stage__glow {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: min(120vh, 1150px);
+  aspect-ratio: 1.45;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(194, 162, 78, 0.13), rgba(194, 162, 78, 0.045) 46%, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* גרעון עדין (1.5%) — feTurbulence מוטמע */
+.lx-stage__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* קווים גאומטריים דקים ברקע — תנועה איטית כמעט בלתי מורגשת */
+.lx-stage__lines {
+  position: absolute;
+  inset: -6%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  animation: lx-drift 90s linear infinite alternate;
+}
+.lx-stage__lines line,
+.lx-stage__lines path {
+  stroke: rgba(194, 162, 78, 0.09);
+  stroke-width: 1;
+  fill: none;
+}
+.lx-stage__lines circle {
+  fill: rgba(194, 162, 78, 0.12);
+}
+@keyframes lx-drift {
+  from { transform: translate3d(-0.6%, -0.4%, 0) rotate(-0.35deg); }
+  to { transform: translate3d(0.6%, 0.4%, 0) rotate(0.35deg); }
+}
+
+/* ---------------------------------------------------------------------------
+   הסצנה והספר
+--------------------------------------------------------------------------- */
+.lx-viewport {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* ריווח מצומצם ומדויק — הסרגלים וכפתור הכניסה לעולם לא מסתירים את החוברת,
+     והשוליים סביב הספר דקים ויוקרתיים. רצועת הצד לחצים נשמרת בחישוב-הרוחב
+     שב-FlipbookViewer (ARROW_GUTTER), לא בריפוד — כדי לא לבזבז רוחב פעמיים. */
+  /* צומצם (60px→52px למעלה, 100px→84px למטה) — „שיפרסו במסך באופן יותר נוח
+     וברור": הגובה הפנוי הוא מה שקובע את גודל העמוד, וכל מילימטר נספר. */
+  padding: clamp(44px, 5vh, 52px) clamp(8px, 1.4vw, 18px) 84px;
+}
+.lx-zoomer {
+  will-change: transform;
+  transition: transform 240ms var(--lx-ease);
+}
+.lx-zoomer--panning { transition: none; }
+.lx-scene {
+  perspective: 2600px;
+  perspective-origin: 50% 46%;
+}
+.lx-book {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 700ms var(--lx-ease);
+  user-select: none;
+  -webkit-user-select: none;
+}
+.lx-book--flipping,
+.lx-book--dragging {
+  transition: none;
+}
+.lx-book--dragging * {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+/* צל מגע + צל סביבתי מתחת לספר */
+.lx-book::after {
+  content: "";
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  bottom: -5.5%;
+  height: 9%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.16) 58%, transparent 78%);
+  filter: blur(10px);
+  z-index: -1;
+  transition: opacity 600ms var(--lx-ease);
+}
+
+/* חצי כפולה */
+.lx-half {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  border-radius: 3px;
+}
+.lx-half--right { right: 0; }
+.lx-half--left { left: 0; }
+
+/* דף בודד (מובייל) — החצי תופס את כל הרוחב */
+.lxbook[data-view="single"] .lx-half { width: 100%; }
+.lxbook[data-view="single"] .lx-half--right { display: none; }
+
+/* עמוד נייר */
+.lx-paper {
+  position: absolute;
+  inset: 0;
+  background: var(--color-paper);
+  border-radius: 3px;
+  overflow: hidden;
+  container-type: size;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.14),
+    0 14px 34px rgba(0, 0, 0, 0.26),
+    0 40px 90px rgba(0, 0, 0, 0.18);
+}
+.lx-paper--blank { background: var(--color-warm-ivory); }
+.lx-blankpage {
+  position: absolute;
+  inset: 0;
+  background: var(--color-warm-ivory);
+}
+
+/* מרקם נייר כמעט בלתי נראה */
+.lx-paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.012;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+}
+
+/* צל פנימי ליד השדרה + highlight בקצה הדף */
+.lx-paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.lx-half--right .lx-paper::after {
+  background:
+    linear-gradient(to right, rgba(15, 12, 4, 0.13), rgba(15, 12, 4, 0.04) 7%, transparent 13%),
+    linear-gradient(to left, rgba(255, 255, 255, 0.45), transparent 1.4%);
+}
+.lx-half--left .lx-paper::after {
+  background:
+    linear-gradient(to left, rgba(15, 12, 4, 0.13), rgba(15, 12, 4, 0.04) 7%, transparent 13%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.45), transparent 1.4%);
+}
+.lxbook[data-view="single"] .lx-half .lx-paper::after {
+  background: linear-gradient(to right, rgba(15, 12, 4, 0.09), transparent 8%);
+}
+
+/* תוכן העמוד — גיליון 860×A4 ממוזער לגודל העמוד */
+.lx-pagescale {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+}
+.lx-paper--interactive .lx-pagescale { pointer-events: auto; }
+
+/* הצללת דפדוף על העמודים שמתחת (מוזנת מ---fold-shade) */
+.lx-undershade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: var(--fold-shade);
+}
+.lx-undershade--left { background: linear-gradient(to left, rgba(8, 6, 2, 0.34), transparent 55%); }
+.lx-undershade--right { background: linear-gradient(to right, rgba(8, 6, 2, 0.3), transparent 55%); }
+
+/* --- הדף המתהפך --- */
+.lx-leaf {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  transform-origin: right center;
+  transform-style: preserve-3d;
+  z-index: 8;
+  will-change: transform;
+}
+.lxbook[data-view="single"] .lx-leaf { width: 100%; }
+.lx-leaf__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--color-paper);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  container-type: size;
+}
+.lx-leaf__face--back {
+  transform: rotateY(180deg);
+}
+/* ברק/צל דינמי על פני הדף המתהפך */
+.lx-leaf__sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  opacity: var(--fold-shade);
+}
+.lx-leaf__face--front .lx-leaf__sheen {
+  background: linear-gradient(to left, rgba(10, 8, 3, 0.32), rgba(10, 8, 3, 0.05) 42%, rgba(255, 255, 255, 0.1) 78%, transparent);
+}
+.lx-leaf__face--back .lx-leaf__sheen {
+  background: linear-gradient(to right, rgba(10, 8, 3, 0.32), rgba(10, 8, 3, 0.05) 42%, rgba(255, 255, 255, 0.08) 78%, transparent);
+}
+
+/* --- עובי הדפים שנותרו (מארזי הקצה) --- */
+.lx-edges {
+  position: absolute;
+  top: 0.7%;
+  bottom: 0.7%;
+  width: var(--edge-w, 0px);
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(to right, #efe9db 0 1px, #dcd4c2 1px 2.6px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+.lx-edges--left { right: 100%; }
+.lx-edges--right { left: 100%; }
+
+/* קו השדרה במרכז הכפולה */
+.lx-spineline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2) 12%, rgba(0, 0, 0, 0.2) 88%, transparent);
+  z-index: 7;
+  pointer-events: none;
+}
+.lxbook[data-view="single"] .lx-spineline { display: none; }
+
+/* ---------------------------------------------------------------------------
+   גב החוברת — קולופון וכריכה אחורית (השער הקדמי = עמוד 1 האמיתי)
+--------------------------------------------------------------------------- */
+.lx-cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+.lx-cover--back {
+  background:
+    linear-gradient(158deg, #12213f 0%, var(--color-obsidian) 46%, #0d1a33 100%);
+  color: var(--color-warm-ivory);
+  justify-content: center;
+  padding: 9% 8%;
+}
+/* מרקם בד עדין על הכריכה */
+.lx-cover--back::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3C/svg%3E");
+}
+/* highlight צר לאורך קצה הכריכה + הצללת שדרה */
+.lx-cover--back::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to left, rgba(255, 255, 255, 0.055), transparent 2%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.35), transparent 9%);
+}
+.lx-cover__org {
+  margin: 0;
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: clamp(0.58rem, 1.7cqw, 0.86rem);
+  letter-spacing: 0.06em;
+  color: rgba(145, 135, 122, 0.95);
+}
+
+/* אלמנט הזווית */
+.lxa-ray { stroke: rgba(245, 241, 232, 0.85); stroke-width: 2; stroke-linecap: round; }
+.lxa-arc { stroke: var(--color-champagne); stroke-width: 2; stroke-linecap: round; fill: none; }
+.lxa-vertex { fill: var(--color-champagne); }
+
+/* פנים הכריכה האחורית — קולופון */
+.lx-cover--colophon {
+  background: var(--color-warm-ivory);
+  color: var(--color-graphite);
+  justify-content: center;
+  padding: 10%;
+}
+.lx-cover--colophon .lxa-ray { stroke: rgba(41, 41, 45, 0.34); stroke-width: 1.6; }
+.lx-cover--colophon .lxa-arc { stroke: rgba(168, 135, 74, 0.55); stroke-width: 1.6; }
+.lx-cover__innermark {
+  width: 22%;
+  max-width: 120px;
+  opacity: 0.85;
+  display: block;
+  margin: 0 auto;
+}
+.lx-colophon__title {
+  margin: 7% 0 5%;
+  font-family: var(--lx-serif);
+  font-weight: 400;
+  font-size: clamp(1rem, 3.6cqw, 1.7rem);
+  color: var(--color-graphite);
+}
+.lx-colophon__line {
+  margin: 0 0 2.2%;
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: clamp(0.7rem, 2.1cqw, 1rem);
+  line-height: 1.7;
+  color: var(--color-muted-text);
+}
+.lx-colophon__line strong { font-weight: 500; color: var(--color-graphite); }
+.lx-colophon__year {
+  margin: 6% 0 0;
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: clamp(0.62rem, 1.8cqw, 0.85rem);
+  letter-spacing: 0.22em;
+  margin-inline-end: -0.22em;
+  color: var(--color-antique-gold);
+}
+.lx-cover__backmark {
+  width: 30%;
+  max-width: 170px;
+  margin-bottom: 7%;
+}
+.lx-cover__backtitle {
+  margin: 0 0 2.5%;
+  font-family: var(--lx-serif);
+  font-weight: 400;
+  font-size: clamp(0.8rem, 2.9cqw, 1.35rem);
+  color: var(--color-warm-ivory);
+}
+
+/* ---------------------------------------------------------------------------
+   מסך הכניסה — CTA וטקסט עזר
+--------------------------------------------------------------------------- */
+.lx-entry {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* יושב בתוך רצועת ה-100px השמורה מתחת לספר (padding-bottom של ה-viewport).
+     הכפתור בלבד (טקסט העזר הוסר) — כל הרצועה שלו: ~52px כפתור + 20px היסט,
+     כמעט 30px מרווח מהדפים. המסגרת לעולם לא נוגעת בעמודים. */
+  bottom: 20px;
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  transition: opacity 500ms var(--lx-ease), transform 500ms var(--lx-ease);
+}
+.lxbook[data-open="true"] .lx-entry {
+  opacity: 0;
+  transform: translateY(10px);
+  visibility: hidden;
+}
+.lx-entry__btn {
+  pointer-events: auto;
+  appearance: none;
+  cursor: pointer;
+  font-family: var(--lx-sans);
+  font-weight: 400;
+  font-size: 1.04rem;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  margin-inline-end: -0.16em;
+  /* מלל בזהב הכותרת הראשית, על מסגרת בנייבי הפרויקט */
+  color: var(--color-champagne);
+  background: rgba(12, 23, 48, 0.45);
+  border: 1px solid rgba(194, 162, 78, 0.65);
+  border-radius: 2px;
+  padding: 14px 48px;
+  transition: background 200ms var(--lx-ease), border-color 200ms var(--lx-ease), color 200ms var(--lx-ease);
+}
+.lx-entry__btn:hover {
+  background: rgba(194, 162, 78, 0.14);
+  border-color: var(--color-champagne);
+  color: #dcc27a;
+}
+.lx-entry__btn:focus-visible {
+  outline: 2px solid var(--color-champagne);
+  outline-offset: 3px;
+}
+/* הכריכה הסגורה מגיבה מעט ל-hover */
+.lxbook[data-open="false"] .lx-book { cursor: pointer; }
+.lxbook[data-open="false"] .lx-book:hover { transform: translateX(var(--book-shift, 0px)) rotateY(-4deg) !important; }
+
+/* ---------------------------------------------------------------------------
+   אזורי דפדוף וחצים
+--------------------------------------------------------------------------- */
+.lx-zone {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: clamp(48px, 13%, 130px);
+  z-index: 10;
+  cursor: grab;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.lx-zone--next { left: 0; }
+.lx-zone--prev { right: 0; }
+.lx-zone:active { cursor: grabbing; }
+
+.lx-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 14;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(194, 162, 78, 0.32);
+  background: rgba(12, 23, 48, 0.38);
+  backdrop-filter: blur(8px);
+  color: rgba(245, 241, 232, 0.88);
+  cursor: pointer;
+  transition: opacity 220ms var(--lx-ease), background 180ms var(--lx-ease), border-color 180ms var(--lx-ease), transform 180ms var(--lx-ease);
+}
+.lx-arrow:hover:not(:disabled) { background: rgba(194, 162, 78, 0.14); border-color: rgba(194, 162, 78, 0.7); }
+.lx-arrow--next:hover:not(:disabled) { transform: translateY(-50%) translateX(-2px); }
+.lx-arrow--prev:hover:not(:disabled) { transform: translateY(-50%) translateX(2px); }
+.lx-arrow:focus-visible { outline: 2px solid var(--color-champagne); outline-offset: 2px; }
+.lx-arrow:disabled { opacity: 0; pointer-events: none; }
+/* החצים יושבים בתוך רצועת-הצד השמורה (ARROW_GUTTER) — לעולם לא על הדף */
+.lx-arrow--next { left: clamp(6px, 1.2%, 16px); }
+.lx-arrow--prev { right: clamp(6px, 1.2%, 16px); }
+.lx-arrow svg { width: 21px; height: 21px; }
+
+/* ---------------------------------------------------------------------------
+   סרגלי הממשק — עליון (פעולות) ותחתון (ניווט). תמיד גלויים, לעולם לא מעל הספר.
+--------------------------------------------------------------------------- */
+.lx-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px clamp(14px, 2.6%, 30px) 11px;
+  border-bottom: 1px solid rgba(194, 162, 78, 0.13);
+  background: rgba(12, 23, 48, 0.28);
+  backdrop-filter: blur(6px);
+}
+.lx-topbar__title {
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  /* מלל על המסגרת — בזהב הכותרת הראשית */
+  color: rgba(194, 162, 78, 0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lx-topbar__acts {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+}
+.lx-topbar__acts a,
+.lx-topbar__acts button {
+  appearance: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: rgba(245, 241, 232, 0.66);
+  text-decoration: none;
+  padding: 6px 11px;
+  transition: color 180ms var(--lx-ease);
+}
+/* קו זהב דק שנמתח מתחת לפעולה ב-hover — במקום קופסה */
+.lx-topbar__acts a::after,
+.lx-topbar__acts button::after {
+  content: "";
+  position: absolute;
+  right: 11px;
+  left: 11px;
+  bottom: 2px;
+  height: 1px;
+  background: var(--color-champagne);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 240ms var(--lx-ease);
+}
+.lx-topbar__acts a:hover,
+.lx-topbar__acts button:hover {
+  color: var(--color-champagne);
+}
+.lx-topbar__acts a:hover::after,
+.lx-topbar__acts button:hover::after {
+  transform: scaleX(1);
+}
+.lx-topbar__acts a:focus-visible,
+.lx-topbar__acts button:focus-visible {
+  outline: 1px solid var(--color-champagne);
+  outline-offset: 2px;
+}
+.lx-topbar__acts svg { width: 13px; height: 13px; flex: none; opacity: 0.8; }
+
+.lx-toolbar {
+  position: absolute;
+  bottom: clamp(14px, 2.8%, 24px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 7px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(194, 162, 78, 0.2);
+  background: rgba(13, 26, 52, 0.78);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.42);
+  max-width: calc(100% - 20px);
+}
+.lx-toolbar__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: rgba(245, 241, 232, 0.72);
+  transition: color 160ms var(--lx-ease), background 160ms var(--lx-ease);
+}
+.lx-toolbar__btn:hover:not(:disabled) { color: var(--color-champagne); background: rgba(194, 162, 78, 0.09); }
+.lx-toolbar__btn:focus-visible { outline: 1px solid var(--color-champagne); outline-offset: 1px; }
+.lx-toolbar__btn:disabled { opacity: 0.26; cursor: default; }
+.lx-toolbar__btn[aria-pressed="true"] { color: var(--color-champagne); background: rgba(194, 162, 78, 0.12); }
+.lx-toolbar__btn svg { width: 18px; height: 18px; }
+.lx-toolbar__pages {
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: 0.84rem;
+  color: rgba(245, 241, 232, 0.68);
+  padding: 0 16px;
+  white-space: nowrap;
+  min-width: 172px;
+  text-align: center;
+}
+.lx-toolbar__pages b {
+  font-family: var(--lx-serif);
+  font-weight: 400;
+  font-size: 1.04rem;
+  color: var(--color-champagne);
+  direction: ltr;
+  unicode-bidi: isolate;
+  letter-spacing: 0.03em;
+}
+.lx-toolbar__sep {
+  width: 1px;
+  height: 22px;
+  background: linear-gradient(to bottom, transparent, rgba(194, 162, 78, 0.35), transparent);
+  margin: 0 8px;
+  flex: none;
+}
+
+/* ---------------------------------------------------------------------------
+   פאנל תוכן העניינים
+--------------------------------------------------------------------------- */
+.lx-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 18;
+  background: rgba(4, 10, 24, 0.5);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  animation: lx-fade 280ms var(--lx-ease);
+}
+@keyframes lx-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.lx-toc {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 19;
+  width: min(420px, 92%);
+  background: rgba(15, 28, 55, 0.95);
+  backdrop-filter: blur(14px);
+  border-inline-start: 1px solid rgba(194, 162, 78, 0.3);
+  display: flex;
+  flex-direction: column;
+  animation: lx-toc-in 320ms var(--lx-ease);
+}
+@keyframes lx-toc-in {
+  from { transform: translateX(28px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.lx-toc__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid rgba(194, 162, 78, 0.18);
+}
+.lx-toc__title {
+  margin: 0;
+  font-family: var(--lx-serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--color-warm-ivory);
+}
+.lx-toc__close {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: rgba(245, 241, 232, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lx-toc__close:hover { color: var(--color-champagne); background: rgba(194, 162, 78, 0.1); }
+.lx-toc__close:focus-visible { outline: 2px solid var(--color-champagne); }
+.lx-toc__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 14px 22px 22px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(194, 162, 78, 0.35) transparent;
+}
+.lx-toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* כותרת שער (קבוצת נושא) בפאנל — תווית זהב + קו ממשיך עדין, אחיד לפרקים ולתמונות */
+.lx-toc__group {
+  margin: 16px 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--lx-sans);
+  font-weight: 400;
+  font-size: 0.82rem;
+  color: var(--color-antique-gold);
+  white-space: nowrap;
+}
+.lx-toc__group::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(194, 162, 78, 0.25);
+}
+section:first-of-type > .lx-toc__group {
+  margin-top: 2px;
+}
+.lx-toc__group--thumbs {
+  margin: 14px 0 8px;
+}
+.lx-toc__row {
+  appearance: none;
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  text-align: start;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(194, 162, 78, 0.12);
+  padding: 13px 4px;
+  cursor: pointer;
+  transition: background 170ms var(--lx-ease);
+}
+.lx-toc__row:hover { background: rgba(194, 162, 78, 0.07); }
+.lx-toc__row:focus-visible { outline: 2px solid var(--color-champagne); outline-offset: -2px; }
+.lx-toc__row[aria-current="true"] .lx-toc__label { color: var(--color-champagne); }
+.lx-toc__num {
+  flex: none;
+  font-family: var(--lx-serif);
+  font-weight: 300;
+  font-size: 0.95rem;
+  color: var(--color-antique-gold);
+  direction: ltr;
+  unicode-bidi: isolate;
+  min-width: 26px;
+}
+.lx-toc__text { flex: 1; min-width: 0; }
+.lx-toc__label {
+  display: block;
+  font-family: var(--lx-sans);
+  font-weight: 400;
+  font-size: 0.96rem;
+  color: var(--color-warm-ivory);
+  line-height: 1.4;
+}
+.lx-toc__sub {
+  display: block;
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: 0.78rem;
+  color: rgba(145, 135, 122, 1);
+  margin-top: 2px;
+}
+.lx-toc__page {
+  flex: none;
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: 0.78rem;
+  color: rgba(245, 241, 232, 0.55);
+  white-space: nowrap;
+}
+
+.lx-toc__thumbstitle {
+  margin: 26px 0 12px;
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  margin-inline-end: -0.22em;
+  color: rgba(145, 135, 122, 1);
+}
+.lx-toc__thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.lx-thumb {
+  appearance: none;
+  border: 1px solid rgba(194, 162, 78, 0.2);
+  border-radius: 3px;
+  background: var(--color-charcoal);
+  padding: 0;
+  cursor: pointer;
+  aspect-ratio: 210 / 297;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 170ms var(--lx-ease), transform 170ms var(--lx-ease);
+}
+.lx-thumb:hover { border-color: var(--color-champagne); transform: translateY(-2px); }
+.lx-thumb:focus-visible { outline: 2px solid var(--color-champagne); outline-offset: 1px; }
+.lx-thumb[aria-current="true"] { border-color: var(--color-champagne); box-shadow: 0 0 0 1px var(--color-champagne); }
+.lx-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: var(--color-paper);
+}
+.lx-thumb__live {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--color-warm-ivory);
+}
+.lx-thumb__live svg { width: 46%; }
+.lx-thumb__live span {
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: 0.56rem;
+  color: var(--color-muted-text);
+  padding: 0 5px;
+  text-align: center;
+  line-height: 1.3;
+}
+.lx-thumb__num {
+  position: absolute;
+  bottom: 3px;
+  left: 5px;
+  font-family: var(--lx-sans);
+  font-weight: 400;
+  font-size: 0.6rem;
+  color: rgba(41, 41, 45, 0.75);
+  background: rgba(251, 249, 244, 0.82);
+  border-radius: 2px;
+  padding: 0 4px;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ---------------------------------------------------------------------------
+   מספור עמודים — ברור וקריא בתחתית כל עמוד (השער נשאר נקי), כמו בדפוס:
+   עמוד ימני (זוגי) ⇒ המספר בפינה הימנית-תחתונה; עמוד שמאלי (אי-זוגי) ⇒
+   בפינה השמאלית-תחתונה. אינו נגרר עם הזום של תוכן העמוד.
+--------------------------------------------------------------------------- */
+.lx-pagenum {
+  position: absolute;
+  bottom: 1.4%;
+  z-index: 5;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--lx-serif);
+  font-weight: 700;
+  font-size: clamp(0.8rem, 2.6cqw, 1.15rem);
+  letter-spacing: 0.05em;
+  color: #7a5c17;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.lx-pagenum--right {
+  right: 3.5%;
+}
+.lx-pagenum--left {
+  left: 3.5%;
+}
+.lx-pagenum::before,
+.lx-pagenum::after {
+  content: "";
+  width: 16px;
+  height: 1.5px;
+  background: rgba(169, 134, 58, 0.6);
+}
+
+/* ---------------------------------------------------------------------------
+   עטיפת עמוד המצגת בתוך דף A4
+--------------------------------------------------------------------------- */
+.lx-preswrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--color-paper);
+  padding: 34px 30px;
+}
+.lx-preswrap__title {
+  margin: 0 0 6px;
+  text-align: center;
+  font-family: var(--lx-serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--color-graphite);
+}
+.lx-preswrap__sub {
+  margin: 0 0 20px;
+  text-align: center;
+  font-family: var(--lx-sans);
+  font-weight: 300;
+  font-size: 0.95rem;
+  color: var(--color-muted-text);
+}
+
+/* ---------------------------------------------------------------------------
+   רספונסיביות + נגישות
+--------------------------------------------------------------------------- */
+/* מסכים צרים (טאבלט) — חצים קומפקטיים בתוך רצועת-צד מצומצמת (92px, ראו
+   ARROW_GUTTER ב-FlipbookViewer) כדי להשאיר לדפים רוחב מרבי בלי חפיפה */
+@media (max-width: 1100px) {
+  .lx-arrow { width: 38px; height: 38px; }
+  .lx-arrow svg { width: 18px; height: 18px; }
+  .lx-arrow--next { left: 4px; }
+  .lx-arrow--prev { right: 4px; }
+}
+
+@media (max-width: 760px) {
+  .lx-stage { min-height: clamp(460px, 100dvh - 118px, 860px); border-radius: 14px; }
+  /* במסכים צרים הפעולות עוטפות ליותר משורה אחת, וגובה הסרגל משתנה לפי הרוחב.
+     לכן הסרגל יוצא מריחוף (absolute) לזרימת ה-flex של הבמה עם order:-1 — הוא
+     תופס את גובהו האמיתי בראש, וה-viewport (flex:1) מקבל בדיוק את השאר. אין
+     מדידת JS ואין מספר קסם, ולכן הדפים לעולם לא נחתכים מתחתיו בשום רוחב.
+     הסרגל התחתון וכפתור הכניסה נשארים מרחפים — הם מעוצבים לרחף מעל הדף. */
+  .lx-topbar { position: static; order: -1; }
+  .lx-viewport { padding: 8px 6px calc(94px + env(safe-area-inset-bottom)); }
+  .lx-entry { bottom: calc(16px + env(safe-area-inset-bottom)); }
+  .lx-toolbar {
+    bottom: max(8px, env(safe-area-inset-bottom));
+    padding: 4px 8px;
+    gap: 0;
+    border-radius: 12px;
+  }
+  .lx-toolbar__btn { width: 38px; height: 38px; }
+  .lx-toolbar__pages { padding: 0 8px; font-size: 0.76rem; min-width: 0; }
+  .lx-toolbar__pages b { font-size: 0.94rem; }
+  .lx-toolbar__sep { margin: 0 3px; }
+  .lx-topbar__title { display: none; }
+  .lx-topbar { justify-content: center; }
+  /* שלוש הפעולות רחבות מהמסך הצר — עוטפות לשתי שורות ממורכזות במקום להיחתך.
+     חובה לבטל את flex:none של הבסיס: בלעדיו הקבוצה שומרת על רוחבה המלא
+     וגולשת מהסרגל במקום להתכווץ אליו ולעטוף. */
+  .lx-topbar__acts { flex: 0 1 auto; min-width: 0; flex-wrap: wrap; justify-content: center; }
+  .lx-arrow { width: 40px; height: 40px; }
+  .lx-toc__thumbs { grid-template-columns: repeat(3, 1fr); }
+  .lx-entry__btn { padding: 12px 38px; font-size: 0.98rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-stage__lines { animation: none; }
+  .lx-book,
+  .lx-zoomer,
+  .lx-entry { transition: none; }
+  .lx-toc,
+  .lx-scrim { animation-duration: 1ms; }
+}
+
+/* מעבר עדין בהחלפת עמוד ללא אנימציית קיפול (קפיצת TOC / reduced motion) */
+.lx-book--fadeswap .lx-half,
+.lx-book--fadeswap .lx-cover {
+  animation: lx-pagefade 320ms var(--lx-ease);
+}
+@keyframes lx-pagefade { from { opacity: 0.25; } to { opacity: 1; } }
+
+/* הדפסה — הספר הדיגיטלי אינו רכיב דפוס; ההדפסה נעשית ב-/worksheets/print */
+@media print {
+  .lxbook .lx-stage { display: none; }
+}
+
+/* וכל מעטפת החוברת יחד איתה — שום קישוט מסך לא מגיע למדפסת */
+@media print {
+  .lxbook { display: none; }
+}
+
+/* המחסן — הדפים שאינם על הבמה כרגע. visibility ולא display, כדי שהדפים יימדדו
+   (fitSheets) ושהשעשועונים ימשיכו לחיות גם כשהדף שלהם סגור. */
+.lx-store {
+  position: absolute;
+  inset-inline-start: -9999px;
+  top: 0;
+  width: 794px;
+  visibility: hidden;
+  pointer-events: none;
+}

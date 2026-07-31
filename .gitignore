@@ -1,0 +1,34 @@
+
+# build output
+# dependencies
+# environment & secrets
+# os / editor
+# test / tooling artifacts
+*.key
+*.log
+*.pem
+*.secret
+*.secret.*
+*.tmp
+.DS_Store
+.env
+.env.*
+.playwright/
+.secrets/
+.vite/
+Thumbs.db
+coverage/
+credentials.json
+dist/
+node_modules/
+playwright-report/
+secrets.json
+standalone/
+test-results/
+
+# תיקיית קלט זמנית של יניב — תוצרים מפרויקט אחר, לא קוד של הריפו
+_CLAUDE_INPUT/
+
+.vercel
+.vercel
+!.env.example

@@ -1,0 +1,292 @@
+/* ===========================================================================
+   כפתורי הפעולה וסרגל הקריאה — מועתקים מפרויקט הזוויות (zaviyot), אחד לאחד.
+
+   דרישת יניב: „כפתורי הפעולה של הדפים מהחוברת... בדיוק כמו כפתורי הפעולה של
+   דפי העבודה שיש בפרויקט זוויות — אחידות מקסימלית". לכן גם שמות המחלקות זהים
+   (.btn, .btn--gold, .btn--ghost, .btn--sm, .wsbar) ולא רק המראה: מי שמשווה
+   את שני הריפואים רואה את אותו קוד, ולא שני ניסוחים של אותו עיצוב.
+
+   הערכים הם הערכים הסופיים שם אחרי כל הדריסות בגיליון שלהם: נייבי #11203c,
+   זהב #c2a24e, כחול-חתימה #2d6cb3, פינה 12px.
+   =========================================================================== */
+:root {
+  --act-ink: #11203c;
+  --act-navy: #16233f;
+  --act-gold: #c2a24e;
+  --act-accent: #2d6cb3;
+  --act-accent-strong: #245a96;
+  --act-accent-soft: #e9f1fb;
+  --act-accent-line: #cfe0f4;
+  --act-surface: #ffffff;
+  --act-border: #ece7db;
+  --act-radius-btn: 12px;
+  --act-step-0: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --act-step--1: clamp(0.8rem, 0.77rem + 0.15vw, 0.875rem);
+  --act-font-head: 'Rubik', var(--font-he);
+}
+
+/* ===== כפתורים ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--act-font-head);
+  font-size: var(--act-step-0);
+  font-weight: 600;
+  min-height: 44px;
+  padding: 12px 22px;
+  border-radius: var(--act-radius-btn);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.1;
+  transition: box-shadow var(--dur-move) var(--ease), background var(--dur-quick) var(--ease);
+}
+/* כפתור ראשי: כחול החתימה */
+.btn--primary {
+  background: var(--act-accent);
+  color: #fff;
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--act-accent) 28%, transparent);
+}
+.btn--primary:hover {
+  background: var(--act-accent-strong);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--act-accent) 36%, transparent);
+}
+/* כפתור זהב: הפעולה המרכזית של הדף — הורדה / הדפסה */
+.btn--gold {
+  background: var(--act-gold);
+  color: var(--act-ink);
+}
+.btn--gold:hover { filter: brightness(1.05); }
+/* כפתור משני: לבן עם מסגרת בצבע החתימה */
+.btn--ghost {
+  background: var(--act-surface);
+  color: var(--act-accent);
+  border: 1px solid var(--act-accent-line);
+}
+.btn--ghost:hover { background: var(--act-accent-soft); border-color: var(--act-accent); }
+.btn--block { width: 100%; }
+.btn--sm {
+  min-height: 44px;
+  padding: 10px 16px;
+  font-size: var(--act-step--1);
+}
+.btn--disabled, .btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.btn:focus-visible {
+  outline: 3px solid var(--act-accent);
+  outline-offset: 3px;
+}
+.btn--primary:focus-visible, .btn--gold:focus-visible {
+  outline-color: var(--act-ink);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.9);
+}
+/* על רקע כהה (סרגל הקריאה) המסגרת הלבנה היא שמפרידה את הכפתור מהרקע */
+.wsbar .btn--ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+.wsbar .btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== סרגל הקריאה העליון ===== */
+.wsbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  /* בטלפון הסרגל נשבר לשלוש שורות; דביק — הוא היה מכסה שליש מסך ותופס
+     לחיצות (כפתור „בדקו" של שעשועון נלכד מתחתיו). בצר הוא נגלל עם הדף,
+     והדפדוף חי בניווט התחתון — בדיוק בשביל זה הוא נוסף. */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 18px;
+  background: var(--act-navy);
+  color: #fff;
+}
+.wsbar__title {
+  font-family: var(--act-font-head);
+  font-weight: 700;
+  font-size: var(--act-step--1);
+  color: #fff;
+  text-align: center;
+  /* שורה מלאה משלה — אחרת הכותרת נדחסת לעמודה צרה בין קבוצות הכפתורים */
+  flex: 1;
+  flex-basis: 100%;
+  order: 3;
+}
+.wsbar__side {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.wsbar__side--acts { margin-inline-start: auto; }
+.wsbar__nav { display: flex; gap: 6px; }
+
+/* ===== בורר העמודים ===== */
+.pick {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(2px);
+}
+.pick__modal {
+  width: min(980px, 98vw);
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.35);
+}
+.pick__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--act-ink);
+  color: #fff;
+}
+.pick__title { font-family: var(--act-font-head); font-size: 18px; }
+.pick__close {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.pick__close:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+.pick__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 20px 8px;
+  border-bottom: 1px solid #e7eaf1;
+}
+.pick__chip {
+  border: 1.5px solid #d8dbe4;
+  background: #f4f6fb;
+  color: var(--act-ink);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font: 600 14px var(--font-he);
+  cursor: pointer;
+}
+.pick__chip[aria-pressed='true'] { background: var(--act-ink); border-color: var(--act-ink); color: #fff; }
+.pick__grid {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 20px;
+}
+.pick__group {
+  grid-column: 1 / -1;
+  margin: 8px 0 0;
+  font: 700 13px var(--act-font-head);
+  color: var(--act-accent);
+}
+.pick__card {
+  position: relative;
+  width: 150px;
+  border: 2px solid #e0e3ec;
+  background: #fff;
+  border-radius: 12px;
+  padding: 6px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+}
+.pick__card[aria-pressed='true'] { border-color: var(--act-gold); background: #fffaf0; }
+.pick__tick {
+  position: absolute;
+  inset-inline-end: 10px;
+  inset-block-start: 10px;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid #c3c9d6;
+  background: #fff;
+  color: var(--act-ink);
+  font: 800 14px/18px var(--font-he);
+}
+.pick__card[aria-pressed='true'] .pick__tick { border-color: var(--act-gold); background: var(--act-gold); }
+.pick__card[aria-pressed='true'] .pick__tick::after { content: '✓'; }
+/* חלון הנייר: העמוד החי מוקטן לתוכו. 136px מתוך 210 מ"מ (=793.7px) ⇒ 0.1714.
+   הערך קבוע כי רוחב הכרטיס קבוע — אחרת אי אפשר לחשב יחס ב-CSS. */
+.pick__paper {
+  display: block;
+  position: relative;
+  width: 136px;
+  aspect-ratio: 210 / 297;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid #eef0f5;
+  border-radius: 6px;
+  background: #fff;
+}
+.pick__mini { position: absolute; inset: 0; }
+.pick__mini > .sheet {
+  transform: scale(0.1714);
+  transform-origin: top right;
+  margin: 0;
+  box-shadow: none;
+  border: 0;
+  pointer-events: none;
+}
+.pick__no { display: block; margin-top: 5px; font: 700 12.5px var(--font-he); color: var(--act-ink); }
+.pick__name {
+  display: block;
+  font-size: 10.5px;
+  color: #5b657a;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.pick__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  border-top: 1px solid #e7eaf1;
+  background: #fbfcfe;
+}
+.pick__count { font: 700 15px var(--font-he); color: var(--act-ink); }
+.pick__count--empty { color: #8892a6; }
+.pick__acts { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* הבוחר האחד — שתי שאלות (מה? באיזה צבע?) וכפתור פעולה אחד */
+.pick__modal--choice { width: min(480px, 94vw); max-height: none; }
+.pick__choice { display: flex; flex-direction: column; gap: 14px; padding: 22px 20px 24px; }
+.pick__choice .btn { width: 100%; }
+.pick__q { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pick__qlabel { min-width: 82px; font: 700 14px var(--font-he); color: var(--act-ink); }
+.pick__q .pick__chip { flex: 1 1 auto; text-align: center; }
+
+@media (max-width: 720px) {
+  .wsbar { position: static; }
+}
+
+@media print {
+  .wsbar, .pick, [data-noprint] { display: none !important; }
+}
