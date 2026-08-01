@@ -1,48 +1,48 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-01T21:16:21.147Z",
-  "mode": "release",
+  "generatedAt": "2026-08-01T23:20:12.302Z",
+  "mode": "static",
   "summary": {
     "pass": 14,
-    "warn": 1,
-    "fail": 7,
-    "criticalFailures": 7
+    "warn": 8,
+    "fail": 0,
+    "criticalFailures": 0
   },
   "checks": [
     {
       "id": "runtime:VITE_FIREBASE_API_KEY",
-      "status": "fail",
-      "critical": true,
+      "status": "warn",
+      "critical": false,
       "message": "VITE_FIREBASE_API_KEY is missing locally and was not found in GitHub Actions secrets."
     },
     {
       "id": "runtime:VITE_FIREBASE_AUTH_DOMAIN",
-      "status": "fail",
-      "critical": true,
+      "status": "warn",
+      "critical": false,
       "message": "VITE_FIREBASE_AUTH_DOMAIN is missing locally and was not found in GitHub Actions secrets."
     },
     {
       "id": "runtime:VITE_FIREBASE_PROJECT_ID",
-      "status": "fail",
-      "critical": true,
+      "status": "warn",
+      "critical": false,
       "message": "VITE_FIREBASE_PROJECT_ID is missing locally and was not found in GitHub Actions secrets."
     },
     {
       "id": "runtime:VITE_FIREBASE_STORAGE_BUCKET",
-      "status": "fail",
-      "critical": true,
+      "status": "warn",
+      "critical": false,
       "message": "VITE_FIREBASE_STORAGE_BUCKET is missing locally and was not found in GitHub Actions secrets."
     },
     {
       "id": "runtime:VITE_FIREBASE_MESSAGING_SENDER_ID",
-      "status": "fail",
-      "critical": true,
+      "status": "warn",
+      "critical": false,
       "message": "VITE_FIREBASE_MESSAGING_SENDER_ID is missing locally and was not found in GitHub Actions secrets."
     },
     {
       "id": "runtime:VITE_FIREBASE_APP_ID",
-      "status": "fail",
-      "critical": true,
+      "status": "warn",
+      "critical": false,
       "message": "VITE_FIREBASE_APP_ID is missing locally and was not found in GitHub Actions secrets."
     },
     {
@@ -119,8 +119,8 @@
     },
     {
       "id": "actions:service-account",
-      "status": "fail",
-      "critical": true,
+      "status": "warn",
+      "critical": false,
       "message": "FIREBASE_SERVICE_ACCOUNT was not found in GitHub Actions secrets."
     },
     {
@@ -139,7 +139,7 @@
       "id": "firestore:cli",
       "status": "warn",
       "critical": false,
-      "message": "Firebase CLI is not installed locally; rules received structural validation only."
+      "message": "Firebase CLI is not a local package; this check is structural. Emulator evidence is reported separately."
     }
   ]
 }

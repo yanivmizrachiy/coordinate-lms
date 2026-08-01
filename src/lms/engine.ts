@@ -12,6 +12,7 @@ import {
 } from './repository';
 import { calculatePageScore } from './scoring';
 import { answersMatch } from './answerValidation';
+import { runSynchronizationRetry } from './syncRetry';
 import type {
   ActivityEvent,
   AnswerKey,
@@ -359,16 +360,21 @@ export function attachLmsToPage(
   async function retrySynchronization(): Promise<void> {
     retryButton.disabled = true;
     setMessage(status, 'מנסה לסנכרן מחדש…');
-    const outcomes: PersistenceOutcome[] = [];
-    if (draftSyncFailed) outcomes.push(await persistDraft());
-    if (resultSyncFailed && latestResult) {
-      const outcome = await savePageResult(latestResult);
-      rememberOutcome('result', outcome);
-      outcomes.push(outcome);
-    }
-    for (const event of [...pendingActivity.values()]) {
-      outcomes.push(await persistActivity(event));
-    }
+    const resultToRetry = resultSyncFailed ? latestResult : null;
+    const outcomes = await runSynchronizationRetry({
+      ...(draftSyncFailed ? { retryDraft: persistDraft } : {}),
+      ...(resultToRetry
+        ? {
+            retryResult: async () => {
+              const outcome = await savePageResult(resultToRetry);
+              rememberOutcome('result', outcome);
+              return outcome;
+            },
+          }
+        : {}),
+      pendingActivity: [...pendingActivity.values()],
+      retryActivity: persistActivity,
+    });
     retryButton.disabled = false;
     if (outcomes.some((outcome) => outcome.central === 'failed')) {
       setMessage(

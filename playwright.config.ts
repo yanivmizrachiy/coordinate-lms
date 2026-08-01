@@ -41,6 +41,7 @@ export default defineConfig({
   webServer: {
     command: 'npm run build && npm run preview',
     url: 'http://localhost:4319',
+    env: { VITE_ALLOW_LOCAL_LMS: 'true' },
     // Never reuse a server on this port: another project of Yaniv's has run on
     // the default 4173, and Playwright then measured THAT app and reported
     // failures here. strictPort + no reuse turns a clash into a clear error.

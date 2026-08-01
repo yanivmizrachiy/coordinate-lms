@@ -7,6 +7,7 @@ const root = resolve(import.meta.dirname, '..');
 const jsonPath = resolve(root, 'reports', 'answer-coverage.json');
 const markdownPath = resolve(root, 'reports', 'answer-coverage.md');
 const orderPath = resolve(root, 'reports', 'answer-target-order.json');
+const reviewManifestPath = resolve(root, 'public', 'answer-review-manifest.json');
 const check = process.argv.includes('--check');
 
 async function existingGeneratedAt() {
@@ -34,10 +35,32 @@ try {
     await existingGeneratedAt(),
   );
   const order = coverage.answerTargetOrderSnapshot(report);
+  const reviewManifest = {
+    schemaVersion: 2,
+    generatedAt: report.generatedAt,
+    pageCount: report.pageCount,
+    targetCount: report.targetCount,
+    pages: report.pages.map((page) => ({
+      pageNumber: page.pageNumber,
+      title: page.title,
+      targets: page.targets.map((target) => ({
+        pageNumber: page.pageNumber,
+        targetId: target.targetId,
+        signature: target.signature,
+        inputType: target.inputType,
+        classification: target.classification,
+        sourceEvidence: target.sourceEvidence,
+        automaticCheckingSafe: target.automaticCheckingSafe,
+        answers: target.answers,
+        context: target.context,
+      })),
+    })),
+  };
   const outputs = [
     [jsonPath, JSON.stringify(report, null, 2) + '\n'],
     [markdownPath, coverage.renderAnswerCoverageMarkdown(report)],
     [orderPath, JSON.stringify(order, null, 2) + '\n'],
+    [reviewManifestPath, JSON.stringify(reviewManifest, null, 2) + '\n'],
   ];
 
   if (check) {

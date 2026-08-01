@@ -14,6 +14,11 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Set up Java for the Firestore emulator
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
       - run: npm ci
       - name: Production dependency security gate
         run: npm audit --omit=dev --audit-level=high
@@ -27,6 +32,11 @@ jobs:
         run: npm run typecheck
       - name: Unit & content tests
         run: npm test
+      - name: Firestore emulator authorization tests
+        run: npm run test:firestore
+      - name: Separated classroom release contract
+        if: always()
+        run: npm run release:report:static
       - name: Build
         run: npm run build
       - name: Keep readiness evidence
@@ -39,6 +49,10 @@ jobs:
             reports/answer-coverage.md
             reports/answer-target-order.json
             reports/firebase-readiness.json
+            reports/firebase-readiness.md
+            reports/firestore-emulator.json
+            reports/release-readiness.json
+            reports/release-readiness.md
           retention-days: 14
 
   # The rules Yaniv repeats most — drawings big enough to write on, nothing cut

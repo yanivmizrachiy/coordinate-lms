@@ -547,7 +547,9 @@ export async function claimGuestProgress(
 }
 
 function localDashboard(): DashboardSnapshot {
-  const profiles = listLocalProfiles();
+  const profiles = listLocalProfiles().filter(
+    (profile) => profile.role !== 'admin',
+  );
   const localResults = Object.values(
     loadMap<PageResult>(RESULTS_KEY),
   );
@@ -593,7 +595,11 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
       collection(firestore, 'students'),
     );
 
-    const students = await Promise.all(studentsSnapshot.docs.map(async (studentDocument) => {
+    const studentDocuments = studentsSnapshot.docs.filter(
+      (studentDocument) =>
+        (studentDocument.data() as DashboardStudent['profile']).role !== 'admin',
+    );
+    const students = await Promise.all(studentDocuments.map(async (studentDocument) => {
       const profile = studentDocument.data() as DashboardStudent['profile'];
 
       const [resultsSnapshot, draftsSnapshot, activitySnapshot] =

@@ -96,7 +96,7 @@ export function lmsLogin({
       const keysButton = elem('button', {
         class: 'btn btn--teacher',
         type: 'button',
-        text: 'סטודיו מפתחות תשובה',
+        text: 'סטודיו סקירת תשובות',
       });
       keysButton.addEventListener('click', () => {
         navigate('#/keys');
@@ -203,6 +203,12 @@ export function lmsLogin({
     username.hidden = !registrationMode;
     className.hidden = !registrationMode;
     school.hidden = !registrationMode;
+    fullName.required = registrationMode;
+    username.required = registrationMode;
+    fullName.disabled = !registrationMode;
+    username.disabled = !registrationMode;
+    className.disabled = !registrationMode;
+    school.disabled = !registrationMode;
 
     password.autocomplete = registrationMode
       ? 'new-password'

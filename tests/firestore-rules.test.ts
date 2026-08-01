@@ -34,7 +34,9 @@ describe('Firestore production rules contract', () => {
 
   it('limits answer-key writes to the administrator and validates the schema', () => {
     expect(rules).toContain('match /answerKeys/{document}');
-    expect(rules).toContain('allow create, update: if admin() && validAnswerKey();');
+    expect(rules).toContain(
+      'allow create, update: if admin() && validAnswerKey(document);',
+    );
     expect(rules).toContain('allow delete: if admin();');
   });
 });

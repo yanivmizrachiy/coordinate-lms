@@ -58,7 +58,7 @@ service cloud.firestore {
           || request.resource.data.school is string);
     }
 
-    function validDraft(uid) {
+    function validDraft(uid, document) {
       return request.resource.data.keys().hasAll([
           'uid', 'pageNumber', 'startedAt', 'updatedAt', 'activeSeconds',
           'questions', 'submitted', 'maxAttemptCount'
@@ -69,6 +69,7 @@ service cloud.firestore {
         ])
         && request.resource.data.uid == uid
         && validPageNumber(request.resource.data.pageNumber)
+        && document == 'page-' + string(request.resource.data.pageNumber)
         && request.resource.data.startedAt is int
         && request.resource.data.updatedAt is int
         && request.resource.data.updatedAt >= request.resource.data.startedAt
@@ -82,7 +83,7 @@ service cloud.firestore {
           || validScore(request.resource.data.score));
     }
 
-    function validResult(uid) {
+    function validResult(uid, document) {
       return request.resource.data.keys().hasAll([
           'uid', 'pageNumber', 'score', 'bestScore', 'latestScore',
           'startedAt', 'submittedAt', 'activeSeconds', 'attempts', 'answers',
@@ -95,6 +96,7 @@ service cloud.firestore {
         ])
         && request.resource.data.uid == uid
         && validPageNumber(request.resource.data.pageNumber)
+        && document == 'page-' + string(request.resource.data.pageNumber)
         && validScore(request.resource.data.score)
         && validScore(request.resource.data.bestScore)
         && validScore(request.resource.data.latestScore)
@@ -115,7 +117,7 @@ service cloud.firestore {
         && request.resource.data.submissionId.size() <= 200;
     }
 
-    function validActivity(uid) {
+    function validActivity(uid, document) {
       return request.resource.data.keys().hasAll([
           'id', 'uid', 'pageNumber', 'type', 'createdAt'
         ])
@@ -125,6 +127,7 @@ service cloud.firestore {
         && request.resource.data.id is string
         && request.resource.data.id.size() >= 1
         && request.resource.data.id.size() <= 200
+        && request.resource.data.id == document
         && request.resource.data.uid == uid
         && validPageNumber(request.resource.data.pageNumber)
         && request.resource.data.type in [
@@ -136,7 +139,7 @@ service cloud.firestore {
           || request.resource.data.metadata is map);
     }
 
-    function validAnswerKey() {
+    function validAnswerKey(document) {
       return request.resource.data.keys().hasAll([
           'pageNumber', 'answers', 'updatedAt', 'updatedBy'
         ])
@@ -144,6 +147,7 @@ service cloud.firestore {
           'pageNumber', 'answers', 'updatedAt', 'updatedBy'
         ])
         && validPageNumber(request.resource.data.pageNumber)
+        && document == 'page-' + string(request.resource.data.pageNumber)
         && request.resource.data.answers is map
         && request.resource.data.answers.size() <= 500
         && request.resource.data.updatedAt is int
@@ -167,9 +171,9 @@ service cloud.firestore {
 
       match /drafts/{document} {
         allow read: if owner(uid) || admin();
-        allow create: if (owner(uid) || admin()) && validDraft(uid);
+        allow create: if (owner(uid) || admin()) && validDraft(uid, document);
         allow update: if (owner(uid) || admin())
-          && validDraft(uid)
+          && validDraft(uid, document)
           && request.resource.data.pageNumber == resource.data.pageNumber
           && request.resource.data.startedAt == resource.data.startedAt
           && request.resource.data.updatedAt >= resource.data.updatedAt
@@ -185,9 +189,9 @@ service cloud.firestore {
 
       match /results/{document} {
         allow read: if owner(uid) || admin();
-        allow create: if (owner(uid) || admin()) && validResult(uid);
+        allow create: if (owner(uid) || admin()) && validResult(uid, document);
         allow update: if (owner(uid) || admin())
-          && validResult(uid)
+          && validResult(uid, document)
           && request.resource.data.pageNumber == resource.data.pageNumber
           && request.resource.data.startedAt == resource.data.startedAt
           && (request.resource.data.submittedAt > resource.data.submittedAt
@@ -200,10 +204,10 @@ service cloud.firestore {
       }
 
       match /activity/{document} {
-        allow create: if (owner(uid) || admin()) && validActivity(uid);
+        allow create: if (owner(uid) || admin()) && validActivity(uid, document);
         allow read: if owner(uid) || admin();
         allow update: if (owner(uid) || admin())
-          && validActivity(uid)
+          && validActivity(uid, document)
           && request.resource.data == resource.data;
         allow delete: if admin();
       }
@@ -211,7 +215,7 @@ service cloud.firestore {
 
     match /answerKeys/{document} {
       allow read: if signedIn();
-      allow create, update: if admin() && validAnswerKey();
+      allow create, update: if admin() && validAnswerKey(document);
       allow delete: if admin();
     }
   }

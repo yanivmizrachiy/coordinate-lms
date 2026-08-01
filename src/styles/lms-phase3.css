@@ -76,6 +76,26 @@
   margin-top: 16px;
 }
 
+.lms-keys__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #d8e0ec;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.lms-keys__filters select {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #9aabc4;
+  border-radius: 10px;
+  background: #fff;
+  color: #253653;
+  font: inherit;
+}
+
 .lms-keys__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -100,8 +120,14 @@
 }
 
 .lms-keys__card li {
+  display: grid;
+  gap: 4px;
   margin: 7px 0;
   line-height: 1.45;
+}
+
+.lms-keys__card small {
+  color: #5b677d;
 }
 
 .lms-keys__card code {
@@ -117,6 +143,10 @@
 
   .lms-progress__actions .btn,
   .lms-keys__toolbar .btn {
+    width: 100%;
+  }
+
+  .lms-keys__filters select {
     width: 100%;
   }
 }

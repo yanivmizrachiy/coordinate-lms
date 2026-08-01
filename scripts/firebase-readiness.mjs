@@ -211,7 +211,7 @@ add(
   firebaseCli.status === 0 ? 'pass' : 'warn',
   firebaseCli.status === 0
     ? 'Firebase CLI is installed; deployment syntax can be validated by the manual workflow.'
-    : 'Firebase CLI is not installed locally; rules received structural validation only.',
+    : 'Firebase CLI is not a local package; this check is structural. Emulator evidence is reported separately.',
 );
 
 const report = {
@@ -229,10 +229,36 @@ const report = {
   checks,
 };
 
+function renderMarkdown(value) {
+  const lines = [
+    '# Firebase readiness report',
+    '',
+    `Generated: ${value.generatedAt}`,
+    '',
+    `Mode: ${value.mode}`,
+    '',
+    `Summary: ${value.summary.pass} pass, ${value.summary.warn} warning, ${value.summary.fail} failure.`,
+    '',
+    '| Status | Check | Critical | Message |',
+    '|---|---|:---:|---|',
+  ];
+  for (const check of value.checks) {
+    lines.push(
+      `| ${check.status} | ${check.id} | ${check.critical ? 'yes' : 'no'} | ${check.message.replace(/\|/g, '\\|')} |`,
+    );
+  }
+  return lines.join('\n') + '\n';
+}
+
 await mkdir(resolve(root, 'reports'), { recursive: true });
 await writeFile(
   resolve(root, 'reports/firebase-readiness.json'),
   JSON.stringify(report, null, 2) + '\n',
+  'utf8',
+);
+await writeFile(
+  resolve(root, 'reports/firebase-readiness.md'),
+  renderMarkdown(report),
   'utf8',
 );
 
