@@ -1,9 +1,9 @@
 import {
-  addDoc,
   collection,
   doc,
   getDoc,
   getDocs,
+  runTransaction,
   setDoc,
 } from 'firebase/firestore';
 import {
@@ -21,12 +21,19 @@ import type {
   DashboardStudent,
   PageDraft,
   PageResult,
+  PersistenceOutcome,
+  QuestionProgress,
+  SyncErrorRecord,
 } from './types';
 
 const DRAFTS_KEY = 'coordinate_lms_drafts_v2';
 const RESULTS_KEY = 'coordinate_lms_results_v2';
 const ACTIVITY_KEY = 'coordinate_lms_activity_v2';
 const ANSWER_KEYS_KEY = 'coordinate_lms_answer_keys_v2';
+const SYNC_ERRORS_KEY = 'coordinate_lms_sync_errors_v2';
+
+const CENTRAL_SAVE_ERROR =
+  'השמירה במכשיר הצליחה, אבל הסנכרון המרכזי נכשל. בדקו את החיבור ונסו שוב.';
 
 function safeParse<T>(raw: string | null, fallback: T): T {
   if (!raw) return fallback;
@@ -53,6 +60,189 @@ function compoundKey(uid: string, pageNumber: number): string {
   return uid + ':' + String(pageNumber);
 }
 
+function maxAttemptCount(
+  questions: Record<string, QuestionProgress> | Record<string, number>,
+): number {
+  return Math.max(
+    0,
+    ...Object.values(questions).map((value) =>
+      typeof value === 'number' ? value : value.attempts,
+    ),
+  );
+}
+
+function assertAttemptCount(value: number): void {
+  if (!Number.isInteger(value) || value < 0 || value > 3) {
+    throw new Error('מספר הניסיונות חייב להיות מספר שלם בין 0 ל־3.');
+  }
+}
+
+function validateDraft(draft: PageDraft): PageDraft {
+  if (
+    !Number.isInteger(draft.pageNumber) ||
+    draft.pageNumber < 1 ||
+    draft.pageNumber > 77
+  ) {
+    throw new Error('מספר עמוד לא תקין.');
+  }
+  for (const progress of Object.values(draft.questions)) {
+    assertAttemptCount(progress.attempts);
+  }
+  return {
+    ...draft,
+    maxAttemptCount: maxAttemptCount(draft.questions),
+  };
+}
+
+function validateResult(result: PageResult): PageResult {
+  if (
+    !Number.isInteger(result.pageNumber) ||
+    result.pageNumber < 1 ||
+    result.pageNumber > 77
+  ) {
+    throw new Error('מספר עמוד לא תקין.');
+  }
+  if (!Number.isInteger(result.score) || result.score < 1 || result.score > 100) {
+    throw new Error('הציון חייב להיות מספר שלם בין 1 ל־100.');
+  }
+  for (const attempts of Object.values(result.attempts)) {
+    assertAttemptCount(attempts);
+  }
+  return {
+    ...result,
+    bestScore: result.bestScore ?? result.score,
+    latestScore: result.score,
+    maxAttemptCount: maxAttemptCount(result.attempts),
+    submissionId:
+      result.submissionId ||
+      [result.uid, result.pageNumber, result.startedAt, result.submittedAt].join(':'),
+  };
+}
+
+function mergeQuestionProgress(
+  older: QuestionProgress | undefined,
+  newer: QuestionProgress | undefined,
+): QuestionProgress | undefined {
+  if (!older) return newer;
+  if (!newer) return older;
+  const newest = newer.attempts >= older.attempts ? newer : older;
+  return {
+    ...newest,
+    attempts: Math.max(older.attempts, newer.attempts),
+    correct: older.correct || newer.correct,
+    locked: older.locked || newer.locked,
+  };
+}
+
+export function mergePageDrafts(
+  existing: PageDraft | null | undefined,
+  incoming: PageDraft,
+): PageDraft {
+  const validated = validateDraft(incoming);
+  if (!existing) return validated;
+  const newest = validated.updatedAt >= existing.updatedAt ? validated : existing;
+  const questions: Record<string, QuestionProgress> = {};
+  for (const qid of new Set([
+    ...Object.keys(existing.questions),
+    ...Object.keys(validated.questions),
+  ])) {
+    const merged = mergeQuestionProgress(
+      existing.questions[qid],
+      validated.questions[qid],
+    );
+    if (merged) questions[qid] = merged;
+  }
+  return validateDraft({
+    ...newest,
+    startedAt: Math.min(existing.startedAt, validated.startedAt),
+    updatedAt: Math.max(existing.updatedAt, validated.updatedAt),
+    activeSeconds: Math.max(existing.activeSeconds, validated.activeSeconds),
+    questions,
+    submitted: existing.submitted || validated.submitted,
+    score:
+      existing.score === undefined
+        ? validated.score
+        : validated.score === undefined
+          ? existing.score
+          : Math.max(existing.score, validated.score),
+  });
+}
+
+export function mergePageResults(
+  existing: PageResult | null | undefined,
+  incoming: PageResult,
+): PageResult {
+  const validated = validateResult(incoming);
+  if (!existing) return validated;
+  const normalizedExisting = validateResult(existing);
+  const latest =
+    validated.submittedAt >= normalizedExisting.submittedAt
+      ? validated
+      : normalizedExisting;
+  const bestScore = Math.max(
+    normalizedExisting.bestScore ?? normalizedExisting.score,
+    validated.bestScore ?? validated.score,
+  );
+  return {
+    ...latest,
+    score: latest.score,
+    latestScore: latest.score,
+    bestScore,
+    maxAttemptCount: maxAttemptCount(latest.attempts),
+  };
+}
+
+function syncErrorKey(record: Pick<SyncErrorRecord, 'uid' | 'pageNumber' | 'operation'>): string {
+  return [record.uid, record.pageNumber, record.operation].join(':');
+}
+
+function recordSyncError(record: SyncErrorRecord): void {
+  const errors = loadMap<SyncErrorRecord>(SYNC_ERRORS_KEY);
+  errors[syncErrorKey(record)] = record;
+  saveMap(SYNC_ERRORS_KEY, errors);
+}
+
+function clearSyncError(
+  uid: string,
+  pageNumber: number,
+  operation: SyncErrorRecord['operation'],
+): void {
+  const errors = loadMap<SyncErrorRecord>(SYNC_ERRORS_KEY);
+  delete errors[syncErrorKey({ uid, pageNumber, operation })];
+  saveMap(SYNC_ERRORS_KEY, errors);
+}
+
+export function loadSyncErrors(uid?: string): SyncErrorRecord[] {
+  return Object.values(loadMap<SyncErrorRecord>(SYNC_ERRORS_KEY))
+    .filter((record) => !uid || record.uid === uid)
+    .sort((a, b) => b.createdAt - a.createdAt);
+}
+
+function failedOutcome(
+  uid: string,
+  pageNumber: number,
+  operation: SyncErrorRecord['operation'],
+): PersistenceOutcome {
+  recordSyncError({
+    uid,
+    pageNumber,
+    operation,
+    createdAt: Date.now(),
+    message: CENTRAL_SAVE_ERROR,
+  });
+  return { localSaved: true, central: 'failed', error: CENTRAL_SAVE_ERROR };
+}
+
+function savedOutcome(
+  uid: string,
+  pageNumber: number,
+  operation: SyncErrorRecord['operation'],
+  central: PersistenceOutcome['central'],
+): PersistenceOutcome {
+  if (central === 'saved') clearSyncError(uid, pageNumber, operation);
+  return { localSaved: true, central };
+}
+
 export async function loadDraft(
   uid: string,
   pageNumber: number,
@@ -76,9 +266,12 @@ export async function loadDraft(
 
       if (snapshot.exists()) {
         const remote = snapshot.data() as PageDraft;
-        localDrafts[compoundKey(uid, pageNumber)] = remote;
+        const merged = local
+          ? mergePageDrafts(remote, local)
+          : validateDraft(remote);
+        localDrafts[compoundKey(uid, pageNumber)] = merged;
         saveMap(DRAFTS_KEY, localDrafts);
-        return remote;
+        return merged;
       }
     } catch {
       return local || null;
@@ -88,9 +281,14 @@ export async function loadDraft(
   return local || null;
 }
 
-export async function saveDraft(draft: PageDraft): Promise<void> {
+export async function saveDraft(
+  draft: PageDraft,
+): Promise<PersistenceOutcome> {
+  const validated = validateDraft(draft);
   const localDrafts = loadMap<PageDraft>(DRAFTS_KEY);
-  localDrafts[compoundKey(draft.uid, draft.pageNumber)] = draft;
+  const key = compoundKey(validated.uid, validated.pageNumber);
+  const mergedLocal = mergePageDrafts(localDrafts[key], validated);
+  localDrafts[key] = mergedLocal;
   saveMap(DRAFTS_KEY, localDrafts);
 
   const session = currentSession();
@@ -101,25 +299,38 @@ export async function saveDraft(draft: PageDraft): Promise<void> {
     session.uid === draft.uid &&
     draft.uid !== 'guest'
   ) {
-    await setDoc(
-      doc(
+    try {
+      const reference = doc(
         db,
         'students',
-        draft.uid,
+        validated.uid,
         'drafts',
-        'page-' + String(draft.pageNumber),
-      ),
-      draft,
-      { merge: true },
-    ).catch(() => undefined);
+        'page-' + String(validated.pageNumber),
+      );
+      await runTransaction(db, async (transaction) => {
+        const snapshot = await transaction.get(reference);
+        const remote = snapshot.exists()
+          ? (snapshot.data() as PageDraft)
+          : null;
+        transaction.set(reference, mergePageDrafts(remote, mergedLocal));
+      });
+      return savedOutcome(validated.uid, validated.pageNumber, 'draft', 'saved');
+    } catch {
+      return failedOutcome(validated.uid, validated.pageNumber, 'draft');
+    }
   }
+
+  return savedOutcome(validated.uid, validated.pageNumber, 'draft', 'not-required');
 }
 
 export async function savePageResult(
   result: PageResult,
-): Promise<void> {
+): Promise<PersistenceOutcome> {
+  const validated = validateResult(result);
   const localResults = loadMap<PageResult>(RESULTS_KEY);
-  localResults[compoundKey(result.uid, result.pageNumber)] = result;
+  const key = compoundKey(validated.uid, validated.pageNumber);
+  const mergedLocal = mergePageResults(localResults[key], validated);
+  localResults[key] = mergedLocal;
   saveMap(RESULTS_KEY, localResults);
 
   const session = currentSession();
@@ -130,29 +341,53 @@ export async function savePageResult(
     session.uid === result.uid &&
     result.uid !== 'guest'
   ) {
-    await setDoc(
-      doc(
+    try {
+      const reference = doc(
         db,
         'students',
-        result.uid,
+        validated.uid,
         'results',
-        'page-' + String(result.pageNumber),
-      ),
-      result,
-      { merge: true },
-    ).catch(() => undefined);
+        'page-' + String(validated.pageNumber),
+      );
+      await runTransaction(db, async (transaction) => {
+        const snapshot = await transaction.get(reference);
+        const remote = snapshot.exists()
+          ? (snapshot.data() as PageResult)
+          : null;
+        transaction.set(reference, mergePageResults(remote, mergedLocal));
+      });
+      return savedOutcome(validated.uid, validated.pageNumber, 'result', 'saved');
+    } catch {
+      return failedOutcome(validated.uid, validated.pageNumber, 'result');
+    }
   }
+
+  return savedOutcome(validated.uid, validated.pageNumber, 'result', 'not-required');
 }
 
 export async function logActivity(
   event: ActivityEvent,
-): Promise<void> {
+): Promise<PersistenceOutcome> {
+  const eventId =
+    event.id ||
+    [
+      event.createdAt,
+      event.type,
+      event.pageNumber,
+      crypto.randomUUID(),
+    ].join('-');
+  const eventWithId: ActivityEvent = {
+    ...event,
+    id: eventId,
+  };
   const events = safeParse<ActivityEvent[]>(
     localStorage.getItem(ACTIVITY_KEY),
     [],
   );
 
-  events.push(event);
+  if (!events.some((item) => item.id === eventWithId.id)) {
+    events.push(eventWithId);
+  }
 
   if (events.length > 5000) {
     events.splice(0, events.length - 5000);
@@ -168,11 +403,18 @@ export async function logActivity(
     session.uid === event.uid &&
     event.uid !== 'guest'
   ) {
-    await addDoc(
-      collection(db, 'students', event.uid, 'activity'),
-      event,
-    ).catch(() => undefined);
+    try {
+      await setDoc(
+        doc(db, 'students', event.uid, 'activity', eventId),
+        eventWithId,
+      );
+      return savedOutcome(event.uid, event.pageNumber, 'activity', 'saved');
+    } catch {
+      return failedOutcome(event.uid, event.pageNumber, 'activity');
+    }
   }
+
+  return savedOutcome(event.uid, event.pageNumber, 'activity', 'not-required');
 }
 
 export async function loadAnswerKey(
@@ -239,11 +481,23 @@ export async function saveAnswerKey(
   }
 }
 
+export interface GuestProgressClaim {
+  complete: boolean;
+  outcomes: PersistenceOutcome[];
+}
+
+export function canFinalizeGuestTransfer(
+  outcomes: PersistenceOutcome[],
+): boolean {
+  return outcomes.every((outcome) => outcome.central !== 'failed');
+}
+
 export async function claimGuestProgress(
   uid: string,
-): Promise<void> {
+): Promise<GuestProgressClaim> {
   const drafts = loadMap<PageDraft>(DRAFTS_KEY);
   const results = loadMap<PageResult>(RESULTS_KEY);
+  const outcomes: PersistenceOutcome[] = [];
 
   const guestDraftKey = compoundKey('guest', 1);
   const guestResultKey = compoundKey('guest', 1);
@@ -258,10 +512,7 @@ export async function claimGuestProgress(
       updatedAt: Date.now(),
     };
 
-    drafts[compoundKey(uid, 1)] = claimedDraft;
-    delete drafts[guestDraftKey];
-    saveMap(DRAFTS_KEY, drafts);
-    await saveDraft(claimedDraft);
+    outcomes.push(await saveDraft(claimedDraft));
   }
 
   if (guestResult) {
@@ -270,11 +521,29 @@ export async function claimGuestProgress(
       uid,
     };
 
-    results[compoundKey(uid, 1)] = claimedResult;
-    delete results[guestResultKey];
-    saveMap(RESULTS_KEY, results);
-    await savePageResult(claimedResult);
+    outcomes.push(await savePageResult(claimedResult));
   }
+
+  const complete = canFinalizeGuestTransfer(outcomes);
+  if (complete) {
+    const latestDrafts = loadMap<PageDraft>(DRAFTS_KEY);
+    const latestResults = loadMap<PageResult>(RESULTS_KEY);
+    delete latestDrafts[guestDraftKey];
+    delete latestResults[guestResultKey];
+    saveMap(DRAFTS_KEY, latestDrafts);
+    saveMap(RESULTS_KEY, latestResults);
+    clearSyncError(uid, 1, 'guest-transfer');
+  } else {
+    recordSyncError({
+      uid,
+      pageNumber: 1,
+      operation: 'guest-transfer',
+      createdAt: Date.now(),
+      message:
+        'התקדמות האורח נשמרה במכשיר אך טרם הועברה למערכת המרכזית. נסו שוב לפני המשך העבודה.',
+    });
+  }
+  return { complete, outcomes };
 }
 
 function localDashboard(): DashboardSnapshot {
@@ -289,6 +558,7 @@ function localDashboard(): DashboardSnapshot {
     localStorage.getItem(ACTIVITY_KEY),
     [],
   );
+  const syncErrors = loadSyncErrors();
 
   const students: DashboardStudent[] = profiles.map((profile) => ({
     profile,
@@ -301,12 +571,14 @@ function localDashboard(): DashboardSnapshot {
     activity: localActivity
       .filter((event) => event.uid === profile.uid)
       .sort((a, b) => b.createdAt - a.createdAt),
+    syncErrors: syncErrors.filter((error) => error.uid === profile.uid),
   }));
 
   return {
     students,
     generatedAt: Date.now(),
     source: 'local',
+    syncErrors,
   };
 }
 
@@ -314,22 +586,21 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
   if (!db || !isAdminSession()) {
     return localDashboard();
   }
+  const firestore = db;
 
   try {
     const studentsSnapshot = await getDocs(
-      collection(db, 'students'),
+      collection(firestore, 'students'),
     );
 
-    const students: DashboardStudent[] = [];
-
-    for (const studentDocument of studentsSnapshot.docs) {
+    const students = await Promise.all(studentsSnapshot.docs.map(async (studentDocument) => {
       const profile = studentDocument.data() as DashboardStudent['profile'];
 
       const [resultsSnapshot, draftsSnapshot, activitySnapshot] =
         await Promise.all([
           getDocs(
             collection(
-              db,
+              firestore,
               'students',
               studentDocument.id,
               'results',
@@ -337,7 +608,7 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
           ),
           getDocs(
             collection(
-              db,
+              firestore,
               'students',
               studentDocument.id,
               'drafts',
@@ -345,7 +616,7 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
           ),
           getDocs(
             collection(
-              db,
+              firestore,
               'students',
               studentDocument.id,
               'activity',
@@ -365,13 +636,14 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
         .map((document) => document.data() as ActivityEvent)
         .sort((a, b) => b.createdAt - a.createdAt);
 
-      students.push({
+      return {
         profile,
         results,
         drafts,
         activity,
-      });
-    }
+        syncErrors: [],
+      } satisfies DashboardStudent;
+    }));
 
     students.sort((a, b) => {
       const aLatest = a.activity[0]?.createdAt || a.profile.lastSeenAt;
@@ -383,10 +655,54 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
       students,
       generatedAt: Date.now(),
       source: 'firebase',
+      syncErrors: [],
     };
   } catch {
-    return localDashboard();
+    const fallback = localDashboard();
+    const dashboardError: SyncErrorRecord = {
+      uid: currentSession()?.uid || 'admin',
+      pageNumber: 1,
+      operation: 'dashboard',
+      createdAt: Date.now(),
+      message:
+        'טעינת הנתונים המרכזיים נכשלה. הנתונים המקומיים אינם תמונת מצב של הכיתה.',
+    };
+    return {
+      ...fallback,
+      syncErrors: [dashboardError, ...fallback.syncErrors],
+    };
   }
+}
+
+export async function loadPageResult(
+  uid: string,
+  pageNumber: number,
+): Promise<PageResult | null> {
+  const localResults = loadMap<PageResult>(RESULTS_KEY);
+  const key = compoundKey(uid, pageNumber);
+  const local = localResults[key];
+  const session = currentSession();
+
+  if (db && session?.uid === uid && uid !== 'guest') {
+    try {
+      const snapshot = await getDoc(
+        doc(db, 'students', uid, 'results', 'page-' + String(pageNumber)),
+      );
+      if (snapshot.exists()) {
+        const remote = snapshot.data() as PageResult;
+        const merged = local
+          ? mergePageResults(remote, local)
+          : validateResult(remote);
+        localResults[key] = merged;
+        saveMap(RESULTS_KEY, localResults);
+        return merged;
+      }
+    } catch {
+      return local ? validateResult(local) : null;
+    }
+  }
+
+  return local ? validateResult(local) : null;
 }
 
 export async function loadUserResults(
@@ -410,12 +726,14 @@ export async function loadUserResults(
     const merged = new Map<number, PageResult>();
 
     for (const result of localResults) {
-      merged.set(result.pageNumber, result);
+      const current = merged.get(result.pageNumber);
+      merged.set(result.pageNumber, mergePageResults(current, result));
     }
 
     for (const document of snapshot.docs) {
       const result = document.data() as PageResult;
-      merged.set(result.pageNumber, result);
+      const current = merged.get(result.pageNumber);
+      merged.set(result.pageNumber, mergePageResults(current, result));
     }
 
     return [...merged.values()].sort(
@@ -449,12 +767,14 @@ export async function loadUserDrafts(
     const merged = new Map<number, PageDraft>();
 
     for (const draft of localDrafts) {
-      merged.set(draft.pageNumber, draft);
+      const current = merged.get(draft.pageNumber);
+      merged.set(draft.pageNumber, mergePageDrafts(current, draft));
     }
 
     for (const document of snapshot.docs) {
       const draft = document.data() as PageDraft;
-      merged.set(draft.pageNumber, draft);
+      const current = merged.get(draft.pageNumber);
+      merged.set(draft.pageNumber, mergePageDrafts(current, draft));
     }
 
     return [...merged.values()].sort(

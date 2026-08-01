@@ -37,9 +37,11 @@ export interface PageDraft {
   questions: Record<string, QuestionProgress>;
   submitted: boolean;
   score?: number;
+  maxAttemptCount?: number;
 }
 
 export interface ActivityEvent {
+  id?: string;
   uid: string;
   pageNumber: number;
   type:
@@ -64,6 +66,24 @@ export interface PageResult {
   activeSeconds: number;
   attempts: Record<string, number>;
   answers: Record<string, string>;
+  bestScore?: number;
+  latestScore?: number;
+  maxAttemptCount?: number;
+  submissionId?: string;
+}
+
+export interface SyncErrorRecord {
+  uid: string;
+  pageNumber: number;
+  operation: 'draft' | 'result' | 'activity' | 'guest-transfer' | 'dashboard';
+  createdAt: number;
+  message: string;
+}
+
+export interface PersistenceOutcome {
+  localSaved: true;
+  central: 'saved' | 'failed' | 'not-required';
+  error?: string;
 }
 
 export type AnswerKey = Record<string, string[]>;
@@ -73,10 +93,12 @@ export interface DashboardStudent {
   results: PageResult[];
   drafts: PageDraft[];
   activity: ActivityEvent[];
+  syncErrors: SyncErrorRecord[];
 }
 
 export interface DashboardSnapshot {
   students: DashboardStudent[];
   generatedAt: number;
   source: 'firebase' | 'local';
+  syncErrors: SyncErrorRecord[];
 }

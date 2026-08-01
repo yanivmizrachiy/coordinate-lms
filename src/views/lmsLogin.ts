@@ -249,9 +249,16 @@ export function lmsLogin({
 
     void action
       .then(async (session) => {
-        await claimGuestProgress(session.uid);
+        const guestClaim = await claimGuestProgress(session.uid);
 
-        await logActivity({
+        if (!guestClaim.complete) {
+          status.textContent =
+            'החשבון נוצר, אבל העברת התקדמות האורח למערכת המרכזית נכשלה. ההתקדמות נשארה במכשיר; בדקו חיבור ונסו להתחבר שוב.';
+          status.dataset.kind = 'error';
+          return;
+        }
+
+        const activityOutcome = await logActivity({
           uid: session.uid,
           pageNumber: 1,
           type: registrationMode
@@ -260,9 +267,12 @@ export function lmsLogin({
           createdAt: Date.now(),
         });
 
-        status.textContent =
-          'החשבון נשמר. עוברים להמשך התרגול…';
-        status.dataset.kind = 'success';
+        status.textContent = activityOutcome.central === 'failed'
+          ? 'החשבון וההתקדמות נשמרו, אך רישום פעילות ההתחברות לא הסתנכרן. עוברים לתרגול…'
+          : 'החשבון וההתקדמות נשמרו. עוברים להמשך התרגול…';
+        status.dataset.kind = activityOutcome.central === 'failed'
+          ? 'error'
+          : 'success';
 
         window.setTimeout(() => {
           navigate('#/workbook/2');

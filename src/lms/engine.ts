@@ -4,15 +4,20 @@ import { LMS_CONFIG } from './config';
 import {
   loadAnswerKey,
   loadDraft,
+  loadPageResult,
   logActivity,
   saveAnswerKey,
   saveDraft,
   savePageResult,
 } from './repository';
 import { calculatePageScore } from './scoring';
+import { answersMatch } from './answerValidation';
 import type {
+  ActivityEvent,
   AnswerKey,
   PageDraft,
+  PageResult,
+  PersistenceOutcome,
   QuestionProgress,
 } from './types';
 
@@ -28,28 +33,6 @@ interface CheckSummary {
   keyed: number;
   unkeyed: number;
   remaining: number;
-}
-
-function normalizeAnswer(raw: string): string {
-  let value = raw
-    .trim()
-    .replace(/[־–—]/g, '-')
-    .replace(/,/g, '.')
-    .replace(/\u00a0/g, ' ');
-
-  const mixedHalf = value.match(/^(\d+)\s*1\/2$/);
-
-  if (mixedHalf?.[1]) {
-    value = String(Number(mixedHalf[1]) + 0.5);
-  }
-
-  value = value.replace(/(\d)½/g, (_match, digit: string) =>
-    String(Number(digit) + 0.5),
-  );
-
-  return value
-    .replace(/\s+/g, '')
-    .toLocaleLowerCase('he');
 }
 
 function targetValue(target: HTMLElement): string {
@@ -195,10 +178,14 @@ export function attachLmsToPage(
   const status = elem('div', {
     class: 'lms-panel__status',
     text: 'המערכת מכינה את אזורי המענה…',
+    role: 'status',
+    'aria-live': 'polite',
+    'aria-atomic': 'true',
   });
 
   const scoreHost = elem('div', {
     class: 'lms-panel__scorehost',
+    'aria-live': 'polite',
   });
 
   const buttons = elem('div', {
@@ -219,6 +206,8 @@ export function attachLmsToPage(
         ? 'סיימתי את הפעילות'
         : 'הגשת העמוד וקבלת ציון',
   }) as HTMLButtonElement;
+  checkButton.disabled = true;
+  submitButton.disabled = true;
 
   const accountButton = elem('button', {
     class: 'btn btn--ghost',
@@ -230,7 +219,19 @@ export function attachLmsToPage(
     location.hash = '#/login';
   });
 
-  buttons.append(checkButton, submitButton, accountButton);
+  const retryButton = elem('button', {
+    class: 'btn btn--ghost',
+    type: 'button',
+    text: 'ניסיון סנכרון נוסף',
+    hidden: 'true',
+  }) as HTMLButtonElement;
+
+  buttons.append(
+    checkButton,
+    submitButton,
+    retryButton,
+    accountButton,
+  );
 
   if (isAdminSession()) {
     const adminButton = elem('button', {
@@ -250,8 +251,14 @@ export function attachLmsToPage(
 
   let draft = defaultDraft(uid, pageNumber);
   let answerKey: AnswerKey = {};
+  let latestResult: PageResult | null = null;
   let saveTimer: number | undefined;
   let lastActivityAt = Date.now();
+  let draftSyncFailed = false;
+  let resultSyncFailed = false;
+  let submissionInFlight = false;
+  let checkPromise: Promise<CheckSummary> | null = null;
+  const pendingActivity = new Map<string, ActivityEvent>();
 
   const listeners: Array<{
     target: HTMLElement;
@@ -298,9 +305,80 @@ export function attachLmsToPage(
     target.dataset.lmsState = state;
     target.dataset.lmsAttempts = String(progress.attempts);
     target.contentEditable =
-      progress.correct || progress.locked
+      draft.submitted || progress.correct || progress.locked
         ? 'false'
         : 'true';
+  }
+
+  function rememberOutcome(
+    operation: 'draft' | 'result',
+    outcome: PersistenceOutcome,
+  ): boolean {
+    const failed = outcome.central === 'failed';
+    if (operation === 'draft') draftSyncFailed = failed;
+    else resultSyncFailed = failed;
+    retryButton.hidden = !(
+      draftSyncFailed ||
+      resultSyncFailed ||
+      pendingActivity.size > 0
+    );
+    return !failed;
+  }
+
+  async function persistDraft(): Promise<PersistenceOutcome> {
+    const outcome = await saveDraft(draft);
+    rememberOutcome('draft', outcome);
+    if (outcome.central === 'failed') {
+      setMessage(status, outcome.error || 'הסנכרון המרכזי נכשל.', 'error');
+    }
+    return outcome;
+  }
+
+  async function persistActivity(
+    event: ActivityEvent,
+  ): Promise<PersistenceOutcome> {
+    const stableEvent: ActivityEvent = {
+      ...event,
+      id: event.id || crypto.randomUUID(),
+    };
+    const outcome = await logActivity(stableEvent);
+    if (outcome.central === 'failed') {
+      pendingActivity.set(stableEvent.id || '', stableEvent);
+      setMessage(status, outcome.error || 'רישום הפעילות לא הסתנכרן.', 'error');
+    } else {
+      pendingActivity.delete(stableEvent.id || '');
+    }
+    retryButton.hidden = !(
+      draftSyncFailed ||
+      resultSyncFailed ||
+      pendingActivity.size > 0
+    );
+    return outcome;
+  }
+
+  async function retrySynchronization(): Promise<void> {
+    retryButton.disabled = true;
+    setMessage(status, 'מנסה לסנכרן מחדש…');
+    const outcomes: PersistenceOutcome[] = [];
+    if (draftSyncFailed) outcomes.push(await persistDraft());
+    if (resultSyncFailed && latestResult) {
+      const outcome = await savePageResult(latestResult);
+      rememberOutcome('result', outcome);
+      outcomes.push(outcome);
+    }
+    for (const event of [...pendingActivity.values()]) {
+      outcomes.push(await persistActivity(event));
+    }
+    retryButton.disabled = false;
+    if (outcomes.some((outcome) => outcome.central === 'failed')) {
+      setMessage(
+        status,
+        'הנתונים נשמרו במכשיר, אך הסנכרון המרכזי עדיין נכשל. בדקו את החיבור ונסו שוב.',
+        'error',
+      );
+    } else {
+      setMessage(status, 'הסנכרון המרכזי הושלם.', 'success');
+    }
   }
 
   function scheduleSave(): void {
@@ -309,7 +387,7 @@ export function attachLmsToPage(
     }
 
     saveTimer = window.setTimeout(() => {
-      void saveDraft(draft);
+      void persistDraft();
     }, 300);
   }
 
@@ -344,7 +422,7 @@ export function attachLmsToPage(
     );
   }
 
-  async function runCheck(): Promise<CheckSummary> {
+  async function performCheck(): Promise<CheckSummary> {
     touch();
     snapshotAnswers();
     answerKey = await loadAnswerKey(pageNumber);
@@ -384,10 +462,7 @@ export function attachLmsToPage(
 
       progress.attempts += 1;
 
-      const normalized = normalizeAnswer(progress.answer);
-      const correct = expected.some(
-        (value) => normalizeAnswer(value) === normalized,
-      );
+      const correct = answersMatch(progress.answer, expected);
 
       if (correct) {
         progress.correct = true;
@@ -403,9 +478,9 @@ export function attachLmsToPage(
     }
 
     draft.updatedAt = Date.now();
-    await saveDraft(draft);
+    const draftOutcome = await persistDraft();
 
-    await logActivity({
+    const activityOutcome = await persistActivity({
       uid,
       pageNumber,
       type: 'answer_check',
@@ -417,7 +492,16 @@ export function attachLmsToPage(
       },
     });
 
-    if (keyed === 0 && targets.length > 0) {
+    if (
+      draftOutcome.central === 'failed' ||
+      activityOutcome.central === 'failed'
+    ) {
+      setMessage(
+        status,
+        'הבדיקה נשמרה במכשיר, אך הסנכרון המרכזי נכשל. אפשר לנסות שוב בכפתור הסנכרון.',
+        'error',
+      );
+    } else if (keyed === 0 && targets.length > 0) {
       setMessage(
         status,
         'לעמוד הזה עדיין לא הוגדר מפתח תשובות. מנהל יכול לפתוח מצב מורה ולשמור את התשובות הנכונות.',
@@ -446,129 +530,151 @@ export function attachLmsToPage(
     };
   }
 
+  function runCheck(): Promise<CheckSummary> {
+    if (checkPromise) return checkPromise;
+    checkButton.disabled = true;
+    checkPromise = performCheck().finally(() => {
+      checkPromise = null;
+      checkButton.disabled = draft.submitted || submissionInFlight;
+    });
+    return checkPromise;
+  }
+
   async function submitPage(): Promise<void> {
-    touch();
-    snapshotAnswers();
+    if (submissionInFlight || draft.submitted) return;
+    submissionInFlight = true;
+    submitButton.disabled = true;
+    checkButton.disabled = true;
 
-    if (targets.length === 0) {
-      const now = Date.now();
+    try {
+      touch();
+      snapshotAnswers();
 
-      await savePageResult({
+      let score = 100;
+      let attempts: Record<string, number> = {};
+      let answers: Record<string, string> = {};
+
+      if (targets.length > 0) {
+        const summary = await runCheck();
+        if (summary.keyed === 0) return;
+
+        answerKey = await loadAnswerKey(pageNumber);
+        const keyedEntries = Object.keys(answerKey)
+          .map((qid) => draft.questions[qid])
+          .filter(
+            (progress): progress is QuestionProgress =>
+              Boolean(progress),
+          );
+
+        if (
+          keyedEntries.some(
+            (progress) =>
+              !progress.correct && !progress.locked,
+          )
+        ) {
+          setMessage(
+            status,
+            'עדיין יש תשובות שניתן לתקן. לאחר 3 ניסיונות התשובה תינעל.',
+            'error',
+          );
+          return;
+        }
+
+        score = calculatePageScore(
+          keyedEntries.map((progress) => ({
+            attempts: progress.attempts,
+            correct: progress.correct,
+            locked: progress.locked,
+          })),
+          true,
+        );
+
+        for (const [qid, progress] of Object.entries(
+          draft.questions,
+        )) {
+          attempts[qid] = progress.attempts;
+          answers[qid] = progress.answer;
+        }
+      }
+
+      const submittedAt = Date.now();
+      latestResult = {
         uid,
         pageNumber,
-        score: 100,
+        score,
         startedAt: draft.startedAt,
-        submittedAt: now,
+        submittedAt,
         activeSeconds: draft.activeSeconds,
-        attempts: {},
-        answers: {},
-      });
+        attempts,
+        answers,
+        submissionId: crypto.randomUUID(),
+      };
+
+      const resultOutcome = await savePageResult(latestResult);
+      rememberOutcome('result', resultOutcome);
 
       draft.submitted = true;
-      draft.score = 100;
-      await saveDraft(draft);
-      showScore(100);
+      draft.score = score;
+      draft.updatedAt = submittedAt;
+      const draftOutcome = await persistDraft();
+      showScore(score);
 
-      setMessage(
-        status,
-        'הפעילות סומנה כהושלמה.',
-        'success',
-      );
+      const activityOutcome = await persistActivity({
+        uid,
+        pageNumber,
+        type: 'page_submit',
+        createdAt: submittedAt,
+        metadata: {
+          score,
+          activeSeconds: draft.activeSeconds,
+          submissionId: latestResult.submissionId,
+        },
+      });
 
-      return;
-    }
+      for (const target of targets) {
+        const qid = target.dataset.lmsQid;
+        if (qid) updateTarget(target, progressFor(qid));
+      }
 
-    const summary = await runCheck();
+      const syncFailed = [
+        resultOutcome,
+        draftOutcome,
+        activityOutcome,
+      ].some((outcome) => outcome.central === 'failed');
 
-    if (summary.keyed === 0) return;
-
-    answerKey = await loadAnswerKey(pageNumber);
-
-    const keyedEntries = Object.keys(answerKey)
-      .map((qid) => draft.questions[qid])
-      .filter(
-        (progress): progress is QuestionProgress =>
-          Boolean(progress),
-      );
-
-    const unfinished = keyedEntries.some(
-      (progress) =>
-        !progress.correct && !progress.locked,
-    );
-
-    if (unfinished) {
-      setMessage(
-        status,
-        'עדיין יש תשובות שניתן לתקן. לאחר 3 ניסיונות התשובה תינעל.',
-        'error',
-      );
-      return;
-    }
-
-    const score = calculatePageScore(
-      keyedEntries.map((progress) => ({
-        attempts: progress.attempts,
-        correct: progress.correct,
-        locked: progress.locked,
-      })),
-      true,
-    );
-
-    const attempts: Record<string, number> = {};
-    const answers: Record<string, string> = {};
-
-    for (const [qid, progress] of Object.entries(
-      draft.questions,
-    )) {
-      attempts[qid] = progress.attempts;
-      answers[qid] = progress.answer;
-    }
-
-    const submittedAt = Date.now();
-
-    await savePageResult({
-      uid,
-      pageNumber,
-      score,
-      startedAt: draft.startedAt,
-      submittedAt,
-      activeSeconds: draft.activeSeconds,
-      attempts,
-      answers,
-    });
-
-    draft.submitted = true;
-    draft.score = score;
-    draft.updatedAt = submittedAt;
-    await saveDraft(draft);
-
-    showScore(score);
-
-    await logActivity({
-      uid,
-      pageNumber,
-      type: 'page_submit',
-      createdAt: submittedAt,
-      metadata: {
-        score,
-        activeSeconds: draft.activeSeconds,
-      },
-    });
-
-    if (uid === 'guest' && pageNumber === 1) {
-      setMessage(
-        status,
-        'העמוד נשמר במצב אורח. כדי לעבור לעמוד 2 יש להירשם, ואז הציון ישויך לחשבון.',
-        'success',
-      );
-
-      accountButton.textContent = 'הרשמה ושמירת ההתקדמות';
-    } else {
-      setMessage(
-        status,
-        'העמוד הוגש ונשמר בהצלחה.',
-        'success',
-      );
+      if (syncFailed) {
+        setMessage(
+          status,
+          'ההגשה נשמרה במכשיר, אבל הסנכרון המרכזי לא הושלם. לחצו על ניסיון סנכרון נוסף.',
+          'error',
+        );
+      } else if (uid === 'guest' && pageNumber === 1) {
+        setMessage(
+          status,
+          'העמוד נשמר במכשיר במצב אורח. כדי לעבור לעמוד 2 יש להירשם, ואז הציון ישויך לחשבון.',
+          'success',
+        );
+        accountButton.textContent = 'הרשמה ושמירת ההתקדמות';
+      } else if (resultOutcome.central === 'saved') {
+        setMessage(
+          status,
+          targets.length === 0
+            ? 'הפעילות הושלמה וסונכרנה במערכת המרכזית.'
+            : 'העמוד הוגש וסונכרן במערכת המרכזית.',
+          'success',
+        );
+      } else {
+        setMessage(
+          status,
+          'ההגשה נשמרה במכשיר בלבד; סנכרון מרכזי אינו פעיל.',
+          'normal',
+        );
+      }
+    } finally {
+      submissionInFlight = false;
+      submitButton.disabled = draft.submitted;
+      checkButton.disabled = draft.submitted || checkPromise !== null;
+      if (draft.submitted) submitButton.textContent = 'העמוד הוגש';
     }
   }
 
@@ -579,6 +685,15 @@ export function attachLmsToPage(
   submitButton.addEventListener('click', () => {
     void submitPage();
   });
+
+  retryButton.addEventListener('click', () => {
+    void retrySynchronization();
+  });
+
+  const retryWhenOnline = (): void => {
+    if (!retryButton.hidden) void retrySynchronization();
+  };
+  window.addEventListener('online', retryWhenOnline);
 
   if (isAdminSession() && targets.length > 0) {
     const keyButton = elem('button', {
@@ -647,10 +762,19 @@ export function attachLmsToPage(
     target.dataset.lmsQid = qid;
     target.dataset.lmsEditable = 'true';
     target.setAttribute('role', 'textbox');
-    target.setAttribute(
-      'aria-label',
-      'תשובה ' + String(index + 1),
-    );
+    if (!target.getAttribute('aria-label')?.trim()) {
+      const context = target
+        .closest('tr, li, p, .completion-sentence, .q-card')
+        ?.textContent?.replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 140);
+      target.setAttribute(
+        'aria-label',
+        context
+          ? 'תשובה ' + String(index + 1) + ': ' + context
+          : 'תשובה ' + String(index + 1) + ' בעמוד ' + String(pageNumber),
+      );
+    }
     target.setAttribute('tabindex', '0');
     target.spellcheck = false;
 
@@ -669,7 +793,7 @@ export function attachLmsToPage(
 
       scheduleSave();
 
-      void logActivity({
+      void persistActivity({
         uid,
         pageNumber,
         type: 'answer_change',
@@ -702,8 +826,10 @@ export function attachLmsToPage(
   void Promise.all([
     loadDraft(uid, pageNumber),
     loadAnswerKey(pageNumber),
-  ]).then(([storedDraft, storedKey]) => {
+    loadPageResult(uid, pageNumber),
+  ]).then(([storedDraft, storedKey, storedResult]) => {
     answerKey = storedKey;
+    latestResult = storedResult;
 
     if (storedDraft) {
       draft = storedDraft;
@@ -727,9 +853,19 @@ export function attachLmsToPage(
       showScore(draft.score);
     }
 
+    checkButton.disabled = draft.submitted;
+    submitButton.disabled = draft.submitted;
+    if (draft.submitted) submitButton.textContent = 'העמוד הוגש';
+
     const keyedCount = Object.keys(answerKey).length;
 
-    if (targets.length === 0) {
+    if (draft.submitted) {
+      setMessage(
+        status,
+        'העמוד כבר הוגש. הציון והתקדמות הניסיונות נשמרו.',
+        'success',
+      );
+    } else if (targets.length === 0) {
       setMessage(
         status,
         'זהו עמוד פעילות או משחק. בסיום לחצו על כפתור ההשלמה.',
@@ -752,9 +888,15 @@ export function attachLmsToPage(
           ' אזורי מענה. נדרש מפתח תשובות של המורה לעמוד זה.',
       );
     }
+  }).catch(() => {
+    setMessage(
+      status,
+      'טעינת ההתקדמות נכשלה. ההגשה מושבתת כדי למנוע דריסה של נתונים קיימים; רעננו את העמוד ונסו שוב.',
+      'error',
+    );
   });
 
-  void logActivity({
+  void persistActivity({
     uid,
     pageNumber,
     type: 'page_open',
@@ -768,7 +910,7 @@ export function attachLmsToPage(
     touch();
     scheduleSave();
 
-    void logActivity({
+    void persistActivity({
       uid,
       pageNumber,
       type: 'heartbeat',
@@ -790,9 +932,9 @@ export function attachLmsToPage(
 
       touch();
       snapshotAnswers();
-      void saveDraft(draft);
+      void persistDraft();
 
-      void logActivity({
+      void persistActivity({
         uid,
         pageNumber,
         type: 'page_leave',
@@ -813,6 +955,8 @@ export function attachLmsToPage(
           listener.keydown,
         );
       }
+
+      window.removeEventListener('online', retryWhenOnline);
     },
   };
 }
