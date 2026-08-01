@@ -1,6 +1,6 @@
 # Coordinate LMS — Migration Status
 
-Updated: 2026-07-31 11:17:56
+Updated: 2026-08-01
 
 ## Completed in this migration
 
@@ -10,7 +10,7 @@ Updated: 2026-07-31 11:17:56
   - Repository folder: _legacy/perplexity-original
 - Canonical printable workbook source copied into this repository.
 - Original page order, questions, HTML, graphs and print styling retained.
-- LMS score range fixed at 1–100.
+- LMS score range fixed at **1–100 for every submitted page**.
 - Maximum attempts configured as 3.
 - First page configured as guest-accessible in LMS configuration.
 - Firebase client foundation created.
@@ -30,7 +30,6 @@ Updated: 2026-07-31 11:17:56
 9. Store students, attempts, activity and results centrally.
 10. Never delete the Perplexity prototype.
 
-
 ## LMS Phase 3 Extreme
 
 - Added a student progress page with scores, drafts, active time and continue action.
@@ -40,3 +39,23 @@ Updated: 2026-07-31 11:17:56
 - Added page-level key coverage reporting.
 - Added remote/local result and draft merging.
 - Added Firebase and Vercel bootstrap automation.
+
+## LMS hardening — 2026-08-01
+
+- Production registration now fails closed when Firebase is not configured.
+- Local browser-only accounts remain available only in development or by explicit opt-in.
+- GitHub Pages deployment now requires all Firebase build settings.
+- Firestore rules validate page numbers, score range, student ownership and data shapes.
+- Automated tests lock the page score range to 1–100 and verify attempt penalties.
+- Teacher dashboard now loads results, drafts and activity events from Firebase.
+- Teacher dashboard now shows registration time, last activity, current page, active time and latest action.
+- CSV export now includes full activity and progress fields.
+
+## Still required before public classroom use
+
+- Configure Firebase Authentication email/password provider.
+- Create Firestore and deploy `firestore.rules`.
+- Add the six `VITE_FIREBASE_*` GitHub Actions secrets.
+- Complete and verify answer keys for every page that contains answer targets.
+- Run a two-device acceptance test: student phone and teacher computer.
+- Trigger the manual GitHub Pages deployment only after CI passes.
