@@ -29,6 +29,27 @@ function answerFromAria(target: HTMLElement): string[] {
 }
 
 /**
+ * Captures explicit authoring answers before the generic LMS engine replaces
+ * descriptive aria-labels with sequential accessible labels such as
+ * "תשובה 1". This runs only on labels that literally name the answer.
+ */
+export function hydrateExplicitAuthoringAnswers(
+  root: ParentNode,
+): void {
+  for (const target of root.querySelectorAll<HTMLElement>(
+    '.word-blank[aria-label]',
+  )) {
+    if (target.dataset['lmsAnswers']) continue;
+
+    const answers = answerFromAria(target);
+
+    if (answers.length > 0) {
+      target.dataset['lmsAnswers'] = JSON.stringify(answers);
+    }
+  }
+}
+
+/**
  * Reads answers that the canonical worksheet already states explicitly:
  * - data-lms-answers added by interactive grid/choice hydrators
  * - authoring aria labels such as "מקום להשלמת המילה אופקי"
