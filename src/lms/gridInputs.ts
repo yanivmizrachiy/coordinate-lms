@@ -12,6 +12,7 @@ interface Box {
   height: number;
   label: string;
   kind: string;
+  answers: string[];
 }
 
 function parseArray(raw: string | undefined): (number | string)[] | null {
@@ -46,6 +47,7 @@ function answerSpan(box: Box): HTMLSpanElement {
   span.className = 'blank lms-grid-answer';
   span.dir = 'ltr';
   span.dataset.gridAnswer = box.kind;
+  span.dataset.lmsAnswers = JSON.stringify(box.answers);
   span.setAttribute('aria-label', box.label);
   span.style.left = percent(box.x, VIEWBOX_WIDTH);
   span.style.top = percent(box.y, VIEWBOX_HEIGHT);
@@ -81,6 +83,7 @@ function boxesForGrid(grid: HTMLElement): Box[] {
         height: 22,
         label: 'השלמת המספר החסר על ציר x',
         kind: 'x-tick',
+        answers: [String(value)],
       });
     }
   }
@@ -96,6 +99,7 @@ function boxesForGrid(grid: HTMLElement): Box[] {
         height: 22,
         label: 'השלמת המספר החסר על ציר y',
         kind: 'y-tick',
+        answers: [String(value)],
       });
     }
   }
@@ -109,6 +113,7 @@ function boxesForGrid(grid: HTMLElement): Box[] {
         height: 22,
         label: 'שם הציר האופקי',
         kind: 'axis-x',
+        answers: ['x', 'X', 'ציר x'],
       },
       {
         x: x(0) - 28,
@@ -117,6 +122,7 @@ function boxesForGrid(grid: HTMLElement): Box[] {
         height: 22,
         label: 'שם הציר האנכי',
         kind: 'axis-y',
+        answers: ['y', 'Y', 'ציר y'],
       },
     );
 
@@ -129,6 +135,7 @@ function boxesForGrid(grid: HTMLElement): Box[] {
           height: 22,
           label: 'המילה הראשונה בשם ראשית הצירים',
           kind: 'origin-first',
+          answers: ['ראשית'],
         },
         {
           x: x(0) - 54,
@@ -137,6 +144,7 @@ function boxesForGrid(grid: HTMLElement): Box[] {
           height: 22,
           label: 'המילה השנייה בשם ראשית הצירים',
           kind: 'origin-second',
+          answers: ['צירים', 'הצירים'],
         },
       );
     } else {
@@ -147,6 +155,7 @@ function boxesForGrid(grid: HTMLElement): Box[] {
         height: 22,
         label: 'שם נקודת הראשית',
         kind: 'origin',
+        answers: ['O', 'o', '0'],
       });
     }
   }
