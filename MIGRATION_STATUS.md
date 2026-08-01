@@ -53,8 +53,10 @@ Updated: 2026-08-01
 - CSV export now includes full activity and progress fields.
 - Empty answer boxes drawn inside coordinate-grid SVGs are now editable on mobile and desktop while print output remains unchanged.
 - Existing true/false radio questions are now connected to persistence, three attempts and scoring.
-- Complete built-in answer keys are available for pages 1–5.
-- Playwright tests now authenticate protected workbook routes and separately verify the page-1 guest flow and page-2 registration gate.
+- Complete reviewed built-in answer keys are available for pages 1–5.
+- The runtime now derives non-ambiguous answers automatically from canonical worksheet metadata: missing grid ticks, axis names, the origin, true/false rows and explicit authoring labels.
+- Automatic derivation never guesses from surrounding prose; open or ambiguous tasks remain for teacher review.
+- Playwright tests authenticate protected workbook routes, verify the page-1 guest flow and page-2 registration gate, and test automatic answer derivation.
 
 ## Still required before public classroom use
 
@@ -62,6 +64,6 @@ Updated: 2026-08-01
 - Create Firestore and deploy `firestore.rules`.
 - Add the six `VITE_FIREBASE_*` GitHub Actions secrets.
 - Add the `FIREBASE_SERVICE_ACCOUNT` GitHub Actions secret for automated rules deployment.
-- Complete and verify answer keys for every page after page 5 that contains answer targets.
+- Review the answer-key coverage report for pages 6–77 and manually key only the remaining ambiguous or open targets.
 - Run a two-device acceptance test: student phone and teacher computer.
 - Trigger the manual GitHub Pages deployment only after CI passes.
