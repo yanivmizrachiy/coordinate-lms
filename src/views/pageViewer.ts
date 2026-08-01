@@ -14,6 +14,7 @@ import {
   renderAccessGate,
 } from '../lms/engine';
 import { hydrateGridAnswerInputs } from '../lms/gridInputs';
+import { hydrateChoiceAnswerInputs } from '../lms/choiceInputs';
 
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
@@ -37,10 +38,12 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     const zoomLabel = elem('button', { class: 'zoombtn zoombtn--label', type: 'button', text: 'התאמה למסך', title: 'חזרה להתאמה למסך' });
     const zoom = elem('div', { class: 'zoomer', role: 'group', 'aria-label': 'גודל התצוגה' }, zoomOut, zoomLabel, zoomIn);
     let gameCleanup: (() => void) | undefined;
+    let choiceCleanup: (() => void) | undefined;
     if (data) {
       sheetWrap.append(fromHTML(data.html));
       hydrateGrids(sheetWrap);
       hydrateGridAnswerInputs(sheetWrap);
+      choiceCleanup = hydrateChoiceAnswerInputs(sheetWrap);
       fitSheets(sheetWrap);
       if (data.gameId) {
         const host = sheetWrap.querySelector<HTMLElement>('[data-game-host]');
@@ -143,6 +146,7 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     return () => {
       window.clearTimeout(settle);
       window.removeEventListener('resize', applyZoom);
+      choiceCleanup?.();
       gameCleanup?.();
       lms?.cleanup();
     };
