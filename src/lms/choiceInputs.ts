@@ -51,9 +51,18 @@ export function hydrateChoiceAnswerInputs(
 
     options.dataset['lmsChoice'] = 'ready';
 
+    const expected = row.dataset['answer'];
     const proxy = document.createElement('span');
     proxy.className = 'blank lms-choice-proxy';
     proxy.setAttribute('aria-hidden', 'true');
+
+    if (expected) {
+      proxy.dataset['lmsAnswers'] = JSON.stringify([
+        expected,
+        expected === 'true' ? 'נכון' : 'לא נכון',
+      ]);
+    }
+
     options.insertAdjacentElement('afterend', proxy);
 
     const onChange: EventListener = () => {
