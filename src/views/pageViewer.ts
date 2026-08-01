@@ -15,6 +15,7 @@ import {
 } from '../lms/engine';
 import { hydrateGridAnswerInputs } from '../lms/gridInputs';
 import { hydrateChoiceAnswerInputs } from '../lms/choiceInputs';
+import { hydrateExplicitAuthoringAnswers } from '../lms/implicitAnswers';
 
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
@@ -44,6 +45,7 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       hydrateGrids(sheetWrap);
       hydrateGridAnswerInputs(sheetWrap);
       choiceCleanup = hydrateChoiceAnswerInputs(sheetWrap);
+      hydrateExplicitAuthoringAnswers(sheetWrap);
       fitSheets(sheetWrap);
       if (data.gameId) {
         const host = sheetWrap.querySelector<HTMLElement>('[data-game-host]');
