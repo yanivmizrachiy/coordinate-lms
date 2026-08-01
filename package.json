@@ -1,7 +1,7 @@
 {
   "name": "coordinate-lms",
   "version": "1.0.0",
-  "description": "מערכת צירים — הרביע הראשון: חוברת 34 עמודים, שעשועונים אינטראקטיביים, מובייל והדפסת A4 — אפליקציה אחת מאוחדת.",
+  "description": "מערכת צירים — הרביע הראשון: LMS אינטראקטיבי לחוברת עברית בת 77 עמודים, מובייל והדפסת A4.",
   "type": "module",
   "private": true,
   "scripts": {
@@ -12,16 +12,22 @@
     "test:watch": "vitest",
     "test:visual": "playwright test",
     "typecheck": "tsc --noEmit",
-    "verify": "npm run typecheck && npm test && npm run build && npm run test:visual",
+    "answers:coverage": "node scripts/generate-answer-coverage.mjs",
+    "answers:coverage:check": "node scripts/generate-answer-coverage.mjs --check",
+    "firebase:check": "node scripts/firebase-readiness.mjs",
+    "firebase:check:static": "node scripts/firebase-readiness.mjs --static",
+    "release:check": "npm run verify && npm audit --audit-level=high && npm audit --omit=dev --audit-level=high && npm run firebase:check",
+    "verify": "npm run answers:coverage:check && npm run typecheck && npm test && npm run build && npm run test:visual",
     "pdf": "node scripts/build-pdf.mjs",
     "phase3:verify": "npm run typecheck && npm test && npm run build"
   },
   "devDependencies": {
-    "@playwright/test": "^1.49.1",
-    "@types/node": "^26.1.1",
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.1.2",
+    "linkedom": "^0.18.13",
     "typescript": "^5.7.2",
-    "vite": "^6.0.7",
-    "vitest": "^2.1.8"
+    "vite": "^6.4.3",
+    "vitest": "^4.1.10"
   },
   "dependencies": {
     "firebase": "^12.17.0",

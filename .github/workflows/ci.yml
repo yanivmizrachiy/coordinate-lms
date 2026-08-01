@@ -17,12 +17,29 @@ jobs:
       - run: npm ci
       - name: Production dependency security gate
         run: npm audit --omit=dev --audit-level=high
+      - name: Development toolchain security gate
+        run: npm audit --audit-level=high
+      - name: Generated answer coverage is current
+        run: npm run answers:coverage:check
+      - name: Firebase launch contract (static)
+        run: npm run firebase:check:static
       - name: Typecheck
         run: npm run typecheck
       - name: Unit & content tests
         run: npm test
       - name: Build
         run: npm run build
+      - name: Keep readiness evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: readiness-reports
+          path: |
+            reports/answer-coverage.json
+            reports/answer-coverage.md
+            reports/answer-target-order.json
+            reports/firebase-readiness.json
+          retention-days: 14
 
   # The rules Yaniv repeats most — drawings big enough to write on, nothing cut
   # off the page, labels not printing backwards, 13px body text — can only be

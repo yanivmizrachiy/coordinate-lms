@@ -1,0 +1,72 @@
+const MAX_ANSWER_LENGTH = 120;
+
+function numericValue(raw: string): number | null {
+  const value = raw
+    .trim()
+    .replace(/,/g, '.')
+    .replace(/\u00a0/g, ' ')
+    .replace(/½/g, ' 1/2')
+    .replace(/¼/g, ' 1/4')
+    .replace(/¾/g, ' 3/4')
+    .replace(/\s+/g, ' ');
+
+  const mixed = value.match(/^([+-]?\d+)\s+(\d+)\/(\d+)$/);
+  if (mixed?.[1] && mixed[2] && mixed[3]) {
+    const whole = Number(mixed[1]);
+    const numerator = Number(mixed[2]);
+    const denominator = Number(mixed[3]);
+    if (denominator === 0 || numerator >= denominator) return null;
+    return whole < 0
+      ? whole - numerator / denominator
+      : whole + numerator / denominator;
+  }
+
+  const fraction = value.match(/^([+-]?\d+)\/(\d+)$/);
+  if (fraction?.[1] && fraction[2]) {
+    const numerator = Number(fraction[1]);
+    const denominator = Number(fraction[2]);
+    return denominator === 0 ? null : numerator / denominator;
+  }
+
+  if (!/^[+-]?(?:\d+\.?\d*|\.\d+)$/.test(value)) return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+export function isAllowedExpectedAnswer(value: unknown): value is string {
+  if (typeof value !== 'string') return false;
+  const trimmed = value.trim();
+  return (
+    trimmed.length > 0 &&
+    trimmed.length <= MAX_ANSWER_LENGTH &&
+    !/[\u0000-\u001f\u007f]/.test(trimmed) &&
+    !/[<>]/.test(trimmed)
+  );
+}
+
+export function normalizeAnswer(raw: string): string {
+  return raw
+    .trim()
+    .replace(/[־–—]/g, '-')
+    .replace(/\u00a0/g, ' ')
+    .replace(/\s+/g, '')
+    .toLocaleLowerCase('he');
+}
+
+export function answersMatch(raw: string, expected: readonly string[]): boolean {
+  if (!isAllowedExpectedAnswer(raw)) return false;
+
+  const rawNumber = numericValue(raw);
+  const normalized = normalizeAnswer(raw);
+
+  return expected.some((candidate) => {
+    if (!isAllowedExpectedAnswer(candidate)) return false;
+    const candidateNumber = numericValue(candidate);
+
+    if (rawNumber !== null && candidateNumber !== null) {
+      return Math.abs(rawNumber - candidateNumber) < 1e-12;
+    }
+
+    return normalizeAnswer(candidate) === normalized;
+  });
+}
