@@ -13,6 +13,7 @@ import {
 } from './auth';
 import { DEFAULT_ANSWER_KEYS } from './answerKey';
 import { db } from './firebase';
+import { implicitAnswerKey } from './implicitAnswers';
 import type {
   ActivityEvent,
   AnswerKey,
@@ -178,6 +179,7 @@ export async function loadAnswerKey(
   pageNumber: number,
 ): Promise<AnswerKey> {
   const defaults = DEFAULT_ANSWER_KEYS[pageNumber] || {};
+  const implicit = implicitAnswerKey(pageNumber);
   const customKeys = loadMap<AnswerKey>(ANSWER_KEYS_KEY);
   const local = customKeys[String(pageNumber)] || {};
 
@@ -202,6 +204,7 @@ export async function loadAnswerKey(
   }
 
   return {
+    ...implicit,
     ...defaults,
     ...local,
     ...remote,
