@@ -3,6 +3,7 @@ import { currentSession } from '../lms/auth';
 import { firebaseConfigured } from '../lms/firebase';
 import { loadDashboard } from '../lms/repository';
 import type {
+  ActivityEvent,
   DashboardSnapshot,
   DashboardStudent,
 } from '../lms/types';
@@ -17,8 +18,19 @@ function formatDate(value: number): string {
 }
 
 function formatDuration(seconds: number): string {
-  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
   const remainingSeconds = seconds % 60;
+
+  if (hours > 0) {
+    return (
+      String(hours) +
+      ':' +
+      String(minutes).padStart(2, '0') +
+      ':' +
+      String(remainingSeconds).padStart(2, '0')
+    );
+  }
 
   return (
     String(minutes) +
@@ -41,9 +53,66 @@ function averageScore(student: DashboardStudent): number {
 function totalActiveSeconds(
   student: DashboardStudent,
 ): number {
-  return student.results.reduce(
+  const submittedPages = new Set(
+    student.results.map((result) => result.pageNumber),
+  );
+
+  const completedSeconds = student.results.reduce(
     (sum, result) => sum + result.activeSeconds,
     0,
+  );
+
+  const draftSeconds = student.drafts
+    .filter(
+      (draft) =>
+        !draft.submitted &&
+        !submittedPages.has(draft.pageNumber),
+    )
+    .reduce((sum, draft) => sum + draft.activeSeconds, 0);
+
+  return completedSeconds + draftSeconds;
+}
+
+function latestActivityAt(student: DashboardStudent): number {
+  return (
+    student.activity[0]?.createdAt ||
+    student.profile.lastSeenAt
+  );
+}
+
+function currentPage(student: DashboardStudent): number {
+  const openDraft = [...student.drafts]
+    .filter((draft) => !draft.submitted)
+    .sort((a, b) => b.updatedAt - a.updatedAt)[0];
+
+  if (openDraft) return openDraft.pageNumber;
+
+  const lastResult = [...student.results]
+    .sort((a, b) => b.pageNumber - a.pageNumber)[0];
+
+  return Math.min((lastResult?.pageNumber || 0) + 1, 77) || 1;
+}
+
+function activityLabel(event?: ActivityEvent): string {
+  if (!event) return 'אין פעילות מתועדת';
+
+  const labels: Record<ActivityEvent['type'], string> = {
+    page_open: 'פתח עמוד',
+    answer_change: 'כתב תשובה',
+    answer_check: 'בדק תשובות',
+    page_submit: 'הגיש עמוד',
+    page_leave: 'עזב עמוד',
+    heartbeat: 'עבד בתרגול',
+    registration: 'נרשם',
+    login: 'התחבר',
+  };
+
+  return (
+    labels[event.type] +
+    ' ' +
+    String(event.pageNumber) +
+    ' · ' +
+    formatDate(event.createdAt)
   );
 }
 
@@ -55,8 +124,13 @@ function exportCsv(snapshot: DashboardSnapshot): void {
       'אימייל',
       'כיתה',
       'בית ספר',
-      'כניסה אחרונה',
-      'מספר עמודים',
+      'נרשם בתאריך',
+      'פעילות אחרונה',
+      'פעולה אחרונה',
+      'עמוד נוכחי',
+      'מספר עמודים שהוגשו',
+      'מספר טיוטות',
+      'מספר אירועים',
       'ממוצע',
       'זמן פעיל בשניות',
       'ציונים',
@@ -70,8 +144,13 @@ function exportCsv(snapshot: DashboardSnapshot): void {
       student.profile.email,
       student.profile.className || '',
       student.profile.school || '',
-      formatDate(student.profile.lastSeenAt),
+      formatDate(student.profile.createdAt),
+      formatDate(latestActivityAt(student)),
+      activityLabel(student.activity[0]),
+      String(currentPage(student)),
       String(student.results.length),
+      String(student.drafts.filter((draft) => !draft.submitted).length),
+      String(student.activity.length),
       String(averageScore(student)),
       String(totalActiveSeconds(student)),
       student.results
@@ -158,11 +237,13 @@ export function lmsAdmin({
   });
 
   header.append(
-    elem('div', {}, 
+    elem(
+      'div',
+      {},
       elem('h1', { text: 'דשבורד מורה' }),
       elem('p', {
         text:
-          'תלמידים, ציונים, עמודים וזמן עבודה פעיל.',
+          'תלמידים, זמני כניסה, פעילות, טיוטות, ציונים והתקדמות בכל עמוד.',
       }),
     ),
   );
@@ -180,7 +261,7 @@ export function lmsAdmin({
   const exportButton = elem('button', {
     class: 'btn btn--gold',
     type: 'button',
-    text: 'ייצוא CSV',
+    text: 'ייצוא CSV מלא',
     disabled: 'true',
   }) as HTMLButtonElement;
 
@@ -208,7 +289,7 @@ export function lmsAdmin({
       : 'lms-mode lms-mode--local',
     text: firebaseConfigured
       ? 'מקור הנתונים המרכזי: Firebase'
-      : 'Firebase אינו מוגדר — מוצגים נתונים מקומיים בלבד',
+      : 'Firebase אינו מוגדר — אין כרגע דשבורד משותף בין מכשירים',
   });
 
   const content = elem('div', {
@@ -234,6 +315,11 @@ export function lmsAdmin({
       0,
     );
 
+    const activeStudentCount = snapshot.students.filter(
+      (student) =>
+        Date.now() - latestActivityAt(student) <= 15 * 60 * 1000,
+    ).length;
+
     const summary = elem('div', {
       class: 'lms-summary',
     });
@@ -245,7 +331,15 @@ export function lmsAdmin({
         elem('strong', {
           text: String(snapshot.students.length),
         }),
-        elem('span', { text: 'תלמידים' }),
+        elem('span', { text: 'תלמידים רשומים' }),
+      ),
+      elem(
+        'div',
+        { class: 'lms-summary__card' },
+        elem('strong', {
+          text: String(activeStudentCount),
+        }),
+        elem('span', { text: 'פעילים ב־15 דקות האחרונות' }),
       ),
       elem(
         'div',
@@ -282,11 +376,14 @@ export function lmsAdmin({
     for (const label of [
       'שם',
       'כיתה',
+      'נרשם',
       'פעילות אחרונה',
-      'עמודים',
+      'עמוד נוכחי',
+      'הוגשו',
       'ממוצע',
       'זמן פעיל',
-      'פירוט',
+      'מה עשה לאחרונה',
+      'ציונים',
     ]) {
       headRow.append(elem('th', { text: label }));
     }
@@ -300,7 +397,7 @@ export function lmsAdmin({
       const emptyRow = elem('tr');
       emptyRow.append(
         elem('td', {
-          colspan: '7',
+          colspan: '10',
           text: 'עדיין אין תלמידים רשומים.',
         }),
       );
@@ -316,7 +413,10 @@ export function lmsAdmin({
           text: student.profile.fullName,
         }),
         elem('small', {
-          text: student.profile.email,
+          text:
+            student.profile.username +
+            ' · ' +
+            student.profile.email,
         }),
       );
 
@@ -336,7 +436,13 @@ export function lmsAdmin({
           text: student.profile.className || '—',
         }),
         elem('td', {
-          text: formatDate(student.profile.lastSeenAt),
+          text: formatDate(student.profile.createdAt),
+        }),
+        elem('td', {
+          text: formatDate(latestActivityAt(student)),
+        }),
+        elem('td', {
+          text: String(currentPage(student)),
         }),
         elem('td', {
           text: String(student.results.length),
@@ -348,6 +454,10 @@ export function lmsAdmin({
           text: formatDuration(
             totalActiveSeconds(student),
           ),
+        }),
+        elem('td', {
+          class: 'lms-table__details',
+          text: activityLabel(student.activity[0]),
         }),
         elem('td', {
           class: 'lms-table__details',
