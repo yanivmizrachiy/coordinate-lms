@@ -56,8 +56,42 @@
   cursor: not-allowed;
 }
 
+.lms-choice-proxy {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  min-width: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%);
+  border: 0 !important;
+  white-space: nowrap;
+}
+
+.tf-options[data-lms-state='correct'] {
+  border-radius: 10px;
+  box-shadow: 0 0 0 3px rgb(22 101 52 / 22%);
+  background: rgb(220 252 231 / 62%);
+}
+
+.tf-options[data-lms-state='wrong'],
+.tf-options[data-lms-state='missing'] {
+  border-radius: 10px;
+  box-shadow: 0 0 0 3px rgb(153 27 27 / 20%);
+  background: rgb(254 226 226 / 68%);
+}
+
+.tf-options[data-lms-state='locked'] {
+  border-radius: 10px;
+  opacity: 0.78;
+  box-shadow: 0 0 0 3px rgb(127 29 29 / 24%);
+  background: rgb(254 202 202 / 68%);
+}
+
 @media print {
-  .lms-grid-answer {
+  .lms-grid-answer,
+  .lms-choice-proxy {
     display: none !important;
   }
 }
