@@ -39,7 +39,9 @@ npm run verify       # הכול: טיפוסים · בדיקות · בנייה ·
 npm test             # מתמטיקה, משחקים, תוכן החוברת וכללי הפריסה (Vitest)
 npm run test:visual  # בדיקות רינדור end-to-end (Playwright)
 npm run answers:coverage       # דוח תשובות מדויק לכל 77 העמודים
+npm run test:firestore         # כללי הרשאה אמיתיים מול emulator; דורש Java 21
 npm run firebase:check:static  # חוזה קוד ו-workflow בלי לדרוש סודות
+npm run release:report:static  # מצב נפרד: repo · emulator · Firebase · פדגוגיה · שני מכשירים
 npm run release:check          # שער שחרור; נכשל בכוונה אם Firebase חסר
 ```
 
@@ -107,3 +109,8 @@ Current launch status, measured answer coverage, and external blockers are in
 `MIGRATION_STATUS.md`. The exact human Firebase and two-device steps are in
 `docs/CLASSROOM_LAUNCH_CHECKLIST.md`; absence of those steps is never reported
 as a successful central deployment.
+
+The administrator answer-review studio at `#/keys` is generated from the same
+1,061-target coverage manifest. Its version-2 JSON workflow rejects missing,
+duplicate, unknown, drifted, malformed, or canonical-answer-changing imports
+and requires an explicit activation click after validation.

@@ -1,10 +1,10 @@
 # Coordinate LMS — migration and launch status
 
-Updated: 2026-08-01
+Updated: 2026-08-02
 
 The branch is materially closer to classroom use, but it is **not production
-ready**. Firebase is not configured, Firestore rules have not been deployed or
-emulator-verified, a two-device acceptance test has not run, and 921 response
+ready**. Firebase is not configured, Firestore rules have not been deployed,
+a two-device acceptance test has not run, and 921 response
 targets still require teacher judgment or review.
 
 ## Completed and verified in the repository
@@ -40,6 +40,23 @@ targets still require teacher judgment or review.
 - Firestore rules use owner scoping, administrator-only class-wide reads and
   key writes, field allowlists, bounded document shapes, page/score/attempt
   validation, and monotonic update checks.
+- Nine genuine rules-unit-testing scenarios pass against the Firestore emulator
+  under the demo-only project `demo-coordinate-lms` with Firebase CLI 15.25.1.
+  They exercise anonymous, two-student, and administrator identities; valid and
+  invalid writes; class reads; retries; deletes; and document/payload binding.
+- A consolidated two-student simulation covers guest transfer, registration,
+  page-2 access, drafts/results/activity, reload-persistent attempts,
+  logout/login, retry transitions, administrator fallback, and full CSV. A
+  separate isolated-browser flow repeats the identity and dashboard path.
+- The answer-review studio consumes the exact generated 1,061-target manifest,
+  reports global and per-page progress, filters by status/classification, and
+  exports/reimports strict version-2 batches. It rejects partial, duplicate,
+  unknown, drifted, malformed, and canonical-answer-changing imports and never
+  activates a validated file without a separate click.
+- JSON and Markdown release reports separate repository engineering,
+  emulator-backed validation, external Firebase configuration, pedagogical
+  review, and physical two-device acceptance with pass/warning/failure/blocked
+  statuses. A passing repo or emulator result cannot imply classroom readiness.
 - LMS status messages are announced, meaningful authored/grid labels are
   preserved, true/false group names include the statement, touch targets are
   measured, keyboard completion is tested, and overlays remain hidden in print.
@@ -87,10 +104,10 @@ absent from both the local environment and GitHub Actions:
 - `VITE_FIREBASE_APP_ID`
 - `FIREBASE_SERVICE_ACCOUNT`
 
-Firebase CLI is not installed locally, so `firestore.rules` received structural
-and repository-contract tests, not an emulator or deploy validation. Email/
-Password Authentication, Firestore creation, rules/index deployment, the first
-production deployment, and the two-device acceptance test are not complete.
+Firebase CLI is not installed globally, but the pinned CLI 15.25.1 and a
+task-local Java 21 runtime completed the real Firestore emulator suite. Email/
+Password Authentication, Firestore creation, rules/index production deployment,
+the first production deployment, and the two-device acceptance test are not complete.
 Follow `docs/CLASSROOM_LAUNCH_CHECKLIST.md` without adding secrets to the repo.
 
 ## Security and dependency status
@@ -100,8 +117,8 @@ Follow `docs/CLASSROOM_LAUNCH_CHECKLIST.md` without adding secrets to the repo.
 - Previous Vitest/Vite/esbuild development-tool advisories were removed by a
   Node-20-compatible Vitest 4 and patch/minor toolchain update; no forced fix or
   unrelated application-framework major upgrade was used.
-- Student privacy and administrator boundaries have static rules-contract
-  coverage. Real emulator/production authorization checks remain required.
+- Student privacy and administrator boundaries have both static contract and
+  real emulator coverage. Production authorization acceptance remains required.
 - Because grading occurs in the browser, authenticated students can read the
   centrally stored answer-key collection. Those keys are grading data, not a
   secret; moving grading to a trusted backend would be a separate architecture
@@ -109,23 +126,27 @@ Follow `docs/CLASSROOM_LAUNCH_CHECKLIST.md` without adding secrets to the repo.
 
 ## Validation evidence
 
-Final branch validation on 2026-08-01:
+Current branch validation on 2026-08-02:
 
 - `npm run answers:coverage` and `npm run answers:coverage:check`: pass,
   140/1,061 safely checked targets across 77 pages.
 - `npm run typecheck`: pass.
-- `npm test`: 10 files passed, 140 tests passed.
-- `npm run build`: pass, 330 modules transformed. Vite reports a non-blocking
+- `npm test`: 13 files passed, 152 tests passed.
+- `npm run test:firestore`: pass, nine genuine emulator tests passed with a
+  demo-only project and pinned Firebase CLI 15.25.1.
+- `npm run build`: pass, 332 modules transformed. Vite reports a non-blocking
   large-chunk optimization warning.
 - `npm audit --audit-level=high`: pass, zero vulnerabilities.
 - `npm audit --omit=dev --audit-level=high`: pass, zero vulnerabilities.
-- `npm run test:visual`: 85 passed, 15 intentionally skipped mobile duplicates,
-  zero failures across 100 desktop/mobile cases.
+- `npm run test:visual`: 86 passed, 16 intentional mobile skips, zero failures
+  across 102 desktop/mobile cases, including the isolated classroom flow.
 - `npm run firebase:check:static`: 14 passed, 8 warnings, zero failures.
+- `npm run release:report:static`: repository engineering and emulator domains
+  pass; external Firebase, pedagogical review, and two-device acceptance are
+  independently blocked.
 - `npm run release:check`: repository checks, audits, build, and browsers pass;
-  final exit is non-zero solely because release Firebase readiness reports
-  14 passed, one warning (local CLI), and the seven external failures listed
-  above.
+  final exit remains non-zero because the separated release contract correctly
+  marks external Firebase, pedagogical review, and physical acceptance blocked.
 
 ## Remaining blockers and honest completion
 
@@ -133,13 +154,13 @@ Final branch validation on 2026-08-01:
    with traceable evidence and focused tests.
 2. A Firebase project owner must complete the console and GitHub configuration
    listed above without exposing credentials.
-3. Rules/indexes must be emulator-tested or deployed to the intended project,
-   then student-isolation and teacher-wide access must be tested with real
-   accounts.
+3. Rules/indexes must be deployed to the intended project, then the emulator-
+   proven student-isolation and teacher-wide access contract must be repeated
+   with production acceptance accounts.
 4. A real student phone and separate teacher computer must pass the recorded
    offline/reconnect, guest transfer, dashboard, CSV, and duplicate-submit flow.
 5. CI and review must pass before a separately confirmed merge or deployment.
 
-Estimated overall classroom-release completion: **70%**. Repository engineering
+Estimated overall classroom-release completion: **76%**. Repository engineering
 and verification automation are substantially complete; manual pedagogical
 review and external Firebase acceptance remain the dominant unfinished work.

@@ -41,11 +41,14 @@ before deployment.
 
 ## 4. Deploy Firestore rules and indexes
 
-1. Run `npm run firebase:check` and resolve every failure.
-2. In GitHub Actions, run **Deploy Firestore rules (manual)**.
-3. Confirm the workflow deploys both `firestore.rules` and
+1. Install Java 21 and run `npm run test:firestore`. Confirm all authorization
+   scenarios pass against `demo-coordinate-lms`; this command cannot access a
+   production Firebase project.
+2. Run `npm run firebase:check` and resolve every failure.
+3. In GitHub Actions, run **Deploy Firestore rules (manual)**.
+4. Confirm the workflow deploys both `firestore.rules` and
    `firestore.indexes.json` to the intended project.
-4. Verify with emulator or production acceptance accounts that a student cannot
+5. Verify with production acceptance accounts that a student cannot
    read another student's profile, drafts, results, or activity, and that only
    an authorized teacher can read class-wide data.
 
@@ -77,3 +80,8 @@ Use a real student phone and a separate teacher computer:
 
 Record the date, Firebase project ID (not credentials), deployed commit, tester
 names, devices, and observed result in the release notes.
+Copy `docs/two-device-acceptance.template.json` to
+`reports/two-device-acceptance.json`, fill only non-secret evidence, and leave
+the status blocked or failure unless every recorded check passed. Then run
+`npm run release:report` and confirm the physical-acceptance domain changed to
+`pass` for the intended commit.

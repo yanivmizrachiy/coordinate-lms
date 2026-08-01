@@ -81,10 +81,12 @@ Before presenting a branch as ready for review, run at least:
 npm run answers:coverage:check
 npm run typecheck
 npm test
+npm run test:firestore
 npm run build
 npm audit --audit-level=high
 npm audit --omit=dev --audit-level=high
 npm run firebase:check
+npm run release:report
 npm run test:visual
 ```
 
