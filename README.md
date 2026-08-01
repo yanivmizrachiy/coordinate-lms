@@ -2,7 +2,8 @@
 
 אפליקציה אחת ללימוד מערכת הצירים ברביע הראשון: **77 עמודים ממוספרים** (דפי עבודה, 7 שעשועונים משולבים ודף הצופן המודפס), עמוד שער, עמוד תוכן עניינים, סרט פתיחה, תצוגת מובייל מלאה והדפסת **A4** מקצועית — הכול בריפו אחד, בכתובת אחת ובקובץ כניסה אחד.
 
-> ריפו יחיד מותר לפרויקט: `yanivmizrachiy/coordinate-first-quadrant`. אין לכתוב אל `yanivmizrachiy/parabula-next`.
+> ריפו ה־LMS היחיד שמותר לכתוב אליו: `yanivmizrachiy/coordinate-lms`.
+> `yanivmizrachiy/coordinate-first-quadrant` הוא מקור החוברת לקריאה בלבד.
 
 ## מה יש באפליקציה
 
@@ -37,9 +38,14 @@ npm run preview      # תצוגה מקדימה של התוצר על http://local
 npm run verify       # הכול: טיפוסים · בדיקות · בנייה · בדיקות דפדפן
 npm test             # מתמטיקה, משחקים, תוכן החוברת וכללי הפריסה (Vitest)
 npm run test:visual  # בדיקות רינדור end-to-end (Playwright)
+npm run answers:coverage       # דוח תשובות מדויק לכל 77 העמודים
+npm run firebase:check:static  # חוזה קוד ו-workflow בלי לדרוש סודות
+npm run release:check          # שער שחרור; נכשל בכוונה אם Firebase חסר
 ```
 
-הבדיקות אוכפות את הכללים שב־`USER_MEMORY.md` — מספור, ניסוח, גודל סרטוטים, גופן, חיתוך עמודים, כיווניות עברית ועוד. **כלל שאין לו בדיקה נחשב כלל שלא קיים.**
+הבדיקות אוכפות את הכללים שב־`RULES.md` ואת חוזה תוכן החוברת ההיסטורי —
+מספור, ניסוח, גודל סרטוטים, גופן, חיתוך עמודים, כיווניות עברית ועוד.
+**כלל שאין לו בדיקה נחשב כלל שלא קיים.**
 
 ## פרסום ל־GitHub Pages
 
@@ -85,7 +91,8 @@ tests/                        בדיקות Vitest + בדיקות e2e של Playwr
 
 ## זיכרון הפרויקט
 
-- `USER_MEMORY.md` — **דף הכללים היחיד**: כל דרישות יניב, ב־15 ראשי פרקים.
+- `RULES.md` — **דף הכללים היחיד** לעבודת LMS.
+- `USER_MEMORY.md` ו־`HANDOFF.md` — ארכיון החלטות חוברת, לא הרשאת תפעול.
 - `CLAUDE.md` — שלט הפניה בלבד; אין בו כללים משלו.
 
 ## Coordinate LMS migration
@@ -95,3 +102,8 @@ practice, scoring, registration, activity tracking and teacher-dashboard layer.
 
 The original Perplexity prototype is preserved under
 `_legacy/perplexity-original`.
+
+Current launch status, measured answer coverage, and external blockers are in
+`MIGRATION_STATUS.md`. The exact human Firebase and two-device steps are in
+`docs/CLASSROOM_LAUNCH_CHECKLIST.md`; absence of those steps is never reported
+as a successful central deployment.
