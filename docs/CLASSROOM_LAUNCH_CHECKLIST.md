@@ -57,7 +57,9 @@ before deployment.
 1. Open a PR and require CI to pass: coverage drift, typecheck, tests, build,
    production audit, Firestore checks, and desktop/mobile Playwright.
 2. Review the answer report in `reports/answer-coverage.md`. Unkeyed ambiguous or
-   open-ended targets require teacher review; do not convert them by guessing.
+   open-ended targets require teacher judgment; do not convert them by guessing.
+   Reviewed proof and open-ended entries are bound to target signatures, so any
+   prompt drift must be resolved before release.
 3. Run `npm run release:check` locally or in the release environment.
 4. Manually run **Deploy to GitHub Pages (manual)**. Do not deploy from an
    unreviewed branch and do not enable local LMS fallback in production.

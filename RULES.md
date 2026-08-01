@@ -39,6 +39,11 @@ this file, the current instruction wins and this file must be reconciled.
 - An answer may be checked automatically only when it is reviewed explicitly,
   encoded in canonical metadata, mathematically deterministic, or a verified
   valid range.
+- Reviewed proofs and reviewed open-ended decisions must be bound to the
+  current target signature and cite canonical source evidence. Prompt drift
+  must make the old decision inapplicable.
+- Unordered answer sets may be accepted only through the strict `set:` format;
+  duplicates, omissions, and extra labels must remain incorrect.
 - Never infer an answer merely from nearby prose. Open-ended, ambiguous,
   unsupported, and missing targets remain visibly ungraded for teacher review.
 - The generated JSON and Markdown coverage reports must represent all pages

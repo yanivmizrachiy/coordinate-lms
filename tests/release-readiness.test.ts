@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 interface ReleaseDomain {
   id: string;
   status: 'pass' | 'warning' | 'failure' | 'blocked';
+  summary: string;
 }
 
 interface ReleaseReport {
@@ -39,6 +40,16 @@ describe('separated classroom release contract', () => {
     expect(report.domains[1]?.status).toBe('pass');
     expect(report.status).toBe('blocked');
     expect(report.releaseReady).toBe(false);
+  });
+
+  it('separates reviewed open-ended work from unresolved answer targets', () => {
+    const pedagogical = report.domains.find(
+      (domain) => domain.id === 'pedagogical-review',
+    );
+    expect(pedagogical?.status).toBe('blocked');
+    expect(pedagogical?.summary).toContain('875/1061');
+    expect(pedagogical?.summary).toContain('161 are signature-bound open-ended');
+    expect(pedagogical?.summary).toContain('25 remain unresolved');
   });
 
   it('publishes the same domain contract in Markdown', () => {

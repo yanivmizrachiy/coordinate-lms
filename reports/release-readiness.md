@@ -1,6 +1,6 @@
 # Classroom release-readiness contract
 
-Generated: 2026-08-01T23:20:12.358Z
+Generated: 2026-08-01T23:51:05.186Z
 
 Mode: static
 
@@ -11,7 +11,7 @@ Overall status: **blocked**
 | Repository engineering gates | pass | The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent. |
 | Firestore emulator-backed validation | pass | Real Firestore operations passed against the demo project with the pinned Firebase CLI. |
 | External Firebase configuration and deployment | blocked | Repository validation cannot supply console settings, service-account configuration, or deployment evidence. |
-| Pedagogical answer-key review | blocked | 140/1061 targets are safely auto-checkable; 921 remain deliberately ungraded pending teacher judgment. |
+| Pedagogical answer-key review | blocked | 875/1061 targets are safely auto-checkable; 161 are signature-bound open-ended tasks; 25 remain unresolved. |
 | Physical two-device classroom acceptance | blocked | No passing real student-phone and separate teacher-computer acceptance record exists. |
 
 ## Repository engineering gates
@@ -37,7 +37,7 @@ Real Firestore operations passed against the demo project with the pinned Fireba
 Evidence:
 
 - suite: tests/firestore-emulator.test.ts
-- generatedAt: 2026-08-01T23:16:24.086Z
+- generatedAt: 2026-08-01T23:45:34.735Z
 - Firebase CLI: 15.25.1
 - contract SHA-256: 5219753cd0d484128af3e2568b0e9434d5b61bac54e708684c50f23e1ead2f06
 
@@ -65,7 +65,7 @@ Blockers:
 
 Status: **blocked**
 
-140/1061 targets are safely auto-checkable; 921 remain deliberately ungraded pending teacher judgment.
+875/1061 targets are safely auto-checkable; 161 are signature-bound open-ended tasks; 25 remain unresolved.
 
 Evidence:
 
@@ -74,7 +74,7 @@ Evidence:
 
 Blockers:
 
-- Complete review in the answer-review studio without guessing.
+- Resolve 25 targets in the answer-review studio without guessing.
 
 ## Physical two-device classroom acceptance
 

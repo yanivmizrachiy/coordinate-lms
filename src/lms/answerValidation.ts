@@ -61,6 +61,28 @@ export function answersMatch(raw: string, expected: readonly string[]): boolean 
 
   return expected.some((candidate) => {
     if (!isAllowedExpectedAnswer(candidate)) return false;
+    if (candidate.startsWith('set:')) {
+      const expectedTokens = candidate
+        .slice(4)
+        .split(',')
+        .map((token) => token.trim().toLocaleLowerCase('he'))
+        .filter(Boolean);
+      if (
+        expectedTokens.length < 2 ||
+        !expectedTokens.every((token) => /^[a-z]+$/i.test(token))
+      ) {
+        return false;
+      }
+      const actualTokens = (raw.match(/[a-z]+/gi) || []).map((token) =>
+        token.toLocaleLowerCase('he'),
+      );
+      return (
+        actualTokens.length === expectedTokens.length &&
+        new Set(actualTokens).size === actualTokens.length &&
+        [...actualTokens].sort().join(',') ===
+          [...expectedTokens].sort().join(',')
+      );
+    }
     const candidateNumber = numericValue(candidate);
 
     if (rawNumber !== null && candidateNumber !== null) {

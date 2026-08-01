@@ -4,8 +4,8 @@ Updated: 2026-08-02
 
 The branch is materially closer to classroom use, but it is **not production
 ready**. Firebase is not configured, Firestore rules have not been deployed,
-a two-device acceptance test has not run, and 921 response
-targets still require teacher judgment or review.
+a two-device acceptance test has not run, and 186 response targets remain
+deliberately ungraded: 161 open-ended and 25 requiring teacher review.
 
 ## Completed and verified in the repository
 
@@ -19,6 +19,12 @@ targets still require teacher judgment or review.
 - Runtime answer normalization accepts exact numeric equivalence (including
   common fractions and mixed numbers) without accepting mathematically
   different answers or unsafe answer formats.
+- A target-bound proof registry records 735 exact canonical or deterministic
+  answer decisions with source evidence and prompt signatures. It also supports
+  reviewed unordered label sets without accepting omissions or duplicates.
+- A separate signature-bound review records 161 learner-created or
+  prior-answer-dependent targets as intentionally open-ended. Prompt drift
+  invalidates either reviewed classification instead of inheriting stale data.
 - Firebase readiness checks verify names/presence without exposing values,
   reject placeholders, inspect initialization and production fallback, inspect
   GitHub secret/variable names, check workflows, and structurally validate rules
@@ -74,21 +80,22 @@ Source of record: `reports/answer-coverage.json`.
 
 | Classification | Targets | Automatically checkable |
 |---|---:|---:|
-| reviewed-explicit | 111 | 111 |
+| reviewed-explicit | 190 | 190 |
 | canonical-metadata-derived | 23 | 23 |
-| deterministic-mathematical | 0 | 0 |
+| deterministic-mathematical | 656 | 656 |
 | valid-range | 6 | 6 |
-| open-ended | 62 | 0 |
-| ambiguous | 859 | 0 |
+| open-ended | 161 | 0 |
+| ambiguous | 25 | 0 |
 | unsupported | 0 | 0 |
 | missing | 0 | 0 |
-| **Total** | **1,061** | **140 (13.2%)** |
+| **Total** | **1,061** | **875 (82.5%)** |
 
-All pages 1–77 are represented. The manually reviewed explicit-key count is
-111 (10.5% of all targets). Another 29 targets are safe because their source is
-explicit canonical metadata or a reviewed valid range. No additional page 6–77
-key was guessed: every remaining open-ended or ambiguous target is listed with
-context for teacher review.
+All pages 1–77 are represented. Every newly checkable answer is bound to the
+current target signature and includes exact canonical source evidence; none was
+inferred merely from nearby prose. The remaining 161 open-ended targets are
+intentionally learner-created or dependent on the learner's earlier choice.
+The remaining 25 genuinely ambiguous targets stay visibly ungraded pending
+teacher review.
 
 ## Firebase readiness — measured state
 
@@ -129,12 +136,13 @@ Follow `docs/CLASSROOM_LAUNCH_CHECKLIST.md` without adding secrets to the repo.
 Current branch validation on 2026-08-02:
 
 - `npm run answers:coverage` and `npm run answers:coverage:check`: pass,
-  140/1,061 safely checked targets across 77 pages.
+  875/1,061 safely checked targets across 77 pages; 161 reviewed open-ended and
+  25 ambiguous targets remain deliberately ungraded.
 - `npm run typecheck`: pass.
-- `npm test`: 13 files passed, 152 tests passed.
+- `npm test`: 13 files passed, 157 tests passed.
 - `npm run test:firestore`: pass, nine genuine emulator tests passed with a
   demo-only project and pinned Firebase CLI 15.25.1.
-- `npm run build`: pass, 332 modules transformed. Vite reports a non-blocking
+- `npm run build`: pass, 333 modules transformed. Vite reports a non-blocking
   large-chunk optimization warning.
 - `npm audit --audit-level=high`: pass, zero vulnerabilities.
 - `npm audit --omit=dev --audit-level=high`: pass, zero vulnerabilities.
@@ -150,8 +158,9 @@ Current branch validation on 2026-08-02:
 
 ## Remaining blockers and honest completion
 
-1. A teacher must review 62 open-ended and 859 ambiguous targets; add keys only
-   with traceable evidence and focused tests.
+1. A teacher must resolve the 25 genuinely ambiguous targets. The 161 reviewed
+   open-ended targets need an explicit classroom judgment/grading policy; add
+   automatic keys only with traceable evidence and focused tests.
 2. A Firebase project owner must complete the console and GitHub configuration
    listed above without exposing credentials.
 3. Rules/indexes must be deployed to the intended project, then the emulator-
@@ -161,6 +170,7 @@ Current branch validation on 2026-08-02:
    offline/reconnect, guest transfer, dashboard, CSV, and duplicate-submit flow.
 5. CI and review must pass before a separately confirmed merge or deployment.
 
-Estimated overall classroom-release completion: **76%**. Repository engineering
-and verification automation are substantially complete; manual pedagogical
-review and external Firebase acceptance remain the dominant unfinished work.
+Estimated overall classroom-release completion: **90%**. All safe, autonomous
+repository engineering identified in this pass is complete. Teacher judgment,
+external Firebase ownership/deployment, and real-device acceptance are the
+remaining release work.

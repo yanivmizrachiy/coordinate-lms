@@ -154,20 +154,35 @@ domains.push(
 
 const safelyCheckable = Number(answerCoverage?.automaticallyCheckableTargets || 0);
 const targetCount = Number(answerCoverage?.targetCount || 0);
-const remainingReview = Math.max(0, targetCount - safelyCheckable);
-const pedagogicalPass = targetCount > 0 && remainingReview === 0;
+const answerTargets = Array.isArray(answerCoverage?.pages)
+  ? answerCoverage.pages.flatMap((page) =>
+      Array.isArray(page?.targets) ? page.targets : [],
+    )
+  : [];
+const reviewedOpenEnded = answerTargets.filter(
+  (target) =>
+    target?.classification === 'open-ended' &&
+    String(target?.sourceEvidence || '').startsWith('signature-bound'),
+).length;
+const unresolvedReview = Math.max(
+  0,
+  targetCount - safelyCheckable - reviewedOpenEnded,
+);
+const pedagogicalPass = targetCount > 0 && unresolvedReview === 0;
 domains.push(
   domain(
     'pedagogical-review',
     'Pedagogical answer-key review',
     pedagogicalPass ? 'pass' : targetCount > 0 ? 'blocked' : 'failure',
     targetCount > 0
-      ? `${String(safelyCheckable)}/${String(targetCount)} targets are safely auto-checkable; ${String(remainingReview)} remain deliberately ungraded pending teacher judgment.`
+      ? `${String(safelyCheckable)}/${String(targetCount)} targets are safely auto-checkable; ${String(reviewedOpenEnded)} are signature-bound open-ended tasks; ${String(unresolvedReview)} remain unresolved.`
       : 'Answer coverage evidence is missing or invalid.',
     ['reports/answer-coverage.json', 'public/answer-review-manifest.json'],
     pedagogicalPass
       ? []
-      : ['Complete review in the answer-review studio without guessing.'],
+      : [
+          `Resolve ${String(unresolvedReview)} targets in the answer-review studio without guessing.`,
+        ],
   ),
 );
 

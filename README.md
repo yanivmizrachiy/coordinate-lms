@@ -113,4 +113,6 @@ as a successful central deployment.
 The administrator answer-review studio at `#/keys` is generated from the same
 1,061-target coverage manifest. Its version-2 JSON workflow rejects missing,
 duplicate, unknown, drifted, malformed, or canonical-answer-changing imports
-and requires an explicit activation click after validation.
+and requires an explicit activation click after validation. Reviewed automatic
+answers and reviewed open-ended decisions are signature-bound, so a changed
+prompt cannot silently reuse stale grading data.

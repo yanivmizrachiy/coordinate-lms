@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-01T23:20:12.358Z",
+  "generatedAt": "2026-08-01T23:51:05.186Z",
   "mode": "static",
   "status": "blocked",
   "releaseReady": false,
@@ -26,7 +26,7 @@
       "summary": "Real Firestore operations passed against the demo project with the pinned Firebase CLI.",
       "evidence": [
         "suite: tests/firestore-emulator.test.ts",
-        "generatedAt: 2026-08-01T23:16:24.086Z",
+        "generatedAt: 2026-08-01T23:45:34.735Z",
         "Firebase CLI: 15.25.1",
         "contract SHA-256: 5219753cd0d484128af3e2568b0e9434d5b61bac54e708684c50f23e1ead2f06"
       ],
@@ -54,13 +54,13 @@
       "id": "pedagogical-review",
       "label": "Pedagogical answer-key review",
       "status": "blocked",
-      "summary": "140/1061 targets are safely auto-checkable; 921 remain deliberately ungraded pending teacher judgment.",
+      "summary": "875/1061 targets are safely auto-checkable; 161 are signature-bound open-ended tasks; 25 remain unresolved.",
       "evidence": [
         "reports/answer-coverage.json",
         "public/answer-review-manifest.json"
       ],
       "blockers": [
-        "Complete review in the answer-review studio without guessing."
+        "Resolve 25 targets in the answer-review studio without guessing."
       ]
     },
     {

@@ -9,6 +9,7 @@ import {
   implicitAnswerKey,
 } from './implicitAnswers';
 import { isAllowedExpectedAnswer } from './answerValidation';
+import { PROVEN_ANSWER_PROOFS } from './provenAnswerKey';
 import type { AnswerKey } from './types';
 
 export const ANSWER_CLASSIFICATIONS = [
@@ -82,6 +83,178 @@ const VALID_RANGE_TARGETS = new Set([
   'p3-q15',
 ]);
 
+/**
+ * Targets reviewed against the canonical workbook that intentionally ask the
+ * learner to choose, create, explain, or reuse their own prior result. The
+ * signature binding prevents a later prompt edit from silently inheriting the
+ * reviewed classification.
+ */
+export const REVIEWED_OPEN_ENDED_TARGET_SIGNATURES: Readonly<
+  Record<string, string>
+> = {
+  'p7-q12': 'e4f4cc55',
+  'p7-q13': 'e4f4cc55',
+  'p7-q14': 'f952afbf',
+  'p11-q20': 'bd0fcb5c',
+  'p11-q21': 'bd0fcb5c',
+  'p12-q7': '13c747ef',
+  'p12-q8': '13c747ef',
+  'p12-q9': '13c747ef',
+  'p12-q10': '13c747ef',
+  'p12-q12': '049b2a05',
+  'p12-q13': '049b2a05',
+  'p12-q14': '049b2a05',
+  'p12-q15': '049b2a05',
+  'p12-q16': '9edf80ab',
+  'p13-q17': 'bd0fcb5c',
+  'p13-q18': 'bd0fcb5c',
+  'p15-q3': 'e05dfa65',
+  'p15-q4': '714d467f',
+  'p15-q9': 'bd0fcb5c',
+  'p18-q12': '64aa47f4',
+  'p26-q1': 'aad9137b',
+  'p26-q2': 'aad9137b',
+  'p26-q3': 'aad9137b',
+  'p26-q4': 'aad9137b',
+  'p26-q5': 'aad9137b',
+  'p26-q6': 'aad9137b',
+  'p26-q7': 'aad9137b',
+  'p26-q8': 'aad9137b',
+  'p26-q9': 'aad9137b',
+  'p26-q10': 'aad9137b',
+  'p26-q11': '39217632',
+  'p26-q13': 'dc459768',
+  'p26-q17': '36d8976b',
+  'p26-q19': '69a80635',
+  'p27-q9': 'e6d5c219',
+  'p27-q10': 'e6d5c219',
+  'p29-q12': '3c53a6a0',
+  'p29-q13': '3c53a6a0',
+  'p29-q14': '3c53a6a0',
+  'p29-q15': '3c53a6a0',
+  'p29-q5': '7415af8e',
+  'p29-q6': '7415af8e',
+  'p29-q7': '7415af8e',
+  'p29-q8': '7415af8e',
+  'p29-q16': 'bd0fcb5c',
+  'p30-q16': 'f406b8ba',
+  'p30-q17': 'f406b8ba',
+  'p30-q18': 'f406b8ba',
+  'p30-q19': 'f406b8ba',
+  'p30-q20': '6dd587bb',
+  'p30-q21': '6dd587bb',
+  'p30-q22': 'ea262254',
+  'p33-q5': 'bd0fcb5c',
+  'p38-q5': '2dc8e219',
+  'p38-q6': '2dc8e219',
+  'p38-q7': '2dc8e219',
+  'p38-q8': '2dc8e219',
+  'p38-q11': '7415af8e',
+  'p38-q12': '7415af8e',
+  'p38-q13': '7415af8e',
+  'p38-q14': '7415af8e',
+  'p38-q17': 'bd0fcb5c',
+  'p38-q18': 'bd0fcb5c',
+  'p39-q14': 'bd0fcb5c',
+  'p44-q19': 'bd0fcb5c',
+  'p44-q23': '08b44ca7',
+  'p44-q24': '08b44ca7',
+  'p44-q25': '08b44ca7',
+  'p44-q26': '08b44ca7',
+  'p44-q28': 'bd0fcb5c',
+  'p46-q11': '6b34ed80',
+  'p46-q24': 'f22e876f',
+  'p46-q25': 'ae0d10d8',
+  'p46-q26': 'ae0d10d8',
+  'p46-q27': 'ae0d10d8',
+  'p46-q28': 'ae0d10d8',
+  'p46-q29': 'e7242597',
+  'p49-q1': 'b30606ed',
+  'p49-q4': 'f659763a',
+  'p51-q25': 'bd0fcb5c',
+  'p52-q17': '83580dd6',
+  'p52-q18': '83580dd6',
+  'p52-q19': '83580dd6',
+  'p52-q20': '83580dd6',
+  'p52-q21': '83580dd6',
+  'p52-q22': '83580dd6',
+  'p52-q23': '83580dd6',
+  'p52-q24': '83580dd6',
+  'p52-q25': 'd1ab1133',
+  'p52-q26': 'd1ab1133',
+  'p52-q27': '669ca6bc',
+  'p52-q28': 'a0030abb',
+  'p52-q29': 'a0030abb',
+  'p52-q30': '41b46d54',
+  'p52-q31': '09fb866c',
+  'p52-q32': '09fb866c',
+  'p52-q33': '5088c967',
+  'p52-q34': '66c44584',
+  'p52-q35': '66c44584',
+  'p52-q36': '488c3659',
+  'p53-q7': '8b96c886',
+  'p53-q8': '8b96c886',
+  'p53-q9': '8b96c886',
+  'p53-q10': '8b96c886',
+  'p53-q11': '8b96c886',
+  'p53-q12': '8b96c886',
+  'p53-q13': '8b96c886',
+  'p53-q14': '8b96c886',
+  'p54-q25': '2d50461b',
+  'p55-q10': '4712f361',
+  'p55-q11': '08b4e4c4',
+  'p57-q6': 'eea1b535',
+  'p57-q7': 'eea1b535',
+  'p58-q16': 'a1d66f9a',
+  'p58-q17': 'fd3086ec',
+  'p59-q13': '08de6460',
+  'p59-q14': '08de6460',
+  'p59-q15': '0bab69c9',
+  'p60-q11': 'c9b992da',
+  'p60-q12': 'c9b992da',
+  'p60-q13': '06808fd5',
+  'p61-q11': '25b0ff4b',
+  'p61-q12': '25b0ff4b',
+  'p61-q13': 'bd15e79d',
+  'p61-q14': 'bd15e79d',
+  'p61-q15': '75447ec6',
+  'p62-q12': '7415af8e',
+  'p62-q13': '7415af8e',
+  'p62-q14': '7415af8e',
+  'p62-q15': '7415af8e',
+  'p63-q17': '73ac9493',
+  'p64-q13': 'c19d5f79',
+  'p68-q1': '06c216c8',
+  'p68-q2': '06c216c8',
+  'p68-q3': '06c216c8',
+  'p68-q4': '06c216c8',
+  'p68-q5': '8ea4981a',
+  'p68-q6': '6334a3be',
+  'p68-q8': '986c6f79',
+  'p70-q10': 'dca0bce4',
+  'p73-q7': '195c6054',
+  'p73-q8': '195c6054',
+  'p73-q9': '195c6054',
+  'p73-q10': '195c6054',
+  'p74-q1': 'd690ded0',
+  'p74-q2': 'd690ded0',
+  'p74-q3': 'd690ded0',
+  'p74-q4': 'd690ded0',
+  'p75-q3': '86a530e9',
+  'p75-q4': '86a530e9',
+  'p75-q5': '6e9d9dae',
+  'p75-q6': '6e9d9dae',
+  'p75-q9': 'ac7b4206',
+  'p75-q10': '1cf23f6a',
+  'p75-q12': '082f67a8',
+  'p75-q13': '082f67a8',
+  'p75-q14': '14626e5e',
+  'p76-q4': 'be5c8b3e',
+  'p76-q5': 'be5c8b3e',
+  'p76-q6': 'be5c8b3e',
+  'p76-q7': 'be5c8b3e',
+};
+
 function hash(value: string): string {
   let result = 0x811c9dc5;
   for (let index = 0; index < value.length; index += 1) {
@@ -135,6 +308,7 @@ function classify(
   target: HTMLElement,
   targetId: string,
   context: string,
+  signature: string,
   defaults: AnswerKey,
   implicit: AnswerKey,
 ): Pick<
@@ -151,6 +325,8 @@ function classify(
   const implicitAnswers = (implicit[targetId] || []).filter(
     isAllowedExpectedAnswer,
   );
+  const proven = PROVEN_ANSWER_PROOFS[Number(targetId.match(/^p(\d+)-/)?.[1])]
+    ?.[targetId];
 
   if (defaultAnswers.length > 0) {
     const classification: AnswerClassification = VALID_RANGE_TARGETS.has(targetId)
@@ -163,6 +339,19 @@ function classify(
       automaticCheckingSafe: true,
       answers: defaultAnswers,
     };
+  }
+
+  if (proven && proven.targetSignature === signature) {
+    const answers = proven.answers.filter(isAllowedExpectedAnswer);
+    if (answers.length > 0) {
+      return {
+        classification: proven.classification,
+        currentAnswerSource: 'target-bound reviewed proof',
+        sourceEvidence: proven.sourceEvidence,
+        automaticCheckingSafe: true,
+        answers,
+      };
+    }
   }
 
   if (implicitAnswers.length > 0) {
@@ -197,11 +386,16 @@ function classify(
     };
   }
 
-  if (isOpenEnded(context)) {
+  const reviewedOpenEndedSignature =
+    REVIEWED_OPEN_ENDED_TARGET_SIGNATURES[targetId];
+  if (reviewedOpenEndedSignature === signature || isOpenEnded(context)) {
     return {
       classification: 'open-ended',
       currentAnswerSource: 'teacher judgment required',
-      sourceEvidence: 'learner-created or explanatory response',
+      sourceEvidence:
+        reviewedOpenEndedSignature === signature
+          ? 'signature-bound canonical review: learner-created or dependent response'
+          : 'learner-created or explanatory response',
       automaticCheckingSafe: false,
       answers: [],
     };
@@ -257,10 +451,12 @@ export function buildAnswerCoverageReport(
       const targetId = target.dataset['lmsQid'] || '';
       const context = contextFor(target);
       const inputType = inputTypeFor(target);
+      const signature = hash(inputType + '\n' + context);
       const details = classify(
         target,
         targetId,
         context,
+        signature,
         defaults,
         implicit,
       );
@@ -269,7 +465,7 @@ export function buildAnswerCoverageReport(
         order: index + 1,
         inputType,
         context,
-        signature: hash(inputType + '\n' + context),
+        signature,
         ...details,
       };
     });
