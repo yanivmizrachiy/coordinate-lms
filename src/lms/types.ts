@@ -71,6 +71,8 @@ export type AnswerKey = Record<string, string[]>;
 export interface DashboardStudent {
   profile: StudentProfile;
   results: PageResult[];
+  drafts: PageDraft[];
+  activity: ActivityEvent[];
 }
 
 export interface DashboardSnapshot {

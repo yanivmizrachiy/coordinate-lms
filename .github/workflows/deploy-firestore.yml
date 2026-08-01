@@ -1,0 +1,48 @@
+name: Deploy Firestore rules (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firestore-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+      FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate deployment credentials
+        shell: bash
+        run: |
+          if [[ -z "$FIREBASE_PROJECT_ID" ]]; then
+            echo "::error::VITE_FIREBASE_PROJECT_ID secret is missing"
+            exit 1
+          fi
+
+          if [[ -z "$FIREBASE_SERVICE_ACCOUNT" ]]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT secret is missing"
+            exit 1
+          fi
+      - name: Prepare Firebase service account
+        shell: bash
+        run: |
+          credentials="$RUNNER_TEMP/firebase-service-account.json"
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$credentials"
+          chmod 600 "$credentials"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$credentials" >> "$GITHUB_ENV"
+      - name: Deploy rules and indexes
+        run: >-
+          npx --yes firebase-tools@latest deploy
+          --only firestore:rules,firestore:indexes
+          --project "$FIREBASE_PROJECT_ID"
+          --non-interactive

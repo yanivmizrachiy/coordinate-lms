@@ -6,7 +6,12 @@ import {
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { ADMIN_EMAILS } from './config';
-import { auth, db, firebaseConfigured } from './firebase';
+import {
+  auth,
+  db,
+  firebaseConfigured,
+  localLmsFallbackEnabled,
+} from './firebase';
 import type {
   LmsSession,
   StudentProfile,
@@ -91,6 +96,14 @@ function persistSession(session: LmsSession | null): void {
   localStorage.setItem(SESSION_KEY, JSON.stringify(session));
 }
 
+function requireAvailableBackend(): void {
+  if (firebaseConfigured || localLmsFallbackEnabled) return;
+
+  throw new Error(
+    'מערכת ההרשמה המרכזית עדיין אינה מחוברת. לא נשמור חשבון תלמיד מקומי שאינו מופיע בדשבורד המורה.',
+  );
+}
+
 export function currentSession(): LmsSession | null {
   return safeParse<LmsSession | null>(
     localStorage.getItem(SESSION_KEY),
@@ -160,6 +173,8 @@ export async function registerStudent(
     persistSession(session);
     return session;
   }
+
+  requireAvailableBackend();
 
   const accounts = loadLocalAccounts();
 
@@ -240,6 +255,8 @@ export async function loginStudent(
     persistSession(session);
     return session;
   }
+
+  requireAvailableBackend();
 
   const accounts = loadLocalAccounts();
   const account = accounts[email];

@@ -1,0 +1,97 @@
+.coordinate-grid {
+  position: relative;
+}
+
+.coordinate-grid > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lms-grid-answer {
+  position: absolute !important;
+  z-index: 4;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 2px !important;
+  overflow: hidden;
+  border: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 3px;
+  background: transparent !important;
+  color: #0f172a;
+  font-family: inherit;
+  font-size: clamp(10px, 1.7vw, 17px);
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  outline: none;
+  cursor: text;
+}
+
+.lms-grid-answer:focus {
+  box-shadow: 0 0 0 2px rgb(29 78 216 / 35%);
+  background: rgb(255 255 255 / 88%) !important;
+}
+
+.lms-grid-answer[data-lms-state='correct'] {
+  color: #166534;
+  background: rgb(220 252 231 / 92%) !important;
+}
+
+.lms-grid-answer[data-lms-state='wrong'],
+.lms-grid-answer[data-lms-state='missing'] {
+  color: #991b1b;
+  background: rgb(254 226 226 / 92%) !important;
+}
+
+.lms-grid-answer[data-lms-state='locked'] {
+  color: #7f1d1d;
+  background: rgb(254 202 202 / 92%) !important;
+  cursor: not-allowed;
+}
+
+.lms-choice-proxy {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  min-width: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%);
+  border: 0 !important;
+  white-space: nowrap;
+}
+
+.tf-options[data-lms-state='correct'] {
+  border-radius: 10px;
+  box-shadow: 0 0 0 3px rgb(22 101 52 / 22%);
+  background: rgb(220 252 231 / 62%);
+}
+
+.tf-options[data-lms-state='wrong'],
+.tf-options[data-lms-state='missing'] {
+  border-radius: 10px;
+  box-shadow: 0 0 0 3px rgb(153 27 27 / 20%);
+  background: rgb(254 226 226 / 68%);
+}
+
+.tf-options[data-lms-state='locked'] {
+  border-radius: 10px;
+  opacity: 0.78;
+  box-shadow: 0 0 0 3px rgb(127 29 29 / 24%);
+  background: rgb(254 202 202 / 68%);
+}
+
+@media print {
+  .lms-grid-answer,
+  .lms-choice-proxy {
+    display: none !important;
+  }
+}

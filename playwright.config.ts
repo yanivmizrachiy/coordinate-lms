@@ -1,5 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const testSession = JSON.stringify({
+  uid: 'e2e-student',
+  fullName: 'תלמיד בדיקה',
+  username: 'e2e-student',
+  email: 'student@example.com',
+  role: 'student',
+  createdAt: 1,
+});
+
 // Visual / behavioural end-to-end tests. Run with: npm run test:visual
 // (requires browsers: `npx playwright install chromium`).
 export default defineConfig({
@@ -9,6 +18,20 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:4319',
     trace: 'on-first-retry',
+    storageState: {
+      cookies: [],
+      origins: [
+        {
+          origin: 'http://localhost:4319',
+          localStorage: [
+            {
+              name: 'coordinate_lms_session_v2',
+              value: testSession,
+            },
+          ],
+        },
+      ],
+    },
     /* Smooth scrolling kept moving elements exactly while a click's stability
        check ran — a retry loop that only the slow mobile emulation lost. The
        app honours prefers-reduced-motion everywhere (tokens + scroll), so this

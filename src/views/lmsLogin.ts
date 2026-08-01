@@ -6,7 +6,11 @@ import {
   logoutStudent,
   registerStudent,
 } from '../lms/auth';
-import { firebaseConfigured } from '../lms/firebase';
+import {
+  firebaseConfigured,
+  localLmsFallbackEnabled,
+  missingFirebaseSettings,
+} from '../lms/firebase';
 import {
   claimGuestProgress,
   logActivity,
@@ -115,13 +119,20 @@ export function lmsLogin({
       'עמוד 1 פתוח ללא הרשמה. לאחר ההרשמה הציון שכבר התקבל נשמר בחשבון.',
   });
 
+  const registrationAvailable =
+    firebaseConfigured || localLmsFallbackEnabled;
+
   const modeNote = elem('div', {
     class: firebaseConfigured
       ? 'lms-mode lms-mode--online'
       : 'lms-mode lms-mode--local',
     text: firebaseConfigured
       ? 'שמירה מרכזית מחוברת ל־Firebase.'
-      : 'Firebase עדיין לא הוגדר. כרגע השמירה היא מקומית בדפדפן.',
+      : localLmsFallbackEnabled
+        ? 'מצב פיתוח מקומי בלבד — הנתונים אינם משותפים בין מכשירים.'
+        : 'ההרשמה נעולה: חסרות ' +
+          String(missingFirebaseSettings.length) +
+          ' הגדרות Firebase. כך נמנעת יצירת הרשמה מקומית שלא תופיע בדשבורד המורה.',
   });
 
   const form = elem('form', {
@@ -177,13 +188,13 @@ export function lmsLogin({
     class: 'btn btn--gold',
     type: 'submit',
     text: 'הרשמה ושמירת הציון',
-  });
+  }) as HTMLButtonElement;
 
   const switchButton = elem('button', {
     class: 'btn btn--ghost',
     type: 'button',
     text: 'כבר נרשמתי — התחברות',
-  });
+  }) as HTMLButtonElement;
 
   switchButton.addEventListener('click', () => {
     registrationMode = !registrationMode;
@@ -208,8 +219,19 @@ export function lmsLogin({
     status.textContent = '';
   });
 
+  if (!registrationAvailable) {
+    submitButton.disabled = true;
+    switchButton.disabled = true;
+    status.textContent =
+      'לא ניתן להירשם עד השלמת החיבור המרכזי. עמוד 1 עדיין זמין כאורח.';
+    status.dataset.kind = 'error';
+  }
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+
+    if (!registrationAvailable) return;
+
     submitButton.setAttribute('disabled', 'true');
     status.textContent = 'מתבצעת שמירה…';
     status.dataset.kind = 'normal';
@@ -254,7 +276,7 @@ export function lmsLogin({
         status.dataset.kind = 'error';
       })
       .finally(() => {
-        submitButton.removeAttribute('disabled');
+        submitButton.disabled = !registrationAvailable;
       });
   });
 

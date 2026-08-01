@@ -13,6 +13,7 @@ import {
 } from './auth';
 import { DEFAULT_ANSWER_KEYS } from './answerKey';
 import { db } from './firebase';
+import { implicitAnswerKey } from './implicitAnswers';
 import type {
   ActivityEvent,
   AnswerKey,
@@ -178,6 +179,7 @@ export async function loadAnswerKey(
   pageNumber: number,
 ): Promise<AnswerKey> {
   const defaults = DEFAULT_ANSWER_KEYS[pageNumber] || {};
+  const implicit = implicitAnswerKey(pageNumber);
   const customKeys = loadMap<AnswerKey>(ANSWER_KEYS_KEY);
   const local = customKeys[String(pageNumber)] || {};
 
@@ -202,6 +204,7 @@ export async function loadAnswerKey(
   }
 
   return {
+    ...implicit,
     ...defaults,
     ...local,
     ...remote,
@@ -279,12 +282,25 @@ function localDashboard(): DashboardSnapshot {
   const localResults = Object.values(
     loadMap<PageResult>(RESULTS_KEY),
   );
+  const localDrafts = Object.values(
+    loadMap<PageDraft>(DRAFTS_KEY),
+  );
+  const localActivity = safeParse<ActivityEvent[]>(
+    localStorage.getItem(ACTIVITY_KEY),
+    [],
+  );
 
   const students: DashboardStudent[] = profiles.map((profile) => ({
     profile,
     results: localResults
       .filter((result) => result.uid === profile.uid)
       .sort((a, b) => a.pageNumber - b.pageNumber),
+    drafts: localDrafts
+      .filter((draft) => draft.uid === profile.uid)
+      .sort((a, b) => a.pageNumber - b.pageNumber),
+    activity: localActivity
+      .filter((event) => event.uid === profile.uid)
+      .sort((a, b) => b.createdAt - a.createdAt),
   }));
 
   return {
@@ -309,29 +325,59 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
     for (const studentDocument of studentsSnapshot.docs) {
       const profile = studentDocument.data() as DashboardStudent['profile'];
 
-      const resultsSnapshot = await getDocs(
-        collection(
-          db,
-          'students',
-          studentDocument.id,
-          'results',
-        ),
-      );
+      const [resultsSnapshot, draftsSnapshot, activitySnapshot] =
+        await Promise.all([
+          getDocs(
+            collection(
+              db,
+              'students',
+              studentDocument.id,
+              'results',
+            ),
+          ),
+          getDocs(
+            collection(
+              db,
+              'students',
+              studentDocument.id,
+              'drafts',
+            ),
+          ),
+          getDocs(
+            collection(
+              db,
+              'students',
+              studentDocument.id,
+              'activity',
+            ),
+          ),
+        ]);
 
       const results = resultsSnapshot.docs
-        .map((resultDocument) => resultDocument.data() as PageResult)
+        .map((document) => document.data() as PageResult)
         .sort((a, b) => a.pageNumber - b.pageNumber);
+
+      const drafts = draftsSnapshot.docs
+        .map((document) => document.data() as PageDraft)
+        .sort((a, b) => a.pageNumber - b.pageNumber);
+
+      const activity = activitySnapshot.docs
+        .map((document) => document.data() as ActivityEvent)
+        .sort((a, b) => b.createdAt - a.createdAt);
 
       students.push({
         profile,
         results,
+        drafts,
+        activity,
       });
     }
 
-    students.sort(
-      (a, b) =>
-        b.profile.lastSeenAt - a.profile.lastSeenAt,
-    );
+    students.sort((a, b) => {
+      const aLatest = a.activity[0]?.createdAt || a.profile.lastSeenAt;
+      const bLatest = b.activity[0]?.createdAt || b.profile.lastSeenAt;
+      return bLatest - aLatest;
+    });
 
     return {
       students,
@@ -342,7 +388,6 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
     return localDashboard();
   }
 }
-
 
 export async function loadUserResults(
   uid: string,

@@ -17,21 +17,77 @@ service cloud.firestore {
           == 'yanivmiz77@gmail.com';
     }
 
+    function validPageNumber(value) {
+      return value is int && value >= 1 && value <= 77;
+    }
+
+    function validStudent(uid) {
+      return request.resource.data.uid == uid
+        && request.resource.data.fullName is string
+        && request.resource.data.username is string
+        && request.resource.data.email is string
+        && request.resource.data.createdAt is int
+        && request.resource.data.lastSeenAt is int
+        && (
+          request.resource.data.role == 'student'
+          || admin()
+        );
+    }
+
+    function validDraft(uid) {
+      return request.resource.data.uid == uid
+        && validPageNumber(request.resource.data.pageNumber)
+        && request.resource.data.startedAt is int
+        && request.resource.data.updatedAt is int
+        && request.resource.data.activeSeconds is int
+        && request.resource.data.activeSeconds >= 0
+        && request.resource.data.questions is map
+        && request.resource.data.submitted is bool;
+    }
+
+    function validResult(uid) {
+      return request.resource.data.uid == uid
+        && validPageNumber(request.resource.data.pageNumber)
+        && request.resource.data.score is int
+        && request.resource.data.score >= 1
+        && request.resource.data.score <= 100
+        && request.resource.data.startedAt is int
+        && request.resource.data.submittedAt is int
+        && request.resource.data.activeSeconds is int
+        && request.resource.data.activeSeconds >= 0
+        && request.resource.data.attempts is map
+        && request.resource.data.answers is map;
+    }
+
+    function validActivity(uid) {
+      return request.resource.data.uid == uid
+        && validPageNumber(request.resource.data.pageNumber)
+        && request.resource.data.type is string
+        && request.resource.data.createdAt is int;
+    }
+
     match /students/{uid} {
-      allow create: if owner(uid);
-      allow read, update: if owner(uid) || admin();
+      allow create: if owner(uid) && validStudent(uid);
+      allow read: if owner(uid) || admin();
+      allow update: if (owner(uid) && validStudent(uid)) || admin();
       allow delete: if admin();
 
       match /drafts/{document=**} {
-        allow read, write: if owner(uid) || admin();
+        allow read: if owner(uid) || admin();
+        allow create, update: if
+          (owner(uid) && validDraft(uid)) || admin();
+        allow delete: if owner(uid) || admin();
       }
 
       match /results/{document=**} {
-        allow read, write: if owner(uid) || admin();
+        allow read: if owner(uid) || admin();
+        allow create, update: if
+          (owner(uid) && validResult(uid)) || admin();
+        allow delete: if admin();
       }
 
       match /activity/{document=**} {
-        allow create: if owner(uid);
+        allow create: if owner(uid) && validActivity(uid);
         allow read: if owner(uid) || admin();
         allow update, delete: if admin();
       }
