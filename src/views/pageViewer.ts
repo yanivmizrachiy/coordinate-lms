@@ -13,6 +13,7 @@ import {
   canAccessPage,
   renderAccessGate,
 } from '../lms/engine';
+import { hydrateGridAnswerInputs } from '../lms/gridInputs';
 
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
@@ -39,7 +40,8 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     if (data) {
       sheetWrap.append(fromHTML(data.html));
       hydrateGrids(sheetWrap);
-    fitSheets(sheetWrap);
+      hydrateGridAnswerInputs(sheetWrap);
+      fitSheets(sheetWrap);
       if (data.gameId) {
         const host = sheetWrap.querySelector<HTMLElement>('[data-game-host]');
         const g = gameById(data.gameId);
