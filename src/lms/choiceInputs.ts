@@ -50,6 +50,15 @@ export function hydrateChoiceAnswerInputs(
     if (options.dataset['lmsChoice'] === 'ready') continue;
 
     options.dataset['lmsChoice'] = 'ready';
+    const statement = row.querySelector('td')?.textContent
+      ?.replace(/\s+/g, ' ')
+      .trim();
+    if (statement) {
+      options.setAttribute(
+        'aria-label',
+        statement + ' — סמנו נכון או לא נכון',
+      );
+    }
 
     const expected = row.dataset['answer'];
     const proxy = document.createElement('span');
