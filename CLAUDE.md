@@ -1,17 +1,13 @@
-# CLAUDE.md — שלט הפניה בלבד
+# CLAUDE.md — pointer only
 
-**אין כאן כללים.** כל כללי הפרויקט, הדרישות וההחלטות של יניב נמצאים
-ב**דף כללים אחד ויחיד**, עם תוכן עניינים ו־15 ראשי פרקים:
+The repository's single source of engineering rules is:
 
-> ## `USER_MEMORY.md`
+> ## `RULES.md`
 
-קרא אותו **במלואו לפני כל פעולה**. כל דרישה חדשה של יניב נכתבת שם — לא כאן,
-ולא בשום קובץ אחר. אם נדמה שיש כלל בקובץ אחר: זו טעות, מעבירים
-אותו ל־`USER_MEMORY.md` ומוחקים משם.
+Read it before making changes. `USER_MEMORY.md` and `HANDOFF.md` are historical
+workbook records, not competing rule authorities.
 
-## גבול בטיחות (מועתק כאן בלבד, כי הוא חייב לחול גם לפני קריאת דף הכללים)
-
-- הריפו המותר היחיד: `yanivmizrachiy/coordinate-first-quadrant`.
-- אסור כל כתיבה / commit / push / merge אל `yanivmizrachiy/parabula-next`.
-- אם `git remote get-url origin` אינו מצביע בדיוק אל הריפו המותר — לעצור ולא לכתוב.
-- ליניב יש **אישור עומד** ל־merge ולפרסום; הפירוט המלא בפרק 1 של `USER_MEMORY.md`.
+The writable repository is `yanivmizrachiy/coordinate-lms`. The canonical
+source repository `yanivmizrachiy/coordinate-first-quadrant` is read-only.
+Merge and production deployment require explicit confirmation for the current
+operation.

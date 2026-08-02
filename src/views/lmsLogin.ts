@@ -96,7 +96,7 @@ export function lmsLogin({
       const keysButton = elem('button', {
         class: 'btn btn--teacher',
         type: 'button',
-        text: 'סטודיו מפתחות תשובה',
+        text: 'סטודיו סקירת תשובות',
       });
       keysButton.addEventListener('click', () => {
         navigate('#/keys');
@@ -203,6 +203,12 @@ export function lmsLogin({
     username.hidden = !registrationMode;
     className.hidden = !registrationMode;
     school.hidden = !registrationMode;
+    fullName.required = registrationMode;
+    username.required = registrationMode;
+    fullName.disabled = !registrationMode;
+    username.disabled = !registrationMode;
+    className.disabled = !registrationMode;
+    school.disabled = !registrationMode;
 
     password.autocomplete = registrationMode
       ? 'new-password'
@@ -249,9 +255,16 @@ export function lmsLogin({
 
     void action
       .then(async (session) => {
-        await claimGuestProgress(session.uid);
+        const guestClaim = await claimGuestProgress(session.uid);
 
-        await logActivity({
+        if (!guestClaim.complete) {
+          status.textContent =
+            'החשבון נוצר, אבל העברת התקדמות האורח למערכת המרכזית נכשלה. ההתקדמות נשארה במכשיר; בדקו חיבור ונסו להתחבר שוב.';
+          status.dataset.kind = 'error';
+          return;
+        }
+
+        const activityOutcome = await logActivity({
           uid: session.uid,
           pageNumber: 1,
           type: registrationMode
@@ -260,9 +273,12 @@ export function lmsLogin({
           createdAt: Date.now(),
         });
 
-        status.textContent =
-          'החשבון נשמר. עוברים להמשך התרגול…';
-        status.dataset.kind = 'success';
+        status.textContent = activityOutcome.central === 'failed'
+          ? 'החשבון וההתקדמות נשמרו, אך רישום פעילות ההתחברות לא הסתנכרן. עוברים לתרגול…'
+          : 'החשבון וההתקדמות נשמרו. עוברים להמשך התרגול…';
+        status.dataset.kind = activityOutcome.central === 'failed'
+          ? 'error'
+          : 'success';
 
         window.setTimeout(() => {
           navigate('#/workbook/2');

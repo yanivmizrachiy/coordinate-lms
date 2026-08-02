@@ -13,89 +13,210 @@ service cloud.firestore {
     function admin() {
       return signedIn()
         && request.auth.token.email != null
-        && request.auth.token.email
-          == 'yanivmiz77@gmail.com';
+        && request.auth.token.email == 'yanivmiz77@gmail.com';
     }
 
     function validPageNumber(value) {
       return value is int && value >= 1 && value <= 77;
     }
 
+    function validScore(value) {
+      return value is int && value >= 1 && value <= 100;
+    }
+
+    function validAttemptCount(value) {
+      return value is int && value >= 0 && value <= 3;
+    }
+
     function validStudent(uid) {
-      return request.resource.data.uid == uid
+      return request.resource.data.keys().hasAll([
+          'uid', 'fullName', 'username', 'email', 'role',
+          'createdAt', 'lastSeenAt'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'uid', 'fullName', 'username', 'email', 'className', 'school',
+          'role', 'createdAt', 'lastSeenAt'
+        ])
+        && request.resource.data.uid == uid
         && request.resource.data.fullName is string
+        && request.resource.data.fullName.size() >= 1
+        && request.resource.data.fullName.size() <= 200
         && request.resource.data.username is string
+        && request.resource.data.username.size() >= 1
+        && request.resource.data.username.size() <= 100
         && request.resource.data.email is string
         && request.resource.data.createdAt is int
         && request.resource.data.lastSeenAt is int
+        && request.resource.data.lastSeenAt >= request.resource.data.createdAt
         && (
           request.resource.data.role == 'student'
-          || admin()
-        );
+          || (admin() && request.resource.data.role == 'admin')
+        )
+        && (!request.resource.data.keys().hasAny(['className'])
+          || request.resource.data.className is string)
+        && (!request.resource.data.keys().hasAny(['school'])
+          || request.resource.data.school is string);
     }
 
-    function validDraft(uid) {
-      return request.resource.data.uid == uid
+    function validDraft(uid, document) {
+      return request.resource.data.keys().hasAll([
+          'uid', 'pageNumber', 'startedAt', 'updatedAt', 'activeSeconds',
+          'questions', 'submitted', 'maxAttemptCount'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'uid', 'pageNumber', 'startedAt', 'updatedAt', 'activeSeconds',
+          'questions', 'submitted', 'score', 'maxAttemptCount'
+        ])
+        && request.resource.data.uid == uid
         && validPageNumber(request.resource.data.pageNumber)
+        && document == 'page-' + string(request.resource.data.pageNumber)
         && request.resource.data.startedAt is int
         && request.resource.data.updatedAt is int
+        && request.resource.data.updatedAt >= request.resource.data.startedAt
         && request.resource.data.activeSeconds is int
         && request.resource.data.activeSeconds >= 0
         && request.resource.data.questions is map
-        && request.resource.data.submitted is bool;
+        && request.resource.data.questions.size() <= 500
+        && request.resource.data.submitted is bool
+        && validAttemptCount(request.resource.data.maxAttemptCount)
+        && (!request.resource.data.keys().hasAny(['score'])
+          || validScore(request.resource.data.score));
     }
 
-    function validResult(uid) {
-      return request.resource.data.uid == uid
+    function validResult(uid, document) {
+      return request.resource.data.keys().hasAll([
+          'uid', 'pageNumber', 'score', 'bestScore', 'latestScore',
+          'startedAt', 'submittedAt', 'activeSeconds', 'attempts', 'answers',
+          'maxAttemptCount', 'submissionId'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'uid', 'pageNumber', 'score', 'bestScore', 'latestScore',
+          'startedAt', 'submittedAt', 'activeSeconds', 'attempts', 'answers',
+          'maxAttemptCount', 'submissionId'
+        ])
+        && request.resource.data.uid == uid
         && validPageNumber(request.resource.data.pageNumber)
-        && request.resource.data.score is int
-        && request.resource.data.score >= 1
-        && request.resource.data.score <= 100
+        && document == 'page-' + string(request.resource.data.pageNumber)
+        && validScore(request.resource.data.score)
+        && validScore(request.resource.data.bestScore)
+        && validScore(request.resource.data.latestScore)
+        && request.resource.data.score == request.resource.data.latestScore
+        && request.resource.data.bestScore >= request.resource.data.latestScore
         && request.resource.data.startedAt is int
         && request.resource.data.submittedAt is int
+        && request.resource.data.submittedAt >= request.resource.data.startedAt
         && request.resource.data.activeSeconds is int
         && request.resource.data.activeSeconds >= 0
         && request.resource.data.attempts is map
-        && request.resource.data.answers is map;
+        && request.resource.data.attempts.size() <= 500
+        && request.resource.data.answers is map
+        && request.resource.data.answers.size() <= 500
+        && validAttemptCount(request.resource.data.maxAttemptCount)
+        && request.resource.data.submissionId is string
+        && request.resource.data.submissionId.size() >= 1
+        && request.resource.data.submissionId.size() <= 200;
     }
 
-    function validActivity(uid) {
-      return request.resource.data.uid == uid
+    function validActivity(uid, document) {
+      return request.resource.data.keys().hasAll([
+          'id', 'uid', 'pageNumber', 'type', 'createdAt'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'id', 'uid', 'pageNumber', 'type', 'createdAt', 'metadata'
+        ])
+        && request.resource.data.id is string
+        && request.resource.data.id.size() >= 1
+        && request.resource.data.id.size() <= 200
+        && request.resource.data.id == document
+        && request.resource.data.uid == uid
         && validPageNumber(request.resource.data.pageNumber)
-        && request.resource.data.type is string
-        && request.resource.data.createdAt is int;
+        && request.resource.data.type in [
+          'page_open', 'answer_change', 'answer_check', 'page_submit',
+          'page_leave', 'heartbeat', 'registration', 'login'
+        ]
+        && request.resource.data.createdAt is int
+        && (!request.resource.data.keys().hasAny(['metadata'])
+          || request.resource.data.metadata is map);
+    }
+
+    function validAnswerKey(document) {
+      return request.resource.data.keys().hasAll([
+          'pageNumber', 'answers', 'updatedAt', 'updatedBy'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'pageNumber', 'answers', 'updatedAt', 'updatedBy'
+        ])
+        && validPageNumber(request.resource.data.pageNumber)
+        && document == 'page-' + string(request.resource.data.pageNumber)
+        && request.resource.data.answers is map
+        && request.resource.data.answers.size() <= 500
+        && request.resource.data.updatedAt is int
+        && request.resource.data.updatedBy is string;
     }
 
     match /students/{uid} {
-      allow create: if owner(uid) && validStudent(uid);
+      allow create: if owner(uid)
+        && request.resource.data.email == request.auth.token.email
+        && validStudent(uid);
       allow read: if owner(uid) || admin();
-      allow update: if (owner(uid) && validStudent(uid)) || admin();
+      allow update: if (
+          owner(uid)
+          && validStudent(uid)
+          && request.resource.data.email == request.auth.token.email
+          && request.resource.data.uid == resource.data.uid
+          && request.resource.data.email == resource.data.email
+          && request.resource.data.createdAt == resource.data.createdAt
+        ) || (admin() && validStudent(uid));
       allow delete: if admin();
 
-      match /drafts/{document=**} {
+      match /drafts/{document} {
         allow read: if owner(uid) || admin();
-        allow create, update: if
-          (owner(uid) && validDraft(uid)) || admin();
-        allow delete: if owner(uid) || admin();
-      }
-
-      match /results/{document=**} {
-        allow read: if owner(uid) || admin();
-        allow create, update: if
-          (owner(uid) && validResult(uid)) || admin();
+        allow create: if (owner(uid) || admin()) && validDraft(uid, document);
+        allow update: if (owner(uid) || admin())
+          && validDraft(uid, document)
+          && request.resource.data.pageNumber == resource.data.pageNumber
+          && request.resource.data.startedAt == resource.data.startedAt
+          && request.resource.data.updatedAt >= resource.data.updatedAt
+          && request.resource.data.activeSeconds >= resource.data.activeSeconds
+          && (!resource.data.keys().hasAny(['maxAttemptCount'])
+            || request.resource.data.maxAttemptCount >= resource.data.maxAttemptCount)
+          && (!resource.data.submitted || request.resource.data.submitted)
+          && (!resource.data.keys().hasAny(['score'])
+            || (request.resource.data.keys().hasAny(['score'])
+              && request.resource.data.score >= resource.data.score));
         allow delete: if admin();
       }
 
-      match /activity/{document=**} {
-        allow create: if owner(uid) && validActivity(uid);
+      match /results/{document} {
         allow read: if owner(uid) || admin();
-        allow update, delete: if admin();
+        allow create: if (owner(uid) || admin()) && validResult(uid, document);
+        allow update: if (owner(uid) || admin())
+          && validResult(uid, document)
+          && request.resource.data.pageNumber == resource.data.pageNumber
+          && request.resource.data.startedAt == resource.data.startedAt
+          && (request.resource.data.submittedAt > resource.data.submittedAt
+            || request.resource.data == resource.data)
+          && (!resource.data.keys().hasAny(['bestScore'])
+            || request.resource.data.bestScore >= resource.data.bestScore)
+          && (!resource.data.keys().hasAny(['maxAttemptCount'])
+            || request.resource.data.maxAttemptCount >= resource.data.maxAttemptCount);
+        allow delete: if admin();
+      }
+
+      match /activity/{document} {
+        allow create: if (owner(uid) || admin()) && validActivity(uid, document);
+        allow read: if owner(uid) || admin();
+        allow update: if (owner(uid) || admin())
+          && validActivity(uid, document)
+          && request.resource.data == resource.data;
+        allow delete: if admin();
       }
     }
 
-    match /answerKeys/{document=**} {
+    match /answerKeys/{document} {
       allow read: if signedIn();
-      allow write: if admin();
+      allow create, update: if admin() && validAnswerKey(document);
+      allow delete: if admin();
     }
   }
 }

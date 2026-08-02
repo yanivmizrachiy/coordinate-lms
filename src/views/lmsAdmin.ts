@@ -1,6 +1,14 @@
 import { elem } from '../lib/dom';
 import { currentSession } from '../lms/auth';
 import { firebaseConfigured } from '../lms/firebase';
+import {
+  buildDashboardCsv,
+  dashboardCurrentPage,
+  dashboardTotalActiveSeconds,
+  resultAttemptCount,
+  resultBestScore,
+  resultLatestScore,
+} from '../lms/dashboardCsv';
 import { loadDashboard } from '../lms/repository';
 import type {
   ActivityEvent,
@@ -53,24 +61,7 @@ function averageScore(student: DashboardStudent): number {
 function totalActiveSeconds(
   student: DashboardStudent,
 ): number {
-  const submittedPages = new Set(
-    student.results.map((result) => result.pageNumber),
-  );
-
-  const completedSeconds = student.results.reduce(
-    (sum, result) => sum + result.activeSeconds,
-    0,
-  );
-
-  const draftSeconds = student.drafts
-    .filter(
-      (draft) =>
-        !draft.submitted &&
-        !submittedPages.has(draft.pageNumber),
-    )
-    .reduce((sum, draft) => sum + draft.activeSeconds, 0);
-
-  return completedSeconds + draftSeconds;
+  return dashboardTotalActiveSeconds(student);
 }
 
 function latestActivityAt(student: DashboardStudent): number {
@@ -81,16 +72,7 @@ function latestActivityAt(student: DashboardStudent): number {
 }
 
 function currentPage(student: DashboardStudent): number {
-  const openDraft = [...student.drafts]
-    .filter((draft) => !draft.submitted)
-    .sort((a, b) => b.updatedAt - a.updatedAt)[0];
-
-  if (openDraft) return openDraft.pageNumber;
-
-  const lastResult = [...student.results]
-    .sort((a, b) => b.pageNumber - a.pageNumber)[0];
-
-  return Math.min((lastResult?.pageNumber || 0) + 1, 77) || 1;
+  return dashboardCurrentPage(student);
 }
 
 function activityLabel(event?: ActivityEvent): string {
@@ -117,66 +99,7 @@ function activityLabel(event?: ActivityEvent): string {
 }
 
 function exportCsv(snapshot: DashboardSnapshot): void {
-  const rows = [
-    [
-      'שם מלא',
-      'שם משתמש',
-      'אימייל',
-      'כיתה',
-      'בית ספר',
-      'נרשם בתאריך',
-      'פעילות אחרונה',
-      'פעולה אחרונה',
-      'עמוד נוכחי',
-      'מספר עמודים שהוגשו',
-      'מספר טיוטות',
-      'מספר אירועים',
-      'ממוצע',
-      'זמן פעיל בשניות',
-      'ציונים',
-    ],
-  ];
-
-  for (const student of snapshot.students) {
-    rows.push([
-      student.profile.fullName,
-      student.profile.username,
-      student.profile.email,
-      student.profile.className || '',
-      student.profile.school || '',
-      formatDate(student.profile.createdAt),
-      formatDate(latestActivityAt(student)),
-      activityLabel(student.activity[0]),
-      String(currentPage(student)),
-      String(student.results.length),
-      String(student.drafts.filter((draft) => !draft.submitted).length),
-      String(student.activity.length),
-      String(averageScore(student)),
-      String(totalActiveSeconds(student)),
-      student.results
-        .map(
-          (result) =>
-            'עמוד ' +
-            String(result.pageNumber) +
-            ': ' +
-            String(result.score),
-        )
-        .join(' | '),
-    ]);
-  }
-
-  const csv =
-    '\uFEFF' +
-    rows
-      .map((row) =>
-        row
-          .map(
-            (cell) =>
-              '"' + cell.replace(/"/g, '""') + '"',
-          )
-          .join(','),
-      )
-      .join('\n');
+  const csv = buildDashboardCsv(snapshot);
 
   const blob = new Blob([csv], {
     type: 'text/csv;charset=utf-8',
@@ -306,9 +229,38 @@ export function lmsAdmin({
       }),
     );
 
-    const snapshot = await loadDashboard();
+    let snapshot: DashboardSnapshot;
+
+    try {
+      snapshot = await loadDashboard();
+    } catch {
+      currentSnapshot = null;
+      exportButton.disabled = true;
+      connection.className = 'lms-mode lms-mode--local';
+      connection.textContent = 'טעינת הדשבורד נכשלה — נסו לרענן.';
+      content.replaceChildren(
+        elem('div', {
+          class: 'lms-panel__status',
+          text: 'לא ניתן לטעון כרגע את נתוני התלמידים. הנתונים לא יוצגו עד לטעינה תקינה.',
+          'data-kind': 'error',
+          role: 'alert',
+        }),
+      );
+      return;
+    }
+
     currentSnapshot = snapshot;
-    exportButton.disabled = false;
+    exportButton.disabled = snapshot.students.length === 0;
+    connection.className =
+      snapshot.source === 'firebase'
+        ? 'lms-mode lms-mode--online'
+        : 'lms-mode lms-mode--local';
+    connection.textContent =
+      snapshot.source === 'firebase'
+        ? 'מקור הנתונים המרכזי: Firebase'
+        : firebaseConfigured
+          ? 'המקור המרכזי אינו זמין — מוצגים נתונים מקומיים חלקיים בלבד'
+          : 'Firebase אינו מוגדר — מוצגים נתונים מהמכשיר הזה בלבד';
 
     const resultCount = snapshot.students.reduce(
       (sum, student) => sum + student.results.length,
@@ -425,10 +377,30 @@ export function lmsAdmin({
           (result) =>
             'עמוד ' +
             String(result.pageNumber) +
-            ': ' +
-            String(result.score),
+            ': אחרון ' +
+            String(resultLatestScore(result)) +
+            ' · מיטבי ' +
+            String(resultBestScore(result)) +
+            ' · ניסיונות ' +
+            String(resultAttemptCount(result)),
         )
         .join(', ');
+
+      const openDrafts = student.drafts
+        .filter((draft) => !draft.submitted)
+        .map(
+          (draft) =>
+            'עמוד ' +
+            String(draft.pageNumber) +
+            ' (' +
+            String(draft.maxAttemptCount || 0) +
+            '/3)',
+        )
+        .join(', ');
+
+      const studentErrors = student.syncErrors
+        .map((error) => error.message)
+        .join(' ');
 
       row.append(
         identity,
@@ -461,7 +433,10 @@ export function lmsAdmin({
         }),
         elem('td', {
           class: 'lms-table__details',
-          text: details || 'טרם הוגש עמוד',
+          text:
+            (details || 'טרם הוגש עמוד') +
+            (openDrafts ? ' · טיוטות פעילות: ' + openDrafts : '') +
+            (studentErrors ? ' · שגיאת סנכרון: ' + studentErrors : ''),
         }),
       );
 
@@ -471,7 +446,19 @@ export function lmsAdmin({
     table.append(body);
     tableWrap.append(table);
 
+    const syncAlert = snapshot.syncErrors.length > 0
+      ? elem('div', {
+          class: 'lms-panel__status',
+          text:
+            snapshot.syncErrors[0]?.message ||
+            'קיימות שגיאות סנכרון. הנתונים המוצגים עשויים להיות חלקיים.',
+          'data-kind': 'error',
+          role: 'alert',
+        })
+      : null;
+
     content.replaceChildren(
+      ...(syncAlert ? [syncAlert] : []),
       summary,
       tableWrap,
       elem('p', {

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "status": "blocked",
+  "testedAt": "",
+  "firebaseProjectId": "",
+  "commit": "",
+  "testers": [],
+  "devices": [],
+  "checks": [
+    { "id": "guest-transfer", "status": "blocked", "notes": "" },
+    { "id": "attempts-survive-reload", "status": "blocked", "notes": "" },
+    { "id": "offline-reconnect-truth", "status": "blocked", "notes": "" },
+    { "id": "teacher-central-snapshot", "status": "blocked", "notes": "" },
+    { "id": "utf8-csv", "status": "blocked", "notes": "" },
+    { "id": "duplicate-submit-idempotency", "status": "blocked", "notes": "" }
+  ]
+}

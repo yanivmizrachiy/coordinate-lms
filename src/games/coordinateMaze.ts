@@ -100,7 +100,16 @@ export const coordinateMazeGame: GameDefinition = {
     wrap.append(controls);
 
     function redraw(): void {
-      const wallPoints: GridPoint[] = cfg.walls.map((w) => ({ x: w.x, y: w.y, label: '■', color: '#94a3b8', anchor: 'middle', dx: 0, dy: 4 }));
+      const wallPoints: GridPoint[] = cfg.walls.map((w) => ({
+        x: w.x,
+        y: w.y,
+        label: '■',
+        color: '#94a3b8',
+        anchor: 'middle',
+        dx: 0,
+        // Keep the wall at (2,0) above the axis so it cannot cover tick “2”.
+        dy: w.y === 0 ? -10 : 4,
+      }));
       const points: GridPoint[] = [
         ...wallPoints,
         { x: cfg.start.x, y: cfg.start.y, label: 'התחלה', color: '#15803d', dx: 14, dy: -14 },

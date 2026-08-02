@@ -9,20 +9,51 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: npm
+      - name: Set up Java for the Firestore emulator
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
       - run: npm ci
       - name: Production dependency security gate
         run: npm audit --omit=dev --audit-level=high
+      - name: Development toolchain security gate
+        run: npm audit --audit-level=high
+      - name: Generated answer coverage is current
+        run: npm run answers:coverage:check
+      - name: Firebase launch contract (static)
+        run: npm run firebase:check:static
       - name: Typecheck
         run: npm run typecheck
       - name: Unit & content tests
         run: npm test
+      - name: Firestore emulator authorization tests
+        run: npm run test:firestore
+      - name: Separated classroom release contract
+        if: always()
+        run: npm run release:report:static
       - name: Build
         run: npm run build
+      - name: Keep readiness evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: readiness-reports
+          path: |
+            reports/answer-coverage.json
+            reports/answer-coverage.md
+            reports/answer-target-order.json
+            reports/firebase-readiness.json
+            reports/firebase-readiness.md
+            reports/firestore-emulator.json
+            reports/release-readiness.json
+            reports/release-readiness.md
+          retention-days: 14
 
   # The rules Yaniv repeats most — drawings big enough to write on, nothing cut
   # off the page, labels not printing backwards, 13px body text — can only be
@@ -31,8 +62,8 @@ jobs:
   visual-checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: npm
@@ -43,7 +74,7 @@ jobs:
         run: npm run test:visual
       - name: Keep the failure trace
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: |
