@@ -12,6 +12,7 @@ import {
 } from './repository';
 import { calculatePageScore } from './scoring';
 import { answersMatch } from './answerValidation';
+import { acceptImmediateCorrectAnswer } from './liveFeedback';
 import { runSynchronizationRetry } from './syncRetry';
 import type {
   ActivityEvent,
@@ -309,6 +310,22 @@ export function attachLmsToPage(
       draft.submitted || progress.correct || progress.locked
         ? 'false'
         : 'true';
+  }
+
+  function showImmediateCorrectFeedback(
+    target: HTMLElement,
+    qid: string,
+  ): boolean {
+    const progress = progressFor(qid);
+    const expected = answerKey[qid] || [];
+
+    if (!acceptImmediateCorrectAnswer(progress, expected)) {
+      return false;
+    }
+
+    updateTarget(target, progress);
+    target.dataset.lmsFeedback = 'correct';
+    return true;
   }
 
   function rememberOutcome(
@@ -789,12 +806,14 @@ export function attachLmsToPage(
 
       const progress = progressFor(qid);
       progress.answer = targetValue(target);
-      progress.correct = false;
 
-      if (!progress.locked) {
-        target.dataset.lmsState = progress.answer
-          ? 'filled'
-          : 'empty';
+      if (!progress.locked && !progress.correct) {
+        const accepted = showImmediateCorrectFeedback(target, qid);
+        if (!accepted) {
+          target.dataset.lmsState = progress.answer
+            ? 'filled'
+            : 'empty';
+        }
       }
 
       scheduleSave();
@@ -841,6 +860,8 @@ export function attachLmsToPage(
       draft = storedDraft;
     }
 
+    let restoredCorrectAnswer = false;
+
     for (const target of targets) {
       const qid = target.dataset.lmsQid;
 
@@ -852,8 +873,17 @@ export function attachLmsToPage(
         setTargetValue(target, progress.answer);
       }
 
-      updateTarget(target, progress);
+      if (
+        !draft.submitted &&
+        showImmediateCorrectFeedback(target, qid)
+      ) {
+        restoredCorrectAnswer = true;
+      } else {
+        updateTarget(target, progress);
+      }
     }
+
+    if (restoredCorrectAnswer) scheduleSave();
 
     if (draft.score !== undefined) {
       showScore(draft.score);
