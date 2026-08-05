@@ -1,4 +1,4 @@
-name: Apply live-key fallback and A4 overflow fix
+name: Remove completed migration tools
 
 on:
   push:
@@ -9,27 +9,36 @@ permissions:
   contents: write
 
 jobs:
-  apply-final-fix:
+  cleanup:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
         with:
           ref: agent/sync-latest-workbook
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 20
-      - name: Update immediate-key fallback and adaptive A4 handling
-        run: node scripts/fix-live-key-and-a4-overflow.mjs
-      - name: Commit LMS infrastructure fix only
+      - name: Remove one-shot synchronization workflows and scripts
+        shell: bash
+        run: |
+          git rm -f \
+            .github/workflows/add-canonical-authoring-helpers.yml \
+            .github/workflows/apply-canonical-sync-test-patch.yml \
+            .github/workflows/audit-canonical-parity.yml \
+            .github/workflows/fix-sync-metadata.yml \
+            .github/workflows/regenerate-answer-coverage.yml \
+            .github/workflows/sync-canonical-calc-box.yml \
+            .github/workflows/sync-canonical-pages.yml \
+            .github/workflows/apply-live-correct-feedback.yml \
+            .github/workflows/apply-final-canonical-layout-tests.yml \
+            scripts/apply-workbook-sync.mjs \
+            scripts/patch-canonical-sync-tests.mjs \
+            scripts/add-live-correct-feedback.mjs \
+            scripts/fix-final-canonical-layout-tests.mjs \
+            scripts/fix-canonical-e2e-and-overflow.mjs \
+            scripts/fix-live-key-and-a4-overflow.mjs
+      - name: Commit cleanup
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/lms/engine.ts src/styles/workbook.css
-          if git diff --cached --quiet; then
-            echo "Live-key fallback and A4 overflow recovery are already current."
-          else
-            git commit -m "fix: load immediate answer keys before repository hydration"
-            git push origin HEAD:agent/sync-latest-workbook
-          fi
+          git commit -m "chore: remove completed workbook migration tools"
+          git push origin HEAD:agent/sync-latest-workbook
