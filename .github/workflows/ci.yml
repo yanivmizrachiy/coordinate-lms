@@ -5,16 +5,11 @@ on:
     branches: ['**']
   pull_request:
 
-permissions:
-  contents: write
-
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-        with:
-          ref: ${{ github.event_name == 'push' && github.ref_name || github.event.pull_request.head.sha }}
       - uses: actions/setup-node@v7
         with:
           node-version: 20
@@ -25,44 +20,10 @@ jobs:
           distribution: temurin
           java-version: '21'
       - run: npm ci
-      - name: Apply canonical synchronization test expectations
-        if: github.ref_name == 'agent/sync-latest-workbook' || github.head_ref == 'agent/sync-latest-workbook'
-        run: node scripts/patch-canonical-sync-tests.mjs
-      - name: Persist canonical synchronization test expectations
-        if: github.event_name == 'push' && github.ref_name == 'agent/sync-latest-workbook'
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tests/answer-coverage.test.ts tests/layout-rules.test.ts
-          if git diff --cached --quiet; then
-            echo "Canonical synchronization tests are already current."
-          else
-            git commit -m "test: align assertions with canonical workbook format"
-            git push origin HEAD:agent/sync-latest-workbook
-          fi
       - name: Production dependency security gate
         run: npm audit --omit=dev --audit-level=high
       - name: Development toolchain security gate
         run: npm audit --audit-level=high
-      - name: Regenerate answer coverage during workbook synchronization
-        id: sync_coverage
-        continue-on-error: true
-        if: github.ref_name == 'agent/sync-latest-workbook' || github.head_ref == 'agent/sync-latest-workbook'
-        shell: bash
-        run: |
-          set -o pipefail
-          npm run answers:coverage 2>&1 | tee sync-answer-coverage.log
-      - name: Keep workbook-sync generation diagnostics
-        if: always() && (github.ref_name == 'agent/sync-latest-workbook' || github.head_ref == 'agent/sync-latest-workbook')
-        uses: actions/upload-artifact@v7
-        with:
-          name: sync-answer-coverage-log
-          path: sync-answer-coverage.log
-          retention-days: 7
-      - name: Stop after a failed coverage regeneration
-        if: steps.sync_coverage.outcome == 'failure'
-        run: exit 1
       - name: Generated answer coverage is current
         run: npm run answers:coverage:check
       - name: Firebase launch contract (static)
