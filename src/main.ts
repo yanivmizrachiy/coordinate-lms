@@ -9,6 +9,7 @@ import './styles/grayscale.css';
 import './styles/lms.css';
 import './styles/lms-phase3.css';
 import './styles/lms-grid-inputs.css';
+import './styles/lms-live-feedback.css';
 
 import { startRouter, navigate, type RouteMatch } from './router';
 import { elem, clear } from './lib/dom';
