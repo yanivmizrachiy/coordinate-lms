@@ -193,6 +193,28 @@ export const exerciseGiven = (name: string, calc: string, unit = "יח'"): strin
      learner writes the working and then states what the side equals. */
   '</div>';
 
+/** A labelled cell grid the learner COLOURS by hand — the printable stand-in
+    for the colour-decode game. Columns x:0..xmax, rows y:0..ymax. `.color-grid`
+    is `direction: ltr` so the origin sits bottom-LEFT and x grows to the right,
+    exactly like every coordinate drawing in the booklet — the first quadrant,
+    not a mirror of it. Plain spans, never a <button>: „המשימות שלנו הן
+    להדפסה", and a printed page carries no widget. */
+export const colorGrid = (xmax: number, ymax: number): string => {
+  const cols = xmax + 1;
+  let body = '';
+  for (let y = ymax; y >= 0; y--) {
+    let row = `<span class="cg-lab cg-lab--y">${y}</span>`;
+    for (let x = 0; x <= xmax; x++) row += `<span class="cg-cell" aria-label="תא ${x},${y}"></span>`;
+    body += row;
+  }
+  let foot = '<span class="cg-lab"></span>';
+  for (let x = 0; x <= xmax; x++) foot += `<span class="cg-lab cg-lab--x">${x}</span>`;
+  return (
+    `<div class="color-grid" role="img" aria-label="רשת תאים לצביעה" ` +
+    `style="--cg-cols:${cols}">${body}${foot}</div>`
+  );
+};
+
 /** „מחסן מילים” — the words to choose from, so the task needs no explaining. */
 export const wordBank = (words: string[]): string =>
   '<div class="word-bank"><b>מחסן מילים:</b> ' +
