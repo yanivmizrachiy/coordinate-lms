@@ -25,8 +25,23 @@ jobs:
       - name: Development toolchain security gate
         run: npm audit --audit-level=high
       - name: Regenerate answer coverage during workbook synchronization
+        id: sync_coverage
+        continue-on-error: true
         if: github.ref_name == 'agent/sync-latest-workbook' || github.head_ref == 'agent/sync-latest-workbook'
-        run: npm run answers:coverage
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run answers:coverage 2>&1 | tee sync-answer-coverage.log
+      - name: Keep workbook-sync generation diagnostics
+        if: always() && (github.ref_name == 'agent/sync-latest-workbook' || github.head_ref == 'agent/sync-latest-workbook')
+        uses: actions/upload-artifact@v7
+        with:
+          name: sync-answer-coverage-log
+          path: sync-answer-coverage.log
+          retention-days: 7
+      - name: Stop after a failed coverage regeneration
+        if: steps.sync_coverage.outcome == 'failure'
+        run: exit 1
       - name: Generated answer coverage is current
         run: npm run answers:coverage:check
       - name: Firebase launch contract (static)
