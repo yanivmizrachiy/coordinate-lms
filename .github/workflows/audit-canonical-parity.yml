@@ -1,0 +1,123 @@
+name: Audit canonical workbook parity
+
+on:
+  push:
+    branches:
+      - agent/sync-latest-workbook
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/sync-latest-workbook
+      - name: Read the canonical workbook repository
+        run: git clone --depth 1 https://github.com/yanivmizrachiy/coordinate-first-quadrant.git /tmp/coordinate-first-quadrant
+      - name: Produce a file-level parity report
+        shell: bash
+        run: |
+          python - <<'PY'
+          from hashlib import sha256
+          from pathlib import Path
+          import subprocess
+
+          target = Path('.')
+          source = Path('/tmp/coordinate-first-quadrant')
+          report = Path('reports/canonical-parity.md')
+
+          def digest(path: Path) -> str:
+              return sha256(path.read_bytes()).hexdigest()
+
+          page_root = Path('src/data/workbook/pages')
+          target_pages = {p.relative_to(target).as_posix(): p for p in (target / page_root).glob('*.ts')}
+          source_pages = {p.relative_to(source).as_posix(): p for p in (source / page_root).glob('*.ts')}
+
+          source_only = sorted(set(source_pages) - set(target_pages))
+          target_only = sorted(set(target_pages) - set(source_pages))
+          changed_pages = sorted(
+              path for path in set(source_pages) & set(target_pages)
+              if digest(source_pages[path]) != digest(target_pages[path])
+          )
+          identical_pages = sorted(set(source_pages) & set(target_pages) - set(changed_pages))
+
+          shared_files = [
+              'src/data/workbook/index.ts',
+              'src/data/workbook/authoring.ts',
+              'src/data/workbook/types.ts',
+              'src/data/colorDecode.ts',
+              'src/lib/coordinateGrid.ts',
+              'src/lib/coordinateMath.ts',
+              'src/styles/workbook.css',
+              'src/styles/grayscale.css',
+              'src/views/book.ts',
+              'src/views/flipbook.ts',
+              'src/views/tocSheet.ts',
+          ]
+          shared_rows = []
+          for rel in shared_files:
+              tp, sp = target / rel, source / rel
+              if not tp.exists() and not sp.exists():
+                  state = 'missing in both'
+              elif not tp.exists():
+                  state = 'missing in LMS'
+              elif not sp.exists():
+                  state = 'LMS-only'
+              elif digest(tp) == digest(sp):
+                  state = 'identical'
+              else:
+                  state = 'different'
+              shared_rows.append((rel, state))
+
+          source_sha = subprocess.check_output(
+              ['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True
+          ).strip()
+
+          lines = [
+              '# Canonical workbook parity audit',
+              '',
+              'Updated: 2026-08-05',
+              '',
+              f'- Canonical repository commit: `{source_sha}`.',
+              f'- Page files in canonical source: **{len(source_pages)}**.',
+              f'- Page files in LMS branch: **{len(target_pages)}**.',
+              f'- Identical shared page files: **{len(identical_pages)}**.',
+              f'- Changed shared page files: **{len(changed_pages)}**.',
+              f'- Missing page files in LMS: **{len(source_only)}**.',
+              f'- LMS-only page files: **{len(target_only)}**.',
+              '',
+              '## Shared page files that differ',
+              '',
+          ]
+          lines += [f'- `{path}`' for path in changed_pages] or ['- None.']
+          lines += ['', '## Page files missing in LMS', '']
+          lines += [f'- `{path}`' for path in source_only] or ['- None.']
+          lines += ['', '## LMS-only page files', '']
+          lines += [f'- `{path}`' for path in target_only] or ['- None.']
+          lines += ['', '## Shared infrastructure files', '', '| File | State |', '|---|---|']
+          lines += [f'| `{path}` | {state} |' for path, state in shared_rows]
+          lines += [
+              '',
+              'This report is diagnostic. A differing file is not copied blindly:',
+              'LMS-specific persistence and grading behavior must be preserved while',
+              'canonical wording, mathematics, diagrams and print layout are synchronized.',
+              '',
+          ]
+          report.write_text('\n'.join(lines), encoding='utf-8')
+          PY
+      - name: Commit the audit report
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/canonical-parity.md
+          if git diff --cached --quiet; then
+            echo "Parity report is unchanged."
+          else
+            git commit -m "docs: record canonical workbook parity audit"
+            git push origin HEAD:agent/sync-latest-workbook
+          fi
