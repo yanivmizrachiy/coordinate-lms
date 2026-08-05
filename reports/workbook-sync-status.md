@@ -9,7 +9,7 @@ Updated: 2026-08-05
 - All 76 files under `src/data/workbook/pages/` now come from the canonical source.
 - No canonical page file is missing from the LMS branch.
 - The canonical printable `colorGrid` authoring helper is available to the LMS page layer.
-- The canonical `calcBox` helper is being synchronized to support `shape` and `name` used by the current rectangle and square pages.
+- The canonical `calcBox` helper now supports `shape` and `name` used by the current rectangle and square pages.
 - The LMS authentication, persistence, scoring, dashboard and Firebase layers remain separate from the canonical page sources.
 
 The fully canonical page content currently contains 1,162 detected response
