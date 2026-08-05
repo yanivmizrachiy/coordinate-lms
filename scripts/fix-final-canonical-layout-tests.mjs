@@ -29,7 +29,7 @@ const oldWorkspaceCheck = `      for (const b of page.html.match(/<div class="ca
           .toBeGreaterThanOrEqual(14);
       }`;
 
-const newWorkspaceCheck = `      for (const b of page.html.match(/<div class="calc-pair">[\\s\\S]*?<\\/div><\\/div><\\/div>/g) ?? []) {
+const intermediateWorkspaceCheck = `      for (const b of page.html.match(/<div class="calc-pair">[\\s\\S]*?<\\/div><\\/div><\\/div>/g) ?? []) {
         const firstLine = b.match(/<div class="calc-ltr"[^>]*>[\\s\\S]*?<\\/div>/)?.[0] ?? '';
         /* A wide blank is required only when the learner writes the subtraction
            itself. If the subtraction is already printed, the remaining blank
@@ -42,15 +42,35 @@ const newWorkspaceCheck = `      for (const b of page.html.match(/<div class="ca
           .toBeGreaterThanOrEqual(14);
       }`;
 
-for (const [before, after, label] of [
-  [oldAreaCheck, newAreaCheck, 'area/perimeter S/P distinction'],
-  [oldWorkspaceCheck, newWorkspaceCheck, 'handwritten subtraction width'],
-]) {
-  if (text.includes(after)) continue;
-  if (!text.includes(before)) {
-    throw new Error(`Missing layout test anchor: ${label}`);
+const finalWorkspaceCheck = `      for (const b of page.html.match(/<div class="calc-pair">[\\s\\S]*?<\\/div><\\/div><\\/div>/g) ?? []) {
+        const firstLine = b.match(/<div class="calc-ltr"[^>]*>[\\s\\S]*?<\\/div>/)?.[0] ?? '';
+        /* A handwritten subtraction has the form NAME = [wide workspace] =
+           [short result]. A preprinted subtraction has literal arithmetic
+           between the first two equals signs and must not be mistaken for the
+           learner's workspace. */
+        const handwritten = firstLine.match(
+          /<span class="calc-ltr__eq">=<\\/span>\\s*<span class="blank"[^>]*--blank-width:(\\d+)ch[^>]*><\\/span>\\s*<span class="calc-ltr__eq">=<\\/span>/,
+        );
+        if (!handwritten) continue;
+        expect(Number(handwritten[1]), \`page \${page.n}: no room to write the exercise\`)
+          .toBeGreaterThanOrEqual(14);
+      }`;
+
+if (!text.includes(newAreaCheck)) {
+  if (!text.includes(oldAreaCheck)) {
+    throw new Error('Missing layout test anchor: area/perimeter S/P distinction');
   }
-  text = text.replace(before, after);
+  text = text.replace(oldAreaCheck, newAreaCheck);
+}
+
+if (!text.includes(finalWorkspaceCheck)) {
+  if (text.includes(intermediateWorkspaceCheck)) {
+    text = text.replace(intermediateWorkspaceCheck, finalWorkspaceCheck);
+  } else if (text.includes(oldWorkspaceCheck)) {
+    text = text.replace(oldWorkspaceCheck, finalWorkspaceCheck);
+  } else {
+    throw new Error('Missing layout test anchor: handwritten subtraction width');
+  }
 }
 
 await writeFile(path, text, 'utf8');
