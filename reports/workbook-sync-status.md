@@ -13,17 +13,13 @@ Updated: 2026-08-05
 - The LMS authentication, persistence, scoring, dashboard and Firebase layers remain separate from the canonical page sources.
 - Correct keyed answers receive positive-only immediate LMS feedback: a green ✓ appears as soon as the typed or selected answer is correct. Incorrect partial typing does not consume an attempt.
 - The immediate feedback implementation is limited to `src/lms`, LMS-only styles, and LMS tests. No canonical page source is modified by this behavior.
-- The four dedicated immediate-feedback unit tests pass. The final layout assertions distinguish side-length calculations from area/perimeter calculations.
-- The generated answer reports are being refreshed from the canonical 78-page LMS model; the report-only workflow cannot modify workbook page sources.
-
-The fully canonical page content currently contains 1,162 detected response
-targets, of which 735 (63.3%) are safely automatically checkable. Stale reviewed
-proofs and open-ended signatures are rejected rather than silently attached to
-changed prompts.
+- The four dedicated immediate-feedback unit tests pass.
+- The final calculation-layout assertion now distinguishes a learner-written subtraction blank between two equals signs from a short result field after a preprinted subtraction.
+- The generated reports are current for the canonical model: 1,162 response targets, with 735 safely checkable automatically.
 
 Legacy answer evidence is applied only to authored pages that survived the
 reorder. Rebuilt printable replacements have no legacy page mapping, so old game
 answers cannot be attached to a different printed question.
 
-This branch remains a draft until unit tests, Firestore emulator checks, build
-and browser layout checks all pass on the fully canonical page content.
+The branch is undergoing its final read-only CI verification: unit tests,
+Firestore emulator authorization, production build and browser layout checks.
