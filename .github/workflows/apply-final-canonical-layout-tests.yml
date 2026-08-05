@@ -1,0 +1,35 @@
+name: Apply final canonical layout test migration
+
+on:
+  push:
+    branches:
+      - agent/sync-latest-workbook
+
+permissions:
+  contents: write
+
+jobs:
+  apply-layout-tests:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/sync-latest-workbook
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+      - name: Update canonical layout assertions
+        run: node scripts/fix-final-canonical-layout-tests.mjs
+      - name: Commit test-only migration
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/layout-rules.test.ts
+          if git diff --cached --quiet; then
+            echo "Layout assertions are already current."
+          else
+            git commit -m "test: distinguish side-length and S/P calculation blocks"
+            git push origin HEAD:agent/sync-latest-workbook
+          fi
