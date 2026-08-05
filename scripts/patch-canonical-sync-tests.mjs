@@ -77,7 +77,7 @@ await replaceRegex('tests/layout-rules.test.ts', 'const insideCalcBox = (html: s
     'completion-kind calculation exclusion',
   ],
   [
-    /      for \(const f of p\.html\.matchAll\([\s\S]*?\n      \}\n      \/\* Room to work/,
+    /      for \(const f of p\.html\.matchAll[\s\S]*?      \/\* Room to work/,
 `      for (const box of p.html.split('<div class="calc-box">').slice(1)) {
         const head = box.slice(0, 1600);
         expect(head, \`page \${p.n}: a calculation without S or P\`)
