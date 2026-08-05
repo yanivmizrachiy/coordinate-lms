@@ -1,4 +1,4 @@
-name: Apply workbook synchronization
+name: Regenerate answer coverage reports
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  synchronize:
+  regenerate:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
@@ -21,19 +21,17 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Apply guarded page and test migration
-        run: node scripts/apply-workbook-sync.mjs
       - name: Generate current answer coverage
         run: npm run answers:coverage
-      - name: Commit synchronized sources and reports
+      - name: Commit generated reports only
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/lms/answerCoverage.ts tests/workbook.test.ts tests/layout-rules.test.ts tests/answer-coverage.test.ts README.md RULES.md reports/answer-coverage.json reports/answer-coverage.md reports/answer-target-order.json public/answer-review-manifest.json
+          git add reports/answer-coverage.json reports/answer-coverage.md reports/answer-target-order.json public/answer-review-manifest.json
           if git diff --cached --quiet; then
-            echo "Synchronized sources and reports are already current."
+            echo "Answer reports are already current."
           else
-            git commit -m "lms: migrate answer identities to the 78-page workbook"
+            git commit -m "reports: refresh canonical LMS answer coverage"
             git push origin HEAD:agent/sync-latest-workbook
           fi
