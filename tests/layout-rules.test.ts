@@ -761,11 +761,12 @@ describe('a calculation is written left to right', () => {
     for (const page of WORKBOOK) {
       for (const b of page.html.match(/<div class="calc-pair">[\s\S]*?<\/div><\/div><\/div>/g) ?? []) {
         const firstLine = b.match(/<div class="calc-ltr"[^>]*>[\s\S]*?<\/div>/)?.[0] ?? '';
-        /* A wide blank is required only when the learner writes the subtraction
-           itself. If the subtraction is already printed, the remaining blank
-           is only the short numeric result field. */
+        /* A handwritten subtraction has the form NAME = [wide workspace] =
+           [short result]. A preprinted subtraction has literal arithmetic
+           between the first two equals signs and must not be mistaken for the
+           learner's workspace. */
         const handwritten = firstLine.match(
-          /<span class="calc-ltr__eq">=<\/span>\s*<span class="blank"[^>]*--blank-width:(\d+)ch/,
+          /<span class="calc-ltr__eq">=<\/span>\s*<span class="blank"[^>]*--blank-width:(\d+)ch[^>]*><\/span>\s*<span class="calc-ltr__eq">=<\/span>/,
         );
         if (!handwritten) continue;
         expect(Number(handwritten[1]), `page ${page.n}: no room to write the exercise`)
