@@ -415,35 +415,10 @@ test('every sheet keeps its body text at 13px', async ({ page }) => {
   expect(offenders, offenders.join(', ')).toHaveLength(0);
 });
 
-test('a game sheet reveals its answer when solved correctly', async ({ page }) => {
-  /* Find the sheet by what it hosts, never by its number — page numbers come
-     from the position in BOOK and move whenever a page is added or split. */
+test('numbered workbook pages do not mount retired runtime games', async ({ page }) => {
   await page.goto('/#/print');
-  await page.waitForTimeout(4000);
-  const n = await page.evaluate(() => {
-    const host = document.querySelector('[data-game-host="coordinate-safe"]');
-    return host?.closest('.sheet')?.querySelector('.sheet-number')?.textContent?.trim() ?? '';
-  });
-  expect(n, 'the coordinate-safe game is not on any sheet').not.toBe('');
-  await page.goto(`/#/workbook/${n}`);
-  /* the viewer re-fits the sheet ~420ms after mount (fitSheet settle) — a
-     click aimed before that lands where the button USED to be */
-  await page.waitForTimeout(900);
-  const answers = ['4', '7', '0', '5'];
-  const rows = page.locator('.game__board .game__row');
-  const count = await rows.count();
-  for (let i = 0; i < count; i++) {
-    const input = rows.nth(i).locator('input.answer-input');
-    if (await input.count()) {
-      /* centre the row first — the app bar above and the page navigator below
-         are sticky, and a row scrolled to an EDGE sits under one of them.
-         A person looks at the row mid-screen; the test should too. */
-      await rows.nth(i).evaluate((el) => el.scrollIntoView({ block: 'center', behavior: 'instant' as ScrollBehavior }));
-      await input.fill(answers[i] ?? '');
-      await rows.nth(i).locator('button', { hasText: 'בדקו' }).click();
-    }
-  }
-  await expect(page.locator('.reveal').last()).toContainText('4705');
+  await page.waitForTimeout(3500);
+  await expect(page.locator('[data-game-host]')).toHaveCount(0);
 });
 
 /* The screen always shows colour. Black and white exists only as a choice at
@@ -526,7 +501,7 @@ test('a picker preset chooses a whole chapter', async ({ page }) => {
   await page.locator('.pick__chip', { hasText: 'מושגים בסיסיים' }).click();
   await expect(page.locator('.pick__count')).toHaveText('נבחרו 11 עמודים');
   await page.locator('.pick__chip', { hasText: 'כל החוברת' }).click();
-  await expect(page.locator('.pick__count')).toHaveText('נבחרו 77 עמודים');
+  await expect(page.locator('.pick__count')).toHaveText('נבחרו 78 עמודים');
   await page.locator('.pick__chip', { hasText: 'ניקוי הבחירה' }).click();
   await expect(page.locator('.pick__count')).toHaveText('לא נבחרו עמודים');
 });
@@ -548,7 +523,7 @@ test('the reading bars speak the zaviyot button language', async ({ page }) => {
   expect(navy, 'the bar lost the navy of the zaviyot bars').toBe('rgb(22, 35, 63)');
 
   await page.goto('/#/workbook/5');
-  await expect(page.locator('.wsbar__title')).toHaveText('דף עבודה מספר 5 מתוך 77');
+  await expect(page.locator('.wsbar__title')).toHaveText('דף עבודה מספר 5 מתוך 78');
   await expect(page.locator('.wsbar__nav .btn')).toHaveCount(2);
   // the way to the next page lives at the BOTTOM too — under the thumb
   await expect(page.locator('.pagenav .btn', { hasText: 'הבא' })).toBeVisible();

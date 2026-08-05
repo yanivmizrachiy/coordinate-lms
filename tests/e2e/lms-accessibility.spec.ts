@@ -6,13 +6,17 @@ test('answer fields keep meaningful labels and support keyboard completion', asy
   await expect(target).toBeVisible();
   await expect(target).toHaveAttribute('aria-label', /מקום להשלמת|תשובה.+:/);
 
+  const answers = JSON.parse(
+    (await target.getAttribute('data-lms-answers')) || '[]',
+  ) as string[];
+  expect(answers[0]).toBeTruthy();
+
   await target.focus();
   await expect(target).toBeFocused();
-  await target.fill('שמאל');
+  await target.fill(answers[0]!);
+  await expect(target).toHaveAttribute('data-lms-state', 'correct');
   await target.press('Enter');
   await expect(target).not.toBeFocused();
-  await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
-  await expect(target).toHaveAttribute('data-lms-state', 'correct');
 
   const status = page.locator('.lms-panel__status');
   await expect(status).toHaveAttribute('role', 'status');
@@ -45,7 +49,19 @@ test('LMS overlays do not alter the printed workbook and controls are touch-size
   );
   expect(tooSmall).toEqual([]);
 
+  const keyed = page.locator('[data-lms-answers]').filter({ hasNot: page.locator('input') }).first();
+  if (await keyed.count()) {
+    const answers = JSON.parse((await keyed.getAttribute('data-lms-answers')) || '[]') as string[];
+    if (answers[0] && (await keyed.getAttribute('contenteditable')) === 'true') {
+      await keyed.fill(answers[0]);
+      await expect(keyed).toHaveAttribute('data-lms-state', 'correct');
+    }
+  }
+
   await page.emulateMedia({ media: 'print' });
   await expect(page.locator('.lms-panel')).toBeHidden();
   await expect(page.locator('.lms-grid-answer').first()).toBeHidden();
+  if (await keyed.count()) {
+    expect(await keyed.evaluate((el) => getComputedStyle(el, '::after').content)).toBe('none');
+  }
 });

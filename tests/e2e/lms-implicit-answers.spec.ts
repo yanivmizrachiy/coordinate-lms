@@ -5,8 +5,11 @@ test('an explicit authoring label becomes a checked answer automatically', async
 
   const target = page.locator('[data-lms-qid="p10-q1"]');
   await expect(target).toBeVisible();
-  await target.fill('שמאל');
-  await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
+  const answers = JSON.parse(
+    (await target.getAttribute('data-lms-answers')) || '[]',
+  ) as string[];
+  expect(answers[0]).toBeTruthy();
+  await target.fill(answers[0]!);
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 });
 

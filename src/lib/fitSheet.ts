@@ -39,6 +39,7 @@ function stacked(box: Element): boolean {
 
 /** Space out one sheet's blocks so it uses the height it actually has. */
 export function fitSheet(sheet: HTMLElement): void {
+  sheet.classList.remove('sheet--overflow-tight');
   const content = sheet.querySelector<HTMLElement>('.sheet-content');
   const footer = sheet.querySelector<HTMLElement>('.gz-footer');
   if (!content || !footer) return;
@@ -86,6 +87,11 @@ export function fitSheet(sheet: HTMLElement): void {
     }
     return px(footer.getBoundingClientRect().top - lowest);
   };
+
+  /* Canonical pages occasionally become a few pixels taller after wording or
+     font changes. Tighten spacing only on a sheet that actually overflows; the
+     authored page content and every printable element remain unchanged. */
+  if (room() < 0) sheet.classList.add('sheet--overflow-tight');
 
   /* Spare height goes to the drawings first — a bigger system is worth more to
      a learner than a wider margin. Grown a step at a time and re-measured,

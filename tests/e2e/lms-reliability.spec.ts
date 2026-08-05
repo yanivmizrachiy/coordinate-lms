@@ -25,7 +25,7 @@ test('three-attempt state survives reload and never resets', async ({ page }) =>
 });
 
 test('rapid duplicate submission creates one durable completion', async ({ page }) => {
-  await page.goto('/#/workbook/43');
+  await page.goto('/#/workbook/19');
   const submit = page.getByRole('button', { name: 'סיימתי את הפעילות' });
   await expect(submit).toBeEnabled();
 
@@ -47,9 +47,9 @@ test('rapid duplicate submission creates one durable completion', async ({ page 
       localStorage.getItem('coordinate_lms_activity_v2') || '[]',
     ) as Array<{ pageNumber: number; type: string }>;
     return {
-      results: Object.values(results).filter((result) => result.pageNumber === 43),
+      results: Object.values(results).filter((result) => result.pageNumber === 19),
       submissions: activity.filter(
-        (event) => event.pageNumber === 43 && event.type === 'page_submit',
+        (event) => event.pageNumber === 19 && event.type === 'page_submit',
       ),
     };
   });

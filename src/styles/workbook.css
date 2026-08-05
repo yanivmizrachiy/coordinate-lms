@@ -501,3 +501,48 @@ td > .calc-pair, td .calc-pair { margin: 2px 0; }
 body.bw-print .sheet .toc-btn { background: #fff !important; border-color: #999; box-shadow: none; }
 body.bw-print .sheet .toc-btn__rule { background: #555 !important; }
 body.bw-print .sheet .toc-btn__kicker, body.bw-print .sheet .toc-btn__no { color: #333 !important; }
+
+
+/* Adaptive A4 overflow recovery — content-preserving. */
+.calc-sym__math sub {
+  font-size: 1em;
+  line-height: 0;
+  vertical-align: -0.16em;
+}
+
+@media print {
+  .sheet.sheet--overflow-tight .sheet-header {
+    padding-bottom: 3px;
+    margin-bottom: 4px;
+  }
+  .sheet.sheet--overflow-tight .q-card {
+    padding: 5px 8px;
+  }
+  .sheet.sheet--overflow-tight .q-card h3 {
+    margin: -5px -8px 4px;
+    padding: 3px 7px;
+    min-height: 1.8em;
+  }
+  .sheet.sheet--overflow-tight .tasks {
+    margin-block: 2px;
+  }
+  .sheet.sheet--overflow-tight .tasks li {
+    margin-block: 1px;
+  }
+  .sheet.sheet--overflow-tight .rule-box,
+  .sheet.sheet--overflow-tight .note-box {
+    padding: 4px 7px;
+    margin-block: 2px 3px;
+  }
+  .sheet.sheet--overflow-tight .word-bank {
+    padding: 3px 7px;
+    margin-block: 2px 3px;
+  }
+  .sheet.sheet--overflow-tight .calc-pair,
+  .sheet.sheet--overflow-tight .choice-row {
+    margin-block: 1px 2px;
+  }
+  .sheet.sheet--overflow-tight .sheet-content {
+    padding-bottom: 13mm;
+  }
+}
