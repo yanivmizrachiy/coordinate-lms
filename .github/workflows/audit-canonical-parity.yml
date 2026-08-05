@@ -31,7 +31,9 @@ jobs:
           report = Path('reports/canonical-parity.md')
 
           def digest(path: Path) -> str:
-              return sha256(path.read_bytes()).hexdigest()
+              text = path.read_text(encoding='utf-8')
+              normalized = text.replace('\r\n', '\n').replace('\r', '\n')
+              return sha256(normalized.encode('utf-8')).hexdigest()
 
           page_root = Path('src/data/workbook/pages')
           target_pages = {p.relative_to(target).as_posix(): p for p in (target / page_root).glob('*.ts')}
@@ -89,6 +91,8 @@ jobs:
               f'- Changed shared page files: **{len(changed_pages)}**.',
               f'- Missing page files in LMS: **{len(source_only)}**.',
               f'- LMS-only page files: **{len(target_only)}**.',
+              '',
+              'Line-ending differences are ignored; only normalized UTF-8 content is compared.',
               '',
               '## Shared page files that differ',
               '',
