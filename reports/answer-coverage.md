@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-05T17:23:35.889Z
+Generated: 2026-08-05T18:29:34.628Z
 
-Overall: 876/1184 safely checkable targets (74%).
+Overall: 735/1162 safely checkable targets (63.3%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
-| reviewed-explicit | 190 |
+| reviewed-explicit | 180 |
 | canonical-metadata-derived | 24 |
-| deterministic-mathematical | 656 |
+| deterministic-mathematical | 525 |
 | valid-range | 6 |
-| open-ended | 185 |
-| ambiguous | 123 |
+| open-ended | 162 |
+| ambiguous | 265 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -164,12 +164,12 @@ Overall: 876/1184 safely checkable targets (74%).
 | p5-q5 | text:relation | reviewed-explicit | yes | built-in reviewed answer key | ככל שנקודה רחוקה יותר מציר y, שיעור x שלה […]. |
 | p5-q6 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | נקודה שרחוקה 6 יחידות מציר y ו־2 יחידות מציר x נכתבת ([…],[…]). |
 | p5-q7 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | נקודה שרחוקה 6 יחידות מציר y ו־2 יחידות מציר x נכתבת ([…],[…]). |
-| p5-q8 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | בנקודה A שיעור x הוא 2, ושיעור y הוא 5. A([…],[…]) |
-| p5-q9 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | בנקודה A שיעור x הוא 2, ושיעור y הוא 5. A([…],[…]) |
-| p5-q10 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | נקודה B רחוקה 6 יחידות מציר y ו־2 יחידות מציר x. B([…],[…]) |
-| p5-q11 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | נקודה B רחוקה 6 יחידות מציר y ו־2 יחידות מציר x. B([…],[…]) |
-| p5-q12 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | נקודה C ממוקמת על ציר x, ושיעור x שלה 3. C([…],[…]) |
-| p5-q13 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | נקודה C ממוקמת על ציר x, ושיעור x שלה 3. C([…],[…]) |
+| p5-q8 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | בנקודה D שיעור x הוא 2, ושיעור y הוא 5. D([…],[…]) |
+| p5-q9 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | בנקודה D שיעור x הוא 2, ושיעור y הוא 5. D([…],[…]) |
+| p5-q10 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | נקודה E רחוקה 6 יחידות מציר y ו־2 יחידות מציר x. E([…],[…]) |
+| p5-q11 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | נקודה E רחוקה 6 יחידות מציר y ו־2 יחידות מציר x. E([…],[…]) |
+| p5-q12 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | נקודה F ממוקמת על ציר x, ושיעור x שלה 3. F([…],[…]) |
+| p5-q13 | ordered-pair-coordinate | reviewed-explicit | yes | built-in reviewed answer key | נקודה F ממוקמת על ציר x, ושיעור x שלה 3. F([…],[…]) |
 
 ### Page 6 — נקודות ברביע הראשון
 
@@ -345,7 +345,7 @@ Overall: 876/1184 safely checkable targets (74%).
 
 ### Page 13 — נקודות ברביע הראשון
 
-16/18 safely checkable (88.9%).
+16/21 safely checkable (76.2%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -367,10 +367,13 @@ Overall: 876/1184 safely checkable targets (74%).
 | p13-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | מהם שיעוריה? ([…],[…]) |
 | p13-q17 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 | p13-q18 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p13-q19 | ordered-pair-coordinate | ambiguous | no | none | סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…]). |
+| p13-q20 | ordered-pair-coordinate | ambiguous | no | none | סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…]). |
+| p13-q21 | text:direction | ambiguous | no | none | הנקודה R ממוקמת […] לנקודה K. |
 
 ### Page 14 — נקודות ברביע הראשון
 
-6/6 safely checkable (100%).
+6/10 safely checkable (60%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -380,17 +383,21 @@ Overall: 876/1184 safely checkable targets (74%).
 | p14-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה G: שיעור x = 1, שיעור y = 5 ← G([…],[…]) |
 | p14-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה H: שיעור x = 8, שיעור y = 3 ← H([…],[…]) |
 | p14-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה H: שיעור x = 8, שיעור y = 3 ← H([…],[…]) |
+| p14-q7 | ordered-pair-coordinate | ambiguous | no | none | נקודה K: שיעור x = 0, שיעור y = 4 ← K([…],[…]) |
+| p14-q8 | ordered-pair-coordinate | ambiguous | no | none | נקודה K: שיעור x = 0, שיעור y = 4 ← K([…],[…]) |
+| p14-q9 | ordered-pair-coordinate | ambiguous | no | none | נקודה L: שיעור x = 6, שיעור y = 0 ← L([…],[…]) |
+| p14-q10 | ordered-pair-coordinate | ambiguous | no | none | נקודה L: שיעור x = 6, שיעור y = 0 ← L([…],[…]) |
 
 ### Page 15 — נקודות שעל הצירים
 
-11/13 safely checkable (84.6%).
+9/13 safely checkable (69.2%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p15-q1 | word:number | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה שממוקמת על ציר x שיעור ה־y הוא […]. |
 | p15-q2 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה שממוקמת על ציר […] ערך ה־x הוא 0. |
-| p15-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ראשית הצירים נכתבת O([…],[…]). |
-| p15-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ראשית הצירים נכתבת O([…],[…]). |
+| p15-q3 | ordered-pair-coordinate | ambiguous | no | none | שיעורי הנקודה שעל ראשית הצירים הם ([…],[…]). |
+| p15-q4 | ordered-pair-coordinate | ambiguous | no | none | שיעורי הנקודה שעל ראשית הצירים הם ([…],[…]). |
 | p15-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | P(6,[…]) |
 | p15-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | Q([…],4) |
 | p15-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],0) |
@@ -438,12 +445,18 @@ Overall: 876/1184 safely checkable targets (74%).
 
 ### Page 18 — מסמנים נקודות
 
-2/2 safely checkable (100%).
+0/8 safely checkable (0%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p18-q1 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מי מהנקודות הגבוהה ביותר? […] |
-| p18-q2 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מי הימנית ביותר? […] |
+| p18-q1 | text:letter | ambiguous | no | none | מי הנקודה הגבוהה ביותר? […] |
+| p18-q2 | text:letter | ambiguous | no | none | מי הנקודה הימנית ביותר? […] |
+| p18-q3 | text:letter | ambiguous | no | none | מי הנקודה השמאלית ביותר? […] |
+| p18-q4 | text:letter | ambiguous | no | none | הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […]. |
+| p18-q5 | text:number | ambiguous | no | none | הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […]. |
+| p18-q6 | text:number | ambiguous | no | none | הנקודה R רחוקה מציר x […] יחידות, כי זה שיעור ה־y שלה. |
+| p18-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]). |
+| p18-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]). |
 
 ### Page 19 — מגלים ציור סודי
 
@@ -475,21 +488,21 @@ No detected interactive response targets.
 
 ### Page 22 — מילת הצופן
 
-12/17 safely checkable (70.6%).
+7/17 safely checkable (41.2%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p22-q1 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | האות שממוקמת בנקודה (3,2) היא […]. |
-| p22-q2 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | שיעור ה־x של הנקודה של האות ו הוא […]. |
-| p22-q3 | text:property | reviewed-explicit | yes | target-bound reviewed proof | הנקודה של האות ד היא הנקודה ה[…] ביותר במערכת. |
-| p22-q4 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | האות שממוקמת בנקודה (4,3) היא […]. |
-| p22-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה של האות ק רחוקה […] יחידות מציר ה־y. |
+| p22-q2 | text:number | ambiguous | no | none | הנקודה של האות ק רחוקה […] יחידות מציר ה־y. |
+| p22-q3 | text:number | ambiguous | no | none | שיעור ה־x של הנקודה של האות ו הוא […]. |
+| p22-q4 | text:number | ambiguous | no | none | הנקודה של האות ד היא הימנית ביותר, ושיעור ה־x שלה הוא […]. |
+| p22-q5 | text:letter | ambiguous | no | none | האות שממוקמת בנקודה (4,3) היא […]. |
 | p22-q6 | text:concept | ambiguous | no | none | כתבו את חמש האותיות לפי סדר השאלות, מימין לשמאל: […]. |
 | p22-q7 | ordered-pair-coordinate | ambiguous | no | none | סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]). |
 | p22-q8 | ordered-pair-coordinate | ambiguous | no | none | סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]). |
 | p22-q9 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | האות שממוקמת הכי גבוה במערכת היא […]. |
 | p22-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | המרחק האופקי בין הנקודה של נ לנקודה של ה הוא […] יחידה. |
-| p22-q11 | text:property | reviewed-explicit | yes | target-bound reviewed proof | הנקודה של האות ד היא ה[…] ביותר במערכת. |
+| p22-q11 | text:property | ambiguous | no | none | הנקודה של האות ד היא ה[…] ביותר במערכת — שיעור ה־y שלה קטן מכולם. |
 | p22-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]). |
 | p22-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]). |
 | p22-q14 | text:concept | ambiguous | no | none | כתבו לצד הנקודה את האות ם. איזו מילה נוצרת עכשיו מכל האותיות? […]. |
@@ -617,22 +630,22 @@ No detected interactive response targets.
 
 ### Page 29 — יחסים בין שיעורים
 
-14/14 safely checkable (100%).
+6/14 safely checkable (42.9%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p29-q1 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A(2,3). לנקודה B אותו שיעור y, ושיעור x גדול ב־4. כתבו B: […] |
 | p29-q2 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C(7,5). לנקודה D אותו שיעור x, ושיעור y קטן ב־3. כתבו D: […] |
-| p29-q3 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה E(6,2). שיעור x של F קטן ב־5, ושיעור y זהה. […] |
-| p29-q4 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה P(2,3). שיעור x של Q גדול פי 3, ושיעור y זהה. […] |
-| p29-q5 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה R(8,4). שיעור x של S הוא מחצית ממנו, ושיעור y זהה. […] |
-| p29-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה T(4,2). שיעור y של U גדול פי 3, ושיעור x זהה. […] |
+| p29-q3 | text:text | ambiguous | no | none | הנקודה E(6,2). שיעור x של הנקודה F קטן ב־5, ושיעור y זהה. […] |
+| p29-q4 | text:text | ambiguous | no | none | הנקודה P(2,3). שיעור x של הנקודה Q גדול פי 3, ושיעור y זהה. […] |
+| p29-q5 | text:text | ambiguous | no | none | הנקודה R(8,4). שיעור x של הנקודה S הוא מחצית ממנו, ושיעור y זהה. […] |
+| p29-q6 | text:text | ambiguous | no | none | הנקודה T(4,2). שיעור y של הנקודה U גדול פי 3, ושיעור x זהה. […] |
 | p29-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מהם השיעורים החדשים? […] |
 | p29-q8 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם הנקודה החדשה מקיימת x=y? […] |
-| p29-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל A, ושיעור y זהה: B([…],[…]) |
-| p29-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל A, ושיעור y זהה: B([…],[…]) |
-| p29-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו נקודה C שבה שיעור y גדול פי 2 משל A, ושיעור x זהה: C([…],[…]) |
-| p29-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו נקודה C שבה שיעור y גדול פי 2 משל A, ושיעור x זהה: C([…],[…]) |
+| p29-q9 | ordered-pair-coordinate | ambiguous | no | none | נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…]) |
+| p29-q10 | ordered-pair-coordinate | ambiguous | no | none | נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…]) |
+| p29-q11 | ordered-pair-coordinate | ambiguous | no | none | סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…]) |
+| p29-q12 | ordered-pair-coordinate | ambiguous | no | none | סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…]) |
 | p29-q13 | text:direction | deterministic-mathematical | yes | target-bound reviewed proof | נקודה B ממוקמת […] לנקודה A. |
 | p29-q14 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | נקודה C ממוקמת מעל A, כי גדל רק שיעור […]. |
 
@@ -692,28 +705,27 @@ No detected interactive response targets.
 
 ### Page 33 — מרחק נקודה מהצירים
 
-8/18 safely checkable (44.4%).
+3/17 safely checkable (17.6%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p33-q1 | word:number | canonical-metadata-derived | yes | explicit canonical authoring label | כדי להגיע אל ציר y משנים את ערך x ל־[…]. |
 | p33-q2 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | כדי להגיע אל ציר […] משנים את שיעור y ל־0. |
-| p33-q3 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות A(2,5) ו־B(7,5) יש שיעור […] זהה. |
-| p33-q4 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=7 − 2=[…]יח' |
+| p33-q3 | text:letter | ambiguous | no | none | לשתי הנקודות E(2,5) ו־F(7,5) יש שיעור […] זהה. |
+| p33-q4 | text:number | ambiguous | no | none | EF=7 − 2=[…]יח' |
 | p33-q5 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q6 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
-| p33-q9 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות C(4,1) ו־D(4,6) יש שיעור […] זהה, ולכן הקטע CD מקביל לציר y. |
-| p33-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | CD=6 − 1=[…]יח' |
+| p33-q9 | text:letter | ambiguous | no | none | לשתי הנקודות G(4,1) ו־H(4,6) יש שיעור […] זהה, ולכן הקטע GH מקביל לציר y. |
+| p33-q10 | text:number | ambiguous | no | none | GH=6 − 1=[…]יח' |
 | p33-q11 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p33-q15 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | אורי […] את שני ערכי ה־x במקום לחסר אותם. |
+| p33-q15 | text:relation | ambiguous | no | none | אורי חישב את המרחק בין (2,5) ובין (7,5) וקיבל 9 — הוא […] את שני ערכי ה־x במקום לחסר אותם. תרגיל החיסור הנכון: |
 | p33-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 7 − 2=[…]יח' |
 | p33-q17 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
-| p33-q18 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 
 ### Page 34 — מרחק נקודה מהצירים
 
@@ -842,7 +854,7 @@ No detected interactive response targets.
 
 ### Page 39 — משלימים שיעור חסר ודפוסים
 
-22/28 safely checkable (78.6%).
+21/28 safely checkable (75%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -872,46 +884,46 @@ No detected interactive response targets.
 | p39-q24 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q25 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q26 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
-| p39-q27 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | כדי לקבוע נקודה **אחת** צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]. |
+| p39-q27 | text:letter | ambiguous | no | none | כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]. |
 | p39-q28 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 
 ### Page 40 — שיעור חסר ודפוסים
 
-27/27 safely checkable (100%).
+2/27 safely checkable (7.4%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p40-q1 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A([…],4) ממוקמת על אותו קו אנכי כמו B(6,1). לכן A= […] |
-| p40-q2 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A([…],4) ממוקמת על אותו קו אנכי כמו B(6,1). לכן A= […] |
-| p40-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C(3,[…]) ממוקמת על אותו קו אופקי כמו D(7,5). לכן C= […] |
-| p40-q4 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C(3,[…]) ממוקמת על אותו קו אופקי כמו D(7,5). לכן C= […] |
-| p40-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). לכן E= […] |
-| p40-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). לכן E= […] |
-| p40-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). לכן E= […] |
-| p40-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). לכן G= […] |
-| p40-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). לכן G= […] |
-| p40-q10 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). לכן G= […] |
-| p40-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) |
-| p40-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) |
-| p40-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) |
-| p40-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) |
-| p40-q15 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | כתבו כלל המתאר את כל הנקודות בדפוס: […] |
-| p40-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
-| p40-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
-| p40-q18 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
-| p40-q19 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
-| p40-q20 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מה נשאר קבוע? […] מה משתנה? […] |
-| p40-q21 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מה נשאר קבוע? […] מה משתנה? […] |
+| p40-q1 | ordered-pair-coordinate | ambiguous | no | none | הנקודה A([…],4) ממוקמת על אותו קו אנכי כמו B(6,1). |
+| p40-q2 | ordered-pair-coordinate | ambiguous | no | none | הנקודה C(3,[…]) ממוקמת על אותו קו אופקי כמו D(7,5). |
+| p40-q3 | ordered-pair-coordinate | ambiguous | no | none | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). |
+| p40-q4 | ordered-pair-coordinate | ambiguous | no | none | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). |
+| p40-q5 | ordered-pair-coordinate | ambiguous | no | none | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). |
+| p40-q6 | ordered-pair-coordinate | ambiguous | no | none | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). |
+| p40-q7 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
+| p40-q8 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
+| p40-q9 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
+| p40-q10 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
+| p40-q11 | text:text | ambiguous | no | none | כתבו כלל המתאר את כל הנקודות בדפוס: […] |
+| p40-q12 | ordered-pair-coordinate | ambiguous | no | none | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
+| p40-q13 | ordered-pair-coordinate | ambiguous | no | none | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
+| p40-q14 | ordered-pair-coordinate | ambiguous | no | none | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
+| p40-q15 | ordered-pair-coordinate | ambiguous | no | none | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
+| p40-q16 | text:text | ambiguous | no | none | מה נשאר קבוע? […] מה משתנה? […] |
+| p40-q17 | text:text | ambiguous | no | none | מה נשאר קבוע? […] מה משתנה? […] |
+| p40-q18 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) ([…],[…]) |
+| p40-q19 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) ([…],[…]) |
+| p40-q20 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) ([…],[…]) |
+| p40-q21 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) ([…],[…]) |
 | p40-q22 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) ([…],[…]) |
 | p40-q23 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) ([…],[…]) |
-| p40-q24 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) ([…],[…]) |
-| p40-q25 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) ([…],[…]) |
-| p40-q26 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) ([…],[…]) |
-| p40-q27 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) ([…],[…]) |
+| p40-q24 | text:number | ambiguous | no | none | בדפוס שבסעיף הראשון, ההפרש בין שיעורי ה־y של שתי נקודות סמוכות הוא בהכרח […]. |
+| p40-q25 | ordered-pair-coordinate | ambiguous | no | none | כתבו את הנקודה שתופיע בטבלה במקום השישי: ([…],[…]). |
+| p40-q26 | ordered-pair-coordinate | ambiguous | no | none | כתבו את הנקודה שתופיע בטבלה במקום השישי: ([…],[…]). |
+| p40-q27 | text:number | ambiguous | no | none | בסדרה שבטבלה, שיעור ה־y של כל הנקודות הוא בהכרח […]. |
 
 ### Page 41 — מכלל לטבלה ולגרף
 
-22/29 safely checkable (75.9%).
+18/29 safely checkable (62.1%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -921,10 +933,10 @@ No detected interactive response targets.
 | p41-q4 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y[…][…][…][…] |
 | p41-q5 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y[…][…][…][…] |
 | p41-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y[…][…][…][…] |
-| p41-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]) |
-| p41-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]) |
-| p41-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]) |
-| p41-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]) |
+| p41-q7 | ordered-pair-coordinate | ambiguous | no | none | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
+| p41-q8 | ordered-pair-coordinate | ambiguous | no | none | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
+| p41-q9 | ordered-pair-coordinate | ambiguous | no | none | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
+| p41-q10 | ordered-pair-coordinate | ambiguous | no | none | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
 | p41-q11 | text:property | open-ended | no | teacher judgment required | הנקודות שסימנתם ממוקמות על קו […] אחד. |
 | p41-q12 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | בכל נקודה שמתאימה לכלל, שיעור ה־y גדול פי 2 מערך ה־[…]. |
 | p41-q13 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y2[…][…]5[…] |
@@ -971,7 +983,7 @@ No detected interactive response targets.
 
 ### Page 43 — מזהים ומתקנים טעויות
 
-11/11 safely checkable (100%).
+11/12 safely checkable (91.7%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -986,10 +998,11 @@ No detected interactive response targets.
 | p43-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הזזה של 3 יחידות ימינה מוסיפה לערך ה־x, ולכן מתקבלת הנקודה ([…],[…]). |
 | p43-q10 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | בקטע המקביל לציר x דווקא שיעור ה־[…] זהה בשתי הנקודות. |
 | p43-q11 | text:relation | deterministic-mathematical | yes | target-bound reviewed proof | קטע המקביל לציר x הוא […] לציר y, כי הצירים מאונכים זה לזה. |
+| p43-q12 | text:letter | ambiguous | no | none | שיעורי ה־y כאן זהים, ולכן האורך מחושב בהכרח לפי שיעורי ה־[…]. |
 
 ### Page 44 — זיהוי ותיקון טעויות
 
-14/18 safely checkable (77.8%).
+6/15 safely checkable (40%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1001,16 +1014,13 @@ No detected interactive response targets.
 | p44-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | התשובה הנכונה: […] |
 | p44-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם המשפט נכון? […] |
 | p44-q8 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | התיקון: לשתי הנקודות יש שיעור […] זהה, ולכן הקטע שביניהן מקביל לציר y. |
-| p44-q9 | ordered-pair-coordinate | ambiguous | no | none | הזזה ימינה משנה רק את ערך ה־x, ולכן מתקבלת הנקודה ([…],[…]). |
-| p44-q10 | ordered-pair-coordinate | ambiguous | no | none | הזזה ימינה משנה רק את ערך ה־x, ולכן מתקבלת הנקודה ([…],[…]). |
-| p44-q11 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הקודקוד הנכון: […] |
-| p44-q12 | text:property | reviewed-explicit | yes | target-bound reviewed proof | האורך הוא הצלע ה[…], והרוחב הוא הצלע הקצרה — ולכן החישוב שגוי. |
-| p44-q13 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות יש ערך x זהה, ולכן הקטע מקביל לציר […]. |
-| p44-q14 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | […] |
-| p44-q15 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | ההסבר: הקודקוד הרביעי חייב לחלוק ערך x עם קודקוד אחד ושיעור […] עם קודקוד אחר. |
-| p44-q16 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה (0,7) ממוקמת על ציר […]. |
-| p44-q17 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | אצל כל נקודה שעל ציר y, שיעור x הוא […]. |
-| p44-q18 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | נקודה שממוקמת על שני הצירים יחד היא […] הצירים. |
+| p44-q9 | text:text | ambiguous | no | none | הקודקוד הנכון: […] |
+| p44-q10 | text:property | ambiguous | no | none | האורך הוא הצלע ה[…], והרוחב הוא הצלע הקצרה — ולכן החישוב שגוי. |
+| p44-q11 | text:letter | ambiguous | no | none | לשתי הנקודות יש ערך x זהה, ולכן הקטע מקביל לציר […]. |
+| p44-q12 | text:text | ambiguous | no | none | […] |
+| p44-q13 | text:letter | ambiguous | no | none | הנקודה (0,7) ממוקמת על ציר […]. |
+| p44-q14 | text:number | ambiguous | no | none | אצל כל נקודה שעל ציר y, שיעור x הוא […]. |
+| p44-q15 | text:concept | ambiguous | no | none | נקודה שממוקמת על שני הצירים יחד היא […] הצירים. |
 
 ### Page 45 — הנקודה החשודה
 
@@ -1078,21 +1088,21 @@ No detected interactive response targets.
 | p47-q13 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | EF=[…]=[…]יח' |
 | p47-q14 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | EF=[…]=[…]יח' |
 | p47-q15 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | EF=[…]יח' |
-| p47-q16 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה E([…],[…]) והנקודה F([…],[…]). |
-| p47-q17 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה E([…],[…]) והנקודה F([…],[…]). |
-| p47-q18 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה E([…],[…]) והנקודה F([…],[…]). |
-| p47-q19 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה E([…],[…]) והנקודה F([…],[…]). |
-| p47-q20 | text:number | open-ended | no | teacher judgment required | EF=[…]=[…]יח' |
-| p47-q21 | text:number | open-ended | no | teacher judgment required | EF=[…]=[…]יח' |
-| p47-q22 | text:number | open-ended | no | teacher judgment required | EF=[…]יח' |
+| p47-q16 | ordered-pair-coordinate | ambiguous | no | none | הנקודה K([…],[…]) והנקודה L([…],[…]). |
+| p47-q17 | ordered-pair-coordinate | ambiguous | no | none | הנקודה K([…],[…]) והנקודה L([…],[…]). |
+| p47-q18 | ordered-pair-coordinate | ambiguous | no | none | הנקודה K([…],[…]) והנקודה L([…],[…]). |
+| p47-q19 | ordered-pair-coordinate | ambiguous | no | none | הנקודה K([…],[…]) והנקודה L([…],[…]). |
+| p47-q20 | text:number | ambiguous | no | none | KL=[…]=[…]יח' |
+| p47-q21 | text:number | ambiguous | no | none | KL=[…]=[…]יח' |
+| p47-q22 | text:number | ambiguous | no | none | KL=[…]יח' |
 
 ### Page 48 — קטעים מקבילים לצירים
 
-5/5 safely checkable (100%).
+4/5 safely checkable (80%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p48-q1 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה P(3,1) ו־Q(3,6) - שיעור […] זהה. |
+| p48-q1 | text:letter | ambiguous | no | none | לנקודות P(3,1) ו־Q(3,6) יש שיעור […] זהה. |
 | p48-q2 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | ב־R(1,4) ו־S(7,4) שיעור y זהה, ולכן הקטע RS מקביל לציר […]. |
 | p48-q3 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הקטע AB מקביל לציר […]. |
 | p48-q4 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | הקטע BC […] לקטע AB. |
@@ -1124,23 +1134,28 @@ No detected interactive response targets.
 
 ### Page 50 — קטעים מקבילים לצירים
 
-9/9 safely checkable (100%).
+5/14 safely checkable (35.7%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p50-q1 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הקטע AB מקביל לציר […], כי בשתי הנקודות שעליו שיעור ה־y זהה. |
 | p50-q2 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הקטע CD מקביל לציר y, כי בשתי הנקודות שעליו שיעור ה־[…] זהה. |
-| p50-q3 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | קטע שבו שיעור y זהה בשתי הנקודות מקביל לציר […]. |
-| p50-q4 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | קטע שבו שיעור […] זהה בשתי הנקודות מקביל לציר y. |
-| p50-q5 | text:relation | deterministic-mathematical | yes | target-bound reviewed proof | קטע המקביל לציר x […] לציר y. |
-| p50-q6 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | קטע […] לציר y מאונך לציר x. |
-| p50-q7 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | קטע המקביל לציר x הוא מאונך לציר y. נכוןלא נכון […] |
-| p50-q8 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | בקטע המקביל לציר y, שיעור y זהה בשתי הנקודות. נכוןלא נכון […] |
-| p50-q9 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | בקטע המקביל לציר x, שיעור y זהה בשתי הנקודות. נכוןלא נכון […] |
+| p50-q3 | text:letter | ambiguous | no | none | אם שתי נקודות ממוקמות על קטע ושיעור ה־y שלהן זהה — הקטע מקביל בהכרח לציר […]. |
+| p50-q4 | text:letter | ambiguous | no | none | אם שתי נקודות ממוקמות על קטע ושיעור ה־[…] שלהן זהה — הקטע מקביל בהכרח לציר y. |
+| p50-q5 | text:relation | ambiguous | no | none | קטע המקביל לציר x הוא בהכרח […] לציר y. |
+| p50-q6 | text:relation | ambiguous | no | none | קטע […] לציר y הוא בהכרח מאונך לציר x. |
+| p50-q7 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | קטע המקביל לציר x הוא בהכרח מאונך לציר y. נכוןלא נכון […] |
+| p50-q8 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | אם שתי נקודות ממוקמות על קטע המקביל לציר y, שיעור ה־y שלהן זהה. נכוןלא נכון […] |
+| p50-q9 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | אם שתי נקודות ממוקמות על קטע המקביל לציר x, שיעור ה־y שלהן זהה. נכוןלא נכון […] |
+| p50-q10 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
+| p50-q11 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
+| p50-q12 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
+| p50-q13 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
+| p50-q14 | text:letter | open-ended | no | teacher judgment required | הקטע שסימנתם מאונך בהכרח לציר […]. |
 
 ### Page 51 — המלבן ברביע הראשון
 
-10/10 safely checkable (100%).
+8/10 safely checkable (80%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1152,12 +1167,12 @@ No detected interactive response targets.
 | p51-q6 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | בקטע BC ערך x זהה, ולכן הקטע […] לציר y. |
 | p51-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | אורך AB: […] יח'. אורך BC: […] יח'. |
 | p51-q8 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | אורך AB: […] יח'. אורך BC: […] יח'. |
-| p51-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p51-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p51-q9 | text:number | ambiguous | no | none | היקף הצורה הוא […] יח'.שטח הצורה הוא […] יח"ר. |
+| p51-q10 | text:number | ambiguous | no | none | היקף הצורה הוא […] יח'.שטח הצורה הוא […] יח"ר. |
 
 ### Page 52 — המלבן ברביע הראשון
 
-22/25 safely checkable (88%).
+7/14 safely checkable (50%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1168,28 +1183,17 @@ No detected interactive response targets.
 | p52-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=6 − 1=[…]יח' |
 | p52-q6 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הצלע BC מקבילה לציר […]: ה־y הגבוה פחות הנמוך. |
 | p52-q7 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=4 − 1=[…]יח' |
-| p52-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p52-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p52-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A′([…],[…]) B′([…],[…]) |
-| p52-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A′([…],[…]) B′([…],[…]) |
-| p52-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A′([…],[…]) B′([…],[…]) |
-| p52-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A′([…],[…]) B′([…],[…]) |
-| p52-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
-| p52-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
-| p52-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
-| p52-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
-| p52-q18 | text:text | ambiguous | no | none | מה השתנה? […] |
-| p52-q19 | text:text | ambiguous | no | none | מה נשאר זהה? […] |
-| p52-q20 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | אחרי ההזזה האורך, הרוחב, ההיקף והשטח […], כי הזזה אינה משנה את הצורה. |
-| p52-q21 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הקודקוד החסר: ([…],[…]) |
-| p52-q22 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הקודקוד החסר: ([…],[…]) |
-| p52-q23 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p52-q24 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p52-q25 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p52-q8 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p52-q9 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p52-q10 | ordered-pair-coordinate | ambiguous | no | none | הקודקוד החסר: ([…],[…]) |
+| p52-q11 | ordered-pair-coordinate | ambiguous | no | none | הקודקוד החסר: ([…],[…]) |
+| p52-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p52-q13 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p52-q14 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 
 ### Page 53 — המלבן ברביע הראשון
 
-16/36 safely checkable (44.4%).
+10/28 safely checkable (35.7%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1203,36 +1207,28 @@ No detected interactive response targets.
 | p53-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | QR=[…]=[…]יח' |
 | p53-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | QR=[…]=[…]יח' |
 | p53-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | QR=[…]יח' |
-| p53-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | P=[…]=[…]יח' |
-| p53-q12 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | P=[…]=[…]יח' |
-| p53-q13 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | P=[…]יח' |
-| p53-q14 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | S=[…]=[…]יח"ר |
-| p53-q15 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | S=[…]=[…]יח"ר |
-| p53-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | S=[…]יח"ר |
+| p53-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p53-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p53-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q16 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
 | p53-q17 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
 | p53-q18 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
 | p53-q19 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
 | p53-q20 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q21 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q22 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q23 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q24 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q25 | text:number | open-ended | no | teacher judgment required | AB=[…]=[…]יח' |
-| p53-q26 | text:number | open-ended | no | teacher judgment required | AB=[…]=[…]יח' |
-| p53-q27 | text:number | open-ended | no | teacher judgment required | AB=[…]יח' |
-| p53-q28 | text:number | open-ended | no | teacher judgment required | BC=[…]=[…]יח' |
-| p53-q29 | text:number | open-ended | no | teacher judgment required | BC=[…]=[…]יח' |
-| p53-q30 | text:number | open-ended | no | teacher judgment required | BC=[…]יח' |
-| p53-q31 | text:number | open-ended | no | teacher judgment required | P=[…]=[…]יח' |
-| p53-q32 | text:number | open-ended | no | teacher judgment required | P=[…]=[…]יח' |
-| p53-q33 | text:number | open-ended | no | teacher judgment required | P=[…]יח' |
-| p53-q34 | text:number | open-ended | no | teacher judgment required | S=[…]=[…]יח"ר |
-| p53-q35 | text:number | open-ended | no | teacher judgment required | S=[…]=[…]יח"ר |
-| p53-q36 | text:number | open-ended | no | teacher judgment required | S=[…]יח"ר |
+| p53-q21 | text:number | ambiguous | no | none | AB=[…]=[…]יח' |
+| p53-q22 | text:number | ambiguous | no | none | AB=[…]=[…]יח' |
+| p53-q23 | text:number | ambiguous | no | none | AB=[…]יח' |
+| p53-q24 | text:number | ambiguous | no | none | BC=[…]=[…]יח' |
+| p53-q25 | text:number | ambiguous | no | none | BC=[…]=[…]יח' |
+| p53-q26 | text:number | ambiguous | no | none | BC=[…]יח' |
+| p53-q27 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p53-q28 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 
 ### Page 54 — המלבן ברביע הראשון
 
-4/16 safely checkable (25%).
+2/16 safely checkable (12.5%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1250,12 +1246,12 @@ No detected interactive response targets.
 | p54-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
 | p54-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
 | p54-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
-| p54-q15 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p54-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p54-q15 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p54-q16 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 
 ### Page 55 — המלבן ברביע הראשון
 
-24/25 safely checkable (96%).
+8/14 safely checkable (57.1%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1264,30 +1260,19 @@ No detected interactive response targets.
 | p55-q3 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]=[…]יח' |
 | p55-q4 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]=[…]יח' |
 | p55-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]יח' |
-| p55-q6 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p55-q7 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p55-q6 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
+| p55-q7 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
 | p55-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | באורך […] יח' וברוחב […] יח' — ולכן האורך והרוחב זהים. |
 | p55-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | באורך […] יח' וברוחב […] יח' — ולכן האורך והרוחב זהים. |
-| p55-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p55-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p55-q12 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p55-q13 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p55-q10 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p55-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p55-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p55-q13 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p55-q14 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם אותו שטח מחייב אותו היקף? […] |
-| p55-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A′([…],[…]) B′([…],[…]) |
-| p55-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A′([…],[…]) B′([…],[…]) |
-| p55-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A′([…],[…]) B′([…],[…]) |
-| p55-q18 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A′([…],[…]) B′([…],[…]) |
-| p55-q19 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
-| p55-q20 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
-| p55-q21 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
-| p55-q22 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
-| p55-q23 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p55-q24 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p55-q25 | text:text | open-ended | no | teacher judgment required | מה נשאר זהה? […] |
 
 ### Page 56 — המלבן ברביע הראשון
 
-9/11 safely checkable (81.8%).
+7/11 safely checkable (63.6%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1295,8 +1280,8 @@ No detected interactive response targets.
 | p56-q2 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הקודקוד הרביעי הוא הנקודה D([…],[…]). |
 | p56-q3 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הצלעות המקבילות לציר x הן […]. |
 | p56-q4 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | האורך הוא הצלע […], והרוחב הוא הצלע AB. |
-| p56-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p56-q6 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p56-q5 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p56-q6 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p56-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | אם מזיזים את המלבן יחידה אחת ימינה, הקודקוד A מגיע אל ([…],[…]), וההיקף והשטח […]. |
 | p56-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | אם מזיזים את המלבן יחידה אחת ימינה, הקודקוד A מגיע אל ([…],[…]), וההיקף והשטח […]. |
 | p56-q9 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | אם מזיזים את המלבן יחידה אחת ימינה, הקודקוד A מגיע אל ([…],[…]), וההיקף והשטח […]. |
@@ -1305,7 +1290,7 @@ No detected interactive response targets.
 
 ### Page 57 — המלבן ברביע הראשון
 
-24/27 safely checkable (88.9%).
+20/29 safely checkable (69%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1313,13 +1298,13 @@ No detected interactive response targets.
 | p57-q2 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]=[…]יח' |
 | p57-q3 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]=[…]יח' |
 | p57-q4 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]יח' |
-| p57-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p57-q6 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p57-q5 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
+| p57-q6 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
 | p57-q7 | text:text | ambiguous | no | none | […] […] […] |
 | p57-q8 | text:text | ambiguous | no | none | […] […] […] |
 | p57-q9 | text:text | ambiguous | no | none | […] […] […] |
-| p57-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p57-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p57-q10 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
+| p57-q11 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
 | p57-q12 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | נקודה על ציר xy= […] |
 | p57-q13 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | נקודה על ציר yx= […] |
 | p57-q14 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | קטע אופקישיעור […] זהה |
@@ -1336,10 +1321,12 @@ No detected interactive response targets.
 | p57-q25 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) → ([…],[…]) → ([…],[…]) → ([…],[…]) |
 | p57-q26 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | מהי נקודת הסיום? ([…],[…]) |
 | p57-q27 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | מהי נקודת הסיום? ([…],[…]) |
+| p57-q28 | text:number | ambiguous | no | none | אורך המסלול כולו הוא בהכרח […] יחידות. |
+| p57-q29 | text:number | ambiguous | no | none | שיעור ה־x של נקודת הסיום גדול משיעור ה־x של הנקודה P ב־[…]. |
 
 ### Page 58 — המלבן ברביע הראשון
 
-16/18 safely checkable (88.9%).
+12/18 safely checkable (66.7%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1354,10 +1341,10 @@ No detected interactive response targets.
 | p58-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A(2,3) אחרי הזזה של 4 יחידות ימינה מגיעה אל הנקודה ([…],[…]). |
 | p58-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A(2,3) אחרי הזזה של 4 יחידות ימינה מגיעה אל הנקודה ([…],[…]). |
 | p58-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | אחרי ההזזה x = 6, ושיעור ה־y שווה […] — בדיוק כמו לפני ההזזה. |
-| p58-q12 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p58-q13 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p58-q14 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p58-q15 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p58-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p58-q13 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p58-q14 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p58-q15 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p58-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההפרש בין שני ההיקפים שחישבתם הוא […] יח', ובכל זאת שני השטחים […]. |
 | p58-q17 | text:relation | deterministic-mathematical | yes | target-bound reviewed proof | ההפרש בין שני ההיקפים שחישבתם הוא […] יח', ובכל זאת שני השטחים […]. |
 | p58-q18 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | שני המלבנים האלה הם […] לטענה של דנה. |
@@ -1388,7 +1375,7 @@ No detected interactive response targets.
 
 ### Page 60 — שורה ומקום — הכרטיס שלכם
 
-12/15 safely checkable (80%).
+10/15 safely checkable (66.7%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1402,28 +1389,28 @@ No detected interactive response targets.
 | p60-q8 | text:property | reviewed-explicit | yes | target-bound reviewed proof | לאורך הגוש: ה־x הימני פחות ה־x השמאלי. לרוחב הגוש: ה־y הגבוה פחות ה־y ה[…]. |
 | p60-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 6 − 3=[…]מקומות בשורה |
 | p60-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 4 − 2=[…]שורות |
-| p60-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p60-q12 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p60-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p60-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p60-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | על הכרטיס שלכם יהיה כתוב ([…],[…]). |
 | p60-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | על הכרטיס שלכם יהיה כתוב ([…],[…]). |
 | p60-q15 | text:number | open-ended | no | teacher judgment required | מהכיסא שבחרתם עד הכיסא של נועה יש הפרש של […] שורות. |
 
 ### Page 61 — פיקסלים — כל מסך הוא מערכת צירים
 
-10/13 safely checkable (76.9%).
+7/13 safely checkable (53.8%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p61-q1 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | כל תמונה במסך בנויה מריבועים קטנים שנקראים פיקסלים, ולכל פיקסל יש […] סדור משלו. |
 | p61-q2 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | כשמגדילים תמונה קטנה רואים את הריבועים, כי המסך מסודר בשורות ובעמודות — בדיוק כמו […] הצירים. |
 | p61-q3 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | הצורה שהתקבלה היא […]. |
-| p61-q4 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | השורה התחתונה שצבעתם משתרעת מ־x השווה 2 עד x השווה 5, ולכן ההפרש הוא […]. |
+| p61-q4 | text:number | ambiguous | no | none | השורה התחתונה שצבעתם משתרעת מ־x = 2 עד x = 5, ולכן ההפרש הוא […]. |
 | p61-q5 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הצלע התחתונה מקבילה לציר […], והצלע השמאלית מקבילה לציר y. |
 | p61-q6 | text:property | reviewed-explicit | yes | target-bound reviewed proof | האורך הוא ההפרש בין ה־x הימני ובין ה־x השמאלי, והרוחב הוא ההפרש בין ה־y הגבוה ובין ה־y ה[…]. |
 | p61-q7 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=7 − 1=[…]יח' |
 | p61-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=5 − 1=[…]יח' |
-| p61-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p61-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p61-q9 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p61-q10 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p61-q11 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]). |
 | p61-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]). |
 | p61-q13 | text:number | open-ended | no | teacher judgment required | המרחק שלו מציר y הוא […] יח', וזה בדיוק ערך ה־x שלו. |
@@ -1452,7 +1439,7 @@ No detected interactive response targets.
 
 ### Page 63 — מפת הפארק — כל עצם הוא נקודה
 
-20/24 safely checkable (83.3%).
+11/15 safely checkable (73.3%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1471,15 +1458,6 @@ No detected interactive response targets.
 | p63-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p63-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p63-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p63-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…]). |
-| p63-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…]). |
-| p63-q18 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | הפנס ממוקם מתחת לנדנדה, וההפרש בין שיעורי ה־y שלהם הוא […]. |
-| p63-q19 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו גם נקודה שערך ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]). |
-| p63-q20 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו גם נקודה שערך ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]). |
-| p63-q21 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה שסימנתם רחוקה מציר y ‏[…] יחידות. |
-| p63-q22 | text:direction | deterministic-mathematical | yes | target-bound reviewed proof | מהשער אל הספסל הולכים לאורך השבילים: 2 יחידות ימינה ואחר כך 2 יחידות […], ובסך הכול: |
-| p63-q23 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 2 + 2=[…]יח' |
-| p63-q24 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 4 + 3 + 3=[…]יח' |
 
 ### Page 64 — מסלולים במפת הפארק
 
@@ -1499,11 +1477,11 @@ No detected interactive response targets.
 
 ### Page 65 — קריאת גרפים ברביע הראשון
 
-16/17 safely checkable (94.1%).
+13/17 safely checkable (76.5%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p65-q1 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | בגרף של נתונים, ערך ה־x אומר מתי או כמה, ושיעור ה־y אומר את ה[…] שהתקבלה. |
+| p65-q1 | text:concept | ambiguous | no | none | בגרף של נתונים, שיעור ה־x אומר מתי או כמה, ושיעור ה־y אומר את ה[…] שהתקבלה. |
 | p65-q2 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | כל נקודה בגרף נכתבת כזוג […], בדיוק כמו במערכת הצירים. |
 | p65-q3 | text:property | reviewed-explicit | yes | target-bound reviewed proof | המשמעות של נקודה היא מה ששני השיעורים שלה אומרים יחד, ולא כל שיעור […]. |
 | p65-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה D הם D([…],[…]), כלומר 40 דקות למידה ו־[…] שאלות. |
@@ -1511,23 +1489,23 @@ No detected interactive response targets.
 | p65-q6 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה D הם D([…],[…]), כלומר 40 דקות למידה ו־[…] שאלות. |
 | p65-q7 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה […] מתארת את התלמיד שפתר את מספר השאלות הגדול ביותר. |
 | p65-q8 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות B ו־C יש שיעור […] זהה, כלומר שני התלמידים פתרו אותו מספר שאלות. |
-| p65-q9 | text:relation | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות D ו־E יש שיעור y זהה, אבל ערך ה־x של E […]. |
+| p65-q9 | text:relation | ambiguous | no | none | לשתי הנקודות D ו־E יש שיעור y זהה, אבל שיעור ה־x של הנקודה E […]. |
 | p65-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | משמעות הנקודה D(4,5): התלמיד למד […] עשרות דקות, ופתר 5 שאלות. |
 | p65-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | משמעות הנקודה A(1,2): התלמיד למד 10 דקות, ופתר […] שאלות. |
 | p65-q12 | text:relation | deterministic-mathematical | yes | target-bound reviewed proof | שתי הנקודות B ו־C שונות זו מזו, אבל המשמעות המשותפת שלהן היא שהתלמידים פתרו […] שאלות. |
-| p65-q13 | text:relation | deterministic-mathematical | yes | target-bound reviewed proof | ככל שערך ה־x גדל, שיעור ה־y בדרך כלל […]. |
+| p65-q13 | text:relation | ambiguous | no | none | ככל ששיעור ה־x גדל, שיעור ה־y בדרך כלל […]. |
 | p65-q14 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 6 − 2=[…]שאלות |
 | p65-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על הגרף נקודה G של תלמיד שלמד 50 דקות ופתר 4 שאלות: G([…],[…]). |
 | p65-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על הגרף נקודה G של תלמיד שלמד 50 דקות ופתר 4 שאלות: G([…],[…]). |
-| p65-q17 | text:direction | open-ended | no | teacher judgment required | הנקודה שסימנתם ממוקמת […] לנקודה D. |
+| p65-q17 | text:direction | ambiguous | no | none | הנקודה G ממוקמת מימין לנקודה D וגם […] לה. |
 
 ### Page 66 — קריאת גרפים ברביע הראשון
 
-12/13 safely checkable (92.3%).
+11/13 safely checkable (84.6%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p66-q1 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | כשערך ה־x הוא שנה, המרחק בין שתי נקודות על ציר x הוא מספר ה[…] שעברו. |
+| p66-q1 | text:concept | ambiguous | no | none | כאשר ציר ה־x מציין שנים, ההפרש בין שיעורי ה־x של שתי נקודות הוא מספר ה[…] שעברו. |
 | p66-q2 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בשנה השלישית נרשמו […] עשרות תלמידים, ולכן הנקודה שמתאימה לה היא ([…],[…]). |
 | p66-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | בשנה השלישית נרשמו […] עשרות תלמידים, ולכן הנקודה שמתאימה לה היא ([…],[…]). |
 | p66-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | בשנה השלישית נרשמו […] עשרות תלמידים, ולכן הנקודה שמתאימה לה היא ([…],[…]). |
@@ -1601,7 +1579,7 @@ No detected interactive response targets.
 | p70-q3 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
 | p70-q4 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
 | p70-q5 | text:number | open-ended | no | teacher judgment required | ביום […] הקדשתם את מספר הדקות הגדול ביותר. |
-| p70-q6 | text:number | open-ended | no | teacher judgment required | ההפרש בין היום הגבוה ביותר ובין היום הנמוך ביותר הוא […] עשרות דקות. |
+| p70-q6 | text:number | ambiguous | no | none | ההפרש בין מספר הדקות הגדול ביותר ובין מספר הדקות הקטן ביותר הוא […] עשרות דקות. |
 | p70-q7 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | אם יש שני ימים שבהם הקדשתם אותו זמן, לשתי הנקודות שמתאימות להם יש שיעור […] זהה. |
 | p70-q8 | text:number | open-ended | no | teacher judgment required | הנקודה הגבוהה ביותר בגרף שלכם רחוקה מציר x […] יחידות. |
 
@@ -1624,24 +1602,24 @@ No detected interactive response targets.
 | p71-q11 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | הנקודה B ממוקמת על שני הקטעים, ולכן היא […] הזווית שנוצרת ביניהם. |
 | p71-q12 | text:property | reviewed-explicit | yes | target-bound reviewed proof | הזווית שקודקודה הוא הנקודה B היא זווית […]. |
 
-### Page 72 — מזהים זווית ישרה
+### Page 72 — קטעים מאונכים ברביע הראשון
 
-4/4 safely checkable (100%).
+3/4 safely checkable (75%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p72-q1 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | זווית ישרה נוצרת כאשר קטע אחד מקביל לציר x והשני מקביל לציר […]. |
 | p72-q2 | text:property | deterministic-mathematical | yes | target-bound reviewed proof | זווית ישרה נוצרת רק כשקטע אחד […] והשני אנכי. |
-| p72-q3 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | לשתי נקודות שעל קטע אנכי יש […] x זהה. |
+| p72-q3 | text:letter | ambiguous | no | none | לשתי נקודות שממוקמות על קטע אנכי יש שיעור […] זהה. |
 | p72-q4 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | קטע המקביל לציר x הוא מאונך לציר […]. |
 
 ### Page 73 — בונים זווית ישרה
 
-12/12 safely checkable (100%).
+10/12 safely checkable (83.3%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p73-q1 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | מהראשית זזים תחילה לפי […] ואז לפי y. |
+| p73-q1 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | מראשית הצירים זזים תחילה לפי […] ואז לפי y. |
 | p73-q2 | word:property | canonical-metadata-derived | yes | explicit canonical authoring label | בפינה שבה הכיוון משתנה מאופקי לאנכי נוצרת זווית […]. |
 | p73-q3 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | בפינה (4,0) הכיוון משתנה מ־[…] ל־[…]. |
 | p73-q4 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | בפינה (4,0) הכיוון משתנה מ־[…] ל־[…]. |
@@ -1651,8 +1629,8 @@ No detected interactive response targets.
 | p73-q8 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הצלעות […] ו־BC מקבילות לציר y, ולכן הן מאונכות ל־AB. |
 | p73-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | האורך AB: […] יח'. הרוחב BC: […] יח'. |
 | p73-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | האורך AB: […] יח'. הרוחב BC: […] יח'. |
-| p73-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p73-q12 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p73-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p73-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 
 ### Page 74 — זוויות ברביע הראשון
 
@@ -1703,9 +1681,9 @@ No detected interactive response targets.
 | p76-q9 | text:letter | open-ended | no | teacher judgment required | הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB. |
 | p76-q10 | text:relation | open-ended | no | teacher judgment required | הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB. |
 | p76-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=4 − 0=[…]יח' |
-| p76-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של B. |
-| p76-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של B. |
-| p76-q14 | text:relation | open-ended | no | teacher judgment required | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של B. |
+| p76-q12 | ordered-pair-coordinate | ambiguous | no | none | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
+| p76-q13 | ordered-pair-coordinate | ambiguous | no | none | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
+| p76-q14 | text:relation | ambiguous | no | none | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
 
 ### Page 77 — זוויות ברביע הראשון
 
@@ -1724,7 +1702,7 @@ No detected interactive response targets.
 
 ### Page 78 — זווית ישרה במערכת הצירים
 
-16/16 safely checkable (100%).
+12/16 safely checkable (75%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1737,11 +1715,11 @@ No detected interactive response targets.
 | p78-q7 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=[…]=[…]יח' |
 | p78-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=[…]=[…]יח' |
 | p78-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=[…]יח' |
-| p78-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p78-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p78-q10 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p78-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p78-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | S([…],[…]) |
 | p78-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | S([…],[…]) |
 | p78-q14 | text:text | reviewed-explicit | yes | target-bound reviewed proof | בקודקוד Q הזווית היא […]. |
-| p78-q15 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p78-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
+| p78-q15 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p78-q16 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 

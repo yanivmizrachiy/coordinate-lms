@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-05T17:23:35.889Z",
+  "generatedAt": "2026-08-05T18:29:34.628Z",
   "pageCount": 78,
-  "targetCount": 1184,
+  "targetCount": 1162,
   "pages": [
     {
       "pageNumber": 1,
@@ -1609,7 +1609,7 @@
         {
           "pageNumber": 5,
           "targetId": "p5-q8",
-          "signature": "eea9b15a",
+          "signature": "41877a64",
           "inputType": "ordered-pair-coordinate",
           "classification": "reviewed-explicit",
           "sourceEvidence": "src/lms/answerKey.ts",
@@ -1618,12 +1618,12 @@
             "2",
             "שתיים"
           ],
-          "context": "בנקודה A שיעור x הוא 2, ושיעור y הוא 5. A([…],[…])"
+          "context": "בנקודה D שיעור x הוא 2, ושיעור y הוא 5. D([…],[…])"
         },
         {
           "pageNumber": 5,
           "targetId": "p5-q9",
-          "signature": "eea9b15a",
+          "signature": "41877a64",
           "inputType": "ordered-pair-coordinate",
           "classification": "reviewed-explicit",
           "sourceEvidence": "src/lms/answerKey.ts",
@@ -1632,12 +1632,12 @@
             "5",
             "חמש"
           ],
-          "context": "בנקודה A שיעור x הוא 2, ושיעור y הוא 5. A([…],[…])"
+          "context": "בנקודה D שיעור x הוא 2, ושיעור y הוא 5. D([…],[…])"
         },
         {
           "pageNumber": 5,
           "targetId": "p5-q10",
-          "signature": "eb152a63",
+          "signature": "6e19b959",
           "inputType": "ordered-pair-coordinate",
           "classification": "reviewed-explicit",
           "sourceEvidence": "src/lms/answerKey.ts",
@@ -1646,12 +1646,12 @@
             "6",
             "שש"
           ],
-          "context": "נקודה B רחוקה 6 יחידות מציר y ו־2 יחידות מציר x. B([…],[…])"
+          "context": "נקודה E רחוקה 6 יחידות מציר y ו־2 יחידות מציר x. E([…],[…])"
         },
         {
           "pageNumber": 5,
           "targetId": "p5-q11",
-          "signature": "eb152a63",
+          "signature": "6e19b959",
           "inputType": "ordered-pair-coordinate",
           "classification": "reviewed-explicit",
           "sourceEvidence": "src/lms/answerKey.ts",
@@ -1660,12 +1660,12 @@
             "2",
             "שתיים"
           ],
-          "context": "נקודה B רחוקה 6 יחידות מציר y ו־2 יחידות מציר x. B([…],[…])"
+          "context": "נקודה E רחוקה 6 יחידות מציר y ו־2 יחידות מציר x. E([…],[…])"
         },
         {
           "pageNumber": 5,
           "targetId": "p5-q12",
-          "signature": "36449a37",
+          "signature": "c00631b1",
           "inputType": "ordered-pair-coordinate",
           "classification": "reviewed-explicit",
           "sourceEvidence": "src/lms/answerKey.ts",
@@ -1674,12 +1674,12 @@
             "3",
             "שלוש"
           ],
-          "context": "נקודה C ממוקמת על ציר x, ושיעור x שלה 3. C([…],[…])"
+          "context": "נקודה F ממוקמת על ציר x, ושיעור x שלה 3. F([…],[…])"
         },
         {
           "pageNumber": 5,
           "targetId": "p5-q13",
-          "signature": "36449a37",
+          "signature": "c00631b1",
           "inputType": "ordered-pair-coordinate",
           "classification": "reviewed-explicit",
           "sourceEvidence": "src/lms/answerKey.ts",
@@ -1688,7 +1688,7 @@
             "0",
             "אפס"
           ],
-          "context": "נקודה C ממוקמת על ציר x, ושיעור x שלה 3. C([…],[…])"
+          "context": "נקודה F ממוקמת על ציר x, ושיעור x שלה 3. F([…],[…])"
         }
       ]
     },
@@ -3594,6 +3594,39 @@
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
+        },
+        {
+          "pageNumber": 13,
+          "targetId": "p13-q19",
+          "signature": "f2c048b1",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…])."
+        },
+        {
+          "pageNumber": 13,
+          "targetId": "p13-q20",
+          "signature": "f2c048b1",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…])."
+        },
+        {
+          "pageNumber": 13,
+          "targetId": "p13-q21",
+          "signature": "54054fb8",
+          "inputType": "text:direction",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה R ממוקמת […] לנקודה K."
         }
       ]
     },
@@ -3678,6 +3711,50 @@
             "3"
           ],
           "context": "נקודה H: שיעור x = 8, שיעור y = 3 ← H([…],[…])"
+        },
+        {
+          "pageNumber": 14,
+          "targetId": "p14-q7",
+          "signature": "6ff0a651",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "נקודה K: שיעור x = 0, שיעור y = 4 ← K([…],[…])"
+        },
+        {
+          "pageNumber": 14,
+          "targetId": "p14-q8",
+          "signature": "6ff0a651",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "נקודה K: שיעור x = 0, שיעור y = 4 ← K([…],[…])"
+        },
+        {
+          "pageNumber": 14,
+          "targetId": "p14-q9",
+          "signature": "f562f9df",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "נקודה L: שיעור x = 6, שיעור y = 0 ← L([…],[…])"
+        },
+        {
+          "pageNumber": 14,
+          "targetId": "p14-q10",
+          "signature": "f562f9df",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "נקודה L: שיעור x = 6, שיעור y = 0 ← L([…],[…])"
         }
       ]
     },
@@ -3714,30 +3791,24 @@
         {
           "pageNumber": 15,
           "targetId": "p15-q3",
-          "signature": "b78e5151",
+          "signature": "85460495",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/on-axes-intro.ts — exact axis-zero rule and origin definition",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "0",
-            "אפס"
-          ],
-          "context": "ראשית הצירים נכתבת O([…],[…])."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "שיעורי הנקודה שעל ראשית הצירים הם ([…],[…])."
         },
         {
           "pageNumber": 15,
           "targetId": "p15-q4",
-          "signature": "b78e5151",
+          "signature": "85460495",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/on-axes-intro.ts — exact axis-zero rule and origin definition",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "0",
-            "אפס"
-          ],
-          "context": "ראשית הצירים נכתבת O([…],[…])."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "שיעורי הנקודה שעל ראשית הצירים הם ([…],[…])."
         },
         {
           "pageNumber": 15,
@@ -4159,30 +4230,90 @@
         {
           "pageNumber": 18,
           "targetId": "p18-q1",
-          "signature": "6b3e3a82",
-          "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/plot-practice.ts — exact printed P(2,5), Q(7,3), and R(5,6) coordinates",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "R",
-            "r"
-          ],
-          "context": "מי מהנקודות הגבוהה ביותר? […]"
+          "signature": "a60160b6",
+          "inputType": "text:letter",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "מי הנקודה הגבוהה ביותר? […]"
         },
         {
           "pageNumber": 18,
           "targetId": "p18-q2",
-          "signature": "d46483d8",
-          "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/plot-practice.ts — exact printed P(2,5), Q(7,3), and R(5,6) coordinates",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "Q",
-            "q"
-          ],
-          "context": "מי הימנית ביותר? […]"
+          "signature": "5fea1a80",
+          "inputType": "text:letter",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "מי הנקודה הימנית ביותר? […]"
+        },
+        {
+          "pageNumber": 18,
+          "targetId": "p18-q3",
+          "signature": "a98da932",
+          "inputType": "text:letter",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "מי הנקודה השמאלית ביותר? […]"
+        },
+        {
+          "pageNumber": 18,
+          "targetId": "p18-q4",
+          "signature": "63e7ef56",
+          "inputType": "text:letter",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […]."
+        },
+        {
+          "pageNumber": 18,
+          "targetId": "p18-q5",
+          "signature": "efdc1715",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […]."
+        },
+        {
+          "pageNumber": 18,
+          "targetId": "p18-q6",
+          "signature": "5730ad76",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה R רחוקה מציר x […] יחידות, כי זה שיעור ה־y שלה."
+        },
+        {
+          "pageNumber": 18,
+          "targetId": "p18-q7",
+          "signature": "6f2b24e6",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "open-ended",
+          "sourceEvidence": "learner-created or explanatory response",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…])."
+        },
+        {
+          "pageNumber": 18,
+          "targetId": "p18-q8",
+          "signature": "6f2b24e6",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "open-ended",
+          "sourceEvidence": "learner-created or explanatory response",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…])."
         }
       ]
     },
@@ -4321,54 +4452,46 @@
         {
           "pageNumber": 22,
           "targetId": "p22-q2",
-          "signature": "44661544",
+          "signature": "4a5ea755",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/secret-word-print.ts — exact plotted Hebrew-letter coordinates and coordinate differences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2"
-          ],
-          "context": "שיעור ה־x של הנקודה של האות ו הוא […]."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה של האות ק רחוקה […] יחידות מציר ה־y."
         },
         {
           "pageNumber": 22,
           "targetId": "p22-q3",
-          "signature": "84d8ca36",
-          "inputType": "text:property",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/data/workbook/pages/secret-word-print.ts — exact plotted Hebrew-letter coordinates and coordinate differences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "נמוכה"
-          ],
-          "context": "הנקודה של האות ד היא הנקודה ה[…] ביותר במערכת."
+          "signature": "44661544",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "שיעור ה־x של הנקודה של האות ו הוא […]."
         },
         {
           "pageNumber": 22,
           "targetId": "p22-q4",
-          "signature": "7612f0a1",
-          "inputType": "text:letter",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/secret-word-print.ts — exact plotted Hebrew-letter coordinates and coordinate differences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "ה"
-          ],
-          "context": "האות שממוקמת בנקודה (4,3) היא […]."
+          "signature": "ea86d17b",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה של האות ד היא הימנית ביותר, ושיעור ה־x שלה הוא […]."
         },
         {
           "pageNumber": 22,
           "targetId": "p22-q5",
-          "signature": "4a5ea755",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/secret-word-print.ts — exact plotted Hebrew-letter coordinates and coordinate differences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "הנקודה של האות ק רחוקה […] יחידות מציר ה־y."
+          "signature": "7612f0a1",
+          "inputType": "text:letter",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "האות שממוקמת בנקודה (4,3) היא […]."
         },
         {
           "pageNumber": 22,
@@ -4433,15 +4556,13 @@
         {
           "pageNumber": 22,
           "targetId": "p22-q11",
-          "signature": "f5a802cb",
+          "signature": "cc4c5ebd",
           "inputType": "text:property",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/data/workbook/pages/secret-word-print.ts — exact plotted Hebrew-letter coordinates and coordinate differences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "נמוכה"
-          ],
-          "context": "הנקודה של האות ד היא ה[…] ביותר במערכת."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה של האות ד היא ה[…] ביותר במערכת — שיעור ה־y שלה קטן מכולם."
         },
         {
           "pageNumber": 22,
@@ -5539,62 +5660,46 @@
         {
           "pageNumber": 29,
           "targetId": "p29-q3",
-          "signature": "4a44fca3",
+          "signature": "7458ba8e",
           "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-practice.ts — exact coordinate transformations from the stated arithmetic relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "F(1,2)",
-            "(1,2)",
-            "1,2"
-          ],
-          "context": "הנקודה E(6,2). שיעור x של F קטן ב־5, ושיעור y זהה. […]"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה E(6,2). שיעור x של הנקודה F קטן ב־5, ושיעור y זהה. […]"
         },
         {
           "pageNumber": 29,
           "targetId": "p29-q4",
-          "signature": "12fa1306",
+          "signature": "e96fa317",
           "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-practice.ts — exact coordinate transformations from the stated arithmetic relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "Q(6,3)",
-            "(6,3)",
-            "6,3"
-          ],
-          "context": "הנקודה P(2,3). שיעור x של Q גדול פי 3, ושיעור y זהה. […]"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה P(2,3). שיעור x של הנקודה Q גדול פי 3, ושיעור y זהה. […]"
         },
         {
           "pageNumber": 29,
           "targetId": "p29-q5",
-          "signature": "1f76da65",
+          "signature": "43277408",
           "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-practice.ts — exact coordinate transformations from the stated arithmetic relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "S(4,4)",
-            "(4,4)",
-            "4,4"
-          ],
-          "context": "הנקודה R(8,4). שיעור x של S הוא מחצית ממנו, ושיעור y זהה. […]"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה R(8,4). שיעור x של הנקודה S הוא מחצית ממנו, ושיעור y זהה. […]"
         },
         {
           "pageNumber": 29,
           "targetId": "p29-q6",
-          "signature": "92d12aed",
+          "signature": "65bee958",
           "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-practice.ts — exact coordinate transformations from the stated arithmetic relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "U(4,6)",
-            "(4,6)",
-            "4,6"
-          ],
-          "context": "הנקודה T(4,2). שיעור y של U גדול פי 3, ושיעור x זהה. […]"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה T(4,2). שיעור y של הנקודה U גדול פי 3, ושיעור x זהה. […]"
         },
         {
           "pageNumber": 29,
@@ -5627,54 +5732,46 @@
         {
           "pageNumber": 29,
           "targetId": "p29-q9",
-          "signature": "ae158f89",
+          "signature": "4ecdef2a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-practice.ts — exact coordinate transformations from the stated arithmetic relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל A, ושיעור y זהה: B([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…])"
         },
         {
           "pageNumber": 29,
           "targetId": "p29-q10",
-          "signature": "ae158f89",
+          "signature": "4ecdef2a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-practice.ts — exact coordinate transformations from the stated arithmetic relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל A, ושיעור y זהה: B([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…])"
         },
         {
           "pageNumber": 29,
           "targetId": "p29-q11",
-          "signature": "bc6d22e1",
+          "signature": "dbc7bb7a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-practice.ts — exact coordinate transformations from the stated arithmetic relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2"
-          ],
-          "context": "סמנו נקודה C שבה שיעור y גדול פי 2 משל A, ושיעור x זהה: C([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…])"
         },
         {
           "pageNumber": 29,
           "targetId": "p29-q12",
-          "signature": "bc6d22e1",
+          "signature": "dbc7bb7a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-practice.ts — exact coordinate transformations from the stated arithmetic relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "סמנו נקודה C שבה שיעור y גדול פי 2 משל A, ושיעור x זהה: C([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…])"
         },
         {
           "pageNumber": 29,
@@ -6203,29 +6300,24 @@
         {
           "pageNumber": 33,
           "targetId": "p33-q3",
-          "signature": "f46fdbb4",
+          "signature": "508174f4",
           "inputType": "text:letter",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/distance-intro.ts — exact endpoint differences and diagnosed addition error",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "y",
-            "Y"
-          ],
-          "context": "לשתי הנקודות A(2,5) ו־B(7,5) יש שיעור […] זהה."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "לשתי הנקודות E(2,5) ו־F(7,5) יש שיעור […] זהה."
         },
         {
           "pageNumber": 33,
           "targetId": "p33-q4",
-          "signature": "22cf58e8",
+          "signature": "953c6b70",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/distance-intro.ts — exact endpoint differences and diagnosed addition error",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "AB=7 − 2=[…]יח'"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "EF=7 − 2=[…]יח'"
         },
         {
           "pageNumber": 33,
@@ -6274,29 +6366,24 @@
         {
           "pageNumber": 33,
           "targetId": "p33-q9",
-          "signature": "9134b93c",
+          "signature": "1f5e9884",
           "inputType": "text:letter",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/distance-intro.ts — exact endpoint differences and diagnosed addition error",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "x",
-            "X"
-          ],
-          "context": "לשתי הנקודות C(4,1) ו־D(4,6) יש שיעור […] זהה, ולכן הקטע CD מקביל לציר y."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "לשתי הנקודות G(4,1) ו־H(4,6) יש שיעור […] זהה, ולכן הקטע GH מקביל לציר y."
         },
         {
           "pageNumber": 33,
           "targetId": "p33-q10",
-          "signature": "0e3f8db6",
+          "signature": "e990bebe",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/distance-intro.ts — exact endpoint differences and diagnosed addition error",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "CD=6 − 1=[…]יח'"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "GH=6 − 1=[…]יח'"
         },
         {
           "pageNumber": 33,
@@ -6345,15 +6432,13 @@
         {
           "pageNumber": 33,
           "targetId": "p33-q15",
-          "signature": "c63215da",
+          "signature": "d0d99472",
           "inputType": "text:relation",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/data/workbook/pages/distance-intro.ts — exact endpoint differences and diagnosed addition error",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "חיבר"
-          ],
-          "context": "אורי […] את שני ערכי ה־x במקום לחסר אותם."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "אורי חישב את המרחק בין (2,5) ובין (7,5) וקיבל 9 — הוא […] את שני ערכי ה־x במקום לחסר אותם. תרגיל החיסור הנכון:"
         },
         {
           "pageNumber": 33,
@@ -6371,17 +6456,6 @@
         {
           "pageNumber": 33,
           "targetId": "p33-q17",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
-        },
-        {
-          "pageNumber": 33,
-          "targetId": "p33-q18",
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
@@ -7871,16 +7945,13 @@
         {
           "pageNumber": 39,
           "targetId": "p39-q27",
-          "signature": "65deb520",
+          "signature": "197e7954",
           "inputType": "text:letter",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-intro.ts — exact axis, equality, arithmetic-relation, and pattern constraints",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "y",
-            "Y"
-          ],
-          "context": "כדי לקבוע נקודה **אחת** צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]."
         },
         {
           "pageNumber": 39,
@@ -7902,291 +7973,233 @@
         {
           "pageNumber": 40,
           "targetId": "p40-q1",
-          "signature": "199d3607",
+          "signature": "21218d91",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "הנקודה A([…],4) ממוקמת על אותו קו אנכי כמו B(6,1). לכן A= […]"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה A([…],4) ממוקמת על אותו קו אנכי כמו B(6,1)."
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q2",
-          "signature": "42a2ca16",
-          "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "A(6,4)",
-            "(6,4)",
-            "6,4"
-          ],
-          "context": "הנקודה A([…],4) ממוקמת על אותו קו אנכי כמו B(6,1). לכן A= […]"
+          "signature": "4cc4a5d2",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה C(3,[…]) ממוקמת על אותו קו אופקי כמו D(7,5)."
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q3",
-          "signature": "225f5c24",
+          "signature": "3eab0a0e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "הנקודה C(3,[…]) ממוקמת על אותו קו אופקי כמו D(7,5). לכן C= […]"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3)."
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q4",
-          "signature": "9c5a45bb",
-          "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "C(3,5)",
-            "(3,5)",
-            "3,5"
-          ],
-          "context": "הנקודה C(3,[…]) ממוקמת על אותו קו אופקי כמו D(7,5). לכן C= […]"
+          "signature": "3eab0a0e",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3)."
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q5",
-          "signature": "17405e72",
+          "signature": "8d57fadf",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "4"
-          ],
-          "context": "הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). לכן E= […]"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2)."
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q6",
-          "signature": "17405e72",
+          "signature": "8d57fadf",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "0",
-            "אפס"
-          ],
-          "context": "הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). לכן E= […]"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2)."
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q7",
-          "signature": "92fd9ca5",
-          "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "E(4,0)",
-            "(4,0)",
-            "4,0"
-          ],
-          "context": "הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). לכן E= […]"
+          "signature": "6f305284",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "([…],[…]) ([…],[…])"
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q8",
-          "signature": "6c7d8f23",
+          "signature": "6f305284",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "0",
-            "אפס"
-          ],
-          "context": "הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). לכן G= […]"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "([…],[…]) ([…],[…])"
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q9",
-          "signature": "6c7d8f23",
+          "signature": "6f305284",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2"
-          ],
-          "context": "הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). לכן G= […]"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "([…],[…]) ([…],[…])"
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q10",
-          "signature": "8d0cae0a",
-          "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "G(0,2)",
-            "(0,2)",
-            "0,2"
-          ],
-          "context": "הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). לכן G= […]"
+          "signature": "6f305284",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "([…],[…]) ([…],[…])"
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q11",
-          "signature": "6f305284",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "([…],[…]) ([…],[…])"
-        },
-        {
-          "pageNumber": 40,
-          "targetId": "p40-q12",
-          "signature": "6f305284",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "([…],[…]) ([…],[…])"
-        },
-        {
-          "pageNumber": 40,
-          "targetId": "p40-q13",
-          "signature": "6f305284",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "([…],[…]) ([…],[…])"
-        },
-        {
-          "pageNumber": 40,
-          "targetId": "p40-q14",
-          "signature": "6f305284",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "([…],[…]) ([…],[…])"
-        },
-        {
-          "pageNumber": 40,
-          "targetId": "p40-q15",
           "signature": "11f7e9aa",
           "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "x=y",
-            "x = y",
-            "שיעור x שווה לשיעור y"
-          ],
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
           "context": "כתבו כלל המתאר את כל הנקודות בדפוס: […]"
         },
         {
           "pageNumber": 40,
-          "targetId": "p40-q16",
+          "targetId": "p40-q12",
           "signature": "b390457d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "4"
-          ],
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
           "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])"
+        },
+        {
+          "pageNumber": 40,
+          "targetId": "p40-q13",
+          "signature": "b390457d",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])"
+        },
+        {
+          "pageNumber": 40,
+          "targetId": "p40-q14",
+          "signature": "b390457d",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])"
+        },
+        {
+          "pageNumber": 40,
+          "targetId": "p40-q15",
+          "signature": "b390457d",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])"
+        },
+        {
+          "pageNumber": 40,
+          "targetId": "p40-q16",
+          "signature": "f9ba678c",
+          "inputType": "text:text",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "מה נשאר קבוע? […] מה משתנה? […]"
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q17",
-          "signature": "b390457d",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])"
+          "signature": "f9ba678c",
+          "inputType": "text:text",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "מה נשאר קבוע? […] מה משתנה? […]"
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q18",
-          "signature": "b390457d",
+          "signature": "00a038a3",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "([…],[…]) ([…],[…]) ([…],[…])"
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q19",
-          "signature": "b390457d",
+          "signature": "00a038a3",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "([…],[…]) ([…],[…]) ([…],[…])"
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q20",
-          "signature": "f9ba678c",
-          "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "שיעור y",
-            "y",
-            "y=5"
-          ],
-          "context": "מה נשאר קבוע? […] מה משתנה? […]"
+          "signature": "00a038a3",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "([…],[…]) ([…],[…]) ([…],[…])"
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q21",
-          "signature": "f9ba678c",
-          "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "שיעור x",
-            "x",
-            "x גדל"
-          ],
-          "context": "מה נשאר קבוע? […] מה משתנה? […]"
+          "signature": "00a038a3",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "([…],[…]) ([…],[…]) ([…],[…])"
         },
         {
           "pageNumber": 40,
@@ -8217,54 +8230,46 @@
         {
           "pageNumber": 40,
           "targetId": "p40-q24",
-          "signature": "00a038a3",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "([…],[…]) ([…],[…]) ([…],[…])"
+          "signature": "2345fda7",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "בדפוס שבסעיף הראשון, ההפרש בין שיעורי ה־y של שתי נקודות סמוכות הוא בהכרח […]."
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q25",
-          "signature": "00a038a3",
+          "signature": "f45d8e14",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "4"
-          ],
-          "context": "([…],[…]) ([…],[…]) ([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "כתבו את הנקודה שתופיע בטבלה במקום השישי: ([…],[…])."
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q26",
-          "signature": "00a038a3",
+          "signature": "f45d8e14",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "7"
-          ],
-          "context": "([…],[…]) ([…],[…]) ([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "כתבו את הנקודה שתופיע בטבלה במקום השישי: ([…],[…])."
         },
         {
           "pageNumber": 40,
           "targetId": "p40-q27",
-          "signature": "00a038a3",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-practice.ts — exact shared-line constraints and explicitly defined coordinate sequences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "([…],[…]) ([…],[…]) ([…],[…])"
+          "signature": "ea0fb80b",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "בסדרה שבטבלה, שיעור ה־y של כל הנקודות הוא בהכרח […]."
         }
       ]
     },
@@ -8355,55 +8360,46 @@
         {
           "pageNumber": 41,
           "targetId": "p41-q7",
-          "signature": "ac12d2a1",
+          "signature": "70a1771d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rule-to-graph.ts — exact values from y=2x, y=x+2, and x=y+4",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "0",
-            "אפס"
-          ],
-          "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])."
         },
         {
           "pageNumber": 41,
           "targetId": "p41-q8",
-          "signature": "ac12d2a1",
+          "signature": "70a1771d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rule-to-graph.ts — exact values from y=2x, y=x+2, and x=y+4",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2"
-          ],
-          "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])."
         },
         {
           "pageNumber": 41,
           "targetId": "p41-q9",
-          "signature": "ac12d2a1",
+          "signature": "70a1771d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rule-to-graph.ts — exact values from y=2x, y=x+2, and x=y+4",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "4"
-          ],
-          "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])."
         },
         {
           "pageNumber": 41,
           "targetId": "p41-q10",
-          "signature": "ac12d2a1",
+          "signature": "70a1771d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rule-to-graph.ts — exact values from y=2x, y=x+2, and x=y+4",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])."
         },
         {
           "pageNumber": 41,
@@ -8989,6 +8985,17 @@
             "מאונכת"
           ],
           "context": "קטע המקביל לציר x הוא […] לציר y, כי הצירים מאונכים זה לזה."
+        },
+        {
+          "pageNumber": 43,
+          "targetId": "p43-q12",
+          "signature": "e64fb3bf",
+          "inputType": "text:letter",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "שיעורי ה־y כאן זהים, ולכן האורך מחושב בהכרח לפי שיעורי ה־[…]."
         }
       ]
     },
@@ -9106,135 +9113,78 @@
         {
           "pageNumber": 44,
           "targetId": "p44-q9",
-          "signature": "3fc9bbed",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "הזזה ימינה משנה רק את ערך ה־x, ולכן מתקבלת הנקודה ([…],[…])."
-        },
-        {
-          "pageNumber": 44,
-          "targetId": "p44-q10",
-          "signature": "3fc9bbed",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "הזזה ימינה משנה רק את ערך ה־x, ולכן מתקבלת הנקודה ([…],[…])."
-        },
-        {
-          "pageNumber": 44,
-          "targetId": "p44-q11",
           "signature": "6c61b444",
           "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/errors-practice.ts — exact corrected axis, translation, segment, and rectangle statements",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "(1,4)",
-            "1,4"
-          ],
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
           "context": "הקודקוד הנכון: […]"
         },
         {
           "pageNumber": 44,
-          "targetId": "p44-q12",
+          "targetId": "p44-q10",
           "signature": "b2b5fef4",
           "inputType": "text:property",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/data/workbook/pages/errors-practice.ts — exact corrected axis, translation, segment, and rectangle statements",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "ארוכה"
-          ],
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
           "context": "האורך הוא הצלע ה[…], והרוחב הוא הצלע הקצרה — ולכן החישוב שגוי."
         },
         {
           "pageNumber": 44,
-          "targetId": "p44-q13",
+          "targetId": "p44-q11",
           "signature": "e53b87f8",
           "inputType": "text:letter",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/errors-practice.ts — exact corrected axis, translation, segment, and rectangle statements",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "y",
-            "Y",
-            "ציר y"
-          ],
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
           "context": "לשתי הנקודות יש ערך x זהה, ולכן הקטע מקביל לציר […]."
         },
         {
           "pageNumber": 44,
-          "targetId": "p44-q14",
+          "targetId": "p44-q12",
           "signature": "ea27ec05",
           "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/errors-practice.ts — exact corrected axis, translation, segment, and rectangle statements",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "שיעור y הוא מחצית משיעור x",
-            "y הוא חצי מ-x"
-          ],
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
           "context": "[…]"
         },
         {
           "pageNumber": 44,
-          "targetId": "p44-q15",
-          "signature": "64031b7b",
-          "inputType": "text:letter",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/errors-practice.ts — exact corrected axis, translation, segment, and rectangle statements",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "y",
-            "Y"
-          ],
-          "context": "ההסבר: הקודקוד הרביעי חייב לחלוק ערך x עם קודקוד אחד ושיעור […] עם קודקוד אחר."
-        },
-        {
-          "pageNumber": 44,
-          "targetId": "p44-q16",
+          "targetId": "p44-q13",
           "signature": "15d042da",
           "inputType": "text:letter",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/errors-practice.ts — exact corrected axis, translation, segment, and rectangle statements",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "y",
-            "Y",
-            "ציר y"
-          ],
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
           "context": "הנקודה (0,7) ממוקמת על ציר […]."
         },
         {
           "pageNumber": 44,
-          "targetId": "p44-q17",
+          "targetId": "p44-q14",
           "signature": "cbab8384",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/errors-practice.ts — exact corrected axis, translation, segment, and rectangle statements",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "0",
-            "אפס"
-          ],
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
           "context": "אצל כל נקודה שעל ציר y, שיעור x הוא […]."
         },
         {
           "pageNumber": 44,
-          "targetId": "p44-q18",
+          "targetId": "p44-q15",
           "signature": "cf6d083c",
           "inputType": "text:concept",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/data/workbook/pages/errors-practice.ts — exact corrected axis, translation, segment, and rectangle statements",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "ראשית"
-          ],
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
           "context": "נקודה שממוקמת על שני הצירים יחד היא […] הצירים."
         }
       ]
@@ -9821,79 +9771,79 @@
         {
           "pageNumber": 47,
           "targetId": "p47-q16",
-          "signature": "f406b8ba",
+          "signature": "0a3806aa",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "הנקודה E([…],[…]) והנקודה F([…],[…])."
+          "context": "הנקודה K([…],[…]) והנקודה L([…],[…])."
         },
         {
           "pageNumber": 47,
           "targetId": "p47-q17",
-          "signature": "f406b8ba",
+          "signature": "0a3806aa",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "הנקודה E([…],[…]) והנקודה F([…],[…])."
+          "context": "הנקודה K([…],[…]) והנקודה L([…],[…])."
         },
         {
           "pageNumber": 47,
           "targetId": "p47-q18",
-          "signature": "f406b8ba",
+          "signature": "0a3806aa",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "הנקודה E([…],[…]) והנקודה F([…],[…])."
+          "context": "הנקודה K([…],[…]) והנקודה L([…],[…])."
         },
         {
           "pageNumber": 47,
           "targetId": "p47-q19",
-          "signature": "f406b8ba",
+          "signature": "0a3806aa",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "הנקודה E([…],[…]) והנקודה F([…],[…])."
+          "context": "הנקודה K([…],[…]) והנקודה L([…],[…])."
         },
         {
           "pageNumber": 47,
           "targetId": "p47-q20",
-          "signature": "6dd587bb",
+          "signature": "111045bb",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "EF=[…]=[…]יח'"
+          "context": "KL=[…]=[…]יח'"
         },
         {
           "pageNumber": 47,
           "targetId": "p47-q21",
-          "signature": "6dd587bb",
+          "signature": "111045bb",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "EF=[…]=[…]יח'"
+          "context": "KL=[…]=[…]יח'"
         },
         {
           "pageNumber": 47,
           "targetId": "p47-q22",
-          "signature": "ea262254",
+          "signature": "44623854",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "EF=[…]יח'"
+          "context": "KL=[…]יח'"
         }
       ]
     },
@@ -9904,16 +9854,13 @@
         {
           "pageNumber": 48,
           "targetId": "p48-q1",
-          "signature": "b5b1b230",
+          "signature": "0f71ef82",
           "inputType": "text:letter",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/same-coord-practice.ts — exact endpoint coordinates and same-coordinate parallel-axis rule",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "x",
-            "X"
-          ],
-          "context": "הנקודה P(3,1) ו־Q(3,6) - שיעור […] זהה."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "לנקודות P(3,1) ו־Q(3,6) יש שיעור […] זהה."
         },
         {
           "pageNumber": 48,
@@ -10206,63 +10153,51 @@
         {
           "pageNumber": 50,
           "targetId": "p50-q3",
-          "signature": "167f6169",
+          "signature": "68e811be",
           "inputType": "text:letter",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/parallel-perpendicular.ts — exact same-coordinate and perpendicular-axis rules",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "x",
-            "X",
-            "ציר x"
-          ],
-          "context": "קטע שבו שיעור y זהה בשתי הנקודות מקביל לציר […]."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "אם שתי נקודות ממוקמות על קטע ושיעור ה־y שלהן זהה — הקטע מקביל בהכרח לציר […]."
         },
         {
           "pageNumber": 50,
           "targetId": "p50-q4",
-          "signature": "190d6d89",
+          "signature": "6fd1c52c",
           "inputType": "text:letter",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/parallel-perpendicular.ts — exact same-coordinate and perpendicular-axis rules",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "x",
-            "X"
-          ],
-          "context": "קטע שבו שיעור […] זהה בשתי הנקודות מקביל לציר y."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "אם שתי נקודות ממוקמות על קטע ושיעור ה־[…] שלהן זהה — הקטע מקביל בהכרח לציר y."
         },
         {
           "pageNumber": 50,
           "targetId": "p50-q5",
-          "signature": "52eb4f6d",
+          "signature": "f221e7c7",
           "inputType": "text:relation",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/parallel-perpendicular.ts — exact same-coordinate and perpendicular-axis rules",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "מאונך",
-            "מאונכת"
-          ],
-          "context": "קטע המקביל לציר x […] לציר y."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "קטע המקביל לציר x הוא בהכרח […] לציר y."
         },
         {
           "pageNumber": 50,
           "targetId": "p50-q6",
-          "signature": "204259a7",
+          "signature": "45ba4701",
           "inputType": "text:relation",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/data/workbook/pages/parallel-perpendicular.ts — exact same-coordinate and perpendicular-axis rules",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "מקביל"
-          ],
-          "context": "קטע […] לציר y מאונך לציר x."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "קטע […] לציר y הוא בהכרח מאונך לציר x."
         },
         {
           "pageNumber": 50,
           "targetId": "p50-q7",
-          "signature": "371f954a",
+          "signature": "009272bd",
           "inputType": "true-false",
           "classification": "canonical-metadata-derived",
           "sourceEvidence": "tr[data-answer]",
@@ -10271,12 +10206,12 @@
             "true",
             "נכון"
           ],
-          "context": "קטע המקביל לציר x הוא מאונך לציר y. נכוןלא נכון […]"
+          "context": "קטע המקביל לציר x הוא בהכרח מאונך לציר y. נכוןלא נכון […]"
         },
         {
           "pageNumber": 50,
           "targetId": "p50-q8",
-          "signature": "e43881c7",
+          "signature": "0c452947",
           "inputType": "true-false",
           "classification": "canonical-metadata-derived",
           "sourceEvidence": "tr[data-answer]",
@@ -10285,12 +10220,12 @@
             "false",
             "לא נכון"
           ],
-          "context": "בקטע המקביל לציר y, שיעור y זהה בשתי הנקודות. נכוןלא נכון […]"
+          "context": "אם שתי נקודות ממוקמות על קטע המקביל לציר y, שיעור ה־y שלהן זהה. נכוןלא נכון […]"
         },
         {
           "pageNumber": 50,
           "targetId": "p50-q9",
-          "signature": "343c7312",
+          "signature": "5f538102",
           "inputType": "true-false",
           "classification": "canonical-metadata-derived",
           "sourceEvidence": "tr[data-answer]",
@@ -10299,7 +10234,62 @@
             "true",
             "נכון"
           ],
-          "context": "בקטע המקביל לציר x, שיעור y זהה בשתי הנקודות. נכוןלא נכון […]"
+          "context": "אם שתי נקודות ממוקמות על קטע המקביל לציר x, שיעור ה־y שלהן זהה. נכוןלא נכון […]"
+        },
+        {
+          "pageNumber": 50,
+          "targetId": "p50-q10",
+          "signature": "376f33f4",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…])."
+        },
+        {
+          "pageNumber": 50,
+          "targetId": "p50-q11",
+          "signature": "376f33f4",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…])."
+        },
+        {
+          "pageNumber": 50,
+          "targetId": "p50-q12",
+          "signature": "376f33f4",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…])."
+        },
+        {
+          "pageNumber": 50,
+          "targetId": "p50-q13",
+          "signature": "376f33f4",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…])."
+        },
+        {
+          "pageNumber": 50,
+          "targetId": "p50-q14",
+          "signature": "eadbaf7c",
+          "inputType": "text:letter",
+          "classification": "open-ended",
+          "sourceEvidence": "learner-created or explanatory response",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הקטע שסימנתם מאונך בהכרח לציר […]."
         }
       ]
     },
@@ -10420,28 +10410,24 @@
         {
           "pageNumber": 51,
           "targetId": "p51-q9",
-          "signature": "bb43ce7e",
+          "signature": "708a801d",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/plot-shape.ts — exact rectangle vertices A(2,1), B(7,1), C(7,5), D(2,5)",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "18"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף הצורה הוא […] יח'.שטח הצורה הוא […] יח\"ר."
         },
         {
           "pageNumber": 51,
           "targetId": "p51-q10",
-          "signature": "bb43ce7e",
+          "signature": "708a801d",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/plot-shape.ts — exact rectangle vertices A(2,1), B(7,1), C(7,5), D(2,5)",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "20"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף הצורה הוא […] יח'.שטח הצורה הוא […] יח\"ר."
         }
       ]
     },
@@ -10546,228 +10532,76 @@
         {
           "pageNumber": 52,
           "targetId": "p52-q8",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 52,
           "targetId": "p52-q9",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "15"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 52,
           "targetId": "p52-q10",
-          "signature": "93eed626",
+          "signature": "0dfbd62f",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2"
-          ],
-          "context": "הנקודה A′([…],[…]) B′([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הקודקוד החסר: ([…],[…])"
         },
         {
           "pageNumber": 52,
           "targetId": "p52-q11",
-          "signature": "93eed626",
+          "signature": "0dfbd62f",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "הנקודה A′([…],[…]) B′([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הקודקוד החסר: ([…],[…])"
         },
         {
           "pageNumber": 52,
           "targetId": "p52-q12",
-          "signature": "93eed626",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "7"
-          ],
-          "context": "הנקודה A′([…],[…]) B′([…],[…])"
+          "signature": "3bd58709",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 52,
           "targetId": "p52-q13",
-          "signature": "93eed626",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "הנקודה A′([…],[…]) B′([…],[…])"
+          "signature": "3bd58709",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 52,
           "targetId": "p52-q14",
-          "signature": "d83fb81a",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "7"
-          ],
-          "context": "הנקודה C′([…],[…]) D′([…],[…])"
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q15",
-          "signature": "d83fb81a",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "הנקודה C′([…],[…]) D′([…],[…])"
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q16",
-          "signature": "d83fb81a",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2"
-          ],
-          "context": "הנקודה C′([…],[…]) D′([…],[…])"
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q17",
-          "signature": "d83fb81a",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "הנקודה C′([…],[…]) D′([…],[…])"
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q18",
-          "signature": "520b4c0f",
-          "inputType": "text:text",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "מה השתנה? […]"
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q19",
-          "signature": "2d50461b",
-          "inputType": "text:text",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "מה נשאר זהה? […]"
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q20",
-          "signature": "dd43fecf",
-          "inputType": "text:relation",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "נשארו זהים",
-            "לא השתנו"
-          ],
-          "context": "אחרי ההזזה האורך, הרוחב, ההיקף והשטח […], כי הזזה אינה משנה את הצורה."
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q21",
-          "signature": "0dfbd62f",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2"
-          ],
-          "context": "הקודקוד החסר: ([…],[…])"
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q22",
-          "signature": "0dfbd62f",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "הקודקוד החסר: ([…],[…])"
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q23",
-          "signature": "bb43ce7e",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q24",
-          "signature": "bb43ce7e",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-intro.ts — exact rectangle vertices, side differences, translation, and missing vertex",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "15"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
-        },
-        {
-          "pageNumber": 52,
-          "targetId": "p52-q25",
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "learner-created or explanatory response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -10914,82 +10748,68 @@
         {
           "pageNumber": 53,
           "targetId": "p53-q11",
-          "signature": "09fb866c",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-practice.ts — exact PQRS vertices and rectangle arithmetic",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2*(5+3)",
-            "5+3+5+3"
-          ],
-          "context": "P=[…]=[…]יח'"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 53,
           "targetId": "p53-q12",
-          "signature": "09fb866c",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-practice.ts — exact PQRS vertices and rectangle arithmetic",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "P=[…]=[…]יח'"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 53,
           "targetId": "p53-q13",
-          "signature": "5088c967",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-practice.ts — exact PQRS vertices and rectangle arithmetic",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "P=[…]יח'"
+          "signature": "83580dd6",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "open-ended",
+          "sourceEvidence": "learner-created or explanatory response",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
         },
         {
           "pageNumber": 53,
           "targetId": "p53-q14",
-          "signature": "66c44584",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-practice.ts — exact PQRS vertices and rectangle arithmetic",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5*3",
-            "5×3"
-          ],
-          "context": "S=[…]=[…]יח\"ר"
+          "signature": "83580dd6",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "open-ended",
+          "sourceEvidence": "learner-created or explanatory response",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
         },
         {
           "pageNumber": 53,
           "targetId": "p53-q15",
-          "signature": "66c44584",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-practice.ts — exact PQRS vertices and rectangle arithmetic",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "15"
-          ],
-          "context": "S=[…]=[…]יח\"ר"
+          "signature": "83580dd6",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "open-ended",
+          "sourceEvidence": "learner-created or explanatory response",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
         },
         {
           "pageNumber": 53,
           "targetId": "p53-q16",
-          "signature": "488c3659",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-practice.ts — exact PQRS vertices and rectangle arithmetic",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "15"
-          ],
-          "context": "S=[…]יח\"ר"
+          "signature": "83580dd6",
+          "inputType": "ordered-pair-coordinate",
+          "classification": "open-ended",
+          "sourceEvidence": "learner-created or explanatory response",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
         },
         {
           "pageNumber": 53,
@@ -11038,178 +10858,90 @@
         {
           "pageNumber": 53,
           "targetId": "p53-q21",
-          "signature": "83580dd6",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "signature": "d1ab1133",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
+          "context": "AB=[…]=[…]יח'"
         },
         {
           "pageNumber": 53,
           "targetId": "p53-q22",
-          "signature": "83580dd6",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "signature": "d1ab1133",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
+          "context": "AB=[…]=[…]יח'"
         },
         {
           "pageNumber": 53,
           "targetId": "p53-q23",
-          "signature": "83580dd6",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
-        },
-        {
-          "pageNumber": 53,
-          "targetId": "p53-q24",
-          "signature": "83580dd6",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
-        },
-        {
-          "pageNumber": 53,
-          "targetId": "p53-q25",
-          "signature": "d1ab1133",
-          "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "AB=[…]=[…]יח'"
-        },
-        {
-          "pageNumber": 53,
-          "targetId": "p53-q26",
-          "signature": "d1ab1133",
-          "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "AB=[…]=[…]יח'"
-        },
-        {
-          "pageNumber": 53,
-          "targetId": "p53-q27",
           "signature": "669ca6bc",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "AB=[…]יח'"
         },
         {
           "pageNumber": 53,
-          "targetId": "p53-q28",
+          "targetId": "p53-q24",
           "signature": "a0030abb",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "BC=[…]=[…]יח'"
         },
         {
           "pageNumber": 53,
-          "targetId": "p53-q29",
+          "targetId": "p53-q25",
           "signature": "a0030abb",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "BC=[…]=[…]יח'"
         },
         {
           "pageNumber": 53,
-          "targetId": "p53-q30",
+          "targetId": "p53-q26",
           "signature": "41b46d54",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "BC=[…]יח'"
         },
         {
           "pageNumber": 53,
-          "targetId": "p53-q31",
-          "signature": "09fb866c",
+          "targetId": "p53-q27",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "P=[…]=[…]יח'"
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 53,
-          "targetId": "p53-q32",
-          "signature": "09fb866c",
+          "targetId": "p53-q28",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "P=[…]=[…]יח'"
-        },
-        {
-          "pageNumber": 53,
-          "targetId": "p53-q33",
-          "signature": "5088c967",
-          "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "P=[…]יח'"
-        },
-        {
-          "pageNumber": 53,
-          "targetId": "p53-q34",
-          "signature": "66c44584",
-          "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "S=[…]=[…]יח\"ר"
-        },
-        {
-          "pageNumber": 53,
-          "targetId": "p53-q35",
-          "signature": "66c44584",
-          "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "S=[…]=[…]יח\"ר"
-        },
-        {
-          "pageNumber": 53,
-          "targetId": "p53-q36",
-          "signature": "488c3659",
-          "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "S=[…]יח\"ר"
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         }
       ]
     },
@@ -11378,28 +11110,24 @@
         {
           "pageNumber": 54,
           "targetId": "p54-q15",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-vertices.ts — exact opposite-vertex dimensions and fixed rectangle dimensions",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "14"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 54,
           "targetId": "p54-q16",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/rectangles-vertices.ts — exact opposite-vertex dimensions and fixed rectangle dimensions",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "12"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         }
       ]
     },
@@ -11477,28 +11205,24 @@
         {
           "pageNumber": 55,
           "targetId": "p55-q6",
-          "signature": "bb43ce7e",
+          "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
           "pageNumber": 55,
           "targetId": "p55-q7",
-          "signature": "bb43ce7e",
+          "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
           "pageNumber": 55,
@@ -11529,54 +11253,46 @@
         {
           "pageNumber": 55,
           "targetId": "p55-q10",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 55,
           "targetId": "p55-q11",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "12"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 55,
           "targetId": "p55-q12",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "14"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 55,
           "targetId": "p55-q13",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "12"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 55,
@@ -11591,147 +11307,6 @@
             "לא נכון"
           ],
           "context": "האם אותו שטח מחייב אותו היקף? […]"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q15",
-          "signature": "93eed626",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "4"
-          ],
-          "context": "הנקודה A′([…],[…]) B′([…],[…])"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q16",
-          "signature": "93eed626",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "הנקודה A′([…],[…]) B′([…],[…])"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q17",
-          "signature": "93eed626",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "7"
-          ],
-          "context": "הנקודה A′([…],[…]) B′([…],[…])"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q18",
-          "signature": "93eed626",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "הנקודה A′([…],[…]) B′([…],[…])"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q19",
-          "signature": "d83fb81a",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "7"
-          ],
-          "context": "הנקודה C′([…],[…]) D′([…],[…])"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q20",
-          "signature": "d83fb81a",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "הנקודה C′([…],[…]) D′([…],[…])"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q21",
-          "signature": "d83fb81a",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "4"
-          ],
-          "context": "הנקודה C′([…],[…]) D′([…],[…])"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q22",
-          "signature": "d83fb81a",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "הנקודה C′([…],[…]) D′([…],[…])"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q23",
-          "signature": "bb43ce7e",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "12"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q24",
-          "signature": "bb43ce7e",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-intro.ts — exact square/rectangle vertices, dimensions, translations, perimeters, and areas",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "9"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
-        },
-        {
-          "pageNumber": 55,
-          "targetId": "p55-q25",
-          "signature": "2d50461b",
-          "inputType": "text:text",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "מה נשאר זהה? […]"
         }
       ]
     },
@@ -11795,28 +11370,24 @@
         {
           "pageNumber": 56,
           "targetId": "p56-q5",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-summary.ts — exact missing rectangle vertex, dimensions, translation, perimeter, and area",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "18"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 56,
           "targetId": "p56-q6",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-summary.ts — exact missing rectangle vertex, dimensions, translation, perimeter, and area",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "20"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 56,
@@ -11944,28 +11515,24 @@
         {
           "pageNumber": 57,
           "targetId": "p57-q5",
-          "signature": "bb43ce7e",
+          "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-practice.ts — exact square vertices, side arithmetic, axis rules, and four-stage route",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
           "pageNumber": 57,
           "targetId": "p57-q6",
-          "signature": "bb43ce7e",
+          "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-practice.ts — exact square vertices, side arithmetic, axis rules, and four-stage route",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
           "pageNumber": 57,
@@ -12003,28 +11570,24 @@
         {
           "pageNumber": 57,
           "targetId": "p57-q10",
-          "signature": "bb43ce7e",
+          "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-practice.ts — exact square vertices, side arithmetic, axis rules, and four-stage route",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "12"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
           "pageNumber": 57,
           "targetId": "p57-q11",
-          "signature": "bb43ce7e",
+          "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/squares-practice.ts — exact square vertices, side arithmetic, axis rules, and four-stage route",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "9"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
           "pageNumber": 57,
@@ -12239,6 +11802,28 @@
             "2"
           ],
           "context": "מהי נקודת הסיום? ([…],[…])"
+        },
+        {
+          "pageNumber": 57,
+          "targetId": "p57-q28",
+          "signature": "619fb1a4",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "אורך המסלול כולו הוא בהכרח […] יחידות."
+        },
+        {
+          "pageNumber": 57,
+          "targetId": "p57-q29",
+          "signature": "fc00a65c",
+          "inputType": "text:number",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "שיעור ה־x של נקודת הסיום גדול משיעור ה־x של הנקודה P ב־[…]."
         }
       ]
     },
@@ -12392,54 +11977,46 @@
         {
           "pageNumber": 58,
           "targetId": "p58-q12",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/shapes-claims.ts — exact claim vocabulary, origin, translation, and two rectangle counterexample calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 58,
           "targetId": "p58-q13",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/shapes-claims.ts — exact claim vocabulary, origin, translation, and two rectangle counterexample calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "12"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 58,
           "targetId": "p58-q14",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/shapes-claims.ts — exact claim vocabulary, origin, translation, and two rectangle counterexample calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "14"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 58,
           "targetId": "p58-q15",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/shapes-claims.ts — exact claim vocabulary, origin, translation, and two rectangle counterexample calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "12"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 58,
@@ -12854,28 +12431,24 @@
         {
           "pageNumber": 60,
           "targetId": "p60-q11",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-hall-seats.ts — exact plotted seats and rectangular seat-block calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "10"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 60,
           "targetId": "p60-q12",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-hall-seats.ts — exact plotted seats and rectangular seat-block calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 60,
@@ -12958,15 +12531,13 @@
         {
           "pageNumber": 61,
           "targetId": "p61-q4",
-          "signature": "407a70f6",
+          "signature": "bfb2d35e",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-pixel-art.ts — exact colored-pixel bounds and fixed screen rectangle calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "השורה התחתונה שצבעתם משתרעת מ־x השווה 2 עד x השווה 5, ולכן ההפרש הוא […]."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "השורה התחתונה שצבעתם משתרעת מ־x = 2 עד x = 5, ולכן ההפרש הוא […]."
         },
         {
           "pageNumber": 61,
@@ -13025,28 +12596,24 @@
         {
           "pageNumber": 61,
           "targetId": "p61-q9",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-pixel-art.ts — exact colored-pixel bounds and fixed screen rectangle calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "20"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 61,
           "targetId": "p61-q10",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-pixel-art.ts — exact colored-pixel bounds and fixed screen rectangle calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "24"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 61,
@@ -13479,126 +13046,6 @@
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
-        },
-        {
-          "pageNumber": 63,
-          "targetId": "p63-q16",
-          "signature": "3e5d7b40",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-park-map.ts — exact park-object coordinates and fixed path calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "0",
-            "אפס"
-          ],
-          "context": "סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…])."
-        },
-        {
-          "pageNumber": 63,
-          "targetId": "p63-q17",
-          "signature": "3e5d7b40",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-park-map.ts — exact park-object coordinates and fixed path calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…])."
-        },
-        {
-          "pageNumber": 63,
-          "targetId": "p63-q18",
-          "signature": "b16e28ab",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-park-map.ts — exact park-object coordinates and fixed path calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2"
-          ],
-          "context": "הפנס ממוקם מתחת לנדנדה, וההפרש בין שיעורי ה־y שלהם הוא […]."
-        },
-        {
-          "pageNumber": 63,
-          "targetId": "p63-q19",
-          "signature": "6f0f752a",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-park-map.ts — exact park-object coordinates and fixed path calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "סמנו גם נקודה שערך ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…])."
-        },
-        {
-          "pageNumber": 63,
-          "targetId": "p63-q20",
-          "signature": "6f0f752a",
-          "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-park-map.ts — exact park-object coordinates and fixed path calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3",
-            "4"
-          ],
-          "context": "סמנו גם נקודה שערך ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…])."
-        },
-        {
-          "pageNumber": 63,
-          "targetId": "p63-q21",
-          "signature": "b00458b1",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-park-map.ts — exact park-object coordinates and fixed path calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "הנקודה שסימנתם רחוקה מציר y ‏[…] יחידות."
-        },
-        {
-          "pageNumber": 63,
-          "targetId": "p63-q22",
-          "signature": "b97991c4",
-          "inputType": "text:direction",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-park-map.ts — exact park-object coordinates and fixed path calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "למעלה",
-            "מעלה"
-          ],
-          "context": "מהשער אל הספסל הולכים לאורך השבילים: 2 יחידות ימינה ואחר כך 2 יחידות […], ובסך הכול:"
-        },
-        {
-          "pageNumber": 63,
-          "targetId": "p63-q23",
-          "signature": "42b05fc4",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-park-map.ts — exact park-object coordinates and fixed path calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "4"
-          ],
-          "context": "2 + 2=[…]יח'"
-        },
-        {
-          "pageNumber": 63,
-          "targetId": "p63-q24",
-          "signature": "656294cb",
-          "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/life-park-map.ts — exact park-object coordinates and fixed path calculations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "10"
-          ],
-          "context": "4 + 3 + 3=[…]יח'"
         }
       ]
     },
@@ -13714,15 +13161,13 @@
         {
           "pageNumber": 65,
           "targetId": "p65-q1",
-          "signature": "95ce5a17",
+          "signature": "33f56b4a",
           "inputType": "text:concept",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/data/workbook/pages/graph-reading-intro.ts — exact plotted study-time and question-count data",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "תוצאה"
-          ],
-          "context": "בגרף של נתונים, ערך ה־x אומר מתי או כמה, ושיעור ה־y אומר את ה[…] שהתקבלה."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "בגרף של נתונים, שיעור ה־x אומר מתי או כמה, ושיעור ה־y אומר את ה[…] שהתקבלה."
         },
         {
           "pageNumber": 65,
@@ -13820,16 +13265,13 @@
         {
           "pageNumber": 65,
           "targetId": "p65-q9",
-          "signature": "c293485d",
+          "signature": "1f477b67",
           "inputType": "text:relation",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/graph-reading-intro.ts — exact plotted study-time and question-count data",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "גדול",
-            "גדול יותר"
-          ],
-          "context": "לשתי הנקודות D ו־E יש שיעור y זהה, אבל ערך ה־x של E […]."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "לשתי הנקודות D ו־E יש שיעור y זהה, אבל שיעור ה־x של הנקודה E […]."
         },
         {
           "pageNumber": 65,
@@ -13873,16 +13315,13 @@
         {
           "pageNumber": 65,
           "targetId": "p65-q13",
-          "signature": "9e30f3f9",
+          "signature": "63a4b3b6",
           "inputType": "text:relation",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/graph-reading-intro.ts — exact plotted study-time and question-count data",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "גדל",
-            "עולה"
-          ],
-          "context": "ככל שערך ה־x גדל, שיעור ה־y בדרך כלל […]."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "ככל ששיעור ה־x גדל, שיעור ה־y בדרך כלל […]."
         },
         {
           "pageNumber": 65,
@@ -13926,13 +13365,13 @@
         {
           "pageNumber": 65,
           "targetId": "p65-q17",
-          "signature": "73ac9493",
+          "signature": "579065ef",
           "inputType": "text:direction",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "הנקודה שסימנתם ממוקמת […] לנקודה D."
+          "context": "הנקודה G ממוקמת מימין לנקודה D וגם […] לה."
         }
       ]
     },
@@ -13943,15 +13382,13 @@
         {
           "pageNumber": 66,
           "targetId": "p66-q1",
-          "signature": "0f5b1d6b",
+          "signature": "a962d02f",
           "inputType": "text:concept",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/data/workbook/pages/graph-years.ts — exact plotted enrollment-by-year data and printed differences",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "שנים"
-          ],
-          "context": "כשערך ה־x הוא שנה, המרחק בין שתי נקודות על ציר x הוא מספר ה[…] שעברו."
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "כאשר ציר ה־x מציין שנים, ההפרש בין שיעורי ה־x של שתי נקודות הוא מספר ה[…] שעברו."
         },
         {
           "pageNumber": 66,
@@ -14569,13 +14006,13 @@
         {
           "pageNumber": 70,
           "targetId": "p70-q6",
-          "signature": "6334a3be",
+          "signature": "d548b7a9",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "ההפרש בין היום הגבוה ביותר ובין היום הנמוך ביותר הוא […] עשרות דקות."
+          "context": "ההפרש בין מספר הדקות הגדול ביותר ובין מספר הדקות הקטן ביותר הוא […] עשרות דקות."
         },
         {
           "pageNumber": 70,
@@ -14778,7 +14215,7 @@
     },
     {
       "pageNumber": 72,
-      "title": "מזהים זווית ישרה",
+      "title": "קטעים מאונכים ברביע הראשון",
       "targets": [
         {
           "pageNumber": 72,
@@ -14812,16 +14249,13 @@
         {
           "pageNumber": 72,
           "targetId": "p72-q3",
-          "signature": "7251f64e",
-          "inputType": "text:concept",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/data/workbook/pages/right-angle-practice.ts — exact horizontal/vertical right-angle rule",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "שיעור",
-            "ערך"
-          ],
-          "context": "לשתי נקודות שעל קטע אנכי יש […] x זהה."
+          "signature": "5d3ebac0",
+          "inputType": "text:letter",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "לשתי נקודות שממוקמות על קטע אנכי יש שיעור […] זהה."
         },
         {
           "pageNumber": 72,
@@ -14847,7 +14281,7 @@
         {
           "pageNumber": 73,
           "targetId": "p73-q1",
-          "signature": "a88c54e9",
+          "signature": "98f5b7dc",
           "inputType": "word:letter",
           "classification": "canonical-metadata-derived",
           "sourceEvidence": "aria-label/data-lms-answers",
@@ -14855,7 +14289,7 @@
           "answers": [
             "x"
           ],
-          "context": "מהראשית זזים תחילה לפי […] ואז לפי y."
+          "context": "מראשית הצירים זזים תחילה לפי […] ואז לפי y."
         },
         {
           "pageNumber": 73,
@@ -14984,28 +14418,24 @@
         {
           "pageNumber": 73,
           "targetId": "p73-q11",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/right-angle-build.ts — exact route corner and rectangle dimensions",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "16"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 73,
           "targetId": "p73-q12",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/right-angle-build.ts — exact route corner and rectangle dimensions",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "15"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         }
       ]
     },
@@ -15389,35 +14819,35 @@
         {
           "pageNumber": 76,
           "targetId": "p76-q12",
-          "signature": "082f67a8",
+          "signature": "4ea33d2d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של B."
+          "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B."
         },
         {
           "pageNumber": 76,
           "targetId": "p76-q13",
-          "signature": "082f67a8",
+          "signature": "4ea33d2d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של B."
+          "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B."
         },
         {
           "pageNumber": 76,
           "targetId": "p76-q14",
-          "signature": "14626e5e",
+          "signature": "b5508af7",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של B."
+          "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B."
         }
       ]
     },
@@ -15653,28 +15083,24 @@
         {
           "pageNumber": 78,
           "targetId": "p78-q10",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/right-angle-summary.ts — exact two rectangle constructions, side calculations, and right angles",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "18"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 78,
           "targetId": "p78-q11",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/right-angle-summary.ts — exact two rectangle constructions, side calculations, and right angles",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "20"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 78,
@@ -15718,28 +15144,24 @@
         {
           "pageNumber": 78,
           "targetId": "p78-q15",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/right-angle-summary.ts — exact two rectangle constructions, side calculations, and right angles",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "14"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
           "pageNumber": 78,
           "targetId": "p78-q16",
-          "signature": "bb43ce7e",
+          "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/right-angle-summary.ts — exact two rectangle constructions, side calculations, and right angles",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "12"
-          ],
-          "context": "ההיקף: P = […] יח'השטח: S = […] יח\"ר"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         }
       ]
     }
