@@ -11,8 +11,9 @@ Updated: 2026-08-05
 - The canonical printable `colorGrid` authoring helper is available to the LMS page layer.
 - The canonical `calcBox` helper supports `shape` and `name` used by the current rectangle and square pages.
 - The LMS authentication, persistence, scoring, dashboard and Firebase layers remain separate from the canonical page sources.
-- Correct keyed answers now receive positive-only immediate LMS feedback: a green ✓ appears as soon as the typed or selected answer is correct. Incorrect partial typing does not consume an attempt.
+- Correct keyed answers receive positive-only immediate LMS feedback: a green ✓ appears as soon as the typed or selected answer is correct. Incorrect partial typing does not consume an attempt.
 - The immediate feedback implementation is limited to `src/lms`, LMS-only styles, and LMS tests. No canonical page source is modified by this behavior.
+- The four dedicated immediate-feedback unit tests pass. The remaining layout-test migration is test-only and distinguishes side-length calculations from area/perimeter calculations.
 
 The fully canonical page content currently contains 1,162 detected response
 targets, of which 735 (63.3%) are safely automatically checkable. Stale reviewed
