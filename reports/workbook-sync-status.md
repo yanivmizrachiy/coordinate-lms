@@ -8,6 +8,7 @@ Updated: 2026-08-05
 - Numbered workbook pages: 78.
 - All 76 files under `src/data/workbook/pages/` now come from the canonical source.
 - No canonical page file is missing from the LMS branch.
+- The canonical printable `colorGrid` authoring helper is now available to the LMS page layer.
 - The LMS authentication, persistence, scoring, dashboard and Firebase layers remain separate from the canonical page sources.
 
 Before the full canonical-content import, the migrated answer identity layer safely
