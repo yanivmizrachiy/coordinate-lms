@@ -1,6 +1,6 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-01
+Updated: 2026-08-05
 
 This is the single source of truth for work in `yanivmizrachiy/coordinate-lms`.
 `USER_MEMORY.md` and `HANDOFF.md` preserve historical workbook decisions, but
@@ -21,7 +21,7 @@ this file, the current instruction wins and this file must be reconciled.
 
 ## Canonical workbook integrity
 
-- Preserve all 77 numbered pages, Hebrew RTL behavior, canonical wording,
+- Preserve all 78 numbered pages, Hebrew RTL behavior, canonical wording,
   mathematics, diagrams, page order, A4 pagination, and print layout.
 - LMS behavior is an interactive layer. Interactive controls must be hidden or
   made print-neutral and must not obstruct canonical diagrams.
@@ -47,7 +47,7 @@ this file, the current instruction wins and this file must be reconciled.
 - Never infer an answer merely from nearby prose. Open-ended, ambiguous,
   unsupported, and missing targets remain visibly ungraded for teacher review.
 - The generated JSON and Markdown coverage reports must represent all pages
-  1–77 and must remain synchronized with target order and runtime answer keys.
+  1–78 and must remain synchronized with target order and runtime answer keys.
 
 ## Persistence truth and classroom data
 
@@ -73,7 +73,7 @@ this file, the current instruction wins and this file must be reconciled.
   all been verified.
 - Students may read and write only their own profile and subcollections.
   Dashboard-wide reads and answer-key writes are administrator-only.
-- Firestore writes must use field allowlists and enforce page 1–77, score
+- Firestore writes must use field allowlists and enforce page 1–78, score
   1–100, attempt summary 0–3, monotonic progress, and bounded document shapes.
 - Keep the client administrator list and the Firestore administrator rule
   aligned before deployment.
