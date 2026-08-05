@@ -1,6 +1,10 @@
 import type { WorkbookPageContent } from '../types';
 import { blank, exerciseGiven, grid, ltr, pair, sheet } from '../authoring';
 
+/* ההמשך הישיר של מפת הפארק: אותה מפה מצוירת — שער, ספסל, מזרקה, נדנדה, עץ
+   ויציאה — ועכשיו הולכים בה. מסלול ההליכה של נועם מסומן בקו מקווקו לאורך
+   השבילים, בדיוק כמו שהמלל מתאר אותו, צעד־צעד; הפנס החדש מצויר רק אחרי
+   שהלומד מסמן אותו. */
 export const LIFE_PARK_ROUTE: WorkbookPageContent = sheet({
   sectionClass: 'sheet practice',
   title: 'מסלולים במפת הפארק',

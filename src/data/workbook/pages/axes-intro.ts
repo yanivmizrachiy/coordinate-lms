@@ -4,7 +4,7 @@ import { sheet, blank, wordBlank, ltr, pair, grid, wordBank } from '../authoring
 export const AXES_INTRO: WorkbookPageContent = sheet({
   sectionClass: 'sheet guided dense',
   title: 'מכירים את מערכת הצירים',
-  subtitle: 'שמות הצירים, הראשית וכיווני הגדילה',
+  subtitle: 'שמות הצירים, ראשית הצירים וכיווני הגדילה',
   content: `
 <div class="rule-box completion-intro">
 <div class="completion-sentence">הציר האנכי הוא ציר ${wordBlank('short', 'letter', 'מקום להשלמת האות y')}.</div>

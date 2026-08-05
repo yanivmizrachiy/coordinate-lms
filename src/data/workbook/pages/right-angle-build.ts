@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, calcBox } from '../authoring';
+import { sheet, calcBox, wordBank } from '../authoring';
 
 export const RIGHT_ANGLE_BUILD: WorkbookPageContent = sheet({
   sectionClass: "sheet guided dense",
@@ -9,10 +9,11 @@ export const RIGHT_ANGLE_BUILD: WorkbookPageContent = sheet({
   content: `
 <div class="cols-2 compact-top">
 <div class="rule-box completion-intro">
-<div class="completion-sentence">מהראשית זזים תחילה לפי <span class="word-blank word-short" data-missing="letter" aria-label="מקום להשלמת האות x"></span> ואז לפי <span class="math-ltr" dir="ltr">y</span>.</div>
+<div class="completion-sentence">מראשית הצירים זזים תחילה לפי <span class="word-blank word-short" data-missing="letter" aria-label="מקום להשלמת האות x"></span> ואז לפי <span class="math-ltr" dir="ltr">y</span>.</div>
 <div class="completion-sentence">בפינה שבה הכיוון משתנה מאופקי לאנכי נוצרת זווית <span class="word-blank word-medium" data-missing="property" aria-label="מקום להשלמת המילה ישרה"></span>.</div>
 </div>
-<div aria-label="מסלול מהראשית עם זווית ישרה בפינה" class="coordinate-grid grid-md" data-arrows='[{"from": [0, 0], "to": [4, 0], "label": "4 ימינה"}, {"from": [4, 0], "to": [4, 3], "label": "3 למעלה"}]' data-labelboxes="[]" data-points='[{"x": 0, "y": 0, "label": "O"}, {"x": 4, "y": 0, "label": ""}, {"x": 4, "y": 3, "label": "P"}]' data-polygons="[]" data-segments='[{"from": [3.5, 0], "to": [3.5, 0.5], "type": "guide"}, {"from": [3.5, 0.5], "to": [4, 0.5], "type": "guide"}]' role="img">
+${wordBank(['ישרה', 'x'])}
+<div aria-label="מסלול מראשית הצירים עם זווית ישרה בפינה" class="coordinate-grid grid-md" data-arrows='[{"from": [0, 0], "to": [4, 0], "label": "4 ימינה"}, {"from": [4, 0], "to": [4, 3], "label": "3 למעלה"}]' data-labelboxes="[]" data-points='[{"x": 0, "y": 0, "label": "O"}, {"x": 4, "y": 0, "label": ""}, {"x": 4, "y": 3, "label": "P"}]' data-polygons="[]" data-segments='[{"from": [3.5, 0], "to": [3.5, 0.5], "type": "guide"}, {"from": [3.5, 0.5], "to": [4, 0.5], "type": "guide"}]' role="img">
 </div>
 </div>
 <section class="q-card">
@@ -25,7 +26,7 @@ export const RIGHT_ANGLE_BUILD: WorkbookPageContent = sheet({
 <section class="q-card">
 <h3>ב. אורי בונה מלבן ABCD. בכמה מקודקודי המלבן יש זווית ישרה?</h3>
 <div class="cols-2">
-<div aria-label="מלבן ABCD עם זוויות ישרות בקודקודים" class="coordinate-grid grid-md" data-arrows="[]" data-labelboxes="[]" data-points='[{"x": 1, "y": 1, "label": "A"}, {"x": 6, "y": 1, "label": "B"}, {"x": 6, "y": 4, "label": "C"}, {"x": 1, "y": 4, "label": "D"}]' data-polygons='[{"points": [[1, 1], [6, 1], [6, 4], [1, 4]]}]' data-segments="[]" role="img">
+<div aria-label="מלבן ABCD עם זוויות ישרות בקודקודים" class="coordinate-grid grid-sm" data-arrows="[]" data-labelboxes="[]" data-points='[{"x": 1, "y": 1, "label": "A"}, {"x": 6, "y": 1, "label": "B"}, {"x": 6, "y": 4, "label": "C"}, {"x": 1, "y": 4, "label": "D"}]' data-polygons='[{"points": [[1, 1], [6, 1], [6, 4], [1, 4]]}]' data-segments="[]" role="img">
 </div>
 <div>
 <p class="axis-answer-box">מספר הזוויות הישרות: <span class="blank" style="--blank-width:4ch"></span></p>

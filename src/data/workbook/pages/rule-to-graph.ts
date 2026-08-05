@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, grid } from '../authoring';
+import { sheet, blank, ltr, grid, wordBank } from '../authoring';
 
 /* נשאב מריפו parabula-next של יניב („רביע ראשון — 21 דפי עבודה", עמוד 16,
    „מכלל לטבלה ולגרף"), שוחזר ממפתח התשובות למורה והותאם לכללי USER_MEMORY.md.
@@ -16,6 +16,7 @@ export const RULE_TO_GRAPH: WorkbookPageContent = sheet({
 <div class="completion-sentence">הכלל ${ltr('y = 2x')} אומר: שיעור ה־${ltr('y')} גדול פי ${blank(2, 'number')} מערך ה־${ltr('x')}.</div>
 <div class="completion-sentence">מכל כלל אפשר לבנות טבלה, ומכל טבלה אפשר לסמן ${blank(5, 'concept')} על מערכת הצירים.</div>
 </div>
+${wordBank(['נקודות', '2'])}
 <div class="two-col">
 <section class="q-card span-2">
 <h3>א. מהכלל ${ltr('y = 2x')} אל הטבלה ואל הסרטוט.</h3>
@@ -28,7 +29,7 @@ export const RULE_TO_GRAPH: WorkbookPageContent = sheet({
 </tbody>
 </table>
 <ul class="tasks compact">
-<li>כתבו את ארבע הנקודות מהטבלה: <span class="pair math-ltr" dir="ltr">(0,<span class="pair-blank"></span>)</span> <span class="pair math-ltr" dir="ltr">(1,<span class="pair-blank"></span>)</span> <span class="pair math-ltr" dir="ltr">(2,<span class="pair-blank"></span>)</span> <span class="pair math-ltr" dir="ltr">(3,<span class="pair-blank"></span>)</span></li>
+<li>כתבו את ארבע הנקודות מהטבלה: <span class="pair math-ltr" dir="ltr">(0,<span class="pair-blank"></span>)</span> <span class="pair math-ltr" dir="ltr">(1,<span class="pair-blank"></span>)</span> <span class="pair math-ltr" dir="ltr">(2,<span class="pair-blank"></span>)</span> <span class="pair math-ltr" dir="ltr">(3,<span class="pair-blank"></span>)</span>.</li>
 <li>סמנו את ארבע הנקודות על מערכת הצירים.</li>
 </ul>
 ${grid({ size: 'md', label: 'מערכת צירים ריקה לסימון הנקודות של הכלל' })}

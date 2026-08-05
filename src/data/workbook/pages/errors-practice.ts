@@ -20,7 +20,7 @@ export const ERRORS_PRACTICE: WorkbookPageContent = sheet({
 </section>
 <section class="q-card">
 <h3>טעות בצירים</h3>
-<p>נועה אמרה: “כל נקודה על ציר <span class="math-ltr" dir="ltr">x</span> מקיימת <span class="math-ltr" dir="ltr">x=0</span>”.</p>
+<p>נועה אמרה: „כל נקודה על ציר <span class="math-ltr" dir="ltr">x</span> מקיימת <span class="math-ltr" dir="ltr">x=0</span>”.</p>
 <p>תקנו את המשפט:</p>
 <ul class="tasks compact">
 <li>המשפט הנכון: כל נקודה שעל ציר <span class="math-ltr" dir="ltr">x</span> מקיימת <span class="math-ltr" dir="ltr">y</span> שווה <span class="blank" data-missing="number" style="--blank-width:3ch"></span>.</li>
@@ -46,9 +46,6 @@ export const ERRORS_PRACTICE: WorkbookPageContent = sheet({
 <ul class="tasks compact">
 <li>התיקון: לשתי הנקודות יש שיעור <span class="blank" data-missing="letter" style="--blank-width:3ch"></span> <b>זהה</b>, ולכן הקטע שביניהן מקביל לציר <span class="math-ltr" dir="ltr">y</span>.</li>
 </ul>
-<ul class="tasks compact">
-<li>הזזה ימינה משנה רק את ערך ה־<span class="math-ltr" dir="ltr">x</span>, ולכן מתקבלת הנקודה <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>
-</ul>
 </section>
 <section class="q-card span-2">
 <h3>טעות במלבן</h3>
@@ -65,7 +62,7 @@ export const ERRORS_PRACTICE: WorkbookPageContent = sheet({
 </section>
 <section class="q-card span-2">
 <h3>בודקים ניסוח</h3>
-<p>החליפו את הביטוי הלא מדויק “שיעור <span class="math-ltr" dir="ltr">y</span> קטן פי 2” בניסוח חד־משמעי:</p>
+<p>החליפו את הביטוי הלא מדויק „שיעור <span class="math-ltr" dir="ltr">y</span> קטן פי 2” בניסוח חד־משמעי:</p>
 <ul class="tasks compact">
 <li><span class="blank" style="--blank-width:32ch"></span></li>
 </ul>
@@ -75,9 +72,6 @@ export const ERRORS_PRACTICE: WorkbookPageContent = sheet({
 <h3>טעות בנקודה שעל ציר</h3>
 <p>אורי אמר: „הנקודה <span class="math-ltr" dir="ltr">(0,7)</span> ממוקמת על ציר <span class="math-ltr" dir="ltr">x</span>”.</p>
 <p>תקנו את המשפט:</p>
-<ul class="tasks compact">
-<li>ההסבר: הקודקוד הרביעי חייב לחלוק ערך <span class="math-ltr" dir="ltr">x</span> עם קודקוד אחד ושיעור <span class="blank" data-missing="letter" style="--blank-width:3ch"></span> עם קודקוד אחר.</li>
-</ul>
 <ul class="tasks">
 <li>הנקודה <span class="math-ltr" dir="ltr">(0,7)</span> ממוקמת על ציר <span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>
 <li>אצל כל נקודה שעל ציר <span class="math-ltr" dir="ltr">y</span>, שיעור <span class="math-ltr" dir="ltr">x</span> הוא <span class="blank" data-missing="number" style="--blank-width:3ch"></span>.</li>
