@@ -24,4 +24,11 @@ describe('repository documentation', () => {
     expect(report).toContain('Final cleaned-branch verification passed');
     expect(report).not.toContain('running one final read-only verification');
   });
+
+  it('keeps the release gate data-driven instead of hardcoding a legacy count', () => {
+    const releaseGate = readRepositoryFile('scripts/release-readiness.mjs');
+
+    expect(releaseGate).toContain("answer-target-order.json");
+    expect(releaseGate).not.toMatch(/pageCount\s*===\s*77/);
+  });
 });

@@ -30,15 +30,14 @@ jobs:
         run: npm run firebase:check:static
       - name: Typecheck
         run: npm run typecheck
-      - name: Unit & content tests
-        run: npm test
       - name: Firestore emulator authorization tests
         run: npm run test:firestore
+      - name: Separated classroom release contract
+        run: npm run release:report:static
+      - name: Unit & content tests
+        run: npm test
       - name: Build
         run: npm run build
-      - name: Separated classroom release contract
-        continue-on-error: true
-        run: npm run release:report:static
       - name: Keep readiness evidence
         if: always()
         uses: actions/upload-artifact@v7

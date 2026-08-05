@@ -1,6 +1,6 @@
 # Classroom release-readiness contract
 
-Generated: 2026-08-01T23:56:19.916Z
+Generated: 2026-08-05T19:54:29.717Z
 
 Mode: static
 
@@ -11,7 +11,7 @@ Overall status: **blocked**
 | Repository engineering gates | pass | The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent. |
 | Firestore emulator-backed validation | pass | Real Firestore operations passed against the demo project with the pinned Firebase CLI. |
 | External Firebase configuration and deployment | blocked | Repository validation cannot supply console settings, service-account configuration, or deployment evidence. |
-| Pedagogical answer-key review | blocked | 875/1061 targets are safely auto-checkable; 161 are signature-bound open-ended tasks; 25 remain unresolved. |
+| Pedagogical answer-key review | blocked | 735/1162 targets are safely auto-checkable; 130 are signature-bound open-ended tasks; 297 remain unresolved. |
 | Physical two-device classroom acceptance | blocked | No passing real student-phone and separate teacher-computer acceptance record exists. |
 
 ## Repository engineering gates
@@ -24,6 +24,7 @@ Evidence:
 
 - RULES.md
 - reports/answer-coverage.json
+- reports/answer-target-order.json
 - public/answer-review-manifest.json
 - .github/workflows/ci.yml
 - git diff --check
@@ -37,9 +38,9 @@ Real Firestore operations passed against the demo project with the pinned Fireba
 Evidence:
 
 - suite: tests/firestore-emulator.test.ts
-- generatedAt: 2026-08-01T23:45:34.735Z
+- generatedAt: 2026-08-05T19:54:20.668Z
 - Firebase CLI: 15.25.1
-- contract SHA-256: 5219753cd0d484128af3e2568b0e9434d5b61bac54e708684c50f23e1ead2f06
+- contract SHA-256: ad2bd6c1851c885fcc40949542a136df1552c468151346407a98cd3b88f0c000
 
 ## External Firebase configuration and deployment
 
@@ -65,7 +66,7 @@ Blockers:
 
 Status: **blocked**
 
-875/1061 targets are safely auto-checkable; 161 are signature-bound open-ended tasks; 25 remain unresolved.
+735/1162 targets are safely auto-checkable; 130 are signature-bound open-ended tasks; 297 remain unresolved.
 
 Evidence:
 
@@ -74,7 +75,7 @@ Evidence:
 
 Blockers:
 
-- Resolve 25 targets in the answer-review studio without guessing.
+- Resolve 297 targets in the answer-review studio without guessing.
 
 ## Physical two-device classroom acceptance
 

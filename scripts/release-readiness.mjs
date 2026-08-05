@@ -23,6 +23,21 @@ function domain(id, label, status, summary, evidence = [], blockers = []) {
   return { id, label, status, summary, evidence, blockers };
 }
 
+function pages(value) {
+  return Array.isArray(value?.pages) ? value.pages : [];
+}
+
+function targetCountFromPages(pageList) {
+  return pageList.reduce(
+    (sum, page) => sum + (Array.isArray(page?.targets) ? page.targets.length : 0),
+    0,
+  );
+}
+
+function hasContiguousPageNumbers(pageList) {
+  return pageList.every((page, index) => page?.pageNumber === index + 1);
+}
+
 const firebaseRun = spawnSync(
   process.execPath,
   [resolve(root, 'scripts', 'firebase-readiness.mjs'), ...(staticOnly ? ['--static'] : [])],
@@ -32,9 +47,8 @@ if (firebaseRun.stdout) process.stdout.write(firebaseRun.stdout);
 if (firebaseRun.stderr) process.stderr.write(firebaseRun.stderr);
 
 const answerCoverage = await json(resolve(reports, 'answer-coverage.json'));
-const reviewManifest = await json(
-  resolve(root, 'public', 'answer-review-manifest.json'),
-);
+const answerTargetOrder = await json(resolve(reports, 'answer-target-order.json'));
+const reviewManifest = await json(resolve(root, 'public', 'answer-review-manifest.json'));
 const firebaseReadiness = await json(resolve(reports, 'firebase-readiness.json'));
 const emulator = await json(resolve(reports, 'firestore-emulator.json'));
 const physical = await json(resolve(reports, 'two-device-acceptance.json'));
@@ -47,15 +61,29 @@ const diffCheck = spawnSync('git', ['diff', '--check'], {
   encoding: 'utf8',
 });
 
+const coveragePages = pages(answerCoverage);
+const orderedPages = pages(answerTargetOrder);
+const pageCount = Number(answerCoverage?.pageCount || 0);
+const targetCount = Number(answerCoverage?.targetCount || 0);
+const releaseStepIndex = ci.indexOf('npm run release:report:static');
+const unitTestStepIndex = ci.indexOf('npm test');
+
 const repositoryChecks = [
   existsSync(resolve(root, 'RULES.md')),
-  answerCoverage?.pageCount === 77,
-  answerCoverage?.targetCount === reviewManifest?.targetCount,
+  Number.isInteger(pageCount) && pageCount > 0,
+  coveragePages.length === pageCount,
+  orderedPages.length === pageCount,
+  hasContiguousPageNumbers(coveragePages),
+  hasContiguousPageNumbers(orderedPages),
+  targetCountFromPages(coveragePages) === targetCount,
+  targetCountFromPages(orderedPages) === targetCount,
+  targetCount === Number(reviewManifest?.targetCount || 0),
   answerCoverage?.generatedAt === reviewManifest?.generatedAt,
   packageJson?.scripts?.['test:firestore'] ===
     'node scripts/run-firestore-emulator-tests.mjs',
   ci.includes('actions/setup-java@v5'),
   ci.includes('npm run test:firestore'),
+  releaseStepIndex >= 0 && unitTestStepIndex >= 0 && releaseStepIndex < unitTestStepIndex,
   diffCheck.status === 0,
 ];
 const repositoryPass = repositoryChecks.every(Boolean);
@@ -70,6 +98,7 @@ const domains = [
     [
       'RULES.md',
       'reports/answer-coverage.json',
+      'reports/answer-target-order.json',
       'public/answer-review-manifest.json',
       '.github/workflows/ci.yml',
       'git diff --check',
@@ -121,12 +150,14 @@ const firebaseChecks = Array.isArray(firebaseReadiness?.checks)
   ? firebaseReadiness.checks
   : [];
 const firebaseEvidenceMissing = !firebaseReadiness || firebaseChecks.length === 0;
-const firebaseStructuralFailure = firebaseEvidenceMissing || firebaseChecks.some(
-  (check) =>
-    check.status === 'fail' &&
-    !String(check.id).startsWith('runtime:') &&
-    check.id !== 'actions:service-account',
-);
+const firebaseStructuralFailure =
+  firebaseEvidenceMissing ||
+  firebaseChecks.some(
+    (check) =>
+      check.status === 'fail' &&
+      !String(check.id).startsWith('runtime:') &&
+      check.id !== 'actions:service-account',
+  );
 const firebaseMissing = firebaseChecks.filter(
   (check) => check.status !== 'pass' && check.id !== 'firestore:cli',
 );
@@ -153,12 +184,9 @@ domains.push(
 );
 
 const safelyCheckable = Number(answerCoverage?.automaticallyCheckableTargets || 0);
-const targetCount = Number(answerCoverage?.targetCount || 0);
-const answerTargets = Array.isArray(answerCoverage?.pages)
-  ? answerCoverage.pages.flatMap((page) =>
-      Array.isArray(page?.targets) ? page.targets : [],
-    )
-  : [];
+const answerTargets = coveragePages.flatMap((page) =>
+  Array.isArray(page?.targets) ? page.targets : [],
+);
 const reviewedOpenEnded = answerTargets.filter(
   (target) =>
     target?.classification === 'open-ended' &&
@@ -190,9 +218,9 @@ const physicalPass =
   physical?.schemaVersion === 1 &&
   physical?.status === 'pass' &&
   typeof physical?.testedAt === 'string' &&
-  physical?.testedAt.length > 0 &&
+  physical.testedAt.length > 0 &&
   typeof physical?.commit === 'string' &&
-  physical?.commit.length >= 7 &&
+  physical.commit.length >= 7 &&
   Array.isArray(physical?.devices) &&
   physical.devices.length >= 2 &&
   Array.isArray(physical?.checks) &&

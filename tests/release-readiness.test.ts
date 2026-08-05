@@ -14,10 +14,42 @@ interface ReleaseReport {
   domains: ReleaseDomain[];
 }
 
+interface CoverageTarget {
+  classification?: string;
+  sourceEvidence?: string;
+}
+
+interface CoveragePage {
+  targets?: CoverageTarget[];
+}
+
+interface AnswerCoverage {
+  targetCount: number;
+  automaticallyCheckableTargets: number;
+  pages: CoveragePage[];
+}
+
 const report = JSON.parse(
   readFileSync('reports/release-readiness.json', 'utf8'),
 ) as ReleaseReport;
 const markdown = readFileSync('reports/release-readiness.md', 'utf8');
+const coverage = JSON.parse(
+  readFileSync('reports/answer-coverage.json', 'utf8'),
+) as AnswerCoverage;
+
+const reviewedOpenEnded = coverage.pages
+  .flatMap((page) => page.targets ?? [])
+  .filter(
+    (target) =>
+      target.classification === 'open-ended' &&
+      target.sourceEvidence?.startsWith('signature-bound'),
+  ).length;
+const unresolved = Math.max(
+  0,
+  coverage.targetCount -
+    coverage.automaticallyCheckableTargets -
+    reviewedOpenEnded,
+);
 
 describe('separated classroom release contract', () => {
   it('keeps exactly the five independent readiness domains', () => {
@@ -42,14 +74,18 @@ describe('separated classroom release contract', () => {
     expect(report.releaseReady).toBe(false);
   });
 
-  it('separates reviewed open-ended work from unresolved answer targets', () => {
+  it('derives pedagogical readiness from the current answer coverage', () => {
     const pedagogical = report.domains.find(
       (domain) => domain.id === 'pedagogical-review',
     );
-    expect(pedagogical?.status).toBe('blocked');
-    expect(pedagogical?.summary).toContain('875/1061');
-    expect(pedagogical?.summary).toContain('161 are signature-bound open-ended');
-    expect(pedagogical?.summary).toContain('25 remain unresolved');
+    expect(pedagogical?.status).toBe(unresolved === 0 ? 'pass' : 'blocked');
+    expect(pedagogical?.summary).toContain(
+      `${coverage.automaticallyCheckableTargets}/${coverage.targetCount}`,
+    );
+    expect(pedagogical?.summary).toContain(
+      `${reviewedOpenEnded} are signature-bound open-ended`,
+    );
+    expect(pedagogical?.summary).toContain(`${unresolved} remain unresolved`);
   });
 
   it('publishes the same domain contract in Markdown', () => {
