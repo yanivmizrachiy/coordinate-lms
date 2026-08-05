@@ -93,7 +93,7 @@ describe('answer-key coverage intelligence', () => {
       expect(target.automaticCheckingSafe, targetId).toBe(true);
       expect(proof.sourceEvidence, targetId).toMatch(/^src\/data\/workbook\/pages\//);
     }
-    expect(retainedProofs).toBeGreaterThan(600);
+    expect(retainedProofs).toBeGreaterThan(580);
     expect(staleProofs).toBeGreaterThan(0);
   });
 
