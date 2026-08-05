@@ -13,7 +13,8 @@ Updated: 2026-08-05
 - The LMS authentication, persistence, scoring, dashboard and Firebase layers remain separate from the canonical page sources.
 - Correct keyed answers receive positive-only immediate LMS feedback: a green ✓ appears as soon as the typed or selected answer is correct. Incorrect partial typing does not consume an attempt.
 - The immediate feedback implementation is limited to `src/lms`, LMS-only styles, and LMS tests. No canonical page source is modified by this behavior.
-- The four dedicated immediate-feedback unit tests pass. The remaining layout-test migration is test-only and distinguishes side-length calculations from area/perimeter calculations.
+- The four dedicated immediate-feedback unit tests pass. The final layout assertions distinguish side-length calculations from area/perimeter calculations.
+- The generated answer reports are being refreshed from the canonical 78-page LMS model; the report-only workflow cannot modify workbook page sources.
 
 The fully canonical page content currently contains 1,162 detected response
 targets, of which 735 (63.3%) are safely automatically checkable. Stale reviewed
