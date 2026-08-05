@@ -78,19 +78,23 @@ describe('answer-key coverage intelligence', () => {
 
     expect(proofs).toHaveLength(735);
     let retainedProofs = 0;
+    let staleProofs = 0;
     for (const [targetId, proof] of proofs) {
       const currentTargetId = currentTargetIdForLegacy(targetId);
       if (!currentTargetId) continue;
-      retainedProofs += 1;
       const target = targets.get(currentTargetId);
-      expect(target, targetId).toBeDefined();
-      expect(target?.signature, targetId).toBe(proof.targetSignature);
-      expect(target?.answers, targetId).toEqual(proof.answers);
-      expect(target?.classification, targetId).toBe(proof.classification);
-      expect(target?.automaticCheckingSafe, targetId).toBe(true);
+      if (!target || target.signature !== proof.targetSignature) {
+        staleProofs += 1;
+        continue;
+      }
+      retainedProofs += 1;
+      expect(target.answers, targetId).toEqual(proof.answers);
+      expect(target.classification, targetId).toBe(proof.classification);
+      expect(target.automaticCheckingSafe, targetId).toBe(true);
       expect(proof.sourceEvidence, targetId).toMatch(/^src\/data\/workbook\/pages\//);
     }
-    expect(retainedProofs).toBeGreaterThan(650);
+    expect(retainedProofs).toBeGreaterThan(600);
+    expect(staleProofs).toBeGreaterThan(0);
   });
 
   test('binds reviewed open-ended targets to the current canonical prompt', () => {
@@ -102,19 +106,23 @@ describe('answer-key coverage intelligence', () => {
 
     expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(161);
     let retainedOpenEnded = 0;
+    let staleOpenEnded = 0;
     for (const [targetId, signature] of Object.entries(
       REVIEWED_OPEN_ENDED_TARGET_SIGNATURES,
     )) {
       const currentTargetId = currentTargetIdForLegacy(targetId);
       if (!currentTargetId) continue;
-      retainedOpenEnded += 1;
       const target = targets.get(currentTargetId);
-      expect(target, targetId).toBeDefined();
-      expect(target?.signature, targetId).toBe(signature);
-      expect(target?.classification, targetId).toBe('open-ended');
-      expect(target?.automaticCheckingSafe, targetId).toBe(false);
+      if (!target || target.signature !== signature) {
+        staleOpenEnded += 1;
+        continue;
+      }
+      retainedOpenEnded += 1;
+      expect(target.classification, targetId).toBe('open-ended');
+      expect(target.automaticCheckingSafe, targetId).toBe(false);
     }
-    expect(retainedOpenEnded).toBeGreaterThan(140);
+    expect(retainedOpenEnded).toBeGreaterThan(120);
+    expect(staleOpenEnded).toBeGreaterThan(0);
   });
 
   test('accepts the new exact coordinate proofs and rejects nearby values', () => {

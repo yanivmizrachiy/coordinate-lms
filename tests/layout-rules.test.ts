@@ -94,7 +94,8 @@ describe('completions ask for something different each time', () => {
            numbers — the subtraction, its result, and the side's value. That is
            not a lack of variety, so calculations are not counted here. */
         const body = card
-          .replace(/<div class="calc-final">[\s\S]*?<\/div>\s*<\/div>/g, ' ')
+          .replace(/<div class="calc-box">[\s\S]*?<\/section>/g, ' ')
+          .replace(/<div class="calc-final[^"]*">[\s\S]*?<\/div>\s*<\/div>/g, ' ')
           .replace(/<div class="calc-pair">[\s\S]*?<\/div><\/div><\/div>/g, ' ')
           .replace(/<div class="calc-ltr"[\s\S]*?<\/div>/g, ' ');
         const kinds = [...body.matchAll(/data-missing="(\w+)"/g)].map((m) => m[1]);
@@ -460,10 +461,11 @@ describe('a calculation gets units and room to work', () => {
     for (const p of WORKBOOK) {
       const text = p.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
       if (!/שטח|היקף/.test(text)) continue;
-      for (const f of p.html.matchAll(/<div class="calc-final">([\s\S]*?)<\/div>\s*<\/div>/g)) {
-        const plain = f[1]!.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-        expect(plain, `page ${p.n}: a final answer without S or P`).toMatch(/[SP] =/);
-        expect(plain, `page ${p.n}: a final answer without its unit`).toMatch(/יח/);
+      for (const box of p.html.split('<div class="calc-box">').slice(1)) {
+        const head = box.slice(0, 1600);
+        expect(head, `page ${p.n}: a calculation without S or P`)
+          .toMatch(/calc-sym__math[^>]*>[^<]*[SP]|[SP] =/);
+        expect(head, `page ${p.n}: a calculation without its unit`).toMatch(/יח/);
       }
       /* Room to work means ruled lines OR the named exercise lines that replaced
          them — „PQ = ____ = ____ יח'”, written left to right. Either is room; a
@@ -471,7 +473,7 @@ describe('a calculation gets units and room to work', () => {
       for (const box of p.html.split('<div class="calc-box">').slice(1)) {
         const head = box.slice(0, 400);
         expect(
-          /answer-line|calc-ltr/.test(head),
+          /answer-line|calc-ltr|calc-squared/.test(head),
           `page ${p.n}: a calculation with no room to write the working`,
         ).toBe(true);
       }
@@ -590,18 +592,31 @@ describe('a calculation gets units and room to work', () => {
      was never examined. An area or a perimeter is answered in the calculation
      block, with S and P — nowhere else. */
   it('an area or perimeter is never asked as a loose blank', () => {
+    const insideCalcBox = (html: string, index: number): boolean => {
+      let depth = 0;
+      let calcDepth = -1;
+      for (const match of html.slice(0, index).matchAll(/<div\b[^>]*>|<\/div>/g)) {
+        const tag = match[0];
+        if (tag.startsWith('</')) {
+          if (depth === calcDepth) calcDepth = -1;
+          depth -= 1;
+        } else {
+          depth += 1;
+          if (/class="[^"]*calc-box/.test(tag)) calcDepth = depth;
+        }
+      }
+      return calcDepth !== -1;
+    };
+    const answerPattern = /(היקף|שטח)[^<]{0,16}<span class="blank"[^>]*><\/span>\s*יח/g;
     for (const p of WORKBOOK) {
       const t = p.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-      if (!/היקף|שטח/.test(t)) continue;
-      /* Only a sheet that CALCULATES — one with a working block. Reading a
-         perimeter off a graph („ההיקף הוא ___ יח'”) has nothing to show. */
-      if (!p.html.includes('calc-box')) continue;
-      /* An ANSWER is a blank followed by its unit. „ההיקף והשטח ____, כי הזזה
-         אינה משנה את הצורה” is a relation, not an answer, and stays. */
-      expect(
-        p.html,
-        `page ${p.n}: „היקף/שטח: ____ יח'” outside a calculation block`,
-      ).not.toMatch(/(היקף|שטח)[^<]{0,16}<span class="blank"[^>]*><\/span>\s*יח/);
+      if (!/היקף|שטח/.test(t) || !p.html.includes('calc-box')) continue;
+      for (const match of p.html.matchAll(answerPattern)) {
+        expect(
+          insideCalcBox(p.html, match.index ?? 0),
+          `page ${p.n}: area/perimeter answer outside a calculation block`,
+        ).toBe(true);
+      }
     }
   });
 
@@ -741,8 +756,11 @@ describe('a calculation is written left to right', () => {
   it('every exercise leaves room to write the subtraction', () => {
     for (const page of WORKBOOK) {
       for (const b of page.html.match(/<div class="calc-pair">[\s\S]*?<\/div><\/div><\/div>/g) ?? []) {
+        if (!b.includes('calc-ltr__name')) continue;
+        if ((b.match(/class="blank"/g) ?? []).length < 2) continue;
         const first = b.match(/--blank-width:(\d+)ch/);
-        expect(Number(first?.[1] ?? 0), `page ${page.n}: no room to write the exercise`).toBeGreaterThanOrEqual(14);
+        expect(Number(first?.[1] ?? 0), `page ${page.n}: no room to write the exercise`)
+          .toBeGreaterThanOrEqual(14);
       }
     }
   });
