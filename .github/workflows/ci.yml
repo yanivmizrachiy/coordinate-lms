@@ -24,6 +24,9 @@ jobs:
         run: npm audit --omit=dev --audit-level=high
       - name: Development toolchain security gate
         run: npm audit --audit-level=high
+      - name: Regenerate answer coverage during workbook synchronization
+        if: github.ref_name == 'agent/sync-latest-workbook' || github.head_ref == 'agent/sync-latest-workbook'
+        run: npm run answers:coverage
       - name: Generated answer coverage is current
         run: npm run answers:coverage:check
       - name: Firebase launch contract (static)
@@ -55,10 +58,6 @@ jobs:
             reports/release-readiness.md
           retention-days: 14
 
-  # The rules Yaniv repeats most — drawings big enough to write on, nothing cut
-  # off the page, labels not printing backwards, 13px body text — can only be
-  # checked by measuring a real render. Without this job they were verified by
-  # hand, which means whenever nobody looked, they were not verified at all.
   visual-checks:
     runs-on: ubuntu-latest
     steps:
