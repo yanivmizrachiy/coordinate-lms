@@ -312,12 +312,32 @@ export function attachLmsToPage(
         : 'true';
   }
 
+  function inlineExpectedAnswers(target: HTMLElement): string[] {
+    const raw = target.dataset.lmsAnswers;
+    if (!raw) return [];
+    try {
+      const parsed = JSON.parse(raw) as unknown;
+      return Array.isArray(parsed)
+        ? parsed.filter((value): value is string => typeof value === 'string')
+        : [];
+    } catch {
+      return [];
+    }
+  }
+
   function showImmediateCorrectFeedback(
     target: HTMLElement,
     qid: string,
   ): boolean {
     const progress = progressFor(qid);
-    const expected = answerKey[qid] || [];
+    /* Input can happen before the asynchronous repository key has finished
+       loading. Explicit/implicit authoring already places the same reviewed
+       answers on the target, so use that safe inline key until the repository
+       key arrives. */
+    const storedExpected = answerKey[qid] || [];
+    const expected = storedExpected.length > 0
+      ? storedExpected
+      : inlineExpectedAnswers(target);
 
     if (!acceptImmediateCorrectAnswer(progress, expected)) {
       return false;
