@@ -377,7 +377,7 @@ describe('a calculation gets units and room to work', () => {
      and שיעור y has to say it, and its drawing needs a dashed line to EACH
      axis: one line teaches half the idea. */
   it('the coordinates page teaches the word מרחק, and measures to both axes', () => {
-    const page = WORKBOOK.find((p) => p.title.includes('שיעור x'));
+    const page = WORKBOOK.find((p) => p.title.includes('שיעור x') || p.subtitle.includes('שיעור x'));
     expect(page, 'the page that introduces the coordinates is gone').toBeDefined();
     const html = page!.html;
     expect(html, 'the word מרחק never appears').toMatch(/מרחק|רחוק/);

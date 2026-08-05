@@ -1,5 +1,6 @@
 import { parseHTML } from 'linkedom';
 import { WORKBOOK, TOTAL_PAGES } from '../data/workbook';
+import { legacyPageNumberForCurrent, legacyTargetIdForCurrent } from './legacyWorkbookMap';
 import { hydrateGrids } from '../lib/coordinateGrid';
 import { DEFAULT_ANSWER_KEYS } from './answerKey';
 import { hydrateChoiceAnswerInputs } from './choiceInputs';
@@ -307,6 +308,7 @@ function isOpenEnded(context: string): boolean {
 function classify(
   target: HTMLElement,
   targetId: string,
+  lookupTargetId: string,
   context: string,
   signature: string,
   defaults: AnswerKey,
@@ -319,17 +321,17 @@ function classify(
   | 'automaticCheckingSafe'
   | 'answers'
 > {
-  const defaultAnswers = (defaults[targetId] || []).filter(
+  const defaultAnswers = (defaults[lookupTargetId] || []).filter(
     isAllowedExpectedAnswer,
   );
   const implicitAnswers = (implicit[targetId] || []).filter(
     isAllowedExpectedAnswer,
   );
-  const proven = PROVEN_ANSWER_PROOFS[Number(targetId.match(/^p(\d+)-/)?.[1])]
-    ?.[targetId];
+  const proofPage = Number(lookupTargetId.match(/^p(\d+)-/)?.[1]);
+  const proven = PROVEN_ANSWER_PROOFS[proofPage]?.[lookupTargetId];
 
   if (defaultAnswers.length > 0) {
-    const classification: AnswerClassification = VALID_RANGE_TARGETS.has(targetId)
+    const classification: AnswerClassification = VALID_RANGE_TARGETS.has(lookupTargetId)
       ? 'valid-range'
       : 'reviewed-explicit';
     return {
@@ -387,7 +389,7 @@ function classify(
   }
 
   const reviewedOpenEndedSignature =
-    REVIEWED_OPEN_ENDED_TARGET_SIGNATURES[targetId];
+    REVIEWED_OPEN_ENDED_TARGET_SIGNATURES[lookupTargetId];
   if (reviewedOpenEndedSignature === signature || isOpenEnded(context)) {
     return {
       classification: 'open-ended',
@@ -446,15 +448,18 @@ export function buildAnswerCoverageReport(
     });
 
     const implicit = implicitAnswerKey(page.n);
-    const defaults = DEFAULT_ANSWER_KEYS[page.n] || {};
+    const legacyPage = legacyPageNumberForCurrent(page.n);
+    const defaults = DEFAULT_ANSWER_KEYS[legacyPage ?? page.n] || {};
     const targets = elements.map((target, index): AnswerCoverageTarget => {
       const targetId = target.dataset['lmsQid'] || '';
       const context = contextFor(target);
       const inputType = inputTypeFor(target);
+      const lookupTargetId = legacyTargetIdForCurrent(targetId);
       const signature = hash(inputType + '\n' + context);
       const details = classify(
         target,
         targetId,
+        lookupTargetId,
         context,
         signature,
         defaults,

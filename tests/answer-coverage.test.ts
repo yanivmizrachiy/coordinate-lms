@@ -7,12 +7,13 @@ import {
   isAllowedExpectedAnswer,
 } from '../src/lms/answerValidation';
 import { PROVEN_ANSWER_PROOFS } from '../src/lms/provenAnswerKey';
+import { currentTargetIdForLegacy } from '../src/lms/legacyWorkbookMap';
 
 describe('answer-key coverage intelligence', () => {
-  test('represents every workbook page from 1 through 77', () => {
-    expect(report.pages).toHaveLength(77);
+  test('represents every workbook page from 1 through 78', () => {
+    expect(report.pages).toHaveLength(78);
     expect(report.pages.map((page) => page.pageNumber)).toEqual(
-      Array.from({ length: 77 }, (_, index) => index + 1),
+      Array.from({ length: 78 }, (_, index) => index + 1),
     );
   });
 
@@ -76,8 +77,12 @@ describe('answer-key coverage intelligence', () => {
     );
 
     expect(proofs).toHaveLength(735);
+    let retainedProofs = 0;
     for (const [targetId, proof] of proofs) {
-      const target = targets.get(targetId);
+      const currentTargetId = currentTargetIdForLegacy(targetId);
+      if (!currentTargetId) continue;
+      retainedProofs += 1;
+      const target = targets.get(currentTargetId);
       expect(target, targetId).toBeDefined();
       expect(target?.signature, targetId).toBe(proof.targetSignature);
       expect(target?.answers, targetId).toEqual(proof.answers);
@@ -85,6 +90,7 @@ describe('answer-key coverage intelligence', () => {
       expect(target?.automaticCheckingSafe, targetId).toBe(true);
       expect(proof.sourceEvidence, targetId).toMatch(/^src\/data\/workbook\/pages\//);
     }
+    expect(retainedProofs).toBeGreaterThan(650);
   });
 
   test('binds reviewed open-ended targets to the current canonical prompt', () => {
@@ -95,15 +101,20 @@ describe('answer-key coverage intelligence', () => {
     );
 
     expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(161);
+    let retainedOpenEnded = 0;
     for (const [targetId, signature] of Object.entries(
       REVIEWED_OPEN_ENDED_TARGET_SIGNATURES,
     )) {
-      const target = targets.get(targetId);
+      const currentTargetId = currentTargetIdForLegacy(targetId);
+      if (!currentTargetId) continue;
+      retainedOpenEnded += 1;
+      const target = targets.get(currentTargetId);
       expect(target, targetId).toBeDefined();
       expect(target?.signature, targetId).toBe(signature);
       expect(target?.classification, targetId).toBe('open-ended');
       expect(target?.automaticCheckingSafe, targetId).toBe(false);
     }
+    expect(retainedOpenEnded).toBeGreaterThan(140);
   });
 
   test('accepts the new exact coordinate proofs and rejects nearby values', () => {
