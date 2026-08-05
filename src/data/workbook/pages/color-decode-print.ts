@@ -1,18 +1,24 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, colorGrid, wordBlank } from '../authoring';
+import { sheet, blank, ltr, pair, wordBlank } from '../authoring';
 import { decodeTargets, decodeXMax, decodeYMax } from '../../colorDecode';
 
-/* פענוח צבעוני — הגרסה המודפסת. הדף הזה החליף שעשועון מקוון שבו צובעים תאים
-   בלחיצה: יניב — „אנחנו רק דפים להדפסה ולא מתוקשב!!" (31.07.2026, כמו
-   „ציור נסתר" ו„מילת הצופן"). אותה מיומנות בדיוק — צביעת תאים לפי זוגות
-   סדורים — עכשיו בעיפרון, על רשת מודפסת.
+const colorGrid = (xmax: number, ymax: number): string => {
+  const cols = xmax + 1;
+  let body = '';
+  for (let y = ymax; y >= 0; y -= 1) {
+    let row = `<span class="cg-lab cg-lab--y">${y}</span>`;
+    for (let x = 0; x <= xmax; x += 1) {
+      row += `<span class="cg-cell" aria-label="תא ${x},${y}"></span>`;
+    }
+    body += row;
+  }
+  let foot = '<span class="cg-lab"></span>';
+  for (let x = 0; x <= xmax; x += 1) {
+    foot += `<span class="cg-lab cg-lab--x">${x}</span>`;
+  }
+  return `<div class="color-grid" role="img" aria-label="רשת תאים לצביעה" style="--cg-cols:${cols}">${body}${foot}</div>`;
+};
 
-   02.08.2026 — יניב: „מה הקשר לרביע ראשון? זה לא הצירים הנכונים!! אין כאן
-   משהו מעניין — תיצור משהו מדויק ומועיל". תוקן: (1) הרשת מציגה רביע ראשון
-   כמו כל סרטוט אחר בחוברת — ראשית הצירים בפינה שמאל־תחתונה, x גדל ימינה
-   (‏`.color-grid` עבר מ־`direction: rtl` ל־`ltr`). (2) הסמל אינו עוד „וי"
-   שרירותי אלא **חץ מעלה** סימטרי סביב x=3 שמצביע אל תוך הרביע לכיוון
-   ה־y הגדל — צורה מדויקת שנותנת שאלות על קו אנכי, סימטריה והפרשים. */
 const listText = decodeTargets.map((p) => `(${p.x},${p.y})`).join(' · ');
 
 export const COLOR_DECODE_PRINT: WorkbookPageContent = sheet({
