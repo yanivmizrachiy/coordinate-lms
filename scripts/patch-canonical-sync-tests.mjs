@@ -1,26 +1,23 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
-async function replaceRegex(path, marker, replacements) {
-  let text = await readFile(path, 'utf8');
-  if (text.includes(marker)) {
-    console.log(`${path}: already patched.`);
-    return;
-  }
-
-  for (const [pattern, replacement, label] of replacements) {
-    const next = text.replace(pattern, replacement);
-    if (next === text) {
-      throw new Error(`${path}: regex patch failed for ${label}`);
-    }
-    text = next;
-  }
-
-  await writeFile(path, text, 'utf8');
+function replaceBetween(text, start, end, replacement, label) {
+  const startAt = text.indexOf(start);
+  if (startAt < 0) throw new Error(`Missing start marker for ${label}`);
+  const endAt = text.indexOf(end, startAt + start.length);
+  if (endAt < 0) throw new Error(`Missing end marker for ${label}`);
+  return text.slice(0, startAt) + replacement + text.slice(endAt);
 }
 
-await replaceRegex('tests/answer-coverage.test.ts', 'let staleProofs = 0;', [
-  [
-    /    let retainedProofs = 0;[\s\S]*?    expect\(retainedProofs\)\.toBeGreaterThan\(650\);/,
+async function load(path) {
+  return (await readFile(path, 'utf8')).replace(/\r\n/g, '\n');
+}
+
+let answers = await load('tests/answer-coverage.test.ts');
+if (!answers.includes('let staleProofs = 0;')) {
+  answers = replaceBetween(
+    answers,
+    '    let retainedProofs = 0;',
+    "  test('binds reviewed open-ended targets to the current canonical prompt'",
 `    let retainedProofs = 0;
     let staleProofs = 0;
     for (const [targetId, proof] of proofs) {
@@ -38,11 +35,17 @@ await replaceRegex('tests/answer-coverage.test.ts', 'let staleProofs = 0;', [
       expect(proof.sourceEvidence, targetId).toMatch(/^src\\/data\\/workbook\\/pages\\//);
     }
     expect(retainedProofs).toBeGreaterThan(600);
-    expect(staleProofs).toBeGreaterThan(0);`,
+    expect(staleProofs).toBeGreaterThan(0);
+  });
+
+`,
     'reviewed proof migration',
-  ],
-  [
-    /    let retainedOpenEnded = 0;[\s\S]*?    expect\(retainedOpenEnded\)\.toBeGreaterThan\(140\);/,
+  );
+
+  answers = replaceBetween(
+    answers,
+    '    let retainedOpenEnded = 0;',
+    "  test('accepts the new exact coordinate proofs and rejects nearby values'",
 `    let retainedOpenEnded = 0;
     let staleOpenEnded = 0;
     for (const [targetId, signature] of Object.entries(
@@ -60,40 +63,55 @@ await replaceRegex('tests/answer-coverage.test.ts', 'let staleProofs = 0;', [
       expect(target.automaticCheckingSafe, targetId).toBe(false);
     }
     expect(retainedOpenEnded).toBeGreaterThan(120);
-    expect(staleOpenEnded).toBeGreaterThan(0);`,
-    'open-ended signature migration',
-  ],
-]);
+    expect(staleOpenEnded).toBeGreaterThan(0);
+  });
 
-await replaceRegex('tests/layout-rules.test.ts', 'const insideCalcBox = (html: string, index: number)', [
-  [
-    /        const body = card[\s\S]*?        const kinds =/,
+`,
+    'open-ended signature migration',
+  );
+  await writeFile('tests/answer-coverage.test.ts', answers, 'utf8');
+} else {
+  console.log('tests/answer-coverage.test.ts: already patched.');
+}
+
+let layout = await load('tests/layout-rules.test.ts');
+if (!layout.includes('const insideCalcBox = (html: string, index: number)')) {
+  layout = replaceBetween(
+    layout,
+    '        const body = card',
+    '        const kinds =',
 `        const body = card
           .replace(/<div class="calc-box">[\\s\\S]*?<\\/section>/g, ' ')
           .replace(/<div class="calc-final[^"]*">[\\s\\S]*?<\\/div>\\s*<\\/div>/g, ' ')
           .replace(/<div class="calc-pair">[\\s\\S]*?<\\/div><\\/div><\\/div>/g, ' ')
           .replace(/<div class="calc-ltr"[\\s\\S]*?<\\/div>/g, ' ');
-        const kinds =`,
+`,
     'completion-kind calculation exclusion',
-  ],
-  [
-    /      for \(const f of p\.html\.matchAll[\s\S]*?      \/\* Room to work/,
+  );
+
+  layout = replaceBetween(
+    layout,
+    '      for (const f of p.html.matchAll(',
+    '      /* Room to work',
 `      for (const box of p.html.split('<div class="calc-box">').slice(1)) {
         const head = box.slice(0, 1600);
         expect(head, \`page \${p.n}: a calculation without S or P\`)
           .toMatch(/calc-sym__math[^>]*>[^<]*[SP]|[SP] =/);
         expect(head, \`page \${p.n}: a calculation without its unit\`).toMatch(/יח/);
       }
-      /* Room to work`,
+`,
     'canonical calculation symbols',
-  ],
-  [
-    /\/answer-line\|calc-ltr\/\.test\(head\)/,
+  );
+
+  layout = layout.replace(
+    '/answer-line|calc-ltr/.test(head)',
     '/answer-line|calc-ltr|calc-squared/.test(head)',
-    'squared calculation workspace',
-  ],
-  [
-    /  it\('an area or perimeter is never asked as a loose blank',[\s\S]*?\n  \}\);\n\n  it\('a sheet that asks for a calculation leaves space to do it'/,
+  );
+
+  layout = replaceBetween(
+    layout,
+    "  it('an area or perimeter is never asked as a loose blank'",
+    "  it('a sheet that asks for a calculation leaves space to do it'",
 `  it('an area or perimeter is never asked as a loose blank', () => {
     const insideCalcBox = (html: string, index: number): boolean => {
       let depth = 0;
@@ -123,20 +141,33 @@ await replaceRegex('tests/layout-rules.test.ts', 'const insideCalcBox = (html: s
     }
   });
 
-  it('a sheet that asks for a calculation leaves space to do it'`,
+`,
     'loose area/perimeter answer detection',
-  ],
-  [
-    /      for \(const b of page\.html\.match\(\/<div class="calc-pair">[\s\S]*?\n      \}/,
-`      for (const b of page.html.match(/<div class="calc-pair">[\\s\\S]*?<\\/div><\\/div><\\/div>/g) ?? []) {
+  );
+
+  layout = replaceBetween(
+    layout,
+    "  it('every exercise leaves room to write the subtraction'",
+    "  it('every calculation line carries its units'",
+`  it('every exercise leaves room to write the subtraction', () => {
+    for (const page of WORKBOOK) {
+      for (const b of page.html.match(/<div class="calc-pair">[\\s\\S]*?<\\/div><\\/div><\\/div>/g) ?? []) {
         if (!b.includes('calc-ltr__name')) continue;
         if ((b.match(/class="blank"/g) ?? []).length < 2) continue;
         const first = b.match(/--blank-width:(\\d+)ch/);
         expect(Number(first?.[1] ?? 0), \`page \${page.n}: no room to write the exercise\`)
           .toBeGreaterThanOrEqual(14);
-      }`,
+      }
+    }
+  });
+
+`,
     'handwritten subtraction workspace',
-  ],
-]);
+  );
+
+  await writeFile('tests/layout-rules.test.ts', layout, 'utf8');
+} else {
+  console.log('tests/layout-rules.test.ts: already patched.');
+}
 
 console.log('Canonical synchronization test expectations patched.');
