@@ -12,12 +12,12 @@ Updated: 2026-08-05
 - The immediate checker uses reviewed answer metadata embedded in the target until the asynchronous repository key finishes loading, then continues with the repository key.
 - Adaptive A4 spacing operates in both the fixed A4 screen view and print media, and activates only when measured overflow exists.
 - The generated reports are current for the canonical model: 1,162 response targets, with 735 safely checkable automatically.
-- Final CI is green: 161 unit/content tests, Firestore emulator authorization, TypeScript, production build, release report and all 102 Playwright browser/A4 checks passed.
-- The latest LMS and A4 infrastructure fixes changed no file under `src/data/workbook/pages/`.
+- Full verification passed before cleanup: 161 unit/content tests, Firestore emulator authorization, TypeScript, production build, release report and all 102 Playwright browser/A4 checks.
+- The completed one-shot synchronization workflows and patch scripts have been removed. The permanent read-only CI and production code remain.
+- The LMS and A4 infrastructure changes modified no file under `src/data/workbook/pages/`.
 
 Legacy answer evidence is applied only to authored pages that survived the
 reorder. Rebuilt printable replacements have no legacy page mapping, so old game
 answers cannot be attached to a different printed question.
 
-The completed one-shot synchronization workflows and patch scripts are being
-removed. The permanent read-only CI and production code remain.
+The cleaned branch is running one final read-only verification.
