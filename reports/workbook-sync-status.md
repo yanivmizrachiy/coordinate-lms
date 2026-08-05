@@ -11,13 +11,13 @@ Updated: 2026-08-05
 - Incorrect partial typing does not consume an attempt; an incorrect attempt is counted only by the explicit answer-check action.
 - The immediate checker uses reviewed answer metadata embedded in the target until the asynchronous repository key finishes loading, then continues with the repository key.
 - Adaptive A4 spacing operates in both the fixed A4 screen view and print media, and activates only when measured overflow exists.
-- The final infrastructure fix changed only `src/lms/engine.ts` and `src/styles/workbook.css`; no file under `src/data/workbook/pages/` changed.
 - The generated reports are current for the canonical model: 1,162 response targets, with 735 safely checkable automatically.
-- All 161 unit and content tests, Firestore emulator authorization, TypeScript and the production build passed before this final browser recheck.
+- Final CI is green: 161 unit/content tests, Firestore emulator authorization, TypeScript, production build, release report and all 102 Playwright browser/A4 checks passed.
+- The latest LMS and A4 infrastructure fixes changed no file under `src/data/workbook/pages/`.
 
 Legacy answer evidence is applied only to authored pages that survived the
 reorder. Rebuilt printable replacements have no legacy page mapping, so old game
 answers cannot be attached to a different printed question.
 
-The branch is running the complete read-only CI verification after the live-key
-hydration and adaptive A4 fixes.
+The completed one-shot synchronization workflows and patch scripts are being
+removed. The permanent read-only CI and production code remain.
