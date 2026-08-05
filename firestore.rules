@@ -17,7 +17,7 @@ service cloud.firestore {
     }
 
     function validPageNumber(value) {
-      return value is int && value >= 1 && value <= 77;
+      return value is int && value >= 1 && value <= 78;
     }
 
     function validScore(value) {
