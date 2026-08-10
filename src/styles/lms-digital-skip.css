@@ -1,0 +1,30 @@
+/* Digital-only exception for learner-created or teacher-judgment responses.
+   Canonical workbook markup stays intact; print restores every skipped element. */
+.pageviewer [data-lms-digital-skipped='true'] {
+  display: none !important;
+}
+
+.lms-digital-skip-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.55em;
+  margin-inline: 0.35em;
+  padding: 0.08em 0.55em;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 0.78em;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+@media print {
+  .pageviewer [data-lms-digital-skipped='true'] {
+    display: revert !important;
+  }
+
+  .lms-digital-skip-label {
+    display: none !important;
+  }
+}
