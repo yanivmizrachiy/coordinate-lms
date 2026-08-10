@@ -1,3 +1,4 @@
+import '../styles/lms-digital-skip.css';
 import { loadAnswerKey } from './repository';
 
 const TARGET_SELECTOR = '.blank, .word-blank, .pair-blank';
