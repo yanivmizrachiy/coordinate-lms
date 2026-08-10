@@ -1,3 +1,4 @@
+import { applyDigitalAnswerPolicy } from './digitalAnswerPolicy';
 import type { AnswerKey } from './types';
 
 function parseAnswers(raw: string | undefined): string[] {
@@ -32,6 +33,10 @@ function answerFromAria(target: HTMLElement): string[] {
  * Captures explicit authoring answers before the generic LMS engine replaces
  * descriptive aria-labels with sequential accessible labels such as
  * "תשובה 1". This runs only on labels that literally name the answer.
+ *
+ * The final policy call is deliberately digital-only: it may make an on-screen
+ * question deterministic or order-flexible, but it never mutates the canonical
+ * workbook source from which printing is produced.
  */
 export function hydrateExplicitAuthoringAnswers(
   root: ParentNode,
@@ -47,15 +52,19 @@ export function hydrateExplicitAuthoringAnswers(
       target.dataset['lmsAnswers'] = JSON.stringify(answers);
     }
   }
+
+  applyDigitalAnswerPolicy(root);
 }
 
 /**
  * Reads answers that the canonical worksheet already states explicitly:
  * - data-lms-answers added by interactive grid/choice hydrators
  * - authoring aria labels such as "מקום להשלמת המילה אופקי"
+ * - reviewed digital-only adaptations for deterministic immediate grading
  *
- * It deliberately does not guess from surrounding prose. Ambiguous or open
- * questions still require a reviewed teacher answer key.
+ * It deliberately does not guess from surrounding prose. Open questions stay
+ * ungraded unless the digital layer replaces them with an objectively checkable
+ * version of the same skill.
  */
 export function implicitAnswerKey(
   pageNumber: number,
