@@ -1,22 +1,26 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, grid, exerciseGiven } from '../authoring';
+import { sheet, blank, ltr, pair, grid, exerciseGiven, wordBank } from '../authoring';
 
 /* Based on the national-test question Yaniv sent: an average score plotted by
    year. Same genre, our own data — the sports hall attendance of a school. */
 export const GRAPH_YEARS: WorkbookPageContent = sheet({
   sectionClass: 'sheet practice',
   title: 'קריאת גרפים ברביע הראשון',
-  subtitle: 'לאורך השנים — ערך x הוא השנה, שיעור y הוא התוצאה',
+  subtitle: 'לאורך השנים — ציר ה־x מציין את השנה, וציר ה־y את התוצאה',
   content: `
 <div class="rule-box completion-intro">
-<div class="completion-sentence">כשערך ה־${ltr('x')} הוא שנה, המרחק בין שתי נקודות על ציר ${ltr('x')} הוא מספר ה${blank(5, 'concept')} שעברו.</div>
+<div class="completion-sentence">כאשר ציר ה־${ltr('x')} מציין שנים, ההפרש בין שיעורי ה־${ltr('x')} של שתי נקודות הוא מספר ה${blank(5, 'concept')} שעברו.</div>
 </div>
+${wordBank(['שנים'])}
 <section class="q-card">
 <h3>א. בגרף מוצג מספר התלמידים שנרשמו לחוג המתמטיקה בבית הספר.</h3>
 ${grid({
   size: 'lg',
   axisX: 'שנים מאז הפתיחה',
   axisY: 'נרשמים (עשרות)',
+  /* בסעיף ב מסמנים את השנה השמינית עם 70 תלמידים = 7 עשרות, ולכן ציר ה־y חייב
+     להגיע מעל 7 — אחרת הנקודה (8,7) יוצאת מהמערכת (עמוד 64: „הנקודה יצאה"). */
+  ymax: 8,
   label: 'גרף נקודות: מספר הנרשמים לחוג בכל שנה מאז הפתיחה',
   points: [
     { x: 1, y: 2, label: '' },

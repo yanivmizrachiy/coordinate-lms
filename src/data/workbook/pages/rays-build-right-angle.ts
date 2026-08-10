@@ -7,7 +7,7 @@ import { sheet, blank, ltr, pair, grid } from '../authoring';
 export const RAYS_BUILD_RIGHT_ANGLE: WorkbookPageContent = sheet({
   sectionClass: 'sheet practice',
   title: 'זוויות ברביע הראשון',
-  subtitle: 'בונים זווית ישרה בראשית הצירים, ואז משלימים עליה',
+  subtitle: 'בונים זווית ישרה בראשית הצירים ומשלימים את החסר',
   content: `
 <section class="q-card">
 <h3>א. סמנו נקודה שיוצרת זווית ישרה, ואז השלימו את החסר.</h3>

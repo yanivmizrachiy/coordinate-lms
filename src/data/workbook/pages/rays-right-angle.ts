@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, grid } from '../authoring';
+import { sheet, blank, ltr, pair, grid, wordBank } from '../authoring';
 
 /* Drawn from Yaniv's misparim repo (the „זווית לכיתה ז'” unit) — the questions
    there that live in the first quadrant. The mathematics is his; the wording is
@@ -14,10 +14,11 @@ export const RAYS_RIGHT_ANGLE: WorkbookPageContent = sheet({
 <div class="completion-sentence">קרן שיוצאת מראשית הצירים ועוברת דרך נקודה שעל ציר ${ltr('x')} ממוקמת על ציר ${ltr('x')} עצמו, ולכן היא ${blank(5, 'property')}.</div>
 <div class="completion-sentence">קרן שיוצאת מראשית הצירים ועוברת דרך נקודה שעל ציר ${ltr('y')} היא אנכית, ולכן הזווית בין שתי הקרניים האלה היא זווית ${blank(5, 'property')}.</div>
 </div>
+${wordBank(['ישרה', 'אופקית'])}
 <section class="q-card">
 <h3>א. סמנו, ציירו ובדקו — ואז הקיפו.</h3>
 <p>סמנו כל אפשרות על הסרטוט, ציירו את הקרן מראשית הצירים דרכה, ובדקו איזו יוצרת זווית ישרה.</p>
-${grid({ size: 'md', label: 'מערכת צירים לבדיקת האפשרויות: מסמנים נקודה ומציירים ממנה קרן' })}
+${grid({ size: 'sm', label: 'מערכת צירים לבדיקת האפשרויות: מסמנים נקודה ומציירים ממנה קרן' })}
 <ul class="tasks compact">
 <li>אחת הקרניים של זווית ישרה עוברת דרך הנקודה ${ltr('(4,0)')}. הנקודה שיכולה להיות על הקרן השנייה היא:
 <span class="choice-row"><span class="choice">${ltr('(0,4)')}</span><span class="choice">${ltr('(4,2)')}</span><span class="choice">${ltr('(2,4)')}</span><span class="choice">${ltr('(4,4)')}</span></span></li>
@@ -28,7 +29,7 @@ ${grid({ size: 'md', label: 'מערכת צירים לבדיקת האפשרויו
 <section class="q-card">
 <h3>ב. השלימו לפי הסרטוט.</h3>
 ${grid({
-  size: 'md',
+  size: 'sm',
   label: 'שתי קרניים מראשית הצירים: אחת דרך (5,0) ואחת דרך (0,3)',
   points: [{ x: 0, y: 0, label: 'O' }, { x: 5, y: 0, label: 'P' }, { x: 0, y: 3, label: 'Q' }],
   segments: [

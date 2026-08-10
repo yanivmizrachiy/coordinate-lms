@@ -1,9 +1,9 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet } from '../authoring';
+import { sheet, wordBank } from '../authoring';
 
 export const PARALLEL_PERPENDICULAR: WorkbookPageContent = sheet({
   sectionClass: "sheet guided",
-  title: "מקביל ומאונך במערכת הצירים",
+  title: "קטעים מקבילים לצירים",
   subtitle: "קטע מקביל לציר x הוא מאונך לציר y",
   contentTag: 'div',
   content: `
@@ -22,26 +22,34 @@ export const PARALLEL_PERPENDICULAR: WorkbookPageContent = sheet({
 <section class="q-card">
 <h3>ב. השלימו.</h3>
 <ul class="tasks compact">
-<li>קטע שבו <b>שיעור <span class="math-ltr" dir="ltr">y</span> זהה</b> בשתי הנקודות מקביל לציר <span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>
-<li>קטע שבו <b>שיעור <span class="blank" data-missing="letter" style="--blank-width:3ch"></span> זהה</b> בשתי הנקודות מקביל לציר <span class="math-ltr" dir="ltr">y</span>.</li>
-<li>קטע המקביל לציר <span class="math-ltr" dir="ltr">x</span> <span class="blank" data-missing="relation" style="--blank-width:6ch"></span> לציר <span class="math-ltr" dir="ltr">y</span>.</li>
-<li>קטע <span class="blank" data-missing="relation" style="--blank-width:6ch"></span> לציר <span class="math-ltr" dir="ltr">y</span> מאונך לציר <span class="math-ltr" dir="ltr">x</span>.</li>
+<li>אם שתי נקודות ממוקמות על קטע ושיעור ה־<span class="math-ltr" dir="ltr">y</span> שלהן זהה — הקטע מקביל בהכרח לציר <span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>
+<li>אם שתי נקודות ממוקמות על קטע ושיעור ה־<span class="blank" data-missing="letter" style="--blank-width:3ch"></span> שלהן זהה — הקטע מקביל בהכרח לציר <span class="math-ltr" dir="ltr">y</span>.</li>
+<li>קטע המקביל לציר <span class="math-ltr" dir="ltr">x</span> הוא בהכרח <span class="blank" data-missing="relation" style="--blank-width:6ch"></span> לציר <span class="math-ltr" dir="ltr">y</span>.</li>
+<li>קטע <span class="blank" data-missing="relation" style="--blank-width:6ch"></span> לציר <span class="math-ltr" dir="ltr">y</span> הוא בהכרח מאונך לציר <span class="math-ltr" dir="ltr">x</span>.</li>
 </ul>
+${wordBank(['מקביל', 'x', 'מאונך'])}
 </section>
 </div>
 <section class="q-card span-2">
 <h3>ג. סמנו נכון או לא נכון.</h3>
 <table class="tf-table">
-<tr data-answer="true"><td>קטע המקביל לציר <span class="math-ltr" dir="ltr">x</span> הוא מאונך לציר <span class="math-ltr" dir="ltr">y</span>.</td><td>
+<tr data-answer="true"><td>קטע המקביל לציר <span class="math-ltr" dir="ltr">x</span> הוא בהכרח מאונך לציר <span class="math-ltr" dir="ltr">y</span>.</td><td>
 <div class="tf-options" role="group" aria-label="סמנו נכון או לא נכון"><label class="tf-option"><input type="radio" name="pp-1" value="true"><span>נכון</span></label><label class="tf-option"><input type="radio" name="pp-1" value="false"><span>לא נכון</span></label>
 </div></td></tr>
-<tr data-answer="false"><td>בקטע המקביל לציר <span class="math-ltr" dir="ltr">y</span>, שיעור <span class="math-ltr" dir="ltr">y</span> זהה בשתי הנקודות.</td><td>
+<tr data-answer="false"><td>אם שתי נקודות ממוקמות על קטע המקביל לציר <span class="math-ltr" dir="ltr">y</span>, שיעור ה־<span class="math-ltr" dir="ltr">y</span> שלהן זהה.</td><td>
 <div class="tf-options" role="group" aria-label="סמנו נכון או לא נכון"><label class="tf-option"><input type="radio" name="pp-2" value="true"><span>נכון</span></label><label class="tf-option"><input type="radio" name="pp-2" value="false"><span>לא נכון</span></label>
 </div></td></tr>
-<tr data-answer="true"><td>בקטע המקביל לציר <span class="math-ltr" dir="ltr">x</span>, שיעור <span class="math-ltr" dir="ltr">y</span> זהה בשתי הנקודות.</td><td>
+<tr data-answer="true"><td>אם שתי נקודות ממוקמות על קטע המקביל לציר <span class="math-ltr" dir="ltr">x</span>, שיעור ה־<span class="math-ltr" dir="ltr">y</span> שלהן זהה.</td><td>
 <div class="tf-options" role="group" aria-label="סמנו נכון או לא נכון"><label class="tf-option"><input type="radio" name="pp-3" value="true"><span>נכון</span></label><label class="tf-option"><input type="radio" name="pp-3" value="false"><span>לא נכון</span></label>
 </div></td></tr>
 </table>
+</section>
+<section class="q-card span-2">
+<h3>ד. מסמנים בעצמכם.</h3>
+<ul class="tasks compact">
+<li>סמנו על המערכת שבסעיף א קטע <span class="math-ltr" dir="ltr">EF</span> המקביל לציר <span class="math-ltr" dir="ltr">y</span>, וכתבו את שיעורי קצותיו: <span class="pair math-ltr" dir="ltr">E(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> <span class="pair math-ltr" dir="ltr">F(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>
+<li>הקטע שסימנתם מאונך בהכרח לציר <span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>
+</ul>
 </section>
 `,
 });

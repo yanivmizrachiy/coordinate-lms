@@ -3,7 +3,7 @@ import { sheet } from '../authoring';
 
 export const RIGHT_ANGLE_PRACTICE: WorkbookPageContent = sheet({
   sectionClass: "sheet practice",
-  title: "מזהים זווית ישרה",
+  title: "קטעים מאונכים ברביע הראשון",
   subtitle: "זווית ישרה נוצרת רק כשקטע אחד אופקי והשני אנכי",
   contentTag: 'div',
   content: `
@@ -56,7 +56,7 @@ export const RIGHT_ANGLE_PRACTICE: WorkbookPageContent = sheet({
 <h3>ג. השלימו את הכלל.</h3>
 <ul class="tasks">
 <li>זווית ישרה נוצרת רק כשקטע אחד <span class="blank" data-missing="property" style="--blank-width:6ch"></span> והשני אנכי.</li>
-<li>לשתי נקודות שעל קטע אנכי יש <span class="blank" data-missing="concept" style="--blank-width:5ch"></span> <span class="math-ltr" dir="ltr">x</span> זהה.</li>
+<li>לשתי נקודות שממוקמות על קטע אנכי יש שיעור <span class="blank" data-missing="letter" style="--blank-width:3ch"></span> זהה.</li>
 <li>קטע המקביל לציר <span class="math-ltr" dir="ltr">x</span> הוא מאונך לציר <span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>
 </ul>
 </section>

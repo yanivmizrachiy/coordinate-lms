@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, grid, exerciseGiven } from '../authoring';
+import { sheet, blank, ltr, pair, grid, exerciseGiven, wordBank } from '../authoring';
 
 /* The step between the sent questions and an algebraic expression: points that
    climb by the same amount every time. Reading the step off the graph is what
@@ -13,6 +13,7 @@ export const GRAPH_CONSTANT_RATE: WorkbookPageContent = sheet({
 <div class="completion-sentence">אם בכל צעד על ציר ${ltr('x')} שיעור ה־${ltr('y')} עולה באותו מספר, אומרים שהקצב ${blank(5, 'property')}.</div>
 <div class="completion-sentence">את הקצב מוצאים בתרגיל ${blank(5, 'concept')}: שיעור ה־${ltr('y')} של הנקודה הבאה פחות שיעור ה־${ltr('y')} של הנקודה שלפניה.</div>
 </div>
+${wordBank(['חיסור', 'קבוע'])}
 <section class="q-card">
 <h3>א. בגרף מוצג גובה הנר שנשרף, בכל שעה.</h3>
 ${grid({

@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet } from '../authoring';
+import { sheet, wordBank } from '../authoring';
 
 export const MOVE_INTRO: WorkbookPageContent = sheet({
   sectionClass: "sheet guided dense",
@@ -10,6 +10,7 @@ export const MOVE_INTRO: WorkbookPageContent = sheet({
 <div class="completion-sentence">הזזה ימינה או שמאלה משנה את שיעור <span class="word-blank word-short" data-missing="letter" aria-label="מקום להשלמת האות x"></span>.</div>
 <div class="completion-sentence">הזזה למעלה או <span class="word-blank word-medium" data-missing="direction" aria-label="מקום להשלמת המילה למטה"></span> משנה את שיעור <span class="math-ltr" dir="ltr">y</span>.</div>
 </div>
+${wordBank(['למטה', 'x'])}
 <section class="q-card">
 <h3>א. הקיפו את התשובה הנכונה.</h3>
 <div class="mc-stack">

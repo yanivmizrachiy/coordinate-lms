@@ -22,7 +22,7 @@ export const DISTANCE_PRACTICE: WorkbookPageContent = sheet({
 </section>
 <section class="q-card">
 <h3>אל הצירים</h3>
-<p>כדי להגיע מציר כלשהו, משנים רק שיעור אחד.</p>
+<p>כדי להגיע אל ציר כלשהו, משנים רק שיעור אחד.</p>
 <ul class="tasks">
 <li>מ־<span class="math-ltr" dir="ltr">(7,3)</span> אל ציר <span class="math-ltr" dir="ltr">y</span>: הזזה של <span class="blank" data-missing="number" style="--blank-width:4ch"></span> יח' <span class="blank" data-missing="direction" style="--blank-width:8ch"></span>.</li>
 <li>מ־<span class="math-ltr" dir="ltr">(4,5)</span> אל ציר <span class="blank" data-missing="letter" style="--blank-width:3ch"></span>: הזזה של 5 יח' למטה.</li>

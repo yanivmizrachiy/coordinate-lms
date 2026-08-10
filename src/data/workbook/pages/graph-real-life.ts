@@ -6,7 +6,7 @@ export const GRAPH_REAL: WorkbookPageContent = sheet({
   title: "קוראים גרף מהחיים",
   subtitle: "שיעור x זהה — אותו משקל; שיעור y זהה — אותו מחיר",
   content: `
-<div class="rule-box">בגרף שלפניכם כל נקודה מייצגת חבילת קמח. <b>שיעור <span class="math-ltr" dir="ltr">x</span></b> הוא ה<b>משקל</b> (ק"ג), ו<b>שיעור <span class="math-ltr" dir="ltr">y</span></b> הוא ה<b>מחיר</b> (₪).
+<div class="rule-box">בגרף שלפניכם כל נקודה מייצגת חבילת קמח. <b>שיעור <span class="math-ltr" dir="ltr">x</span></b> מייצג את ה<b>משקל</b> (ק"ג), ו<b>שיעור <span class="math-ltr" dir="ltr">y</span></b> מייצג את ה<b>מחיר</b> (₪).
 </div>
 <section class="q-card">
 <h3>הגרף: משקל החבילה מול מחירה.</h3>

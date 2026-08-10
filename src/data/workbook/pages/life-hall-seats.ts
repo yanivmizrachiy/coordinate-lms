@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, grid, calcBox, exerciseGiven } from '../authoring';
+import { sheet, blank, ltr, pair, grid, calcBox, exerciseGiven, wordBank } from '../authoring';
 
 /* Real life, grade 7: a ticket says „שורה 4, מקום 7”, and sitting in the wrong
    one is the ordered pair failing in public. The block of seats a group buys is
@@ -13,6 +13,7 @@ export const LIFE_HALL_SEATS: WorkbookPageContent = sheet({
 <div class="completion-sentence">על הכרטיס כתוב מקום ושורה. המקום הוא ערך ה־${blank(3, 'letter')}, והשורה היא שיעור ה־${ltr('y')}.</div>
 <div class="completion-sentence">מי שיושב במקום 3 בשורה 5 ומי שיושב במקום 5 בשורה 3 יושבים בשני כיסאות ${blank(5, 'relation')}.</div>
 </div>
+${wordBank(['שונים', 'x'])}
 <section class="q-card">
 <h3>א. מי יושב איפה?</h3>
 ${grid({
