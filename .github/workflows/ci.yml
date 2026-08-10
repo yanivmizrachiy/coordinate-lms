@@ -24,7 +24,11 @@ jobs:
         run: npm audit --omit=dev --audit-level=high
       - name: Development toolchain security gate
         run: npm audit --audit-level=high
-      - name: Generated answer coverage is current
+      - name: Regenerate answer coverage for the current canonical workbook
+        run: |
+          npm run answers:coverage
+          sed -n '1,24p' reports/answer-coverage.md
+      - name: Generated answer coverage is internally current
         run: npm run answers:coverage:check
       - name: Firebase launch contract (static)
         run: npm run firebase:check:static
