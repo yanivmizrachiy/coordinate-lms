@@ -12,6 +12,20 @@ function qid(target: HTMLElement): string {
   return target.dataset['lmsQid'] || '';
 }
 
+function hasInlineAnswer(target: HTMLElement): boolean {
+  const raw = target.dataset['lmsAnswers'];
+  if (!raw) return false;
+
+  try {
+    const values = JSON.parse(raw) as unknown;
+    return Array.isArray(values) && values.some(
+      (value) => typeof value === 'string' && value.trim().length > 0,
+    );
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Removes learner-created / teacher-judgment-only responses from the computer
  * assignment without touching canonical workbook HTML. The same content still
@@ -19,6 +33,8 @@ function qid(target: HTMLElement): string {
  *
  * If a teacher later supplies a real answer key for a target, it is not hidden:
  * the decision is based on the effective runtime key, not a hard-coded list.
+ * Explicit data-lms-answers embedded by the page hydrators are always treated
+ * as graded even if an asynchronous repository read is stale or incomplete.
  */
 export function hideUngradedDigitalTargets(
   root: ParentNode,
@@ -38,7 +54,11 @@ export function hideUngradedDigitalTargets(
       const ungraded = new Set(
         targets.filter((target) => {
           const id = qid(target);
-          return id !== '' && (key[id] || []).length === 0;
+          return (
+            id !== '' &&
+            !hasInlineAnswer(target) &&
+            (key[id] || []).length === 0
+          );
         }),
       );
 
