@@ -1,0 +1,77 @@
+name: Canonical workbook drift snapshot
+
+on:
+  push:
+    branches:
+      - agent/digital-answer-audit
+
+permissions:
+  contents: write
+
+concurrency:
+  group: canonical-workbook-drift-snapshot
+  cancel-in-progress: true
+
+jobs:
+  snapshot:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout LMS branch
+        uses: actions/checkout@v7
+        with:
+          ref: agent/digital-answer-audit
+          path: lms
+      - name: Checkout canonical printed workbook read-only
+        uses: actions/checkout@v7
+        with:
+          repository: yanivmizrachiy/coordinate-first-quadrant
+          ref: main
+          path: canonical
+          persist-credentials: false
+      - name: Build exact drift report
+        shell: bash
+        run: |
+          set -euo pipefail
+          canonical_sha="$(git -C canonical rev-parse HEAD)"
+          lms_sha="$(git -C lms rev-parse HEAD)"
+          canonical_files="$(find canonical/src/data/workbook -type f | sed 's#^canonical/##' | sort)"
+          lms_files="$(find lms/src/data/workbook -type f | sed 's#^lms/##' | sort)"
+          canonical_count="$(printf '%s\n' "$canonical_files" | sed '/^$/d' | wc -l)"
+          lms_count="$(printf '%s\n' "$lms_files" | sed '/^$/d' | wc -l)"
+          diff_text="$(diff -qr canonical/src/data/workbook lms/src/data/workbook || true)"
+          different_count="$(printf '%s\n' "$diff_text" | sed '/^$/d' | wc -l)"
+          {
+            echo '# Canonical workbook drift snapshot'
+            echo
+            echo "Generated: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo
+            echo "- Canonical repository: \`yanivmizrachiy/coordinate-first-quadrant\`"
+            echo "- Canonical commit: \`$canonical_sha\`"
+            echo "- LMS commit measured: \`$lms_sha\`"
+            echo "- Canonical workbook files: $canonical_count"
+            echo "- LMS workbook files: $lms_count"
+            echo "- Different/missing file entries: $different_count"
+            echo
+            echo '## Exact directory diff'
+            echo
+            echo '```text'
+            if [[ -n "$diff_text" ]]; then
+              printf '%s\n' "$diff_text"
+            else
+              echo 'NO DRIFT'
+            fi
+            echo '```'
+          } > lms/reports/canonical-workbook-drift.md
+      - name: Commit drift evidence
+        working-directory: lms
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/canonical-workbook-drift.md
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Record canonical workbook drift"
+          git push
