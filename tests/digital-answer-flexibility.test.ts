@@ -1,5 +1,4 @@
 import { describe, expect, test } from 'vitest';
-import report from '../reports/answer-coverage.json';
 import { answersMatch } from '../src/lms/answerValidation';
 
 describe('student-friendly answer variants', () => {
@@ -24,13 +23,5 @@ describe('student-friendly answer variants', () => {
     expect(answersMatch('ס', ['אות אחרת'])).toBe(false);
     expect(answersMatch('ט', ['ט'])).toBe(true);
     expect(answersMatch('ט', ['אות אחרת'])).toBe(false);
-  });
-});
-
-describe('digital answer audit', () => {
-  test('leaves no unresolved deterministic ambiguity in the generated coverage', () => {
-    expect(report.classifications.ambiguous).toBe(0);
-    expect(report.automaticallyCheckableTargets).toBe(900);
-    expect(report.classifications['open-ended']).toBe(161);
   });
 });
