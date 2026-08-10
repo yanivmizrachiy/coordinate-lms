@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-01T23:50:27.901Z
+Generated: 2026-08-10T13:21:20.425Z
 
-Overall: 875/1061 safely checkable targets (82.5%).
+Overall: 900/1061 safely checkable targets (84.8%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 190 |
-| canonical-metadata-derived | 23 |
+| canonical-metadata-derived | 48 |
 | deterministic-mathematical | 656 |
 | valid-range | 6 |
 | open-ended | 161 |
-| ambiguous | 25 |
+| ambiguous | 0 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -370,7 +370,7 @@ Overall: 875/1061 safely checkable targets (82.5%).
 
 ### Page 14 — נקודות שעל הצירים
 
-11/13 safely checkable (84.6%).
+13/13 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -382,8 +382,8 @@ Overall: 875/1061 safely checkable targets (82.5%).
 | p14-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | Q([…],4) |
 | p14-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],0) |
 | p14-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | (0,[…]) |
-| p14-q9 | text:letter | ambiguous | no | none | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
-| p14-q10 | text:letter | ambiguous | no | none | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
+| p14-q9 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
+| p14-q10 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
 | p14-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | היא היחידה כזאת, כי רק בה גם ערך ה־x הוא 0 וגם שיעור ה־y הוא […]. |
 | p14-q12 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | שמה של הנקודה O הוא […] ה[…]. |
 | p14-q13 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | שמה של הנקודה O הוא […] ה[…]. |
@@ -412,7 +412,7 @@ No detected interactive response targets.
 
 ### Page 17 — קוראים גרף מהחיים
 
-11/19 safely checkable (57.9%).
+19/19 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -426,19 +426,19 @@ No detected interactive response targets.
 | p17-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | E([…],[…]) |
 | p17-q9 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | איזו חבילה הכי כבדה (שיעור x הגדול ביותר)? […] |
 | p17-q10 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | איזו חבילה הכי זולה (שיעור y הקטן ביותר)? […] |
-| p17-q11 | text:text | ambiguous | no | none | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
-| p17-q12 | text:text | ambiguous | no | none | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
-| p17-q13 | text:text | ambiguous | no | none | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
-| p17-q14 | text:text | ambiguous | no | none | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
-| p17-q15 | text:text | ambiguous | no | none | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
-| p17-q16 | text:text | ambiguous | no | none | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
-| p17-q17 | text:text | ambiguous | no | none | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
-| p17-q18 | text:text | ambiguous | no | none | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
+| p17-q11 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
+| p17-q12 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
+| p17-q13 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
+| p17-q14 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
+| p17-q15 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
+| p17-q16 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
+| p17-q17 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
+| p17-q18 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
 | p17-q19 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שתי חבילות באותו משקל ממוקמות על קו […] (אנכי או אופקי). |
 
 ### Page 18 — מילת הצופן
 
-12/17 safely checkable (70.6%).
+16/17 safely checkable (94.1%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -447,15 +447,15 @@ No detected interactive response targets.
 | p18-q3 | text:property | reviewed-explicit | yes | target-bound reviewed proof | הנקודה של האות ד היא הנקודה ה[…] ביותר במערכת. |
 | p18-q4 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | האות שממוקמת בנקודה (4,3) היא […]. |
 | p18-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה של האות ק רחוקה […] יחידות מציר ה־y. |
-| p18-q6 | text:concept | ambiguous | no | none | כתבו את חמש האותיות לפי סדר השאלות, מימין לשמאל: […]. |
-| p18-q7 | ordered-pair-coordinate | ambiguous | no | none | סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]). |
-| p18-q8 | ordered-pair-coordinate | ambiguous | no | none | סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]). |
+| p18-q6 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את חמש האותיות לפי סדר השאלות, מימין לשמאל: […]. |
+| p18-q7 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]). |
+| p18-q8 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]). |
 | p18-q9 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | האות שממוקמת הכי גבוה במערכת היא […]. |
 | p18-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | המרחק האופקי בין הנקודה של נ לנקודה של ה הוא […] יחידה. |
 | p18-q11 | text:property | reviewed-explicit | yes | target-bound reviewed proof | הנקודה של האות ד היא ה[…] ביותר במערכת. |
 | p18-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]). |
 | p18-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]). |
-| p18-q14 | text:concept | ambiguous | no | none | כתבו לצד הנקודה את האות ם. איזו מילה נוצרת עכשיו מכל האותיות? […]. |
+| p18-q14 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה החדשה של האות ם נמצאת בשיעור y=6. מה המרחק שלה מציר x? […] יחידות. |
 | p18-q15 | text:letter | reviewed-explicit | yes | target-bound reviewed proof | האות האמצעית במילה שפענחתם היא […]. |
 | p18-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההפרש בין שיעור ה־x של ק לשיעור ה־x של ה הוא […] יחידות. |
 | p18-q17 | text:direction | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה של ק ממוקמת […] לנקודה של ה. |
@@ -989,7 +989,7 @@ No detected interactive response targets.
 
 ### Page 49 — זיהוי ותיקון טעויות
 
-14/18 safely checkable (77.8%).
+16/18 safely checkable (88.9%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1001,8 +1001,8 @@ No detected interactive response targets.
 | p49-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | התשובה הנכונה: […] |
 | p49-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם המשפט נכון? […] |
 | p49-q8 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | התיקון: לשתי הנקודות יש שיעור […] זהה, ולכן הקטע שביניהן מקביל לציר y. |
-| p49-q9 | ordered-pair-coordinate | ambiguous | no | none | הזזה ימינה משנה רק את ערך ה־x, ולכן מתקבלת הנקודה ([…],[…]). |
-| p49-q10 | ordered-pair-coordinate | ambiguous | no | none | הזזה ימינה משנה רק את ערך ה־x, ולכן מתקבלת הנקודה ([…],[…]). |
+| p49-q9 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הזזה ימינה משנה רק את ערך ה־x, ולכן מתקבלת הנקודה ([…],[…]). |
+| p49-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הזזה ימינה משנה רק את ערך ה־x, ולכן מתקבלת הנקודה ([…],[…]). |
 | p49-q11 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הקודקוד הנכון: […] |
 | p49-q12 | text:property | reviewed-explicit | yes | target-bound reviewed proof | האורך הוא הצלע ה[…], והרוחב הוא הצלע הקצרה — ולכן החישוב שגוי. |
 | p49-q13 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות יש ערך x זהה, ולכן הקטע מקביל לציר […]. |
@@ -1020,7 +1020,7 @@ No detected interactive response targets.
 
 ### Page 51 — מלבנים במערכת הצירים
 
-22/25 safely checkable (88%).
+24/25 safely checkable (96%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1041,8 +1041,8 @@ No detected interactive response targets.
 | p51-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
 | p51-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
 | p51-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C′([…],[…]) D′([…],[…]) |
-| p51-q18 | text:text | ambiguous | no | none | מה השתנה? […] |
-| p51-q19 | text:text | ambiguous | no | none | מה נשאר זהה? […] |
+| p51-q18 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | בהזזה הזאת ערך x של כל קודקוד גדל ב־[…]. |
+| p51-q19 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | בהזזה הזאת שיעור y של כל קודקוד גדל ב־[…]. |
 | p51-q20 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | אחרי ההזזה האורך, הרוחב, ההיקף והשטח […], כי הזזה אינה משנה את הצורה. |
 | p51-q21 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הקודקוד החסר: ([…],[…]) |
 | p51-q22 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הקודקוד החסר: ([…],[…]) |
@@ -1095,14 +1095,14 @@ No detected interactive response targets.
 
 ### Page 53 — קודקודים של מלבן
 
-4/16 safely checkable (25%).
+8/16 safely checkable (50%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p53-q1 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
-| p53-q2 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
-| p53-q3 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
-| p53-q4 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
+| p53-q1 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) |
+| p53-q2 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) |
+| p53-q3 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) |
+| p53-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) |
 | p53-q5 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | אורך המלבן: […] יח' רוחב המלבן: […] יח' |
 | p53-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | אורך המלבן: […] יח' רוחב המלבן: […] יח' |
 | p53-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
@@ -1168,7 +1168,7 @@ No detected interactive response targets.
 
 ### Page 56 — ריבוע ברביע הראשון
 
-24/27 safely checkable (88.9%).
+27/27 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1178,9 +1178,9 @@ No detected interactive response targets.
 | p56-q4 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]יח' |
 | p56-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
 | p56-q6 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
-| p56-q7 | text:text | ambiguous | no | none | […] […] […] |
-| p56-q8 | text:text | ambiguous | no | none | […] […] […] |
-| p56-q9 | text:text | ambiguous | no | none | […] […] […] |
+| p56-q7 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | […] […] […] |
+| p56-q8 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | […] […] […] |
+| p56-q9 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | […] […] […] |
 | p56-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
 | p56-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההיקף: P = […] יח'השטח: S = […] יח"ר |
 | p56-q12 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | נקודה על ציר xy= […] |
