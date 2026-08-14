@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:17:40.636Z",
+  "generatedAt": "2026-08-14T13:24:05.531Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 815,
-  "coveragePercentage": 70.1,
+  "automaticallyCheckableTargets": 841,
+  "coveragePercentage": 72.4,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 104,
-    "deterministic-mathematical": 525,
+    "deterministic-mathematical": 551,
     "valid-range": 6,
-    "open-ended": 160,
-    "ambiguous": 187,
+    "open-ended": 152,
+    "ambiguous": 169,
     "unsupported": 0,
     "missing": 0
   },
@@ -4685,11 +4685,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "לכן כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0).",
           "signature": "e05dfa65",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-x-axis"
+          ]
         },
         {
           "targetId": "p16-q4",
@@ -4697,11 +4699,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "וכל הנקודות שממוקמות על ציר y הן מהצורה (0,[…]).",
           "signature": "714d467f",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-y-axis"
+          ]
         },
         {
           "targetId": "p16-q5",
@@ -4778,12 +4782,10 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p16-q3",
-        "p16-q4",
         "p16-q9"
       ],
-      "automaticallyCheckableTargets": 6,
-      "coveragePercentage": 66.7
+      "automaticallyCheckableTargets": 8,
+      "coveragePercentage": 88.9
     },
     {
       "pageNumber": 17,
@@ -5089,11 +5091,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]).",
           "signature": "6f2b24e6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-right-of-2-below-6",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-right-of-2-below-6"
+          ]
         },
         {
           "targetId": "p18-q8",
@@ -5101,19 +5105,18 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]).",
           "signature": "6f2b24e6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-right-of-2-below-6",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-right-of-2-below-6"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p18-q7",
-        "p18-q8"
-      ],
-      "automaticallyCheckableTargets": 6,
-      "coveragePercentage": 75
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 8,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 19,
@@ -5717,11 +5720,13 @@
           "inputType": "text:text",
           "context": "אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…]",
           "signature": "fd188c4b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-weight-package-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-weight-package-pairs"
+          ]
         },
         {
           "targetId": "p23-q12",
@@ -5729,11 +5734,13 @@
           "inputType": "text:text",
           "context": "אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…]",
           "signature": "fd188c4b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-weight-package-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-weight-package-pairs"
+          ]
         },
         {
           "targetId": "p23-q13",
@@ -5741,11 +5748,13 @@
           "inputType": "text:text",
           "context": "אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…]",
           "signature": "fd188c4b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-weight-package-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-weight-package-pairs"
+          ]
         },
         {
           "targetId": "p23-q14",
@@ -5753,11 +5762,13 @@
           "inputType": "text:text",
           "context": "אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…]",
           "signature": "fd188c4b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-weight-package-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-weight-package-pairs"
+          ]
         },
         {
           "targetId": "p23-q15",
@@ -5765,11 +5776,13 @@
           "inputType": "text:text",
           "context": "אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…]",
           "signature": "a04b5dea",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-price-package-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-price-package-pairs"
+          ]
         },
         {
           "targetId": "p23-q16",
@@ -5777,11 +5790,13 @@
           "inputType": "text:text",
           "context": "אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…]",
           "signature": "a04b5dea",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-price-package-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-price-package-pairs"
+          ]
         },
         {
           "targetId": "p23-q17",
@@ -5789,11 +5804,13 @@
           "inputType": "text:text",
           "context": "אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…]",
           "signature": "a04b5dea",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-price-package-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-price-package-pairs"
+          ]
         },
         {
           "targetId": "p23-q18",
@@ -5801,11 +5818,13 @@
           "inputType": "text:text",
           "context": "אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…]",
           "signature": "a04b5dea",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-price-package-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-price-package-pairs"
+          ]
         },
         {
           "targetId": "p23-q19",
@@ -5823,18 +5842,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p23-q11",
-        "p23-q12",
-        "p23-q13",
-        "p23-q14",
-        "p23-q15",
-        "p23-q16",
-        "p23-q17",
-        "p23-q18"
-      ],
-      "automaticallyCheckableTargets": 11,
-      "coveragePercentage": 57.9
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 19,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 24,
@@ -6157,11 +6167,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על הסרטוט נקודה F שממוקמת על ציר x. שיעוריה: F([…],[…]).",
           "signature": "39217632",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-x-axis"
+          ]
         },
         {
           "targetId": "p25-q12",
@@ -6184,11 +6196,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו נקודה G שממוקמת על ציר x וגם מימין לנקודה B. שיעוריה: G([…],[…]).",
           "signature": "dc459768",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-right-of-5",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-x-right-of-5"
+          ]
         },
         {
           "targetId": "p25-q14",
@@ -6242,11 +6256,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כל הנקודות שממוקמות על ציר y הן מהצורה (0,[…]), כי ערך ה־x שלהן הוא […].",
           "signature": "36d8976b",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-y-axis"
+          ]
         },
         {
           "targetId": "p25-q18",
@@ -6269,11 +6285,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0), כי שיעור ה־[…] שלהן הוא 0.",
           "signature": "69a80635",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-x-axis"
+          ]
         },
         {
           "targetId": "p25-q20",
@@ -6316,14 +6334,10 @@
         "p25-q7",
         "p25-q8",
         "p25-q9",
-        "p25-q10",
-        "p25-q11",
-        "p25-q13",
-        "p25-q17",
-        "p25-q19"
+        "p25-q10"
       ],
-      "automaticallyCheckableTargets": 7,
-      "coveragePercentage": 33.3
+      "automaticallyCheckableTargets": 11,
+      "coveragePercentage": 52.4
     },
     {
       "pageNumber": 26,
@@ -9721,11 +9735,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3).",
           "signature": "3eab0a0e",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-x-axis"
+          ]
         },
         {
           "targetId": "p40-q4",
@@ -9733,11 +9749,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3).",
           "signature": "3eab0a0e",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-x-axis"
+          ]
         },
         {
           "targetId": "p40-q5",
@@ -9745,11 +9763,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2).",
           "signature": "8d57fadf",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-y-axis"
+          ]
         },
         {
           "targetId": "p40-q6",
@@ -9757,11 +9777,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2).",
           "signature": "8d57fadf",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-y-axis"
+          ]
         },
         {
           "targetId": "p40-q7",
@@ -10023,10 +10045,6 @@
       "missingOrAmbiguousTargetIds": [
         "p40-q1",
         "p40-q2",
-        "p40-q3",
-        "p40-q4",
-        "p40-q5",
-        "p40-q6",
         "p40-q7",
         "p40-q8",
         "p40-q9",
@@ -10047,8 +10065,8 @@
         "p40-q26",
         "p40-q27"
       ],
-      "automaticallyCheckableTargets": 2,
-      "coveragePercentage": 7.4
+      "automaticallyCheckableTargets": 6,
+      "coveragePercentage": 22.2
     },
     {
       "pageNumber": 41,
@@ -10677,11 +10695,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…]).",
           "signature": "16a6d254",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-x-axis"
+          ]
         },
         {
           "targetId": "p42-q13",
@@ -10689,11 +10709,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…]).",
           "signature": "16a6d254",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-x-axis"
+          ]
         },
         {
           "targetId": "p42-q14",
@@ -10747,14 +10769,12 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p42-q12",
-        "p42-q13",
         "p42-q14",
         "p42-q15",
         "p42-q16"
       ],
-      "automaticallyCheckableTargets": 12,
-      "coveragePercentage": 70.6
+      "automaticallyCheckableTargets": 14,
+      "coveragePercentage": 82.4
     },
     {
       "pageNumber": 43,
@@ -11369,11 +11389,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על הסרטוט נקודה G שרחוקה מציר x 6 יחידות, וכתבו את שיעוריה: G([…],[…]).",
           "signature": "1705e43c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-y-equals-6",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-y-equals-6"
+          ]
         },
         {
           "targetId": "p45-q13",
@@ -11381,11 +11403,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על הסרטוט נקודה G שרחוקה מציר x 6 יחידות, וכתבו את שיעוריה: G([…],[…]).",
           "signature": "1705e43c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-y-equals-6",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-y-equals-6"
+          ]
         },
         {
           "targetId": "p45-q14",
@@ -11419,12 +11443,10 @@
         "p45-q2",
         "p45-q3",
         "p45-q7",
-        "p45-q12",
-        "p45-q13",
         "p45-q15"
       ],
-      "automaticallyCheckableTargets": 9,
-      "coveragePercentage": 60
+      "automaticallyCheckableTargets": 11,
+      "coveragePercentage": 73.3
     },
     {
       "pageNumber": 46,
@@ -16013,11 +16035,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו גם נקודה ששיעור ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]).",
           "signature": "4c2cf643",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-x-3-between-2-and-5",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-x-3-between-2-and-5"
+          ]
         },
         {
           "targetId": "p64-q5",
@@ -16025,11 +16049,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו גם נקודה ששיעור ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]).",
           "signature": "4c2cf643",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-x-3-between-2-and-5",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-x-3-between-2-and-5"
+          ]
         },
         {
           "targetId": "p64-q6",
@@ -16089,12 +16115,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p64-q4",
-        "p64-q5"
-      ],
-      "automaticallyCheckableTargets": 7,
-      "coveragePercentage": 77.8
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 9,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 65,

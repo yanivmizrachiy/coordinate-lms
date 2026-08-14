@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:17:40.636Z
+Generated: 2026-08-14T13:24:05.531Z
 
-Overall: 815/1162 safely checkable targets (70.1%).
+Overall: 841/1162 safely checkable targets (72.4%).
 
 ## Classification totals
 
@@ -10,10 +10,10 @@ Overall: 815/1162 safely checkable targets (70.1%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 104 |
-| deterministic-mathematical | 525 |
+| deterministic-mathematical | 551 |
 | valid-range | 6 |
-| open-ended | 160 |
-| ambiguous | 187 |
+| open-ended | 152 |
+| ambiguous | 169 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -410,14 +410,14 @@ Overall: 815/1162 safely checkable targets (70.1%).
 
 ### Page 16 — נקודות שעל הצירים
 
-6/9 safely checkable (66.7%).
+8/9 safely checkable (88.9%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p16-q1 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בכל נקודה שממוקמת על ציר x שיעור ה־y הוא […]. |
 | p16-q2 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | בכל נקודה שממוקמת על ציר […] ערך ה־x הוא 0. |
-| p16-q3 | ordered-pair-coordinate | open-ended | no | teacher judgment required | לכן כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0). |
-| p16-q4 | ordered-pair-coordinate | open-ended | no | teacher judgment required | וכל הנקודות שממוקמות על ציר y הן מהצורה (0,[…]). |
+| p16-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | לכן כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0). |
+| p16-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | וכל הנקודות שממוקמות על ציר y הן מהצורה (0,[…]). |
 | p16-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה שממוקמת על שני הצירים יחד היא ראשית הצירים, O([…],[…]). |
 | p16-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה שממוקמת על שני הצירים יחד היא ראשית הצירים, O([…],[…]). |
 | p16-q7 | text:text | reviewed-explicit | yes | target-bound reviewed proof | […] |
@@ -445,7 +445,7 @@ Overall: 815/1162 safely checkable targets (70.1%).
 
 ### Page 18 — מסמנים נקודות
 
-6/8 safely checkable (75%).
+8/8 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -455,8 +455,8 @@ Overall: 815/1162 safely checkable targets (70.1%).
 | p18-q4 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […]. |
 | p18-q5 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […]. |
 | p18-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה R רחוקה מציר x […] יחידות, כי זה שיעור ה־y שלה. |
-| p18-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]). |
-| p18-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]). |
+| p18-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]). |
+| p18-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]). |
 
 ### Page 19 — מגלים ציור סודי
 
@@ -512,7 +512,7 @@ No detected interactive response targets.
 
 ### Page 23 — קוראים גרף מהחיים
 
-11/19 safely checkable (57.9%).
+19/19 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -526,14 +526,14 @@ No detected interactive response targets.
 | p23-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | E([…],[…]) |
 | p23-q9 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | איזו חבילה הכי כבדה (שיעור x הגדול ביותר)? […] |
 | p23-q10 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | איזו חבילה הכי זולה (שיעור y הקטן ביותר)? […] |
-| p23-q11 | text:text | ambiguous | no | none | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
-| p23-q12 | text:text | ambiguous | no | none | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
-| p23-q13 | text:text | ambiguous | no | none | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
-| p23-q14 | text:text | ambiguous | no | none | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
-| p23-q15 | text:text | ambiguous | no | none | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
-| p23-q16 | text:text | ambiguous | no | none | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
-| p23-q17 | text:text | ambiguous | no | none | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
-| p23-q18 | text:text | ambiguous | no | none | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
+| p23-q11 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
+| p23-q12 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
+| p23-q13 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
+| p23-q14 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | אילו שתי חבילות באותו משקל (שיעור x זהה)? […] ו־[…], וגם […] ו־[…] |
+| p23-q15 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
+| p23-q16 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
+| p23-q17 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
+| p23-q18 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | אילו שתי חבילות באותו מחיר (שיעור y זהה)? […] ו־[…], וגם […] ו־[…] |
 | p23-q19 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שתי חבילות באותו משקל ממוקמות על קו […] (אנכי או אופקי). |
 
 ### Page 24 — שפה של מיקום
@@ -555,7 +555,7 @@ No detected interactive response targets.
 
 ### Page 25 — מסמנים נקודות לפי תיאור
 
-7/21 safely checkable (33.3%).
+11/21 safely checkable (52.4%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -569,15 +569,15 @@ No detected interactive response targets.
 | p25-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
 | p25-q9 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
 | p25-q10 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
-| p25-q11 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה F שממוקמת על ציר x. שיעוריה: F([…],[…]). |
+| p25-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה F שממוקמת על ציר x. שיעוריה: F([…],[…]). |
 | p25-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על הסרטוט נקודה F שממוקמת על ציר x. שיעוריה: F([…],[…]). |
-| p25-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו נקודה G שממוקמת על ציר x וגם מימין לנקודה B. שיעוריה: G([…],[…]). |
+| p25-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו נקודה G שממוקמת על ציר x וגם מימין לנקודה B. שיעוריה: G([…],[…]). |
 | p25-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו נקודה G שממוקמת על ציר x וגם מימין לנקודה B. שיעוריה: G([…],[…]). |
 | p25-q15 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בשתי הנקודות שסימנתם שיעור ה־y הוא […], כי שתיהן ממוקמות על ציר x. |
 | p25-q16 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | ערך ה־x של הנקודה G […] מערך ה־x של הנקודה B. |
-| p25-q17 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כל הנקודות שממוקמות על ציר y הן מהצורה (0,[…]), כי ערך ה־x שלהן הוא […]. |
+| p25-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כל הנקודות שממוקמות על ציר y הן מהצורה (0,[…]), כי ערך ה־x שלהן הוא […]. |
 | p25-q18 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | כל הנקודות שממוקמות על ציר y הן מהצורה (0,[…]), כי ערך ה־x שלהן הוא […]. |
-| p25-q19 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0), כי שיעור ה־[…] שלהן הוא 0. |
+| p25-q19 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0), כי שיעור ה־[…] שלהן הוא 0. |
 | p25-q20 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0), כי שיעור ה־[…] שלהן הוא 0. |
 | p25-q21 | text:property | reviewed-explicit | yes | target-bound reviewed proof | לכן הנקודה (0,4) ממוקמת מעל ציר x, אבל היא אינה מימין לציר y — היא […] עליו. |
 
@@ -889,16 +889,16 @@ No detected interactive response targets.
 
 ### Page 40 — שיעור חסר ודפוסים
 
-2/27 safely checkable (7.4%).
+6/27 safely checkable (22.2%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p40-q1 | ordered-pair-coordinate | ambiguous | no | none | הנקודה A([…],4) ממוקמת על אותו קו אנכי כמו B(6,1). |
 | p40-q2 | ordered-pair-coordinate | ambiguous | no | none | הנקודה C(3,[…]) ממוקמת על אותו קו אופקי כמו D(7,5). |
-| p40-q3 | ordered-pair-coordinate | ambiguous | no | none | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). |
-| p40-q4 | ordered-pair-coordinate | ambiguous | no | none | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). |
-| p40-q5 | ordered-pair-coordinate | ambiguous | no | none | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). |
-| p40-q6 | ordered-pair-coordinate | ambiguous | no | none | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). |
+| p40-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). |
+| p40-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). |
+| p40-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). |
+| p40-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). |
 | p40-q7 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
 | p40-q8 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
 | p40-q9 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
@@ -959,7 +959,7 @@ No detected interactive response targets.
 
 ### Page 42 — כספת הקואורדינטות
 
-12/17 safely checkable (70.6%).
+14/17 safely checkable (82.4%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -974,8 +974,8 @@ No detected interactive response targets.
 | p42-q9 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את ארבע הספרות לפי סדר המשימות, משמאל לימין: […]. |
 | p42-q10 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הספרה הקטנה ביותר בקוד התקבלה מהנקודה שממוקמת על ציר […]. |
 | p42-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה שממוקמת על ציר y שיעור ה־x הוא […]. |
-| p42-q12 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…]). |
-| p42-q13 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…]). |
+| p42-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…]). |
+| p42-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…]). |
 | p42-q14 | ordered-pair-coordinate | ambiguous | no | none | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
 | p42-q15 | ordered-pair-coordinate | ambiguous | no | none | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
 | p42-q16 | text:number | ambiguous | no | none | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
@@ -1024,7 +1024,7 @@ No detected interactive response targets.
 
 ### Page 45 — הנקודה החשודה
 
-9/15 safely checkable (60%).
+11/15 safely checkable (73.3%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1039,8 +1039,8 @@ No detected interactive response targets.
 | p45-q9 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
 | p45-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
 | p45-q11 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
-| p45-q12 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודה G שרחוקה מציר x 6 יחידות, וכתבו את שיעוריה: G([…],[…]). |
-| p45-q13 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודה G שרחוקה מציר x 6 יחידות, וכתבו את שיעוריה: G([…],[…]). |
+| p45-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה G שרחוקה מציר x 6 יחידות, וכתבו את שיעוריה: G([…],[…]). |
+| p45-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה G שרחוקה מציר x 6 יחידות, וכתבו את שיעוריה: G([…],[…]). |
 | p45-q14 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | רמז שמתאים לנקודה G בלבד, ואינו מתאים לאף אחת משש הנקודות המודפסות: שיעור ה־y שלה […] מ־5. |
 | p45-q15 | text:number | open-ended | no | teacher judgment required | רמז נוסף שמתאים לנקודה G שסימנתם: ערך ה־x שלה שווה […]. |
 
@@ -1461,15 +1461,15 @@ No detected interactive response targets.
 
 ### Page 64 — מסלולים במפת הפארק
 
-7/9 safely checkable (77.8%).
+9/9 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p64-q1 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…]). |
 | p64-q2 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…]). |
 | p64-q3 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הפנס ממוקם מתחת לנדנדה, וההפרש בין שיעורי ה־y שלהם הוא […] יחידות. |
-| p64-q4 | ordered-pair-coordinate | ambiguous | no | none | סמנו גם נקודה ששיעור ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]). |
-| p64-q5 | ordered-pair-coordinate | ambiguous | no | none | סמנו גם נקודה ששיעור ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]). |
+| p64-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו גם נקודה ששיעור ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]). |
+| p64-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו גם נקודה ששיעור ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]). |
 | p64-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה שסימנתם רחוקה מציר y ‏[…] יחידות. |
 | p64-q7 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | מהשער אל הספסל הולכים לאורך השבילים: 2 יחידות ימינה ואחר כך 2 יחידות […], ובסך הכול: |
 | p64-q8 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | 2 + 2=[…]יח' |
