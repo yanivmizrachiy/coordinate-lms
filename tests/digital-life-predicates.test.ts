@@ -19,6 +19,7 @@ function canonicalRoot(pageNumber: number): HTMLElement {
   const { document, window } = parseHTML(`<div id="root">${page!.html}</div>`);
   Object.assign(globalThis, {
     Node: window.Node,
+    Event: window.Event,
     HTMLElement: window.HTMLElement,
     MutationObserver: window.MutationObserver,
     document,
