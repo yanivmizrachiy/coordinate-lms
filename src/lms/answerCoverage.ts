@@ -271,7 +271,7 @@ function cleanText(value: string): string {
 
 function contextFor(target: HTMLElement): string {
   const source = target.closest(
-    'li, tr, .completion-sentence, .calc-ltr, .calc-final, h3, p',
+    'li, tr, .completion-sentence, .calc-ltr, .calc-final, .task-grid > div, .axis-answer-box, h3, p',
   ) || target.parentElement;
 
   if (!source) return '';
