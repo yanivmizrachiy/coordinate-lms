@@ -23,13 +23,11 @@ test('shows immediate wrong/correct marks and accepts איקס for x', async ({ 
   expect(correctMark).toContain('✓');
 });
 
-test('open response is omitted only on screen and restored for print', async ({ page }) => {
+test('canonical printable task is never hidden in the computerized page', async ({ page }) => {
   await page.goto('/#/workbook/7');
 
-  const openTarget = page.locator('[data-lms-qid="p7-q12"]');
-  await expect(openTarget).toBeAttached();
-  await expect(openTarget).toBeHidden();
-
-  await page.emulateMedia({ media: 'print' });
-  await expect(openTarget).toBeVisible();
+  const target = page.locator('[data-lms-qid="p7-q12"]');
+  await expect(target).toBeAttached();
+  await expect(target).toBeVisible();
+  await expect(page.getByText('לא נדרש במתוקשב')).toHaveCount(0);
 });
