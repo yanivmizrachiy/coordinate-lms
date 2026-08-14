@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T13:33:02.140Z",
+  "generatedAt": "2026-08-14T13:37:34.881Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -8790,10 +8790,12 @@
           "targetId": "p41-q24",
           "signature": "f22e876f",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ],
           "context": "בחרו מספר והשלימו כלל: שיעור ה־y גדול ב־[…] מערך ה־x."
         },
         {
@@ -8801,10 +8803,12 @@
           "targetId": "p41-q25",
           "signature": "ae0d10d8",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ],
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א."
         },
         {
@@ -8812,10 +8816,12 @@
           "targetId": "p41-q26",
           "signature": "ae0d10d8",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ],
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א."
         },
         {
@@ -8823,10 +8829,12 @@
           "targetId": "p41-q27",
           "signature": "ae0d10d8",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ],
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א."
         },
         {
@@ -8834,10 +8842,12 @@
           "targetId": "p41-q28",
           "signature": "ae0d10d8",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ],
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א."
         },
         {
@@ -8845,10 +8855,12 @@
           "targetId": "p41-q29",
           "signature": "e7242597",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ],
           "context": "בשתי הנקודות שסימנתם, ההפרש בין שיעור ה־y ובין ערך ה־x הוא […]."
         }
       ]

@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:33:02.140Z
+Generated: 2026-08-14T13:37:34.881Z
 
-Overall: 867/1162 safely checkable targets (74.6%).
+Overall: 873/1162 safely checkable targets (75.1%).
 
 ## Classification totals
 
@@ -10,9 +10,9 @@ Overall: 867/1162 safely checkable targets (74.6%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 134 |
-| deterministic-mathematical | 547 |
+| deterministic-mathematical | 553 |
 | valid-range | 6 |
-| open-ended | 151 |
+| open-ended | 145 |
 | ambiguous | 144 |
 | unsupported | 0 |
 | missing | 0 |
@@ -923,7 +923,7 @@ No detected interactive response targets.
 
 ### Page 41 — מכלל לטבלה ולגרף
 
-23/29 safely checkable (79.3%).
+29/29 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -950,12 +950,12 @@ No detected interactive response targets.
 | p41-q21 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | ערך x[…][…][…][…] |
 | p41-q22 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | בכלל הזה הגדול מבין השניים הוא תמיד ערך ה־[…]. |
 | p41-q23 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | אם y = 2, אז ערך ה־x הוא […]. |
-| p41-q24 | text:number | open-ended | no | teacher judgment required | בחרו מספר והשלימו כלל: שיעור ה־y גדול ב־[…] מערך ה־x. |
-| p41-q25 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א. |
-| p41-q26 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א. |
-| p41-q27 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א. |
-| p41-q28 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א. |
-| p41-q29 | text:number | open-ended | no | teacher judgment required | בשתי הנקודות שסימנתם, ההפרש בין שיעור ה־y ובין ערך ה־x הוא […]. |
+| p41-q24 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | בחרו מספר והשלימו כלל: שיעור ה־y גדול ב־[…] מערך ה־x. |
+| p41-q25 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א. |
+| p41-q26 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א. |
+| p41-q27 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א. |
+| p41-q28 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א. |
+| p41-q29 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | בשתי הנקודות שסימנתם, ההפרש בין שיעור ה־y ובין ערך ה־x הוא […]. |
 
 ### Page 42 — כספת הקואורדינטות
 

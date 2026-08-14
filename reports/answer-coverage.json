@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:33:02.140Z",
+  "generatedAt": "2026-08-14T13:37:34.881Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 867,
-  "coveragePercentage": 74.6,
+  "automaticallyCheckableTargets": 873,
+  "coveragePercentage": 75.1,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 134,
-    "deterministic-mathematical": 547,
+    "deterministic-mathematical": 553,
     "valid-range": 6,
-    "open-ended": 151,
+    "open-ended": 145,
     "ambiguous": 144,
     "unsupported": 0,
     "missing": 0
@@ -10464,11 +10464,13 @@
           "inputType": "text:number",
           "context": "בחרו מספר והשלימו כלל: שיעור ה־y גדול ב־[…] מערך ה־x.",
           "signature": "f22e876f",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ]
         },
         {
           "targetId": "p41-q25",
@@ -10476,11 +10478,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א.",
           "signature": "ae0d10d8",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ]
         },
         {
           "targetId": "p41-q26",
@@ -10488,11 +10492,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א.",
           "signature": "ae0d10d8",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ]
         },
         {
           "targetId": "p41-q27",
@@ -10500,11 +10506,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א.",
           "signature": "ae0d10d8",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ]
         },
         {
           "targetId": "p41-q28",
@@ -10512,11 +10520,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א.",
           "signature": "ae0d10d8",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ]
         },
         {
           "targetId": "p41-q29",
@@ -10524,23 +10534,18 @@
           "inputType": "text:number",
           "context": "בשתי הנקודות שסימנתם, ההפרש בין שיעור ה־y ובין ערך ה־x הוא […].",
           "signature": "e7242597",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:custom-y-equals-x-plus-k",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:custom-y-equals-x-plus-k"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p41-q24",
-        "p41-q25",
-        "p41-q26",
-        "p41-q27",
-        "p41-q28",
-        "p41-q29"
-      ],
-      "automaticallyCheckableTargets": 23,
-      "coveragePercentage": 79.3
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 29,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 42,
