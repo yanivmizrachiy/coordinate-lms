@@ -87,7 +87,7 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     await studentA.goto('/#/workbook/2');
     const target = studentA.locator('[data-lms-qid="p2-q1"]');
     await target.fill('תשובה שגויה');
-    await studentA.getByRole('button', { name: 'בדיקת תשובות' }).click();
+    await studentA.getByRole('button', { name: 'בדיקת כל התשובות' }).click();
     await expect(target).toHaveAttribute('data-lms-attempts', '1');
     await studentA.reload();
     await expect(studentA.locator('[data-lms-qid="p2-q1"]'))
