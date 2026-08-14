@@ -41,12 +41,13 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     const zoom = elem('div', { class: 'zoomer', role: 'group', 'aria-label': 'גודל התצוגה' }, zoomOut, zoomLabel, zoomIn);
     let gameCleanup: (() => void) | undefined;
     let choiceCleanup: (() => void) | undefined;
+    let predicateCleanup: (() => void) | undefined;
     if (data) {
       sheetWrap.append(fromHTML(data.html));
       hydrateGrids(sheetWrap);
       hydrateGridAnswerInputs(sheetWrap);
       choiceCleanup = hydrateChoiceAnswerInputs(sheetWrap);
-      hydrateExplicitAuthoringAnswers(sheetWrap);
+      predicateCleanup = hydrateExplicitAuthoringAnswers(sheetWrap);
       fitSheets(sheetWrap);
       if (data.gameId) {
         const host = sheetWrap.querySelector<HTMLElement>('[data-game-host]');
@@ -137,6 +138,7 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     return () => {
       window.clearTimeout(settle);
       window.removeEventListener('resize', applyZoom);
+      predicateCleanup?.();
       choiceCleanup?.();
       gameCleanup?.();
       lms?.cleanup();
