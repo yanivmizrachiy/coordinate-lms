@@ -110,7 +110,6 @@ function hydrateMissingCoordinateIntro(root: ParentNode): void {
   const many = blanks(cardByHeading(root, 'ה. „מעל ציר'));
   if (many.length > 0) {
     setAnswer(many[0], ['הרבה', 'אינסוף', 'אינסוף נקודות']);
-    // The four coordinate blanks are learner choices and are graded by a predicate.
     setAnswer(many[many.length - 2], ['y', 'Y']);
   }
 }
@@ -155,6 +154,59 @@ function hydrateSameCoordinateIntro(root: ParentNode): void {
 
   const c = blanks(cardByHeading(root, 'ג. השלימו'));
   setSequential(c, [['x', 'X'], ['x', 'X']]);
+}
+
+function hydrateRelationsIntro(root: ParentNode): void {
+  const text = normalizedText(root.querySelector('.sheet'));
+  if (
+    !text.includes('גדול ב־, קטן ב־ וגדול פי') ||
+    !text.includes('A(3,') ||
+    !text.includes('B(') ||
+    !text.includes('y גדול פי 2 מ־x') ||
+    !text.includes('y הוא מחצית x')
+  ) return;
+
+  const complete = blanks(cardByHeading(root, 'ה. השלימו'), '.pair-blank');
+  setSequential(complete, ['5', '3', '3', '4']);
+}
+
+function hydrateRelationsPractice(root: ParentNode): void {
+  const text = normalizedText(root.querySelector('.sheet'));
+  if (
+    !text.includes('יחסים בין שיעורים') ||
+    !text.includes('E(6,2)') ||
+    !text.includes('P(2,3)') ||
+    !text.includes('R(8,4)') ||
+    !text.includes('T(4,2)')
+  ) return;
+
+  const addSubtract = blanks(cardByHeading(root, 'גדול ב־ וקטן ב־'));
+  setSequential(addSubtract, [
+    ['(6,3)', '6,3'],
+    ['(7,2)', '7,2'],
+    ['(1,2)', '1,2'],
+  ]);
+
+  const multiplyHalf = blanks(cardByHeading(root, 'גדול פי ומחצית'));
+  setSequential(multiplyHalf, [
+    ['(6,3)', '6,3'],
+    ['(4,4)', '4,4'],
+    ['(4,6)', '4,6'],
+  ]);
+
+  const extra = blanks(cardByHeading(root, 'שאלה נוספת'));
+  setSequential(extra, [
+    ['(6,5)', '6,5'],
+    ['לא', 'לא מקיימת'],
+  ]);
+
+  const plot = blanks(cardByHeading(root, 'ד. סמנו על הסרטוט'));
+  setSequential(plot, [
+    '6', '3',
+    '2', '6',
+    ['מימין', 'ימינה'],
+    ['y', 'Y'],
+  ]);
 }
 
 function hydrateErrorsIntro(root: ParentNode): void {
@@ -209,6 +261,8 @@ export function hydrateDigitalDeterministicAnswers(root: ParentNode): void {
   hydrateMissingCoordinateIntro(root);
   hydrateMoveIntro(root);
   hydrateSameCoordinateIntro(root);
+  hydrateRelationsIntro(root);
+  hydrateRelationsPractice(root);
   hydrateErrorsIntro(root);
   hydrateErrorsPractice(root);
 }
