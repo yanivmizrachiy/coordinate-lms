@@ -15,6 +15,13 @@ function setSequentialAnswers(item: HTMLElement, answers: readonly string[]): vo
   });
 }
 
+function setFirstFreeCoordinatePredicate(item: HTMLElement): void {
+  const first = item.querySelector<HTMLElement>('.pair-blank');
+  if (first && !first.dataset['lmsAnswers']) {
+    first.dataset['lmsAnswers'] = JSON.stringify(['predicate:nonnegative-number']);
+  }
+}
+
 /** Tiny LMS-only fixes for answers that are literally determined by the canonical sentence or a reviewed digital choice. */
 export function hydrateDigitalOneStepAnswers(root: ParentNode): void {
   for (const item of root.querySelectorAll<HTMLElement>('li, p')) {
@@ -51,6 +58,38 @@ export function hydrateDigitalOneStepAnswers(root: ParentNode): void {
 
     if (text.includes('הנקודה O ממוקמת גם על ציר') && text.includes('וגם על ציר')) {
       setSequentialAnswers(item, ['x', 'y']);
+    }
+
+    if (text.includes('הנקודה של האות ק רחוקה') && text.includes('מציר ה־y')) {
+      setSequentialAnswers(item, ['6']);
+    }
+
+    if (text.includes('שיעור ה־x של הנקודה של האות ו')) {
+      setSequentialAnswers(item, ['2']);
+    }
+
+    if (text.includes('הנקודה של האות ד היא הימנית ביותר') && text.includes('שיעור ה־x שלה')) {
+      setSequentialAnswers(item, ['7']);
+    }
+
+    if (text.includes('האות שממוקמת בנקודה (4,3)')) {
+      setSequentialAnswers(item, ['ה']);
+    }
+
+    if (text.includes('כתבו את חמש האותיות לפי סדר השאלות')) {
+      setSequentialAnswers(item, ['נקודה']);
+    }
+
+    if (text.includes('סמנו את הנקודה של האות הראשונה במילה') && text.includes('כתבו את שיעוריה')) {
+      setSequentialAnswers(item, ['3', '2']);
+    }
+
+    if (text.includes('הנקודה של האות ד היא ה') && text.includes('שיעור ה־y שלה קטן מכולם')) {
+      setSequentialAnswers(item, ['נמוכה']);
+    }
+
+    if (text.includes('סמנו נקודה חדשה ששיעור ה־y שלה הוא 6')) {
+      setFirstFreeCoordinatePredicate(item);
     }
   }
 }
