@@ -134,20 +134,8 @@ function rawValues(targets: readonly HTMLElement[]): string[] {
   return targets.map((target) => (target.textContent || '').trim());
 }
 
-function syncPredicateProxy(proxy: HTMLElement, targets: readonly HTMLElement[]): void {
+function syncProxy(proxy: HTMLElement, targets: readonly HTMLElement[]): void {
   proxy.textContent = rawValues(targets).join('|');
-  proxy.dispatchEvent(new Event('input', { bubbles: true }));
-}
-
-function syncLengthFourProxy(proxy: HTMLElement, targets: readonly HTMLElement[]): void {
-  const values = rawValues(targets);
-  const joined = values.join('|');
-  proxy.textContent = joined;
-  proxy.dataset['lmsAnswers'] = JSON.stringify([
-    horizontalLengthFourWithWorkMatches(values)
-      ? joined
-      : '__invalid_horizontal_length_four_with_work__',
-  ]);
   proxy.dispatchEvent(new Event('input', { bubbles: true }));
 }
 
@@ -198,7 +186,7 @@ function bindPredicateGroup(
   const groupId = `segment-${rule}-${ordinal}`;
   let proxy: HTMLElement | null = null;
   const onInput: EventListener = () => {
-    if (proxy) syncPredicateProxy(proxy, targets);
+    if (proxy) syncProxy(proxy, targets);
   };
   const binding = createProxy(
     proxyHost,
@@ -210,7 +198,7 @@ function bindPredicateGroup(
   if (!binding) return null;
   proxy = binding.proxy;
   proxy.dataset['lmsAnswers'] = JSON.stringify([`predicate:${rule}`]);
-  syncPredicateProxy(proxy, targets);
+  syncProxy(proxy, targets);
   return binding;
 }
 
@@ -223,7 +211,7 @@ function bindLengthFourWithWork(
   const groupId = `segment-${HORIZONTAL_LENGTH_FOUR_WITH_WORK}-${ordinal}`;
   let proxy: HTMLElement | null = null;
   const onInput: EventListener = () => {
-    if (proxy) syncLengthFourProxy(proxy, targets);
+    if (proxy) syncProxy(proxy, targets);
   };
   const binding = createProxy(
     proxyHost,
@@ -234,7 +222,10 @@ function bindLengthFourWithWork(
   );
   if (!binding) return null;
   proxy = binding.proxy;
-  syncLengthFourProxy(proxy, targets);
+  proxy.dataset['lmsAnswers'] = JSON.stringify([
+    `predicate:${HORIZONTAL_LENGTH_FOUR_WITH_WORK}`,
+  ]);
+  syncProxy(proxy, targets);
   return binding;
 }
 
