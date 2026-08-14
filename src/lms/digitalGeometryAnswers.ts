@@ -106,6 +106,26 @@ function hydrateShapeClaims(root: ParentNode): void {
   setPageCalcFinals(root, ['16', '12', '14', '12']);
 }
 
+function hydrateHallSeats(root: ParentNode): void {
+  const sheetText = normalizedText(root.querySelector('.sheet'));
+  if (!sheetText.includes('שורה ומקום — הכרטיס שלכם')) return;
+
+  // Seat block from (3,2) to (6,4): 3×2.
+  setCalcFinals(cardByHeading(root, 'ב. הכיתה מזמינה גוש כיסאות'), ['10', '6']);
+}
+
+function hydratePixelArt(root: ParentNode): void {
+  const sheetText = normalizedText(root.querySelector('.sheet'));
+  if (!sheetText.includes('פיקסלים — כל מסך הוא מערכת צירים')) return;
+
+  // Bottom colored row: x=2..5 => difference 3.
+  const coloring = cardByHeading(root, 'א. צבעו את הפיקסלים');
+  setAnswer(coloring?.querySelector<HTMLElement>('.blank[data-missing="number"]') ?? undefined, '3');
+
+  // Watch screen from (1,1) to (7,5): 6×4.
+  setCalcFinals(cardByHeading(root, 'ב. כמה פיקסלים צריך'), ['20', '24']);
+}
+
 /** Deterministic LMS-only geometry answers derived from canonical coordinates. */
 export function hydrateDigitalGeometryAnswers(root: ParentNode): void {
   hydratePlotShape(root);
@@ -113,4 +133,6 @@ export function hydrateDigitalGeometryAnswers(root: ParentNode): void {
   hydrateSquaresSummary(root);
   hydrateSquaresPractice(root);
   hydrateShapeClaims(root);
+  hydrateHallSeats(root);
+  hydratePixelArt(root);
 }
