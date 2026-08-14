@@ -97,7 +97,7 @@ describe('answer-key coverage intelligence', () => {
     expect(staleProofs).toBeGreaterThan(0);
   });
 
-  test('binds reviewed open-ended targets to the current canonical prompt', () => {
+  test('keeps reviewed open prompts signature-bound while allowing safe digital upgrades', () => {
     const targets = new Map(
       report.pages.flatMap((page) =>
         page.targets.map((target) => [target.targetId, target] as const),
@@ -105,8 +105,11 @@ describe('answer-key coverage intelligence', () => {
     );
 
     expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(161);
-    let retainedOpenEnded = 0;
-    let staleOpenEnded = 0;
+    let retained = 0;
+    let stillOpen = 0;
+    let upgraded = 0;
+    let stale = 0;
+
     for (const [targetId, signature] of Object.entries(
       REVIEWED_OPEN_ENDED_TARGET_SIGNATURES,
     )) {
@@ -114,15 +117,33 @@ describe('answer-key coverage intelligence', () => {
       if (!currentTargetId) continue;
       const target = targets.get(currentTargetId);
       if (!target || target.signature !== signature) {
-        staleOpenEnded += 1;
+        stale += 1;
         continue;
       }
-      retainedOpenEnded += 1;
-      expect(target.classification, targetId).toBe('open-ended');
-      expect(target.automaticCheckingSafe, targetId).toBe(false);
+
+      retained += 1;
+      if (target.automaticCheckingSafe) {
+        upgraded += 1;
+        expect(
+          [
+            'reviewed-explicit',
+            'canonical-metadata-derived',
+            'deterministic-mathematical',
+            'valid-range',
+          ],
+          targetId,
+        ).toContain(target.classification);
+        expect(target.answers.length, targetId).toBeGreaterThan(0);
+      } else {
+        stillOpen += 1;
+        expect(target.classification, targetId).toBe('open-ended');
+      }
     }
-    expect(retainedOpenEnded).toBeGreaterThan(120);
-    expect(staleOpenEnded).toBeGreaterThan(0);
+
+    expect(retained).toBeGreaterThan(120);
+    expect(upgraded).toBeGreaterThan(0);
+    expect(stillOpen).toBeGreaterThan(0);
+    expect(stale).toBeGreaterThan(0);
   });
 
   test('accepts the new exact coordinate proofs and rejects nearby values', () => {
