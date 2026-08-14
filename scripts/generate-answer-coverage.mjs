@@ -94,6 +94,7 @@ try {
   const coverage = await server.ssrLoadModule('/src/lms/answerCoverage.ts');
   const predicates = await server.ssrLoadModule('/src/lms/digitalPredicates.ts');
   const segments = await server.ssrLoadModule('/src/lms/digitalSegmentPredicates.ts');
+  const rectangles = await server.ssrLoadModule('/src/lms/digitalRectanglePredicates.ts');
   const grouped = await server.ssrLoadModule('/src/lms/groupCoverageBindings.ts');
   const report = applyRuntimePredicateCoverage(
     coverage.buildAnswerCoverageReport(await existingGeneratedAt()),
@@ -115,6 +116,16 @@ try {
         return {
           rule: segmentRule,
           source: 'src/lms/digitalSegmentPredicates.ts',
+        };
+      }
+      const rectangleRule = rectangles.rectanglePredicateRuleForCoverage(
+        pageNumber,
+        targetId,
+      );
+      if (rectangleRule) {
+        return {
+          rule: rectangleRule,
+          source: 'src/lms/digitalRectanglePredicates.ts',
         };
       }
       const groupedRule = grouped.canonicalGroupRuleForCoverage(pageNumber, targetId);
