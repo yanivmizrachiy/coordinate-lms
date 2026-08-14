@@ -7,6 +7,7 @@ import { hydrateDigitalLinearFacts } from './digitalLinearFacts';
 import { hydrateDigitalOneStepAnswers } from './digitalOneStepAnswers';
 import { hydrateDigitalPredicates } from './digitalPredicates';
 import { hydrateDigitalRuleAnswers } from './digitalRuleAnswers';
+import { hydrateDigitalSegmentPredicates } from './digitalSegmentPredicates';
 import { hydrateGridPointPickers } from './gridPointPicker';
 import type { AnswerKey } from './types';
 
@@ -68,10 +69,12 @@ export function hydrateExplicitAuthoringAnswers(
   hydrateDigitalOneStepAnswers(root);
   const cleanupExplanations = hydrateDigitalExplanationChoices(root);
   const cleanupPredicates = hydrateDigitalPredicates(root);
+  const cleanupSegments = hydrateDigitalSegmentPredicates(root);
   const cleanupPointPickers = hydrateGridPointPickers(root);
 
   return () => {
     cleanupPointPickers();
+    cleanupSegments();
     cleanupPredicates();
     cleanupExplanations();
   };
