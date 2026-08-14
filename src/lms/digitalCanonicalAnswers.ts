@@ -83,6 +83,19 @@ function hydrateEncryptedRoute(root: ParentNode): void {
   annotateContainer(root, 'התחנה של מסלול 3 רחוקה מציר x', ['5']);
 }
 
+function hydrateCoordinateMaze(root: ParentNode): void {
+  if (!pageContains(root, 'מבוך הקואורדינטות')) return;
+  annotateContainer(root, 'צעד למעלה או', [['למטה', 'מטה'], 'y']);
+  annotateContainer(root, 'המסלול מתחיל בנקודה', ['0', '0', '6', '4']);
+  annotateContainer(root, 'בכל צעד ימינה או שמאלה', [['נשאר זהה', 'זהה', 'קבוע']]);
+  annotateContainer(root, 'בכל צעד למעלה או', [['למטה', 'מטה']]);
+  annotateContainer(root, 'שיעור ה־x הוא 2 אפשר לעבור', ['3']);
+  annotateContainer(root, 'עמודת הקירות שבה שיעור ה־x הוא', ['5']);
+  annotateContainer(root, '6 − 0', ['6']);
+  annotateContainer(root, '4 − 0', ['4']);
+  annotateContainer(root, 'מספר הצעדים במסלול שסימנתם', [['גדול', 'גדול יותר']]);
+}
+
 function hydrateCoordinateSafe(root: ParentNode): void {
   if (!pageContains(root, 'כספת הקואורדינטות')) return;
   annotateContainer(root, 'התוצאה של תרגיל', ['חיסור']);
@@ -125,6 +138,7 @@ export function hydrateDigitalCanonicalAnswers(root: ParentNode): void {
   hydrateHiddenDrawing(root);
   hydrateColorDecode(root);
   hydrateEncryptedRoute(root);
+  hydrateCoordinateMaze(root);
   hydrateCoordinateSafe(root);
   hydrateSuspectPoint(root);
   hydrateParkRoute(root);
