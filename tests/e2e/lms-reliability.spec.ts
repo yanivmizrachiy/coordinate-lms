@@ -29,7 +29,7 @@ test('registered three-attempt state survives reload and never resets', async ({
     const target = page.locator('[data-lms-qid="p10-q1"]');
     await expect(target).toBeVisible();
     await target.fill('תשובה שגויה');
-    await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
+    await page.getByRole('button', { name: 'בדיקת כל התשובות' }).click();
     await expect(target).toHaveAttribute(
       'data-lms-attempts',
       String(expectedAttempts),
