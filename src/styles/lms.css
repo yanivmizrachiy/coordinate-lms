@@ -2,7 +2,8 @@
 .lms-auth__card,
 .lms-gate,
 .lms-admin__header,
-.lms-admin__content {
+.lms-admin__content,
+.lms-registration-note {
   border: 1px solid rgba(20, 40, 85, 0.15);
   border-radius: 18px;
   background: #fff;
@@ -13,6 +14,38 @@
   margin: 18px 0;
   padding: 18px;
   direction: rtl;
+}
+
+.lms-registration-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 16px 0 18px;
+  padding: 15px 18px;
+  direction: rtl;
+  border-color: rgba(26, 92, 155, 0.28);
+  background: #eef6ff;
+}
+
+.lms-registration-note--signed {
+  border-color: rgba(23, 107, 56, 0.28);
+  background: #eaf8ef;
+}
+
+.lms-registration-note__text {
+  display: block;
+  color: #23395d;
+  line-height: 1.55;
+}
+
+.lms-registration-note__text strong {
+  color: #16376a;
+}
+
+.lms-registration-note--signed .lms-registration-note__text,
+.lms-registration-note--signed .lms-registration-note__text strong {
+  color: #176b38;
 }
 
 .lms-panel__heading {
@@ -281,6 +314,16 @@
     padding: 13px;
   }
 
+  .lms-registration-note {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 13px;
+  }
+
+  .lms-registration-note .btn {
+    width: 100%;
+  }
+
   .lms-score {
     flex-direction: column;
     text-align: center;
@@ -304,6 +347,7 @@
   .lms-auth,
   .lms-admin,
   .lms-gate,
+  .lms-registration-note,
   [data-lms-editable="true"]::after {
     display: none !important;
   }
