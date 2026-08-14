@@ -41,20 +41,19 @@ function hydratePlotShape(root: ParentNode): void {
     !sheetText.includes('D(2,5)')
   ) return;
 
-  // 5×4 rectangle.
   setCalcFinals(cardByHeading(root, 'ד. חשבו את ההיקף והשטח'), ['18', '20']);
 }
 
 function hydrateRectanglesIntro(root: ParentNode): void {
   const sheetText = normalizedText(root.querySelector('.sheet'));
   if (
-    !sheetText.includes('מלבנים במערכת הצירים') ||
     !sheetText.includes('A(1,1)') ||
     !sheetText.includes('B(6,1)') ||
     !sheetText.includes('C(6,4)') ||
     !sheetText.includes('P(2,2)') ||
     !sheetText.includes('Q(7,2)') ||
-    !sheetText.includes('R(7,5)')
+    !sheetText.includes('R(7,5)') ||
+    !sheetText.includes('הקודקוד החסר')
   ) return;
 
   // Main rectangle 5×3, then missing-corner rectangle 5×3.
@@ -77,7 +76,6 @@ function hydrateSquaresSummary(root: ParentNode): void {
     !sheetText.includes('אם מזיזים את המלבן יחידה אחת ימינה')
   ) return;
 
-  // Rectangle is 5×4.
   setPageCalcFinals(root, ['18', '20']);
 }
 
@@ -89,10 +87,8 @@ function hydrateSquaresPractice(root: ParentNode): void {
     !sheetText.includes('התחילו בנקודה P(1,1)')
   ) return;
 
-  // First square side 4; described square side 3.
   setPageCalcFinals(root, ['16', '16', '12', '9']);
 
-  // 5+4+2+3 = 14; final x is 4, so increase from x=1 is 3.
   const summary = cardByHeading(root, 'משימת סיכום');
   setLastLooseNumbers(summary, ['14', '3']);
 }
@@ -101,8 +97,6 @@ function hydrateShapeClaims(root: ParentNode): void {
   const sheetText = normalizedText(root.querySelector('.sheet'));
   if (!sheetText.includes('טענות על נקודות, הזזות ושטחים')) return;
 
-  // First rectangle 6×2 => perimeter 16, area 12.
-  // Second rectangle 4×3 => perimeter 14, area 12.
   setPageCalcFinals(root, ['16', '12', '14', '12']);
 }
 
@@ -110,7 +104,6 @@ function hydrateHallSeats(root: ParentNode): void {
   const sheetText = normalizedText(root.querySelector('.sheet'));
   if (!sheetText.includes('שורה ומקום — הכרטיס שלכם')) return;
 
-  // Seat block from (3,2) to (6,4): 3×2.
   setCalcFinals(cardByHeading(root, 'ב. הכיתה מזמינה גוש כיסאות'), ['10', '6']);
 }
 
@@ -118,11 +111,8 @@ function hydratePixelArt(root: ParentNode): void {
   const sheetText = normalizedText(root.querySelector('.sheet'));
   if (!sheetText.includes('פיקסלים — כל מסך הוא מערכת צירים')) return;
 
-  // Bottom colored row: x=2..5 => difference 3.
   const coloring = cardByHeading(root, 'א. צבעו את הפיקסלים');
   setAnswer(coloring?.querySelector<HTMLElement>('.blank[data-missing="number"]') ?? undefined, '3');
-
-  // Watch screen from (1,1) to (7,5): 6×4.
   setCalcFinals(cardByHeading(root, 'ב. כמה פיקסלים צריך'), ['20', '24']);
 }
 
