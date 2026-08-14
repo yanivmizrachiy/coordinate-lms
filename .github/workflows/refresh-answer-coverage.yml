@@ -1,0 +1,46 @@
+name: Refresh answer coverage
+
+on:
+  push:
+    branches:
+      - agent/canonical-lms-unified
+    paths:
+      - 'src/lms/**'
+      - 'src/data/workbook/**'
+      - 'scripts/generate-answer-coverage.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-answer-coverage-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/canonical-lms-unified
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run answers:coverage
+      - name: Commit refreshed derived reports when needed
+        shell: bash
+        run: |
+          git add reports/answer-coverage.json reports/answer-coverage.md reports/answer-target-order.json public/answer-review-manifest.json
+          if git diff --cached --quiet; then
+            echo 'Answer coverage already current.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore: refresh derived answer coverage'
+          git push origin HEAD:agent/canonical-lms-unified
