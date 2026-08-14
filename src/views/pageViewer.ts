@@ -13,6 +13,7 @@ import {
   canAccessPage,
   renderAccessGate,
 } from '../lms/engine';
+import { currentSession } from '../lms/auth';
 import { hydrateGridAnswerInputs } from '../lms/gridInputs';
 import { hydrateChoiceAnswerInputs } from '../lms/choiceInputs';
 import { hydrateExplicitAuthoringAnswers } from '../lms/implicitAnswers';
@@ -60,10 +61,6 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       ? attachLmsToPage(sheetWrap, page)
       : undefined;
 
-    /* The bottom row: page-turning MUST be comfortable from here too —
-       „אפשרי לדפדף עמוד הבא ועמוד קודם באופן נוח גם מתחתית העמוד" — on a
-       phone the reader is at the bottom when the page ends, and the way to
-       the next page has to be under the thumb, not back at the top. */
     const nav = elem('div', { class: 'pagenav no-print' });
     const select = elem('select', { 'aria-label': 'בחירת עמוד' }) as HTMLSelectElement;
     for (let i = 1; i <= TOTAL_PAGES; i++) {
@@ -92,18 +89,15 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       iconOnly('⛶', 'מסך מלא', () => toggleFullscreen(sheetWrap)),
     );
 
-    viewer.append(readerBar(page), sheetWrap);
+    viewer.append(readerBar(page));
+    if (page === 1) viewer.append(registrationNotice());
+    viewer.append(sheetWrap);
     if (lms) viewer.append(lms.panel);
     viewer.append(nav);
     c.append(viewer);
     outlet.append(c);
     window.scrollTo({ top: 0 });
 
-    /* A4 is 1123px tall and a laptop viewport is not. Left alone the viewer
-       shows two thirds of a page and asks the reader to scroll for the rest.
-       „התאמה למסך” puts the whole sheet on screen; anyone who would rather have
-       the text bigger and scroll can say so, and we remember which they chose.
-       Only this view scales — the booklet stays true A4 for printing. */
     const roomForSheet = (): number => {
       const docTop = sheetWrap.getBoundingClientRect().top + window.scrollY;
       return window.innerHeight - docTop - nav.offsetHeight - 14;
@@ -134,13 +128,8 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     zoomLabel.addEventListener('click', () => { sheetZoom.set('fit'); applyZoom(); });
 
     applyZoom();
-    // …and again once fitSheet has finished growing the drawings.
     const settle = window.setTimeout(applyZoom, 420);
     window.addEventListener('resize', applyZoom);
-    /* A poster page is one big image; measured before it loads, the wrap got
-       the height of an empty sheet and CLIPPED the footer's second line —
-       the broken footer Yaniv photographed on page 16. Re-fit as each image
-       arrives. */
     for (const img of sheetWrap.querySelectorAll('img')) {
       if (!img.complete) img.addEventListener('load', applyZoom, { once: true });
     }
@@ -153,6 +142,43 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       lms?.cleanup();
     };
   };
+}
+
+function registrationNotice(): HTMLElement {
+  const session = currentSession();
+  const box = elem('section', {
+    class: 'lms-registration-note no-print' + (session ? ' lms-registration-note--signed' : ''),
+    role: 'note',
+    'aria-label': session ? 'הלמידה שלך נשמרת' : 'שמירה ודוחות באמצעות הרשמה',
+  });
+
+  box.append(
+    elem('div', {
+      class: 'lms-registration-note__text',
+    },
+      elem('strong', {
+        text: session
+          ? 'החשבון שלך מחובר — הלמידה מתועדת'
+          : 'אפשר לתרגל את כל האתר בלי להירשם',
+      }),
+      elem('span', {
+        text: session
+          ? ' התוצאות, הניסיונות וההתקדמות שתבצע בזמן שאתה מחובר נשמרים בחשבון שלך וניתנים להצגה בדוחות.'
+          : ' רוצה לשמור את התוצאות, לתעד את ההתקדמות ולקבל דוחות על הלמידה שלך? הירשם או התחבר. רק פעילות של משתמש רשום נשמרת ומתועדת.',
+      }),
+    ),
+  );
+
+  const action = elem('button', {
+    class: 'btn btn--gold btn--sm',
+    type: 'button',
+    text: session ? 'הדוחות שלי' : 'הרשמה / התחברות',
+  });
+  action.addEventListener('click', () => {
+    navigate(session ? '#/progress' : '#/login');
+  });
+  box.append(action);
+  return box;
 }
 
 function iconOnly(glyph: string, label: string, onClick: () => void): HTMLElement {
