@@ -1,4 +1,13 @@
-export type DigitalGroupRule = 'distinct-coordinate-pairs';
+export type DigitalGroupRule =
+  | 'distinct-coordinate-pairs'
+  | 'point-above-x-axis'
+  | 'point-right-of-y-axis'
+  | 'point-on-x-axis'
+  | 'point-on-y-axis'
+  | 'point-above-and-right'
+  | 'point-on-x-right-of-5'
+  | 'point-right-of-2-below-6'
+  | 'nonnegative-number';
 
 interface PredicateBinding {
   observer: MutationObserver;
@@ -14,26 +23,61 @@ function finiteNumber(raw: string): number | null {
   return Number.isFinite(value) ? value : null;
 }
 
+function numericValues(values: readonly string[]): number[] | null {
+  const numbers = values.map(finiteNumber);
+  return numbers.some((value) => value === null)
+    ? null
+    : numbers as number[];
+}
+
+function firstQuadrantPoint(values: readonly string[]): [number, number] | null {
+  if (values.length !== 2) return null;
+  const numbers = numericValues(values);
+  if (!numbers) return null;
+  const [x, y] = numbers as [number, number];
+  return x >= 0 && y >= 0 ? [x, y] : null;
+}
+
 export function evaluateDigitalGroupRule(
   rule: DigitalGroupRule,
   values: readonly string[],
 ): boolean {
+  if (rule === 'nonnegative-number') {
+    if (values.length !== 1) return false;
+    const value = finiteNumber(values[0] || '');
+    return value !== null && value >= 0;
+  }
+
   if (rule === 'distinct-coordinate-pairs') {
     if (values.length !== 4) return false;
-    const numbers = values.map(finiteNumber);
-    if (numbers.some((value) => value === null)) return false;
+    const numbers = numericValues(values);
+    if (!numbers || numbers.some((value) => value < 0)) return false;
     const [x1, y1, x2, y2] = numbers as [number, number, number, number];
-
-    // The workbook is about the first quadrant/axes: negative coordinates do
-    // not satisfy the learning context of this task.
-    if (numbers.some((value) => (value as number) < 0)) return false;
-
-    // There is no single model answer. Any two points satisfying both
-    // inequalities are mathematically correct.
     return x1 !== x2 && y1 !== y2;
   }
 
-  return false;
+  const point = firstQuadrantPoint(values);
+  if (!point) return false;
+  const [x, y] = point;
+
+  switch (rule) {
+    case 'point-above-x-axis':
+      return y > 0;
+    case 'point-right-of-y-axis':
+      return x > 0;
+    case 'point-on-x-axis':
+      return y === 0;
+    case 'point-on-y-axis':
+      return x === 0;
+    case 'point-above-and-right':
+      return x > 0 && y > 0;
+    case 'point-on-x-right-of-5':
+      return y === 0 && x > 5;
+    case 'point-right-of-2-below-6':
+      return x > 2 && y < 6;
+    default:
+      return false;
+  }
 }
 
 function normalizedText(node: Element | null): string {
@@ -66,80 +110,156 @@ function mirrorGroupState(
   }
 }
 
+function bindGroupPredicate(
+  proxyHost: HTMLElement,
+  targets: HTMLElement[],
+  rule: DigitalGroupRule,
+  label: string,
+  ordinal: number,
+): PredicateBinding | null {
+  if (targets.length === 0) return null;
+
+  const groupId = rule + '-' + String(ordinal);
+  if (proxyHost.querySelector(`.lms-group-proxy[data-lms-group="${groupId}"]`)) {
+    return null;
+  }
+
+  const proxy = document.createElement('span');
+  proxy.className = 'blank lms-group-proxy';
+  proxy.hidden = true;
+  proxy.dataset['lmsGroup'] = groupId;
+  proxy.dataset['lmsAnswers'] = JSON.stringify([
+    'predicate:' + rule,
+  ]);
+  proxy.setAttribute('aria-label', label);
+
+  // Runtime-only logical targets always come after every canonical target, so
+  // introducing them can never renumber the stable pN-qM IDs.
+  proxyHost.append(proxy);
+
+  const onInput: EventListener = () => {
+    syncProxy(proxy, targets);
+  };
+  for (const target of targets) {
+    target.addEventListener('input', onInput);
+    target.dataset['lmsGroup'] = groupId;
+  }
+
+  const observer = new MutationObserver(() => {
+    mirrorGroupState(proxy, targets);
+  });
+  observer.observe(proxy, {
+    attributes: true,
+    attributeFilter: ['data-lms-state'],
+  });
+
+  syncProxy(proxy, targets);
+  return { observer, targets, proxy, onInput };
+}
+
+function pairRuleForContext(context: string): DigitalGroupRule | null {
+  if (context.includes('נקודה G') && context.includes('מימין לנקודה B')) {
+    return 'point-on-x-right-of-5';
+  }
+  if (context.includes('נקודה S') && context.includes('מימין לנקודה P') && context.includes('מתחת לנקודה R')) {
+    return 'point-right-of-2-below-6';
+  }
+  if (context.includes('גם מעל וגם מימין')) {
+    return 'point-above-and-right';
+  }
+  if (context.includes('מעל ציר x')) {
+    return 'point-above-x-axis';
+  }
+  if (context.includes('מימין לציר y')) {
+    return 'point-right-of-y-axis';
+  }
+  if (context.includes('על ציר x')) {
+    return 'point-on-x-axis';
+  }
+  if (context.includes('על ציר y')) {
+    return 'point-on-y-axis';
+  }
+  return null;
+}
+
 /**
- * Adds LMS-only mathematical grading to canonical worksheet targets.
- * Printable source markup is never changed. Matching is based on the stable
- * canonical prompt text, not a page number, so reordering pages cannot bind the
- * rule to another question.
- *
- * The four visible coordinate blanks remain the learner's interaction. A hidden
- * LMS proxy combines them into one logical answer, so scoring and attempts are
- * attached to the mathematical task rather than treating four coordinates as
- * four unrelated questions.
+ * Adds LMS-only mathematical grading to learner-choice tasks. Canonical print
+ * source is never edited; prompt matching only decides which deterministic
+ * predicate applies in the digital layer.
  */
 export function hydrateDigitalPredicates(root: ParentNode): () => void {
   const bindings: PredicateBinding[] = [];
 
-  // The coverage generator deliberately receives a Document. Its persisted
-  // target-order snapshot stays canonical while runtime-only proxy targets are
-  // being introduced; coverage support for logical group targets is added as a
-  // separate audited change rather than silently renumbering every later target.
+  // The coverage generator receives a Document. Keep its persisted canonical
+  // target order stable until logical-group coverage is represented explicitly.
   if ((root as Node).nodeType === 9) return () => undefined;
 
   const proxyHost = root.querySelector<HTMLElement>('.sheet') ||
     (root instanceof HTMLElement ? root : null);
   if (!proxyHost) return () => undefined;
 
+  let ordinal = 0;
+
   for (const card of root.querySelectorAll<HTMLElement>('.q-card')) {
     const heading = normalizedText(card.querySelector('h3'));
+
     if (
-      !heading.includes('תנו דוגמה לשתי נקודות') ||
-      !heading.includes('ערך ה־x שלהן שונה') ||
-      !heading.includes('שיעור ה־y שלהן שונה')
+      heading.includes('תנו דוגמה לשתי נקודות') &&
+      heading.includes('ערך ה־x שלהן שונה') &&
+      heading.includes('שיעור ה־y שלהן שונה')
     ) {
-      continue;
+      const targets = Array.from(
+        card.querySelectorAll<HTMLElement>('.pair-blank'),
+      );
+      if (targets.length === 4) {
+        ordinal += 1;
+        const binding = bindGroupPredicate(
+          proxyHost,
+          targets,
+          'distinct-coordinate-pairs',
+          'בדיקה מתמטית של שתי הנקודות שנבחרו',
+          ordinal,
+        );
+        if (binding) bindings.push(binding);
+      }
     }
 
-    const targets = Array.from(
-      card.querySelectorAll<HTMLElement>('.pair-blank'),
-    );
-    if (targets.length !== 4) continue;
-    if (proxyHost.querySelector('.lms-group-proxy[data-lms-group="distinct-coordinate-pairs"]')) continue;
+    for (const pair of card.querySelectorAll<HTMLElement>('.pair')) {
+      const container = pair.closest('li') || pair.parentElement;
+      const context = normalizedText(container);
+      const rule = pairRuleForContext(context);
+      const targets = Array.from(
+        pair.querySelectorAll<HTMLElement>('.pair-blank'),
+      );
+      if (!rule || targets.length !== 2) continue;
+      if (targets.some((target) => target.dataset['lmsGroup'])) continue;
 
-    const proxy = document.createElement('span');
-    proxy.className = 'blank lms-group-proxy';
-    proxy.hidden = true;
-    proxy.dataset['lmsGroup'] = 'distinct-coordinate-pairs';
-    proxy.dataset['lmsAnswers'] = JSON.stringify([
-      'predicate:distinct-coordinate-pairs',
-    ]);
-    proxy.setAttribute(
-      'aria-label',
-      'בדיקה מתמטית של שתי הנקודות שנבחרו',
-    );
-
-    // Append after every canonical answer target so existing pN-qM IDs cannot
-    // shift when a digital-only logical target is introduced.
-    proxyHost.append(proxy);
-
-    const onInput: EventListener = () => {
-      syncProxy(proxy, targets);
-    };
-    for (const target of targets) {
-      target.addEventListener('input', onInput);
-      target.dataset['lmsGroup'] = 'distinct-coordinate-pairs';
+      ordinal += 1;
+      const binding = bindGroupPredicate(
+        proxyHost,
+        targets,
+        rule,
+        'בדיקה מתמטית של הזוג הסדור לפי תנאי השאלה',
+        ordinal,
+      );
+      if (binding) bindings.push(binding);
     }
+  }
 
-    const observer = new MutationObserver(() => {
-      mirrorGroupState(proxy, targets);
-    });
-    observer.observe(proxy, {
-      attributes: true,
-      attributeFilter: ['data-lms-state'],
-    });
-
-    syncProxy(proxy, targets);
-    bindings.push({ observer, targets, proxy, onInput });
+  // A single missing coordinate on an axis can be any non-negative number.
+  // This is a real predicate, not a guessed model answer.
+  for (const item of root.querySelectorAll<HTMLElement>('li')) {
+    const context = normalizedText(item);
+    const blanks = Array.from(item.querySelectorAll<HTMLElement>('.pair-blank'));
+    if (blanks.length !== 1) continue;
+    if (
+      (context.includes('כל הנקודות שממוקמות על ציר y') && context.includes('(0,')) ||
+      (context.includes('כל הנקודות שממוקמות על ציר x') && context.includes(',0)'))
+    ) {
+      blanks[0]!.dataset['lmsAnswers'] = JSON.stringify([
+        'predicate:nonnegative-number',
+      ]);
+    }
   }
 
   return () => {
