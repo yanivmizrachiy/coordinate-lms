@@ -14,11 +14,15 @@ interface PickerTask {
   focusHandlers: Array<{ target: HTMLElement; handler: EventListener }>;
 }
 
-interface GridBinding {
+interface GridRef {
   grid: HTMLElement;
   svg: SVGSVGElement;
+}
+
+interface GridBinding extends GridRef {
   tasks: PickerTask[];
   clickHandler: EventListener;
+  originalAria: string | null;
 }
 
 function numberSetting(raw: string | undefined, fallback: number): number {
@@ -30,13 +34,15 @@ function normalizedText(node: Element | null): string {
   return node?.textContent?.replace(/\s+/g, ' ').trim() || '';
 }
 
-function pointLabel(context: string, fallback: number): string {
+function pointLabel(context: string): string {
   const match = context.match(/נקודה\s+([A-Z])/i);
-  return match?.[1]?.toUpperCase() || String(fallback + 1);
+  return match?.[1]?.toUpperCase() || '•';
 }
 
 function numericText(target: HTMLElement): number | null {
-  const value = Number((target.textContent || '').trim().replace(',', '.'));
+  const raw = (target.textContent || '').trim().replace(',', '.');
+  if (!raw) return null;
+  const value = Number(raw);
   return Number.isFinite(value) ? value : null;
 }
 
@@ -49,10 +55,7 @@ function coordinateToViewBox(
   const ymax = numberSetting(grid.dataset['ymax'], 6);
   const sx = (W - L - R) / xmax;
   const sy = (H - T - B) / ymax;
-  return {
-    x: L + x * sx,
-    y: H - B - y * sy,
-  };
+  return { x: L + x * sx, y: H - B - y * sy };
 }
 
 function eventToCoordinate(
@@ -69,15 +72,14 @@ function eventToCoordinate(
   const ymax = numberSetting(grid.dataset['ymax'], 6);
   const sx = (W - L - R) / xmax;
   const sy = (H - T - B) / ymax;
-
   const rawX = (viewX - L) / sx;
   const rawY = (H - B - viewY) / sy;
   const x = Math.round(rawX);
   const y = Math.round(rawY);
 
   if (x < 0 || x > xmax || y < 0 || y > ymax) return null;
-  // A learner may tap near the lattice point on a phone. Snap within slightly
-  // less than half a grid cell; taps near an unrelated cell are not accepted.
+  // Touch screens are imprecise. Snap only when the tap is genuinely closest
+  // to this lattice point, never to a neighbouring cell.
   if (Math.abs(rawX - x) > 0.46 || Math.abs(rawY - y) > 0.46) return null;
   return { x, y };
 }
@@ -96,7 +98,7 @@ function makeMarker(label: string): SVGGElement {
   circle.setAttribute('stroke-width', '3');
 
   const text = document.createElementNS(NS, 'text');
-  text.textContent = label;
+  text.textContent = label === '•' ? '' : label;
   text.setAttribute('font-size', '16');
   text.setAttribute('font-weight', '800');
   text.setAttribute('fill', '#1f2a44');
@@ -136,96 +138,139 @@ function fillTask(task: PickerTask, point: { x: number; y: number }): void {
   });
 }
 
-/**
- * Makes canonical "mark a point and write its coordinates" tasks touch-first.
- * The printable worksheet HTML is unchanged. The existing pair blanks remain a
- * keyboard-accessible fallback and stay synchronized with the point chosen on
- * the graph.
- */
-export function hydrateGridPointPickers(root: ParentNode): () => void {
-  const bindings: GridBinding[] = [];
+function isPointMarkingTask(item: HTMLElement): boolean {
+  const context = normalizedText(item);
+  return /סמנו|סמן/.test(context) && item.querySelectorAll('.pair-blank').length === 2;
+}
 
-  for (const card of root.querySelectorAll<HTMLElement>('.q-card')) {
-    const grid = card.querySelector<HTMLElement>('.coordinate-grid');
-    const svg = grid?.querySelector<SVGSVGElement>('svg');
-    if (!grid || !svg) continue;
+function gridRefs(sheet: HTMLElement): GridRef[] {
+  return Array.from(sheet.querySelectorAll<HTMLElement>('.coordinate-grid'))
+    .map((grid) => ({ grid, svg: grid.querySelector<SVGSVGElement>('svg') }))
+    .filter((entry): entry is GridRef => Boolean(entry.svg));
+}
 
-    const taskElements = Array.from(card.querySelectorAll<HTMLElement>('li'))
-      .filter((item) => {
-        const context = normalizedText(item);
-        return /סמנו|סמן/.test(context) && item.querySelectorAll('.pair-blank').length === 2;
-      });
-    if (taskElements.length === 0) continue;
+/** Pick the graph the printed instruction refers to without page-number rules.
+ * Prefer a graph in the same question card. Otherwise use the nearest graph
+ * appearing before the instruction ("על הסרטוט/המפה" commonly refers back to
+ * the drawing in section א). */
+function gridForTask(item: HTMLElement, grids: readonly GridRef[]): GridRef | null {
+  const card = item.closest('.q-card');
+  const sameCardGrid = card?.querySelector<HTMLElement>('.coordinate-grid');
+  if (sameCardGrid) {
+    const found = grids.find((entry) => entry.grid === sameCardGrid);
+    if (found) return found;
+  }
 
-    let activeIndex = 0;
-    const tasks: PickerTask[] = [];
+  const preceding = grids.filter(({ grid }) =>
+    Boolean(grid.compareDocumentPosition(item) & Node.DOCUMENT_POSITION_FOLLOWING),
+  );
+  return preceding.at(-1) || grids[0] || null;
+}
 
-    taskElements.forEach((item, index) => {
-      const targets = Array.from(item.querySelectorAll<HTMLElement>('.pair-blank'));
-      if (targets.length !== 2) return;
-      const label = pointLabel(normalizedText(item), index);
-      const marker = makeMarker(label);
-      svg.append(marker);
+function buildBinding(
+  gridRef: GridRef,
+  taskElements: readonly HTMLElement[],
+): GridBinding | null {
+  const { grid, svg } = gridRef;
+  let activeIndex = 0;
+  const tasks: PickerTask[] = [];
 
-      const task: PickerTask = {
-        targets: [targets[0]!, targets[1]!] as [HTMLElement, HTMLElement],
-        label,
-        marker,
-        observer: new MutationObserver(() => undefined),
-        focusHandlers: [],
-      };
+  taskElements.forEach((item, index) => {
+    const targets = Array.from(item.querySelectorAll<HTMLElement>('.pair-blank'));
+    if (targets.length !== 2) return;
+    const label = pointLabel(normalizedText(item));
+    const marker = makeMarker(label);
+    svg.append(marker);
 
-      task.observer.disconnect();
-      task.observer = new MutationObserver(() => updateMarker(grid, task));
-      for (const target of task.targets) {
-        task.observer.observe(target, {
-          childList: true,
-          characterData: true,
-          subtree: true,
-        });
-        const handler: EventListener = () => {
-          activeIndex = index;
-          grid.dataset['lmsPickerActive'] = task.label;
-        };
-        target.addEventListener('focus', handler);
-        target.addEventListener('pointerdown', handler);
-        task.focusHandlers.push({ target, handler });
-      }
-      updateMarker(grid, task);
-      tasks.push(task);
-    });
-
-    if (tasks.length === 0) continue;
-    grid.dataset['lmsPicker'] = 'ready';
-    grid.dataset['lmsPickerActive'] = tasks[0]!.label;
-    grid.style.cursor = 'crosshair';
-    grid.style.touchAction = 'manipulation';
-    const originalAria = grid.getAttribute('aria-label') || 'מערכת צירים';
-    grid.setAttribute(
-      'aria-label',
-      `${originalAria}. אפשר ללחוץ על נקודה במערכת כדי לסמן את התשובה.`,
-    );
-
-    const clickHandler: EventListener = (rawEvent) => {
-      const event = rawEvent as MouseEvent;
-      const point = eventToCoordinate(event, grid, svg);
-      if (!point) return;
-      const task = tasks[activeIndex];
-      if (!task) return;
-      fillTask(task, point);
-      updateMarker(grid, task);
-
-      if (activeIndex < tasks.length - 1) {
-        activeIndex += 1;
-        grid.dataset['lmsPickerActive'] = tasks[activeIndex]!.label;
-      }
+    const task: PickerTask = {
+      targets: [targets[0]!, targets[1]!],
+      label,
+      marker,
+      observer: new MutationObserver(() => undefined),
+      focusHandlers: [],
     };
 
-    // Listen on the whole coordinate-grid wrapper rather than only the SVG.
-    // LMS HTML overlays (for missing ticks/labels) sit above the SVG and must
-    // not swallow a learner's tap. Their click bubbles to this shared wrapper.
-    grid.addEventListener('click', clickHandler);
-    bindings.push({ grid, svg, tasks, clickHandler });
+    task.observer.disconnect();
+    task.observer = new MutationObserver(() => updateMarker(grid, task));
+    for (const target of task.targets) {
+      task.observer.observe(target, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+      });
+      const handler: EventListener = () => {
+        activeIndex = index;
+        grid.dataset['lmsPickerActive'] = task.label;
+      };
+      target.addEventListener('focus', handler);
+      target.addEventListener('pointerdown', handler);
+      task.focusHandlers.push({ target, handler });
+    }
+    updateMarker(grid, task);
+    tasks.push(task);
+  });
+
+  if (tasks.length === 0) return null;
+  const originalAria = grid.getAttribute('aria-label');
+  grid.dataset['lmsPicker'] = 'ready';
+  grid.dataset['lmsPickerActive'] = tasks[0]!.label;
+  grid.style.cursor = 'crosshair';
+  grid.style.touchAction = 'manipulation';
+  grid.setAttribute(
+    'aria-label',
+    `${originalAria || 'מערכת צירים'}. אפשר ללחוץ על נקודה במערכת כדי לסמן את התשובה.`,
+  );
+
+  const clickHandler: EventListener = (rawEvent) => {
+    const event = rawEvent as MouseEvent;
+    const point = eventToCoordinate(event, grid, svg);
+    if (!point) return;
+    const task = tasks[activeIndex];
+    if (!task) return;
+    fillTask(task, point);
+    updateMarker(grid, task);
+
+    if (activeIndex < tasks.length - 1) {
+      activeIndex += 1;
+      grid.dataset['lmsPickerActive'] = tasks[activeIndex]!.label;
+    }
+  };
+
+  // Listen on the wrapper: HTML LMS overlays above the SVG still bubble here.
+  grid.addEventListener('click', clickHandler);
+  return { grid, svg, tasks, clickHandler, originalAria };
+}
+
+/**
+ * Makes every canonical "mark a point" instruction touch-first. The graph may
+ * live in the same question card or an earlier section of the same worksheet.
+ * Printable HTML is untouched; existing coordinate blanks remain the keyboard
+ * fallback and stay synchronized with the visible point marker.
+ */
+export function hydrateGridPointPickers(root: ParentNode): () => void {
+  if ((root as Node).nodeType === 9) return () => undefined;
+  const bindings: GridBinding[] = [];
+
+  for (const sheet of root.querySelectorAll<HTMLElement>('.sheet')) {
+    const grids = gridRefs(sheet);
+    if (grids.length === 0) continue;
+    const assignments = new Map<HTMLElement, HTMLElement[]>();
+
+    for (const item of sheet.querySelectorAll<HTMLElement>('li')) {
+      if (!isPointMarkingTask(item)) continue;
+      const selected = gridForTask(item, grids);
+      if (!selected) continue;
+      const list = assignments.get(selected.grid) || [];
+      list.push(item);
+      assignments.set(selected.grid, list);
+    }
+
+    for (const gridRef of grids) {
+      const items = assignments.get(gridRef.grid) || [];
+      if (items.length === 0) continue;
+      const binding = buildBinding(gridRef, items);
+      if (binding) bindings.push(binding);
+    }
   }
 
   return () => {
@@ -235,6 +280,8 @@ export function hydrateGridPointPickers(root: ParentNode): () => void {
       binding.grid.style.touchAction = '';
       delete binding.grid.dataset['lmsPicker'];
       delete binding.grid.dataset['lmsPickerActive'];
+      if (binding.originalAria === null) binding.grid.removeAttribute('aria-label');
+      else binding.grid.setAttribute('aria-label', binding.originalAria);
       for (const task of binding.tasks) {
         task.observer.disconnect();
         for (const { target, handler } of task.focusHandlers) {
