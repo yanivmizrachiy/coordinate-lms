@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T15:59:38.230Z
+Generated: 2026-08-14T16:00:15.528Z
 
-Overall: 1019/1162 safely checkable targets (87.7%).
+Overall: 1026/1162 safely checkable targets (88.3%).
 
 ## Classification totals
 
@@ -10,10 +10,10 @@ Overall: 1019/1162 safely checkable targets (87.7%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 268 |
-| deterministic-mathematical | 565 |
+| deterministic-mathematical | 572 |
 | valid-range | 6 |
 | open-ended | 98 |
-| ambiguous | 45 |
+| ambiguous | 38 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1069,7 +1069,7 @@ No detected interactive response targets.
 
 ### Page 47 — קטעים מקבילים לצירים
 
-15/22 safely checkable (68.2%).
+22/22 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1088,13 +1088,13 @@ No detected interactive response targets.
 | p47-q13 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | EF=[…]=[…]יח' |
 | p47-q14 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | EF=[…]=[…]יח' |
 | p47-q15 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | EF=[…]יח' |
-| p47-q16 | ordered-pair-coordinate | ambiguous | no | none | הנקודה K([…],[…]) והנקודה L([…],[…]). |
-| p47-q17 | ordered-pair-coordinate | ambiguous | no | none | הנקודה K([…],[…]) והנקודה L([…],[…]). |
-| p47-q18 | ordered-pair-coordinate | ambiguous | no | none | הנקודה K([…],[…]) והנקודה L([…],[…]). |
-| p47-q19 | ordered-pair-coordinate | ambiguous | no | none | הנקודה K([…],[…]) והנקודה L([…],[…]). |
-| p47-q20 | text:number | ambiguous | no | none | KL=[…]=[…]יח' |
-| p47-q21 | text:number | ambiguous | no | none | KL=[…]=[…]יח' |
-| p47-q22 | text:number | ambiguous | no | none | KL=[…]יח' |
+| p47-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה K([…],[…]) והנקודה L([…],[…]). |
+| p47-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה K([…],[…]) והנקודה L([…],[…]). |
+| p47-q18 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה K([…],[…]) והנקודה L([…],[…]). |
+| p47-q19 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה K([…],[…]) והנקודה L([…],[…]). |
+| p47-q20 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | KL=[…]=[…]יח' |
+| p47-q21 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | KL=[…]=[…]יח' |
+| p47-q22 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | KL=[…]יח' |
 
 ### Page 48 — קטעים מקבילים לצירים
 

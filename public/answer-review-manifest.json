@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T15:59:38.230Z",
+  "generatedAt": "2026-08-14T16:00:15.528Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -6497,7 +6497,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-y-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-y-coordinate-pairs"
@@ -6510,7 +6510,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-y-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-y-coordinate-pairs"
@@ -6523,7 +6523,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-y-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-y-coordinate-pairs"
@@ -6536,7 +6536,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-y-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-y-coordinate-pairs"
@@ -6576,7 +6576,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -6589,7 +6589,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -6602,7 +6602,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -6615,7 +6615,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -9858,7 +9858,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -9871,7 +9871,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -9884,7 +9884,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -9897,7 +9897,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -10222,10 +10222,12 @@
           "targetId": "p47-q16",
           "signature": "0a3806aa",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:horizontal-segment-length-4-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:horizontal-segment-length-4-with-work"
+          ],
           "context": "הנקודה K([…],[…]) והנקודה L([…],[…])."
         },
         {
@@ -10233,10 +10235,12 @@
           "targetId": "p47-q17",
           "signature": "0a3806aa",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:horizontal-segment-length-4-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:horizontal-segment-length-4-with-work"
+          ],
           "context": "הנקודה K([…],[…]) והנקודה L([…],[…])."
         },
         {
@@ -10244,10 +10248,12 @@
           "targetId": "p47-q18",
           "signature": "0a3806aa",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:horizontal-segment-length-4-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:horizontal-segment-length-4-with-work"
+          ],
           "context": "הנקודה K([…],[…]) והנקודה L([…],[…])."
         },
         {
@@ -10255,10 +10261,12 @@
           "targetId": "p47-q19",
           "signature": "0a3806aa",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:horizontal-segment-length-4-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:horizontal-segment-length-4-with-work"
+          ],
           "context": "הנקודה K([…],[…]) והנקודה L([…],[…])."
         },
         {
@@ -10266,10 +10274,12 @@
           "targetId": "p47-q20",
           "signature": "111045bb",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:horizontal-segment-length-4-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:horizontal-segment-length-4-with-work"
+          ],
           "context": "KL=[…]=[…]יח'"
         },
         {
@@ -10277,10 +10287,12 @@
           "targetId": "p47-q21",
           "signature": "111045bb",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:horizontal-segment-length-4-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:horizontal-segment-length-4-with-work"
+          ],
           "context": "KL=[…]=[…]יח'"
         },
         {
@@ -10288,10 +10300,12 @@
           "targetId": "p47-q22",
           "signature": "44623854",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:horizontal-segment-length-4-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:horizontal-segment-length-4-with-work"
+          ],
           "context": "KL=[…]יח'"
         }
       ]
@@ -10557,7 +10571,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-y-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-y-coordinate-pairs"
@@ -10570,7 +10584,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-y-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-y-coordinate-pairs"
@@ -10583,7 +10597,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-y-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-y-coordinate-pairs"
@@ -10596,7 +10610,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-y-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-y-coordinate-pairs"
@@ -10742,7 +10756,7 @@
           "signature": "376f33f4",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -10755,7 +10769,7 @@
           "signature": "376f33f4",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -10768,7 +10782,7 @@
           "signature": "376f33f4",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -10781,7 +10795,7 @@
           "signature": "376f33f4",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -13586,7 +13600,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -13599,7 +13613,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -13612,7 +13626,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
@@ -13625,7 +13639,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "sourceEvidence": "src/lms/digitalSegmentPredicates.ts:same-x-coordinate-pairs",
           "automaticCheckingSafe": true,
           "answers": [
             "predicate:same-x-coordinate-pairs"
