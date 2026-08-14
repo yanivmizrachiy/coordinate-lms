@@ -1,4 +1,5 @@
 import { hydrateDigitalCanonicalAnswers } from './digitalCanonicalAnswers';
+import { hydrateDigitalExplanationChoices } from './digitalExplanationChoices';
 import { hydrateDigitalPredicates } from './digitalPredicates';
 import { hydrateDigitalRuleAnswers } from './digitalRuleAnswers';
 import { hydrateGridPointPickers } from './gridPointPicker';
@@ -35,8 +36,8 @@ function answerFromAria(target: HTMLElement): string[] {
 /**
  * One preparation point for the digital layer. It captures explicit canonical
  * answer metadata, hydrates reviewed deterministic answers from canonical task
- * wording, adds mathematical predicates, and enables touch-first point marking
- * on the rendered graph. None of these steps edit the printable source.
+ * wording, adds pedagogical explanation choices, mathematical predicates, and
+ * touch-first point marking. None of these steps edit the printable source.
  */
 export function hydrateExplicitAuthoringAnswers(
   root: ParentNode,
@@ -55,19 +56,21 @@ export function hydrateExplicitAuthoringAnswers(
 
   hydrateDigitalCanonicalAnswers(root);
   hydrateDigitalRuleAnswers(root);
+  const cleanupExplanations = hydrateDigitalExplanationChoices(root);
   const cleanupPredicates = hydrateDigitalPredicates(root);
   const cleanupPointPickers = hydrateGridPointPickers(root);
 
   return () => {
     cleanupPointPickers();
     cleanupPredicates();
+    cleanupExplanations();
   };
 }
 
 /**
  * Reads answers that the canonical worksheet already states explicitly or that
  * the reviewed digital-only layer encodes as a deterministic mathematical
- * predicate. It never guesses from surrounding prose.
+ * predicate or pedagogically reviewed choice. It never guesses from prose.
  */
 export function implicitAnswerKey(
   pageNumber: number,
