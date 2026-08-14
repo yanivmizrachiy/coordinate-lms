@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:27:24.069Z
+Generated: 2026-08-14T14:29:00.337Z
 
-Overall: 972/1162 safely checkable targets (83.6%).
+Overall: 984/1162 safely checkable targets (84.7%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 245 |
+| canonical-metadata-derived | 257 |
 | deterministic-mathematical | 541 |
 | valid-range | 6 |
 | open-ended | 118 |
-| ambiguous | 72 |
+| ambiguous | 60 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -618,34 +618,34 @@ No detected interactive response targets.
 
 ### Page 28 — גדול ב־, קטן ב־ וגדול פי
 
-0/5 safely checkable (0%).
+4/5 safely checkable (80%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p28-q1 | ordered-pair-coordinate | ambiguous | no | none | A(3,[…]) - y גדול ב־2 מ־x |
-| p28-q2 | ordered-pair-coordinate | ambiguous | no | none | B([…],6) - y גדול פי 2 מ־x |
-| p28-q3 | ordered-pair-coordinate | ambiguous | no | none | C(7,[…]) - x גדול ב־4 מ־y |
-| p28-q4 | ordered-pair-coordinate | ambiguous | no | none | D(8,[…]) - y הוא מחצית x |
+| p28-q1 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | A(3,[…]) - y גדול ב־2 מ־x |
+| p28-q2 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | B([…],6) - y גדול פי 2 מ־x |
+| p28-q3 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | C(7,[…]) - x גדול ב־4 מ־y |
+| p28-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | D(8,[…]) - y הוא מחצית x |
 | p28-q5 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 
 ### Page 29 — יחסים בין שיעורים
 
-6/14 safely checkable (42.9%).
+14/14 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p29-q1 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A(2,3). לנקודה B אותו שיעור y, ושיעור x גדול ב־4. כתבו B: […] |
 | p29-q2 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה C(7,5). לנקודה D אותו שיעור x, ושיעור y קטן ב־3. כתבו D: […] |
-| p29-q3 | text:text | ambiguous | no | none | הנקודה E(6,2). שיעור x של הנקודה F קטן ב־5, ושיעור y זהה. […] |
-| p29-q4 | text:text | ambiguous | no | none | הנקודה P(2,3). שיעור x של הנקודה Q גדול פי 3, ושיעור y זהה. […] |
-| p29-q5 | text:text | ambiguous | no | none | הנקודה R(8,4). שיעור x של הנקודה S הוא מחצית ממנו, ושיעור y זהה. […] |
-| p29-q6 | text:text | ambiguous | no | none | הנקודה T(4,2). שיעור y של הנקודה U גדול פי 3, ושיעור x זהה. […] |
+| p29-q3 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה E(6,2). שיעור x של הנקודה F קטן ב־5, ושיעור y זהה. […] |
+| p29-q4 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה P(2,3). שיעור x של הנקודה Q גדול פי 3, ושיעור y זהה. […] |
+| p29-q5 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה R(8,4). שיעור x של הנקודה S הוא מחצית ממנו, ושיעור y זהה. […] |
+| p29-q6 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה T(4,2). שיעור y של הנקודה U גדול פי 3, ושיעור x זהה. […] |
 | p29-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מהם השיעורים החדשים? […] |
 | p29-q8 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם הנקודה החדשה מקיימת x=y? […] |
-| p29-q9 | ordered-pair-coordinate | ambiguous | no | none | נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…]) |
-| p29-q10 | ordered-pair-coordinate | ambiguous | no | none | נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…]) |
-| p29-q11 | ordered-pair-coordinate | ambiguous | no | none | סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…]) |
-| p29-q12 | ordered-pair-coordinate | ambiguous | no | none | סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…]) |
+| p29-q9 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…]) |
+| p29-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…]) |
+| p29-q11 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…]) |
+| p29-q12 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…]) |
 | p29-q13 | text:direction | deterministic-mathematical | yes | target-bound reviewed proof | נקודה B ממוקמת […] לנקודה A. |
 | p29-q14 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | נקודה C ממוקמת מעל A, כי גדל רק שיעור […]. |
 

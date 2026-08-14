@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T14:27:24.069Z",
+  "generatedAt": "2026-08-14T14:29:00.337Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -5710,10 +5710,12 @@
           "targetId": "p28-q1",
           "signature": "05032e0a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ],
           "context": "A(3,[…]) - y גדול ב־2 מ־x"
         },
         {
@@ -5721,10 +5723,12 @@
           "targetId": "p28-q2",
           "signature": "7ff021bc",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ],
           "context": "B([…],6) - y גדול פי 2 מ־x"
         },
         {
@@ -5732,10 +5736,12 @@
           "targetId": "p28-q3",
           "signature": "90015708",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ],
           "context": "C(7,[…]) - x גדול ב־4 מ־y"
         },
         {
@@ -5743,10 +5749,12 @@
           "targetId": "p28-q4",
           "signature": "fe19503e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ],
           "context": "D(8,[…]) - y הוא מחצית x"
         },
         {
@@ -5801,10 +5809,13 @@
           "targetId": "p29-q3",
           "signature": "7458ba8e",
           "inputType": "text:text",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "(1,2)",
+            "1,2"
+          ],
           "context": "הנקודה E(6,2). שיעור x של הנקודה F קטן ב־5, ושיעור y זהה. […]"
         },
         {
@@ -5812,10 +5823,13 @@
           "targetId": "p29-q4",
           "signature": "e96fa317",
           "inputType": "text:text",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "(6,3)",
+            "6,3"
+          ],
           "context": "הנקודה P(2,3). שיעור x של הנקודה Q גדול פי 3, ושיעור y זהה. […]"
         },
         {
@@ -5823,10 +5837,13 @@
           "targetId": "p29-q5",
           "signature": "43277408",
           "inputType": "text:text",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "(4,4)",
+            "4,4"
+          ],
           "context": "הנקודה R(8,4). שיעור x של הנקודה S הוא מחצית ממנו, ושיעור y זהה. […]"
         },
         {
@@ -5834,10 +5851,13 @@
           "targetId": "p29-q6",
           "signature": "65bee958",
           "inputType": "text:text",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "(4,6)",
+            "4,6"
+          ],
           "context": "הנקודה T(4,2). שיעור y של הנקודה U גדול פי 3, ושיעור x זהה. […]"
         },
         {
@@ -5873,10 +5893,12 @@
           "targetId": "p29-q9",
           "signature": "4ecdef2a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ],
           "context": "נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…])"
         },
         {
@@ -5884,10 +5906,12 @@
           "targetId": "p29-q10",
           "signature": "4ecdef2a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ],
           "context": "נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…])"
         },
         {
@@ -5895,10 +5919,12 @@
           "targetId": "p29-q11",
           "signature": "dbc7bb7a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ],
           "context": "סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…])"
         },
         {
@@ -5906,10 +5932,12 @@
           "targetId": "p29-q12",
           "signature": "dbc7bb7a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ],
           "context": "סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…])"
         },
         {

@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T14:27:24.069Z",
+  "generatedAt": "2026-08-14T14:29:00.337Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 972,
-  "coveragePercentage": 83.6,
+  "automaticallyCheckableTargets": 984,
+  "coveragePercentage": 84.7,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 245,
+    "canonical-metadata-derived": 257,
     "deterministic-mathematical": 541,
     "valid-range": 6,
     "open-ended": 118,
-    "ambiguous": 72,
+    "ambiguous": 60,
     "unsupported": 0,
     "missing": 0
   },
@@ -6734,11 +6734,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "A(3,[…]) - y גדול ב־2 מ־x",
           "signature": "05032e0a",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p28-q2",
@@ -6746,11 +6748,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "B([…],6) - y גדול פי 2 מ־x",
           "signature": "7ff021bc",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p28-q3",
@@ -6758,11 +6762,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "C(7,[…]) - x גדול ב־4 מ־y",
           "signature": "90015708",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p28-q4",
@@ -6770,11 +6776,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "D(8,[…]) - y הוא מחצית x",
           "signature": "fe19503e",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p28-q5",
@@ -6790,14 +6798,10 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p28-q1",
-        "p28-q2",
-        "p28-q3",
-        "p28-q4",
         "p28-q5"
       ],
-      "automaticallyCheckableTargets": 0,
-      "coveragePercentage": 0
+      "automaticallyCheckableTargets": 4,
+      "coveragePercentage": 80
     },
     {
       "pageNumber": 29,
@@ -6858,11 +6862,14 @@
           "inputType": "text:text",
           "context": "הנקודה E(6,2). שיעור x של הנקודה F קטן ב־5, ושיעור y זהה. […]",
           "signature": "7458ba8e",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "(1,2)",
+            "1,2"
+          ]
         },
         {
           "targetId": "p29-q4",
@@ -6870,11 +6877,14 @@
           "inputType": "text:text",
           "context": "הנקודה P(2,3). שיעור x של הנקודה Q גדול פי 3, ושיעור y זהה. […]",
           "signature": "e96fa317",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "(6,3)",
+            "6,3"
+          ]
         },
         {
           "targetId": "p29-q5",
@@ -6882,11 +6892,14 @@
           "inputType": "text:text",
           "context": "הנקודה R(8,4). שיעור x של הנקודה S הוא מחצית ממנו, ושיעור y זהה. […]",
           "signature": "43277408",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "(4,4)",
+            "4,4"
+          ]
         },
         {
           "targetId": "p29-q6",
@@ -6894,11 +6907,14 @@
           "inputType": "text:text",
           "context": "הנקודה T(4,2). שיעור y של הנקודה U גדול פי 3, ושיעור x זהה. […]",
           "signature": "65bee958",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "(4,6)",
+            "4,6"
+          ]
         },
         {
           "targetId": "p29-q7",
@@ -6936,11 +6952,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…])",
           "signature": "4ecdef2a",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p29-q10",
@@ -6948,11 +6966,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה A כבר מסומנת. סמנו נקודה B שבה שיעור x גדול ב־4 משל הנקודה A, ושיעור y זהה: B([…],[…])",
           "signature": "4ecdef2a",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p29-q11",
@@ -6960,11 +6980,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…])",
           "signature": "dbc7bb7a",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p29-q12",
@@ -6972,11 +6994,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו נקודה C שבה שיעור y גדול פי 2 משל הנקודה A, ושיעור x זהה: C([…],[…])",
           "signature": "dbc7bb7a",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p29-q13",
@@ -7009,18 +7033,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p29-q3",
-        "p29-q4",
-        "p29-q5",
-        "p29-q6",
-        "p29-q9",
-        "p29-q10",
-        "p29-q11",
-        "p29-q12"
-      ],
-      "automaticallyCheckableTargets": 6,
-      "coveragePercentage": 42.9
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 14,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 30,
