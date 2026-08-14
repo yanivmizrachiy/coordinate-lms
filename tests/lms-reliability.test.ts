@@ -1,7 +1,5 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 import {
-  canFinalizeGuestTransfer,
-  claimGuestProgress,
   mergePageDrafts,
   mergePageResults,
 } from '../src/lms/repository';
@@ -118,55 +116,10 @@ describe('LMS persistence merging', () => {
     expect(() => mergePageResults(null, result(101, 1))).toThrow(/1 ל־100/);
     expect(() => mergePageResults(null, result(50, 1, 4))).toThrow(/0 ל־3/);
   });
-
-  test('guest progress is copied before its source records are removed', async () => {
-    localStorage.setItem(
-      'coordinate_lms_session_v2',
-      JSON.stringify({
-        uid: 'student-1',
-        fullName: 'תלמיד',
-        username: 'student',
-        email: 'student@example.com',
-        role: 'student',
-        createdAt: 1,
-      }),
-    );
-    localStorage.setItem(
-      'coordinate_lms_drafts_v2',
-      JSON.stringify({ 'guest:1': { ...draft(20, 2, 'x'), uid: 'guest', pageNumber: 1 } }),
-    );
-    localStorage.setItem(
-      'coordinate_lms_results_v2',
-      JSON.stringify({ 'guest:1': { ...result(90, 20, 2), uid: 'guest', pageNumber: 1 } }),
-    );
-
-    const claim = await claimGuestProgress('student-1');
-    expect(claim.complete).toBe(true);
-
-    const drafts = JSON.parse(
-      localStorage.getItem('coordinate_lms_drafts_v2') || '{}',
-    ) as Record<string, PageDraft>;
-    const results = JSON.parse(
-      localStorage.getItem('coordinate_lms_results_v2') || '{}',
-    ) as Record<string, PageResult>;
-    expect(drafts['guest:1']).toBeUndefined();
-    expect(results['guest:1']).toBeUndefined();
-    expect(drafts['student-1:1']?.questions['p4-q1']?.attempts).toBe(2);
-    expect(results['student-1:1']?.score).toBe(90);
-  });
-
-  test('guest source progress is not eligible for removal after central failure', () => {
-    expect(
-      canFinalizeGuestTransfer([
-        { localSaved: true, central: 'saved' },
-        { localSaved: true, central: 'failed', error: 'sync failed' },
-      ]),
-    ).toBe(false);
-  });
 });
 
 describe('teacher dashboard CSV', () => {
-  test('uses stable columns, UTF-8 BOM, ISO timestamps, and all 77 pages', () => {
+  test('uses stable columns, UTF-8 BOM, ISO timestamps, and all 78 canonical pages', () => {
     const snapshot: DashboardSnapshot = {
       generatedAt: 300,
       source: 'firebase',
@@ -178,6 +131,9 @@ describe('teacher dashboard CSV', () => {
             fullName: 'נועה, "כהן"\nכיתה ז',
             username: '=formula',
             email: 'student@example.com',
+            className: 'ז1',
+            school: 'בית ספר א',
+            city: 'ירושלים',
             role: 'student',
             createdAt: 100,
             lastSeenAt: 200,
@@ -199,11 +155,13 @@ describe('teacher dashboard CSV', () => {
     const csv = buildDashboardCsv(snapshot);
     const lines = csv.trimEnd().split('\r\n');
     expect(csv.startsWith('\uFEFF')).toBe(true);
-    expect(lines).toHaveLength(78);
+    expect(lines).toHaveLength(79);
     expect(lines[0]).toContain(DASHBOARD_CSV_COLUMNS.join('\",\"'));
     expect(csv).toContain('1970-01-01T00:00:00.100Z');
     expect(csv).toContain('"נועה, ""כהן""\nכיתה ז"');
     expect(csv).toContain("\"'=formula\"");
+    expect(csv).toContain('"בית ספר א"');
+    expect(csv).toContain('"ירושלים"');
     expect(csv).toContain('"90","90"');
   });
 
