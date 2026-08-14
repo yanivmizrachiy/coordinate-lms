@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('an explicit answer is checked only after the nearby check button', async ({ page }) => {
+test('an explicit safe answer gets immediate correct feedback without consuming an attempt', async ({ page }) => {
   await page.goto('/#/workbook/10');
 
   const target = page.locator('[data-lms-qid="p10-q1"]');
@@ -11,19 +11,16 @@ test('an explicit answer is checked only after the nearby check button', async (
   expect(answers[0]).toBeTruthy();
 
   await target.fill(answers[0]!);
-  await expect(target).toHaveAttribute('data-lms-state', 'filled');
+  await expect(target).toHaveAttribute('data-lms-state', 'correct');
+  await expect(target).toHaveAttribute('data-lms-attempts', '0');
 
   const localCheck = page.locator('[data-lms-check-for="p10-q1"]');
   await expect(localCheck).toBeVisible();
-  await expect(localCheck).toHaveText('בדוק');
-  await localCheck.click();
-
-  await expect(target).toHaveAttribute('data-lms-state', 'correct');
   await expect(localCheck).toHaveAttribute('data-state', 'correct');
   await expect(localCheck).toHaveText('✓');
 });
 
-test('reviewed explanation prompts become four-option choices and require explicit checking', async ({ page }) => {
+test('reviewed explanation prompts become four-option choices and correct choices get immediate feedback', async ({ page }) => {
   await page.goto('/#/workbook/11');
 
   const fieldset = page.locator('.lms-explanation-options').first();
@@ -40,12 +37,11 @@ test('reviewed explanation prompts become four-option choices and require explic
   expect(answers).toHaveLength(1);
 
   await fieldset.locator(`input[value="${answers[0]!.replace(/"/g, '\\"')}"]`).check();
-  await expect(proxy).toHaveAttribute('data-lms-state', 'filled');
+  await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '0');
 
   const localCheck = page.locator(`[data-lms-check-for="${qid}"]`);
-  await expect(localCheck).toHaveText('בדוק');
-  await localCheck.click();
-  await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(localCheck).toHaveAttribute('data-state', 'correct');
   await expect(localCheck).toHaveText('✓');
 });
 
