@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T14:07:07.632Z",
+  "generatedAt": "2026-08-14T14:10:00.736Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 923,
-  "coveragePercentage": 79.4,
+  "automaticallyCheckableTargets": 931,
+  "coveragePercentage": 80.1,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 190,
+    "canonical-metadata-derived": 198,
     "deterministic-mathematical": 547,
     "valid-range": 6,
     "open-ended": 119,
-    "ambiguous": 120,
+    "ambiguous": 112,
     "unsupported": 0,
     "missing": 0
   },
@@ -14033,11 +14033,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "18"
+          ]
         },
         {
           "targetId": "p56-q6",
@@ -14045,11 +14047,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "20"
+          ]
         },
         {
           "targetId": "p56-q7",
@@ -14120,13 +14124,11 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p56-q5",
-        "p56-q6",
         "p56-q10",
         "p56-q11"
       ],
-      "automaticallyCheckableTargets": 7,
-      "coveragePercentage": 63.6
+      "automaticallyCheckableTargets": 9,
+      "coveragePercentage": 81.8
     },
     {
       "pageNumber": 57,
@@ -14229,11 +14231,13 @@
           "inputType": "text:number",
           "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר.",
           "signature": "7cf9c57b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "16"
+          ]
         },
         {
           "targetId": "p57-q6",
@@ -14241,11 +14245,13 @@
           "inputType": "text:number",
           "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר.",
           "signature": "7cf9c57b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "16"
+          ]
         },
         {
           "targetId": "p57-q7",
@@ -14289,11 +14295,13 @@
           "inputType": "text:number",
           "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר.",
           "signature": "7cf9c57b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "12"
+          ]
         },
         {
           "targetId": "p57-q11",
@@ -14301,11 +14309,13 @@
           "inputType": "text:number",
           "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר.",
           "signature": "7cf9c57b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "9"
+          ]
         },
         {
           "targetId": "p57-q12",
@@ -14543,11 +14553,13 @@
           "inputType": "text:number",
           "context": "אורך המסלול כולו הוא בהכרח […] יחידות.",
           "signature": "619fb1a4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "14"
+          ]
         },
         {
           "targetId": "p57-q29",
@@ -14555,26 +14567,22 @@
           "inputType": "text:number",
           "context": "שיעור ה־x של נקודת הסיום גדול משיעור ה־x של הנקודה P ב־[…].",
           "signature": "fc00a65c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p57-q5",
-        "p57-q6",
         "p57-q7",
         "p57-q8",
-        "p57-q9",
-        "p57-q10",
-        "p57-q11",
-        "p57-q28",
-        "p57-q29"
+        "p57-q9"
       ],
-      "automaticallyCheckableTargets": 20,
-      "coveragePercentage": 69
+      "automaticallyCheckableTargets": 26,
+      "coveragePercentage": 89.7
     },
     {
       "pageNumber": 58,

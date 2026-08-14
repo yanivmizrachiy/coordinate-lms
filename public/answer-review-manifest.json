@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T14:07:07.632Z",
+  "generatedAt": "2026-08-14T14:10:00.736Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -11749,10 +11749,12 @@
           "targetId": "p56-q5",
           "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "18"
+          ],
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
@@ -11760,10 +11762,12 @@
           "targetId": "p56-q6",
           "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "20"
+          ],
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
@@ -11894,10 +11898,12 @@
           "targetId": "p57-q5",
           "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "16"
+          ],
           "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
@@ -11905,10 +11911,12 @@
           "targetId": "p57-q6",
           "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "16"
+          ],
           "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
@@ -11949,10 +11957,12 @@
           "targetId": "p57-q10",
           "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "12"
+          ],
           "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
@@ -11960,10 +11970,12 @@
           "targetId": "p57-q11",
           "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "9"
+          ],
           "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
@@ -12185,10 +12197,12 @@
           "targetId": "p57-q28",
           "signature": "619fb1a4",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "14"
+          ],
           "context": "אורך המסלול כולו הוא בהכרח […] יחידות."
         },
         {
@@ -12196,10 +12210,12 @@
           "targetId": "p57-q29",
           "signature": "fc00a65c",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ],
           "context": "שיעור ה־x של נקודת הסיום גדול משיעור ה־x של הנקודה P ב־[…]."
         }
       ]

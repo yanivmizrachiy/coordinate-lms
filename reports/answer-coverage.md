@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:07:07.632Z
+Generated: 2026-08-14T14:10:00.736Z
 
-Overall: 923/1162 safely checkable targets (79.4%).
+Overall: 931/1162 safely checkable targets (80.1%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 190 |
+| canonical-metadata-derived | 198 |
 | deterministic-mathematical | 547 |
 | valid-range | 6 |
 | open-ended | 119 |
-| ambiguous | 120 |
+| ambiguous | 112 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1272,7 +1272,7 @@ No detected interactive response targets.
 
 ### Page 56 — המלבן ברביע הראשון
 
-7/11 safely checkable (63.6%).
+9/11 safely checkable (81.8%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1280,8 +1280,8 @@ No detected interactive response targets.
 | p56-q2 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הקודקוד הרביעי הוא הנקודה D([…],[…]). |
 | p56-q3 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הצלעות המקבילות לציר x הן […]. |
 | p56-q4 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | האורך הוא הצלע […], והרוחב הוא הצלע AB. |
-| p56-q5 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p56-q6 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p56-q5 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p56-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p56-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | אם מזיזים את המלבן יחידה אחת ימינה, הקודקוד A מגיע אל ([…],[…]), וההיקף והשטח […]. |
 | p56-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | אם מזיזים את המלבן יחידה אחת ימינה, הקודקוד A מגיע אל ([…],[…]), וההיקף והשטח […]. |
 | p56-q9 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | אם מזיזים את המלבן יחידה אחת ימינה, הקודקוד A מגיע אל ([…],[…]), וההיקף והשטח […]. |
@@ -1290,7 +1290,7 @@ No detected interactive response targets.
 
 ### Page 57 — המלבן ברביע הראשון
 
-20/29 safely checkable (69%).
+26/29 safely checkable (89.7%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1298,13 +1298,13 @@ No detected interactive response targets.
 | p57-q2 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]=[…]יח' |
 | p57-q3 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]=[…]יח' |
 | p57-q4 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]יח' |
-| p57-q5 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
-| p57-q6 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
+| p57-q5 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
+| p57-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
 | p57-q7 | text:text | ambiguous | no | none | […] […] […] |
 | p57-q8 | text:text | ambiguous | no | none | […] […] […] |
 | p57-q9 | text:text | ambiguous | no | none | […] […] […] |
-| p57-q10 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
-| p57-q11 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
+| p57-q10 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
+| p57-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
 | p57-q12 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | נקודה על ציר xy= […] |
 | p57-q13 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | נקודה על ציר yx= […] |
 | p57-q14 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | קטע אופקישיעור […] זהה |
@@ -1321,8 +1321,8 @@ No detected interactive response targets.
 | p57-q25 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) → ([…],[…]) → ([…],[…]) → ([…],[…]) |
 | p57-q26 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | מהי נקודת הסיום? ([…],[…]) |
 | p57-q27 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | מהי נקודת הסיום? ([…],[…]) |
-| p57-q28 | text:number | ambiguous | no | none | אורך המסלול כולו הוא בהכרח […] יחידות. |
-| p57-q29 | text:number | ambiguous | no | none | שיעור ה־x של נקודת הסיום גדול משיעור ה־x של הנקודה P ב־[…]. |
+| p57-q28 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | אורך המסלול כולו הוא בהכרח […] יחידות. |
+| p57-q29 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | שיעור ה־x של נקודת הסיום גדול משיעור ה־x של הנקודה P ב־[…]. |
 
 ### Page 58 — המלבן ברביע הראשון
 
