@@ -117,7 +117,7 @@ function hydrateParallelPerpendicular(root: ParentNode): void {
   }
 
   const own = cardByHeading(root, 'ד. מסמנים בעצמכם');
-  const finalAxis = own?.querySelector<HTMLElement>('.blank[data-missing="letter"]');
+  const finalAxis = own?.querySelector<HTMLElement>('.blank[data-missing="letter"]') ?? undefined;
   setAnswer(finalAxis, ['x', 'X']);
 }
 
