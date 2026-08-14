@@ -22,6 +22,44 @@ async function existingGeneratedAt() {
   }
 }
 
+function applyRuntimePredicateCoverage(report, predicateRuleForCoverage) {
+  for (const page of report.pages) {
+    for (const target of page.targets) {
+      if (target.automaticCheckingSafe) continue;
+      const rule = predicateRuleForCoverage(target.context, target.inputType);
+      if (!rule) continue;
+      target.classification = 'deterministic-mathematical';
+      target.currentAnswerSource = 'runtime mathematical predicate';
+      target.sourceEvidence = `src/lms/digitalPredicates.ts:${rule}`;
+      target.automaticCheckingSafe = true;
+      target.answers = [`predicate:${rule}`];
+    }
+
+    const safe = page.targets.filter((target) => target.automaticCheckingSafe).length;
+    page.automaticallyCheckableTargets = safe;
+    page.missingOrAmbiguousTargetIds = page.targets
+      .filter((target) => !target.automaticCheckingSafe)
+      .map((target) => target.targetId);
+    page.coveragePercentage = page.targets.length === 0
+      ? 100
+      : Math.round((safe / page.targets.length) * 1000) / 10;
+  }
+
+  const allTargets = report.pages.flatMap((page) => page.targets);
+  const safe = allTargets.filter((target) => target.automaticCheckingSafe).length;
+  report.automaticallyCheckableTargets = safe;
+  report.coveragePercentage = allTargets.length === 0
+    ? 100
+    : Math.round((safe / allTargets.length) * 1000) / 10;
+  report.classifications = Object.fromEntries(
+    Object.keys(report.classifications).map((classification) => [
+      classification,
+      allTargets.filter((target) => target.classification === classification).length,
+    ]),
+  );
+  return report;
+}
+
 const server = await createServer({
   root,
   appType: 'custom',
@@ -31,8 +69,10 @@ const server = await createServer({
 
 try {
   const coverage = await server.ssrLoadModule('/src/lms/answerCoverage.ts');
-  const report = coverage.buildAnswerCoverageReport(
-    await existingGeneratedAt(),
+  const predicates = await server.ssrLoadModule('/src/lms/digitalPredicates.ts');
+  const report = applyRuntimePredicateCoverage(
+    coverage.buildAnswerCoverageReport(await existingGeneratedAt()),
+    predicates.predicateRuleForCoverage,
   );
   const order = coverage.answerTargetOrderSnapshot(report);
   const reviewManifest = {
