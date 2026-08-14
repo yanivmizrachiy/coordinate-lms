@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:13:02.265Z
+Generated: 2026-08-14T14:17:56.919Z
 
-Overall: 942/1162 safely checkable targets (81.1%).
+Overall: 962/1162 safely checkable targets (82.8%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 209 |
-| deterministic-mathematical | 547 |
+| canonical-metadata-derived | 231 |
+| deterministic-mathematical | 545 |
 | valid-range | 6 |
 | open-ended | 118 |
-| ambiguous | 102 |
+| ambiguous | 82 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -230,7 +230,7 @@ Overall: 942/1162 safely checkable targets (81.1%).
 
 ### Page 9 — נקודות ברביע הראשון
 
-20/28 safely checkable (71.4%).
+28/28 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -238,14 +238,14 @@ Overall: 942/1162 safely checkable targets (81.1%).
 | p9-q2 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | בזוג הסדור (x,y) המספר שנכתב מצד ימין הוא שיעור […]. |
 | p9-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | לדוגמה: בנקודה שערך ה־x שלה 4 ושיעור ה־y שלה 3, הזוג הסדור הוא ([…],[…]). |
 | p9-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | לדוגמה: בנקודה שערך ה־x שלה 4 ושיעור ה־y שלה 3, הזוג הסדור הוא ([…],[…]). |
-| p9-q5 | ordered-pair-coordinate | ambiguous | no | none | x=2, y=5 ← ([…],[…]) |
-| p9-q6 | ordered-pair-coordinate | ambiguous | no | none | x=2, y=5 ← ([…],[…]) |
-| p9-q7 | ordered-pair-coordinate | ambiguous | no | none | x=7, y=1 ← ([…],[…]) |
-| p9-q8 | ordered-pair-coordinate | ambiguous | no | none | x=7, y=1 ← ([…],[…]) |
-| p9-q9 | ordered-pair-coordinate | ambiguous | no | none | x=3, y=6 ← ([…],[…]) |
-| p9-q10 | ordered-pair-coordinate | ambiguous | no | none | x=3, y=6 ← ([…],[…]) |
-| p9-q11 | ordered-pair-coordinate | ambiguous | no | none | x=5, y=4 ← ([…],[…]) |
-| p9-q12 | ordered-pair-coordinate | ambiguous | no | none | x=5, y=4 ← ([…],[…]) |
+| p9-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | x=2, y=5 ← ([…],[…]) |
+| p9-q6 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | x=2, y=5 ← ([…],[…]) |
+| p9-q7 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | x=7, y=1 ← ([…],[…]) |
+| p9-q8 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | x=7, y=1 ← ([…],[…]) |
+| p9-q9 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | x=3, y=6 ← ([…],[…]) |
+| p9-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | x=3, y=6 ← ([…],[…]) |
+| p9-q11 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | x=5, y=4 ← ([…],[…]) |
+| p9-q12 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | x=5, y=4 ← ([…],[…]) |
 | p9-q13 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | A(6,2): שיעור x=[…], שיעור y=[…] |
 | p9-q14 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | A(6,2): שיעור x=[…], שיעור y=[…] |
 | p9-q15 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | B(1,5): שיעור x=[…], שיעור y=[…] |
@@ -651,20 +651,20 @@ No detected interactive response targets.
 
 ### Page 30 — הזזה של נקודות
 
-10/18 safely checkable (55.6%).
+18/18 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p30-q1 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הזזה ימינה או שמאלה משנה את שיעור […]. |
 | p30-q2 | word:direction | canonical-metadata-derived | yes | explicit canonical authoring label | הזזה למעלה או […] משנה את שיעור y. |
-| p30-q3 | ordered-pair-coordinate | ambiguous | no | none | (2,3) - 4 ימינה ← ([…],[…]) |
-| p30-q4 | ordered-pair-coordinate | ambiguous | no | none | (2,3) - 4 ימינה ← ([…],[…]) |
-| p30-q5 | ordered-pair-coordinate | ambiguous | no | none | (7,4) - 5 שמאלה ← ([…],[…]) |
-| p30-q6 | ordered-pair-coordinate | ambiguous | no | none | (7,4) - 5 שמאלה ← ([…],[…]) |
-| p30-q7 | ordered-pair-coordinate | ambiguous | no | none | (5,1) - 4 למעלה ← ([…],[…]) |
-| p30-q8 | ordered-pair-coordinate | ambiguous | no | none | (5,1) - 4 למעלה ← ([…],[…]) |
-| p30-q9 | ordered-pair-coordinate | ambiguous | no | none | (3,6) - 3 למטה ← ([…],[…]) |
-| p30-q10 | ordered-pair-coordinate | ambiguous | no | none | (3,6) - 3 למטה ← ([…],[…]) |
+| p30-q3 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | (2,3) - 4 ימינה ← ([…],[…]) |
+| p30-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | (2,3) - 4 ימינה ← ([…],[…]) |
+| p30-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | (7,4) - 5 שמאלה ← ([…],[…]) |
+| p30-q6 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | (7,4) - 5 שמאלה ← ([…],[…]) |
+| p30-q7 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | (5,1) - 4 למעלה ← ([…],[…]) |
+| p30-q8 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | (5,1) - 4 למעלה ← ([…],[…]) |
+| p30-q9 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | (3,6) - 3 למטה ← ([…],[…]) |
+| p30-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | (3,6) - 3 למטה ← ([…],[…]) |
 | p30-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודת ביניים: ([…],[…]) |
 | p30-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודת ביניים: ([…],[…]) |
 | p30-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה סופית: ([…],[…]) |
@@ -854,16 +854,16 @@ No detected interactive response targets.
 
 ### Page 39 — משלימים שיעור חסר ודפוסים
 
-23/28 safely checkable (82.1%).
+27/28 safely checkable (96.4%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p39-q1 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | A(5,[…]) על ציר x |
-| p39-q2 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | B([…],4) על ציר y |
-| p39-q3 | ordered-pair-coordinate | ambiguous | no | none | C(3,[…]) - שני השיעורים זהים |
-| p39-q4 | ordered-pair-coordinate | ambiguous | no | none | D([…],6) - שיעור y גדול פי 2 משיעור x |
-| p39-q5 | ordered-pair-coordinate | ambiguous | no | none | E(2,[…]) - שיעור y גדול ב־3 משיעור x |
-| p39-q6 | ordered-pair-coordinate | ambiguous | no | none | F([…],3) - שיעור x גדול ב־4 משיעור y |
+| p39-q1 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | A(5,[…]) על ציר x |
+| p39-q2 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | B([…],4) על ציר y |
+| p39-q3 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | C(3,[…]) - שני השיעורים זהים |
+| p39-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | D([…],6) - שיעור y גדול פי 2 משיעור x |
+| p39-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | E(2,[…]) - שיעור y גדול ב־3 משיעור x |
+| p39-q6 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | F([…],3) - שיעור x גדול ב־4 משיעור y |
 | p39-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | על ציר x ושיעור x שלי 6: ([…],0) |
 | p39-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | על ציר y ושיעור y שלי 5: (0,[…]) |
 | p39-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שני שיעוריי 4: ([…],[…]) |

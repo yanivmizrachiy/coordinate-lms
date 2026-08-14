@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T14:13:02.265Z",
+  "generatedAt": "2026-08-14T14:17:56.919Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 942,
-  "coveragePercentage": 81.1,
+  "automaticallyCheckableTargets": 962,
+  "coveragePercentage": 82.8,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 209,
-    "deterministic-mathematical": 547,
+    "canonical-metadata-derived": 231,
+    "deterministic-mathematical": 545,
     "valid-range": 6,
     "open-ended": 118,
-    "ambiguous": 102,
+    "ambiguous": 82,
     "unsupported": 0,
     "missing": 0
   },
@@ -2659,11 +2659,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "x=2, y=5 ← ([…],[…])",
           "signature": "7565752f",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p9-q6",
@@ -2671,11 +2673,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "x=2, y=5 ← ([…],[…])",
           "signature": "7565752f",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p9-q7",
@@ -2683,11 +2687,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "x=7, y=1 ← ([…],[…])",
           "signature": "5d32c082",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "7"
+          ]
         },
         {
           "targetId": "p9-q8",
@@ -2695,11 +2701,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "x=7, y=1 ← ([…],[…])",
           "signature": "5d32c082",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "1"
+          ]
         },
         {
           "targetId": "p9-q9",
@@ -2707,11 +2715,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "x=3, y=6 ← ([…],[…])",
           "signature": "e0a9e98f",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p9-q10",
@@ -2719,11 +2729,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "x=3, y=6 ← ([…],[…])",
           "signature": "e0a9e98f",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p9-q11",
@@ -2731,11 +2743,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "x=5, y=4 ← ([…],[…])",
           "signature": "615f300b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p9-q12",
@@ -2743,11 +2757,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "x=5, y=4 ← ([…],[…])",
           "signature": "615f300b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p9-q13",
@@ -2981,18 +2997,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p9-q5",
-        "p9-q6",
-        "p9-q7",
-        "p9-q8",
-        "p9-q9",
-        "p9-q10",
-        "p9-q11",
-        "p9-q12"
-      ],
-      "automaticallyCheckableTargets": 20,
-      "coveragePercentage": 71.4
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 28,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 10,
@@ -7071,11 +7078,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "(2,3) - 4 ימינה ← ([…],[…])",
           "signature": "6fccc910",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p30-q4",
@@ -7083,11 +7092,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "(2,3) - 4 ימינה ← ([…],[…])",
           "signature": "6fccc910",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p30-q5",
@@ -7095,11 +7106,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "(7,4) - 5 שמאלה ← ([…],[…])",
           "signature": "d1597a46",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p30-q6",
@@ -7107,11 +7120,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "(7,4) - 5 שמאלה ← ([…],[…])",
           "signature": "d1597a46",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p30-q7",
@@ -7119,11 +7134,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "(5,1) - 4 למעלה ← ([…],[…])",
           "signature": "ebcf53af",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p30-q8",
@@ -7131,11 +7148,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "(5,1) - 4 למעלה ← ([…],[…])",
           "signature": "ebcf53af",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p30-q9",
@@ -7143,11 +7162,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "(3,6) - 3 למטה ← ([…],[…])",
           "signature": "843b65d9",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p30-q10",
@@ -7155,11 +7176,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "(3,6) - 3 למטה ← ([…],[…])",
           "signature": "843b65d9",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p30-q11",
@@ -7278,18 +7301,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p30-q3",
-        "p30-q4",
-        "p30-q5",
-        "p30-q6",
-        "p30-q7",
-        "p30-q8",
-        "p30-q9",
-        "p30-q10"
-      ],
-      "automaticallyCheckableTargets": 10,
-      "coveragePercentage": 55.6
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 18,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 31,
@@ -9282,12 +9296,12 @@
           "inputType": "ordered-pair-coordinate",
           "context": "A(5,[…]) על ציר x",
           "signature": "6105cafc",
-          "classification": "deterministic-mathematical",
-          "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-x-axis"
+            "0"
           ]
         },
         {
@@ -9296,12 +9310,12 @@
           "inputType": "ordered-pair-coordinate",
           "context": "B([…],4) על ציר y",
           "signature": "b84e16f5",
-          "classification": "deterministic-mathematical",
-          "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-y-axis"
+            "0"
           ]
         },
         {
@@ -9310,11 +9324,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "C(3,[…]) - שני השיעורים זהים",
           "signature": "6cd84bfd",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p39-q4",
@@ -9322,11 +9338,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "D([…],6) - שיעור y גדול פי 2 משיעור x",
           "signature": "8b625cea",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p39-q5",
@@ -9334,11 +9352,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "E(2,[…]) - שיעור y גדול ב־3 משיעור x",
           "signature": "54bb96c0",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p39-q6",
@@ -9346,11 +9366,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "F([…],3) - שיעור x גדול ב־4 משיעור y",
           "signature": "c24513a5",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "7"
+          ]
         },
         {
           "targetId": "p39-q7",
@@ -9653,7 +9675,8 @@
           "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "y"
+            "y",
+            "Y"
           ]
         },
         {
@@ -9670,14 +9693,10 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p39-q3",
-        "p39-q4",
-        "p39-q5",
-        "p39-q6",
         "p39-q28"
       ],
-      "automaticallyCheckableTargets": 23,
-      "coveragePercentage": 82.1
+      "automaticallyCheckableTargets": 27,
+      "coveragePercentage": 96.4
     },
     {
       "pageNumber": 40,
