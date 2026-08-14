@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T14:02:07.530Z",
+  "generatedAt": "2026-08-14T14:03:28.327Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -10769,10 +10769,12 @@
           "targetId": "p51-q9",
           "signature": "708a801d",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "18"
+          ],
           "context": "היקף הצורה הוא […] יח'.שטח הצורה הוא […] יח\"ר."
         },
         {
@@ -10780,10 +10782,12 @@
           "targetId": "p51-q10",
           "signature": "708a801d",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "20"
+          ],
           "context": "היקף הצורה הוא […] יח'.שטח הצורה הוא […] יח\"ר."
         }
       ]

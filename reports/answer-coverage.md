@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:02:07.530Z
+Generated: 2026-08-14T14:03:28.327Z
 
-Overall: 917/1162 safely checkable targets (78.9%).
+Overall: 919/1162 safely checkable targets (79.1%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 184 |
+| canonical-metadata-derived | 186 |
 | deterministic-mathematical | 547 |
 | valid-range | 6 |
 | open-ended | 119 |
-| ambiguous | 126 |
+| ambiguous | 124 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1155,7 +1155,7 @@ No detected interactive response targets.
 
 ### Page 51 — המלבן ברביע הראשון
 
-8/10 safely checkable (80%).
+10/10 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1167,8 +1167,8 @@ No detected interactive response targets.
 | p51-q6 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | בקטע BC ערך x זהה, ולכן הקטע […] לציר y. |
 | p51-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | אורך AB: […] יח'. אורך BC: […] יח'. |
 | p51-q8 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | אורך AB: […] יח'. אורך BC: […] יח'. |
-| p51-q9 | text:number | ambiguous | no | none | היקף הצורה הוא […] יח'.שטח הצורה הוא […] יח"ר. |
-| p51-q10 | text:number | ambiguous | no | none | היקף הצורה הוא […] יח'.שטח הצורה הוא […] יח"ר. |
+| p51-q9 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הצורה הוא […] יח'.שטח הצורה הוא […] יח"ר. |
+| p51-q10 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הצורה הוא […] יח'.שטח הצורה הוא […] יח"ר. |
 
 ### Page 52 — המלבן ברביע הראשון
 
