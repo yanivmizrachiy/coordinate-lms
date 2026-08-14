@@ -22,6 +22,43 @@ async function existingGeneratedAt() {
   }
 }
 
+function isHiddenRuntimeGroupProxy(target) {
+  return target.inputType === 'text:text' &&
+    target.currentAnswerSource === 'explicit canonical authoring label' &&
+    target.sourceEvidence === 'aria-label/data-lms-answers' &&
+    target.answers.some((answer) => answer.startsWith('predicate:'));
+}
+
+function recalculateCoverage(report) {
+  for (const page of report.pages) {
+    page.targetIds = page.targets.map((target) => target.targetId);
+    page.interactiveTargetCount = page.targets.length;
+    const safe = page.targets.filter((target) => target.automaticCheckingSafe).length;
+    page.automaticallyCheckableTargets = safe;
+    page.missingOrAmbiguousTargetIds = page.targets
+      .filter((target) => !target.automaticCheckingSafe)
+      .map((target) => target.targetId);
+    page.coveragePercentage = page.targets.length === 0
+      ? 100
+      : Math.round((safe / page.targets.length) * 1000) / 10;
+  }
+
+  const allTargets = report.pages.flatMap((page) => page.targets);
+  const safe = allTargets.filter((target) => target.automaticCheckingSafe).length;
+  report.targetCount = allTargets.length;
+  report.automaticallyCheckableTargets = safe;
+  report.coveragePercentage = allTargets.length === 0
+    ? 100
+    : Math.round((safe / allTargets.length) * 1000) / 10;
+  report.classifications = Object.fromEntries(
+    Object.keys(report.classifications).map((classification) => [
+      classification,
+      allTargets.filter((target) => target.classification === classification).length,
+    ]),
+  );
+  return report;
+}
+
 function applyRuntimePredicateCoverage(report, predicateRuleForCoverage) {
   for (const page of report.pages) {
     for (const target of page.targets) {
@@ -35,29 +72,13 @@ function applyRuntimePredicateCoverage(report, predicateRuleForCoverage) {
       target.answers = [`predicate:${rule}`];
     }
 
-    const safe = page.targets.filter((target) => target.automaticCheckingSafe).length;
-    page.automaticallyCheckableTargets = safe;
-    page.missingOrAmbiguousTargetIds = page.targets
-      .filter((target) => !target.automaticCheckingSafe)
-      .map((target) => target.targetId);
-    page.coveragePercentage = page.targets.length === 0
-      ? 100
-      : Math.round((safe / page.targets.length) * 1000) / 10;
+    // A group proxy is an implementation detail used by the runtime to grade
+    // several visible response fields atomically. It is not a learner-facing
+    // response target and must not inflate the coverage denominator.
+    page.targets = page.targets.filter((target) => !isHiddenRuntimeGroupProxy(target));
   }
 
-  const allTargets = report.pages.flatMap((page) => page.targets);
-  const safe = allTargets.filter((target) => target.automaticCheckingSafe).length;
-  report.automaticallyCheckableTargets = safe;
-  report.coveragePercentage = allTargets.length === 0
-    ? 100
-    : Math.round((safe / allTargets.length) * 1000) / 10;
-  report.classifications = Object.fromEntries(
-    Object.keys(report.classifications).map((classification) => [
-      classification,
-      allTargets.filter((target) => target.classification === classification).length,
-    ]),
-  );
-  return report;
+  return recalculateCoverage(report);
 }
 
 const server = await createServer({
