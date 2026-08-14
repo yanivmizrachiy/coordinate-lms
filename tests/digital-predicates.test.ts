@@ -30,15 +30,21 @@ describe('digital mathematical predicates', () => {
   });
 
   it('checks relative-position constraints against canonical plotted points', () => {
-    // B=(5,0): G is on x-axis and right of B.
     expect(evaluateDigitalGroupRule('point-on-x-right-of-5', ['6', '0'])).toBe(true);
     expect(evaluateDigitalGroupRule('point-on-x-right-of-5', ['5', '0'])).toBe(false);
     expect(evaluateDigitalGroupRule('point-on-x-right-of-5', ['7', '1'])).toBe(false);
-
-    // P=(2,5), R=(5,6): S is right of P and below R.
     expect(evaluateDigitalGroupRule('point-right-of-2-below-6', ['3', '5'])).toBe(true);
     expect(evaluateDigitalGroupRule('point-right-of-2-below-6', ['2', '5'])).toBe(false);
     expect(evaluateDigitalGroupRule('point-right-of-2-below-6', ['3', '6'])).toBe(false);
+  });
+
+  it('checks the two equal-weight/equal-price package pairs in any order', () => {
+    expect(evaluateDigitalGroupRule('same-weight-package-pairs', ['B', 'C', 'D', 'E'])).toBe(true);
+    expect(evaluateDigitalGroupRule('same-weight-package-pairs', ['E', 'D', 'C', 'B'])).toBe(true);
+    expect(evaluateDigitalGroupRule('same-weight-package-pairs', ['A', 'B', 'D', 'E'])).toBe(false);
+    expect(evaluateDigitalGroupRule('same-price-package-pairs', ['A', 'B', 'D', 'F'])).toBe(true);
+    expect(evaluateDigitalGroupRule('same-price-package-pairs', ['F', 'D', 'B', 'A'])).toBe(true);
+    expect(evaluateDigitalGroupRule('same-price-package-pairs', ['A', 'C', 'D', 'F'])).toBe(false);
   });
 
   it('accepts any non-negative free coordinate on an axis', () => {
@@ -52,6 +58,7 @@ describe('digital mathematical predicates', () => {
     expect(answersMatch('1|2|1|5', ['predicate:distinct-coordinate-pairs'])).toBe(false);
     expect(answersMatch('8|0', ['predicate:point-on-x-axis'])).toBe(true);
     expect(answersMatch('0|8', ['predicate:point-on-x-axis'])).toBe(false);
+    expect(answersMatch('B|C|D|E', ['predicate:same-weight-package-pairs'])).toBe(true);
     expect(answersMatch('9', ['predicate:nonnegative-number'])).toBe(true);
   });
 });
