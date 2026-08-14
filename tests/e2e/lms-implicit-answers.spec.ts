@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('an explicit authoring label becomes a checked answer automatically', async ({ page }) => {
+test('an explicit answer is checked only after the nearby check button', async ({ page }) => {
   await page.goto('/#/workbook/10');
 
   const target = page.locator('[data-lms-qid="p10-q1"]');
@@ -9,8 +9,18 @@ test('an explicit authoring label becomes a checked answer automatically', async
     (await target.getAttribute('data-lms-answers')) || '[]',
   ) as string[];
   expect(answers[0]).toBeTruthy();
+
   await target.fill(answers[0]!);
+  await expect(target).toHaveAttribute('data-lms-state', 'filled');
+
+  const localCheck = page.locator('[data-lms-check-for="p10-q1"]');
+  await expect(localCheck).toBeVisible();
+  await expect(localCheck).toHaveText('בדוק');
+  await localCheck.click();
+
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
+  await expect(localCheck).toHaveAttribute('data-state', 'correct');
+  await expect(localCheck).toHaveText('✓');
 });
 
 test('coordinate-grid blanks carry their exact mathematical answers', async ({ page }) => {
