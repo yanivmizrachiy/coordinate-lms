@@ -53,6 +53,34 @@ export function normalizeAnswer(raw: string): string {
     .toLocaleLowerCase('he');
 }
 
+type AxisName = 'x' | 'y';
+
+function axisName(raw: string): AxisName | null {
+  const value = normalizeAnswer(raw).replace(/[-'"׳״]/g, '');
+
+  // Keyboard/notation flexibility is accepted only when the expected answer
+  // is an axis name, so permissive aliases cannot leak into unrelated answers.
+  if (
+    ['x', 'צירx', 'איקס', 'אקס', 'ציראיקס', 'ציראקס', 'ס'].includes(value)
+  ) {
+    return 'x';
+  }
+
+  if (
+    ['y', 'צירy', 'וואי', 'ואי', 'ווי', 'צירוואי', 'צירואי', 'ט'].includes(value)
+  ) {
+    return 'y';
+  }
+
+  return null;
+}
+
+function axisAliasMatches(raw: string, candidate: string): boolean {
+  const expectedAxis = axisName(candidate);
+  if (!expectedAxis) return false;
+  return axisName(raw) === expectedAxis;
+}
+
 export function answersMatch(raw: string, expected: readonly string[]): boolean {
   if (!isAllowedExpectedAnswer(raw)) return false;
 
@@ -88,6 +116,8 @@ export function answersMatch(raw: string, expected: readonly string[]): boolean 
     if (rawNumber !== null && candidateNumber !== null) {
       return Math.abs(rawNumber - candidateNumber) < 1e-12;
     }
+
+    if (axisAliasMatches(raw, candidate)) return true;
 
     return normalizeAnswer(candidate) === normalized;
   });
