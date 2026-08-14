@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:25:21.645Z",
+  "generatedAt": "2026-08-14T13:26:23.412Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 862,
-  "coveragePercentage": 74.2,
+  "automaticallyCheckableTargets": 867,
+  "coveragePercentage": 74.6,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 129,
+    "canonical-metadata-derived": 134,
     "deterministic-mathematical": 547,
     "valid-range": 6,
-    "open-ended": 152,
-    "ambiguous": 148,
+    "open-ended": 151,
+    "ambiguous": 144,
     "unsupported": 0,
     "missing": 0
   },
@@ -10221,11 +10221,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]).",
           "signature": "70a1771d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p41-q8",
@@ -10233,11 +10235,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]).",
           "signature": "70a1771d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p41-q9",
@@ -10245,11 +10249,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]).",
           "signature": "70a1771d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p41-q10",
@@ -10257,11 +10263,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]).",
           "signature": "70a1771d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p41-q11",
@@ -10269,11 +10277,15 @@
           "inputType": "text:property",
           "context": "הנקודות שסימנתם ממוקמות על קו […] אחד.",
           "signature": "6b34ed80",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ישר",
+            "ישר אחד",
+            "קו ישר"
+          ]
         },
         {
           "targetId": "p41-q12",
@@ -10520,11 +10532,6 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p41-q7",
-        "p41-q8",
-        "p41-q9",
-        "p41-q10",
-        "p41-q11",
         "p41-q24",
         "p41-q25",
         "p41-q26",
@@ -10532,8 +10539,8 @@
         "p41-q28",
         "p41-q29"
       ],
-      "automaticallyCheckableTargets": 18,
-      "coveragePercentage": 62.1
+      "automaticallyCheckableTargets": 23,
+      "coveragePercentage": 79.3
     },
     {
       "pageNumber": 42,

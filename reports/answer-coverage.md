@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:25:21.645Z
+Generated: 2026-08-14T13:26:23.412Z
 
-Overall: 862/1162 safely checkable targets (74.2%).
+Overall: 867/1162 safely checkable targets (74.6%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 129 |
+| canonical-metadata-derived | 134 |
 | deterministic-mathematical | 547 |
 | valid-range | 6 |
-| open-ended | 152 |
-| ambiguous | 148 |
+| open-ended | 151 |
+| ambiguous | 144 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -923,7 +923,7 @@ No detected interactive response targets.
 
 ### Page 41 — מכלל לטבלה ולגרף
 
-18/29 safely checkable (62.1%).
+23/29 safely checkable (79.3%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -933,11 +933,11 @@ No detected interactive response targets.
 | p41-q4 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y[…][…][…][…] |
 | p41-q5 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y[…][…][…][…] |
 | p41-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y[…][…][…][…] |
-| p41-q7 | ordered-pair-coordinate | ambiguous | no | none | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
-| p41-q8 | ordered-pair-coordinate | ambiguous | no | none | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
-| p41-q9 | ordered-pair-coordinate | ambiguous | no | none | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
-| p41-q10 | ordered-pair-coordinate | ambiguous | no | none | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
-| p41-q11 | text:property | open-ended | no | teacher judgment required | הנקודות שסימנתם ממוקמות על קו […] אחד. |
+| p41-q7 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
+| p41-q8 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
+| p41-q9 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
+| p41-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…]). |
+| p41-q11 | text:property | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודות שסימנתם ממוקמות על קו […] אחד. |
 | p41-q12 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | בכל נקודה שמתאימה לכלל, שיעור ה־y גדול פי 2 מערך ה־[…]. |
 | p41-q13 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y2[…][…]5[…] |
 | p41-q14 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y2[…][…]5[…] |

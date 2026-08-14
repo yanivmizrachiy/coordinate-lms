@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T13:25:21.645Z",
+  "generatedAt": "2026-08-14T13:26:23.412Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -8564,10 +8564,12 @@
           "targetId": "p41-q7",
           "signature": "70a1771d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ],
           "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])."
         },
         {
@@ -8575,10 +8577,12 @@
           "targetId": "p41-q8",
           "signature": "70a1771d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ],
           "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])."
         },
         {
@@ -8586,10 +8590,12 @@
           "targetId": "p41-q9",
           "signature": "70a1771d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ],
           "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])."
         },
         {
@@ -8597,10 +8603,12 @@
           "targetId": "p41-q10",
           "signature": "70a1771d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ],
           "context": "כתבו את ארבע הנקודות מהטבלה: (0,[…]) (1,[…]) (2,[…]) (3,[…])."
         },
         {
@@ -8608,10 +8616,14 @@
           "targetId": "p41-q11",
           "signature": "6b34ed80",
           "inputType": "text:property",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ישר",
+            "ישר אחד",
+            "קו ישר"
+          ],
           "context": "הנקודות שסימנתם ממוקמות על קו […] אחד."
         },
         {
