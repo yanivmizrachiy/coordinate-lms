@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T13:52:47.201Z",
+  "generatedAt": "2026-08-14T13:54:37.822Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -3580,34 +3580,40 @@
         {
           "pageNumber": 13,
           "targetId": "p13-q17",
-          "signature": "bd0fcb5c",
+          "signature": "b729b5af",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי הנקודה נמצאת באותו קו אנכי כמו M, ולכן שיעור ה־x שלה זהה לשיעור ה־x של M והוא 6."
+          ],
+          "context": "ההסבר: מדוע שיעור ה־x של הנקודה הוא 6?כי הנקודה נמצאת באותו גובה כמו L, ולכן שיעור ה־x שלה שווה ל־6.כי הנקודה נמצאת באותו קו אנכי כמו M, ולכן שיעור ה־x שלה זהה לשיעור ה־x של M והוא 6.כי כל נקודה שממוקמת מעל M חייבת להיות בעלת שיעור x שווה ל"
         },
         {
           "pageNumber": 13,
           "targetId": "p13-q18",
-          "signature": "bd0fcb5c",
+          "signature": "fc72ead6",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי הנקודה נמצאת בגובה של L, ולכן שיעור ה־y שלה זהה לשיעור ה־y של L והוא 6."
+          ],
+          "context": "ההסבר: מדוע שיעור ה־y של הנקודה הוא 6?כי הנקודה נמצאת בגובה של L, ולכן שיעור ה־y שלה זהה לשיעור ה־y של L והוא 6.כי הנקודה נמצאת באותו קו אנכי כמו M, ולכן שיעור ה־y שלה שווה ל־6.כי שיעור ה־x שלה הוא 6 ולכן גם שיעור ה־y חייב להיות 6.כי כל נקו"
         },
         {
           "pageNumber": 13,
           "targetId": "p13-q19",
           "signature": "f2c048b1",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ],
           "context": "סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…])."
         },
         {
@@ -3615,10 +3621,12 @@
           "targetId": "p13-q20",
           "signature": "f2c048b1",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ],
           "context": "סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…])."
         },
         {
@@ -3626,10 +3634,12 @@
           "targetId": "p13-q21",
           "signature": "54054fb8",
           "inputType": "text:direction",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מימין"
+          ],
           "context": "הנקודה R ממוקמת […] לנקודה K."
         }
       ]

@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:52:47.201Z",
+  "generatedAt": "2026-08-14T13:54:37.822Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 910,
-  "coveragePercentage": 78.3,
+  "automaticallyCheckableTargets": 915,
+  "coveragePercentage": 78.7,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 167,
+    "canonical-metadata-derived": 172,
     "deterministic-mathematical": 557,
     "valid-range": 6,
-    "open-ended": 137,
-    "ambiguous": 115,
+    "open-ended": 135,
+    "ambiguous": 112,
     "unsupported": 0,
     "missing": 0
   },
@@ -4199,25 +4199,29 @@
           "targetId": "p13-q17",
           "order": 17,
           "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "ההסבר: מדוע שיעור ה־x של הנקודה הוא 6?כי הנקודה נמצאת באותו גובה כמו L, ולכן שיעור ה־x שלה שווה ל־6.כי הנקודה נמצאת באותו קו אנכי כמו M, ולכן שיעור ה־x שלה זהה לשיעור ה־x של M והוא 6.כי כל נקודה שממוקמת מעל M חייבת להיות בעלת שיעור x שווה ל",
+          "signature": "b729b5af",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי הנקודה נמצאת באותו קו אנכי כמו M, ולכן שיעור ה־x שלה זהה לשיעור ה־x של M והוא 6."
+          ]
         },
         {
           "targetId": "p13-q18",
           "order": 18,
           "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "ההסבר: מדוע שיעור ה־y של הנקודה הוא 6?כי הנקודה נמצאת בגובה של L, ולכן שיעור ה־y שלה זהה לשיעור ה־y של L והוא 6.כי הנקודה נמצאת באותו קו אנכי כמו M, ולכן שיעור ה־y שלה שווה ל־6.כי שיעור ה־x שלה הוא 6 ולכן גם שיעור ה־y חייב להיות 6.כי כל נקו",
+          "signature": "fc72ead6",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי הנקודה נמצאת בגובה של L, ולכן שיעור ה־y שלה זהה לשיעור ה־y של L והוא 6."
+          ]
         },
         {
           "targetId": "p13-q19",
@@ -4225,11 +4229,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…]).",
           "signature": "f2c048b1",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p13-q20",
@@ -4237,11 +4243,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…]).",
           "signature": "f2c048b1",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p13-q21",
@@ -4249,22 +4257,18 @@
           "inputType": "text:direction",
           "context": "הנקודה R ממוקמת […] לנקודה K.",
           "signature": "54054fb8",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מימין"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p13-q17",
-        "p13-q18",
-        "p13-q19",
-        "p13-q20",
-        "p13-q21"
-      ],
-      "automaticallyCheckableTargets": 16,
-      "coveragePercentage": 76.2
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 21,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 14,

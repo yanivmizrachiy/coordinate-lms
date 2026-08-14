@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:52:47.201Z
+Generated: 2026-08-14T13:54:37.822Z
 
-Overall: 910/1162 safely checkable targets (78.3%).
+Overall: 915/1162 safely checkable targets (78.7%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 167 |
+| canonical-metadata-derived | 172 |
 | deterministic-mathematical | 557 |
 | valid-range | 6 |
-| open-ended | 137 |
-| ambiguous | 115 |
+| open-ended | 135 |
+| ambiguous | 112 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -345,7 +345,7 @@ Overall: 910/1162 safely checkable targets (78.3%).
 
 ### Page 13 — נקודות ברביע הראשון
 
-16/21 safely checkable (76.2%).
+21/21 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -365,11 +365,11 @@ Overall: 910/1162 safely checkable targets (78.3%).
 | p13-q14 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | איזו נקודה ממוקמת על ציר y? […] |
 | p13-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | מהם שיעוריה? ([…],[…]) |
 | p13-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | מהם שיעוריה? ([…],[…]) |
-| p13-q17 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
-| p13-q18 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
-| p13-q19 | ordered-pair-coordinate | ambiguous | no | none | סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…]). |
-| p13-q20 | ordered-pair-coordinate | ambiguous | no | none | סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…]). |
-| p13-q21 | text:direction | ambiguous | no | none | הנקודה R ממוקמת […] לנקודה K. |
+| p13-q17 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע שיעור ה־x של הנקודה הוא 6?כי הנקודה נמצאת באותו גובה כמו L, ולכן שיעור ה־x שלה שווה ל־6.כי הנקודה נמצאת באותו קו אנכי כמו M, ולכן שיעור ה־x שלה זהה לשיעור ה־x של M והוא 6.כי כל נקודה שממוקמת מעל M חייבת להיות בעלת שיעור x שווה ל |
+| p13-q18 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע שיעור ה־y של הנקודה הוא 6?כי הנקודה נמצאת בגובה של L, ולכן שיעור ה־y שלה זהה לשיעור ה־y של L והוא 6.כי הנקודה נמצאת באותו קו אנכי כמו M, ולכן שיעור ה־y שלה שווה ל־6.כי שיעור ה־x שלה הוא 6 ולכן גם שיעור ה־y חייב להיות 6.כי כל נקו |
+| p13-q19 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…]). |
+| p13-q20 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…]). |
+| p13-q21 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה R ממוקמת […] לנקודה K. |
 
 ### Page 14 — נקודות ברביע הראשון
 
