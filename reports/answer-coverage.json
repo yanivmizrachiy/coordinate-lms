@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:45:26.139Z",
+  "generatedAt": "2026-08-14T13:47:07.684Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 876,
-  "coveragePercentage": 75.4,
+  "automaticallyCheckableTargets": 878,
+  "coveragePercentage": 75.6,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 137,
+    "canonical-metadata-derived": 139,
     "deterministic-mathematical": 553,
     "valid-range": 6,
     "open-ended": 142,
-    "ambiguous": 144,
+    "ambiguous": 142,
     "unsupported": 0,
     "missing": 0
   },
@@ -13650,11 +13650,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "14"
+          ]
         },
         {
           "targetId": "p54-q16",
@@ -13662,11 +13664,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "12"
+          ]
         }
       ],
       "missingOrAmbiguousTargetIds": [
@@ -13681,12 +13685,10 @@
         "p54-q11",
         "p54-q12",
         "p54-q13",
-        "p54-q14",
-        "p54-q15",
-        "p54-q16"
+        "p54-q14"
       ],
-      "automaticallyCheckableTargets": 2,
-      "coveragePercentage": 12.5
+      "automaticallyCheckableTargets": 4,
+      "coveragePercentage": 25
     },
     {
       "pageNumber": 55,

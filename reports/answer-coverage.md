@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:45:26.139Z
+Generated: 2026-08-14T13:47:07.684Z
 
-Overall: 876/1162 safely checkable targets (75.4%).
+Overall: 878/1162 safely checkable targets (75.6%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 137 |
+| canonical-metadata-derived | 139 |
 | deterministic-mathematical | 553 |
 | valid-range | 6 |
 | open-ended | 142 |
-| ambiguous | 144 |
+| ambiguous | 142 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1228,7 +1228,7 @@ No detected interactive response targets.
 
 ### Page 54 — המלבן ברביע הראשון
 
-2/16 safely checkable (12.5%).
+4/16 safely checkable (25%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1246,8 +1246,8 @@ No detected interactive response targets.
 | p54-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
 | p54-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
 | p54-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
-| p54-q15 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p54-q16 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p54-q15 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p54-q16 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 
 ### Page 55 — המלבן ברביע הראשון
 
