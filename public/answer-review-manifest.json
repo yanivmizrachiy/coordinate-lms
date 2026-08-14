@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T13:54:37.822Z",
+  "generatedAt": "2026-08-14T13:56:03.015Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -4074,13 +4074,15 @@
         {
           "pageNumber": 16,
           "targetId": "p16-q9",
-          "signature": "bd0fcb5c",
+          "signature": "6c5fbb82",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי על ציר x שיעור y הוא 0 ועל ציר y ערך x הוא 0, ולכן נקודה שעל שני הצירים יחד חייבת להיות (0,0)."
+          ],
+          "context": "ההסבר: מדוע רק ראשית הצירים נמצאת גם על ציר x וגם על ציר y?כי על ציר x שיעור y הוא 0 ועל ציר y ערך x הוא 0, ולכן נקודה שעל שני הצירים יחד חייבת להיות (0,0).כי בכל נקודה על אחד הצירים שני השיעורים שווים זה לזה.כי כל נקודה ששיעור ה־x שלה 0 נמ"
         }
       ]
     },

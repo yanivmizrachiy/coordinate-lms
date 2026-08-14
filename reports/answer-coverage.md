@@ -1,18 +1,18 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:54:37.822Z
+Generated: 2026-08-14T13:56:03.015Z
 
-Overall: 915/1162 safely checkable targets (78.7%).
+Overall: 916/1162 safely checkable targets (78.8%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 172 |
+| canonical-metadata-derived | 173 |
 | deterministic-mathematical | 557 |
 | valid-range | 6 |
-| open-ended | 135 |
+| open-ended | 134 |
 | ambiguous | 112 |
 | unsupported | 0 |
 | missing | 0 |
@@ -410,7 +410,7 @@ Overall: 915/1162 safely checkable targets (78.7%).
 
 ### Page 16 — נקודות שעל הצירים
 
-8/9 safely checkable (88.9%).
+9/9 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -422,7 +422,7 @@ Overall: 915/1162 safely checkable targets (78.7%).
 | p16-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה שממוקמת על שני הצירים יחד היא ראשית הצירים, O([…],[…]). |
 | p16-q7 | text:text | reviewed-explicit | yes | target-bound reviewed proof | […] |
 | p16-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | אין נקודה אחרת כזאת, כי רק בה גם ערך ה־x הוא 0 וגם שיעור ה־y הוא […]. |
-| p16-q9 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p16-q9 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע רק ראשית הצירים נמצאת גם על ציר x וגם על ציר y?כי על ציר x שיעור y הוא 0 ועל ציר y ערך x הוא 0, ולכן נקודה שעל שני הצירים יחד חייבת להיות (0,0).כי בכל נקודה על אחד הצירים שני השיעורים שווים זה לזה.כי כל נקודה ששיעור ה־x שלה 0 נמ |
 
 ### Page 17 — בודקים ומתקנים סימון
 
