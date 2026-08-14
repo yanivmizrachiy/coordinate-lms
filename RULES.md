@@ -58,7 +58,17 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Creating these alternatives requires high-level pedagogical reasoning: identify the concept, anticipate common misconceptions, preserve the original cognitive demand, and construct diagnostic distractors.
 - This adaptation occurs **only in the computerized layer**. The printable question remains unchanged.
 
-## 7. Answer-checking policy
+## 7. Per-answer checking is the primary feedback interaction
+
+- **Every objectively checkable student response must have a small, clear digital-only check button immediately next to the response control.** This applies to ordinary text/number answers, an ordered pair treated as one answer unit, a graphical selection, and a grouped mathematical response.
+- The student enters or selects the answer and then presses that nearby check button. Correctness is evaluated at that moment; merely typing must not consume an attempt or be the primary correctness-reveal interaction.
+- A correct checked response receives a clearly visible **green ✓** immediately next to/over the response and becomes completed according to the attempt policy.
+- An incorrect checked response receives clear local error feedback and may be corrected while attempts remain.
+- The nearby button must check the complete mathematical answer unit. For an ordered pair this means the pair, not two unrelated mini-checks. For a predicate/group task it means the whole condition/group, not one arbitrary field.
+- A page-wide “check all answers” control may remain as a convenience, but it is secondary; it must use exactly the same checking logic as the nearby per-answer buttons.
+- Check buttons and feedback markers are LMS-only and must never appear in print.
+
+## 8. Answer-checking policy
 
 - An answer may be checked automatically when it is reviewed explicitly, encoded in canonical metadata, mathematically deterministic, or expressible as a verified valid range/predicate.
 - Reviewed answer logic must be bound to the current target signature and canonical source evidence. Prompt drift invalidates stale grading logic.
@@ -68,7 +78,7 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Never invent one fixed answer for a task whose valid solution set contains many responses. Encode the mathematical condition instead.
 - A target may remain genuinely ungraded only after pedagogical review proves that no objective computerized equivalent can preserve the original learning objective.
 
-## 8. Iron rule: practice is open; registration is only for saving and documentation
+## 9. Iron rule: practice is open; registration is only for saving and documentation
 
 - **Every student, registered or not, may open and solve every computerized page and every exercise in the LMS. There is no registration wall on any workbook page.**
 - Registration/login is optional for practice. It becomes necessary only when the student wants their work, answers, scores, attempts, progress, and activity to be saved and documented to their personal account.
@@ -80,7 +90,7 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - The information box must explicitly tell the student that a registered account enables saved learning history and personal progress reports.
 - That information box is an LMS overlay only and must not modify or appear in the printable source page.
 
-## 9. Registration identity and security
+## 10. Registration identity and security
 
 - Registration for persistent learning records requires all of these fields: **full name, username, email address, password, school, city, and class**. These are required, not optional, for a newly registered student.
 - The registration screen must explain why registration exists: to save, document and report the student's learning activity and progress.
@@ -92,23 +102,27 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Registration must fail closed when the real production authentication backend is unavailable; failure of registration must never block anonymous practice.
 - Do not expose one student's profile or learning records to another student. Class-wide access is administrator-only.
 
-## 10. Scoring and attempts
+## 11. Scoring and attempts
 
+- **Every computerized page has its own independent page score.** Scores are not merged across pages for the page-completion display.
 - Every submitted page score is an integer from 1 through 100.
+- At page completion/submission, show that page's score prominently in **red**, with the numeric score surrounded by a clearly visible **red circle/ring** and a label identifying it as the score for that page.
+- The red score circle is shown to registered and anonymous students; persistence still follows the registration rules.
 - Every automatically checked answer allows at most three attempts during the active practice state.
+- An attempt is consumed when the student explicitly checks/submits that response, not merely while typing or editing it.
 - For registered students, reload, retry, stale writes, or reconnection must never reset a persisted attempt count.
-- Each objectively checkable response gives immediate per-question feedback: green success for correct and red failure for incorrect, while preserving the attempt rule.
+- Each objectively checkable response gives immediate local feedback **after its check action**: green ✓ for correct and red/local failure for incorrect, while preserving the attempt rule.
 - For graphical tasks, feedback applies to the submitted graphical choice, not to a surrogate typed answer.
 - After page submission, show the score to every user. Persist the score, answers, and attempt counts **only when the user is registered and signed in**.
 
-## 11. Student and teacher visibility
+## 12. Student and teacher visibility
 
 - Registered students may view only their own saved data.
 - Only the configured administrator may view class-wide registered-student results in the initial release.
 - The administrator view must expose question-level correctness and attempts, not only page-level scores.
 - The teacher dashboard and reports contain **registered students only**. Anonymous/guest practice must not create student records, activity rows, progress records, or statistics.
 
-## 12. Persistence and Firebase truth
+## 13. Persistence and Firebase truth
 
 - Persistence applies only to a registered, signed-in student (or the configured administrator where appropriate).
 - Local persistence success and central Firebase synchronization success are different states for registered users.
@@ -119,7 +133,7 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Teacher views must distinguish central Firebase data from any registered-user local fallback and expose synchronization errors.
 - **There is no guest-progress persistence or guest-progress transfer workflow.** Any code, test, copy, storage key usage, or migration rule that assumes durable guest progress is obsolete and must be removed.
 
-## 13. Firebase and authorization
+## 14. Firebase and authorization
 
 - Production registration fails closed unless all required Firebase client settings are configured.
 - Browser-only accounts are development-only or require explicit production-disabled opt-in.
@@ -130,7 +144,7 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Do not hard-code a stale workbook page count.
 - Anonymous practice must not require or create a Firebase student identity merely to solve exercises.
 
-## 14. Documentation and source-of-truth hygiene
+## 15. Documentation and source-of-truth hygiene
 
 - `RULES.md` is the only normative rule document.
 - `README.md` may describe the project but must not define competing rules.
@@ -139,7 +153,7 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - PR descriptions and comments are status/history only and must be reconciled when they contain obsolete claims such as 77 pages, registration walls on workbook pages, durable guest progress, teacher judgment for mathematically deterministic tasks, or permanent ungraded treatment for tasks that can be objectively computerized.
 - Any repository text or code that conflicts with the canonical 78-page one-to-one mapping or the rules above is a defect.
 
-## 15. Required quality gates
+## 16. Required quality gates
 
 Before presenting a branch as ready for review, run at least:
 
