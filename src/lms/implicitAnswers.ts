@@ -6,6 +6,7 @@ import { hydrateDigitalGraphAnswers } from './digitalGraphAnswers';
 import { hydrateDigitalLinearFacts } from './digitalLinearFacts';
 import { hydrateDigitalOneStepAnswers } from './digitalOneStepAnswers';
 import { hydrateDigitalPredicates } from './digitalPredicates';
+import { hydrateDigitalRectanglePredicates } from './digitalRectanglePredicates';
 import { hydrateDigitalRuleAnswers } from './digitalRuleAnswers';
 import { hydrateDigitalSegmentPredicates } from './digitalSegmentPredicates';
 import { hydrateGridPointPickers } from './gridPointPicker';
@@ -70,10 +71,12 @@ export function hydrateExplicitAuthoringAnswers(
   const cleanupExplanations = hydrateDigitalExplanationChoices(root);
   const cleanupPredicates = hydrateDigitalPredicates(root);
   const cleanupSegments = hydrateDigitalSegmentPredicates(root);
+  const cleanupRectangles = hydrateDigitalRectanglePredicates(root);
   const cleanupPointPickers = hydrateGridPointPickers(root);
 
   return () => {
     cleanupPointPickers();
+    cleanupRectangles();
     cleanupSegments();
     cleanupPredicates();
     cleanupExplanations();
