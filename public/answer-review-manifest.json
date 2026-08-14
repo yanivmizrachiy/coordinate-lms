@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T13:09:12.226Z",
+  "generatedAt": "2026-08-14T13:10:48.270Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -7406,10 +7406,13 @@
           "targetId": "p38-q1",
           "signature": "6fa503aa",
           "inputType": "text:direction",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "למטה",
+            "מטה"
+          ],
           "context": "במבוך זזים צעד אחד בכל פעם, וכל צעד משנה שיעור אחד בלבד: צעד ימינה או שמאלה משנה את שיעור ה־x, וצעד למעלה או […] משנה את שיעור ה־[…]. הנקודות שמסומן עליהן הסימן ■ הן קירות, ואסור לעמוד עליהן."
         },
         {
@@ -7417,10 +7420,12 @@
           "targetId": "p38-q2",
           "signature": "7effb3a3",
           "inputType": "text:letter",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y"
+          ],
           "context": "במבוך זזים צעד אחד בכל פעם, וכל צעד משנה שיעור אחד בלבד: צעד ימינה או שמאלה משנה את שיעור ה־x, וצעד למעלה או […] משנה את שיעור ה־[…]. הנקודות שמסומן עליהן הסימן ■ הן קירות, ואסור לעמוד עליהן."
         },
         {
@@ -7527,10 +7532,12 @@
           "targetId": "p38-q12",
           "signature": "4a9ee81b",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ],
           "context": "המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…])."
         },
         {
@@ -7538,10 +7545,12 @@
           "targetId": "p38-q13",
           "signature": "4a9ee81b",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ],
           "context": "המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…])."
         },
         {
@@ -7549,10 +7558,12 @@
           "targetId": "p38-q14",
           "signature": "4a9ee81b",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ],
           "context": "המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…])."
         },
         {
@@ -7560,10 +7571,12 @@
           "targetId": "p38-q15",
           "signature": "4a9ee81b",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ],
           "context": "המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…])."
         },
         {
@@ -7571,10 +7584,14 @@
           "targetId": "p38-q16",
           "signature": "19b10638",
           "inputType": "text:relation",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "נשאר זהה",
+            "זהה",
+            "קבוע"
+          ],
           "context": "בכל צעד ימינה או שמאלה שיעור ה־x משתנה, ושיעור ה־y […]."
         },
         {
@@ -7582,10 +7599,13 @@
           "targetId": "p38-q17",
           "signature": "494a55ef",
           "inputType": "text:direction",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "למטה",
+            "מטה"
+          ],
           "context": "בכל צעד למעלה או […] שיעור ה־y משתנה, ושיעור ה־x נשאר זהה."
         },
         {
@@ -7626,10 +7646,12 @@
           "targetId": "p38-q21",
           "signature": "45d37920",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ],
           "context": "את עמודת הקירות שבה שיעור ה־x הוא 2 אפשר לעבור רק בשיעור y שגדול מ־[…]."
         },
         {
@@ -7670,10 +7692,13 @@
           "targetId": "p38-q25",
           "signature": "24c657f9",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "גדול",
+            "גדול יותר"
+          ],
           "context": "מספר הצעדים במסלול שסימנתם […] מסכום שני ההפרשים, כי צריך לעקוף את הקירות."
         }
       ]

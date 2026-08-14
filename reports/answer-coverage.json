@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:09:12.226Z",
+  "generatedAt": "2026-08-14T13:10:48.270Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 796,
-  "coveragePercentage": 68.5,
+  "automaticallyCheckableTargets": 806,
+  "coveragePercentage": 69.4,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 85,
+    "canonical-metadata-derived": 95,
     "deterministic-mathematical": 525,
     "valid-range": 6,
-    "open-ended": 161,
-    "ambiguous": 205,
+    "open-ended": 160,
+    "ambiguous": 196,
     "unsupported": 0,
     "missing": 0
   },
@@ -8874,11 +8874,14 @@
           "inputType": "text:direction",
           "context": "במבוך זזים צעד אחד בכל פעם, וכל צעד משנה שיעור אחד בלבד: צעד ימינה או שמאלה משנה את שיעור ה־x, וצעד למעלה או […] משנה את שיעור ה־[…]. הנקודות שמסומן עליהן הסימן ■ הן קירות, ואסור לעמוד עליהן.",
           "signature": "6fa503aa",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "למטה",
+            "מטה"
+          ]
         },
         {
           "targetId": "p38-q2",
@@ -8886,11 +8889,13 @@
           "inputType": "text:letter",
           "context": "במבוך זזים צעד אחד בכל פעם, וכל צעד משנה שיעור אחד בלבד: צעד ימינה או שמאלה משנה את שיעור ה־x, וצעד למעלה או […] משנה את שיעור ה־[…]. הנקודות שמסומן עליהן הסימן ■ הן קירות, ואסור לעמוד עליהן.",
           "signature": "7effb3a3",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y"
+          ]
         },
         {
           "targetId": "p38-q3",
@@ -9006,11 +9011,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]).",
           "signature": "4a9ee81b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p38-q13",
@@ -9018,11 +9025,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]).",
           "signature": "4a9ee81b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p38-q14",
@@ -9030,11 +9039,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]).",
           "signature": "4a9ee81b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p38-q15",
@@ -9042,11 +9053,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]).",
           "signature": "4a9ee81b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p38-q16",
@@ -9054,11 +9067,15 @@
           "inputType": "text:relation",
           "context": "בכל צעד ימינה או שמאלה שיעור ה־x משתנה, ושיעור ה־y […].",
           "signature": "19b10638",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "נשאר זהה",
+            "זהה",
+            "קבוע"
+          ]
         },
         {
           "targetId": "p38-q17",
@@ -9066,11 +9083,14 @@
           "inputType": "text:direction",
           "context": "בכל צעד למעלה או […] שיעור ה־y משתנה, ושיעור ה־x נשאר זהה.",
           "signature": "494a55ef",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "למטה",
+            "מטה"
+          ]
         },
         {
           "targetId": "p38-q18",
@@ -9114,11 +9134,13 @@
           "inputType": "text:number",
           "context": "את עמודת הקירות שבה שיעור ה־x הוא 2 אפשר לעבור רק בשיעור y שגדול מ־[…].",
           "signature": "45d37920",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p38-q22",
@@ -9162,16 +9184,17 @@
           "inputType": "text:relation",
           "context": "מספר הצעדים במסלול שסימנתם […] מסכום שני ההפרשים, כי צריך לעקוף את הקירות.",
           "signature": "24c657f9",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "גדול",
+            "גדול יותר"
+          ]
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p38-q1",
-        "p38-q2",
         "p38-q3",
         "p38-q4",
         "p38-q5",
@@ -9181,23 +9204,15 @@
         "p38-q9",
         "p38-q10",
         "p38-q11",
-        "p38-q12",
-        "p38-q13",
-        "p38-q14",
-        "p38-q15",
-        "p38-q16",
-        "p38-q17",
         "p38-q18",
         "p38-q19",
         "p38-q20",
-        "p38-q21",
         "p38-q22",
         "p38-q23",
-        "p38-q24",
-        "p38-q25"
+        "p38-q24"
       ],
-      "automaticallyCheckableTargets": 0,
-      "coveragePercentage": 0
+      "automaticallyCheckableTargets": 10,
+      "coveragePercentage": 40
     },
     {
       "pageNumber": 39,

@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:09:12.226Z
+Generated: 2026-08-14T13:10:48.270Z
 
-Overall: 796/1162 safely checkable targets (68.5%).
+Overall: 806/1162 safely checkable targets (69.4%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 85 |
+| canonical-metadata-derived | 95 |
 | deterministic-mathematical | 525 |
 | valid-range | 6 |
-| open-ended | 161 |
-| ambiguous | 205 |
+| open-ended | 160 |
+| ambiguous | 196 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -822,12 +822,12 @@ No detected interactive response targets.
 
 ### Page 38 — מבוך הקואורדינטות
 
-0/25 safely checkable (0%).
+10/25 safely checkable (40%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p38-q1 | text:direction | ambiguous | no | none | במבוך זזים צעד אחד בכל פעם, וכל צעד משנה שיעור אחד בלבד: צעד ימינה או שמאלה משנה את שיעור ה־x, וצעד למעלה או […] משנה את שיעור ה־[…]. הנקודות שמסומן עליהן הסימן ■ הן קירות, ואסור לעמוד עליהן. |
-| p38-q2 | text:letter | ambiguous | no | none | במבוך זזים צעד אחד בכל פעם, וכל צעד משנה שיעור אחד בלבד: צעד ימינה או שמאלה משנה את שיעור ה־x, וצעד למעלה או […] משנה את שיעור ה־[…]. הנקודות שמסומן עליהן הסימן ■ הן קירות, ואסור לעמוד עליהן. |
+| p38-q1 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | במבוך זזים צעד אחד בכל פעם, וכל צעד משנה שיעור אחד בלבד: צעד ימינה או שמאלה משנה את שיעור ה־x, וצעד למעלה או […] משנה את שיעור ה־[…]. הנקודות שמסומן עליהן הסימן ■ הן קירות, ואסור לעמוד עליהן. |
+| p38-q2 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | במבוך זזים צעד אחד בכל פעם, וכל צעד משנה שיעור אחד בלבד: צעד ימינה או שמאלה משנה את שיעור ה־x, וצעד למעלה או […] משנה את שיעור ה־[…]. הנקודות שמסומן עליהן הסימן ■ הן קירות, ואסור לעמוד עליהן. |
 | p38-q3 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
 | p38-q4 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
 | p38-q5 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
@@ -837,20 +837,20 @@ No detected interactive response targets.
 | p38-q9 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
 | p38-q10 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
 | p38-q11 | text:number | open-ended | no | teacher judgment required | במסלול שסימנתם יש […] צעדים. |
-| p38-q12 | ordered-pair-coordinate | ambiguous | no | none | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
-| p38-q13 | ordered-pair-coordinate | ambiguous | no | none | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
-| p38-q14 | ordered-pair-coordinate | ambiguous | no | none | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
-| p38-q15 | ordered-pair-coordinate | ambiguous | no | none | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
-| p38-q16 | text:relation | ambiguous | no | none | בכל צעד ימינה או שמאלה שיעור ה־x משתנה, ושיעור ה־y […]. |
-| p38-q17 | text:direction | ambiguous | no | none | בכל צעד למעלה או […] שיעור ה־y משתנה, ושיעור ה־x נשאר זהה. |
+| p38-q12 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
+| p38-q13 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
+| p38-q14 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
+| p38-q15 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
+| p38-q16 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | בכל צעד ימינה או שמאלה שיעור ה־x משתנה, ושיעור ה־y […]. |
+| p38-q17 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | בכל צעד למעלה או […] שיעור ה־y משתנה, ושיעור ה־x נשאר זהה. |
 | p38-q18 | text:direction | open-ended | no | teacher judgment required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
 | p38-q19 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
 | p38-q20 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
-| p38-q21 | text:number | ambiguous | no | none | את עמודת הקירות שבה שיעור ה־x הוא 2 אפשר לעבור רק בשיעור y שגדול מ־[…]. |
+| p38-q21 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | את עמודת הקירות שבה שיעור ה־x הוא 2 אפשר לעבור רק בשיעור y שגדול מ־[…]. |
 | p38-q22 | text:number | ambiguous | no | none | את עמודת הקירות שבה שיעור ה־x הוא […] אפשר לעבור רק בשיעור y שקטן מ־3. |
 | p38-q23 | text:number | ambiguous | no | none | 6 − 0=[…]יחידות |
 | p38-q24 | text:number | ambiguous | no | none | 4 − 0=[…]יחידות |
-| p38-q25 | text:relation | open-ended | no | teacher judgment required | מספר הצעדים במסלול שסימנתם […] מסכום שני ההפרשים, כי צריך לעקוף את הקירות. |
+| p38-q25 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | מספר הצעדים במסלול שסימנתם […] מסכום שני ההפרשים, כי צריך לעקוף את הקירות. |
 
 ### Page 39 — משלימים שיעור חסר ודפוסים
 
