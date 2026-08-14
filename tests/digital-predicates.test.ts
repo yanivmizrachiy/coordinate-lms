@@ -67,6 +67,21 @@ describe('digital mathematical predicates', () => {
     expect(evaluateDigitalGroupRule('custom-y-equals-x-plus-k', ['3', '-1', '2', '4', '7', '3'])).toBe(false);
   });
 
+  it('accepts the two missing rectangle vertices in either order', () => {
+    expect(evaluateDigitalGroupRule('rectangle-missing-opposite-corners', ['1', '5', '7', '2'])).toBe(true);
+    expect(evaluateDigitalGroupRule('rectangle-missing-opposite-corners', ['7', '2', '1', '5'])).toBe(true);
+    expect(evaluateDigitalGroupRule('rectangle-missing-opposite-corners', ['1', '2', '7', '5'])).toBe(false);
+    expect(evaluateDigitalGroupRule('rectangle-missing-opposite-corners', ['1', '5', '1', '5'])).toBe(false);
+  });
+
+  it('accepts either legal 4-by-3 rectangle orientation from (2,1), in any vertex order', () => {
+    expect(evaluateDigitalGroupRule('rectangle-from-corner-4x3', ['2', '1', '6', '1', '2', '4', '6', '4'])).toBe(true);
+    expect(evaluateDigitalGroupRule('rectangle-from-corner-4x3', ['6', '4', '2', '4', '6', '1', '2', '1'])).toBe(true);
+    expect(evaluateDigitalGroupRule('rectangle-from-corner-4x3', ['2', '1', '5', '1', '2', '5', '5', '5'])).toBe(true);
+    expect(evaluateDigitalGroupRule('rectangle-from-corner-4x3', ['2', '1', '6', '1', '2', '5', '6', '5'])).toBe(false);
+    expect(evaluateDigitalGroupRule('rectangle-from-corner-4x3', ['2', '1', '6', '1', '2', '4', '2', '4'])).toBe(false);
+  });
+
   it('accepts any non-negative free coordinate on an axis', () => {
     expect(evaluateDigitalGroupRule('nonnegative-number', ['0'])).toBe(true);
     expect(evaluateDigitalGroupRule('nonnegative-number', ['7.5'])).toBe(true);
@@ -82,6 +97,8 @@ describe('digital mathematical predicates', () => {
     expect(answersMatch('3|4', ['predicate:point-x-3-between-2-and-5'])).toBe(true);
     expect(answersMatch('B|C|D|E', ['predicate:same-weight-package-pairs'])).toBe(true);
     expect(answersMatch('3|0|3|4|7|3', ['predicate:custom-y-equals-x-plus-k'])).toBe(true);
+    expect(answersMatch('1|5|7|2', ['predicate:rectangle-missing-opposite-corners'])).toBe(true);
+    expect(answersMatch('2|1|6|1|2|4|6|4', ['predicate:rectangle-from-corner-4x3'])).toBe(true);
     expect(answersMatch('9', ['predicate:nonnegative-number'])).toBe(true);
   });
 });
