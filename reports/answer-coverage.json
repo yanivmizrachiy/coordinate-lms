@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:51:44.100Z",
+  "generatedAt": "2026-08-14T13:52:47.201Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 901,
-  "coveragePercentage": 77.5,
+  "automaticallyCheckableTargets": 910,
+  "coveragePercentage": 78.3,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 158,
+    "canonical-metadata-derived": 167,
     "deterministic-mathematical": 557,
     "valid-range": 6,
-    "open-ended": 138,
-    "ambiguous": 123,
+    "open-ended": 137,
+    "ambiguous": 115,
     "unsupported": 0,
     "missing": 0
   },
@@ -5334,11 +5334,13 @@
           "inputType": "text:number",
           "context": "הנקודה של האות ק רחוקה […] יחידות מציר ה־y.",
           "signature": "4a5ea755",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p22-q3",
@@ -5346,11 +5348,13 @@
           "inputType": "text:number",
           "context": "שיעור ה־x של הנקודה של האות ו הוא […].",
           "signature": "44661544",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p22-q4",
@@ -5358,11 +5362,13 @@
           "inputType": "text:number",
           "context": "הנקודה של האות ד היא הימנית ביותר, ושיעור ה־x שלה הוא […].",
           "signature": "ea86d17b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "7"
+          ]
         },
         {
           "targetId": "p22-q5",
@@ -5370,11 +5376,13 @@
           "inputType": "text:letter",
           "context": "האות שממוקמת בנקודה (4,3) היא […].",
           "signature": "7612f0a1",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ה"
+          ]
         },
         {
           "targetId": "p22-q6",
@@ -5382,11 +5390,13 @@
           "inputType": "text:concept",
           "context": "כתבו את חמש האותיות לפי סדר השאלות, מימין לשמאל: […].",
           "signature": "b2db73e1",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "נקודה"
+          ]
         },
         {
           "targetId": "p22-q7",
@@ -5394,11 +5404,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]).",
           "signature": "91846cae",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p22-q8",
@@ -5406,11 +5418,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]).",
           "signature": "91846cae",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p22-q9",
@@ -5447,11 +5461,13 @@
           "inputType": "text:property",
           "context": "הנקודה של האות ד היא ה[…] ביותר במערכת — שיעור ה־y שלה קטן מכולם.",
           "signature": "cc4c5ebd",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "נמוכה"
+          ]
         },
         {
           "targetId": "p22-q12",
@@ -5459,11 +5475,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]).",
           "signature": "64aa47f4",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:nonnegative-number"
+          ]
         },
         {
           "targetId": "p22-q13",
@@ -5538,19 +5556,10 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p22-q2",
-        "p22-q3",
-        "p22-q4",
-        "p22-q5",
-        "p22-q6",
-        "p22-q7",
-        "p22-q8",
-        "p22-q11",
-        "p22-q12",
         "p22-q14"
       ],
-      "automaticallyCheckableTargets": 7,
-      "coveragePercentage": 41.2
+      "automaticallyCheckableTargets": 16,
+      "coveragePercentage": 94.1
     },
     {
       "pageNumber": 23,

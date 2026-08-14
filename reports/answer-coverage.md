@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:51:44.100Z
+Generated: 2026-08-14T13:52:47.201Z
 
-Overall: 901/1162 safely checkable targets (77.5%).
+Overall: 910/1162 safely checkable targets (78.3%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 158 |
+| canonical-metadata-derived | 167 |
 | deterministic-mathematical | 557 |
 | valid-range | 6 |
-| open-ended | 138 |
-| ambiguous | 123 |
+| open-ended | 137 |
+| ambiguous | 115 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -488,22 +488,22 @@ No detected interactive response targets.
 
 ### Page 22 — מילת הצופן
 
-7/17 safely checkable (41.2%).
+16/17 safely checkable (94.1%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p22-q1 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | האות שממוקמת בנקודה (3,2) היא […]. |
-| p22-q2 | text:number | ambiguous | no | none | הנקודה של האות ק רחוקה […] יחידות מציר ה־y. |
-| p22-q3 | text:number | ambiguous | no | none | שיעור ה־x של הנקודה של האות ו הוא […]. |
-| p22-q4 | text:number | ambiguous | no | none | הנקודה של האות ד היא הימנית ביותר, ושיעור ה־x שלה הוא […]. |
-| p22-q5 | text:letter | ambiguous | no | none | האות שממוקמת בנקודה (4,3) היא […]. |
-| p22-q6 | text:concept | ambiguous | no | none | כתבו את חמש האותיות לפי סדר השאלות, מימין לשמאל: […]. |
-| p22-q7 | ordered-pair-coordinate | ambiguous | no | none | סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]). |
-| p22-q8 | ordered-pair-coordinate | ambiguous | no | none | סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]). |
+| p22-q2 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה של האות ק רחוקה […] יחידות מציר ה־y. |
+| p22-q3 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | שיעור ה־x של הנקודה של האות ו הוא […]. |
+| p22-q4 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה של האות ד היא הימנית ביותר, ושיעור ה־x שלה הוא […]. |
+| p22-q5 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | האות שממוקמת בנקודה (4,3) היא […]. |
+| p22-q6 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את חמש האותיות לפי סדר השאלות, מימין לשמאל: […]. |
+| p22-q7 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]). |
+| p22-q8 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…]). |
 | p22-q9 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | האות שממוקמת הכי גבוה במערכת היא […]. |
 | p22-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | המרחק האופקי בין הנקודה של נ לנקודה של ה הוא […] יחידה. |
-| p22-q11 | text:property | ambiguous | no | none | הנקודה של האות ד היא ה[…] ביותר במערכת — שיעור ה־y שלה קטן מכולם. |
-| p22-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]). |
+| p22-q11 | text:property | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה של האות ד היא ה[…] ביותר במערכת — שיעור ה־y שלה קטן מכולם. |
+| p22-q12 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]). |
 | p22-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]). |
 | p22-q14 | text:concept | ambiguous | no | none | כתבו לצד הנקודה את האות ם. איזו מילה נוצרת עכשיו מכל האותיות? […]. |
 | p22-q15 | text:letter | reviewed-explicit | yes | target-bound reviewed proof | האות האמצעית במילה שפענחתם היא […]. |

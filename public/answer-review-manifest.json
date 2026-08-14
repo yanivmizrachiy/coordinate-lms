@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T13:51:44.100Z",
+  "generatedAt": "2026-08-14T13:52:47.201Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -4503,10 +4503,12 @@
           "targetId": "p22-q2",
           "signature": "4a5ea755",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ],
           "context": "הנקודה של האות ק רחוקה […] יחידות מציר ה־y."
         },
         {
@@ -4514,10 +4516,12 @@
           "targetId": "p22-q3",
           "signature": "44661544",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ],
           "context": "שיעור ה־x של הנקודה של האות ו הוא […]."
         },
         {
@@ -4525,10 +4529,12 @@
           "targetId": "p22-q4",
           "signature": "ea86d17b",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "7"
+          ],
           "context": "הנקודה של האות ד היא הימנית ביותר, ושיעור ה־x שלה הוא […]."
         },
         {
@@ -4536,10 +4542,12 @@
           "targetId": "p22-q5",
           "signature": "7612f0a1",
           "inputType": "text:letter",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ה"
+          ],
           "context": "האות שממוקמת בנקודה (4,3) היא […]."
         },
         {
@@ -4547,10 +4555,12 @@
           "targetId": "p22-q6",
           "signature": "b2db73e1",
           "inputType": "text:concept",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "נקודה"
+          ],
           "context": "כתבו את חמש האותיות לפי סדר השאלות, מימין לשמאל: […]."
         },
         {
@@ -4558,10 +4568,12 @@
           "targetId": "p22-q7",
           "signature": "91846cae",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ],
           "context": "סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…])."
         },
         {
@@ -4569,10 +4581,12 @@
           "targetId": "p22-q8",
           "signature": "91846cae",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ],
           "context": "סמנו את הנקודה של האות הראשונה במילה, וכתבו את שיעוריה: ([…],[…])."
         },
         {
@@ -4607,10 +4621,12 @@
           "targetId": "p22-q11",
           "signature": "cc4c5ebd",
           "inputType": "text:property",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "נמוכה"
+          ],
           "context": "הנקודה של האות ד היא ה[…] ביותר במערכת — שיעור ה־y שלה קטן מכולם."
         },
         {
@@ -4618,10 +4634,12 @@
           "targetId": "p22-q12",
           "signature": "64aa47f4",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:nonnegative-number"
+          ],
           "context": "סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…])."
         },
         {
