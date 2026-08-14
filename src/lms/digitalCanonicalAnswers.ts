@@ -26,7 +26,9 @@ function annotateContainer(
   needle: string,
   answers: readonly Expected[],
 ): boolean {
-  const candidates = root.querySelectorAll<HTMLElement>('li, p, .rule-box');
+  const candidates = root.querySelectorAll<HTMLElement>(
+    'li, p, .rule-box, .calc-ltr, .calc-final',
+  );
   for (const candidate of candidates) {
     if (!normalizedText(candidate).includes(needle)) continue;
     const targets = answerTargets(candidate);
@@ -39,6 +41,27 @@ function annotateContainer(
 
 function pageContains(root: ParentNode, needle: string): boolean {
   return normalizedText(root.querySelector('.sheet')).includes(needle);
+}
+
+function canonicalNumber(value: number): string {
+  return Number.isInteger(value) ? String(value) : String(Math.round(value * 1e12) / 1e12);
+}
+
+/** Derive only a literal, one-step arithmetic expression printed beside one
+ * answer blank. No algebraic guessing and no prose inference. */
+function hydrateSimpleArithmetic(root: ParentNode): void {
+  for (const candidate of root.querySelectorAll<HTMLElement>('.calc-ltr, .calc-final')) {
+    const targets = answerTargets(candidate);
+    if (targets.length !== 1 || targets[0]!.dataset['lmsAnswers']) continue;
+    const text = normalizedText(candidate).replace(/,/g, '.');
+    const match = text.match(/(-?\d+(?:\.\d+)?)\s*([+−-])\s*(-?\d+(?:\.\d+)?)/);
+    if (!match?.[1] || !match[2] || !match[3]) continue;
+    const left = Number(match[1]);
+    const right = Number(match[3]);
+    if (!Number.isFinite(left) || !Number.isFinite(right)) continue;
+    const result = match[2] === '+' ? left + right : left - right;
+    setAnswers(targets[0]!, canonicalNumber(result));
+  }
 }
 
 function hydratePlotPractice(root: ParentNode): void {
@@ -90,9 +113,7 @@ function hydrateCoordinateMaze(root: ParentNode): void {
   annotateContainer(root, 'בכל צעד ימינה או שמאלה', [['נשאר זהה', 'זהה', 'קבוע']]);
   annotateContainer(root, 'בכל צעד למעלה או', [['למטה', 'מטה']]);
   annotateContainer(root, 'שיעור ה־x הוא 2 אפשר לעבור', ['3']);
-  annotateContainer(root, 'עמודת הקירות שבה שיעור ה־x הוא', ['5']);
-  annotateContainer(root, '6 − 0', ['6']);
-  annotateContainer(root, '4 − 0', ['4']);
+  annotateContainer(root, 'אפשר לעבור רק בשיעור y שקטן מ־3', ['5']);
   annotateContainer(root, 'מספר הצעדים במסלול שסימנתם', [['גדול', 'גדול יותר']]);
 }
 
@@ -130,10 +151,10 @@ function hydrateParkRoute(root: ParentNode): void {
 /**
  * Adds reviewed LMS-only answers that are stated or deterministically implied by
  * the canonical printable task. Matching is by canonical wording, never by page
- * number, so page insertion/reordering cannot attach an answer to another task.
- * No printable source node is added, removed or rewritten.
+ * number. Simple printed arithmetic is derived directly from the expression.
  */
 export function hydrateDigitalCanonicalAnswers(root: ParentNode): void {
+  hydrateSimpleArithmetic(root);
   hydratePlotPractice(root);
   hydrateHiddenDrawing(root);
   hydrateColorDecode(root);
