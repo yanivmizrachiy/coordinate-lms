@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T14:38:23.920Z",
+  "generatedAt": "2026-08-14T14:38:55.790Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -6469,10 +6469,13 @@
           "targetId": "p33-q3",
           "signature": "508174f4",
           "inputType": "text:letter",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y",
+            "Y"
+          ],
           "context": "לשתי הנקודות E(2,5) ו־F(7,5) יש שיעור […] זהה."
         },
         {
@@ -6537,10 +6540,13 @@
           "targetId": "p33-q9",
           "signature": "1f5e9884",
           "inputType": "text:letter",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ],
           "context": "לשתי הנקודות G(4,1) ו־H(4,6) יש שיעור […] זהה, ולכן הקטע GH מקביל לציר y."
         },
         {
@@ -6605,10 +6611,13 @@
           "targetId": "p33-q15",
           "signature": "d0d99472",
           "inputType": "text:relation",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "חיבר",
+            "חיבר יחד"
+          ],
           "context": "אורי חישב את המרחק בין (2,5) ובין (7,5) וקיבל 9 — הוא […] את שני ערכי ה־x במקום לחסר אותם. תרגיל החיסור הנכון:"
         },
         {
@@ -9653,10 +9662,13 @@
           "targetId": "p45-q7",
           "signature": "49bd58af",
           "inputType": "text:letter",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ],
           "context": "לשתי נקודות שממוקמות על אותו קו אנכי יש שיעור […] זהה."
         },
         {
@@ -10269,10 +10281,13 @@
           "targetId": "p48-q1",
           "signature": "0f71ef82",
           "inputType": "text:letter",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ],
           "context": "לנקודות P(3,1) ו־Q(3,6) יש שיעור […] זהה."
         },
         {

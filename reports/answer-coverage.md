@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:38:23.920Z
+Generated: 2026-08-14T14:38:55.790Z
 
-Overall: 984/1162 safely checkable targets (84.7%).
+Overall: 989/1162 safely checkable targets (85.1%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 257 |
+| canonical-metadata-derived | 262 |
 | deterministic-mathematical | 541 |
 | valid-range | 6 |
 | open-ended | 118 |
-| ambiguous | 60 |
+| ambiguous | 55 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -705,25 +705,25 @@ No detected interactive response targets.
 
 ### Page 33 — מרחק נקודה מהצירים
 
-5/17 safely checkable (29.4%).
+8/17 safely checkable (47.1%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p33-q1 | word:number | canonical-metadata-derived | yes | explicit canonical authoring label | כדי להגיע אל ציר y משנים את ערך x ל־[…]. |
 | p33-q2 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | כדי להגיע אל ציר […] משנים את שיעור y ל־0. |
-| p33-q3 | text:letter | ambiguous | no | none | לשתי הנקודות E(2,5) ו־F(7,5) יש שיעור […] זהה. |
+| p33-q3 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי הנקודות E(2,5) ו־F(7,5) יש שיעור […] זהה. |
 | p33-q4 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | EF=7 − 2=[…]יח' |
 | p33-q5 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q6 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
-| p33-q9 | text:letter | ambiguous | no | none | לשתי הנקודות G(4,1) ו־H(4,6) יש שיעור […] זהה, ולכן הקטע GH מקביל לציר y. |
+| p33-q9 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי הנקודות G(4,1) ו־H(4,6) יש שיעור […] זהה, ולכן הקטע GH מקביל לציר y. |
 | p33-q10 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | GH=6 − 1=[…]יח' |
 | p33-q11 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p33-q15 | text:relation | ambiguous | no | none | אורי חישב את המרחק בין (2,5) ובין (7,5) וקיבל 9 — הוא […] את שני ערכי ה־x במקום לחסר אותם. תרגיל החיסור הנכון: |
+| p33-q15 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | אורי חישב את המרחק בין (2,5) ובין (7,5) וקיבל 9 — הוא […] את שני ערכי ה־x במקום לחסר אותם. תרגיל החיסור הנכון: |
 | p33-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 7 − 2=[…]יח' |
 | p33-q17 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 
@@ -1024,7 +1024,7 @@ No detected interactive response targets.
 
 ### Page 45 — הנקודה החשודה
 
-11/15 safely checkable (73.3%).
+12/15 safely checkable (80%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1034,7 +1034,7 @@ No detected interactive response targets.
 | p45-q4 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | מבין השתיים, הרמז השני פוסל את זו שבה שיעור ה־y […] מ־2. |
 | p45-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה שנשארה, וכתבו את שיעוריה: ([…],[…]). |
 | p45-q6 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה שנשארה, וכתבו את שיעוריה: ([…],[…]). |
-| p45-q7 | text:letter | ambiguous | no | none | לשתי נקודות שממוקמות על אותו קו אנכי יש שיעור […] זהה. |
+| p45-q7 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי נקודות שממוקמות על אותו קו אנכי יש שיעור […] זהה. |
 | p45-q8 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הקו האנכי שעובר דרך הנקודה (7,0) הוא הקו שבו ערך ה־x שווה […]. |
 | p45-q9 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
 | p45-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
@@ -1098,11 +1098,11 @@ No detected interactive response targets.
 
 ### Page 48 — קטעים מקבילים לצירים
 
-4/5 safely checkable (80%).
+5/5 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p48-q1 | text:letter | ambiguous | no | none | לנקודות P(3,1) ו־Q(3,6) יש שיעור […] זהה. |
+| p48-q1 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לנקודות P(3,1) ו־Q(3,6) יש שיעור […] זהה. |
 | p48-q2 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | ב־R(1,4) ו־S(7,4) שיעור y זהה, ולכן הקטע RS מקביל לציר […]. |
 | p48-q3 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הקטע AB מקביל לציר […]. |
 | p48-q4 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | הקטע BC […] לקטע AB. |

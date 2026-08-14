@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T14:38:23.920Z",
+  "generatedAt": "2026-08-14T14:38:55.790Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 984,
-  "coveragePercentage": 84.7,
+  "automaticallyCheckableTargets": 989,
+  "coveragePercentage": 85.1,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 257,
+    "canonical-metadata-derived": 262,
     "deterministic-mathematical": 541,
     "valid-range": 6,
     "open-ended": 118,
-    "ambiguous": 60,
+    "ambiguous": 55,
     "unsupported": 0,
     "missing": 0
   },
@@ -7644,11 +7644,14 @@
           "inputType": "text:letter",
           "context": "לשתי הנקודות E(2,5) ו־F(7,5) יש שיעור […] זהה.",
           "signature": "508174f4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y",
+            "Y"
+          ]
         },
         {
           "targetId": "p33-q4",
@@ -7718,11 +7721,14 @@
           "inputType": "text:letter",
           "context": "לשתי הנקודות G(4,1) ו־H(4,6) יש שיעור […] זהה, ולכן הקטע GH מקביל לציר y.",
           "signature": "1f5e9884",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ]
         },
         {
           "targetId": "p33-q10",
@@ -7792,11 +7798,14 @@
           "inputType": "text:relation",
           "context": "אורי חישב את המרחק בין (2,5) ובין (7,5) וקיבל 9 — הוא […] את שני ערכי ה־x במקום לחסר אותם. תרגיל החיסור הנכון:",
           "signature": "d0d99472",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "חיבר",
+            "חיבר יחד"
+          ]
         },
         {
           "targetId": "p33-q16",
@@ -7826,21 +7835,18 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p33-q3",
         "p33-q5",
         "p33-q6",
         "p33-q7",
         "p33-q8",
-        "p33-q9",
         "p33-q11",
         "p33-q12",
         "p33-q13",
         "p33-q14",
-        "p33-q15",
         "p33-q17"
       ],
-      "automaticallyCheckableTargets": 5,
-      "coveragePercentage": 29.4
+      "automaticallyCheckableTargets": 8,
+      "coveragePercentage": 47.1
     },
     {
       "pageNumber": 34,
@@ -11417,11 +11423,14 @@
           "inputType": "text:letter",
           "context": "לשתי נקודות שממוקמות על אותו קו אנכי יש שיעור […] זהה.",
           "signature": "49bd58af",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ]
         },
         {
           "targetId": "p45-q8",
@@ -11539,11 +11548,10 @@
       "missingOrAmbiguousTargetIds": [
         "p45-q2",
         "p45-q3",
-        "p45-q7",
         "p45-q15"
       ],
-      "automaticallyCheckableTargets": 11,
-      "coveragePercentage": 73.3
+      "automaticallyCheckableTargets": 12,
+      "coveragePercentage": 80
     },
     {
       "pageNumber": 46,
@@ -12160,11 +12168,14 @@
           "inputType": "text:letter",
           "context": "לנקודות P(3,1) ו־Q(3,6) יש שיעור […] זהה.",
           "signature": "0f71ef82",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ]
         },
         {
           "targetId": "p48-q2",
@@ -12229,11 +12240,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p48-q1"
-      ],
-      "automaticallyCheckableTargets": 4,
-      "coveragePercentage": 80
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 5,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 49,
