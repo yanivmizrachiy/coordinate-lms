@@ -1,4 +1,5 @@
 import { hydrateDigitalPredicates } from './digitalPredicates';
+import { hydrateGridPointPickers } from './gridPointPicker';
 import type { AnswerKey } from './types';
 
 function parseAnswers(raw: string | undefined): string[] {
@@ -30,11 +31,10 @@ function answerFromAria(target: HTMLElement): string[] {
 }
 
 /**
- * Captures explicit authoring answers before the generic LMS engine replaces
- * descriptive aria-labels with sequential accessible labels such as
- * "תשובה 1". Digital-only mathematical predicates are hydrated here as well,
- * in one pre-engine preparation point; the canonical printable markup remains
- * untouched. The returned cleanup is owned by the page viewer.
+ * One preparation point for the digital layer. It captures explicit canonical
+ * answer metadata, adds reviewed mathematical predicates, and enables touch-
+ * first point marking on the rendered graph. None of these steps edit the
+ * printable workbook source.
  */
 export function hydrateExplicitAuthoringAnswers(
   root: ParentNode,
@@ -51,7 +51,13 @@ export function hydrateExplicitAuthoringAnswers(
     }
   }
 
-  return hydrateDigitalPredicates(root);
+  const cleanupPredicates = hydrateDigitalPredicates(root);
+  const cleanupPointPickers = hydrateGridPointPickers(root);
+
+  return () => {
+    cleanupPointPickers();
+    cleanupPredicates();
+  };
 }
 
 /**
