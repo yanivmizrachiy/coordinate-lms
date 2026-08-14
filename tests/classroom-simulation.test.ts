@@ -8,7 +8,6 @@ import {
 import { buildDashboardCsv } from '../src/lms/dashboardCsv';
 import { canAccessPage } from '../src/lms/engine';
 import {
-  claimGuestProgress,
   loadDashboard,
   loadDraft,
   logActivity,
@@ -74,21 +73,27 @@ beforeEach(() => {
 });
 
 describe('two-student classroom simulation', () => {
-  it('covers guest transfer, registration, page access, persistence, relogin, dashboard, and CSV', async () => {
+  it('keeps every page open to guests, never persists guest work, and persists registered students', async () => {
     expect(canAccessPage(1)).toBe(true);
-    expect(canAccessPage(2)).toBe(false);
-    await saveDraft({ ...draft('guest', 1, 2), pageNumber: 1 });
-    await savePageResult({ ...result('guest', 1, 84), pageNumber: 1 });
+    expect(canAccessPage(2)).toBe(true);
+    expect(canAccessPage(78)).toBe(true);
+
+    const guestDraftOutcome = await saveDraft(draft('guest', 1, 2));
+    const guestResultOutcome = await savePageResult(result('guest', 1, 84));
+    expect(guestDraftOutcome.localSaved).toBe(false);
+    expect(guestResultOutcome.localSaved).toBe(false);
+    expect(localStorage.getItem('coordinate_lms_drafts_v2')).toBeNull();
+    expect(localStorage.getItem('coordinate_lms_results_v2')).toBeNull();
 
     const studentA = await registerStudent({
       fullName: 'נועה כהן',
       username: 'noa',
       email: 'noa@example.test',
-      password: 'student-a-password',
+      password: 'StudentA1234',
       className: 'ז1',
+      school: 'בית ספר א',
+      city: 'ירושלים',
     });
-    expect(canAccessPage(2)).toBe(true);
-    expect((await claimGuestProgress(studentA.uid)).complete).toBe(true);
     await saveDraft(draft(studentA.uid, 2, 3));
     await savePageResult(result(studentA.uid, 2, 91));
     await logActivity({
@@ -99,10 +104,10 @@ describe('two-student classroom simulation', () => {
       createdAt: 300,
     });
     await logoutStudent();
-    expect(canAccessPage(2)).toBe(false);
+    expect(canAccessPage(78)).toBe(true);
     const reloggedA = await loginStudent(
       'noa@example.test',
-      'student-a-password',
+      'StudentA1234',
     );
     expect(reloggedA.uid).toBe(studentA.uid);
     expect((await loadDraft(studentA.uid, 2))?.maxAttemptCount).toBe(3);
@@ -112,8 +117,10 @@ describe('two-student classroom simulation', () => {
       fullName: 'אורי לוי',
       username: 'uri',
       email: 'uri@example.test',
-      password: 'student-b-password',
+      password: 'StudentB1234',
       className: 'ז1',
+      school: 'בית ספר א',
+      city: 'ירושלים',
     });
     await saveDraft(draft(studentB.uid, 2, 1));
     await savePageResult(result(studentB.uid, 2, 73));
@@ -130,7 +137,10 @@ describe('two-student classroom simulation', () => {
       fullName: 'מורה',
       username: 'teacher',
       email: 'yanivmiz77@gmail.com',
-      password: 'teacher-password',
+      password: 'Teacher12345',
+      className: 'מנהל',
+      school: 'ניהול',
+      city: 'ירושלים',
     });
     expect(currentSession()?.role).toBe('admin');
     const dashboard = await loadDashboard();
@@ -140,9 +150,10 @@ describe('two-student classroom simulation', () => {
     );
     expect(dashboard.students.every((student) => student.results.length > 0)).toBe(true);
     const csv = buildDashboardCsv(dashboard);
-    expect(csv.trimEnd().split('\r\n')).toHaveLength(155);
+    expect(csv.trimEnd().split('\r\n')).toHaveLength(157);
     expect(csv).toContain(studentA.uid);
     expect(csv).toContain(studentB.uid);
+    expect(csv).not.toContain('guest');
     expect(csv).not.toContain(currentSession()?.uid || 'missing-admin');
   });
 
