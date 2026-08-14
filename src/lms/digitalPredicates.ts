@@ -1,6 +1,8 @@
 export type DigitalGroupRule =
   | 'distinct-coordinate-pairs'
   | 'two-distinct-positive-points'
+  | 'same-x-coordinate-pairs'
+  | 'same-y-coordinate-pairs'
   | 'point-above-x-axis'
   | 'point-right-of-y-axis'
   | 'point-on-x-axis'
@@ -89,6 +91,18 @@ function sameCoordinateSet(actual: Set<string> | null, expected: readonly string
   return expected.every((point) => actual.has(point));
 }
 
+function sameCoordinatePairRule(
+  values: readonly string[],
+  coordinate: 'x' | 'y',
+): boolean {
+  if (values.length !== 4) return false;
+  const numbers = numericValues(values);
+  if (!numbers || numbers.some((value) => value < 0)) return false;
+  const [x1, y1, x2, y2] = numbers as [number, number, number, number];
+  if (x1 === x2 && y1 === y2) return false;
+  return coordinate === 'x' ? x1 === x2 : y1 === y2;
+}
+
 export function evaluateDigitalGroupRule(
   rule: DigitalGroupRule,
   values: readonly string[],
@@ -97,6 +111,14 @@ export function evaluateDigitalGroupRule(
     if (values.length !== 1) return false;
     const value = finiteNumber(values[0] || '');
     return value !== null && value >= 0;
+  }
+
+  if (rule === 'same-x-coordinate-pairs') {
+    return sameCoordinatePairRule(values, 'x');
+  }
+
+  if (rule === 'same-y-coordinate-pairs') {
+    return sameCoordinatePairRule(values, 'y');
   }
 
   if (rule === 'same-weight-package-pairs') {
@@ -235,6 +257,20 @@ function pairRuleForContext(context: string): DigitalGroupRule | null {
   return null;
 }
 
+function sameCoordinateRuleForContext(context: string): DigitalGroupRule | null {
+  if (
+    context.includes('שתי נקודות') &&
+    /שיעור(?: ה־)?x/.test(context) &&
+    context.includes('זהה')
+  ) return 'same-x-coordinate-pairs';
+  if (
+    context.includes('שתי נקודות') &&
+    /שיעור(?: ה־)?y/.test(context) &&
+    context.includes('זהה')
+  ) return 'same-y-coordinate-pairs';
+  return null;
+}
+
 function isCustomRuleContext(context: string): boolean {
   return (
     context.includes('בחרו מספר והשלימו כלל') ||
@@ -287,6 +323,10 @@ export function predicateRuleForCoverage(
     context.includes('שיעור ה־y שלהן שונה')
   ) {
     return 'distinct-coordinate-pairs';
+  }
+  if (inputType === 'ordered-pair-coordinate') {
+    const sameCoordinateRule = sameCoordinateRuleForContext(context);
+    if (sameCoordinateRule) return sameCoordinateRule;
   }
   if (inputType.startsWith('text:') && context.includes('באותו משקל')) {
     return 'same-weight-package-pairs';
@@ -427,6 +467,24 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
       if (rule) {
         ordinal += 1;
         const binding = bindGroupPredicate(proxyHost, blanks, rule, 'בדיקה של שני זוגות החבילות ללא תלות בסדר הכתיבה', ordinal);
+        if (binding) bindings.push(binding);
+      }
+
+      const pairBlanks = Array.from(item.querySelectorAll<HTMLElement>('.pair-blank'));
+      const sameCoordinateRule = pairBlanks.length === 4
+        ? sameCoordinateRuleForContext(context)
+        : null;
+      if (sameCoordinateRule && pairBlanks.every((target) => !target.dataset['lmsGroup'])) {
+        ordinal += 1;
+        const binding = bindGroupPredicate(
+          proxyHost,
+          pairBlanks,
+          sameCoordinateRule,
+          sameCoordinateRule === 'same-x-coordinate-pairs'
+            ? 'בדיקה מתמטית של שתי נקודות שונות בעלות אותו שיעור x'
+            : 'בדיקה מתמטית של שתי נקודות שונות בעלות אותו שיעור y',
+          ordinal,
+        );
         if (binding) bindings.push(binding);
       }
     }
