@@ -7,6 +7,8 @@ export type DigitalGroupRule =
   | 'point-above-and-right'
   | 'point-on-x-right-of-5'
   | 'point-right-of-2-below-6'
+  | 'point-y-equals-6'
+  | 'point-x-3-between-2-and-5'
   | 'same-weight-package-pairs'
   | 'same-price-package-pairs'
   | 'nonnegative-number';
@@ -74,13 +76,10 @@ export function evaluateDigitalGroupRule(
   }
 
   if (rule === 'same-weight-package-pairs') {
-    // On the canonical graph B/C both have x=3 and D/E both have x=6.
-    // Either pair may be written first and either label may be written first.
     return matchesTwoUnorderedPairs(values, ['BC', 'DE']);
   }
 
   if (rule === 'same-price-package-pairs') {
-    // A/B both have y=5 and D/F both have y=4.
     return matchesTwoUnorderedPairs(values, ['AB', 'DF']);
   }
 
@@ -111,6 +110,10 @@ export function evaluateDigitalGroupRule(
       return y === 0 && x > 5;
     case 'point-right-of-2-below-6':
       return x > 2 && y < 6;
+    case 'point-y-equals-6':
+      return y === 6;
+    case 'point-x-3-between-2-and-5':
+      return x === 3 && y > 2 && y < 5;
     default:
       return false;
   }
@@ -164,26 +167,17 @@ function bindGroupPredicate(
   proxy.className = 'blank lms-group-proxy';
   proxy.hidden = true;
   proxy.dataset['lmsGroup'] = groupId;
-  proxy.dataset['lmsAnswers'] = JSON.stringify([
-    'predicate:' + rule,
-  ]);
+  proxy.dataset['lmsAnswers'] = JSON.stringify(['predicate:' + rule]);
   proxy.setAttribute('aria-label', label);
-
-  // Runtime-only logical targets always come after every canonical target, so
-  // introducing them can never renumber the stable pN-qM IDs.
   proxyHost.append(proxy);
 
-  const onInput: EventListener = () => {
-    syncProxy(proxy, targets);
-  };
+  const onInput: EventListener = () => syncProxy(proxy, targets);
   for (const target of targets) {
     target.addEventListener('input', onInput);
     target.dataset['lmsGroup'] = groupId;
   }
 
-  const observer = new MutationObserver(() => {
-    mirrorGroupState(proxy, targets);
-  });
+  const observer = new MutationObserver(() => mirrorGroupState(proxy, targets));
   observer.observe(proxy, {
     attributes: true,
     attributeFilter: ['data-lms-state'],
@@ -197,8 +191,22 @@ function pairRuleForContext(context: string): DigitalGroupRule | null {
   if (context.includes('נקודה G') && context.includes('מימין לנקודה B')) {
     return 'point-on-x-right-of-5';
   }
-  if (context.includes('נקודה S') && context.includes('מימין לנקודה P') && context.includes('מתחת לנקודה R')) {
+  if (
+    context.includes('נקודה S') &&
+    context.includes('מימין לנקודה P') &&
+    context.includes('מתחת לנקודה R')
+  ) {
     return 'point-right-of-2-below-6';
+  }
+  if (context.includes('נקודה G') && context.includes('רחוקה מציר x') && context.includes('6 יחידות')) {
+    return 'point-y-equals-6';
+  }
+  if (
+    context.includes('שיעור ה־x שלה כמו של הספסל') &&
+    context.includes('מעל הספסל') &&
+    context.includes('מתחת לעץ')
+  ) {
+    return 'point-x-3-between-2-and-5';
   }
   if (context.includes('גם מעל וגם מימין')) {
     return 'point-above-and-right';
@@ -226,8 +234,9 @@ function pairRuleForContext(context: string): DigitalGroupRule | null {
 export function hydrateDigitalPredicates(root: ParentNode): () => void {
   const bindings: PredicateBinding[] = [];
 
-  // The coverage generator receives a Document. Keep its persisted canonical
-  // target order stable until logical-group coverage is represented explicitly.
+  // Runtime group proxies are structural. The coverage generator receives a
+  // Document and keeps canonical target IDs stable; non-structural reviewed
+  // answers are still hydrated separately by digitalCanonicalAnswers.
   if ((root as Node).nodeType === 9) return () => undefined;
 
   const proxyHost = root.querySelector<HTMLElement>('.sheet') ||
@@ -244,9 +253,7 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
       heading.includes('ערך ה־x שלהן שונה') &&
       heading.includes('שיעור ה־y שלהן שונה')
     ) {
-      const targets = Array.from(
-        card.querySelectorAll<HTMLElement>('.pair-blank'),
-      );
+      const targets = Array.from(card.querySelectorAll<HTMLElement>('.pair-blank'));
       if (targets.length === 4) {
         ordinal += 1;
         const binding = bindGroupPredicate(
@@ -286,9 +293,7 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
       const container = pair.closest('li') || pair.parentElement;
       const context = normalizedText(container);
       const rule = pairRuleForContext(context);
-      const targets = Array.from(
-        pair.querySelectorAll<HTMLElement>('.pair-blank'),
-      );
+      const targets = Array.from(pair.querySelectorAll<HTMLElement>('.pair-blank'));
       if (!rule || targets.length !== 2) continue;
       if (targets.some((target) => target.dataset['lmsGroup'])) continue;
 
@@ -304,8 +309,6 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
     }
   }
 
-  // A single missing coordinate on an axis can be any non-negative number.
-  // This is a real predicate, not a guessed model answer.
   for (const item of root.querySelectorAll<HTMLElement>('li')) {
     const context = normalizedText(item);
     const blanks = Array.from(item.querySelectorAll<HTMLElement>('.pair-blank'));
@@ -314,9 +317,7 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
       (context.includes('כל הנקודות שממוקמות על ציר y') && context.includes('(0,')) ||
       (context.includes('כל הנקודות שממוקמות על ציר x') && context.includes(',0)'))
     ) {
-      blanks[0]!.dataset['lmsAnswers'] = JSON.stringify([
-        'predicate:nonnegative-number',
-      ]);
+      blanks[0]!.dataset['lmsAnswers'] = JSON.stringify(['predicate:nonnegative-number']);
     }
   }
 
