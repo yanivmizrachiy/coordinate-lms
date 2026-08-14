@@ -32,7 +32,7 @@ describe('learner-created rectangle predicate', () => {
     ).toBe(true);
   });
 
-  it('rejects a square, wrong vertex order, out-of-grid coordinates, and inconsistent calculations', () => {
+  it('rejects a square, wrong vertex order, non-grid/out-of-grid coordinates, and inconsistent calculations', () => {
     const square = [...validHorizontal];
     square.splice(0, 8, '1', '1', '4', '1', '4', '4', '1', '4');
     expect(ownAxisAlignedRectangleWithWorkMatches(square)).toBe(false);
@@ -40,6 +40,11 @@ describe('learner-created rectangle predicate', () => {
     const wrongOrder = [...validHorizontal];
     wrongOrder.splice(0, 8, '1', '1', '6', '4', '6', '1', '1', '4');
     expect(ownAxisAlignedRectangleWithWorkMatches(wrongOrder)).toBe(false);
+
+    const fractionalGridPoint = [...validHorizontal];
+    fractionalGridPoint[0] = '1.5';
+    fractionalGridPoint[6] = '1.5';
+    expect(ownAxisAlignedRectangleWithWorkMatches(fractionalGridPoint)).toBe(false);
 
     const outsideGrid = [...validHorizontal];
     outsideGrid[2] = '9';
