@@ -17,7 +17,6 @@ import { currentSession } from '../lms/auth';
 import { hydrateGridAnswerInputs } from '../lms/gridInputs';
 import { hydrateChoiceAnswerInputs } from '../lms/choiceInputs';
 import { hydrateExplicitAuthoringAnswers } from '../lms/implicitAnswers';
-import { hydrateInlineAnswerChecks } from '../lms/inlineAnswerChecks';
 
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
@@ -61,9 +60,6 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
 
     const lms = data
       ? attachLmsToPage(sheetWrap, page)
-      : undefined;
-    const inlineCheckCleanup = data
-      ? hydrateInlineAnswerChecks(sheetWrap)
       : undefined;
 
     const nav = elem('div', { class: 'pagenav no-print' });
@@ -142,7 +138,6 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     return () => {
       window.clearTimeout(settle);
       window.removeEventListener('resize', applyZoom);
-      inlineCheckCleanup?.();
       predicateCleanup?.();
       choiceCleanup?.();
       gameCleanup?.();
