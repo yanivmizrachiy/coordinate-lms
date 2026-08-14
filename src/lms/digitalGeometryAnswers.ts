@@ -19,6 +19,11 @@ function setCalcFinals(container: ParentNode | undefined, values: readonly strin
   values.forEach((value, index) => setAnswer(finals[index], value));
 }
 
+function setPageCalcFinals(root: ParentNode, values: readonly string[]): void {
+  const finals = Array.from(root.querySelectorAll<HTMLElement>('.calc-final .blank'));
+  values.forEach((value, index) => setAnswer(finals[index], value));
+}
+
 function setLastLooseNumbers(container: ParentNode | undefined, values: readonly string[]): void {
   if (!container) return;
   const targets = Array.from(container.querySelectorAll<HTMLElement>('.blank[data-missing="number"]'));
@@ -43,50 +48,51 @@ function hydratePlotShape(root: ParentNode): void {
 function hydrateRectanglesIntro(root: ParentNode): void {
   const sheetText = normalizedText(root.querySelector('.sheet'));
   if (
-    !sheetText.includes('קודקודים, צלעות מקבילות, היקף ושטח') ||
-    !sheetText.includes('מלבן ABCD')
+    !sheetText.includes('מלבנים במערכת הצירים') ||
+    !sheetText.includes('A(1,1)') ||
+    !sheetText.includes('B(6,1)') ||
+    !sheetText.includes('C(6,4)') ||
+    !sheetText.includes('P(2,2)') ||
+    !sheetText.includes('Q(7,2)') ||
+    !sheetText.includes('R(7,5)')
   ) return;
 
-  // Main rectangle: A(1,1),B(6,1),C(6,4),D(1,4) => 5×3.
-  setCalcFinals(cardByHeading(root, 'ב. אורכי הצלעות'), ['16', '15']);
+  // Main rectangle 5×3, then missing-corner rectangle 5×3.
+  setPageCalcFinals(root, ['16', '15', '16', '15']);
 
-  // Missing-corner rectangle: P(2,2),Q(7,2),R(7,5), so S=(2,5), also 5×3.
   const missing = cardByHeading(root, 'ג. משלימים את הקודקוד החסר');
   if (missing) {
     const coordinates = Array.from(missing.querySelectorAll<HTMLElement>('.pair-blank'));
     setAnswer(coordinates[0], '2');
     setAnswer(coordinates[1], '5');
-    setCalcFinals(missing, ['16', '15']);
   }
 }
 
 function hydrateSquaresSummary(root: ParentNode): void {
   const sheetText = normalizedText(root.querySelector('.sheet'));
   if (
-    !sheetText.includes('משלימים קודקוד חסר, ומכריעים אם טענה נכונה בהכרח') ||
     !sheetText.includes('A(2,2)') ||
     !sheetText.includes('B(2,6)') ||
-    !sheetText.includes('C(7,6)')
+    !sheetText.includes('C(7,6)') ||
+    !sheetText.includes('אם מזיזים את המלבן יחידה אחת ימינה')
   ) return;
 
   // Rectangle is 5×4.
-  setCalcFinals(cardByHeading(root, 'א. משלימים את הקודקוד החסר'), ['18', '20']);
+  setPageCalcFinals(root, ['18', '20']);
 }
 
 function hydrateSquaresPractice(root: ParentNode): void {
   const sheetText = normalizedText(root.querySelector('.sheet'));
   if (
-    !sheetText.includes('ריבוע ברביע הראשון') ||
-    !sheetText.includes('יישום משולב של כל הכללים')
+    !sheetText.includes('A(2,1), B(6,1), C(6,5)') ||
+    !sheetText.includes('קודקוד שמאלי־תחתון של ריבוע הוא (1,2)') ||
+    !sheetText.includes('התחילו בנקודה P(1,1)')
   ) return;
 
-  // A(2,1),B(6,1),C(6,5): side 4.
-  setCalcFinals(cardByHeading(root, 'משלימים ריבוע'), ['16', '16']);
-  // Lower-left (1,2), side 3.
-  setCalcFinals(cardByHeading(root, 'ריבוע מתיאור'), ['12', '9']);
+  // First square side 4; described square side 3.
+  setPageCalcFinals(root, ['16', '16', '12', '9']);
 
-  // Path from P(1,1): 5 right + 4 up + 2 left + 3 down = 14;
-  // final x is 4, which is 3 greater than the starting x=1.
+  // 5+4+2+3 = 14; final x is 4, so increase from x=1 is 3.
   const summary = cardByHeading(root, 'משימת סיכום');
   setLastLooseNumbers(summary, ['14', '3']);
 }
@@ -96,9 +102,8 @@ function hydrateShapeClaims(root: ParentNode): void {
   if (!sheetText.includes('טענות על נקודות, הזזות ושטחים')) return;
 
   // First rectangle 6×2 => perimeter 16, area 12.
-  setCalcFinals(cardByHeading(root, 'ג. המלבן הראשון'), ['16', '12']);
   // Second rectangle 4×3 => perimeter 14, area 12.
-  setCalcFinals(cardByHeading(root, 'ד. המלבן השני'), ['14', '12']);
+  setPageCalcFinals(root, ['16', '12', '14', '12']);
 }
 
 /** Deterministic LMS-only geometry answers derived from canonical coordinates. */
