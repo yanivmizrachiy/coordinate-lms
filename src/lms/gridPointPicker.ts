@@ -78,8 +78,6 @@ function eventToCoordinate(
   const y = Math.round(rawY);
 
   if (x < 0 || x > xmax || y < 0 || y > ymax) return null;
-  // Touch screens are imprecise. Snap only when the tap is genuinely closest
-  // to this lattice point, never to a neighbouring cell.
   if (Math.abs(rawX - x) > 0.46 || Math.abs(rawY - y) > 0.46) return null;
   return { x, y };
 }
@@ -149,10 +147,6 @@ function gridRefs(sheet: HTMLElement): GridRef[] {
     .filter((entry): entry is GridRef => Boolean(entry.svg));
 }
 
-/** Pick the graph the printed instruction refers to without page-number rules.
- * Prefer a graph in the same question card. Otherwise use the nearest graph
- * appearing before the instruction ("על הסרטוט/המפה" commonly refers back to
- * the drawing in section א). */
 function gridForTask(item: HTMLElement, grids: readonly GridRef[]): GridRef | null {
   const card = item.closest('.q-card');
   const sameCardGrid = card?.querySelector<HTMLElement>('.coordinate-grid');
@@ -236,17 +230,12 @@ function buildBinding(
     }
   };
 
-  // Listen on the wrapper: HTML LMS overlays above the SVG still bubble here.
-  grid.addEventListener('click', clickHandler);
+  // Capture before LMS overlays can intercept/stop the event. The wrapper still
+  // owns the interaction, so taps on either SVG or HTML overlays behave alike.
+  grid.addEventListener('click', clickHandler, true);
   return { grid, svg, tasks, clickHandler, originalAria };
 }
 
-/**
- * Makes every canonical "mark a point" instruction touch-first. The graph may
- * live in the same question card or an earlier section of the same worksheet.
- * Printable HTML is untouched; existing coordinate blanks remain the keyboard
- * fallback and stay synchronized with the visible point marker.
- */
 export function hydrateGridPointPickers(root: ParentNode): () => void {
   if ((root as Node).nodeType === 9) return () => undefined;
   const bindings: GridBinding[] = [];
@@ -275,7 +264,7 @@ export function hydrateGridPointPickers(root: ParentNode): () => void {
 
   return () => {
     for (const binding of bindings) {
-      binding.grid.removeEventListener('click', binding.clickHandler);
+      binding.grid.removeEventListener('click', binding.clickHandler, true);
       binding.grid.style.cursor = '';
       binding.grid.style.touchAction = '';
       delete binding.grid.dataset['lmsPicker'];
