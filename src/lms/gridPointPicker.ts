@@ -137,8 +137,16 @@ function fillTask(task: PickerTask, point: { x: number; y: number }): void {
 }
 
 function isPointMarkingTask(item: HTMLElement): boolean {
-  const context = normalizedText(item);
-  return /סמנו|סמן/.test(context) && item.querySelectorAll('.pair-blank').length === 2;
+  if (item.querySelectorAll('.pair-blank').length !== 2) return false;
+  if (/סמנו|סמן/.test(normalizedText(item))) return true;
+
+  // Some canonical worksheets put “mark a point on the drawing” in one list
+  // item and the ordered-pair response in the immediately following item.
+  // Keep those two lines together digitally without changing the print source.
+  const previous = item.previousElementSibling;
+  return previous instanceof HTMLElement &&
+    previous.querySelectorAll('.pair-blank').length === 0 &&
+    /סמנו|סמן/.test(normalizedText(previous));
 }
 
 function gridRefs(sheet: HTMLElement): GridRef[] {
@@ -230,8 +238,6 @@ function buildBinding(
     }
   };
 
-  // Capture before LMS overlays can intercept/stop the event. The wrapper still
-  // owns the interaction, so taps on either SVG or HTML overlays behave alike.
   grid.addEventListener('click', clickHandler, true);
   return { grid, svg, tasks, clickHandler, originalAria };
 }
