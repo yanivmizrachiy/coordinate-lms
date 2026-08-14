@@ -69,6 +69,21 @@ function hydrateRectanglesIntro(root: ParentNode): void {
   setCalcFinals(missing, ['16', '15']);
 }
 
+function hydrateRectanglesPracticeFixed(root: ParentNode): void {
+  const dimensions = cardByHeading(root, 'ב. אורך ורוחב של מלבן');
+  if (!dimensions) return;
+  const text = normalizedText(dimensions);
+  if (
+    !text.includes('P(2,2)') ||
+    !text.includes('Q(7,2)') ||
+    !text.includes('R(7,5)') ||
+    !text.includes('S(2,5)')
+  ) return;
+
+  // PQRS is 5×3, so P=16 and S=15.
+  setCalcFinals(dimensions, ['16', '15']);
+}
+
 function hydrateSquaresSummary(root: ParentNode): void {
   const sheetText = normalizedText(root.querySelector('.sheet'));
   if (
@@ -122,6 +137,7 @@ function hydratePixelArt(root: ParentNode): void {
 export function hydrateDigitalGeometryAnswers(root: ParentNode): void {
   hydratePlotShape(root);
   hydrateRectanglesIntro(root);
+  hydrateRectanglesPracticeFixed(root);
   hydrateSquaresSummary(root);
   hydrateSquaresPractice(root);
   hydrateShapeClaims(root);
