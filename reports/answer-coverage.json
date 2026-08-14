@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T14:17:56.919Z",
+  "generatedAt": "2026-08-14T14:19:27.988Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 962,
-  "coveragePercentage": 82.8,
+  "automaticallyCheckableTargets": 972,
+  "coveragePercentage": 83.6,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 231,
-    "deterministic-mathematical": 545,
+    "canonical-metadata-derived": 245,
+    "deterministic-mathematical": 541,
     "valid-range": 6,
     "open-ended": 118,
-    "ambiguous": 82,
+    "ambiguous": 72,
     "unsupported": 0,
     "missing": 0
   },
@@ -4486,11 +4486,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "שיעורי הנקודה שעל ראשית הצירים הם ([…],[…]).",
           "signature": "85460495",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p15-q4",
@@ -4498,11 +4500,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "שיעורי הנקודה שעל ראשית הצירים הם ([…],[…]).",
           "signature": "85460495",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p15-q5",
@@ -4510,12 +4514,12 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה P(6,[…]) ממוקמת על ציר x.",
           "signature": "6f24925d",
-          "classification": "deterministic-mathematical",
-          "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-x-axis"
+            "0"
           ]
         },
         {
@@ -4524,12 +4528,12 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה Q([…],4) ממוקמת על ציר y.",
           "signature": "e1cbe669",
-          "classification": "deterministic-mathematical",
-          "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-y-axis"
+            "0"
           ]
         },
         {
@@ -4538,12 +4542,12 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה שממוקמת על ציר x וערך ה־x שלה 2 היא ([…],0).",
           "signature": "313f086f",
-          "classification": "deterministic-mathematical",
-          "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-x-axis"
+            "2"
           ]
         },
         {
@@ -4552,12 +4556,12 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה שממוקמת על ציר y ושיעור ה־y שלה 6 היא (0,[…]).",
           "signature": "d9981f02",
-          "classification": "deterministic-mathematical",
-          "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-y-axis"
+            "6"
           ]
         },
         {
@@ -4571,7 +4575,8 @@
           "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "x"
+            "x",
+            "X"
           ]
         },
         {
@@ -4585,7 +4590,8 @@
           "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "y"
+            "y",
+            "Y"
           ]
         },
         {
@@ -4633,12 +4639,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p15-q3",
-        "p15-q4"
-      ],
-      "automaticallyCheckableTargets": 11,
-      "coveragePercentage": 84.6
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 13,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 16,
@@ -11026,18 +11029,19 @@
           "inputType": "text:letter",
           "context": "שיעורי ה־y כאן זהים, ולכן האורך מחושב בהכרח לפי שיעורי ה־[…].",
           "signature": "e64fb3bf",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p43-q12"
-      ],
-      "automaticallyCheckableTargets": 11,
-      "coveragePercentage": 91.7
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 12,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 44,
@@ -11182,11 +11186,14 @@
           "inputType": "text:text",
           "context": "הקודקוד הנכון: […]",
           "signature": "6c61b444",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "(1,4)",
+            "1,4"
+          ]
         },
         {
           "targetId": "p44-q10",
@@ -11194,11 +11201,14 @@
           "inputType": "text:property",
           "context": "האורך הוא הצלע ה[…], והרוחב הוא הצלע הקצרה — ולכן החישוב שגוי.",
           "signature": "b2b5fef4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ארוכה",
+            "ארוך"
+          ]
         },
         {
           "targetId": "p44-q11",
@@ -11206,11 +11216,14 @@
           "inputType": "text:letter",
           "context": "לשתי הנקודות יש ערך x זהה, ולכן הקטע מקביל לציר […].",
           "signature": "e53b87f8",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y",
+            "Y"
+          ]
         },
         {
           "targetId": "p44-q12",
@@ -11218,11 +11231,15 @@
           "inputType": "text:text",
           "context": "[…]",
           "signature": "ea27ec05",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "שיעור y הוא מחצית משיעור x",
+            "שיעור y שווה למחצית משיעור x",
+            "שיעור y שווה לחצי משיעור x"
+          ]
         },
         {
           "targetId": "p44-q13",
@@ -11230,11 +11247,14 @@
           "inputType": "text:letter",
           "context": "הנקודה (0,7) ממוקמת על ציר […].",
           "signature": "15d042da",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y",
+            "Y"
+          ]
         },
         {
           "targetId": "p44-q14",
@@ -11242,11 +11262,13 @@
           "inputType": "text:number",
           "context": "אצל כל נקודה שעל ציר y, שיעור x הוא […].",
           "signature": "cbab8384",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p44-q15",
@@ -11254,26 +11276,22 @@
           "inputType": "text:concept",
           "context": "נקודה שממוקמת על שני הצירים יחד היא […] הצירים.",
           "signature": "cf6d083c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ראשית",
+            "ראשית הצירים"
+          ]
         }
       ],
       "missingOrAmbiguousTargetIds": [
         "p44-q1",
-        "p44-q4",
-        "p44-q9",
-        "p44-q10",
-        "p44-q11",
-        "p44-q12",
-        "p44-q13",
-        "p44-q14",
-        "p44-q15"
+        "p44-q4"
       ],
-      "automaticallyCheckableTargets": 6,
-      "coveragePercentage": 40
+      "automaticallyCheckableTargets": 13,
+      "coveragePercentage": 86.7
     },
     {
       "pageNumber": 45,

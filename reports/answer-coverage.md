@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:17:56.919Z
+Generated: 2026-08-14T14:19:27.988Z
 
-Overall: 962/1162 safely checkable targets (82.8%).
+Overall: 972/1162 safely checkable targets (83.6%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 231 |
-| deterministic-mathematical | 545 |
+| canonical-metadata-derived | 245 |
+| deterministic-mathematical | 541 |
 | valid-range | 6 |
 | open-ended | 118 |
-| ambiguous | 82 |
+| ambiguous | 72 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -390,18 +390,18 @@ Overall: 962/1162 safely checkable targets (82.8%).
 
 ### Page 15 — נקודות שעל הצירים
 
-11/13 safely checkable (84.6%).
+13/13 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p15-q1 | word:number | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה שממוקמת על ציר x שיעור ה־y הוא […]. |
 | p15-q2 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה שממוקמת על ציר […] ערך ה־x הוא 0. |
-| p15-q3 | ordered-pair-coordinate | ambiguous | no | none | שיעורי הנקודה שעל ראשית הצירים הם ([…],[…]). |
-| p15-q4 | ordered-pair-coordinate | ambiguous | no | none | שיעורי הנקודה שעל ראשית הצירים הם ([…],[…]). |
-| p15-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה P(6,[…]) ממוקמת על ציר x. |
-| p15-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה Q([…],4) ממוקמת על ציר y. |
-| p15-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה שממוקמת על ציר x וערך ה־x שלה 2 היא ([…],0). |
-| p15-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה שממוקמת על ציר y ושיעור ה־y שלה 6 היא (0,[…]). |
+| p15-q3 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | שיעורי הנקודה שעל ראשית הצירים הם ([…],[…]). |
+| p15-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | שיעורי הנקודה שעל ראשית הצירים הם ([…],[…]). |
+| p15-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה P(6,[…]) ממוקמת על ציר x. |
+| p15-q6 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה Q([…],4) ממוקמת על ציר y. |
+| p15-q7 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה שממוקמת על ציר x וערך ה־x שלה 2 היא ([…],0). |
+| p15-q8 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה שממוקמת על ציר y ושיעור ה־y שלה 6 היא (0,[…]). |
 | p15-q9 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
 | p15-q10 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
 | p15-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | היא היחידה כזאת, כי רק בה גם ערך ה־x הוא 0 וגם שיעור ה־y הוא […]. |
@@ -983,7 +983,7 @@ No detected interactive response targets.
 
 ### Page 43 — מזהים ומתקנים טעויות
 
-11/12 safely checkable (91.7%).
+12/12 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -998,11 +998,11 @@ No detected interactive response targets.
 | p43-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הזזה של 3 יחידות ימינה מוסיפה לערך ה־x, ולכן מתקבלת הנקודה ([…],[…]). |
 | p43-q10 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | בקטע המקביל לציר x דווקא שיעור ה־[…] זהה בשתי הנקודות. |
 | p43-q11 | text:relation | deterministic-mathematical | yes | target-bound reviewed proof | קטע המקביל לציר x הוא […] לציר y, כי הצירים מאונכים זה לזה. |
-| p43-q12 | text:letter | ambiguous | no | none | שיעורי ה־y כאן זהים, ולכן האורך מחושב בהכרח לפי שיעורי ה־[…]. |
+| p43-q12 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | שיעורי ה־y כאן זהים, ולכן האורך מחושב בהכרח לפי שיעורי ה־[…]. |
 
 ### Page 44 — זיהוי ותיקון טעויות
 
-6/15 safely checkable (40%).
+13/15 safely checkable (86.7%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1014,13 +1014,13 @@ No detected interactive response targets.
 | p44-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | התשובה הנכונה: […] |
 | p44-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם המשפט נכון? […] |
 | p44-q8 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | התיקון: לשתי הנקודות יש שיעור […] זהה, ולכן הקטע שביניהן מקביל לציר y. |
-| p44-q9 | text:text | ambiguous | no | none | הקודקוד הנכון: […] |
-| p44-q10 | text:property | ambiguous | no | none | האורך הוא הצלע ה[…], והרוחב הוא הצלע הקצרה — ולכן החישוב שגוי. |
-| p44-q11 | text:letter | ambiguous | no | none | לשתי הנקודות יש ערך x זהה, ולכן הקטע מקביל לציר […]. |
-| p44-q12 | text:text | ambiguous | no | none | […] |
-| p44-q13 | text:letter | ambiguous | no | none | הנקודה (0,7) ממוקמת על ציר […]. |
-| p44-q14 | text:number | ambiguous | no | none | אצל כל נקודה שעל ציר y, שיעור x הוא […]. |
-| p44-q15 | text:concept | ambiguous | no | none | נקודה שממוקמת על שני הצירים יחד היא […] הצירים. |
+| p44-q9 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | הקודקוד הנכון: […] |
+| p44-q10 | text:property | canonical-metadata-derived | yes | explicit canonical authoring label | האורך הוא הצלע ה[…], והרוחב הוא הצלע הקצרה — ולכן החישוב שגוי. |
+| p44-q11 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי הנקודות יש ערך x זהה, ולכן הקטע מקביל לציר […]. |
+| p44-q12 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | […] |
+| p44-q13 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה (0,7) ממוקמת על ציר […]. |
+| p44-q14 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | אצל כל נקודה שעל ציר y, שיעור x הוא […]. |
+| p44-q15 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה שממוקמת על שני הצירים יחד היא […] הצירים. |
 
 ### Page 45 — הנקודה החשודה
 
