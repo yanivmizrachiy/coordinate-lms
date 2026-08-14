@@ -29,6 +29,9 @@ function studentProfile(uid: string, email = `${uid}@example.test`) {
     fullName: `Student ${uid}`,
     username: uid,
     email,
+    className: 'ז1',
+    school: 'בית ספר בדיקה',
+    city: 'ירושלים',
     role: 'student',
     createdAt: NOW,
     lastSeenAt: NOW,
@@ -121,7 +124,7 @@ afterAll(async () => {
 });
 
 describe('Firestore emulator authorization contract', () => {
-  it('allows an owner profile but denies anonymous and cross-student reads', async () => {
+  it('allows a complete owner profile but denies anonymous and cross-student reads', async () => {
     const ownDb = studentDb(STUDENT_A);
     await assertSucceeds(
       setDoc(
@@ -143,10 +146,13 @@ describe('Firestore emulator authorization contract', () => {
     );
   });
 
-  it('rejects impersonation, role escalation, invalid timestamps, and extra fields', async () => {
+  it('rejects missing registration fields, impersonation, role escalation, invalid timestamps, and extra fields', async () => {
     const db = studentDb(STUDENT_A);
     const reference = doc(db, 'students', STUDENT_A);
 
+    const complete = studentProfile(STUDENT_A);
+    const { city: _city, ...missingCity } = complete;
+    await assertFails(setDoc(reference, missingCity));
     await assertFails(
       setDoc(reference, { ...studentProfile(STUDENT_A), uid: STUDENT_B }),
     );
@@ -174,10 +180,13 @@ describe('Firestore emulator authorization contract', () => {
     await assertFails(getDocs(collection(studentDb(STUDENT_A), 'students')));
   });
 
-  it('enforces owner, page, score, attempt, shape, and document-path draft rules', async () => {
+  it('enforces owner, canonical page range, score, attempt, shape, and document-path draft rules', async () => {
     const db = studentDb(STUDENT_A);
     await assertSucceeds(
       setDoc(doc(db, 'students', STUDENT_A, 'drafts', 'page-2'), draft(STUDENT_A)),
+    );
+    await assertSucceeds(
+      setDoc(doc(db, 'students', STUDENT_A, 'drafts', 'page-78'), draft(STUDENT_A, 78)),
     );
     await assertFails(
       setDoc(doc(db, 'students', STUDENT_B, 'drafts', 'page-2'), draft(STUDENT_B)),
@@ -187,6 +196,9 @@ describe('Firestore emulator authorization contract', () => {
     );
     await assertFails(
       setDoc(doc(db, 'students', STUDENT_A, 'drafts', 'page-0'), draft(STUDENT_A, 0)),
+    );
+    await assertFails(
+      setDoc(doc(db, 'students', STUDENT_A, 'drafts', 'page-79'), draft(STUDENT_A, 79)),
     );
     await assertFails(
       setDoc(doc(db, 'students', STUDENT_A, 'drafts', 'page-2'), {
@@ -323,11 +335,23 @@ describe('Firestore emulator authorization contract', () => {
     await assertSucceeds(
       setDoc(doc(admin, 'answerKeys', 'page-2'), validKey),
     );
+    await assertSucceeds(
+      setDoc(doc(admin, 'answerKeys', 'page-78'), {
+        ...validKey,
+        pageNumber: 78,
+      }),
+    );
     await assertFails(
       setDoc(doc(studentDb(STUDENT_A), 'answerKeys', 'page-2'), validKey),
     );
     await assertFails(
       setDoc(doc(admin, 'answerKeys', 'page-3'), validKey),
+    );
+    await assertFails(
+      setDoc(doc(admin, 'answerKeys', 'page-79'), {
+        ...validKey,
+        pageNumber: 79,
+      }),
     );
     await assertFails(
       setDoc(doc(admin, 'answerKeys', 'page-2'), {
