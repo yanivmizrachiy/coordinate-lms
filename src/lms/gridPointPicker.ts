@@ -167,13 +167,13 @@ export function hydrateGridPointPickers(root: ParentNode): () => void {
       const marker = makeMarker(label);
       svg.append(marker);
 
-      const task = {
-        targets: [targets[0]!, targets[1]!] as [HTMLElement, HTMLElement],
+      const task: PickerTask = {
+        targets: [targets[0]!, targets[1]!],
         label,
         marker,
         observer: new MutationObserver(() => undefined),
         focusHandlers: [],
-      } satisfies PickerTask;
+      };
 
       task.observer.disconnect();
       task.observer = new MutationObserver(() => updateMarker(grid, task));
