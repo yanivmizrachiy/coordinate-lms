@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:24:05.531Z
+Generated: 2026-08-14T13:25:21.645Z
 
-Overall: 841/1162 safely checkable targets (72.4%).
+Overall: 862/1162 safely checkable targets (74.2%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 104 |
-| deterministic-mathematical | 551 |
+| canonical-metadata-derived | 129 |
+| deterministic-mathematical | 547 |
 | valid-range | 6 |
 | open-ended | 152 |
-| ambiguous | 169 |
+| ambiguous | 148 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -889,37 +889,37 @@ No detected interactive response targets.
 
 ### Page 40 — שיעור חסר ודפוסים
 
-6/27 safely checkable (22.2%).
+27/27 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p40-q1 | ordered-pair-coordinate | ambiguous | no | none | הנקודה A([…],4) ממוקמת על אותו קו אנכי כמו B(6,1). |
-| p40-q2 | ordered-pair-coordinate | ambiguous | no | none | הנקודה C(3,[…]) ממוקמת על אותו קו אופקי כמו D(7,5). |
-| p40-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). |
-| p40-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). |
-| p40-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). |
-| p40-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). |
-| p40-q7 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
-| p40-q8 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
-| p40-q9 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
-| p40-q10 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
-| p40-q11 | text:text | ambiguous | no | none | כתבו כלל המתאר את כל הנקודות בדפוס: […] |
-| p40-q12 | ordered-pair-coordinate | ambiguous | no | none | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
-| p40-q13 | ordered-pair-coordinate | ambiguous | no | none | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
-| p40-q14 | ordered-pair-coordinate | ambiguous | no | none | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
-| p40-q15 | ordered-pair-coordinate | ambiguous | no | none | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
-| p40-q16 | text:text | ambiguous | no | none | מה נשאר קבוע? […] מה משתנה? […] |
-| p40-q17 | text:text | ambiguous | no | none | מה נשאר קבוע? […] מה משתנה? […] |
-| p40-q18 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) ([…],[…]) |
-| p40-q19 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) ([…],[…]) |
-| p40-q20 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) ([…],[…]) |
-| p40-q21 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) ([…],[…]) |
+| p40-q1 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה A([…],4) ממוקמת על אותו קו אנכי כמו B(6,1). |
+| p40-q2 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה C(3,[…]) ממוקמת על אותו קו אופקי כמו D(7,5). |
+| p40-q3 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). |
+| p40-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3). |
+| p40-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). |
+| p40-q6 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2). |
+| p40-q7 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) |
+| p40-q8 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) |
+| p40-q9 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) |
+| p40-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) |
+| p40-q11 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו כלל המתאר את כל הנקודות בדפוס: […] |
+| p40-q12 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
+| p40-q13 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
+| p40-q14 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
+| p40-q15 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…]) |
+| p40-q16 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | מה נשאר קבוע? […] מה משתנה? […] |
+| p40-q17 | text:text | canonical-metadata-derived | yes | explicit canonical authoring label | מה נשאר קבוע? […] מה משתנה? […] |
+| p40-q18 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) ([…],[…]) |
+| p40-q19 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) ([…],[…]) |
+| p40-q20 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) ([…],[…]) |
+| p40-q21 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | ([…],[…]) ([…],[…]) ([…],[…]) |
 | p40-q22 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) ([…],[…]) |
 | p40-q23 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) ([…],[…]) ([…],[…]) |
-| p40-q24 | text:number | ambiguous | no | none | בדפוס שבסעיף הראשון, ההפרש בין שיעורי ה־y של שתי נקודות סמוכות הוא בהכרח […]. |
-| p40-q25 | ordered-pair-coordinate | ambiguous | no | none | כתבו את הנקודה שתופיע בטבלה במקום השישי: ([…],[…]). |
-| p40-q26 | ordered-pair-coordinate | ambiguous | no | none | כתבו את הנקודה שתופיע בטבלה במקום השישי: ([…],[…]). |
-| p40-q27 | text:number | ambiguous | no | none | בסדרה שבטבלה, שיעור ה־y של כל הנקודות הוא בהכרח […]. |
+| p40-q24 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | בדפוס שבסעיף הראשון, ההפרש בין שיעורי ה־y של שתי נקודות סמוכות הוא בהכרח […]. |
+| p40-q25 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את הנקודה שתופיע בטבלה במקום השישי: ([…],[…]). |
+| p40-q26 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את הנקודה שתופיע בטבלה במקום השישי: ([…],[…]). |
+| p40-q27 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | בסדרה שבטבלה, שיעור ה־y של כל הנקודות הוא בהכרח […]. |
 
 ### Page 41 — מכלל לטבלה ולגרף
 

@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:24:05.531Z",
+  "generatedAt": "2026-08-14T13:25:21.645Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 841,
-  "coveragePercentage": 72.4,
+  "automaticallyCheckableTargets": 862,
+  "coveragePercentage": 74.2,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 104,
-    "deterministic-mathematical": 551,
+    "canonical-metadata-derived": 129,
+    "deterministic-mathematical": 547,
     "valid-range": 6,
     "open-ended": 152,
-    "ambiguous": 169,
+    "ambiguous": 148,
     "unsupported": 0,
     "missing": 0
   },
@@ -9711,11 +9711,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה A([…],4) ממוקמת על אותו קו אנכי כמו B(6,1).",
           "signature": "21218d91",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p40-q2",
@@ -9723,11 +9725,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה C(3,[…]) ממוקמת על אותו קו אופקי כמו D(7,5).",
           "signature": "4cc4a5d2",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p40-q3",
@@ -9735,12 +9739,12 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3).",
           "signature": "3eab0a0e",
-          "classification": "deterministic-mathematical",
-          "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-x-axis"
+            "4"
           ]
         },
         {
@@ -9749,12 +9753,12 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה E([…],[…]) ממוקמת על ציר x מתחת לנקודה F(4,3).",
           "signature": "3eab0a0e",
-          "classification": "deterministic-mathematical",
-          "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-x-axis"
+            "0"
           ]
         },
         {
@@ -9763,12 +9767,12 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2).",
           "signature": "8d57fadf",
-          "classification": "deterministic-mathematical",
-          "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-y-axis"
+            "0"
           ]
         },
         {
@@ -9777,12 +9781,12 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה G([…],[…]) ממוקמת על ציר y משמאל לנקודה H(5,2).",
           "signature": "8d57fadf",
-          "classification": "deterministic-mathematical",
-          "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-y-axis"
+            "2"
           ]
         },
         {
@@ -9791,11 +9795,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…])",
           "signature": "6f305284",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p40-q8",
@@ -9803,11 +9809,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…])",
           "signature": "6f305284",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p40-q9",
@@ -9815,11 +9823,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…])",
           "signature": "6f305284",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p40-q10",
@@ -9827,11 +9837,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…])",
           "signature": "6f305284",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p40-q11",
@@ -9839,11 +9851,16 @@
           "inputType": "text:text",
           "context": "כתבו כלל המתאר את כל הנקודות בדפוס: […]",
           "signature": "11f7e9aa",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x = y",
+            "y = x",
+            "שיעור x שווה לשיעור y",
+            "שיעור y שווה לשיעור x"
+          ]
         },
         {
           "targetId": "p40-q12",
@@ -9851,11 +9868,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])",
           "signature": "b390457d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p40-q13",
@@ -9863,11 +9882,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])",
           "signature": "b390457d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p40-q14",
@@ -9875,11 +9896,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])",
           "signature": "b390457d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p40-q15",
@@ -9887,11 +9910,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה(1,5)(2,5)(3,5)([…],[…])([…],[…])",
           "signature": "b390457d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p40-q16",
@@ -9899,11 +9924,14 @@
           "inputType": "text:text",
           "context": "מה נשאר קבוע? […] מה משתנה? […]",
           "signature": "f9ba678c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y",
+            "שיעור y"
+          ]
         },
         {
           "targetId": "p40-q17",
@@ -9911,11 +9939,14 @@
           "inputType": "text:text",
           "context": "מה נשאר קבוע? […] מה משתנה? […]",
           "signature": "f9ba678c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "שיעור x"
+          ]
         },
         {
           "targetId": "p40-q18",
@@ -9923,11 +9954,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "00a038a3",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p40-q19",
@@ -9935,11 +9968,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "00a038a3",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p40-q20",
@@ -9947,11 +9982,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "00a038a3",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p40-q21",
@@ -9959,11 +9996,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "00a038a3",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p40-q22",
@@ -9999,11 +10038,13 @@
           "inputType": "text:number",
           "context": "בדפוס שבסעיף הראשון, ההפרש בין שיעורי ה־y של שתי נקודות סמוכות הוא בהכרח […].",
           "signature": "2345fda7",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "1"
+          ]
         },
         {
           "targetId": "p40-q25",
@@ -10011,11 +10052,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את הנקודה שתופיע בטבלה במקום השישי: ([…],[…]).",
           "signature": "f45d8e14",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p40-q26",
@@ -10023,11 +10066,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את הנקודה שתופיע בטבלה במקום השישי: ([…],[…]).",
           "signature": "f45d8e14",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p40-q27",
@@ -10035,38 +10080,18 @@
           "inputType": "text:number",
           "context": "בסדרה שבטבלה, שיעור ה־y של כל הנקודות הוא בהכרח […].",
           "signature": "ea0fb80b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p40-q1",
-        "p40-q2",
-        "p40-q7",
-        "p40-q8",
-        "p40-q9",
-        "p40-q10",
-        "p40-q11",
-        "p40-q12",
-        "p40-q13",
-        "p40-q14",
-        "p40-q15",
-        "p40-q16",
-        "p40-q17",
-        "p40-q18",
-        "p40-q19",
-        "p40-q20",
-        "p40-q21",
-        "p40-q24",
-        "p40-q25",
-        "p40-q26",
-        "p40-q27"
-      ],
-      "automaticallyCheckableTargets": 6,
-      "coveragePercentage": 22.2
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 27,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 41,
