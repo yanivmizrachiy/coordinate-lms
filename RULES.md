@@ -77,9 +77,22 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Do not create a durable `guest` student record, do not transfer guest history into a later account, and do not include guest activity in teacher reports or class statistics.
 - Only registered users have persistent save/sync. Once a registered student is signed in, their work is documented to their account according to the persistence rules below.
 - The first computerized page must contain a clear, visible digital-only information box explaining in student-friendly Hebrew that registration is **not required to practice**, but registration is required to save and document progress, and that work performed while signed in is recorded to the student's account.
+- The information box must explicitly tell the student that a registered account enables saved learning history and personal progress reports.
 - That information box is an LMS overlay only and must not modify or appear in the printable source page.
 
-## 9. Scoring and attempts
+## 9. Registration identity and security
+
+- Registration for persistent learning records requires all of these fields: **full name, username, email address, password, school, city, and class**. These are required, not optional, for a newly registered student.
+- The registration screen must explain why registration exists: to save, document and report the student's learning activity and progress.
+- Production authentication must use **Firebase Authentication**. Do not implement a custom production password database.
+- A student's password must never be stored in Firestore, in the student profile, in reports, in logs, in repository files, or in application analytics.
+- Development-only local authentication may exist only behind an explicit development fallback that production workflows keep disabled; it is never presented as production security.
+- Enforce a reasonable password policy in the UI and application validation. The current minimum is 10 characters including at least one letter and one number; Firebase remains the authentication authority.
+- Profile strings must be validated, length-bounded and treated as untrusted user input.
+- Registration must fail closed when the real production authentication backend is unavailable; failure of registration must never block anonymous practice.
+- Do not expose one student's profile or learning records to another student. Class-wide access is administrator-only.
+
+## 10. Scoring and attempts
 
 - Every submitted page score is an integer from 1 through 100.
 - Every automatically checked answer allows at most three attempts during the active practice state.
@@ -88,14 +101,14 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - For graphical tasks, feedback applies to the submitted graphical choice, not to a surrogate typed answer.
 - After page submission, show the score to every user. Persist the score, answers, and attempt counts **only when the user is registered and signed in**.
 
-## 10. Student and teacher visibility
+## 11. Student and teacher visibility
 
 - Registered students may view only their own saved data.
 - Only the configured administrator may view class-wide registered-student results in the initial release.
 - The administrator view must expose question-level correctness and attempts, not only page-level scores.
 - The teacher dashboard and reports contain **registered students only**. Anonymous/guest practice must not create student records, activity rows, progress records, or statistics.
 
-## 11. Persistence and Firebase truth
+## 12. Persistence and Firebase truth
 
 - Persistence applies only to a registered, signed-in student (or the configured administrator where appropriate).
 - Local persistence success and central Firebase synchronization success are different states for registered users.
@@ -106,7 +119,7 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Teacher views must distinguish central Firebase data from any registered-user local fallback and expose synchronization errors.
 - **There is no guest-progress persistence or guest-progress transfer workflow.** Any code, test, copy, storage key usage, or migration rule that assumes durable guest progress is obsolete and must be removed.
 
-## 12. Firebase and authorization
+## 13. Firebase and authorization
 
 - Production registration fails closed unless all required Firebase client settings are configured.
 - Browser-only accounts are development-only or require explicit production-disabled opt-in.
@@ -117,7 +130,7 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Do not hard-code a stale workbook page count.
 - Anonymous practice must not require or create a Firebase student identity merely to solve exercises.
 
-## 13. Documentation and source-of-truth hygiene
+## 14. Documentation and source-of-truth hygiene
 
 - `RULES.md` is the only normative rule document.
 - `README.md` may describe the project but must not define competing rules.
@@ -126,7 +139,7 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - PR descriptions and comments are status/history only and must be reconciled when they contain obsolete claims such as 77 pages, registration walls on workbook pages, durable guest progress, teacher judgment for mathematically deterministic tasks, or permanent ungraded treatment for tasks that can be objectively computerized.
 - Any repository text or code that conflicts with the canonical 78-page one-to-one mapping or the rules above is a defect.
 
-## 14. Required quality gates
+## 15. Required quality gates
 
 Before presenting a branch as ready for review, run at least:
 
