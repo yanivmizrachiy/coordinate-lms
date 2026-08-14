@@ -59,6 +59,14 @@ describe('digital mathematical predicates', () => {
     expect(evaluateDigitalGroupRule('same-price-package-pairs', ['A', 'C', 'D', 'F'])).toBe(false);
   });
 
+  it('checks a learner-defined y=x+k rule as one dependent response', () => {
+    expect(evaluateDigitalGroupRule('custom-y-equals-x-plus-k', ['3', '0', '3', '4', '7', '3'])).toBe(true);
+    expect(evaluateDigitalGroupRule('custom-y-equals-x-plus-k', ['2', '1', '3', '5', '7', '2'])).toBe(true);
+    expect(evaluateDigitalGroupRule('custom-y-equals-x-plus-k', ['3', '0', '3', '4', '6', '3'])).toBe(false);
+    expect(evaluateDigitalGroupRule('custom-y-equals-x-plus-k', ['3', '0', '3', '0', '3', '3'])).toBe(false);
+    expect(evaluateDigitalGroupRule('custom-y-equals-x-plus-k', ['3', '-1', '2', '4', '7', '3'])).toBe(false);
+  });
+
   it('accepts any non-negative free coordinate on an axis', () => {
     expect(evaluateDigitalGroupRule('nonnegative-number', ['0'])).toBe(true);
     expect(evaluateDigitalGroupRule('nonnegative-number', ['7.5'])).toBe(true);
@@ -73,6 +81,7 @@ describe('digital mathematical predicates', () => {
     expect(answersMatch('7|6', ['predicate:point-y-equals-6'])).toBe(true);
     expect(answersMatch('3|4', ['predicate:point-x-3-between-2-and-5'])).toBe(true);
     expect(answersMatch('B|C|D|E', ['predicate:same-weight-package-pairs'])).toBe(true);
+    expect(answersMatch('3|0|3|4|7|3', ['predicate:custom-y-equals-x-plus-k'])).toBe(true);
     expect(answersMatch('9', ['predicate:nonnegative-number'])).toBe(true);
   });
 });
