@@ -19,6 +19,13 @@ function setCalcFinals(container: ParentNode | undefined, values: readonly strin
   values.forEach((value, index) => setAnswer(finals[index], value));
 }
 
+function setLastLooseNumbers(container: ParentNode | undefined, values: readonly string[]): void {
+  if (!container) return;
+  const targets = Array.from(container.querySelectorAll<HTMLElement>('.blank[data-missing="number"]'));
+  const start = Math.max(0, targets.length - values.length);
+  values.forEach((value, index) => setAnswer(targets[start + index], value));
+}
+
 function hydratePlotShape(root: ParentNode): void {
   const sheetText = normalizedText(root.querySelector('.sheet'));
   if (
@@ -53,8 +60,52 @@ function hydrateRectanglesIntro(root: ParentNode): void {
   }
 }
 
+function hydrateSquaresSummary(root: ParentNode): void {
+  const sheetText = normalizedText(root.querySelector('.sheet'));
+  if (
+    !sheetText.includes('משלימים קודקוד חסר, ומכריעים אם טענה נכונה בהכרח') ||
+    !sheetText.includes('A(2,2)') ||
+    !sheetText.includes('B(2,6)') ||
+    !sheetText.includes('C(7,6)')
+  ) return;
+
+  // Rectangle is 5×4.
+  setCalcFinals(cardByHeading(root, 'א. משלימים את הקודקוד החסר'), ['18', '20']);
+}
+
+function hydrateSquaresPractice(root: ParentNode): void {
+  const sheetText = normalizedText(root.querySelector('.sheet'));
+  if (
+    !sheetText.includes('ריבוע ברביע הראשון') ||
+    !sheetText.includes('יישום משולב של כל הכללים')
+  ) return;
+
+  // A(2,1),B(6,1),C(6,5): side 4.
+  setCalcFinals(cardByHeading(root, 'משלימים ריבוע'), ['16', '16']);
+  // Lower-left (1,2), side 3.
+  setCalcFinals(cardByHeading(root, 'ריבוע מתיאור'), ['12', '9']);
+
+  // Path from P(1,1): 5 right + 4 up + 2 left + 3 down = 14;
+  // final x is 4, which is 3 greater than the starting x=1.
+  const summary = cardByHeading(root, 'משימת סיכום');
+  setLastLooseNumbers(summary, ['14', '3']);
+}
+
+function hydrateShapeClaims(root: ParentNode): void {
+  const sheetText = normalizedText(root.querySelector('.sheet'));
+  if (!sheetText.includes('טענות על נקודות, הזזות ושטחים')) return;
+
+  // First rectangle 6×2 => perimeter 16, area 12.
+  setCalcFinals(cardByHeading(root, 'ג. המלבן הראשון'), ['16', '12']);
+  // Second rectangle 4×3 => perimeter 14, area 12.
+  setCalcFinals(cardByHeading(root, 'ד. המלבן השני'), ['14', '12']);
+}
+
 /** Deterministic LMS-only geometry answers derived from canonical coordinates. */
 export function hydrateDigitalGeometryAnswers(root: ParentNode): void {
   hydratePlotShape(root);
   hydrateRectanglesIntro(root);
+  hydrateSquaresSummary(root);
+  hydrateSquaresPractice(root);
+  hydrateShapeClaims(root);
 }
