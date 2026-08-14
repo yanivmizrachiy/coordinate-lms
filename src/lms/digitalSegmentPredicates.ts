@@ -31,7 +31,7 @@ export function segmentPredicateRuleForCoverage(
   if (
     text.includes('שתי נקודות') &&
     text.includes('זהה') &&
-    /שיעור(?: ה־)?y/.test(text)
+    /שיעור(?: ה־)?\s*y/.test(text)
   ) {
     return 'same-y-coordinate-pairs';
   }
@@ -39,7 +39,7 @@ export function segmentPredicateRuleForCoverage(
   if (
     text.includes('שתי נקודות') &&
     text.includes('זהה') &&
-    /שיעור(?: ה־)?x/.test(text)
+    /שיעור(?: ה־)?\s*x/.test(text)
   ) {
     return 'same-x-coordinate-pairs';
   }
