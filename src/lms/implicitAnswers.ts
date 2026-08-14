@@ -3,6 +3,7 @@ import { hydrateDigitalDeterministicAnswers } from './digitalDeterministicAnswer
 import { hydrateDigitalExplanationChoices } from './digitalExplanationChoices';
 import { hydrateDigitalGeometryAnswers } from './digitalGeometryAnswers';
 import { hydrateDigitalGraphAnswers } from './digitalGraphAnswers';
+import { hydrateDigitalLifePredicates } from './digitalLifePredicates';
 import { hydrateDigitalLinearFacts } from './digitalLinearFacts';
 import { hydrateDigitalOneStepAnswers } from './digitalOneStepAnswers';
 import { hydrateDigitalPredicates } from './digitalPredicates';
@@ -14,12 +15,9 @@ import type { AnswerKey } from './types';
 
 function parseAnswers(raw: string | undefined): string[] {
   if (!raw) return [];
-
   try {
     const parsed = JSON.parse(raw) as unknown;
-
     if (!Array.isArray(parsed)) return [];
-
     return parsed
       .filter((value): value is string => typeof value === 'string')
       .map((value) => value.trim())
@@ -31,34 +29,15 @@ function parseAnswers(raw: string | undefined): string[] {
 
 function answerFromAria(target: HTMLElement): string[] {
   const aria = target.getAttribute('aria-label')?.trim() || '';
-  const match = aria.match(
-    /(?:מקום\s+)?להשלמת\s+(?:המילה|האות|המספר)\s+(.+)$/,
-  );
-
-  return match?.[1]?.trim()
-    ? [match[1].trim()]
-    : [];
+  const match = aria.match(/(?:מקום\s+)?להשלמת\s+(?:המילה|האות|המספר)\s+(.+)$/);
+  return match?.[1]?.trim() ? [match[1].trim()] : [];
 }
 
-/**
- * One preparation point for the digital layer. It captures explicit canonical
- * answer metadata, hydrates reviewed deterministic answers from canonical task
- * wording, adds pedagogical explanation choices, mathematical predicates, and
- * touch-first point marking. None of these steps edit the printable source.
- */
-export function hydrateExplicitAuthoringAnswers(
-  root: ParentNode,
-): () => void {
-  for (const target of root.querySelectorAll<HTMLElement>(
-    '.word-blank[aria-label]',
-  )) {
+export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
+  for (const target of root.querySelectorAll<HTMLElement>('.word-blank[aria-label]')) {
     if (target.dataset['lmsAnswers']) continue;
-
     const answers = answerFromAria(target);
-
-    if (answers.length > 0) {
-      target.dataset['lmsAnswers'] = JSON.stringify(answers);
-    }
+    if (answers.length > 0) target.dataset['lmsAnswers'] = JSON.stringify(answers);
   }
 
   hydrateDigitalCanonicalAnswers(root);
@@ -72,10 +51,12 @@ export function hydrateExplicitAuthoringAnswers(
   const cleanupPredicates = hydrateDigitalPredicates(root);
   const cleanupSegments = hydrateDigitalSegmentPredicates(root);
   const cleanupRectangles = hydrateDigitalRectanglePredicates(root);
+  const cleanupLife = hydrateDigitalLifePredicates(root);
   const cleanupPointPickers = hydrateGridPointPickers(root);
 
   return () => {
     cleanupPointPickers();
+    cleanupLife();
     cleanupRectangles();
     cleanupSegments();
     cleanupPredicates();
@@ -83,36 +64,17 @@ export function hydrateExplicitAuthoringAnswers(
   };
 }
 
-/**
- * Reads answers that the canonical worksheet already states explicitly or that
- * the reviewed digital-only layer encodes as a deterministic mathematical
- * predicate or pedagogically reviewed choice. It never guesses from prose.
- */
-export function implicitAnswerKey(
-  pageNumber: number,
-): AnswerKey {
+export function implicitAnswerKey(pageNumber: number): AnswerKey {
   if (typeof document === 'undefined') return {};
-
   const prefix = 'p' + String(pageNumber) + '-q';
   const key: AnswerKey = {};
 
-  for (const target of document.querySelectorAll<HTMLElement>(
-    '[data-lms-qid]',
-  )) {
+  for (const target of document.querySelectorAll<HTMLElement>('[data-lms-qid]')) {
     const qid = target.dataset['lmsQid'];
-
     if (!qid || !qid.startsWith(prefix)) continue;
-
-    const explicit = parseAnswers(
-      target.dataset['lmsAnswers'],
-    );
-    const inferred = explicit.length > 0
-      ? explicit
-      : answerFromAria(target);
-
-    if (inferred.length > 0) {
-      key[qid] = inferred;
-    }
+    const explicit = parseAnswers(target.dataset['lmsAnswers']);
+    const inferred = explicit.length > 0 ? explicit : answerFromAria(target);
+    if (inferred.length > 0) key[qid] = inferred;
   }
 
   return key;
