@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T15:49:52.090Z",
+  "generatedAt": "2026-08-14T15:53:17.462Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -6496,10 +6496,12 @@
           "targetId": "p33-q5",
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-y-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -6507,10 +6509,12 @@
           "targetId": "p33-q6",
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-y-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -6518,10 +6522,12 @@
           "targetId": "p33-q7",
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-y-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -6529,10 +6535,12 @@
           "targetId": "p33-q8",
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-y-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -6567,10 +6575,12 @@
           "targetId": "p33-q11",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -6578,10 +6588,12 @@
           "targetId": "p33-q12",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -6589,10 +6601,12 @@
           "targetId": "p33-q13",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -6600,10 +6614,12 @@
           "targetId": "p33-q14",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -9841,10 +9857,12 @@
           "targetId": "p46-q5",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -9852,10 +9870,12 @@
           "targetId": "p46-q6",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -9863,10 +9883,12 @@
           "targetId": "p46-q7",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -9874,10 +9896,12 @@
           "targetId": "p46-q8",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -10532,10 +10556,12 @@
           "targetId": "p49-q14",
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-y-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -10543,10 +10569,12 @@
           "targetId": "p49-q15",
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-y-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -10554,10 +10582,12 @@
           "targetId": "p49-q16",
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-y-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -10565,10 +10595,12 @@
           "targetId": "p49-q17",
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-y-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-y-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
         }
       ]
@@ -13553,10 +13585,12 @@
           "targetId": "p63-q12",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -13564,10 +13598,12 @@
           "targetId": "p63-q13",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -13575,10 +13611,12 @@
           "targetId": "p63-q14",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -13586,10 +13624,12 @@
           "targetId": "p63-q15",
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
         }
       ]

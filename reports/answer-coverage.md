@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T15:49:52.090Z
+Generated: 2026-08-14T15:53:17.462Z
 
-Overall: 999/1162 safely checkable targets (86%).
+Overall: 1019/1162 safely checkable targets (87.7%).
 
 ## Classification totals
 
@@ -10,9 +10,9 @@ Overall: 999/1162 safely checkable targets (86%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 268 |
-| deterministic-mathematical | 545 |
+| deterministic-mathematical | 565 |
 | valid-range | 6 |
-| open-ended | 118 |
+| open-ended | 98 |
 | ambiguous | 45 |
 | unsupported | 0 |
 | missing | 0 |
@@ -705,7 +705,7 @@ No detected interactive response targets.
 
 ### Page 33 — מרחק נקודה מהצירים
 
-8/17 safely checkable (47.1%).
+16/17 safely checkable (94.1%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -713,16 +713,16 @@ No detected interactive response targets.
 | p33-q2 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | כדי להגיע אל ציר […] משנים את שיעור y ל־0. |
 | p33-q3 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי הנקודות E(2,5) ו־F(7,5) יש שיעור […] זהה. |
 | p33-q4 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | EF=7 − 2=[…]יח' |
-| p33-q5 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
-| p33-q6 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
-| p33-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
-| p33-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
+| p33-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
+| p33-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
+| p33-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
+| p33-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q9 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי הנקודות G(4,1) ו־H(4,6) יש שיעור […] זהה, ולכן הקטע GH מקביל לציר y. |
 | p33-q10 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | GH=6 − 1=[…]יח' |
-| p33-q11 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p33-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p33-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p33-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p33-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p33-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p33-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p33-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q15 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | אורי חישב את המרחק בין (2,5) ובין (7,5) וקיבל 9 — הוא […] את שני ערכי ה־x במקום לחסר אותם. תרגיל החיסור הנכון: |
 | p33-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 7 − 2=[…]יח' |
 | p33-q17 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
@@ -1046,7 +1046,7 @@ No detected interactive response targets.
 
 ### Page 46 — קטעים מקבילים לצירים
 
-11/16 safely checkable (68.8%).
+15/16 safely checkable (93.8%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1054,10 +1054,10 @@ No detected interactive response targets.
 | p46-q2 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות A ו־B יש שיעור […] זהה, והוא […]. |
 | p46-q3 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לכן הקטע AB מקביל לציר […]. |
 | p46-q4 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות B ו־C יש שיעור y זהה, והוא […]. |
-| p46-q5 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p46-q6 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p46-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p46-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p46-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p46-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p46-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p46-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p46-q9 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לשתי נקודות שיש להן שיעור x זהה, הקטע שביניהן מקביל לציר […]. |
 | p46-q10 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות P(4,1) ו־Q(4,6) יש שיעור […] זהה, ולכן הקטע PQ מקביל לציר y. |
 | p46-q11 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הקטע RS מקביל לציר […], כי בשתי הנקודות שעליו שיעור ה־y זהה. |
@@ -1110,7 +1110,7 @@ No detected interactive response targets.
 
 ### Page 49 — קטעים מקבילים לצירים
 
-13/17 safely checkable (76.5%).
+17/17 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1127,10 +1127,10 @@ No detected interactive response targets.
 | p49-q11 | word:concept | canonical-metadata-derived | yes | explicit canonical authoring label | מה קיבלתם? […] |
 | p49-q12 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי הנקודות שהקפתם בסעיף ב יש שיעור y זהה, ולכן הקטע שביניהן מקביל לציר […]. |
 | p49-q13 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | בכל הנקודות שהקפתם שיעור ה־x הוא […], ולכן כולן ממוקמות על קו אחד עם הנקודה (4,2). |
-| p49-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
-| p49-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
-| p49-q16 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
-| p49-q17 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
+| p49-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
+| p49-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
+| p49-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
+| p49-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 
 ### Page 50 — קטעים מקבילים לצירים
 
@@ -1439,7 +1439,7 @@ No detected interactive response targets.
 
 ### Page 63 — מפת הפארק — כל עצם הוא נקודה
 
-11/15 safely checkable (73.3%).
+15/15 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1454,10 +1454,10 @@ No detected interactive response targets.
 | p63-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AF=[…]=[…]יח' |
 | p63-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AF=[…]=[…]יח' |
 | p63-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AF=[…]יח' |
-| p63-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p63-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p63-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
-| p63-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p63-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p63-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p63-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
+| p63-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 
 ### Page 64 — מסלולים במפת הפארק
 
