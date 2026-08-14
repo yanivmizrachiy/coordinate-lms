@@ -6,6 +6,7 @@ import {
   runTransaction,
   setDoc,
 } from 'firebase/firestore';
+import { TOTAL_PAGES } from '../data/workbook';
 import {
   currentSession,
   isAdminSession,
@@ -32,6 +33,7 @@ const RESULTS_KEY = 'coordinate_lms_results_v2';
 const ACTIVITY_KEY = 'coordinate_lms_activity_v2';
 const ANSWER_KEYS_KEY = 'coordinate_lms_answer_keys_v2';
 const SYNC_ERRORS_KEY = 'coordinate_lms_sync_errors_v2';
+const LEGACY_GUEST_UID = 'guest';
 
 const CENTRAL_SAVE_ERROR =
   'השמירה במכשיר הצליחה, אבל הסנכרון המרכזי נכשל. בדקו את החיבור ונסו שוב.';
@@ -61,6 +63,66 @@ function compoundKey(uid: string, pageNumber: number): string {
   return uid + ':' + String(pageNumber);
 }
 
+function activeSessionOwns(uid: string): boolean {
+  const session = currentSession();
+  return Boolean(session && session.uid === uid && uid !== LEGACY_GUEST_UID);
+}
+
+function noSaveOutcome(): PersistenceOutcome {
+  return {
+    localSaved: false,
+    central: 'not-required',
+  };
+}
+
+function purgeLegacyGuestData(): void {
+  const drafts = loadMap<PageDraft>(DRAFTS_KEY);
+  const results = loadMap<PageResult>(RESULTS_KEY);
+  const errors = loadMap<SyncErrorRecord>(SYNC_ERRORS_KEY);
+
+  let draftsChanged = false;
+  for (const key of Object.keys(drafts)) {
+    if (key.startsWith(LEGACY_GUEST_UID + ':')) {
+      delete drafts[key];
+      draftsChanged = true;
+    }
+  }
+  if (draftsChanged) saveMap(DRAFTS_KEY, drafts);
+
+  let resultsChanged = false;
+  for (const key of Object.keys(results)) {
+    if (key.startsWith(LEGACY_GUEST_UID + ':')) {
+      delete results[key];
+      resultsChanged = true;
+    }
+  }
+  if (resultsChanged) saveMap(RESULTS_KEY, results);
+
+  let errorsChanged = false;
+  for (const [key, error] of Object.entries(errors)) {
+    if (error.uid === LEGACY_GUEST_UID || key.startsWith(LEGACY_GUEST_UID + ':')) {
+      delete errors[key];
+      errorsChanged = true;
+    }
+  }
+  if (errorsChanged) saveMap(SYNC_ERRORS_KEY, errors);
+
+  const activity = safeParse<ActivityEvent[]>(
+    localStorage.getItem(ACTIVITY_KEY),
+    [],
+  );
+  const registeredOnly = activity.filter(
+    (event) => event.uid !== LEGACY_GUEST_UID,
+  );
+  if (registeredOnly.length !== activity.length) {
+    localStorage.setItem(ACTIVITY_KEY, JSON.stringify(registeredOnly));
+  }
+}
+
+if (typeof localStorage !== 'undefined') {
+  purgeLegacyGuestData();
+}
+
 function maxAttemptCount(
   questions: Record<string, QuestionProgress> | Record<string, number>,
 ): number {
@@ -78,14 +140,18 @@ function assertAttemptCount(value: number): void {
   }
 }
 
-function validateDraft(draft: PageDraft): PageDraft {
+function assertPageNumber(pageNumber: number): void {
   if (
-    !Number.isInteger(draft.pageNumber) ||
-    draft.pageNumber < 1 ||
-    draft.pageNumber > 77
+    !Number.isInteger(pageNumber) ||
+    pageNumber < 1 ||
+    pageNumber > TOTAL_PAGES
   ) {
     throw new Error('מספר עמוד לא תקין.');
   }
+}
+
+function validateDraft(draft: PageDraft): PageDraft {
+  assertPageNumber(draft.pageNumber);
   for (const progress of Object.values(draft.questions)) {
     assertAttemptCount(progress.attempts);
   }
@@ -96,13 +162,7 @@ function validateDraft(draft: PageDraft): PageDraft {
 }
 
 function validateResult(result: PageResult): PageResult {
-  if (
-    !Number.isInteger(result.pageNumber) ||
-    result.pageNumber < 1 ||
-    result.pageNumber > 77
-  ) {
-    throw new Error('מספר עמוד לא תקין.');
-  }
+  assertPageNumber(result.pageNumber);
   if (!Number.isInteger(result.score) || result.score < 1 || result.score > 100) {
     throw new Error('הציון חייב להיות מספר שלם בין 1 ל־100.');
   }
@@ -198,6 +258,7 @@ function syncErrorKey(record: Pick<SyncErrorRecord, 'uid' | 'pageNumber' | 'oper
 }
 
 function recordSyncError(record: SyncErrorRecord): void {
+  if (record.uid === LEGACY_GUEST_UID) return;
   const errors = loadMap<SyncErrorRecord>(SYNC_ERRORS_KEY);
   errors[syncErrorKey(record)] = record;
   saveMap(SYNC_ERRORS_KEY, errors);
@@ -208,6 +269,7 @@ function clearSyncError(
   pageNumber: number,
   operation: SyncErrorRecord['operation'],
 ): void {
+  if (uid === LEGACY_GUEST_UID) return;
   const errors = loadMap<SyncErrorRecord>(SYNC_ERRORS_KEY);
   delete errors[syncErrorKey({ uid, pageNumber, operation })];
   saveMap(SYNC_ERRORS_KEY, errors);
@@ -215,6 +277,7 @@ function clearSyncError(
 
 export function loadSyncErrors(uid?: string): SyncErrorRecord[] {
   return Object.values(loadMap<SyncErrorRecord>(SYNC_ERRORS_KEY))
+    .filter((record) => record.uid !== LEGACY_GUEST_UID)
     .filter((record) => !uid || record.uid === uid)
     .sort((a, b) => b.createdAt - a.createdAt);
 }
@@ -248,12 +311,14 @@ export async function loadDraft(
   uid: string,
   pageNumber: number,
 ): Promise<PageDraft | null> {
+  if (!activeSessionOwns(uid)) return null;
+  assertPageNumber(pageNumber);
+
   const localDrafts = loadMap<PageDraft>(DRAFTS_KEY);
   const local = localDrafts[compoundKey(uid, pageNumber)];
-
   const session = currentSession();
 
-  if (db && session && session.uid === uid && uid !== 'guest') {
+  if (db && session && session.uid === uid) {
     try {
       const snapshot = await getDoc(
         doc(
@@ -285,6 +350,8 @@ export async function loadDraft(
 export async function saveDraft(
   draft: PageDraft,
 ): Promise<PersistenceOutcome> {
+  if (!activeSessionOwns(draft.uid)) return noSaveOutcome();
+
   const validated = validateDraft(draft);
   const localDrafts = loadMap<PageDraft>(DRAFTS_KEY);
   const key = compoundKey(validated.uid, validated.pageNumber);
@@ -294,12 +361,7 @@ export async function saveDraft(
 
   const session = currentSession();
 
-  if (
-    db &&
-    session &&
-    session.uid === draft.uid &&
-    draft.uid !== 'guest'
-  ) {
+  if (db && session && session.uid === draft.uid) {
     try {
       const reference = doc(
         db,
@@ -327,6 +389,8 @@ export async function saveDraft(
 export async function savePageResult(
   result: PageResult,
 ): Promise<PersistenceOutcome> {
+  if (!activeSessionOwns(result.uid)) return noSaveOutcome();
+
   const validated = validateResult(result);
   const localResults = loadMap<PageResult>(RESULTS_KEY);
   const key = compoundKey(validated.uid, validated.pageNumber);
@@ -336,12 +400,7 @@ export async function savePageResult(
 
   const session = currentSession();
 
-  if (
-    db &&
-    session &&
-    session.uid === result.uid &&
-    result.uid !== 'guest'
-  ) {
+  if (db && session && session.uid === result.uid) {
     try {
       const reference = doc(
         db,
@@ -369,6 +428,9 @@ export async function savePageResult(
 export async function logActivity(
   event: ActivityEvent,
 ): Promise<PersistenceOutcome> {
+  if (!activeSessionOwns(event.uid)) return noSaveOutcome();
+
+  assertPageNumber(event.pageNumber);
   const eventId =
     event.id ||
     [
@@ -398,12 +460,7 @@ export async function logActivity(
 
   const session = currentSession();
 
-  if (
-    db &&
-    session &&
-    session.uid === event.uid &&
-    event.uid !== 'guest'
-  ) {
+  if (db && session && session.uid === event.uid) {
     try {
       await setDoc(
         doc(db, 'students', event.uid, 'activity', eventId),
@@ -421,6 +478,7 @@ export async function logActivity(
 export async function loadAnswerKey(
   pageNumber: number,
 ): Promise<AnswerKey> {
+  assertPageNumber(pageNumber);
   const defaults = DEFAULT_ANSWER_KEYS[pageNumber] || {};
   const proven = provenAnswerKey(pageNumber);
   const implicit = implicitAnswerKey(pageNumber);
@@ -463,6 +521,7 @@ export async function saveAnswerKey(
   if (!isAdminSession()) {
     throw new Error('רק מנהל יכול לשמור מפתח תשובות.');
   }
+  assertPageNumber(pageNumber);
 
   const customKeys = loadMap<AnswerKey>(ANSWER_KEYS_KEY);
   customKeys[String(pageNumber)] = key;
@@ -484,85 +543,21 @@ export async function saveAnswerKey(
   }
 }
 
-export interface GuestProgressClaim {
-  complete: boolean;
-  outcomes: PersistenceOutcome[];
-}
-
-export function canFinalizeGuestTransfer(
-  outcomes: PersistenceOutcome[],
-): boolean {
-  return outcomes.every((outcome) => outcome.central !== 'failed');
-}
-
-export async function claimGuestProgress(
-  uid: string,
-): Promise<GuestProgressClaim> {
-  const drafts = loadMap<PageDraft>(DRAFTS_KEY);
-  const results = loadMap<PageResult>(RESULTS_KEY);
-  const outcomes: PersistenceOutcome[] = [];
-
-  const guestDraftKey = compoundKey('guest', 1);
-  const guestResultKey = compoundKey('guest', 1);
-
-  const guestDraft = drafts[guestDraftKey];
-  const guestResult = results[guestResultKey];
-
-  if (guestDraft) {
-    const claimedDraft: PageDraft = {
-      ...guestDraft,
-      uid,
-      updatedAt: Date.now(),
-    };
-
-    outcomes.push(await saveDraft(claimedDraft));
-  }
-
-  if (guestResult) {
-    const claimedResult: PageResult = {
-      ...guestResult,
-      uid,
-    };
-
-    outcomes.push(await savePageResult(claimedResult));
-  }
-
-  const complete = canFinalizeGuestTransfer(outcomes);
-  if (complete) {
-    const latestDrafts = loadMap<PageDraft>(DRAFTS_KEY);
-    const latestResults = loadMap<PageResult>(RESULTS_KEY);
-    delete latestDrafts[guestDraftKey];
-    delete latestResults[guestResultKey];
-    saveMap(DRAFTS_KEY, latestDrafts);
-    saveMap(RESULTS_KEY, latestResults);
-    clearSyncError(uid, 1, 'guest-transfer');
-  } else {
-    recordSyncError({
-      uid,
-      pageNumber: 1,
-      operation: 'guest-transfer',
-      createdAt: Date.now(),
-      message:
-        'התקדמות האורח נשמרה במכשיר אך טרם הועברה למערכת המרכזית. נסו שוב לפני המשך העבודה.',
-    });
-  }
-  return { complete, outcomes };
-}
-
 function localDashboard(): DashboardSnapshot {
+  purgeLegacyGuestData();
   const profiles = listLocalProfiles().filter(
     (profile) => profile.role !== 'admin',
   );
   const localResults = Object.values(
     loadMap<PageResult>(RESULTS_KEY),
-  );
+  ).filter((result) => result.uid !== LEGACY_GUEST_UID);
   const localDrafts = Object.values(
     loadMap<PageDraft>(DRAFTS_KEY),
-  );
+  ).filter((draft) => draft.uid !== LEGACY_GUEST_UID);
   const localActivity = safeParse<ActivityEvent[]>(
     localStorage.getItem(ACTIVITY_KEY),
     [],
-  );
+  ).filter((event) => event.uid !== LEGACY_GUEST_UID);
   const syncErrors = loadSyncErrors();
 
   const students: DashboardStudent[] = profiles.map((profile) => ({
@@ -599,8 +594,10 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
     );
 
     const studentDocuments = studentsSnapshot.docs.filter(
-      (studentDocument) =>
-        (studentDocument.data() as DashboardStudent['profile']).role !== 'admin',
+      (studentDocument) => {
+        const profile = studentDocument.data() as DashboardStudent['profile'];
+        return profile.role !== 'admin' && studentDocument.id !== LEGACY_GUEST_UID;
+      },
     );
     const students = await Promise.all(studentDocuments.map(async (studentDocument) => {
       const profile = studentDocument.data() as DashboardStudent['profile'];
@@ -687,12 +684,15 @@ export async function loadPageResult(
   uid: string,
   pageNumber: number,
 ): Promise<PageResult | null> {
+  if (!activeSessionOwns(uid)) return null;
+  assertPageNumber(pageNumber);
+
   const localResults = loadMap<PageResult>(RESULTS_KEY);
   const key = compoundKey(uid, pageNumber);
   const local = localResults[key];
   const session = currentSession();
 
-  if (db && session?.uid === uid && uid !== 'guest') {
+  if (db && session?.uid === uid) {
     try {
       const snapshot = await getDoc(
         doc(db, 'students', uid, 'results', 'page-' + String(pageNumber)),
@@ -717,11 +717,13 @@ export async function loadPageResult(
 export async function loadUserResults(
   uid: string,
 ): Promise<PageResult[]> {
+  if (!activeSessionOwns(uid) && !isAdminSession()) return [];
+
   const localResults = Object.values(
     loadMap<PageResult>(RESULTS_KEY),
-  ).filter((result) => result.uid === uid);
+  ).filter((result) => result.uid === uid && result.uid !== LEGACY_GUEST_UID);
 
-  if (!db || uid === 'guest') {
+  if (!db) {
     return localResults.sort(
       (a, b) => a.pageNumber - b.pageNumber,
     );
@@ -758,11 +760,13 @@ export async function loadUserResults(
 export async function loadUserDrafts(
   uid: string,
 ): Promise<PageDraft[]> {
+  if (!activeSessionOwns(uid) && !isAdminSession()) return [];
+
   const localDrafts = Object.values(
     loadMap<PageDraft>(DRAFTS_KEY),
-  ).filter((draft) => draft.uid === uid);
+  ).filter((draft) => draft.uid === uid && draft.uid !== LEGACY_GUEST_UID);
 
-  if (!db || uid === 'guest') {
+  if (!db) {
     return localDrafts.sort(
       (a, b) => a.pageNumber - b.pageNumber,
     );
