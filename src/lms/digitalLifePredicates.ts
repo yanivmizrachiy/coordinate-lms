@@ -91,9 +91,6 @@ export function deliverySameStreetWithDistanceWorkMatches(
     return false;
   }
 
-  // Restaurant A is at (1,1). A new address on the same street must keep y=1
-  // and be a different point. The written subtraction must be larger x minus
-  // smaller x, and both numeric answers must equal that horizontal distance.
   if (y !== 1 || x === 1) return false;
   const highX = Math.max(x, 1);
   const lowX = Math.min(x, 1);
@@ -203,11 +200,14 @@ function bindPointAndDistanceCard(
   if (!card) return null;
 
   const coordinates = Array.from(card.querySelectorAll<HTMLElement>('.pair-blank'));
-  const distances = Array.from(card.querySelectorAll<HTMLElement>('.blank[data-missing="number"]'));
-  if (coordinates.length !== 2 || distances.length !== 1) return null;
+  const numberTargets = Array.from(
+    card.querySelectorAll<HTMLElement>('.blank[data-missing="number"]'),
+  );
+  const distance = numberTargets.at(-1);
+  if (coordinates.length !== 2 || !distance) return null;
   return createBinding(
     proxyHost,
-    [...coordinates, ...distances],
+    [...coordinates, distance],
     rule,
     'בדיקה מתמטית של הנקודה שנבחרה והמרחק ממנה',
   );
@@ -233,7 +233,6 @@ function bindDeliveryCard(
   );
 }
 
-/** Adds atomic LMS-only grading to real-life learner-choice tasks. */
 export function hydrateDigitalLifePredicates(root: ParentNode): () => void {
   if ((root as Node).nodeType === 9) return () => undefined;
   const proxyHost = root.querySelector<HTMLElement>('.sheet') ||
