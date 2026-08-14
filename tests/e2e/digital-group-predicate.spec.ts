@@ -14,14 +14,35 @@ async function clickGridPoint(
   y: number,
 ): Promise<void> {
   const svg = grid.locator('svg');
-  const box = await svg.boundingBox();
+  await expect(svg).toBeVisible();
+
+  // The workbook fits the A4 sheet shortly after mount. A raw mouse click based
+  // on an earlier bounding box can therefore land outside the grid while that
+  // fit settles. Wait until the SVG geometry is stable, then let Playwright
+  // perform a real actionability-checked click inside the SVG.
+  let box = await svg.boundingBox();
   if (!box) throw new Error('coordinate grid is not visible');
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    await page.waitForTimeout(100);
+    const next = await svg.boundingBox();
+    if (!next) throw new Error('coordinate grid is not visible');
+    const stable =
+      Math.abs(next.x - box.x) < 0.5 &&
+      Math.abs(next.y - box.y) < 0.5 &&
+      Math.abs(next.width - box.width) < 0.5 &&
+      Math.abs(next.height - box.height) < 0.5;
+    box = next;
+    if (stable) break;
+  }
+
   const viewX = 56 + x * ((560 - 56 - 104) / 8);
   const viewY = 380 - 82 - y * ((380 - 70 - 82) / 6);
-  await page.mouse.click(
-    box.x + (viewX / 560) * box.width,
-    box.y + (viewY / 380) * box.height,
-  );
+  await svg.click({
+    position: {
+      x: (viewX / 560) * box.width,
+      y: (viewY / 380) * box.height,
+    },
+  });
 }
 
 async function checkAll(page: Page): Promise<void> {
