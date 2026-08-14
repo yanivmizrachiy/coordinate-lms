@@ -7,6 +7,8 @@ export type DigitalGroupRule =
   | 'point-above-and-right'
   | 'point-on-x-right-of-5'
   | 'point-right-of-2-below-6'
+  | 'same-weight-package-pairs'
+  | 'same-price-package-pairs'
   | 'nonnegative-number';
 
 interface PredicateBinding {
@@ -38,6 +40,29 @@ function firstQuadrantPoint(values: readonly string[]): [number, number] | null 
   return x >= 0 && y >= 0 ? [x, y] : null;
 }
 
+function normalizedLabel(raw: string): string | null {
+  const label = raw.trim().toUpperCase();
+  return /^[A-F]$/.test(label) ? label : null;
+}
+
+function unorderedPairKey(a: string, b: string): string | null {
+  const left = normalizedLabel(a);
+  const right = normalizedLabel(b);
+  if (!left || !right || left === right) return null;
+  return [left, right].sort().join('');
+}
+
+function matchesTwoUnorderedPairs(
+  values: readonly string[],
+  expectedPairKeys: readonly string[],
+): boolean {
+  if (values.length !== 4) return false;
+  const first = unorderedPairKey(values[0] || '', values[1] || '');
+  const second = unorderedPairKey(values[2] || '', values[3] || '');
+  if (!first || !second || first === second) return false;
+  return [first, second].sort().join('|') === [...expectedPairKeys].sort().join('|');
+}
+
 export function evaluateDigitalGroupRule(
   rule: DigitalGroupRule,
   values: readonly string[],
@@ -46,6 +71,17 @@ export function evaluateDigitalGroupRule(
     if (values.length !== 1) return false;
     const value = finiteNumber(values[0] || '');
     return value !== null && value >= 0;
+  }
+
+  if (rule === 'same-weight-package-pairs') {
+    // On the canonical graph B/C both have x=3 and D/E both have x=6.
+    // Either pair may be written first and either label may be written first.
+    return matchesTwoUnorderedPairs(values, ['BC', 'DE']);
+  }
+
+  if (rule === 'same-price-package-pairs') {
+    // A/B both have y=5 and D/F both have y=4.
+    return matchesTwoUnorderedPairs(values, ['AB', 'DF']);
   }
 
   if (rule === 'distinct-coordinate-pairs') {
@@ -218,6 +254,28 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
           targets,
           'distinct-coordinate-pairs',
           'בדיקה מתמטית של שתי הנקודות שנבחרו',
+          ordinal,
+        );
+        if (binding) bindings.push(binding);
+      }
+    }
+
+    for (const item of card.querySelectorAll<HTMLElement>('li')) {
+      const context = normalizedText(item);
+      const blanks = Array.from(item.querySelectorAll<HTMLElement>('.blank'));
+      let rule: DigitalGroupRule | null = null;
+      if (blanks.length === 4 && context.includes('באותו משקל')) {
+        rule = 'same-weight-package-pairs';
+      } else if (blanks.length === 4 && context.includes('באותו מחיר')) {
+        rule = 'same-price-package-pairs';
+      }
+      if (rule) {
+        ordinal += 1;
+        const binding = bindGroupPredicate(
+          proxyHost,
+          blanks,
+          rule,
+          'בדיקה של שני זוגות החבילות ללא תלות בסדר הכתיבה',
           ordinal,
         );
         if (binding) bindings.push(binding);
