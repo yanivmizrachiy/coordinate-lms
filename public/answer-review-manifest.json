@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T16:32:43.407Z",
+  "generatedAt": "2026-08-14T16:34:06.244Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -12912,10 +12912,12 @@
           "targetId": "p59-q16",
           "signature": "a1d66f9a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:phone-same-column-with-distance",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:phone-same-column-with-distance"
+          ],
           "context": "סמנו על הסרטוט את המקום שבו הייתם שמים אפליקציה חדשה, כך שתהיה באותה עמודה של אפליקציית המפות: ([…],[…])."
         },
         {
@@ -12923,10 +12925,12 @@
           "targetId": "p59-q17",
           "signature": "fd3086ec",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:phone-same-column-with-distance",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:phone-same-column-with-distance"
+          ],
           "context": "המרחק בין האפליקציה שסימנתם ובין אפליקציית המפות הוא […] יח'."
         }
       ]
@@ -13100,10 +13104,12 @@
           "targetId": "p60-q13",
           "signature": "08de6460",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:hall-seat-above-noa-with-distance",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:hall-seat-above-noa-with-distance"
+          ],
           "context": "על הכרטיס שלכם יהיה כתוב ([…],[…])."
         },
         {
@@ -13111,10 +13117,12 @@
           "targetId": "p60-q14",
           "signature": "08de6460",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:hall-seat-above-noa-with-distance",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:hall-seat-above-noa-with-distance"
+          ],
           "context": "על הכרטיס שלכם יהיה כתוב ([…],[…])."
         },
         {
@@ -13122,10 +13130,12 @@
           "targetId": "p60-q15",
           "signature": "0bab69c9",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:hall-seat-above-noa-with-distance",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:hall-seat-above-noa-with-distance"
+          ],
           "context": "מהכיסא שבחרתם עד הכיסא של נועה יש הפרש של […] שורות."
         }
       ]

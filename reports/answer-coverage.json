@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T16:32:43.407Z",
+  "generatedAt": "2026-08-14T16:34:06.244Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1056,
-  "coveragePercentage": 90.9,
+  "automaticallyCheckableTargets": 1061,
+  "coveragePercentage": 91.3,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 270,
-    "deterministic-mathematical": 600,
+    "deterministic-mathematical": 605,
     "valid-range": 6,
-    "open-ended": 82,
+    "open-ended": 77,
     "ambiguous": 24,
     "unsupported": 0,
     "missing": 0
@@ -15236,11 +15236,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על הסרטוט את המקום שבו הייתם שמים אפליקציה חדשה, כך שתהיה באותה עמודה של אפליקציית המפות: ([…],[…]).",
           "signature": "a1d66f9a",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:phone-same-column-with-distance",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:phone-same-column-with-distance"
+          ]
         },
         {
           "targetId": "p59-q17",
@@ -15248,19 +15250,18 @@
           "inputType": "text:number",
           "context": "המרחק בין האפליקציה שסימנתם ובין אפליקציית המפות הוא […] יח'.",
           "signature": "fd3086ec",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:phone-same-column-with-distance",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:phone-same-column-with-distance"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p59-q16",
-        "p59-q17"
-      ],
-      "automaticallyCheckableTargets": 15,
-      "coveragePercentage": 88.2
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 17,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 60,
@@ -15462,11 +15463,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "על הכרטיס שלכם יהיה כתוב ([…],[…]).",
           "signature": "08de6460",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:hall-seat-above-noa-with-distance",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:hall-seat-above-noa-with-distance"
+          ]
         },
         {
           "targetId": "p60-q14",
@@ -15474,11 +15477,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "על הכרטיס שלכם יהיה כתוב ([…],[…]).",
           "signature": "08de6460",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:hall-seat-above-noa-with-distance",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:hall-seat-above-noa-with-distance"
+          ]
         },
         {
           "targetId": "p60-q15",
@@ -15486,20 +15491,18 @@
           "inputType": "text:number",
           "context": "מהכיסא שבחרתם עד הכיסא של נועה יש הפרש של […] שורות.",
           "signature": "0bab69c9",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:hall-seat-above-noa-with-distance",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:hall-seat-above-noa-with-distance"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p60-q13",
-        "p60-q14",
-        "p60-q15"
-      ],
-      "automaticallyCheckableTargets": 12,
-      "coveragePercentage": 80
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 15,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 61,

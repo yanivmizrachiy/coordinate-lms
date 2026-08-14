@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T16:32:43.407Z
+Generated: 2026-08-14T16:34:06.244Z
 
-Overall: 1056/1162 safely checkable targets (90.9%).
+Overall: 1061/1162 safely checkable targets (91.3%).
 
 ## Classification totals
 
@@ -10,9 +10,9 @@ Overall: 1056/1162 safely checkable targets (90.9%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 270 |
-| deterministic-mathematical | 600 |
+| deterministic-mathematical | 605 |
 | valid-range | 6 |
-| open-ended | 82 |
+| open-ended | 77 |
 | ambiguous | 24 |
 | unsupported | 0 |
 | missing | 0 |
@@ -1351,7 +1351,7 @@ No detected interactive response targets.
 
 ### Page 59 — מסך הטלפון הוא מערכת צירים
 
-15/17 safely checkable (88.2%).
+17/17 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1370,12 +1370,12 @@ No detected interactive response targets.
 | p59-q13 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | חבר אמר לי „האפליקציה ב־(2,6)”, ואני חיפשתי ב־(6,2) ולא מצאתי. הוא התכוון לעמודה 2 ולשורה […]. |
 | p59-q14 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | שני הזוגות בנויים מאותם מספרים, אבל ה[…] שלהם שונה, ולכן הם שני מקומות שונים על המסך. |
 | p59-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על הסרטוט את המקום שבו הייתם שמים אפליקציה חדשה, כך שתהיה באותה עמודה של אפליקציית המפות: ([…],[…]). |
-| p59-q16 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט את המקום שבו הייתם שמים אפליקציה חדשה, כך שתהיה באותה עמודה של אפליקציית המפות: ([…],[…]). |
-| p59-q17 | text:number | open-ended | no | teacher judgment required | המרחק בין האפליקציה שסימנתם ובין אפליקציית המפות הוא […] יח'. |
+| p59-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט את המקום שבו הייתם שמים אפליקציה חדשה, כך שתהיה באותה עמודה של אפליקציית המפות: ([…],[…]). |
+| p59-q17 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | המרחק בין האפליקציה שסימנתם ובין אפליקציית המפות הוא […] יח'. |
 
 ### Page 60 — שורה ומקום — הכרטיס שלכם
 
-12/15 safely checkable (80%).
+15/15 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1391,9 +1391,9 @@ No detected interactive response targets.
 | p60-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 4 − 2=[…]שורות |
 | p60-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p60-q12 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p60-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | על הכרטיס שלכם יהיה כתוב ([…],[…]). |
-| p60-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | על הכרטיס שלכם יהיה כתוב ([…],[…]). |
-| p60-q15 | text:number | open-ended | no | teacher judgment required | מהכיסא שבחרתם עד הכיסא של נועה יש הפרש של […] שורות. |
+| p60-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | על הכרטיס שלכם יהיה כתוב ([…],[…]). |
+| p60-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | על הכרטיס שלכם יהיה כתוב ([…],[…]). |
+| p60-q15 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | מהכיסא שבחרתם עד הכיסא של נועה יש הפרש של […] שורות. |
 
 ### Page 61 — פיקסלים — כל מסך הוא מערכת צירים
 
