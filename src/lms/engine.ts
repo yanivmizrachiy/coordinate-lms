@@ -12,7 +12,6 @@ import {
 } from './repository';
 import { calculatePageScore } from './scoring';
 import { answersMatch } from './answerValidation';
-import { acceptImmediateCorrectAnswer } from './liveFeedback';
 import { runSynchronizationRetry } from './syncRetry';
 import type {
   ActivityEvent,
@@ -35,6 +34,12 @@ interface CheckSummary {
   keyed: number;
   unkeyed: number;
   remaining: number;
+}
+
+interface InlineCheckUnit {
+  button: HTMLButtonElement;
+  checkTargets: HTMLElement[];
+  feedbackTargets: HTMLElement[];
 }
 
 function targetValue(target: HTMLElement): string {
@@ -203,7 +208,7 @@ export function attachLmsToPage(
   const checkButton = elem('button', {
     class: 'btn btn--ghost',
     type: 'button',
-    text: 'בדיקת תשובות',
+    text: 'בדיקת כל התשובות',
   }) as HTMLButtonElement;
 
   const submitButton = elem('button', {
@@ -267,6 +272,7 @@ export function attachLmsToPage(
   let submissionInFlight = false;
   let checkPromise: Promise<CheckSummary> | null = null;
   const pendingActivity = new Map<string, ActivityEvent>();
+  const inlineCheckUnits: InlineCheckUnit[] = [];
 
   const listeners: Array<{
     target: HTMLElement;
@@ -331,23 +337,13 @@ export function attachLmsToPage(
     }
   }
 
-  function showImmediateCorrectFeedback(
-    target: HTMLElement,
-    qid: string,
-  ): boolean {
-    const progress = progressFor(qid);
+  function expectedAnswersFor(target: HTMLElement): string[] {
+    const qid = target.dataset.lmsQid;
+    if (!qid) return [];
     const storedExpected = answerKey[qid] || [];
-    const expected = storedExpected.length > 0
+    return storedExpected.length > 0
       ? storedExpected
       : inlineExpectedAnswers(target);
-
-    if (!acceptImmediateCorrectAnswer(progress, expected)) {
-      return false;
-    }
-
-    updateTarget(target, progress);
-    target.dataset.lmsFeedback = 'correct';
-    return true;
   }
 
   function rememberOutcome(
@@ -458,18 +454,233 @@ export function attachLmsToPage(
     scoreHost.replaceChildren(
       elem(
         'div',
-        { class: 'lms-score' },
+        {
+          class: 'lms-score',
+          'data-page-score': String(pageNumber),
+        },
         elem('div', {
           class: 'lms-score__circle',
           text: String(score),
-          'aria-label': 'ציון ' + String(score),
+          'aria-label': 'ציון בעמוד ' + String(pageNumber) + ': ' + String(score),
         }),
         elem('div', {
           class: 'lms-score__label',
-          text: 'הציון בעמוד: ' + String(score) + ' מתוך 100',
+          text:
+            'הציון בעמוד ' +
+            String(pageNumber) +
+            ': ' +
+            String(score) +
+            ' מתוך 100',
         }),
       ),
     );
+  }
+
+  function checkTarget(target: HTMLElement): { keyed: boolean; remaining: boolean } {
+    const qid = target.dataset.lmsQid;
+    if (!qid) return { keyed: false, remaining: false };
+
+    const progress = progressFor(qid);
+    const expected = expectedAnswersFor(target);
+
+    if (expected.length === 0) {
+      target.dataset.lmsState = progress.answer ? 'pending' : 'empty';
+      return { keyed: false, remaining: false };
+    }
+
+    if (progress.correct || progress.locked) {
+      updateTarget(target, progress);
+      return { keyed: true, remaining: false };
+    }
+
+    if (!progress.answer.trim()) {
+      target.dataset.lmsState = 'missing';
+      return { keyed: true, remaining: true };
+    }
+
+    progress.attempts += 1;
+    const correct = answersMatch(progress.answer, expected);
+
+    if (correct) {
+      progress.correct = true;
+      target.dataset.lmsFeedback = 'correct';
+    } else if (progress.attempts >= LMS_CONFIG.maxAttempts) {
+      progress.locked = true;
+      delete target.dataset.lmsFeedback;
+    } else {
+      delete target.dataset.lmsFeedback;
+    }
+
+    updateTarget(target, progress);
+    return {
+      keyed: true,
+      remaining: !progress.correct && !progress.locked,
+    };
+  }
+
+  function inlineUnitState(unit: InlineCheckUnit): 'idle' | 'correct' | 'wrong' | 'locked' {
+    const progress = unit.checkTargets
+      .map((target) => target.dataset.lmsQid)
+      .filter((qid): qid is string => Boolean(qid))
+      .map(progressFor);
+
+    if (progress.length === 0) return 'idle';
+    if (progress.every((item) => item.correct)) return 'correct';
+    if (progress.every((item) => item.correct || item.locked)) return 'locked';
+    if (progress.some((item) => item.attempts > 0)) return 'wrong';
+    return 'idle';
+  }
+
+  function refreshInlineCheckUnit(unit: InlineCheckUnit): void {
+    const state = inlineUnitState(unit);
+    const checkable = unit.checkTargets.some(
+      (target) => expectedAnswersFor(target).length > 0,
+    );
+
+    unit.button.dataset.state = state;
+    unit.button.disabled =
+      draft.submitted ||
+      !checkable ||
+      state === 'correct' ||
+      state === 'locked';
+
+    if (!checkable) {
+      unit.button.textContent = 'בדיקה בבנייה';
+      unit.button.setAttribute('aria-label', 'בדיקה אוטומטית עדיין אינה זמינה לתשובה הזאת');
+    } else if (state === 'correct') {
+      unit.button.textContent = '✓';
+      unit.button.setAttribute('aria-label', 'תשובה נכונה');
+    } else if (state === 'locked') {
+      unit.button.textContent = '×';
+      unit.button.setAttribute('aria-label', 'התשובה ננעלה לאחר שלושה ניסיונות');
+    } else if (state === 'wrong') {
+      unit.button.textContent = 'בדוק שוב';
+      unit.button.setAttribute('aria-label', 'בדיקה חוזרת של התשובה');
+    } else {
+      unit.button.textContent = 'בדוק';
+      unit.button.setAttribute('aria-label', 'בדיקת התשובה');
+    }
+  }
+
+  function refreshInlineCheckButtons(): void {
+    for (const unit of inlineCheckUnits) refreshInlineCheckUnit(unit);
+  }
+
+  async function checkInlineUnit(unit: InlineCheckUnit): Promise<void> {
+    if (draft.submitted || submissionInFlight) return;
+    unit.button.disabled = true;
+    touch();
+    snapshotAnswers();
+    answerKey = await loadAnswerKey(pageNumber);
+
+    let keyed = 0;
+    let remaining = 0;
+    for (const target of unit.checkTargets) {
+      const result = checkTarget(target);
+      if (result.keyed) keyed += 1;
+      if (result.remaining) remaining += 1;
+    }
+
+    draft.updatedAt = Date.now();
+    const draftOutcome = await persistDraft();
+    const activityOutcome = await persistActivity({
+      uid,
+      pageNumber,
+      type: 'answer_check',
+      createdAt: Date.now(),
+      metadata: {
+        qids: unit.checkTargets
+          .map((target) => target.dataset.lmsQid)
+          .filter(Boolean),
+        scope: 'inline',
+        keyed,
+        remaining,
+      },
+    });
+
+    refreshInlineCheckUnit(unit);
+
+    if (persistenceEnabled &&
+      (draftOutcome.central === 'failed' || activityOutcome.central === 'failed')) {
+      setMessage(status, 'התשובה נבדקה, אך הסנכרון המרכזי נכשל.', 'error');
+    } else if (keyed === 0) {
+      setMessage(status, 'הבדיקה האוטומטית לתשובה הזאת עדיין אינה שלמה.', 'error');
+    } else if (inlineUnitState(unit) === 'correct') {
+      setMessage(status, 'נכון ✓', 'success');
+    } else if (inlineUnitState(unit) === 'locked') {
+      setMessage(status, 'התשובה ננעלה לאחר שלושה ניסיונות.', 'error');
+    } else {
+      setMessage(status, 'עדיין לא נכון. אפשר לתקן ולבדוק שוב.', 'normal');
+    }
+  }
+
+  function installInlineCheckButtons(): void {
+    const seenGroups = new Set<string>();
+    const seenPairs = new Set<Element>();
+
+    const addUnit = (
+      anchor: HTMLElement,
+      checkTargets: HTMLElement[],
+      feedbackTargets: HTMLElement[],
+    ): void => {
+      if (checkTargets.length === 0) return;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'lms-inline-check no-print';
+      button.dataset.lmsCheckFor = checkTargets
+        .map((target) => target.dataset.lmsQid || '')
+        .filter(Boolean)
+        .join(',');
+      button.textContent = 'בדוק';
+      anchor.insertAdjacentElement('afterend', button);
+      const unit: InlineCheckUnit = { button, checkTargets, feedbackTargets };
+      button.addEventListener('click', () => {
+        void checkInlineUnit(unit);
+      });
+      inlineCheckUnits.push(unit);
+    };
+
+    for (const target of targets) {
+      if (target.classList.contains('lms-group-proxy')) continue;
+
+      const groupId = target.dataset.lmsGroup;
+      if (groupId) {
+        if (seenGroups.has(groupId)) continue;
+        seenGroups.add(groupId);
+        const visible = targets.filter(
+          (candidate) =>
+            candidate.dataset.lmsGroup === groupId &&
+            !candidate.classList.contains('lms-group-proxy'),
+        );
+        const proxy = targets.find(
+          (candidate) =>
+            candidate.dataset.lmsGroup === groupId &&
+            candidate.classList.contains('lms-group-proxy'),
+        );
+        const last = visible.at(-1);
+        const pair = last?.closest<HTMLElement>('.pair');
+        const anchor = pair || last;
+        if (anchor) addUnit(anchor, proxy ? [proxy] : visible, visible);
+        continue;
+      }
+
+      const pair = target.closest<HTMLElement>('.pair');
+      if (pair) {
+        if (seenPairs.has(pair)) continue;
+        seenPairs.add(pair);
+        const pairTargets = Array.from(
+          pair.querySelectorAll<HTMLElement>(TARGET_SELECTOR),
+        ).filter(
+          (candidate) =>
+            targets.includes(candidate) &&
+            !candidate.classList.contains('lms-group-proxy'),
+        );
+        addUnit(pair, pairTargets, pairTargets);
+        continue;
+      }
+
+      addUnit(target, [target], [target]);
+    }
   }
 
   async function performCheck(): Promise<CheckSummary> {
@@ -482,49 +693,10 @@ export function attachLmsToPage(
     let remaining = 0;
 
     for (const target of targets) {
-      const qid = target.dataset.lmsQid;
-
-      if (!qid) continue;
-
-      const expected = answerKey[qid] || [];
-      const progress = progressFor(qid);
-
-      if (expected.length === 0) {
-        unkeyed += 1;
-        target.dataset.lmsState = progress.answer
-          ? 'pending'
-          : 'empty';
-        continue;
-      }
-
-      keyed += 1;
-
-      if (progress.correct || progress.locked) {
-        updateTarget(target, progress);
-        continue;
-      }
-
-      if (!progress.answer.trim()) {
-        target.dataset.lmsState = 'missing';
-        remaining += 1;
-        continue;
-      }
-
-      progress.attempts += 1;
-
-      const correct = answersMatch(progress.answer, expected);
-
-      if (correct) {
-        progress.correct = true;
-      } else if (
-        progress.attempts >= LMS_CONFIG.maxAttempts
-      ) {
-        progress.locked = true;
-      } else {
-        remaining += 1;
-      }
-
-      updateTarget(target, progress);
+      const result = checkTarget(target);
+      if (result.keyed) keyed += 1;
+      else unkeyed += 1;
+      if (result.remaining) remaining += 1;
     }
 
     draft.updatedAt = Date.now();
@@ -536,11 +708,14 @@ export function attachLmsToPage(
       type: 'answer_check',
       createdAt: Date.now(),
       metadata: {
+        scope: 'page',
         keyed,
         unkeyed,
         remaining,
       },
     });
+
+    refreshInlineCheckButtons();
 
     if (
       persistenceEnabled &&
@@ -615,7 +790,10 @@ export function attachLmsToPage(
         if (summary.keyed === 0) return;
 
         answerKey = await loadAnswerKey(pageNumber);
-        const keyedEntries = Object.keys(answerKey)
+        const keyedEntries = targets
+          .filter((target) => expectedAnswersFor(target).length > 0)
+          .map((target) => target.dataset.lmsQid)
+          .filter((qid): qid is string => Boolean(qid))
           .map((qid) => draft.questions[qid])
           .filter(
             (progress): progress is QuestionProgress =>
@@ -693,6 +871,7 @@ export function attachLmsToPage(
         const qid = target.dataset.lmsQid;
         if (qid) updateTarget(target, progressFor(qid));
       }
+      refreshInlineCheckButtons();
 
       const syncFailed = persistenceEnabled && [
         resultOutcome,
@@ -788,6 +967,7 @@ export function attachLmsToPage(
       void saveAnswerKey(pageNumber, key)
         .then(() => {
           answerKey = key;
+          refreshInlineCheckButtons();
           setMessage(
             status,
             'נשמר מפתח מורה עבור ' +
@@ -843,14 +1023,13 @@ export function attachLmsToPage(
       progress.answer = targetValue(target);
 
       if (!progress.locked && !progress.correct) {
-        const accepted = showImmediateCorrectFeedback(target, qid);
-        if (!accepted) {
-          target.dataset.lmsState = progress.answer
-            ? 'filled'
-            : 'empty';
-        }
+        target.dataset.lmsState = progress.answer
+          ? 'filled'
+          : 'empty';
+        delete target.dataset.lmsFeedback;
       }
 
+      refreshInlineCheckButtons();
       scheduleSave();
 
       void persistActivity({
@@ -883,6 +1062,8 @@ export function attachLmsToPage(
     });
   });
 
+  installInlineCheckButtons();
+
   const statePromise = persistenceEnabled
     ? Promise.all([
         loadDraft(uid, pageNumber),
@@ -903,8 +1084,6 @@ export function attachLmsToPage(
       draft = storedDraft;
     }
 
-    let restoredCorrectAnswer = false;
-
     for (const target of targets) {
       const qid = target.dataset.lmsQid;
 
@@ -916,27 +1095,21 @@ export function attachLmsToPage(
         setTargetValue(target, progress.answer);
       }
 
-      if (
-        !draft.submitted &&
-        showImmediateCorrectFeedback(target, qid)
-      ) {
-        restoredCorrectAnswer = true;
-      } else {
-        updateTarget(target, progress);
-      }
+      updateTarget(target, progress);
     }
-
-    if (restoredCorrectAnswer) scheduleSave();
 
     if (draft.score !== undefined) {
       showScore(draft.score);
     }
 
+    refreshInlineCheckButtons();
     checkButton.disabled = draft.submitted;
     submitButton.disabled = draft.submitted;
     if (draft.submitted) submitButton.textContent = 'העמוד הוגש';
 
-    const keyedCount = Object.keys(answerKey).length;
+    const keyedCount = targets.filter(
+      (target) => expectedAnswersFor(target).length > 0,
+    ).length;
 
     if (draft.submitted) {
       setMessage(
@@ -958,7 +1131,7 @@ export function attachLmsToPage(
         status,
         'נמצאו ' +
           String(targets.length) +
-          ' אזורי מענה. בדיקה אוטומטית זמינה ל־' +
+          ' אזורי מענה. ליד כל תשובה זמינה בדיקה מקומית, ובדיקה אוטומטית קיימת ל־' +
           String(keyedCount) +
           ' תשובות.' +
           (persistenceEnabled ? ' השמירה פעילה.' : ' אין שמירה ללא הרשמה.'),
@@ -1045,6 +1218,10 @@ export function attachLmsToPage(
           'keydown',
           listener.keydown,
         );
+      }
+
+      for (const unit of inlineCheckUnits) {
+        unit.button.remove();
       }
 
       window.removeEventListener('online', retryWhenOnline);
