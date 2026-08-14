@@ -131,3 +131,27 @@ test('equal-coordinate package pairs are accepted regardless of pair order after
   await checkAll(page);
   await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
 });
+
+test('learner-created horizontal length-four segment validates endpoints, work, and final length together', async ({ page }) => {
+  await page.goto('/#/workbook/47');
+  const values = ['1', '3', '5', '3', '1 − 5', '4', '4'];
+  for (let index = 0; index < values.length; index += 1) {
+    await page.locator(`[data-lms-qid="p47-q${16 + index}"]`).fill(values[index]!);
+  }
+
+  const proxy = page.locator(
+    '.lms-group-proxy[data-lms-group^="segment-horizontal-segment-length-4-with-work-"]',
+  );
+  await expect(proxy).not.toHaveAttribute('data-lms-state', 'correct');
+  await checkAll(page);
+  await expect(proxy).toHaveAttribute('data-lms-state', 'wrong');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
+
+  await page.locator('[data-lms-qid="p47-q20"]').fill('5 − 1');
+  await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
+  for (let q = 16; q <= 22; q += 1) {
+    await expect(page.locator(`[data-lms-qid="p47-q${q}"]`))
+      .toHaveAttribute('data-lms-group-state', 'correct');
+  }
+});
