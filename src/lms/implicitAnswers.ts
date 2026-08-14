@@ -3,6 +3,7 @@ import { hydrateDigitalDeterministicAnswers } from './digitalDeterministicAnswer
 import { hydrateDigitalExplanationChoices } from './digitalExplanationChoices';
 import { hydrateDigitalGeometryAnswers } from './digitalGeometryAnswers';
 import { hydrateDigitalGraphAnswers } from './digitalGraphAnswers';
+import { hydrateDigitalLinearFacts } from './digitalLinearFacts';
 import { hydrateDigitalOneStepAnswers } from './digitalOneStepAnswers';
 import { hydrateDigitalPredicates } from './digitalPredicates';
 import { hydrateDigitalRuleAnswers } from './digitalRuleAnswers';
@@ -63,6 +64,7 @@ export function hydrateExplicitAuthoringAnswers(
   hydrateDigitalGeometryAnswers(root);
   hydrateDigitalGraphAnswers(root);
   hydrateDigitalDeterministicAnswers(root);
+  hydrateDigitalLinearFacts(root);
   hydrateDigitalOneStepAnswers(root);
   const cleanupExplanations = hydrateDigitalExplanationChoices(root);
   const cleanupPredicates = hydrateDigitalPredicates(root);
