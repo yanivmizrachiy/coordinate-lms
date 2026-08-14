@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:47:34.012Z
+Generated: 2026-08-14T13:48:28.500Z
 
-Overall: 882/1162 safely checkable targets (75.9%).
+Overall: 883/1162 safely checkable targets (76%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 139 |
+| canonical-metadata-derived | 140 |
 | deterministic-mathematical | 557 |
 | valid-range | 6 |
 | open-ended | 138 |
-| ambiguous | 142 |
+| ambiguous | 141 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -854,7 +854,7 @@ No detected interactive response targets.
 
 ### Page 39 — משלימים שיעור חסר ודפוסים
 
-26/28 safely checkable (92.9%).
+27/28 safely checkable (96.4%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -884,7 +884,7 @@ No detected interactive response targets.
 | p39-q24 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q25 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q26 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
-| p39-q27 | text:letter | ambiguous | no | none | כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]. |
+| p39-q27 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]. |
 | p39-q28 | text:relation | open-ended | no | teacher judgment required | ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x  |
 
 ### Page 40 — שיעור חסר ודפוסים

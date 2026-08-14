@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:47:34.012Z",
+  "generatedAt": "2026-08-14T13:48:28.500Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 882,
-  "coveragePercentage": 75.9,
+  "automaticallyCheckableTargets": 883,
+  "coveragePercentage": 76,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 139,
+    "canonical-metadata-derived": 140,
     "deterministic-mathematical": 557,
     "valid-range": 6,
     "open-ended": 138,
-    "ambiguous": 142,
+    "ambiguous": 141,
     "unsupported": 0,
     "missing": 0
   },
@@ -9651,11 +9651,13 @@
           "inputType": "text:letter",
           "context": "כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…].",
           "signature": "197e7954",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y"
+          ]
         },
         {
           "targetId": "p39-q28",
@@ -9671,11 +9673,10 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p39-q27",
         "p39-q28"
       ],
-      "automaticallyCheckableTargets": 26,
-      "coveragePercentage": 92.9
+      "automaticallyCheckableTargets": 27,
+      "coveragePercentage": 96.4
     },
     {
       "pageNumber": 40,
