@@ -24,6 +24,16 @@ describe('digital mathematical predicates', () => {
     expect(evaluateDigitalGroupRule('two-distinct-positive-points', ['2', '0', '4', '5'])).toBe(false);
   });
 
+  it('checks learner-created pairs by the requested shared coordinate', () => {
+    expect(evaluateDigitalGroupRule('same-x-coordinate-pairs', ['3', '1', '3', '7'])).toBe(true);
+    expect(evaluateDigitalGroupRule('same-x-coordinate-pairs', ['3', '1', '4', '1'])).toBe(false);
+    expect(evaluateDigitalGroupRule('same-x-coordinate-pairs', ['3', '1', '3', '1'])).toBe(false);
+    expect(evaluateDigitalGroupRule('same-y-coordinate-pairs', ['1', '4', '8', '4'])).toBe(true);
+    expect(evaluateDigitalGroupRule('same-y-coordinate-pairs', ['1', '4', '1', '8'])).toBe(false);
+    expect(evaluateDigitalGroupRule('same-y-coordinate-pairs', ['1', '4', '1', '4'])).toBe(false);
+    expect(evaluateDigitalGroupRule('same-y-coordinate-pairs', ['-1', '4', '2', '4'])).toBe(false);
+  });
+
   it('checks axis and quadrant descriptions without choosing a model point', () => {
     expect(evaluateDigitalGroupRule('point-above-x-axis', ['0', '4'])).toBe(true);
     expect(evaluateDigitalGroupRule('point-above-x-axis', ['4', '0'])).toBe(false);
@@ -100,6 +110,8 @@ describe('digital mathematical predicates', () => {
     expect(answersMatch('1|2|4|5', ['predicate:distinct-coordinate-pairs'])).toBe(true);
     expect(answersMatch('1|2|1|5', ['predicate:distinct-coordinate-pairs'])).toBe(false);
     expect(answersMatch('2|3|2|5', ['predicate:two-distinct-positive-points'])).toBe(true);
+    expect(answersMatch('3|1|3|7', ['predicate:same-x-coordinate-pairs'])).toBe(true);
+    expect(answersMatch('1|4|8|4', ['predicate:same-y-coordinate-pairs'])).toBe(true);
     expect(answersMatch('8|0', ['predicate:point-on-x-axis'])).toBe(true);
     expect(answersMatch('0|8', ['predicate:point-on-x-axis'])).toBe(false);
     expect(answersMatch('7|6', ['predicate:point-y-equals-6'])).toBe(true);
