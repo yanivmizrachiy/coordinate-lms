@@ -1,5 +1,12 @@
 import type { DigitalGroupRule } from './digitalPredicates';
 
+export const HORIZONTAL_LENGTH_FOUR_WITH_WORK =
+  'horizontal-segment-length-4-with-work' as const;
+
+type SegmentCoverageRule =
+  | DigitalGroupRule
+  | typeof HORIZONTAL_LENGTH_FOUR_WITH_WORK;
+
 interface SegmentBinding {
   observer: MutationObserver;
   targets: HTMLElement[];
@@ -21,10 +28,78 @@ function normalizedContext(context: string): string {
     .trim();
 }
 
+function finiteNumber(raw: string): number | null {
+  const normalized = raw.trim().replace(',', '.');
+  if (!/^[+-]?(?:\d+\.?\d*|\.\d+)$/.test(normalized)) return null;
+  const value = Number(normalized);
+  return Number.isFinite(value) ? value : null;
+}
+
+function nearlyEqual(left: number, right: number): boolean {
+  return Math.abs(left - right) < 1e-12;
+}
+
+function subtractionOperands(raw: string): [number, number] | null {
+  const normalized = raw
+    .trim()
+    .replace(/[−–—]/g, '-')
+    .replace(/\s+/g, '');
+  const match = normalized.match(
+    /^([+]?(?:\d+\.?\d*|\.\d+))-([+]?(?:\d+\.?\d*|\.\d+))$/,
+  );
+  if (!match?.[1] || !match[2]) return null;
+  const left = finiteNumber(match[1]);
+  const right = finiteNumber(match[2]);
+  return left === null || right === null ? null : [left, right];
+}
+
+/**
+ * Page 47 lets the learner choose any horizontal KL of length 4. The answer is
+ * valid only when the chosen endpoints, the written subtraction, its result,
+ * and the stated length all agree. No model coordinates are invented.
+ */
+export function horizontalLengthFourWithWorkMatches(
+  values: readonly string[],
+): boolean {
+  if (values.length !== 7) return false;
+  const coordinates = values.slice(0, 4).map(finiteNumber);
+  if (coordinates.some((value) => value === null)) return false;
+  const [x1, y1, x2, y2] = coordinates as [number, number, number, number];
+  if ([x1, y1, x2, y2].some((value) => value < 0)) return false;
+  if (!nearlyEqual(y1, y2) || nearlyEqual(x1, x2)) return false;
+
+  const highX = Math.max(x1, x2);
+  const lowX = Math.min(x1, x2);
+  if (!nearlyEqual(highX - lowX, 4)) return false;
+
+  const subtraction = subtractionOperands(values[4] || '');
+  if (!subtraction) return false;
+  if (!nearlyEqual(subtraction[0], highX) || !nearlyEqual(subtraction[1], lowX)) {
+    return false;
+  }
+
+  const result = finiteNumber(values[5] || '');
+  const finalLength = finiteNumber(values[6] || '');
+  return result !== null &&
+    finalLength !== null &&
+    nearlyEqual(result, 4) &&
+    nearlyEqual(finalLength, 4);
+}
+
 export function segmentPredicateRuleForCoverage(
   context: string,
   inputType: string,
-): DigitalGroupRule | null {
+  pageNumber?: number,
+  targetId?: string,
+): SegmentCoverageRule | null {
+  if (
+    pageNumber === 47 &&
+    targetId !== undefined &&
+    /^p47-q(?:1[6-9]|2[0-2])$/.test(targetId)
+  ) {
+    return HORIZONTAL_LENGTH_FOUR_WITH_WORK;
+  }
+
   if (inputType !== 'ordered-pair-coordinate') return null;
   const text = normalizedContext(context);
 
@@ -55,8 +130,24 @@ export function segmentPredicateRuleForCoverage(
   return null;
 }
 
-function syncProxy(proxy: HTMLElement, targets: readonly HTMLElement[]): void {
-  proxy.textContent = targets.map((target) => (target.textContent || '').trim()).join('|');
+function rawValues(targets: readonly HTMLElement[]): string[] {
+  return targets.map((target) => (target.textContent || '').trim());
+}
+
+function syncPredicateProxy(proxy: HTMLElement, targets: readonly HTMLElement[]): void {
+  proxy.textContent = rawValues(targets).join('|');
+  proxy.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+function syncLengthFourProxy(proxy: HTMLElement, targets: readonly HTMLElement[]): void {
+  const values = rawValues(targets);
+  const joined = values.join('|');
+  proxy.textContent = joined;
+  proxy.dataset['lmsAnswers'] = JSON.stringify([
+    horizontalLengthFourWithWorkMatches(values)
+      ? joined
+      : '__invalid_horizontal_length_four_with_work__',
+  ]);
   proxy.dispatchEvent(new Event('input', { bubbles: true }));
 }
 
@@ -71,24 +162,22 @@ function mirrorGroupState(proxy: HTMLElement, targets: readonly HTMLElement[]): 
   }
 }
 
-function bindGroup(
+function createProxy(
   proxyHost: HTMLElement,
   targets: HTMLElement[],
-  rule: DigitalGroupRule,
-  ordinal: number,
+  groupId: string,
+  ariaLabel: string,
+  onInput: EventListener,
 ): SegmentBinding | null {
-  if (targets.length !== 4 || targets.some((target) => target.dataset['lmsGroup'])) return null;
+  if (targets.length === 0 || targets.some((target) => target.dataset['lmsGroup'])) return null;
 
-  const groupId = `segment-${rule}-${ordinal}`;
   const proxy = document.createElement('span');
   proxy.className = 'blank lms-group-proxy';
   proxy.hidden = true;
   proxy.dataset['lmsGroup'] = groupId;
-  proxy.dataset['lmsAnswers'] = JSON.stringify([`predicate:${rule}`]);
-  proxy.setAttribute('aria-label', 'בדיקה מתמטית של שני קצות הקטע לפי תנאי השאלה');
+  proxy.setAttribute('aria-label', ariaLabel);
   proxyHost.append(proxy);
 
-  const onInput: EventListener = () => syncProxy(proxy, targets);
   for (const target of targets) {
     target.addEventListener('input', onInput);
     target.dataset['lmsGroup'] = groupId;
@@ -96,8 +185,57 @@ function bindGroup(
 
   const observer = new MutationObserver(() => mirrorGroupState(proxy, targets));
   observer.observe(proxy, { attributes: true, attributeFilter: ['data-lms-state'] });
-  syncProxy(proxy, targets);
   return { observer, targets, proxy, onInput };
+}
+
+function bindPredicateGroup(
+  proxyHost: HTMLElement,
+  targets: HTMLElement[],
+  rule: DigitalGroupRule,
+  ordinal: number,
+): SegmentBinding | null {
+  if (targets.length !== 4) return null;
+  const groupId = `segment-${rule}-${ordinal}`;
+  let proxy: HTMLElement | null = null;
+  const onInput: EventListener = () => {
+    if (proxy) syncPredicateProxy(proxy, targets);
+  };
+  const binding = createProxy(
+    proxyHost,
+    targets,
+    groupId,
+    'בדיקה מתמטית של שני קצות הקטע לפי תנאי השאלה',
+    onInput,
+  );
+  if (!binding) return null;
+  proxy = binding.proxy;
+  proxy.dataset['lmsAnswers'] = JSON.stringify([`predicate:${rule}`]);
+  syncPredicateProxy(proxy, targets);
+  return binding;
+}
+
+function bindLengthFourWithWork(
+  proxyHost: HTMLElement,
+  targets: HTMLElement[],
+  ordinal: number,
+): SegmentBinding | null {
+  if (targets.length !== 7) return null;
+  const groupId = `segment-${HORIZONTAL_LENGTH_FOUR_WITH_WORK}-${ordinal}`;
+  let proxy: HTMLElement | null = null;
+  const onInput: EventListener = () => {
+    if (proxy) syncLengthFourProxy(proxy, targets);
+  };
+  const binding = createProxy(
+    proxyHost,
+    targets,
+    groupId,
+    'בדיקה מתמטית של קטע KL, תרגיל החיסור והאורך 4',
+    onInput,
+  );
+  if (!binding) return null;
+  proxy = binding.proxy;
+  syncLengthFourProxy(proxy, targets);
+  return binding;
 }
 
 /** Runtime binding for learner-created axis-parallel segments. */
@@ -109,6 +247,27 @@ export function hydrateDigitalSegmentPredicates(root: ParentNode): () => void {
 
   const bindings: SegmentBinding[] = [];
   let ordinal = 0;
+
+  for (const card of root.querySelectorAll<HTMLElement>('.q-card')) {
+    const heading = normalizedText(card.querySelector('h3'));
+    const cardText = normalizedText(card);
+    if (
+      !heading.includes('סמנו קטע משלכם') ||
+      !cardText.includes('קטע KL') ||
+      !cardText.includes('אורכו 4')
+    ) continue;
+
+    const coordinates = Array.from(card.querySelectorAll<HTMLElement>('.pair-blank'));
+    const calculation = Array.from(
+      card.querySelectorAll<HTMLElement>('.calc-pair .blank[data-missing="number"]'),
+    );
+    const targets = [...coordinates, ...calculation];
+    if (coordinates.length !== 4 || calculation.length !== 3 || targets.length !== 7) continue;
+    ordinal += 1;
+    const binding = bindLengthFourWithWork(proxyHost, targets, ordinal);
+    if (binding) bindings.push(binding);
+  }
+
   for (const item of root.querySelectorAll<HTMLElement>('li')) {
     const targets = Array.from(item.querySelectorAll<HTMLElement>('.pair-blank'));
     if (targets.length !== 4) continue;
@@ -116,9 +275,9 @@ export function hydrateDigitalSegmentPredicates(root: ParentNode): () => void {
       normalizedText(item),
       'ordered-pair-coordinate',
     );
-    if (!rule) continue;
+    if (!rule || rule === HORIZONTAL_LENGTH_FOUR_WITH_WORK) continue;
     ordinal += 1;
-    const binding = bindGroup(proxyHost, targets, rule, ordinal);
+    const binding = bindPredicateGroup(proxyHost, targets, rule, ordinal);
     if (binding) bindings.push(binding);
   }
 
