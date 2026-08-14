@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T16:21:20.718Z
+Generated: 2026-08-14T16:22:58.803Z
 
-Overall: 1054/1162 safely checkable targets (90.7%).
+Overall: 1056/1162 safely checkable targets (90.9%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 268 |
+| canonical-metadata-derived | 270 |
 | deterministic-mathematical | 600 |
 | valid-range | 6 |
 | open-ended | 82 |
-| ambiguous | 26 |
+| ambiguous | 24 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1193,7 +1193,7 @@ No detected interactive response targets.
 
 ### Page 53 — המלבן ברביע הראשון
 
-26/28 safely checkable (92.9%).
+28/28 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1207,8 +1207,8 @@ No detected interactive response targets.
 | p53-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | QR=[…]=[…]יח' |
 | p53-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | QR=[…]=[…]יח' |
 | p53-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | QR=[…]יח' |
-| p53-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p53-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p53-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p53-q12 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p53-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
 | p53-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
 | p53-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
