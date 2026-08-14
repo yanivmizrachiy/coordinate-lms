@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:10:00.736Z
+Generated: 2026-08-14T14:11:18.836Z
 
-Overall: 931/1162 safely checkable targets (80.1%).
+Overall: 936/1162 safely checkable targets (80.6%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 198 |
+| canonical-metadata-derived | 203 |
 | deterministic-mathematical | 547 |
 | valid-range | 6 |
 | open-ended | 119 |
-| ambiguous | 112 |
+| ambiguous | 107 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1375,7 +1375,7 @@ No detected interactive response targets.
 
 ### Page 60 — שורה ומקום — הכרטיס שלכם
 
-10/15 safely checkable (66.7%).
+12/15 safely checkable (80%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1389,28 +1389,28 @@ No detected interactive response targets.
 | p60-q8 | text:property | reviewed-explicit | yes | target-bound reviewed proof | לאורך הגוש: ה־x הימני פחות ה־x השמאלי. לרוחב הגוש: ה־y הגבוה פחות ה־y ה[…]. |
 | p60-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 6 − 3=[…]מקומות בשורה |
 | p60-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 4 − 2=[…]שורות |
-| p60-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p60-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p60-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p60-q12 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p60-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | על הכרטיס שלכם יהיה כתוב ([…],[…]). |
 | p60-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | על הכרטיס שלכם יהיה כתוב ([…],[…]). |
 | p60-q15 | text:number | open-ended | no | teacher judgment required | מהכיסא שבחרתם עד הכיסא של נועה יש הפרש של […] שורות. |
 
 ### Page 61 — פיקסלים — כל מסך הוא מערכת צירים
 
-7/13 safely checkable (53.8%).
+10/13 safely checkable (76.9%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p61-q1 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | כל תמונה במסך בנויה מריבועים קטנים שנקראים פיקסלים, ולכל פיקסל יש […] סדור משלו. |
 | p61-q2 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | כשמגדילים תמונה קטנה רואים את הריבועים, כי המסך מסודר בשורות ובעמודות — בדיוק כמו […] הצירים. |
 | p61-q3 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | הצורה שהתקבלה היא […]. |
-| p61-q4 | text:number | ambiguous | no | none | השורה התחתונה שצבעתם משתרעת מ־x = 2 עד x = 5, ולכן ההפרש הוא […]. |
+| p61-q4 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | השורה התחתונה שצבעתם משתרעת מ־x = 2 עד x = 5, ולכן ההפרש הוא […]. |
 | p61-q5 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הצלע התחתונה מקבילה לציר […], והצלע השמאלית מקבילה לציר y. |
 | p61-q6 | text:property | reviewed-explicit | yes | target-bound reviewed proof | האורך הוא ההפרש בין ה־x הימני ובין ה־x השמאלי, והרוחב הוא ההפרש בין ה־y הגבוה ובין ה־y ה[…]. |
 | p61-q7 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=7 − 1=[…]יח' |
 | p61-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=5 − 1=[…]יח' |
-| p61-q9 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p61-q10 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p61-q9 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p61-q10 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p61-q11 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]). |
 | p61-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]). |
 | p61-q13 | text:number | open-ended | no | teacher judgment required | המרחק שלו מציר y הוא […] יח', וזה בדיוק ערך ה־x שלו. |
