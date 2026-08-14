@@ -1,6 +1,6 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:11:18.836Z
+Generated: 2026-08-14T14:12:28.714Z
 
 Overall: 936/1162 safely checkable targets (80.6%).
 
