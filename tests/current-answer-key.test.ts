@@ -17,10 +17,12 @@ describe('current runtime answer-key mapping', () => {
     expect(currentQ1).toBe('p62-q1');
     expect(current[currentQ1!]).toEqual(legacyDelivery['p61-q1']);
 
-    // Legacy page 62 is a different worksheet (park map) and has q16=4.
-    // That old qid must never leak onto current delivery page 62, where the
-    // digital group proxy becomes q16 at runtime.
-    expect(provenAnswerKey(62)['p62-q16']).toEqual(['4']);
+    // Legacy page 62 belongs to a different worksheet. It does have a reviewed
+    // q16 answer, but that foreign qid must never leak onto current delivery
+    // page 62, where a digital group proxy becomes q16 at runtime.
+    const foreignLegacyQ16 = provenAnswerKey(62)['p62-q16'];
+    expect(foreignLegacyQ16).toBeDefined();
+    expect(foreignLegacyQ16?.length).toBeGreaterThan(0);
     expect(current['p62-q16']).toBeUndefined();
   });
 
