@@ -30,32 +30,39 @@ service cloud.firestore {
 
     function validStudent(uid) {
       return request.resource.data.keys().hasAll([
-          'uid', 'fullName', 'username', 'email', 'role',
-          'createdAt', 'lastSeenAt'
+          'uid', 'fullName', 'username', 'email', 'className', 'school', 'city',
+          'role', 'createdAt', 'lastSeenAt'
         ])
         && request.resource.data.keys().hasOnly([
-          'uid', 'fullName', 'username', 'email', 'className', 'school',
+          'uid', 'fullName', 'username', 'email', 'className', 'school', 'city',
           'role', 'createdAt', 'lastSeenAt'
         ])
         && request.resource.data.uid == uid
         && request.resource.data.fullName is string
         && request.resource.data.fullName.size() >= 1
-        && request.resource.data.fullName.size() <= 200
+        && request.resource.data.fullName.size() <= 120
         && request.resource.data.username is string
-        && request.resource.data.username.size() >= 1
-        && request.resource.data.username.size() <= 100
+        && request.resource.data.username.size() >= 3
+        && request.resource.data.username.size() <= 32
         && request.resource.data.email is string
+        && request.resource.data.email.size() >= 3
+        && request.resource.data.email.size() <= 254
+        && request.resource.data.className is string
+        && request.resource.data.className.size() >= 1
+        && request.resource.data.className.size() <= 120
+        && request.resource.data.school is string
+        && request.resource.data.school.size() >= 1
+        && request.resource.data.school.size() <= 120
+        && request.resource.data.city is string
+        && request.resource.data.city.size() >= 1
+        && request.resource.data.city.size() <= 120
         && request.resource.data.createdAt is int
         && request.resource.data.lastSeenAt is int
         && request.resource.data.lastSeenAt >= request.resource.data.createdAt
         && (
           request.resource.data.role == 'student'
           || (admin() && request.resource.data.role == 'admin')
-        )
-        && (!request.resource.data.keys().hasAny(['className'])
-          || request.resource.data.className is string)
-        && (!request.resource.data.keys().hasAny(['school'])
-          || request.resource.data.school is string);
+        );
     }
 
     function validDraft(uid, document) {
