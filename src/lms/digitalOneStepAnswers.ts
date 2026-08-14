@@ -29,9 +29,7 @@ export function hydrateDigitalOneStepAnswers(root: ParentNode): void {
 
     if (text.includes('כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־')) {
       const blank = item.querySelector<HTMLElement>('.blank[data-missing="letter"]');
-      if (blank && !blank.dataset['lmsAnswers']) {
-        blank.dataset['lmsAnswers'] = JSON.stringify(['y']);
-      }
+      if (blank && !blank.dataset['lmsAnswers']) blank.dataset['lmsAnswers'] = JSON.stringify(['y']);
     }
 
     if (
@@ -44,52 +42,23 @@ export function hydrateDigitalOneStepAnswers(root: ParentNode): void {
       }
     }
 
-    if (text.includes('נקודה K: שיעור x = 0, שיעור y = 4')) {
-      setSequentialAnswers(item, ['0', '4']);
-    }
+    if (text.includes('נקודה K: שיעור x = 0, שיעור y = 4')) setSequentialAnswers(item, ['0', '4']);
+    if (text.includes('נקודה L: שיעור x = 6, שיעור y = 0')) setSequentialAnswers(item, ['6', '0']);
+    if (text.includes('שיעורי הנקודה שעל ראשית הצירים הם')) setSequentialAnswers(item, ['0', '0']);
+    if (text.includes('הנקודה O ממוקמת גם על ציר') && text.includes('וגם על ציר')) setSequentialAnswers(item, ['x', 'y']);
 
-    if (text.includes('נקודה L: שיעור x = 6, שיעור y = 0')) {
-      setSequentialAnswers(item, ['6', '0']);
+    if (text.includes('סמנו נקודה R') && text.includes('שיעור ה־y שלה זהה לזה של הנקודה K') && text.includes('שיעור ה־x שלה 5')) {
+      setSequentialAnswers(item, ['5', '4']);
     }
+    if (text.includes('הנקודה R ממוקמת') && text.includes('לנקודה K')) setSequentialAnswers(item, ['מימין']);
 
-    if (text.includes('שיעורי הנקודה שעל ראשית הצירים הם')) {
-      setSequentialAnswers(item, ['0', '0']);
-    }
-
-    if (text.includes('הנקודה O ממוקמת גם על ציר') && text.includes('וגם על ציר')) {
-      setSequentialAnswers(item, ['x', 'y']);
-    }
-
-    if (text.includes('הנקודה של האות ק רחוקה') && text.includes('מציר ה־y')) {
-      setSequentialAnswers(item, ['6']);
-    }
-
-    if (text.includes('שיעור ה־x של הנקודה של האות ו')) {
-      setSequentialAnswers(item, ['2']);
-    }
-
-    if (text.includes('הנקודה של האות ד היא הימנית ביותר') && text.includes('שיעור ה־x שלה')) {
-      setSequentialAnswers(item, ['7']);
-    }
-
-    if (text.includes('האות שממוקמת בנקודה (4,3)')) {
-      setSequentialAnswers(item, ['ה']);
-    }
-
-    if (text.includes('כתבו את חמש האותיות לפי סדר השאלות')) {
-      setSequentialAnswers(item, ['נקודה']);
-    }
-
-    if (text.includes('סמנו את הנקודה של האות הראשונה במילה') && text.includes('כתבו את שיעוריה')) {
-      setSequentialAnswers(item, ['3', '2']);
-    }
-
-    if (text.includes('הנקודה של האות ד היא ה') && text.includes('שיעור ה־y שלה קטן מכולם')) {
-      setSequentialAnswers(item, ['נמוכה']);
-    }
-
-    if (text.includes('סמנו נקודה חדשה ששיעור ה־y שלה הוא 6')) {
-      setFirstFreeCoordinatePredicate(item);
-    }
+    if (text.includes('הנקודה של האות ק רחוקה') && text.includes('מציר ה־y')) setSequentialAnswers(item, ['6']);
+    if (text.includes('שיעור ה־x של הנקודה של האות ו')) setSequentialAnswers(item, ['2']);
+    if (text.includes('הנקודה של האות ד היא הימנית ביותר') && text.includes('שיעור ה־x שלה')) setSequentialAnswers(item, ['7']);
+    if (text.includes('האות שממוקמת בנקודה (4,3)')) setSequentialAnswers(item, ['ה']);
+    if (text.includes('כתבו את חמש האותיות לפי סדר השאלות')) setSequentialAnswers(item, ['נקודה']);
+    if (text.includes('סמנו את הנקודה של האות הראשונה במילה') && text.includes('כתבו את שיעוריה')) setSequentialAnswers(item, ['3', '2']);
+    if (text.includes('הנקודה של האות ד היא ה') && text.includes('שיעור ה־y שלה קטן מכולם')) setSequentialAnswers(item, ['נמוכה']);
+    if (text.includes('סמנו נקודה חדשה ששיעור ה־y שלה הוא 6')) setFirstFreeCoordinatePredicate(item);
   }
 }
