@@ -38,6 +38,18 @@ describe('digital mathematical predicates', () => {
     expect(evaluateDigitalGroupRule('point-right-of-2-below-6', ['3', '6'])).toBe(false);
   });
 
+  it('accepts all and only learner-chosen points for the suspect and park prompts', () => {
+    expect(evaluateDigitalGroupRule('point-y-equals-6', ['0', '6'])).toBe(true);
+    expect(evaluateDigitalGroupRule('point-y-equals-6', ['7', '6'])).toBe(true);
+    expect(evaluateDigitalGroupRule('point-y-equals-6', ['7', '5'])).toBe(false);
+
+    expect(evaluateDigitalGroupRule('point-x-3-between-2-and-5', ['3', '3'])).toBe(true);
+    expect(evaluateDigitalGroupRule('point-x-3-between-2-and-5', ['3', '4'])).toBe(true);
+    expect(evaluateDigitalGroupRule('point-x-3-between-2-and-5', ['3', '2'])).toBe(false);
+    expect(evaluateDigitalGroupRule('point-x-3-between-2-and-5', ['3', '5'])).toBe(false);
+    expect(evaluateDigitalGroupRule('point-x-3-between-2-and-5', ['4', '4'])).toBe(false);
+  });
+
   it('checks the two equal-weight/equal-price package pairs in any order', () => {
     expect(evaluateDigitalGroupRule('same-weight-package-pairs', ['B', 'C', 'D', 'E'])).toBe(true);
     expect(evaluateDigitalGroupRule('same-weight-package-pairs', ['E', 'D', 'C', 'B'])).toBe(true);
@@ -58,6 +70,8 @@ describe('digital mathematical predicates', () => {
     expect(answersMatch('1|2|1|5', ['predicate:distinct-coordinate-pairs'])).toBe(false);
     expect(answersMatch('8|0', ['predicate:point-on-x-axis'])).toBe(true);
     expect(answersMatch('0|8', ['predicate:point-on-x-axis'])).toBe(false);
+    expect(answersMatch('7|6', ['predicate:point-y-equals-6'])).toBe(true);
+    expect(answersMatch('3|4', ['predicate:point-x-3-between-2-and-5'])).toBe(true);
     expect(answersMatch('B|C|D|E', ['predicate:same-weight-package-pairs'])).toBe(true);
     expect(answersMatch('9', ['predicate:nonnegative-number'])).toBe(true);
   });
