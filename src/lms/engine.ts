@@ -74,6 +74,13 @@ function defaultDraft(
   };
 }
 
+function noSaveOutcome(): PersistenceOutcome {
+  return {
+    localSaved: false,
+    central: 'not-required',
+  };
+}
+
 function setMessage(
   node: HTMLElement,
   text: string,
@@ -83,13 +90,16 @@ function setMessage(
   node.dataset.kind = kind;
 }
 
+/** Practice access is public. Registration controls persistence, not pages. */
 export function canAccessPage(pageNumber: number): boolean {
-  return (
-    pageNumber <= LMS_CONFIG.guestFreePages ||
-    currentSession() !== null
-  );
+  void pageNumber;
+  return true;
 }
 
+/**
+ * Kept as a compatibility renderer for old callers. It is no longer an access
+ * gate: anonymous students can practice every page.
+ */
 export function renderAccessGate(
   outlet: HTMLElement,
   pageNumber: number,
@@ -99,19 +109,14 @@ export function renderAccessGate(
     {
       class: 'lms-gate no-print',
       role: 'region',
-      'aria-label': 'נדרשת הרשמה',
+      'aria-label': 'שמירה ודוחות באמצעות הרשמה',
     },
-    elem('div', {
-      class: 'lms-gate__icon',
-      text: '🔐',
-      'aria-hidden': 'true',
-    }),
     elem('h1', {
-      text: 'כדי להמשיך לעמוד ' + String(pageNumber) + ' יש להירשם',
+      text: 'עמוד ' + String(pageNumber) + ' פתוח לתרגול ללא הרשמה',
     }),
     elem('p', {
       text:
-        'עמוד 1 פתוח ללא הרשמה. לאחר קבלת הציון ההתקדמות נשמרת בחשבון התלמיד.',
+        'אפשר לתרגל מיד. הרשמה נדרשת רק כדי לשמור תוצאות, לתעד התקדמות ולקבל דוחות.',
     }),
   );
 
@@ -122,24 +127,24 @@ export function renderAccessGate(
   const registerButton = elem('button', {
     class: 'btn btn--gold',
     type: 'button',
-    text: 'הרשמה והמשך',
+    text: 'הרשמה לשמירה ודוחות',
   });
 
   registerButton.addEventListener('click', () => {
     location.hash = '#/login';
   });
 
-  const backButton = elem('button', {
+  const continueButton = elem('button', {
     class: 'btn btn--ghost',
     type: 'button',
-    text: 'חזרה לעמוד הראשון',
+    text: 'המשך ללא שמירה',
   });
 
-  backButton.addEventListener('click', () => {
-    location.hash = '#/workbook/1';
+  continueButton.addEventListener('click', () => {
+    location.hash = '#/workbook/' + String(pageNumber);
   });
 
-  actions.append(registerButton, backButton);
+  actions.append(registerButton, continueButton);
   card.append(actions);
   outlet.replaceChildren(card);
 }
@@ -149,6 +154,7 @@ export function attachLmsToPage(
   pageNumber: number,
 ): AttachResult {
   const session = currentSession();
+  const persistenceEnabled = session !== null;
   const uid = session?.uid || 'guest';
 
   const targets = Array.from(
@@ -172,8 +178,8 @@ export function attachLmsToPage(
     elem('div', {
       class: 'lms-panel__identity',
       text: session
-        ? 'תלמיד: ' + session.fullName
-        : 'מצב אורח — עמוד ראשון בלבד',
+        ? 'תלמיד: ' + session.fullName + ' — השמירה פעילה'
+        : 'תרגול ללא הרשמה — אין שמירה או מעקב',
     }),
   );
 
@@ -214,7 +220,7 @@ export function attachLmsToPage(
   const accountButton = elem('button', {
     class: 'btn btn--ghost',
     type: 'button',
-    text: session ? 'החשבון שלי' : 'הרשמה / התחברות',
+    text: session ? 'החשבון שלי' : 'הרשמה לשמירה ודוחות',
   });
 
   accountButton.addEventListener('click', () => {
@@ -330,10 +336,6 @@ export function attachLmsToPage(
     qid: string,
   ): boolean {
     const progress = progressFor(qid);
-    /* Input can happen before the asynchronous repository key has finished
-       loading. Explicit/implicit authoring already places the same reviewed
-       answers on the target, so use that safe inline key until the repository
-       key arrives. */
     const storedExpected = answerKey[qid] || [];
     const expected = storedExpected.length > 0
       ? storedExpected
@@ -352,6 +354,7 @@ export function attachLmsToPage(
     operation: 'draft' | 'result',
     outcome: PersistenceOutcome,
   ): boolean {
+    if (!persistenceEnabled) return true;
     const failed = outcome.central === 'failed';
     if (operation === 'draft') draftSyncFailed = failed;
     else resultSyncFailed = failed;
@@ -364,6 +367,7 @@ export function attachLmsToPage(
   }
 
   async function persistDraft(): Promise<PersistenceOutcome> {
+    if (!persistenceEnabled) return noSaveOutcome();
     const outcome = await saveDraft(draft);
     rememberOutcome('draft', outcome);
     if (outcome.central === 'failed') {
@@ -375,6 +379,7 @@ export function attachLmsToPage(
   async function persistActivity(
     event: ActivityEvent,
   ): Promise<PersistenceOutcome> {
+    if (!persistenceEnabled) return noSaveOutcome();
     const stableEvent: ActivityEvent = {
       ...event,
       id: event.id || crypto.randomUUID(),
@@ -395,6 +400,7 @@ export function attachLmsToPage(
   }
 
   async function retrySynchronization(): Promise<void> {
+    if (!persistenceEnabled) return;
     retryButton.disabled = true;
     setMessage(status, 'מנסה לסנכרן מחדש…');
     const resultToRetry = resultSyncFailed ? latestResult : null;
@@ -425,6 +431,7 @@ export function attachLmsToPage(
   }
 
   function scheduleSave(): void {
+    if (!persistenceEnabled) return;
     if (saveTimer !== undefined) {
       window.clearTimeout(saveTimer);
     }
@@ -536,8 +543,8 @@ export function attachLmsToPage(
     });
 
     if (
-      draftOutcome.central === 'failed' ||
-      activityOutcome.central === 'failed'
+      persistenceEnabled &&
+      (draftOutcome.central === 'failed' || activityOutcome.central === 'failed')
     ) {
       setMessage(
         status,
@@ -547,7 +554,7 @@ export function attachLmsToPage(
     } else if (keyed === 0 && targets.length > 0) {
       setMessage(
         status,
-        'לעמוד הזה עדיין לא הוגדר מפתח תשובות. מנהל יכול לפתוח מצב מורה ולשמור את התשובות הנכונות.',
+        'לעמוד הזה עדיין לא הוגדרה בדיקה אוטומטית מלאה. העמוד נשאר פתוח, אך אין לפרסם גרסה סופית עד שהשאלה תתוקשב ותיבדק.',
         'error',
       );
     } else if (remaining > 0) {
@@ -557,6 +564,12 @@ export function attachLmsToPage(
           String(remaining) +
           ' תשובות לתיקון. לכל תשובה מותר עד 3 ניסיונות.',
         'normal',
+      );
+    } else if (!persistenceEnabled) {
+      setMessage(
+        status,
+        'הבדיקה הושלמה. זהו תרגול ללא הרשמה ולכן התוצאה אינה נשמרת. אפשר להירשם בכל שלב כדי להפעיל שמירה ודוחות.',
+        'success',
       );
     } else {
       setMessage(
@@ -594,8 +607,8 @@ export function attachLmsToPage(
       snapshotAnswers();
 
       let score = 100;
-      let attempts: Record<string, number> = {};
-      let answers: Record<string, string> = {};
+      const attempts: Record<string, number> = {};
+      const answers: Record<string, string> = {};
 
       if (targets.length > 0) {
         const summary = await runCheck();
@@ -653,7 +666,9 @@ export function attachLmsToPage(
         submissionId: crypto.randomUUID(),
       };
 
-      const resultOutcome = await savePageResult(latestResult);
+      const resultOutcome = persistenceEnabled
+        ? await savePageResult(latestResult)
+        : noSaveOutcome();
       rememberOutcome('result', resultOutcome);
 
       draft.submitted = true;
@@ -679,7 +694,7 @@ export function attachLmsToPage(
         if (qid) updateTarget(target, progressFor(qid));
       }
 
-      const syncFailed = [
+      const syncFailed = persistenceEnabled && [
         resultOutcome,
         draftOutcome,
         activityOutcome,
@@ -691,13 +706,13 @@ export function attachLmsToPage(
           'ההגשה נשמרה במכשיר, אבל הסנכרון המרכזי לא הושלם. לחצו על ניסיון סנכרון נוסף.',
           'error',
         );
-      } else if (uid === 'guest' && pageNumber === 1) {
+      } else if (!persistenceEnabled) {
         setMessage(
           status,
-          'העמוד נשמר במכשיר במצב אורח. כדי לעבור לעמוד 2 יש להירשם, ואז הציון ישויך לחשבון.',
+          'קיבלת ציון לתרגול. מאחר שלא נרשמת, הציון והפעילות לא נשמרו ולא תועדו. הרשמה תפעיל שמירה ודוחות לפעילות שתבצע לאחר ההתחברות.',
           'success',
         );
-        accountButton.textContent = 'הרשמה ושמירת ההתקדמות';
+        accountButton.textContent = 'הרשמה לשמירה ודוחות';
       } else if (resultOutcome.central === 'saved') {
         setMessage(
           status,
@@ -709,7 +724,7 @@ export function attachLmsToPage(
       } else {
         setMessage(
           status,
-          'ההגשה נשמרה במכשיר בלבד; סנכרון מרכזי אינו פעיל.',
+          'ההגשה נשמרה בחשבון המקומי הרשום; סנכרון מרכזי אינו פעיל.',
           'normal',
         );
       }
@@ -734,7 +749,7 @@ export function attachLmsToPage(
   });
 
   const retryWhenOnline = (): void => {
-    if (!retryButton.hidden) void retrySynchronization();
+    if (persistenceEnabled && !retryButton.hidden) void retrySynchronization();
   };
   window.addEventListener('online', retryWhenOnline);
 
@@ -868,11 +883,19 @@ export function attachLmsToPage(
     });
   });
 
-  void Promise.all([
-    loadDraft(uid, pageNumber),
-    loadAnswerKey(pageNumber),
-    loadPageResult(uid, pageNumber),
-  ]).then(([storedDraft, storedKey, storedResult]) => {
+  const statePromise = persistenceEnabled
+    ? Promise.all([
+        loadDraft(uid, pageNumber),
+        loadAnswerKey(pageNumber),
+        loadPageResult(uid, pageNumber),
+      ])
+    : Promise.all([
+        Promise.resolve<PageDraft | null>(null),
+        loadAnswerKey(pageNumber),
+        Promise.resolve<PageResult | null>(null),
+      ]);
+
+  void statePromise.then(([storedDraft, storedKey, storedResult]) => {
     answerKey = storedKey;
     latestResult = storedResult;
 
@@ -918,22 +941,27 @@ export function attachLmsToPage(
     if (draft.submitted) {
       setMessage(
         status,
-        'העמוד כבר הוגש. הציון והתקדמות הניסיונות נשמרו.',
+        persistenceEnabled
+          ? 'העמוד כבר הוגש. הציון והתקדמות הניסיונות נשמרו.'
+          : 'העמוד הוגש בתרגול הנוכחי בלבד. ללא הרשמה אין שמירה לאחר יציאה או רענון.',
         'success',
       );
     } else if (targets.length === 0) {
       setMessage(
         status,
-        'זהו עמוד פעילות או משחק. בסיום לחצו על כפתור ההשלמה.',
+        persistenceEnabled
+          ? 'זהו עמוד פעילות. בסיום לחצו על כפתור ההשלמה; הפעילות תישמר בחשבון.'
+          : 'זהו עמוד פעילות. אפשר לבצע אותו ללא הרשמה; הפעילות לא תישמר.',
       );
     } else if (keyedCount > 0) {
       setMessage(
         status,
         'נמצאו ' +
           String(targets.length) +
-          ' אזורי מענה. מפתח אוטומטי זמין ל־' +
+          ' אזורי מענה. בדיקה אוטומטית זמינה ל־' +
           String(keyedCount) +
-          ' תשובות.',
+          ' תשובות.' +
+          (persistenceEnabled ? ' השמירה פעילה.' : ' אין שמירה ללא הרשמה.'),
         'success',
       );
     } else {
@@ -941,13 +969,16 @@ export function attachLmsToPage(
         status,
         'נמצאו ' +
           String(targets.length) +
-          ' אזורי מענה. נדרש מפתח תשובות של המורה לעמוד זה.',
+          ' אזורי מענה, אך הבדיקה האוטומטית לעמוד הזה עדיין אינה שלמה.',
+        'error',
       );
     }
   }).catch(() => {
     setMessage(
       status,
-      'טעינת ההתקדמות נכשלה. ההגשה מושבתת כדי למנוע דריסה של נתונים קיימים; רעננו את העמוד ונסו שוב.',
+      persistenceEnabled
+        ? 'טעינת ההתקדמות נכשלה. ההגשה מושבתת כדי למנוע דריסה של נתונים קיימים; רעננו את העמוד ונסו שוב.'
+        : 'טעינת בדיקת התשובות נכשלה. רעננו את העמוד ונסו שוב.',
       'error',
     );
   });
@@ -962,25 +993,27 @@ export function attachLmsToPage(
     },
   });
 
-  const heartbeat = window.setInterval(() => {
-    touch();
-    scheduleSave();
+  const heartbeat = persistenceEnabled
+    ? window.setInterval(() => {
+        touch();
+        scheduleSave();
 
-    void persistActivity({
-      uid,
-      pageNumber,
-      type: 'heartbeat',
-      createdAt: Date.now(),
-      metadata: {
-        activeSeconds: draft.activeSeconds,
-      },
-    });
-  }, LMS_CONFIG.activityHeartbeatSeconds * 1000);
+        void persistActivity({
+          uid,
+          pageNumber,
+          type: 'heartbeat',
+          createdAt: Date.now(),
+          metadata: {
+            activeSeconds: draft.activeSeconds,
+          },
+        });
+      }, LMS_CONFIG.activityHeartbeatSeconds * 1000)
+    : undefined;
 
   return {
     panel,
     cleanup: () => {
-      window.clearInterval(heartbeat);
+      if (heartbeat !== undefined) window.clearInterval(heartbeat);
 
       if (saveTimer !== undefined) {
         window.clearTimeout(saveTimer);
@@ -988,17 +1021,19 @@ export function attachLmsToPage(
 
       touch();
       snapshotAnswers();
-      void persistDraft();
 
-      void persistActivity({
-        uid,
-        pageNumber,
-        type: 'page_leave',
-        createdAt: Date.now(),
-        metadata: {
-          activeSeconds: draft.activeSeconds,
-        },
-      });
+      if (persistenceEnabled) {
+        void persistDraft();
+        void persistActivity({
+          uid,
+          pageNumber,
+          type: 'page_leave',
+          createdAt: Date.now(),
+          metadata: {
+            activeSeconds: draft.activeSeconds,
+          },
+        });
+      }
 
       for (const listener of listeners) {
         listener.target.removeEventListener(
