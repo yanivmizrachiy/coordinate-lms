@@ -1,3 +1,5 @@
+import { evaluateDigitalGroupRule } from './digitalPredicates';
+
 const MAX_ANSWER_LENGTH = 120;
 
 function numericValue(raw: string): number | null {
@@ -81,6 +83,16 @@ function axisAliasMatches(raw: string, candidate: string): boolean {
   return axisName(raw) === expectedAxis;
 }
 
+function predicateMatches(raw: string, candidate: string): boolean {
+  if (candidate === 'predicate:distinct-coordinate-pairs') {
+    return evaluateDigitalGroupRule(
+      'distinct-coordinate-pairs',
+      raw.split('|'),
+    );
+  }
+  return false;
+}
+
 export function answersMatch(raw: string, expected: readonly string[]): boolean {
   if (!isAllowedExpectedAnswer(raw)) return false;
 
@@ -89,6 +101,9 @@ export function answersMatch(raw: string, expected: readonly string[]): boolean 
 
   return expected.some((candidate) => {
     if (!isAllowedExpectedAnswer(candidate)) return false;
+    if (candidate.startsWith('predicate:')) {
+      return predicateMatches(raw, candidate);
+    }
     if (candidate.startsWith('set:')) {
       const expectedTokens = candidate
         .slice(4)
