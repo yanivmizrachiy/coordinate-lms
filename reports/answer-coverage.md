@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:12:28.714Z
+Generated: 2026-08-14T14:13:02.265Z
 
-Overall: 936/1162 safely checkable targets (80.6%).
+Overall: 942/1162 safely checkable targets (81.1%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 203 |
+| canonical-metadata-derived | 209 |
 | deterministic-mathematical | 547 |
 | valid-range | 6 |
-| open-ended | 119 |
-| ambiguous | 107 |
+| open-ended | 118 |
+| ambiguous | 102 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1477,11 +1477,11 @@ No detected interactive response targets.
 
 ### Page 65 — קריאת גרפים ברביע הראשון
 
-13/17 safely checkable (76.5%).
+17/17 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p65-q1 | text:concept | ambiguous | no | none | בגרף של נתונים, שיעור ה־x אומר מתי או כמה, ושיעור ה־y אומר את ה[…] שהתקבלה. |
+| p65-q1 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | בגרף של נתונים, שיעור ה־x אומר מתי או כמה, ושיעור ה־y אומר את ה[…] שהתקבלה. |
 | p65-q2 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | כל נקודה בגרף נכתבת כזוג […], בדיוק כמו במערכת הצירים. |
 | p65-q3 | text:property | reviewed-explicit | yes | target-bound reviewed proof | המשמעות של נקודה היא מה ששני השיעורים שלה אומרים יחד, ולא כל שיעור […]. |
 | p65-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה D הם D([…],[…]), כלומר 40 דקות למידה ו־[…] שאלות. |
@@ -1489,23 +1489,23 @@ No detected interactive response targets.
 | p65-q6 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה D הם D([…],[…]), כלומר 40 דקות למידה ו־[…] שאלות. |
 | p65-q7 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה […] מתארת את התלמיד שפתר את מספר השאלות הגדול ביותר. |
 | p65-q8 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות B ו־C יש שיעור […] זהה, כלומר שני התלמידים פתרו אותו מספר שאלות. |
-| p65-q9 | text:relation | ambiguous | no | none | לשתי הנקודות D ו־E יש שיעור y זהה, אבל שיעור ה־x של הנקודה E […]. |
+| p65-q9 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי הנקודות D ו־E יש שיעור y זהה, אבל שיעור ה־x של הנקודה E […]. |
 | p65-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | משמעות הנקודה D(4,5): התלמיד למד […] עשרות דקות, ופתר 5 שאלות. |
 | p65-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | משמעות הנקודה A(1,2): התלמיד למד 10 דקות, ופתר […] שאלות. |
 | p65-q12 | text:relation | deterministic-mathematical | yes | target-bound reviewed proof | שתי הנקודות B ו־C שונות זו מזו, אבל המשמעות המשותפת שלהן היא שהתלמידים פתרו […] שאלות. |
-| p65-q13 | text:relation | ambiguous | no | none | ככל ששיעור ה־x גדל, שיעור ה־y בדרך כלל […]. |
+| p65-q13 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ככל ששיעור ה־x גדל, שיעור ה־y בדרך כלל […]. |
 | p65-q14 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 6 − 2=[…]שאלות |
 | p65-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על הגרף נקודה G של תלמיד שלמד 50 דקות ופתר 4 שאלות: G([…],[…]). |
 | p65-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על הגרף נקודה G של תלמיד שלמד 50 דקות ופתר 4 שאלות: G([…],[…]). |
-| p65-q17 | text:direction | ambiguous | no | none | הנקודה G ממוקמת מימין לנקודה D וגם […] לה. |
+| p65-q17 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה G ממוקמת מימין לנקודה D וגם […] לה. |
 
 ### Page 66 — קריאת גרפים ברביע הראשון
 
-11/13 safely checkable (84.6%).
+13/13 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p66-q1 | text:concept | ambiguous | no | none | כאשר ציר ה־x מציין שנים, ההפרש בין שיעורי ה־x של שתי נקודות הוא מספר ה[…] שעברו. |
+| p66-q1 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | כאשר ציר ה־x מציין שנים, ההפרש בין שיעורי ה־x של שתי נקודות הוא מספר ה[…] שעברו. |
 | p66-q2 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בשנה השלישית נרשמו […] עשרות תלמידים, ולכן הנקודה שמתאימה לה היא ([…],[…]). |
 | p66-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | בשנה השלישית נרשמו […] עשרות תלמידים, ולכן הנקודה שמתאימה לה היא ([…],[…]). |
 | p66-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | בשנה השלישית נרשמו […] עשרות תלמידים, ולכן הנקודה שמתאימה לה היא ([…],[…]). |
@@ -1517,7 +1517,7 @@ No detected interactive response targets.
 | p66-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 6 − 2=[…]עשרות |
 | p66-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על הגרף נקודה שמתארת את השנה השמינית, שבה נרשמו 70 תלמידים: ([…],[…]). |
 | p66-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על הגרף נקודה שמתארת את השנה השמינית, שבה נרשמו 70 תלמידים: ([…],[…]). |
-| p66-q13 | text:direction | open-ended | no | teacher judgment required | הנקודה שסימנתם ממוקמת […] מכל הנקודות האחרות בגרף. |
+| p66-q13 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה שסימנתם ממוקמת […] מכל הנקודות האחרות בגרף. |
 
 ### Page 67 — קריאת גרפים ברביע הראשון
 

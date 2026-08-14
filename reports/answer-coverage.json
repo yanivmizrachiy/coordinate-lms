@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T14:12:28.714Z",
+  "generatedAt": "2026-08-14T14:13:02.265Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 936,
-  "coveragePercentage": 80.6,
+  "automaticallyCheckableTargets": 942,
+  "coveragePercentage": 81.1,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 203,
+    "canonical-metadata-derived": 209,
     "deterministic-mathematical": 547,
     "valid-range": 6,
-    "open-ended": 119,
-    "ambiguous": 107,
+    "open-ended": 118,
+    "ambiguous": 102,
     "unsupported": 0,
     "missing": 0
   },
@@ -16249,11 +16249,14 @@
           "inputType": "text:concept",
           "context": "בגרף של נתונים, שיעור ה־x אומר מתי או כמה, ושיעור ה־y אומר את ה[…] שהתקבלה.",
           "signature": "33f56b4a",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "התוצאה",
+            "תוצאה"
+          ]
         },
         {
           "targetId": "p65-q2",
@@ -16361,11 +16364,14 @@
           "inputType": "text:relation",
           "context": "לשתי הנקודות D ו־E יש שיעור y זהה, אבל שיעור ה־x של הנקודה E […].",
           "signature": "1f477b67",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "גדול יותר",
+            "גדול"
+          ]
         },
         {
           "targetId": "p65-q10",
@@ -16415,11 +16421,14 @@
           "inputType": "text:relation",
           "context": "ככל ששיעור ה־x גדל, שיעור ה־y בדרך כלל […].",
           "signature": "63a4b3b6",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "גדל",
+            "עולה"
+          ]
         },
         {
           "targetId": "p65-q14",
@@ -16469,21 +16478,19 @@
           "inputType": "text:direction",
           "context": "הנקודה G ממוקמת מימין לנקודה D וגם […] לה.",
           "signature": "579065ef",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מתחת",
+            "מתחתיה"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p65-q1",
-        "p65-q9",
-        "p65-q13",
-        "p65-q17"
-      ],
-      "automaticallyCheckableTargets": 13,
-      "coveragePercentage": 76.5
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 17,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 66,
@@ -16511,11 +16518,14 @@
           "inputType": "text:concept",
           "context": "כאשר ציר ה־x מציין שנים, ההפרש בין שיעורי ה־x של שתי נקודות הוא מספר ה[…] שעברו.",
           "signature": "a962d02f",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "שנים",
+            "שנה"
+          ]
         },
         {
           "targetId": "p66-q2",
@@ -16678,19 +16688,19 @@
           "inputType": "text:direction",
           "context": "הנקודה שסימנתם ממוקמת […] מכל הנקודות האחרות בגרף.",
           "signature": "c19d5f79",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מימין",
+            "ימינה"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p66-q1",
-        "p66-q13"
-      ],
-      "automaticallyCheckableTargets": 11,
-      "coveragePercentage": 84.6
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 13,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 67,

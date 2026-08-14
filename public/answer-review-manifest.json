@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T14:12:28.714Z",
+  "generatedAt": "2026-08-14T14:13:02.265Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -13593,10 +13593,13 @@
           "targetId": "p65-q1",
           "signature": "33f56b4a",
           "inputType": "text:concept",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "התוצאה",
+            "תוצאה"
+          ],
           "context": "בגרף של נתונים, שיעור ה־x אומר מתי או כמה, ושיעור ה־y אומר את ה[…] שהתקבלה."
         },
         {
@@ -13697,10 +13700,13 @@
           "targetId": "p65-q9",
           "signature": "1f477b67",
           "inputType": "text:relation",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "גדול יותר",
+            "גדול"
+          ],
           "context": "לשתי הנקודות D ו־E יש שיעור y זהה, אבל שיעור ה־x של הנקודה E […]."
         },
         {
@@ -13747,10 +13753,13 @@
           "targetId": "p65-q13",
           "signature": "63a4b3b6",
           "inputType": "text:relation",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "גדל",
+            "עולה"
+          ],
           "context": "ככל ששיעור ה־x גדל, שיעור ה־y בדרך כלל […]."
         },
         {
@@ -13797,10 +13806,13 @@
           "targetId": "p65-q17",
           "signature": "579065ef",
           "inputType": "text:direction",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מתחת",
+            "מתחתיה"
+          ],
           "context": "הנקודה G ממוקמת מימין לנקודה D וגם […] לה."
         }
       ]
@@ -13814,10 +13826,13 @@
           "targetId": "p66-q1",
           "signature": "a962d02f",
           "inputType": "text:concept",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "שנים",
+            "שנה"
+          ],
           "context": "כאשר ציר ה־x מציין שנים, ההפרש בין שיעורי ה־x של שתי נקודות הוא מספר ה[…] שעברו."
         },
         {
@@ -13969,10 +13984,13 @@
           "targetId": "p66-q13",
           "signature": "c19d5f79",
           "inputType": "text:direction",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מימין",
+            "ימינה"
+          ],
           "context": "הנקודה שסימנתם ממוקמת […] מכל הנקודות האחרות בגרף."
         }
       ]
