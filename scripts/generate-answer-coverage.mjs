@@ -72,9 +72,6 @@ function applyRuntimePredicateCoverage(report, predicateRuleForCoverage) {
       target.answers = [`predicate:${rule}`];
     }
 
-    // A group proxy is an implementation detail used by the runtime to grade
-    // several visible response fields atomically. It is not a learner-facing
-    // response target and must not inflate the coverage denominator.
     page.targets = page.targets.filter((target) => !isHiddenRuntimeGroupProxy(target));
   }
 
@@ -91,9 +88,12 @@ const server = await createServer({
 try {
   const coverage = await server.ssrLoadModule('/src/lms/answerCoverage.ts');
   const predicates = await server.ssrLoadModule('/src/lms/digitalPredicates.ts');
+  const segments = await server.ssrLoadModule('/src/lms/digitalSegmentPredicates.ts');
   const report = applyRuntimePredicateCoverage(
     coverage.buildAnswerCoverageReport(await existingGeneratedAt()),
-    predicates.predicateRuleForCoverage,
+    (context, inputType) =>
+      predicates.predicateRuleForCoverage(context, inputType) ??
+      segments.segmentPredicateRuleForCoverage(context, inputType),
   );
   const order = coverage.answerTargetOrderSnapshot(report);
   const reviewManifest = {
