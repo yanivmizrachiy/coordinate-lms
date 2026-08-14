@@ -77,11 +77,13 @@ describe('answer-key coverage intelligence', () => {
     );
 
     expect(proofs).toHaveLength(735);
+    let mappedProofs = 0;
     let retainedProofs = 0;
     let staleProofs = 0;
     for (const [targetId, proof] of proofs) {
       const currentTargetId = currentTargetIdForLegacy(targetId);
       if (!currentTargetId) continue;
+      mappedProofs += 1;
       const target = targets.get(currentTargetId);
       if (!target || target.signature !== proof.targetSignature) {
         staleProofs += 1;
@@ -93,7 +95,8 @@ describe('answer-key coverage intelligence', () => {
       expect(target.automaticCheckingSafe, targetId).toBe(true);
       expect(proof.sourceEvidence, targetId).toMatch(/^src\/data\/workbook\/pages\//);
     }
-    expect(retainedProofs).toBeGreaterThan(580);
+    expect(retainedProofs + staleProofs).toBe(mappedProofs);
+    expect(retainedProofs).toBeGreaterThan(staleProofs);
     expect(staleProofs).toBeGreaterThan(0);
   });
 
@@ -105,6 +108,7 @@ describe('answer-key coverage intelligence', () => {
     );
 
     expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(161);
+    let mapped = 0;
     let retained = 0;
     let stillOpen = 0;
     let upgraded = 0;
@@ -115,6 +119,7 @@ describe('answer-key coverage intelligence', () => {
     )) {
       const currentTargetId = currentTargetIdForLegacy(targetId);
       if (!currentTargetId) continue;
+      mapped += 1;
       const target = targets.get(currentTargetId);
       if (!target || target.signature !== signature) {
         stale += 1;
@@ -140,7 +145,8 @@ describe('answer-key coverage intelligence', () => {
       }
     }
 
-    expect(retained).toBeGreaterThan(120);
+    expect(retained + stale).toBe(mapped);
+    expect(retained).toBeGreaterThan(stale);
     expect(upgraded).toBeGreaterThan(0);
     expect(stillOpen).toBeGreaterThan(0);
     expect(stale).toBeGreaterThan(0);
