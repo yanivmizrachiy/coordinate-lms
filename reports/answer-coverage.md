@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:54:21.647Z
+Generated: 2026-08-14T15:49:52.090Z
 
-Overall: 995/1162 safely checkable targets (85.6%).
+Overall: 999/1162 safely checkable targets (86%).
 
 ## Classification totals
 
@@ -10,10 +10,10 @@ Overall: 995/1162 safely checkable targets (85.6%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 268 |
-| deterministic-mathematical | 541 |
+| deterministic-mathematical | 545 |
 | valid-range | 6 |
 | open-ended | 118 |
-| ambiguous | 49 |
+| ambiguous | 45 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1134,7 +1134,7 @@ No detected interactive response targets.
 
 ### Page 50 — קטעים מקבילים לצירים
 
-10/14 safely checkable (71.4%).
+14/14 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1147,10 +1147,10 @@ No detected interactive response targets.
 | p50-q7 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | קטע המקביל לציר x הוא בהכרח מאונך לציר y. נכוןלא נכון […] |
 | p50-q8 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | אם שתי נקודות ממוקמות על קטע המקביל לציר y, שיעור ה־y שלהן זהה. נכוןלא נכון […] |
 | p50-q9 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | אם שתי נקודות ממוקמות על קטע המקביל לציר x, שיעור ה־y שלהן זהה. נכוןלא נכון […] |
-| p50-q10 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
-| p50-q11 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
-| p50-q12 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
-| p50-q13 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
+| p50-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
+| p50-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
+| p50-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
+| p50-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
 | p50-q14 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הקטע שסימנתם מאונך בהכרח לציר […]. |
 
 ### Page 51 — המלבן ברביע הראשון

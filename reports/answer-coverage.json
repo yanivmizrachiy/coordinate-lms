@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T14:54:21.647Z",
+  "generatedAt": "2026-08-14T15:49:52.090Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 995,
-  "coveragePercentage": 85.6,
+  "automaticallyCheckableTargets": 999,
+  "coveragePercentage": 86,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 268,
-    "deterministic-mathematical": 541,
+    "deterministic-mathematical": 545,
     "valid-range": 6,
     "open-ended": 118,
-    "ambiguous": 49,
+    "ambiguous": 45,
     "unsupported": 0,
     "missing": 0
   },
@@ -12675,11 +12675,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]).",
           "signature": "376f33f4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ]
         },
         {
           "targetId": "p50-q11",
@@ -12687,11 +12689,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]).",
           "signature": "376f33f4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ]
         },
         {
           "targetId": "p50-q12",
@@ -12699,11 +12703,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]).",
           "signature": "376f33f4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ]
         },
         {
           "targetId": "p50-q13",
@@ -12711,11 +12717,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]).",
           "signature": "376f33f4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ]
         },
         {
           "targetId": "p50-q14",
@@ -12733,14 +12741,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p50-q10",
-        "p50-q11",
-        "p50-q12",
-        "p50-q13"
-      ],
-      "automaticallyCheckableTargets": 10,
-      "coveragePercentage": 71.4
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 14,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 51,

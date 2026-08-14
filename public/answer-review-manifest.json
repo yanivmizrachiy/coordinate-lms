@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T14:54:21.647Z",
+  "generatedAt": "2026-08-14T15:49:52.090Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -10709,10 +10709,12 @@
           "targetId": "p50-q10",
           "signature": "376f33f4",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…])."
         },
         {
@@ -10720,10 +10722,12 @@
           "targetId": "p50-q11",
           "signature": "376f33f4",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…])."
         },
         {
@@ -10731,10 +10735,12 @@
           "targetId": "p50-q12",
           "signature": "376f33f4",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…])."
         },
         {
@@ -10742,10 +10748,12 @@
           "targetId": "p50-q13",
           "signature": "376f33f4",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:same-x-coordinate-pairs",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:same-x-coordinate-pairs"
+          ],
           "context": "סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…])."
         },
         {
