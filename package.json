@@ -29,7 +29,6 @@
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.1.2",
     "linkedom": "^0.18.13",
-    "postcss": "8.5.23",
     "typescript": "^5.7.2",
     "vite": "^6.4.3",
     "vitest": "^4.1.10"
