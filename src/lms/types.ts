@@ -76,13 +76,13 @@ export interface PageResult {
 export interface SyncErrorRecord {
   uid: string;
   pageNumber: number;
-  operation: 'draft' | 'result' | 'activity' | 'guest-transfer' | 'dashboard';
+  operation: 'draft' | 'result' | 'activity' | 'dashboard';
   createdAt: number;
   message: string;
 }
 
 export interface PersistenceOutcome {
-  localSaved: true;
+  localSaved: boolean;
   central: 'saved' | 'failed' | 'not-required';
   error?: string;
 }
