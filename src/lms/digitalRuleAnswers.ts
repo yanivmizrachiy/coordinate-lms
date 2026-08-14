@@ -24,6 +24,14 @@ function cardByHeading(root: ParentNode, needle: string): HTMLElement | undefine
   );
 }
 
+function setCalcFinals(container: ParentNode | undefined, values: readonly string[]): void {
+  if (!container) return;
+  const finals = Array.from(
+    container.querySelectorAll<HTMLElement>('.calc-final .blank'),
+  );
+  values.forEach((value, index) => setAnswer(finals[index], value));
+}
+
 function hydrateRuleToGraph(root: ParentNode): void {
   const first = cardByHeading(root, 'y = 2x');
   if (first) {
@@ -63,12 +71,36 @@ function hydrateRectangleVertices(root: ParentNode): void {
     !text.includes('אורכו 4 יחידות') ||
     !text.includes('רוחבו 3 יחידות')
   ) return;
+  setCalcFinals(build, ['14', '12']);
+}
 
-  const finals = Array.from(
-    build.querySelectorAll<HTMLElement>('.calc-final .blank'),
-  );
-  setAnswer(finals[0], '14');
-  setAnswer(finals[1], '12');
+function hydrateFixedRectangleAndSquareCalculations(root: ParentNode, sheetText: string): void {
+  if (sheetText.includes('מוצאים קודקוד חסר, ומחשבים אורך ורוחב')) {
+    // PQRS = (2,2),(7,2),(7,5),(2,5): 5×3.
+    setCalcFinals(cardByHeading(root, 'אורך ורוחב של מלבן'), ['16', '15']);
+  }
+
+  if (sheetText.includes('ריבועים ומלבנים — שטח והיקף')) {
+    // ABCD is 4×4. Rectangle A is 6×2; rectangle B is 3×4.
+    setCalcFinals(cardByHeading(root, 'א. הריבוע'), ['16', '16']);
+    setCalcFinals(cardByHeading(root, 'ב. חשבו שטח והיקף'), ['16', '12', '14', '12']);
+  }
+
+  if (
+    sheetText.includes('משלימים קודקוד חסר, ומכריעים אם טענה נכונה בהכרח') &&
+    sheetText.includes('A(2,2)') &&
+    sheetText.includes('B(2,6)') &&
+    sheetText.includes('C(7,6)')
+  ) {
+    // Fixed rectangle is 5×4.
+    setCalcFinals(cardByHeading(root, 'א. משלימים את הקודקוד החסר'), ['18', '20']);
+  }
+
+  if (sheetText.includes('ריבוע ברביע הראשון') && sheetText.includes('יישום משולב של כל הכללים')) {
+    // First square has side 4; described square has side 3.
+    setCalcFinals(cardByHeading(root, 'משלימים ריבוע'), ['16', '16']);
+    setCalcFinals(cardByHeading(root, 'ריבוע מתיאור'), ['12', '9']);
+  }
 }
 
 function hydrateSameAxisPrint(root: ParentNode): void {
@@ -132,6 +164,8 @@ export function hydrateDigitalRuleAnswers(root: ParentNode): void {
   if (sheetText.includes('קודקודים של מלבן')) {
     hydrateRectangleVertices(root);
   }
+
+  hydrateFixedRectangleAndSquareCalculations(root, sheetText);
 
   if (sheetText.includes('אותו x או אותו y')) {
     hydrateSameAxisPrint(root);
