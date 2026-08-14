@@ -2,17 +2,8 @@ import type { WorkbookPageContent } from '../types';
 import { sheet, blank, ltr, pair, colorGrid, wordBlank } from '../authoring';
 import { decodeTargets, decodeXMax, decodeYMax } from '../../colorDecode';
 
-/* פענוח צבעוני — הגרסה המודפסת. הדף הזה החליף שעשועון מקוון שבו צובעים תאים
-   בלחיצה: יניב — „אנחנו רק דפים להדפסה ולא מתוקשב!!" (31.07.2026, כמו
-   „ציור נסתר" ו„מילת הצופן"). אותה מיומנות בדיוק — צביעת תאים לפי זוגות
-   סדורים — עכשיו בעיפרון, על רשת מודפסת.
-
-   02.08.2026 — יניב: „מה הקשר לרביע ראשון? זה לא הצירים הנכונים!! אין כאן
-   משהו מעניין — תיצור משהו מדויק ומועיל". תוקן: (1) הרשת מציגה רביע ראשון
-   כמו כל סרטוט אחר בחוברת — ראשית הצירים בפינה שמאל־תחתונה, x גדל ימינה
-   (‏`.color-grid` עבר מ־`direction: rtl` ל־`ltr`). (2) הסמל אינו עוד „וי"
-   שרירותי אלא **חץ מעלה** סימטרי סביב x=3 שמצביע אל תוך הרביע לכיוון
-   ה־y הגדל — צורה מדויקת שנותנת שאלות על קו אנכי, סימטריה והפרשים. */
+/* Canonical printable-page content mirrored into the LMS. The printable source
+   remains unchanged; computerized interaction is added only by the LMS layer. */
 const listText = decodeTargets.map((p) => `(${p.x},${p.y})`).join(' · ');
 
 export const COLOR_DECODE_PRINT: WorkbookPageContent = sheet({
