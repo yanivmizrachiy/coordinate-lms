@@ -11,9 +11,12 @@ this file, the current instruction wins and this file must be reconciled.
 
 - The only writable repository for LMS work is
   `yanivmizrachiy/coordinate-lms`.
-- `yanivmizrachiy/coordinate-first-quadrant` is the canonical source workbook
-  and is read-only. Never commit, push, merge, deploy, or otherwise modify it
-  while doing LMS work.
+- `yanivmizrachiy/coordinate-first-quadrant` is the canonical printable workbook
+  source and is strictly read-only during LMS work. Never commit, push, merge,
+  deploy, rewrite, or otherwise modify it while implementing computerized pages.
+- **All current interaction, answer-checking, pedagogical adaptation, and UI work
+  applies only to the computerized/LMS pages. The ordinary printable pages must
+  not be changed for these requirements.**
 - Preserve unrelated work and never rewrite shared history. Do not use
   `git reset --hard`, force-push, or forced dependency-audit fixes.
 - A feature branch and draft pull request are allowed. Merging and production
@@ -22,34 +25,83 @@ this file, the current instruction wins and this file must be reconciled.
 
 ## Canonical workbook integrity and synchronization
 
-- The printed workbook is the content and graphics source of truth. Its current
+- The printable workbook is the content and graphics source of truth. Its current
   canonical order contains 78 numbered pages; the LMS must be brought into and
   kept in one-to-one synchronization with that source rather than maintaining a
-  separately edited copy.
+  separately edited print copy.
 - Canonical Hebrew wording, mathematics, diagrams, page order, RTL behavior,
   A4 pagination, colours, typography, and graphic layout must remain identical
   by default between print and the computerized page.
-- A change in the canonical printed source must cause the corresponding digital
+- A change in the canonical printable source must cause the corresponding digital
   page content/graphics to change automatically. CI must detect source/LMS drift
   and block a release rather than silently allowing the two versions to diverge.
 - LMS behavior is an interactive overlay. Interactive controls must be hidden or
   print-neutral and must not obstruct canonical diagrams.
-- **Printed-source protection:** the current interaction and answer-checking work
-  applies only to the computerized/LMS pages. Do not edit the printable workbook,
-  print-source files, printed wording, printed diagrams, or printed layout in
-  order to make computerized checking easier.
-- **Digital-only exception:** if a canonical printed question genuinely cannot
-  support objective computerized checking, do not alter the printed source.
-  The rendered digital layer may omit that response from grading or replace it
-  with a deterministic computerized question that checks the same mathematical
-  skill. Digital adaptations must never leak into printed output.
-- A good canonical question must not be removed merely because several answer
-  orders or notations are valid. Prefer a strict-but-flexible checker that
-  accepts every mathematically equivalent valid arrangement and rejects
-  duplicates, omissions, or invalid combinations.
+- Never edit printable wording, diagrams, layout, or source files merely to make
+  computerized checking easier. Any necessary pedagogical or interaction change
+  belongs only in the digital adaptation layer.
+- A good canonical question must not be removed merely because several answers,
+  answer orders, positions, or notations are valid. Prefer an objective checker
+  that accepts every mathematically valid response and rejects invalid ones.
 - Canonical workbook details recorded in `USER_MEMORY.md` remain a historical
   content contract only where they do not conflict with this file or a current
   instruction.
+
+## Computerized interaction is part of the task
+
+- The computerized page must preserve the mathematical action the student is
+  supposed to perform. Do not reduce every task to typing into a text field.
+- When the task asks the student to mark, choose, or place a point on a diagram or
+  coordinate grid, the computerized task must use direct click/tap interaction on
+  that diagram whenever practical.
+- The student clicks or taps the chosen location, the LMS visibly marks the
+  selected point, and the student submits that actual graphical choice.
+- Typing a coordinate is not a substitute when the intended computerized action
+  is point selection.
+- Similar principles apply to other inherently visual actions: use an appropriate
+  direct digital interaction rather than replacing the mathematical action with
+  unnecessary text entry.
+
+## Objective checking of multiple valid answers
+
+- A task is **not open-ended merely because many answers can be correct**.
+- If validity can be expressed as an objective mathematical condition, the LMS
+  must check that condition automatically. No teacher judgment is required.
+- For point-selection tasks, the checker validates the student's actual selected
+  location against the mathematical predicate at submission time.
+- It must accept every selectable point that satisfies the requirement and reject
+  every selectable point that does not.
+- Examples include: any point with `y = 6`; any point on the x-axis; any point on
+  the x-axis to the right of B; or any other deterministic geometric condition.
+- The checker must never rely on one sample coordinate when the task permits a
+  whole set of correct coordinates.
+- A mathematically valid alternative must not be rejected merely because it
+  differs from an example answer or from the author's first chosen example.
+
+## Pedagogical conversion of explanation questions
+
+- Questions such as **"הסבר מדוע"** must not remain free-text by default in the
+  computerized version merely because automatic checking of prose is difficult.
+- The preferred digital adaptation is a carefully designed selection task with
+  **four answer choices** (or an equivalent compact choice control when the UI
+  requires it), while preserving the same mathematical idea and cognitive goal.
+- There should normally be one best correct explanation and three plausible
+  distractors based on realistic student misconceptions or partial reasoning.
+- Distractors must be mathematically and didactically meaningful. Do not use silly,
+  obviously wrong, grammatically revealing, or unrelated options.
+- The correct option must not be identifiable merely because it is longer, more
+  precise in wording, uniquely formatted, or noticeably different in style.
+- The task must be neither artificially easy nor artificially difficult. It should
+  require genuine mathematical thought at the level appropriate to the original
+  question.
+- Creating the four options requires high-quality pedagogical reasoning: identify
+  the intended concept, anticipate common misconceptions, preserve the original
+  level of thinking, and construct distractors that diagnose understanding rather
+  than reward guessing.
+- The digital adaptation must preserve the mathematical learning objective of the
+  printable question. It may change only the computerized response mechanism and
+  digital wording needed to make the task objectively checkable.
+- Do not change the printable question or printable page to implement this rule.
 
 ## Scoring, access, and answer policy
 
@@ -60,27 +112,9 @@ this file, the current instruction wins and this file must be reconciled.
 - Pages 1 and 2 are guest-accessible. Page 3 onward requires registration.
 - An answer may be checked automatically only when it is reviewed explicitly,
   encoded in canonical metadata, mathematically deterministic, or a verified
-  valid range.
-- **Interactive point-selection rule:** when the printed task asks the student to
-  mark, choose, or place a point on a diagram or coordinate grid, the computerized
-  task must use direct interaction with that diagram whenever practical. The
-  student clicks/taps the chosen location, the LMS visibly marks that selected
-  point, and submission checks the mathematical condition of the task. Typing a
-  coordinate is not a substitute when the intended computerized interaction is
-  point selection.
-- A point-selection task is **not open-ended merely because many points can be
-  correct**. If the requirement is mathematically objective, the checker must
-  accept every selectable point that satisfies the requirement and reject every
-  selectable point that does not. Examples include `y = 6`, a point on the x-axis,
-  a point on the x-axis to the right of B, or any other deterministic geometric
-  predicate. These tasks require no teacher judgment.
-- The checker must validate the student's actual selected location against the
-  task predicate at submission time. It must not rely on one pre-authored sample
-  coordinate, and it must not reject a mathematically valid alternative merely
-  because it differs from an example answer.
-- Reviewed proofs and reviewed open-ended decisions must be bound to the
-  current target signature and cite canonical source evidence. Prompt drift
-  must make the old decision inapplicable.
+  valid range/predicate.
+- Reviewed answer logic must be bound to the current target signature and cite
+  canonical source evidence. Prompt drift must make the old decision inapplicable.
 - Normal student notation variants must be accepted when their meaning is
   unambiguous. Examples include case differences (`x`/`X`), safe Hebrew axis
   spellings (`איקס`, `וואי`), Hebrew-keyboard axis-key slips when an axis name
@@ -91,19 +125,20 @@ this file, the current instruction wins and this file must be reconciled.
 - Unordered answer sets and order-flexible multi-blank answers may be accepted
   only when the complete combination is valid; duplicates, omissions, and
   mixed invalid combinations must remain incorrect.
-- Never infer an answer merely from nearby prose. Open-ended, unsupported, or
-  genuinely non-deterministic targets remain ungraded unless the digital-only
-  exception above replaces them with an objective equivalent. A task with many
-  valid answers is not considered non-deterministic when membership in the set
-  of valid answers can be checked objectively.
+- Never invent a single answer for a task whose correct solution set contains
+  many valid responses. Encode the actual mathematical validity condition instead.
+- A target should remain genuinely ungraded only when no objective digital
+  equivalent can preserve the learning objective after pedagogical review.
 - Generated JSON and Markdown coverage reports must remain synchronized with
-  target order, digital adaptations, and runtime answer keys.
+  target order, digital adaptations, interaction type, and runtime answer keys.
 
 ## Student feedback and teacher visibility
 
 - Each objectively checkable response gives immediate per-question feedback:
   a small green success mark for a correct answer and a red failure mark for an
   incorrect answer, while preserving the three-attempt rule.
+- For graphical point-selection tasks, feedback applies to the submitted graphical
+  choice, not to a separately typed surrogate answer.
 - After page submission, show the final page score prominently in red inside a
   red circle and persist the score together with the student's answers and
   attempt counts.
