@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T16:35:48.862Z",
+  "generatedAt": "2026-08-14T16:41:01.809Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -13458,10 +13458,12 @@
           "targetId": "p62-q11",
           "signature": "25b0ff4b",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:delivery-same-street-with-distance-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:delivery-same-street-with-distance-work"
+          ],
           "context": "הכתובת שסימנתם היא ([…],[…])."
         },
         {
@@ -13469,10 +13471,12 @@
           "targetId": "p62-q12",
           "signature": "25b0ff4b",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:delivery-same-street-with-distance-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:delivery-same-street-with-distance-work"
+          ],
           "context": "הכתובת שסימנתם היא ([…],[…])."
         },
         {
@@ -13480,10 +13484,12 @@
           "targetId": "p62-q13",
           "signature": "bd15e79d",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:delivery-same-street-with-distance-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:delivery-same-street-with-distance-work"
+          ],
           "context": "AD=[…]=[…]יח'"
         },
         {
@@ -13491,10 +13497,12 @@
           "targetId": "p62-q14",
           "signature": "bd15e79d",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:delivery-same-street-with-distance-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:delivery-same-street-with-distance-work"
+          ],
           "context": "AD=[…]=[…]יח'"
         },
         {
@@ -13502,10 +13510,12 @@
           "targetId": "p62-q15",
           "signature": "75447ec6",
           "inputType": "text:number",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:delivery-same-street-with-distance-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:delivery-same-street-with-distance-work"
+          ],
           "context": "AD=[…]יח'"
         }
       ]

@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T16:35:48.862Z",
+  "generatedAt": "2026-08-14T16:41:01.809Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1061,
-  "coveragePercentage": 91.3,
+  "automaticallyCheckableTargets": 1066,
+  "coveragePercentage": 91.7,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 270,
-    "deterministic-mathematical": 605,
+    "deterministic-mathematical": 610,
     "valid-range": 6,
-    "open-ended": 77,
+    "open-ended": 72,
     "ambiguous": 24,
     "unsupported": 0,
     "missing": 0
@@ -15887,11 +15887,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הכתובת שסימנתם היא ([…],[…]).",
           "signature": "25b0ff4b",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:delivery-same-street-with-distance-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:delivery-same-street-with-distance-work"
+          ]
         },
         {
           "targetId": "p62-q12",
@@ -15899,11 +15901,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הכתובת שסימנתם היא ([…],[…]).",
           "signature": "25b0ff4b",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:delivery-same-street-with-distance-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:delivery-same-street-with-distance-work"
+          ]
         },
         {
           "targetId": "p62-q13",
@@ -15911,11 +15915,13 @@
           "inputType": "text:number",
           "context": "AD=[…]=[…]יח'",
           "signature": "bd15e79d",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:delivery-same-street-with-distance-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:delivery-same-street-with-distance-work"
+          ]
         },
         {
           "targetId": "p62-q14",
@@ -15923,11 +15929,13 @@
           "inputType": "text:number",
           "context": "AD=[…]=[…]יח'",
           "signature": "bd15e79d",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:delivery-same-street-with-distance-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:delivery-same-street-with-distance-work"
+          ]
         },
         {
           "targetId": "p62-q15",
@@ -15935,22 +15943,18 @@
           "inputType": "text:number",
           "context": "AD=[…]יח'",
           "signature": "75447ec6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalLifePredicates.ts:delivery-same-street-with-distance-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:delivery-same-street-with-distance-work"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p62-q11",
-        "p62-q12",
-        "p62-q13",
-        "p62-q14",
-        "p62-q15"
-      ],
-      "automaticallyCheckableTargets": 10,
-      "coveragePercentage": 66.7
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 15,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 63,

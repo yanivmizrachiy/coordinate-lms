@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T16:35:48.862Z
+Generated: 2026-08-14T16:41:01.809Z
 
-Overall: 1061/1162 safely checkable targets (91.3%).
+Overall: 1066/1162 safely checkable targets (91.7%).
 
 ## Classification totals
 
@@ -10,9 +10,9 @@ Overall: 1061/1162 safely checkable targets (91.3%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 270 |
-| deterministic-mathematical | 605 |
+| deterministic-mathematical | 610 |
 | valid-range | 6 |
-| open-ended | 77 |
+| open-ended | 72 |
 | ambiguous | 24 |
 | unsupported | 0 |
 | missing | 0 |
@@ -1417,7 +1417,7 @@ No detected interactive response targets.
 
 ### Page 62 — מסלול השליח — כמה באמת נסע?
 
-10/15 safely checkable (66.7%).
+15/15 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1431,11 +1431,11 @@ No detected interactive response targets.
 | p62-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | הקטע מהמסעדה היישר אל כתובת ב אינו מקביל לאף ציר, כי משתנים בו […] השיעורים. |
 | p62-q9 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | בין הבניינים אין רחוב, ולכן השליח חייב לנסוע בשני קטעים: אחד מקביל לציר x ואחד מקביל לציר […]. |
 | p62-q10 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | אפליקציית הניווט מחשבת בדיוק כך: היא מחברת את ההפרשים […] למדוד בקו אווירי. |
-| p62-q11 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הכתובת שסימנתם היא ([…],[…]). |
-| p62-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הכתובת שסימנתם היא ([…],[…]). |
-| p62-q13 | text:number | open-ended | no | teacher judgment required | AD=[…]=[…]יח' |
-| p62-q14 | text:number | open-ended | no | teacher judgment required | AD=[…]=[…]יח' |
-| p62-q15 | text:number | open-ended | no | teacher judgment required | AD=[…]יח' |
+| p62-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הכתובת שסימנתם היא ([…],[…]). |
+| p62-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הכתובת שסימנתם היא ([…],[…]). |
+| p62-q13 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | AD=[…]=[…]יח' |
+| p62-q14 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | AD=[…]=[…]יח' |
+| p62-q15 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | AD=[…]יח' |
 
 ### Page 63 — מפת הפארק — כל עצם הוא נקודה
 
