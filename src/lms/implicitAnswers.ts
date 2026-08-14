@@ -34,11 +34,11 @@ function answerFromAria(target: HTMLElement): string[] {
  * descriptive aria-labels with sequential accessible labels such as
  * "תשובה 1". Digital-only mathematical predicates are hydrated here as well,
  * in one pre-engine preparation point; the canonical printable markup remains
- * untouched.
+ * untouched. The returned cleanup is owned by the page viewer.
  */
 export function hydrateExplicitAuthoringAnswers(
   root: ParentNode,
-): void {
+): () => void {
   for (const target of root.querySelectorAll<HTMLElement>(
     '.word-blank[aria-label]',
   )) {
@@ -51,7 +51,7 @@ export function hydrateExplicitAuthoringAnswers(
     }
   }
 
-  hydrateDigitalPredicates(root);
+  return hydrateDigitalPredicates(root);
 }
 
 /**
