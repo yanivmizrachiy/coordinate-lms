@@ -1023,10 +1023,22 @@ export function attachLmsToPage(
       progress.answer = targetValue(target);
 
       if (!progress.locked && !progress.correct) {
-        target.dataset.lmsState = progress.answer
-          ? 'filled'
-          : 'empty';
-        delete target.dataset.lmsFeedback;
+        const expected = expectedAnswersFor(target);
+        const correctNow =
+          progress.answer.trim().length > 0 &&
+          expected.length > 0 &&
+          answersMatch(progress.answer, expected);
+
+        if (correctNow) {
+          progress.correct = true;
+          target.dataset.lmsFeedback = 'correct';
+          updateTarget(target, progress);
+        } else {
+          target.dataset.lmsState = progress.answer
+            ? 'filled'
+            : 'empty';
+          delete target.dataset.lmsFeedback;
+        }
       }
 
       refreshInlineCheckButtons();
