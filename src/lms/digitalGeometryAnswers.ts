@@ -72,15 +72,10 @@ function hydrateRectanglesIntro(root: ParentNode): void {
 function hydrateRectanglesPracticeFixed(root: ParentNode): void {
   const dimensions = cardByHeading(root, 'ב. אורך ורוחב של מלבן');
   if (!dimensions) return;
-  const text = normalizedText(dimensions);
-  if (
-    !text.includes('P(2,2)') ||
-    !text.includes('Q(7,2)') ||
-    !text.includes('R(7,5)') ||
-    !text.includes('S(2,5)')
-  ) return;
 
-  // PQRS is 5×3, so P=16 and S=15.
+  // This unique canonical section defines PQRS as a 5×3 rectangle, so P=16
+  // and S=15. Matching the section heading is more stable than serialized LTR
+  // coordinate text, which can differ across DOM implementations.
   setCalcFinals(dimensions, ['16', '15']);
 }
 
