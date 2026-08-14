@@ -3,6 +3,7 @@ export type DigitalGroupRule =
   | 'two-distinct-positive-points'
   | 'same-x-coordinate-pairs'
   | 'same-y-coordinate-pairs'
+  | 'parallel-through-3-4-points'
   | 'point-above-x-axis'
   | 'point-right-of-y-axis'
   | 'point-on-x-axis'
@@ -119,6 +120,16 @@ export function evaluateDigitalGroupRule(
 
   if (rule === 'same-y-coordinate-pairs') {
     return sameCoordinatePairRule(values, 'y');
+  }
+
+  if (rule === 'parallel-through-3-4-points') {
+    if (values.length !== 4) return false;
+    const numbers = numericValues(values);
+    if (!numbers || numbers.some((value) => value < 0)) return false;
+    const [xForHorizontal, yForHorizontal, xForVertical, yForVertical] = numbers as [number, number, number, number];
+    const horizontalPointIsNew = xForHorizontal !== 3 || yForHorizontal !== 4;
+    const verticalPointIsNew = xForVertical !== 3 || yForVertical !== 4;
+    return yForHorizontal === 4 && horizontalPointIsNew && xForVertical === 3 && verticalPointIsNew;
   }
 
   if (rule === 'same-weight-package-pairs') {
@@ -271,6 +282,12 @@ function sameCoordinateRuleForContext(context: string): DigitalGroupRule | null 
   return null;
 }
 
+function isParallelThrough34Context(context: string): boolean {
+  return context.includes('בינה לבין (3,4)') &&
+    context.includes('מקביל לציר x') &&
+    context.includes('ולציר y');
+}
+
 function isCustomRuleContext(context: string): boolean {
   return (
     context.includes('בחרו מספר והשלימו כלל') ||
@@ -313,6 +330,9 @@ export function predicateRuleForCoverage(
   const rectangleRule = rectangleRuleForCoverage(context, inputType);
   if (rectangleRule) return rectangleRule;
   if (isCustomRuleContext(context)) return 'custom-y-equals-x-plus-k';
+  if (inputType === 'ordered-pair-coordinate' && isParallelThrough34Context(context)) {
+    return 'parallel-through-3-4-points';
+  }
   if (inputType === 'ordered-pair-coordinate' && isTwoPositivePointsContext(context)) {
     return 'two-distinct-positive-points';
   }
@@ -471,6 +491,22 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
       }
 
       const pairBlanks = Array.from(item.querySelectorAll<HTMLElement>('.pair-blank'));
+      if (
+        pairBlanks.length === 4 &&
+        isParallelThrough34Context(context) &&
+        pairBlanks.every((target) => !target.dataset['lmsGroup'])
+      ) {
+        ordinal += 1;
+        const binding = bindGroupPredicate(
+          proxyHost,
+          pairBlanks,
+          'parallel-through-3-4-points',
+          'בדיקה של שתי נקודות היוצרות דרך (3,4) קטע מקביל ל־x וקטע מקביל ל־y',
+          ordinal,
+        );
+        if (binding) bindings.push(binding);
+      }
+
       const sameCoordinateRule = pairBlanks.length === 4
         ? sameCoordinateRuleForContext(context)
         : null;
