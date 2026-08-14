@@ -168,7 +168,7 @@ export function hydrateGridPointPickers(root: ParentNode): () => void {
       svg.append(marker);
 
       const task: PickerTask = {
-        targets: [targets[0]!, targets[1]!],
+        targets: [targets[0]!, targets[1]!] as [HTMLElement, HTMLElement],
         label,
         marker,
         observer: new MutationObserver(() => undefined),
@@ -199,6 +199,7 @@ export function hydrateGridPointPickers(root: ParentNode): () => void {
     grid.dataset['lmsPicker'] = 'ready';
     grid.dataset['lmsPickerActive'] = tasks[0]!.label;
     grid.style.cursor = 'crosshair';
+    grid.style.touchAction = 'manipulation';
     const originalAria = grid.getAttribute('aria-label') || 'מערכת צירים';
     grid.setAttribute(
       'aria-label',
@@ -219,14 +220,19 @@ export function hydrateGridPointPickers(root: ParentNode): () => void {
         grid.dataset['lmsPickerActive'] = tasks[activeIndex]!.label;
       }
     };
-    svg.addEventListener('click', clickHandler);
+
+    // Listen on the whole coordinate-grid wrapper rather than only the SVG.
+    // LMS HTML overlays (for missing ticks/labels) sit above the SVG and must
+    // not swallow a learner's tap. Their click bubbles to this shared wrapper.
+    grid.addEventListener('click', clickHandler);
     bindings.push({ grid, svg, tasks, clickHandler });
   }
 
   return () => {
     for (const binding of bindings) {
-      binding.svg.removeEventListener('click', binding.clickHandler);
+      binding.grid.removeEventListener('click', binding.clickHandler);
       binding.grid.style.cursor = '';
+      binding.grid.style.touchAction = '';
       delete binding.grid.dataset['lmsPicker'];
       delete binding.grid.dataset['lmsPickerActive'];
       for (const task of binding.tasks) {
