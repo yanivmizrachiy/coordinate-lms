@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:03:28.327Z
+Generated: 2026-08-14T14:07:07.632Z
 
-Overall: 919/1162 safely checkable targets (79.1%).
+Overall: 923/1162 safely checkable targets (79.4%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 186 |
+| canonical-metadata-derived | 190 |
 | deterministic-mathematical | 547 |
 | valid-range | 6 |
 | open-ended | 119 |
-| ambiguous | 124 |
+| ambiguous | 120 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1326,7 +1326,7 @@ No detected interactive response targets.
 
 ### Page 58 — המלבן ברביע הראשון
 
-12/18 safely checkable (66.7%).
+16/18 safely checkable (88.9%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1341,10 +1341,10 @@ No detected interactive response targets.
 | p58-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A(2,3) אחרי הזזה של 4 יחידות ימינה מגיעה אל הנקודה ([…],[…]). |
 | p58-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A(2,3) אחרי הזזה של 4 יחידות ימינה מגיעה אל הנקודה ([…],[…]). |
 | p58-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | אחרי ההזזה x = 6, ושיעור ה־y שווה […] — בדיוק כמו לפני ההזזה. |
-| p58-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p58-q13 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p58-q14 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p58-q15 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p58-q12 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p58-q13 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p58-q14 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p58-q15 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p58-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההפרש בין שני ההיקפים שחישבתם הוא […] יח', ובכל זאת שני השטחים […]. |
 | p58-q17 | text:relation | deterministic-mathematical | yes | target-bound reviewed proof | ההפרש בין שני ההיקפים שחישבתם הוא […] יח', ובכל זאת שני השטחים […]. |
 | p58-q18 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | שני המלבנים האלה הם […] לטענה של דנה. |

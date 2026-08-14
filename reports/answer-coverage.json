@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T14:03:28.327Z",
+  "generatedAt": "2026-08-14T14:07:07.632Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 919,
-  "coveragePercentage": 79.1,
+  "automaticallyCheckableTargets": 923,
+  "coveragePercentage": 79.4,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 186,
+    "canonical-metadata-derived": 190,
     "deterministic-mathematical": 547,
     "valid-range": 6,
     "open-ended": 119,
-    "ambiguous": 124,
+    "ambiguous": 120,
     "unsupported": 0,
     "missing": 0
   },
@@ -14761,11 +14761,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "16"
+          ]
         },
         {
           "targetId": "p58-q13",
@@ -14773,11 +14775,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "12"
+          ]
         },
         {
           "targetId": "p58-q14",
@@ -14785,11 +14789,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "14"
+          ]
         },
         {
           "targetId": "p58-q15",
@@ -14797,11 +14803,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "12"
+          ]
         },
         {
           "targetId": "p58-q16",
@@ -14851,14 +14859,10 @@
       ],
       "missingOrAmbiguousTargetIds": [
         "p58-q6",
-        "p58-q7",
-        "p58-q12",
-        "p58-q13",
-        "p58-q14",
-        "p58-q15"
+        "p58-q7"
       ],
-      "automaticallyCheckableTargets": 12,
-      "coveragePercentage": 66.7
+      "automaticallyCheckableTargets": 16,
+      "coveragePercentage": 88.9
     },
     {
       "pageNumber": 59,
