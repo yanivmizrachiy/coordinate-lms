@@ -28,4 +28,20 @@ describe('canonical rectangle geometry hydration', () => {
     expect(coordinates).toHaveLength(2);
     expect(coordinates.map((target) => answers(target)[0])).toEqual(['2', '5']);
   });
+
+  it('hydrates the fixed PQRS 5×3 perimeter and area on workbook page 53', () => {
+    const page = WORKBOOK.find((candidate) => candidate.n === 53);
+    expect(page).toBeDefined();
+
+    const { document } = parseHTML(page!.html);
+    hydrateDigitalGeometryAnswers(document as unknown as ParentNode);
+
+    const dimensionsCard = Array.from(document.querySelectorAll('.q-card')).find((card) =>
+      card.querySelector('h3')?.textContent?.includes('אורך ורוחב של מלבן'),
+    );
+    expect(dimensionsCard).toBeDefined();
+    const finals = Array.from(dimensionsCard!.querySelectorAll('.calc-final .blank'));
+    expect(finals).toHaveLength(2);
+    expect(finals.map((target) => answers(target)[0])).toEqual(['16', '15']);
+  });
 });
