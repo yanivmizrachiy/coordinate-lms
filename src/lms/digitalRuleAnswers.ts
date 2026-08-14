@@ -19,15 +19,10 @@ function cardByHeading(root: ParentNode, needle: string): HTMLElement | undefine
   );
 }
 
-/** LMS-only deterministic answers for canonical rule/table tasks. */
-export function hydrateDigitalRuleAnswers(root: ParentNode): void {
-  const sheetText = normalizedText(root.querySelector('.sheet'));
-  if (!sheetText.includes('מכלל לטבלה ולגרף')) return;
-
+function hydrateRuleToGraph(root: ParentNode): void {
   const first = cardByHeading(root, 'y = 2x');
   if (first) {
     const targets = answerTargets(first);
-    // table y-values, then the four ordered-pair y-values, then line property and x.
     const expected: Array<string | string[]> = [
       '0', '2', '4', '6',
       '0', '2', '4', '6',
@@ -51,5 +46,35 @@ export function hydrateDigitalRuleAnswers(root: ParentNode): void {
     ['4', '5', '6', '7', 'x', '6'].forEach((answer, index) =>
       setAnswer(targets[index], answer),
     );
+  }
+}
+
+function hydrateRectangleVertices(root: ParentNode): void {
+  const build = cardByHeading(root, 'בונים מלבן');
+  if (!build) return;
+  const text = normalizedText(build);
+  if (
+    !text.includes('(2,1)') ||
+    !text.includes('אורכו 4 יחידות') ||
+    !text.includes('רוחבו 3 יחידות')
+  ) return;
+
+  const finals = Array.from(
+    build.querySelectorAll<HTMLElement>('.calc-final .blank'),
+  );
+  setAnswer(finals[0], '14');
+  setAnswer(finals[1], '12');
+}
+
+/** LMS-only deterministic answers for canonical rule/table tasks. */
+export function hydrateDigitalRuleAnswers(root: ParentNode): void {
+  const sheetText = normalizedText(root.querySelector('.sheet'));
+
+  if (sheetText.includes('מכלל לטבלה ולגרף')) {
+    hydrateRuleToGraph(root);
+  }
+
+  if (sheetText.includes('קודקודים של מלבן')) {
+    hydrateRectangleVertices(root);
   }
 }
