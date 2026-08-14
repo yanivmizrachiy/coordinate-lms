@@ -11,6 +11,7 @@ export type DigitalGroupRule =
   | 'point-x-3-between-2-and-5'
   | 'same-weight-package-pairs'
   | 'same-price-package-pairs'
+  | 'custom-y-equals-x-plus-k'
   | 'nonnegative-number';
 
 interface PredicateBinding {
@@ -89,6 +90,16 @@ export function evaluateDigitalGroupRule(
     if (!numbers || numbers.some((value) => value < 0)) return false;
     const [x1, y1, x2, y2] = numbers as [number, number, number, number];
     return x1 !== x2 && y1 !== y2;
+  }
+
+  if (rule === 'custom-y-equals-x-plus-k') {
+    if (values.length !== 6) return false;
+    const numbers = numericValues(values);
+    if (!numbers) return false;
+    const [k, x1, y1, x2, y2, difference] = numbers as [number, number, number, number, number, number];
+    if ([x1, y1, x2, y2].some((value) => value < 0)) return false;
+    if (x1 === x2 && y1 === y2) return false;
+    return y1 - x1 === k && y2 - x2 === k && difference === k;
   }
 
   const point = firstQuadrantPoint(values);
@@ -181,6 +192,14 @@ function pairRuleForContext(context: string): DigitalGroupRule | null {
   return null;
 }
 
+function isCustomRuleContext(context: string): boolean {
+  return (
+    context.includes('בחרו מספר והשלימו כלל') ||
+    context.includes('כתבו שתי נקודות שמתאימות לכלל שלכם') ||
+    context.includes('בשתי הנקודות שסימנתם, ההפרש בין שיעור ה־y ובין ערך ה־x')
+  );
+}
+
 /** The coverage report asks this same rule resolver instead of inventing a
  * second answer policy. It marks canonical fields covered by one reviewed
  * group predicate while runtime still grades the complete group atomically. */
@@ -188,6 +207,7 @@ export function predicateRuleForCoverage(
   context: string,
   inputType: string,
 ): DigitalGroupRule | null {
+  if (isCustomRuleContext(context)) return 'custom-y-equals-x-plus-k';
   if (
     inputType === 'ordered-pair-coordinate' &&
     context.includes('תנו דוגמה לשתי נקודות') &&
@@ -237,6 +257,30 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
         ordinal += 1;
         const binding = bindGroupPredicate(proxyHost, targets, 'distinct-coordinate-pairs', 'בדיקה מתמטית של שתי הנקודות שנבחרו', ordinal);
         if (binding) bindings.push(binding);
+      }
+    }
+
+    if (heading.includes('כלל משלכם')) {
+      const cardText = normalizedText(card);
+      if (
+        cardText.includes('בחרו מספר והשלימו כלל') &&
+        cardText.includes('כתבו שתי נקודות שמתאימות לכלל שלכם') &&
+        cardText.includes('ההפרש בין שיעור ה־y ובין ערך ה־x')
+      ) {
+        const targets = Array.from(
+          card.querySelectorAll<HTMLElement>('.blank, .pair-blank'),
+        ).filter((target) => !target.classList.contains('lms-group-proxy'));
+        if (targets.length === 6) {
+          ordinal += 1;
+          const binding = bindGroupPredicate(
+            proxyHost,
+            targets,
+            'custom-y-equals-x-plus-k',
+            'בדיקה מתמטית של הכלל שנבחר, שתי הנקודות וההפרש',
+            ordinal,
+          );
+          if (binding) bindings.push(binding);
+        }
       }
     }
 
