@@ -1,15 +1,13 @@
-/* פענוח צבעוני — צובעים את התאים שברשימת הזוגות הסדורים, ומהם מתגלה סמל.
-
-   הקובץ הזה מחזיק **נתונים בלבד**. השעשועון המקוון הוסר (31.07.2026): הדף
-   הוא עכשיו `COLOR_DECODE_PRINT` — „אנחנו רק דפים להדפסה ולא מתוקשב" —
-   ורשימת התאים נשארת כאן כמקור אמת אחד לדף המודפס ולבדיקות. */
 import { isFirstQuadrant, type Point } from '../lib/coordinateMath';
 
-/** גבולות הרשת — ערך x ושיעור y הגדולים ביותר שיש להם תא. */
+/** Canonical data used by the computerized counterpart of the printable
+ * "פענוח צבעוני" page. The printable repository remains read-only; this LMS
+ * copy exists so the computerized interaction can preserve the same content
+ * and validate it objectively.
+ */
 export const decodeXMax = 6;
 export const decodeYMax = 5;
 
-/** התאים שמצביעים על חץ מעלה — סמל שמראה את כיוון הרביע הראשון. */
 export const decodeTargets: Point[] = [
   { x: 3, y: 0 }, { x: 3, y: 1 }, { x: 3, y: 2 },
   { x: 1, y: 3 }, { x: 2, y: 3 }, { x: 3, y: 3 }, { x: 4, y: 3 }, { x: 5, y: 3 },
