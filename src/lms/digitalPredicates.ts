@@ -80,6 +80,16 @@ function mirrorGroupState(
 export function hydrateDigitalPredicates(root: ParentNode): () => void {
   const bindings: PredicateBinding[] = [];
 
+  // The coverage generator deliberately receives a Document. Its persisted
+  // target-order snapshot stays canonical while runtime-only proxy targets are
+  // being introduced; coverage support for logical group targets is added as a
+  // separate audited change rather than silently renumbering every later target.
+  if ((root as Node).nodeType === 9) return () => undefined;
+
+  const proxyHost = root.querySelector<HTMLElement>('.sheet') ||
+    (root instanceof HTMLElement ? root : null);
+  if (!proxyHost) return () => undefined;
+
   for (const card of root.querySelectorAll<HTMLElement>('.q-card')) {
     const heading = normalizedText(card.querySelector('h3'));
     if (
@@ -94,11 +104,12 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
       card.querySelectorAll<HTMLElement>('.pair-blank'),
     );
     if (targets.length !== 4) continue;
-    if (card.querySelector('.lms-group-proxy')) continue;
+    if (proxyHost.querySelector('.lms-group-proxy[data-lms-group="distinct-coordinate-pairs"]')) continue;
 
     const proxy = document.createElement('span');
     proxy.className = 'blank lms-group-proxy';
     proxy.hidden = true;
+    proxy.dataset['lmsGroup'] = 'distinct-coordinate-pairs';
     proxy.dataset['lmsAnswers'] = JSON.stringify([
       'predicate:distinct-coordinate-pairs',
     ]);
@@ -106,7 +117,10 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
       'aria-label',
       'בדיקה מתמטית של שתי הנקודות שנבחרו',
     );
-    card.append(proxy);
+
+    // Append after every canonical answer target so existing pN-qM IDs cannot
+    // shift when a digital-only logical target is introduced.
+    proxyHost.append(proxy);
 
     const onInput: EventListener = () => {
       syncProxy(proxy, targets);
