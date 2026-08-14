@@ -68,33 +68,45 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Never invent one fixed answer for a task whose valid solution set contains many responses. Encode the mathematical condition instead.
 - A target may remain genuinely ungraded only after pedagogical review proves that no objective computerized equivalent can preserve the original learning objective.
 
-## 8. Scoring and attempts
+## 8. Iron rule: practice is open; registration is only for saving and documentation
+
+- **Every student, registered or not, may open and solve every computerized page and every exercise in the LMS. There is no registration wall on any workbook page.**
+- Registration/login is optional for practice. It becomes necessary only when the student wants their work, answers, scores, attempts, progress, and activity to be saved and documented to their personal account.
+- A non-registered visitor may receive normal on-screen checking, feedback, and a score during the current practice session, but the LMS must not persist that visitor's work as student progress.
+- **For a non-registered visitor, do not save drafts, results, scores, attempts, activity history, or progress to Firebase, to the teacher dashboard, or to persistent local LMS storage.** Refreshing/leaving may therefore discard unsaved guest work.
+- Do not create a durable `guest` student record, do not transfer guest history into a later account, and do not include guest activity in teacher reports or class statistics.
+- Only registered users have persistent save/sync. Once a registered student is signed in, their work is documented to their account according to the persistence rules below.
+- The first computerized page must contain a clear, visible digital-only information box explaining in student-friendly Hebrew that registration is **not required to practice**, but registration is required to save and document progress, and that work performed while signed in is recorded to the student's account.
+- That information box is an LMS overlay only and must not modify or appear in the printable source page.
+
+## 9. Scoring and attempts
 
 - Every submitted page score is an integer from 1 through 100.
-- Every automatically checked answer allows at most three attempts.
-- Reload, retry, stale writes, or reconnection must never reset the attempt count.
-- Pages 1 and 2 are guest-accessible. Page 3 onward requires registration.
+- Every automatically checked answer allows at most three attempts during the active practice state.
+- For registered students, reload, retry, stale writes, or reconnection must never reset a persisted attempt count.
 - Each objectively checkable response gives immediate per-question feedback: green success for correct and red failure for incorrect, while preserving the attempt rule.
 - For graphical tasks, feedback applies to the submitted graphical choice, not to a surrogate typed answer.
-- After page submission, persist the score, answers, and attempt counts.
+- After page submission, show the score to every user. Persist the score, answers, and attempt counts **only when the user is registered and signed in**.
 
-## 9. Student and teacher visibility
+## 10. Student and teacher visibility
 
-- Students may view only their own data.
-- Only the configured administrator may view class-wide student results in the initial release.
+- Registered students may view only their own saved data.
+- Only the configured administrator may view class-wide registered-student results in the initial release.
 - The administrator view must expose question-level correctness and attempts, not only page-level scores.
+- The teacher dashboard and reports contain **registered students only**. Anonymous/guest practice must not create student records, activity rows, progress records, or statistics.
 
-## 10. Persistence and Firebase truth
+## 11. Persistence and Firebase truth
 
-- Local persistence success and central Firebase synchronization success are different states.
+- Persistence applies only to a registered, signed-in student (or the configured administrator where appropriate).
+- Local persistence success and central Firebase synchronization success are different states for registered users.
 - Never tell a student data was saved centrally unless the central write actually succeeded.
 - Central failures must be visible, retryable, and idempotent.
 - Retries must not duplicate results, attempts, or activity events.
-- Guest progress must be copied to an account before guest source records are removed; failed transfer preserves the source.
 - Concurrent/stale writes must preserve the latest valid state, best score, highest attempt count, and completed/locked state.
-- Teacher views must distinguish central Firebase data from local fallback and expose synchronization errors.
+- Teacher views must distinguish central Firebase data from any registered-user local fallback and expose synchronization errors.
+- **There is no guest-progress persistence or guest-progress transfer workflow.** Any code, test, copy, storage key usage, or migration rule that assumes durable guest progress is obsolete and must be removed.
 
-## 11. Firebase and authorization
+## 12. Firebase and authorization
 
 - Production registration fails closed unless all required Firebase client settings are configured.
 - Browser-only accounts are development-only or require explicit production-disabled opt-in.
@@ -103,17 +115,18 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Class-wide reads and answer-key writes are administrator-only.
 - Firestore rules must use field allowlists and validate the **current canonical page range**, score 1–100, attempt summary 0–3, monotonic progress, and bounded document shapes.
 - Do not hard-code a stale workbook page count.
+- Anonymous practice must not require or create a Firebase student identity merely to solve exercises.
 
-## 12. Documentation and source-of-truth hygiene
+## 13. Documentation and source-of-truth hygiene
 
 - `RULES.md` is the only normative rule document.
 - `README.md` may describe the project but must not define competing rules.
 - Status reports may describe current implementation gaps but must not redefine requirements.
 - Historical memory/handoff documents must not contain active rules that compete with `RULES.md`; contradictory historical instructions must be removed rather than left as an alternative authority.
-- PR descriptions and comments are status/history only and must be reconciled when they contain obsolete claims such as 77 pages, teacher judgment for mathematically deterministic tasks, or permanent ungraded treatment for tasks that can be objectively computerized.
+- PR descriptions and comments are status/history only and must be reconciled when they contain obsolete claims such as 77 pages, registration walls on workbook pages, durable guest progress, teacher judgment for mathematically deterministic tasks, or permanent ungraded treatment for tasks that can be objectively computerized.
 - Any repository text or code that conflicts with the canonical 78-page one-to-one mapping or the rules above is a defect.
 
-## 13. Required quality gates
+## 14. Required quality gates
 
 Before presenting a branch as ready for review, run at least:
 
