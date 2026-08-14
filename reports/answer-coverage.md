@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:49:49.221Z
+Generated: 2026-08-14T13:51:44.100Z
 
-Overall: 883/1162 safely checkable targets (76%).
+Overall: 901/1162 safely checkable targets (77.5%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 140 |
+| canonical-metadata-derived | 158 |
 | deterministic-mathematical | 557 |
 | valid-range | 6 |
 | open-ended | 138 |
-| ambiguous | 141 |
+| ambiguous | 123 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -373,7 +373,7 @@ Overall: 883/1162 safely checkable targets (76%).
 
 ### Page 14 — נקודות ברביע הראשון
 
-6/10 safely checkable (60%).
+10/10 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -383,14 +383,14 @@ Overall: 883/1162 safely checkable targets (76%).
 | p14-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה G: שיעור x = 1, שיעור y = 5 ← G([…],[…]) |
 | p14-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה H: שיעור x = 8, שיעור y = 3 ← H([…],[…]) |
 | p14-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה H: שיעור x = 8, שיעור y = 3 ← H([…],[…]) |
-| p14-q7 | ordered-pair-coordinate | ambiguous | no | none | נקודה K: שיעור x = 0, שיעור y = 4 ← K([…],[…]) |
-| p14-q8 | ordered-pair-coordinate | ambiguous | no | none | נקודה K: שיעור x = 0, שיעור y = 4 ← K([…],[…]) |
-| p14-q9 | ordered-pair-coordinate | ambiguous | no | none | נקודה L: שיעור x = 6, שיעור y = 0 ← L([…],[…]) |
-| p14-q10 | ordered-pair-coordinate | ambiguous | no | none | נקודה L: שיעור x = 6, שיעור y = 0 ← L([…],[…]) |
+| p14-q7 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה K: שיעור x = 0, שיעור y = 4 ← K([…],[…]) |
+| p14-q8 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה K: שיעור x = 0, שיעור y = 4 ← K([…],[…]) |
+| p14-q9 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה L: שיעור x = 6, שיעור y = 0 ← L([…],[…]) |
+| p14-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה L: שיעור x = 6, שיעור y = 0 ← L([…],[…]) |
 
 ### Page 15 — נקודות שעל הצירים
 
-9/13 safely checkable (69.2%).
+11/13 safely checkable (84.6%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -402,8 +402,8 @@ Overall: 883/1162 safely checkable targets (76%).
 | p15-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | Q([…],4) |
 | p15-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],0) |
 | p15-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | (0,[…]) |
-| p15-q9 | text:letter | ambiguous | no | none | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
-| p15-q10 | text:letter | ambiguous | no | none | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
+| p15-q9 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
+| p15-q10 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
 | p15-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | היא היחידה כזאת, כי רק בה גם ערך ה־x הוא 0 וגם שיעור ה־y הוא […]. |
 | p15-q12 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | שמה של הנקודה O הוא […] ה[…]. |
 | p15-q13 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | שמה של הנקודה O הוא […] ה[…]. |
@@ -1110,23 +1110,23 @@ No detected interactive response targets.
 
 ### Page 49 — קטעים מקבילים לצירים
 
-1/17 safely checkable (5.9%).
+13/17 safely checkable (76.5%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p49-q1 | text:property | ambiguous | no | none | בכל סרטוט מסומנת נקודה אחת, ולצידה כתובים שיעוריה; לצד כל נקודה אחרת כתובה אות. הקיפו בעיפרון את כל הנקודות שיש להן אותו שיעור כמו הנקודה המסומנת: אותו שיעור x — הנקודות ממוקמות על קו […]; אותו שיעור y — הנקודות ממוקמות על קו אופקי. האותיות |
-| p49-q2 | text:number | ambiguous | no | none | הקפתם […] נקודות, ובכולן שיעור ה־x הוא 3. |
-| p49-q3 | text:property | ambiguous | no | none | הנקודות שהקפתם ממוקמות על קו […]. |
-| p49-q4 | text:letter | ambiguous | no | none | האותיות שבנקודות שהקפתם, מלמעלה למטה, הן […] ו־[…]. |
-| p49-q5 | text:letter | ambiguous | no | none | האותיות שבנקודות שהקפתם, מלמעלה למטה, הן […] ו־[…]. |
-| p49-q6 | text:number | ambiguous | no | none | בשתי הנקודות שהקפתם שיעור ה־y הוא […]. |
-| p49-q7 | text:letter | ambiguous | no | none | לשתי הנקודות שהקפתם ולנקודה (2,2) יש שיעור […] זהה. |
-| p49-q8 | text:letter | ambiguous | no | none | האותיות שבנקודות שהקפתם, מימין לשמאל, הן […] ו־[…]. |
-| p49-q9 | text:letter | ambiguous | no | none | האותיות שבנקודות שהקפתם, מימין לשמאל, הן […] ו־[…]. |
-| p49-q10 | text:concept | ambiguous | no | none | כתבו את ארבע האותיות שהקפתם לפי סדר הסעיפים, מימין לשמאל: […]. |
+| p49-q1 | text:property | canonical-metadata-derived | yes | explicit canonical authoring label | בכל סרטוט מסומנת נקודה אחת, ולצידה כתובים שיעוריה; לצד כל נקודה אחרת כתובה אות. הקיפו בעיפרון את כל הנקודות שיש להן אותו שיעור כמו הנקודה המסומנת: אותו שיעור x — הנקודות ממוקמות על קו […]; אותו שיעור y — הנקודות ממוקמות על קו אופקי. האותיות |
+| p49-q2 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הקפתם […] נקודות, ובכולן שיעור ה־x הוא 3. |
+| p49-q3 | text:property | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודות שהקפתם ממוקמות על קו […]. |
+| p49-q4 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | האותיות שבנקודות שהקפתם, מלמעלה למטה, הן […] ו־[…]. |
+| p49-q5 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | האותיות שבנקודות שהקפתם, מלמעלה למטה, הן […] ו־[…]. |
+| p49-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | בשתי הנקודות שהקפתם שיעור ה־y הוא […]. |
+| p49-q7 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי הנקודות שהקפתם ולנקודה (2,2) יש שיעור […] זהה. |
+| p49-q8 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | האותיות שבנקודות שהקפתם, מימין לשמאל, הן […] ו־[…]. |
+| p49-q9 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | האותיות שבנקודות שהקפתם, מימין לשמאל, הן […] ו־[…]. |
+| p49-q10 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את ארבע האותיות שהקפתם לפי סדר הסעיפים, מימין לשמאל: […]. |
 | p49-q11 | word:concept | canonical-metadata-derived | yes | explicit canonical authoring label | מה קיבלתם? […] |
-| p49-q12 | text:letter | ambiguous | no | none | לשתי הנקודות שהקפתם בסעיף ב יש שיעור y זהה, ולכן הקטע שביניהן מקביל לציר […]. |
-| p49-q13 | text:number | ambiguous | no | none | בכל הנקודות שהקפתם שיעור ה־x הוא […], ולכן כולן ממוקמות על קו אחד עם הנקודה (4,2). |
+| p49-q12 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי הנקודות שהקפתם בסעיף ב יש שיעור y זהה, ולכן הקטע שביניהן מקביל לציר […]. |
+| p49-q13 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | בכל הנקודות שהקפתם שיעור ה־x הוא […], ולכן כולן ממוקמות על קו אחד עם הנקודה (4,2). |
 | p49-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p49-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p49-q16 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |

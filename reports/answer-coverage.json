@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:49:49.221Z",
+  "generatedAt": "2026-08-14T13:51:44.100Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 883,
-  "coveragePercentage": 76,
+  "automaticallyCheckableTargets": 901,
+  "coveragePercentage": 77.5,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 140,
+    "canonical-metadata-derived": 158,
     "deterministic-mathematical": 557,
     "valid-range": 6,
     "open-ended": 138,
-    "ambiguous": 141,
+    "ambiguous": 123,
     "unsupported": 0,
     "missing": 0
   },
@@ -4373,11 +4373,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה K: שיעור x = 0, שיעור y = 4 ← K([…],[…])",
           "signature": "6ff0a651",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p14-q8",
@@ -4385,11 +4387,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה K: שיעור x = 0, שיעור y = 4 ← K([…],[…])",
           "signature": "6ff0a651",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p14-q9",
@@ -4397,11 +4401,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה L: שיעור x = 6, שיעור y = 0 ← L([…],[…])",
           "signature": "f562f9df",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p14-q10",
@@ -4409,21 +4415,18 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה L: שיעור x = 6, שיעור y = 0 ← L([…],[…])",
           "signature": "f562f9df",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p14-q7",
-        "p14-q8",
-        "p14-q9",
-        "p14-q10"
-      ],
-      "automaticallyCheckableTargets": 6,
-      "coveragePercentage": 60
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 10,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 15,
@@ -4561,11 +4564,13 @@
           "inputType": "text:letter",
           "context": "הנקודה O ממוקמת גם על ציר […] וגם על ציר […].",
           "signature": "f36751b5",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x"
+          ]
         },
         {
           "targetId": "p15-q10",
@@ -4573,11 +4578,13 @@
           "inputType": "text:letter",
           "context": "הנקודה O ממוקמת גם על ציר […] וגם על ציר […].",
           "signature": "f36751b5",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y"
+          ]
         },
         {
           "targetId": "p15-q11",
@@ -4626,12 +4633,10 @@
       ],
       "missingOrAmbiguousTargetIds": [
         "p15-q3",
-        "p15-q4",
-        "p15-q9",
-        "p15-q10"
+        "p15-q4"
       ],
-      "automaticallyCheckableTargets": 9,
-      "coveragePercentage": 69.2
+      "automaticallyCheckableTargets": 11,
+      "coveragePercentage": 84.6
     },
     {
       "pageNumber": 16,
@@ -12208,11 +12213,14 @@
           "inputType": "text:property",
           "context": "בכל סרטוט מסומנת נקודה אחת, ולצידה כתובים שיעוריה; לצד כל נקודה אחרת כתובה אות. הקיפו בעיפרון את כל הנקודות שיש להן אותו שיעור כמו הנקודה המסומנת: אותו שיעור x — הנקודות ממוקמות על קו […]; אותו שיעור y — הנקודות ממוקמות על קו אופקי. האותיות",
           "signature": "7d357426",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "אנכי",
+            "אנכית"
+          ]
         },
         {
           "targetId": "p49-q2",
@@ -12220,11 +12228,13 @@
           "inputType": "text:number",
           "context": "הקפתם […] נקודות, ובכולן שיעור ה־x הוא 3.",
           "signature": "cb7ff6f9",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p49-q3",
@@ -12232,11 +12242,14 @@
           "inputType": "text:property",
           "context": "הנקודות שהקפתם ממוקמות על קו […].",
           "signature": "5060e7c3",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "אנכי",
+            "אנכית"
+          ]
         },
         {
           "targetId": "p49-q4",
@@ -12244,11 +12257,13 @@
           "inputType": "text:letter",
           "context": "האותיות שבנקודות שהקפתם, מלמעלה למטה, הן […] ו־[…].",
           "signature": "614360a6",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ז"
+          ]
         },
         {
           "targetId": "p49-q5",
@@ -12256,11 +12271,13 @@
           "inputType": "text:letter",
           "context": "האותיות שבנקודות שהקפתם, מלמעלה למטה, הן […] ו־[…].",
           "signature": "614360a6",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ה"
+          ]
         },
         {
           "targetId": "p49-q6",
@@ -12268,11 +12285,13 @@
           "inputType": "text:number",
           "context": "בשתי הנקודות שהקפתם שיעור ה־y הוא […].",
           "signature": "661d84d4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p49-q7",
@@ -12280,11 +12299,14 @@
           "inputType": "text:letter",
           "context": "לשתי הנקודות שהקפתם ולנקודה (2,2) יש שיעור […] זהה.",
           "signature": "95d33763",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y",
+            "Y"
+          ]
         },
         {
           "targetId": "p49-q8",
@@ -12292,11 +12314,13 @@
           "inputType": "text:letter",
           "context": "האותיות שבנקודות שהקפתם, מימין לשמאל, הן […] ו־[…].",
           "signature": "0206539c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "י"
+          ]
         },
         {
           "targetId": "p49-q9",
@@ -12304,11 +12328,13 @@
           "inputType": "text:letter",
           "context": "האותיות שבנקודות שהקפתם, מימין לשמאל, הן […] ו־[…].",
           "signature": "0206539c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ם"
+          ]
         },
         {
           "targetId": "p49-q10",
@@ -12316,11 +12342,13 @@
           "inputType": "text:concept",
           "context": "כתבו את ארבע האותיות שהקפתם לפי סדר הסעיפים, מימין לשמאל: […].",
           "signature": "e5c28093",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "זהים"
+          ]
         },
         {
           "targetId": "p49-q11",
@@ -12333,7 +12361,7 @@
           "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "שהתגלתה"
+            "זהים"
           ]
         },
         {
@@ -12342,11 +12370,14 @@
           "inputType": "text:letter",
           "context": "לשתי הנקודות שהקפתם בסעיף ב יש שיעור y זהה, ולכן הקטע שביניהן מקביל לציר […].",
           "signature": "ef6410e5",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ]
         },
         {
           "targetId": "p49-q13",
@@ -12354,11 +12385,13 @@
           "inputType": "text:number",
           "context": "בכל הנקודות שהקפתם שיעור ה־x הוא […], ולכן כולן ממוקמות על קו אחד עם הנקודה (4,2).",
           "signature": "1c212140",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p49-q14",
@@ -12410,25 +12443,13 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p49-q1",
-        "p49-q2",
-        "p49-q3",
-        "p49-q4",
-        "p49-q5",
-        "p49-q6",
-        "p49-q7",
-        "p49-q8",
-        "p49-q9",
-        "p49-q10",
-        "p49-q12",
-        "p49-q13",
         "p49-q14",
         "p49-q15",
         "p49-q16",
         "p49-q17"
       ],
-      "automaticallyCheckableTargets": 1,
-      "coveragePercentage": 5.9
+      "automaticallyCheckableTargets": 13,
+      "coveragePercentage": 76.5
     },
     {
       "pageNumber": 50,
