@@ -103,6 +103,24 @@ function hydrateFixedRectangleAndSquareCalculations(root: ParentNode, sheetText:
   }
 }
 
+function hydrateParallelPerpendicular(root: ParentNode): void {
+  const complete = cardByHeading(root, 'ב. השלימו');
+  if (complete) {
+    const targets = answerTargets(complete);
+    const expected: Array<string | string[]> = [
+      ['x', 'X'],
+      ['x', 'X'],
+      ['מאונך', 'מאונכת'],
+      ['מקביל', 'מקבילה'],
+    ];
+    expected.forEach((answer, index) => setAnswer(targets[index], answer));
+  }
+
+  const own = cardByHeading(root, 'ד. מסמנים בעצמכם');
+  const finalAxis = own?.querySelector<HTMLElement>('.blank[data-missing="letter"]');
+  setAnswer(finalAxis, ['x', 'X']);
+}
+
 function hydrateSameAxisPrint(root: ParentNode): void {
   const ruleBox = root.querySelector<HTMLElement>('.rule-box');
   if (ruleBox) {
@@ -166,6 +184,13 @@ export function hydrateDigitalRuleAnswers(root: ParentNode): void {
   }
 
   hydrateFixedRectangleAndSquareCalculations(root, sheetText);
+
+  if (
+    sheetText.includes('קטעים מקבילים לצירים') &&
+    sheetText.includes('קטע מקביל לציר x הוא מאונך לציר y')
+  ) {
+    hydrateParallelPerpendicular(root);
+  }
 
   if (sheetText.includes('אותו x או אותו y')) {
     hydrateSameAxisPrint(root);
