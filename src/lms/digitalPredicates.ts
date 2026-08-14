@@ -12,6 +12,8 @@ export type DigitalGroupRule =
   | 'same-weight-package-pairs'
   | 'same-price-package-pairs'
   | 'custom-y-equals-x-plus-k'
+  | 'rectangle-missing-opposite-corners'
+  | 'rectangle-from-corner-4x3'
   | 'nonnegative-number';
 
 interface PredicateBinding {
@@ -66,6 +68,26 @@ function matchesTwoUnorderedPairs(
   return [first, second].sort().join('|') === [...expectedPairKeys].sort().join('|');
 }
 
+function coordinateKey(x: number, y: number): string {
+  return `${x},${y}`;
+}
+
+function coordinateSet(values: readonly string[]): Set<string> | null {
+  if (values.length % 2 !== 0) return null;
+  const numbers = numericValues(values);
+  if (!numbers || numbers.some((value) => value < 0)) return null;
+  const set = new Set<string>();
+  for (let index = 0; index < numbers.length; index += 2) {
+    set.add(coordinateKey(numbers[index]!, numbers[index + 1]!));
+  }
+  return set.size * 2 === values.length ? set : null;
+}
+
+function sameCoordinateSet(actual: Set<string> | null, expected: readonly string[]): boolean {
+  if (!actual || actual.size !== expected.length) return false;
+  return expected.every((point) => actual.has(point));
+}
+
 export function evaluateDigitalGroupRule(
   rule: DigitalGroupRule,
   values: readonly string[],
@@ -82,6 +104,18 @@ export function evaluateDigitalGroupRule(
 
   if (rule === 'same-price-package-pairs') {
     return matchesTwoUnorderedPairs(values, ['AB', 'DF']);
+  }
+
+  if (rule === 'rectangle-missing-opposite-corners') {
+    return sameCoordinateSet(coordinateSet(values), ['1,5', '7,2']);
+  }
+
+  if (rule === 'rectangle-from-corner-4x3') {
+    const actual = coordinateSet(values);
+    return (
+      sameCoordinateSet(actual, ['2,1', '6,1', '2,4', '6,4']) ||
+      sameCoordinateSet(actual, ['2,1', '5,1', '2,5', '5,5'])
+    );
   }
 
   if (rule === 'distinct-coordinate-pairs') {
@@ -200,6 +234,25 @@ function isCustomRuleContext(context: string): boolean {
   );
 }
 
+function rectangleRuleForCoverage(context: string, inputType: string): DigitalGroupRule | null {
+  if (inputType !== 'ordered-pair-coordinate') return null;
+  if (
+    context.includes('שני קודקודים נגדיים הם') &&
+    context.includes('(1,2)') &&
+    context.includes('(7,5)')
+  ) {
+    return 'rectangle-missing-opposite-corners';
+  }
+  if (
+    context.includes('כתבו את ארבעת הקודקודים כזוגות סדורים') &&
+    context.includes('אורכו 4 יחידות') &&
+    context.includes('רוחבו 3 יחידות')
+  ) {
+    return 'rectangle-from-corner-4x3';
+  }
+  return null;
+}
+
 /** The coverage report asks this same rule resolver instead of inventing a
  * second answer policy. It marks canonical fields covered by one reviewed
  * group predicate while runtime still grades the complete group atomically. */
@@ -207,6 +260,8 @@ export function predicateRuleForCoverage(
   context: string,
   inputType: string,
 ): DigitalGroupRule | null {
+  const rectangleRule = rectangleRuleForCoverage(context, inputType);
+  if (rectangleRule) return rectangleRule;
   if (isCustomRuleContext(context)) return 'custom-y-equals-x-plus-k';
   if (
     inputType === 'ordered-pair-coordinate' &&
@@ -247,6 +302,49 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
 
   for (const card of root.querySelectorAll<HTMLElement>('.q-card')) {
     const heading = normalizedText(card.querySelector('h3'));
+    const cardText = normalizedText(card);
+
+    if (
+      heading.includes('מזהים קודקודים') &&
+      cardText.includes('שני קודקודים נגדיים הם') &&
+      cardText.includes('(1,2)') &&
+      cardText.includes('(7,5)')
+    ) {
+      const targets = Array.from(card.querySelectorAll<HTMLElement>('.pair-blank')).slice(0, 4);
+      if (targets.length === 4) {
+        ordinal += 1;
+        const binding = bindGroupPredicate(
+          proxyHost,
+          targets,
+          'rectangle-missing-opposite-corners',
+          'בדיקה מתמטית של שני הקודקודים החסרים במלבן, ללא תלות בסדר',
+          ordinal,
+        );
+        if (binding) bindings.push(binding);
+      }
+    }
+
+    if (
+      heading.includes('בונים מלבן') &&
+      cardText.includes('אחד מקודקודיו הוא') &&
+      cardText.includes('(2,1)') &&
+      cardText.includes('אורכו 4 יחידות') &&
+      cardText.includes('רוחבו 3 יחידות')
+    ) {
+      const targets = Array.from(card.querySelectorAll<HTMLElement>('.pair-blank')).slice(0, 8);
+      if (targets.length === 8) {
+        ordinal += 1;
+        const binding = bindGroupPredicate(
+          proxyHost,
+          targets,
+          'rectangle-from-corner-4x3',
+          'בדיקה מתמטית של ארבעת קודקודי המלבן, בכל סדר ובכל אוריינטציה חוקית',
+          ordinal,
+        );
+        if (binding) bindings.push(binding);
+      }
+    }
+
     if (
       heading.includes('תנו דוגמה לשתי נקודות') &&
       heading.includes('ערך ה־x שלהן שונה') &&
@@ -261,7 +359,6 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
     }
 
     if (heading.includes('כלל משלכם')) {
-      const cardText = normalizedText(card);
       if (
         cardText.includes('בחרו מספר והשלימו כלל') &&
         cardText.includes('כתבו שתי נקודות שמתאימות לכלל שלכם') &&
