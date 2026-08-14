@@ -49,7 +49,7 @@ async function checkAll(page: Page): Promise<void> {
   await page.getByRole('button', { name: 'בדיקת כל התשובות' }).click();
 }
 
-test('learner-chosen point pairs are graded by the mathematical condition after check', async ({ page }) => {
+test('learner-chosen point pairs consume an attempt only on a wrong explicit check, then turn correct immediately', async ({ page }) => {
   await page.goto('/#/workbook/12');
 
   const x1 = page.locator('[data-lms-qid="p12-q7"]');
@@ -63,22 +63,23 @@ test('learner-chosen point pairs are graded by the mathematical condition after 
   await x2.fill('1');
   await y2.fill('5');
   await expect(proxy).not.toHaveAttribute('data-lms-state', 'wrong');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '0');
   await checkAll(page);
 
   await expect(proxy).toHaveAttribute('data-lms-state', 'wrong');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
   await expect(x1).toHaveAttribute('data-lms-group-state', 'wrong');
 
   await x2.fill('4');
-  await expect(proxy).not.toHaveAttribute('data-lms-state', 'correct');
-  await checkAll(page);
   await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
   await expect(x1).toHaveAttribute('data-lms-group-state', 'correct');
   await expect(y1).toHaveAttribute('data-lms-group-state', 'correct');
   await expect(x2).toHaveAttribute('data-lms-group-state', 'correct');
   await expect(y2).toHaveAttribute('data-lms-group-state', 'correct');
 });
 
-test('point-marking tasks are answered by touching the grid and checked explicitly', async ({ page }) => {
+test('point-marking tasks are answered by touching the grid and valid conditions turn correct immediately', async ({ page }) => {
   await page.goto('/#/workbook/25');
   const grid = page.locator('.coordinate-grid[data-lms-picker="ready"]');
   await expect(grid).toHaveAttribute('data-lms-picker-active', 'F');
@@ -95,12 +96,11 @@ test('point-marking tasks are answered by touching the grid and checked explicit
   await expect(grid.locator('[data-lms-picked-label="G"]')).toBeVisible();
 
   const rightOfB = page.locator('.lms-group-proxy[data-lms-group^="point-on-x-right-of-5-"]');
-  await expect(rightOfB).not.toHaveAttribute('data-lms-state', 'correct');
-  await checkAll(page);
   await expect(rightOfB).toHaveAttribute('data-lms-state', 'correct');
+  await expect(rightOfB).toHaveAttribute('data-lms-attempts', '0');
 });
 
-test('axis and free-coordinate tasks accept any valid value after check', async ({ page }) => {
+test('axis and free-coordinate tasks accept any valid value immediately without consuming attempts', async ({ page }) => {
   await page.goto('/#/workbook/25');
 
   const aboveX = page.locator('.lms-group-proxy[data-lms-group^="point-above-x-axis-"]');
@@ -112,24 +112,23 @@ test('axis and free-coordinate tasks accept any valid value after check', async 
   await anyYOnYAxis.fill('4');
   await anyXOnXAxis.fill('9');
 
-  await expect(aboveX).not.toHaveAttribute('data-lms-state', 'correct');
-  await expect(anyYOnYAxis).not.toHaveAttribute('data-lms-state', 'correct');
-  await checkAll(page);
   await expect(aboveX).toHaveAttribute('data-lms-state', 'correct');
+  await expect(aboveX).toHaveAttribute('data-lms-attempts', '0');
   await expect(anyYOnYAxis).toHaveAttribute('data-lms-state', 'correct');
+  await expect(anyYOnYAxis).toHaveAttribute('data-lms-attempts', '0');
   await expect(anyXOnXAxis).toHaveAttribute('data-lms-state', 'correct');
+  await expect(anyXOnXAxis).toHaveAttribute('data-lms-attempts', '0');
 });
 
-test('equal-coordinate package pairs are accepted regardless of pair order after check', async ({ page }) => {
+test('equal-coordinate package pairs are accepted regardless of pair order with immediate feedback', async ({ page }) => {
   await page.goto('/#/workbook/23');
   const targets = [11, 12, 13, 14].map((qid) => page.locator(`[data-lms-qid="p23-q${qid}"]`));
   for (const [target, value] of targets.map((target, index) => [target, ['E', 'D', 'C', 'B'][index]!] as const)) {
     await target.fill(value);
   }
   const proxy = page.locator('.lms-group-proxy[data-lms-group^="same-weight-package-pairs-"]');
-  await expect(proxy).not.toHaveAttribute('data-lms-state', 'correct');
-  await checkAll(page);
   await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '0');
 });
 
 test('learner-created horizontal length-four segment validates endpoints, work, and final length together', async ({ page }) => {
@@ -143,6 +142,7 @@ test('learner-created horizontal length-four segment validates endpoints, work, 
     '.lms-group-proxy[data-lms-group^="segment-horizontal-segment-length-4-with-work-"]',
   );
   await expect(proxy).not.toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '0');
   await checkAll(page);
   await expect(proxy).toHaveAttribute('data-lms-state', 'wrong');
   await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
