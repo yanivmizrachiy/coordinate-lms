@@ -99,3 +99,34 @@ test('split-line hall instruction still lets the learner pick a free seat by tou
       .toHaveAttribute('data-lms-group-state', 'correct');
   }
 });
+
+test('delivery address choice is filled by touch and the subtraction stays tied to the chosen x', async ({ page }) => {
+  await page.goto('/#/workbook/62');
+  const grid = page.locator('.coordinate-grid[data-lms-picker="ready"]');
+  await expect(grid).toBeVisible();
+
+  await clickGridPoint(page, grid, 6, 1);
+  await expect(page.locator('[data-lms-qid="p62-q11"]')).toHaveText('6');
+  await expect(page.locator('[data-lms-qid="p62-q12"]')).toHaveText('1');
+
+  await page.locator('[data-lms-qid="p62-q13"]').fill('1 − 6');
+  await page.locator('[data-lms-qid="p62-q14"]').fill('5');
+  await page.locator('[data-lms-qid="p62-q15"]').fill('5');
+
+  const proxy = page.locator(
+    '.lms-group-proxy[data-lms-group="delivery-same-street-with-distance-work"]',
+  );
+  await expect(proxy).not.toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '0');
+  await checkAll(page);
+  await expect(proxy).toHaveAttribute('data-lms-state', 'wrong');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
+
+  await page.locator('[data-lms-qid="p62-q13"]').fill('6 − 1');
+  await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
+  for (let q = 11; q <= 15; q += 1) {
+    await expect(page.locator(`[data-lms-qid="p62-q${q}"]`))
+      .toHaveAttribute('data-lms-group-state', 'correct');
+  }
+});
