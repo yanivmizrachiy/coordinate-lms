@@ -1,5 +1,12 @@
 export type DigitalGroupRule = 'distinct-coordinate-pairs';
 
+interface PredicateBinding {
+  observer: MutationObserver;
+  targets: HTMLElement[];
+  proxy: HTMLElement;
+  onInput: EventListener;
+}
+
 function finiteNumber(raw: string): number | null {
   const normalized = raw.trim().replace(',', '.');
   if (!/^[+-]?(?:\d+\.?\d*|\.\d+)$/.test(normalized)) return null;
@@ -17,9 +24,12 @@ export function evaluateDigitalGroupRule(
     if (numbers.some((value) => value === null)) return false;
     const [x1, y1, x2, y2] = numbers as [number, number, number, number];
 
-    // The canonical task asks for two points whose x-values differ AND whose
-    // y-values differ. There is no single model answer: every pair satisfying
-    // the mathematical predicate is correct.
+    // The workbook is about the first quadrant/axes: negative coordinates do
+    // not satisfy the learning context of this task.
+    if (numbers.some((value) => (value as number) < 0)) return false;
+
+    // There is no single model answer. Any two points satisfying both
+    // inequalities are mathematically correct.
     return x1 !== x2 && y1 !== y2;
   }
 
@@ -30,13 +40,46 @@ function normalizedText(node: Element | null): string {
   return node?.textContent?.replace(/\s+/g, ' ').trim() || '';
 }
 
+function syncProxy(
+  proxy: HTMLElement,
+  targets: readonly HTMLElement[],
+): void {
+  proxy.textContent = targets
+    .map((target) => (target.textContent || '').trim())
+    .join('|');
+  proxy.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+function mirrorGroupState(
+  proxy: HTMLElement,
+  targets: readonly HTMLElement[],
+): void {
+  const state = proxy.dataset['lmsState'] || 'empty';
+  for (const target of targets) {
+    target.dataset['lmsGroupState'] = state;
+    if (['correct', 'wrong', 'locked', 'missing'].includes(state)) {
+      target.dataset['lmsState'] = state;
+    }
+    if (state === 'correct' || state === 'locked') {
+      target.contentEditable = 'false';
+    }
+  }
+}
+
 /**
- * Adds LMS-only mathematical metadata to canonical worksheet targets.
- * It never edits the printable source. Matching is based on the stable
- * canonical prompt text, not a page number, so page insertion/reordering does
- * not silently bind the rule to another question.
+ * Adds LMS-only mathematical grading to canonical worksheet targets.
+ * Printable source markup is never changed. Matching is based on the stable
+ * canonical prompt text, not a page number, so reordering pages cannot bind the
+ * rule to another question.
+ *
+ * The four visible coordinate blanks remain the learner's interaction. A hidden
+ * LMS proxy combines them into one logical answer, so scoring and attempts are
+ * attached to the mathematical task rather than treating four coordinates as
+ * four unrelated questions.
  */
-export function hydrateDigitalPredicates(root: ParentNode): void {
+export function hydrateDigitalPredicates(root: ParentNode): () => void {
+  const bindings: PredicateBinding[] = [];
+
   for (const card of root.querySelectorAll<HTMLElement>('.q-card')) {
     const heading = normalizedText(card.querySelector('h3'));
     if (
@@ -51,11 +94,47 @@ export function hydrateDigitalPredicates(root: ParentNode): void {
       card.querySelectorAll<HTMLElement>('.pair-blank'),
     );
     if (targets.length !== 4) continue;
+    if (card.querySelector('.lms-group-proxy')) continue;
 
-    const groupId = 'distinct-coordinate-pairs';
+    const proxy = document.createElement('span');
+    proxy.className = 'blank lms-group-proxy';
+    proxy.hidden = true;
+    proxy.dataset['lmsAnswers'] = JSON.stringify([
+      'predicate:distinct-coordinate-pairs',
+    ]);
+    proxy.setAttribute(
+      'aria-label',
+      'בדיקה מתמטית של שתי הנקודות שנבחרו',
+    );
+    card.append(proxy);
+
+    const onInput: EventListener = () => {
+      syncProxy(proxy, targets);
+    };
     for (const target of targets) {
-      target.dataset['lmsGroup'] = groupId;
-      target.dataset['lmsGroupRule'] = 'distinct-coordinate-pairs';
+      target.addEventListener('input', onInput);
+      target.dataset['lmsGroup'] = 'distinct-coordinate-pairs';
     }
+
+    const observer = new MutationObserver(() => {
+      mirrorGroupState(proxy, targets);
+    });
+    observer.observe(proxy, {
+      attributes: true,
+      attributeFilter: ['data-lms-state'],
+    });
+
+    syncProxy(proxy, targets);
+    bindings.push({ observer, targets, proxy, onInput });
   }
+
+  return () => {
+    for (const binding of bindings) {
+      binding.observer.disconnect();
+      for (const target of binding.targets) {
+        target.removeEventListener('input', binding.onInput);
+      }
+      binding.proxy.remove();
+    }
+  };
 }
