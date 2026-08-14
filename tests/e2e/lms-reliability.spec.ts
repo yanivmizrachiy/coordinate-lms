@@ -1,6 +1,28 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
-test('three-attempt state survives reload and never resets', async ({ page }) => {
+test.use({
+  storageState: {
+    cookies: [],
+    origins: [],
+  },
+});
+
+async function registerStudent(page: Page, suffix: string): Promise<void> {
+  await page.goto('/#/login');
+  await page.getByPlaceholder('שם מלא').fill('תלמיד בדיקה ' + suffix);
+  await page.getByPlaceholder('שם משתמש').fill('student_' + suffix);
+  await page.getByPlaceholder('כתובת אימייל').fill(`student-${suffix}@example.test`);
+  await page.getByPlaceholder('סיסמה — לפחות 10 תווים, כולל אות ומספר')
+    .fill('student-password-' + suffix + '1');
+  await page.getByPlaceholder('בית ספר').fill('בית ספר בדיקה');
+  await page.getByPlaceholder('עיר').fill('ירושלים');
+  await page.getByPlaceholder('כיתה').fill('ז1');
+  await page.getByRole('button', { name: 'הרשמה והפעלת שמירה ודוחות' }).click();
+  await expect(page).toHaveURL(/#\/workbook\/1$/);
+}
+
+test('registered three-attempt state survives reload and never resets', async ({ page }) => {
+  await registerStudent(page, 'attempts');
   await page.goto('/#/workbook/10');
 
   for (let expectedAttempts = 1; expectedAttempts <= 3; expectedAttempts += 1) {
@@ -24,7 +46,8 @@ test('three-attempt state survives reload and never resets', async ({ page }) =>
     .toHaveAttribute('data-lms-attempts', '3');
 });
 
-test('rapid duplicate submission creates one durable completion', async ({ page }) => {
+test('rapid duplicate submission creates one durable registered completion', async ({ page }) => {
+  await registerStudent(page, 'duplicate');
   await page.goto('/#/workbook/19');
   const submit = page.getByRole('button', { name: 'סיימתי את הפעילות' });
   await expect(submit).toBeEnabled();
@@ -37,7 +60,7 @@ test('rapid duplicate submission creates one durable completion', async ({ page 
   await expect(page.getByRole('button', { name: 'העמוד הוגש' }))
     .toBeDisabled();
   await expect(page.locator('.lms-panel__status'))
-    .toContainText('נשמרה במכשיר בלבד');
+    .toContainText('ההגשה נשמרה בחשבון המקומי הרשום');
 
   const persisted = await page.evaluate(() => {
     const results = JSON.parse(
