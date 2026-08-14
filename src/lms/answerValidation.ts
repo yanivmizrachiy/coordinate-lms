@@ -1,4 +1,7 @@
-import { evaluateDigitalGroupRule } from './digitalPredicates';
+import {
+  evaluateDigitalGroupRule,
+  type DigitalGroupRule,
+} from './digitalPredicates';
 
 const MAX_ANSWER_LENGTH = 120;
 
@@ -84,13 +87,11 @@ function axisAliasMatches(raw: string, candidate: string): boolean {
 }
 
 function predicateMatches(raw: string, candidate: string): boolean {
-  if (candidate === 'predicate:distinct-coordinate-pairs') {
-    return evaluateDigitalGroupRule(
-      'distinct-coordinate-pairs',
-      raw.split('|'),
-    );
-  }
-  return false;
+  const rule = candidate.slice('predicate:'.length) as DigitalGroupRule;
+  const values = rule === 'nonnegative-number'
+    ? [raw]
+    : raw.split('|');
+  return evaluateDigitalGroupRule(rule, values);
 }
 
 export function answersMatch(raw: string, expected: readonly string[]): boolean {
