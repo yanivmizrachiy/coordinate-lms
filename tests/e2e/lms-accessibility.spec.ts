@@ -5,7 +5,7 @@ test('answer fields keep meaningful labels and support keyboard completion', asy
   const target = page.locator('[data-lms-qid="p10-q1"]');
   await expect(target).toBeVisible();
   await expect(target).toHaveAttribute('aria-label', /מקום להשלמת|תשובה.+:/);
-  await expect(page.locator('.lms-inline-check[data-lms-check-for*="p10-q1"]'))
+  await expect(page.locator('.lms-inline-check[data-lms-check-for="p10-q1"]'))
     .toHaveCount(1);
 
   const answers = JSON.parse(
