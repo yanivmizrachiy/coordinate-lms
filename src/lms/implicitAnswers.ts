@@ -1,6 +1,7 @@
 import { hydrateDigitalCanonicalAnswers } from './digitalCanonicalAnswers';
 import { hydrateDigitalExplanationChoices } from './digitalExplanationChoices';
 import { hydrateDigitalGeometryAnswers } from './digitalGeometryAnswers';
+import { hydrateDigitalGraphAnswers } from './digitalGraphAnswers';
 import { hydrateDigitalOneStepAnswers } from './digitalOneStepAnswers';
 import { hydrateDigitalPredicates } from './digitalPredicates';
 import { hydrateDigitalRuleAnswers } from './digitalRuleAnswers';
@@ -59,6 +60,7 @@ export function hydrateExplicitAuthoringAnswers(
   hydrateDigitalCanonicalAnswers(root);
   hydrateDigitalRuleAnswers(root);
   hydrateDigitalGeometryAnswers(root);
+  hydrateDigitalGraphAnswers(root);
   hydrateDigitalOneStepAnswers(root);
   const cleanupExplanations = hydrateDigitalExplanationChoices(root);
   const cleanupPredicates = hydrateDigitalPredicates(root);
