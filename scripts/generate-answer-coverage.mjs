@@ -59,17 +59,22 @@ function recalculateCoverage(report) {
   return report;
 }
 
-function applyRuntimePredicateCoverage(report, predicateRuleForCoverage) {
+function applyRuntimePredicateCoverage(report, resolveRule) {
   for (const page of report.pages) {
     for (const target of page.targets) {
       if (target.automaticCheckingSafe) continue;
-      const rule = predicateRuleForCoverage(target.context, target.inputType);
-      if (!rule) continue;
+      const resolved = resolveRule(
+        target.context,
+        target.inputType,
+        page.pageNumber,
+        target.targetId,
+      );
+      if (!resolved) continue;
       target.classification = 'deterministic-mathematical';
       target.currentAnswerSource = 'runtime mathematical predicate';
-      target.sourceEvidence = `src/lms/digitalPredicates.ts:${rule}`;
+      target.sourceEvidence = `${resolved.source}:${resolved.rule}`;
       target.automaticCheckingSafe = true;
-      target.answers = [`predicate:${rule}`];
+      target.answers = [`predicate:${resolved.rule}`];
     }
 
     page.targets = page.targets.filter((target) => !isHiddenRuntimeGroupProxy(target));
@@ -91,9 +96,27 @@ try {
   const segments = await server.ssrLoadModule('/src/lms/digitalSegmentPredicates.ts');
   const report = applyRuntimePredicateCoverage(
     coverage.buildAnswerCoverageReport(await existingGeneratedAt()),
-    (context, inputType) =>
-      predicates.predicateRuleForCoverage(context, inputType) ??
-      segments.segmentPredicateRuleForCoverage(context, inputType),
+    (context, inputType, pageNumber, targetId) => {
+      const generalRule = predicates.predicateRuleForCoverage(context, inputType);
+      if (generalRule) {
+        return {
+          rule: generalRule,
+          source: 'src/lms/digitalPredicates.ts',
+        };
+      }
+      const segmentRule = segments.segmentPredicateRuleForCoverage(
+        context,
+        inputType,
+        pageNumber,
+        targetId,
+      );
+      return segmentRule
+        ? {
+            rule: segmentRule,
+            source: 'src/lms/digitalSegmentPredicates.ts',
+          }
+        : null;
+    },
   );
   const order = coverage.answerTargetOrderSnapshot(report);
   const reviewManifest = {
