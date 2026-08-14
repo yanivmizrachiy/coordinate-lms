@@ -24,25 +24,32 @@ async function clickGridPoint(
   );
 }
 
-test('learner-chosen point pairs are graded by the mathematical condition', async ({ page }) => {
+async function checkAll(page: Page): Promise<void> {
+  await page.getByRole('button', { name: 'בדיקת כל התשובות' }).click();
+}
+
+test('learner-chosen point pairs are graded by the mathematical condition after check', async ({ page }) => {
   await page.goto('/#/workbook/12');
 
   const x1 = page.locator('[data-lms-qid="p12-q7"]');
   const y1 = page.locator('[data-lms-qid="p12-q8"]');
   const x2 = page.locator('[data-lms-qid="p12-q9"]');
   const y2 = page.locator('[data-lms-qid="p12-q10"]');
+  const proxy = page.locator('.lms-group-proxy[data-lms-group^="distinct-coordinate-pairs-"]');
 
   await x1.fill('1');
   await y1.fill('2');
   await x2.fill('1');
   await y2.fill('5');
-  await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
+  await expect(proxy).not.toHaveAttribute('data-lms-state', 'wrong');
+  await checkAll(page);
 
-  const proxy = page.locator('.lms-group-proxy[data-lms-group^="distinct-coordinate-pairs-"]');
   await expect(proxy).toHaveAttribute('data-lms-state', 'wrong');
   await expect(x1).toHaveAttribute('data-lms-group-state', 'wrong');
 
   await x2.fill('4');
+  await expect(proxy).not.toHaveAttribute('data-lms-state', 'correct');
+  await checkAll(page);
   await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
   await expect(x1).toHaveAttribute('data-lms-group-state', 'correct');
   await expect(y1).toHaveAttribute('data-lms-group-state', 'correct');
@@ -50,7 +57,7 @@ test('learner-chosen point pairs are graded by the mathematical condition', asyn
   await expect(y2).toHaveAttribute('data-lms-group-state', 'correct');
 });
 
-test('point-marking tasks are answered directly by touching the coordinate grid', async ({ page }) => {
+test('point-marking tasks are answered by touching the grid and checked explicitly', async ({ page }) => {
   await page.goto('/#/workbook/25');
   const grid = page.locator('.coordinate-grid[data-lms-picker="ready"]');
   await expect(grid).toHaveAttribute('data-lms-picker-active', 'F');
@@ -67,31 +74,39 @@ test('point-marking tasks are answered directly by touching the coordinate grid'
   await expect(grid.locator('[data-lms-picked-label="G"]')).toBeVisible();
 
   const rightOfB = page.locator('.lms-group-proxy[data-lms-group^="point-on-x-right-of-5-"]');
+  await expect(rightOfB).not.toHaveAttribute('data-lms-state', 'correct');
+  await checkAll(page);
   await expect(rightOfB).toHaveAttribute('data-lms-state', 'correct');
 });
 
-test('axis and free-coordinate tasks accept any value satisfying the prompt', async ({ page }) => {
+test('axis and free-coordinate tasks accept any valid value after check', async ({ page }) => {
   await page.goto('/#/workbook/25');
 
   const aboveX = page.locator('.lms-group-proxy[data-lms-group^="point-above-x-axis-"]');
   await page.locator('[data-lms-qid="p25-q1"]').fill('0');
   await page.locator('[data-lms-qid="p25-q2"]').fill('4');
-  await expect(aboveX).toHaveAttribute('data-lms-state', 'correct');
 
   const anyYOnYAxis = page.locator('[data-lms-qid="p25-q17"]');
   const anyXOnXAxis = page.locator('[data-lms-qid="p25-q19"]');
   await anyYOnYAxis.fill('4');
   await anyXOnXAxis.fill('9');
+
+  await expect(aboveX).not.toHaveAttribute('data-lms-state', 'correct');
+  await expect(anyYOnYAxis).not.toHaveAttribute('data-lms-state', 'correct');
+  await checkAll(page);
+  await expect(aboveX).toHaveAttribute('data-lms-state', 'correct');
   await expect(anyYOnYAxis).toHaveAttribute('data-lms-state', 'correct');
   await expect(anyXOnXAxis).toHaveAttribute('data-lms-state', 'correct');
 });
 
-test('equal-coordinate package pairs are accepted regardless of pair order', async ({ page }) => {
+test('equal-coordinate package pairs are accepted regardless of pair order after check', async ({ page }) => {
   await page.goto('/#/workbook/23');
   const targets = [11, 12, 13, 14].map((qid) => page.locator(`[data-lms-qid="p23-q${qid}"]`));
   for (const [target, value] of targets.map((target, index) => [target, ['E', 'D', 'C', 'B'][index]!] as const)) {
     await target.fill(value);
   }
   const proxy = page.locator('.lms-group-proxy[data-lms-group^="same-weight-package-pairs-"]');
+  await expect(proxy).not.toHaveAttribute('data-lms-state', 'correct');
+  await checkAll(page);
   await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
 });
