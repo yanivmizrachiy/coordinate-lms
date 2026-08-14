@@ -76,10 +76,8 @@ function applyRuntimePredicateCoverage(report, resolveRule) {
       target.automaticCheckingSafe = true;
       target.answers = [`predicate:${resolved.rule}`];
     }
-
     page.targets = page.targets.filter((target) => !isHiddenRuntimeGroupProxy(target));
   }
-
   return recalculateCoverage(report);
 }
 
@@ -95,48 +93,35 @@ try {
   const predicates = await server.ssrLoadModule('/src/lms/digitalPredicates.ts');
   const segments = await server.ssrLoadModule('/src/lms/digitalSegmentPredicates.ts');
   const rectangles = await server.ssrLoadModule('/src/lms/digitalRectanglePredicates.ts');
+  const life = await server.ssrLoadModule('/src/lms/digitalLifePredicates.ts');
   const grouped = await server.ssrLoadModule('/src/lms/groupCoverageBindings.ts');
   const report = applyRuntimePredicateCoverage(
     coverage.buildAnswerCoverageReport(await existingGeneratedAt()),
     (context, inputType, pageNumber, targetId) => {
       const generalRule = predicates.predicateRuleForCoverage(context, inputType);
-      if (generalRule) {
-        return {
-          rule: generalRule,
-          source: 'src/lms/digitalPredicates.ts',
-        };
-      }
+      if (generalRule) return { rule: generalRule, source: 'src/lms/digitalPredicates.ts' };
+
       const segmentRule = segments.segmentPredicateRuleForCoverage(
         context,
         inputType,
         pageNumber,
         targetId,
       );
-      if (segmentRule) {
-        return {
-          rule: segmentRule,
-          source: 'src/lms/digitalSegmentPredicates.ts',
-        };
-      }
-      const rectangleRule = rectangles.rectanglePredicateRuleForCoverage(
-        pageNumber,
-        targetId,
-      );
-      if (rectangleRule) {
-        return {
-          rule: rectangleRule,
-          source: 'src/lms/digitalRectanglePredicates.ts',
-        };
-      }
+      if (segmentRule) return { rule: segmentRule, source: 'src/lms/digitalSegmentPredicates.ts' };
+
+      const rectangleRule = rectangles.rectanglePredicateRuleForCoverage(pageNumber, targetId);
+      if (rectangleRule) return { rule: rectangleRule, source: 'src/lms/digitalRectanglePredicates.ts' };
+
+      const lifeRule = life.lifePredicateRuleForCoverage(pageNumber, targetId);
+      if (lifeRule) return { rule: lifeRule, source: 'src/lms/digitalLifePredicates.ts' };
+
       const groupedRule = grouped.canonicalGroupRuleForCoverage(pageNumber, targetId);
       return groupedRule
-        ? {
-            rule: groupedRule,
-            source: 'src/lms/digitalPredicates.ts',
-          }
+        ? { rule: groupedRule, source: 'src/lms/digitalPredicates.ts' }
         : null;
     },
   );
+
   const order = coverage.answerTargetOrderSnapshot(report);
   const reviewManifest = {
     schemaVersion: 2,
@@ -159,6 +144,7 @@ try {
       })),
     })),
   };
+
   const outputs = [
     [jsonPath, JSON.stringify(report, null, 2) + '\n'],
     [markdownPath, coverage.renderAnswerCoverageMarkdown(report)],
