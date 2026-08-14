@@ -1,3 +1,4 @@
+import { hydrateDigitalCanonicalAnswers } from './digitalCanonicalAnswers';
 import { hydrateDigitalPredicates } from './digitalPredicates';
 import { hydrateGridPointPickers } from './gridPointPicker';
 import type { AnswerKey } from './types';
@@ -32,9 +33,9 @@ function answerFromAria(target: HTMLElement): string[] {
 
 /**
  * One preparation point for the digital layer. It captures explicit canonical
- * answer metadata, adds reviewed mathematical predicates, and enables touch-
- * first point marking on the rendered graph. None of these steps edit the
- * printable workbook source.
+ * answer metadata, hydrates reviewed deterministic answers from canonical task
+ * wording, adds mathematical predicates, and enables touch-first point marking
+ * on the rendered graph. None of these steps edit the printable source.
  */
 export function hydrateExplicitAuthoringAnswers(
   root: ParentNode,
@@ -51,6 +52,7 @@ export function hydrateExplicitAuthoringAnswers(
     }
   }
 
+  hydrateDigitalCanonicalAnswers(root);
   const cleanupPredicates = hydrateDigitalPredicates(root);
   const cleanupPointPickers = hydrateGridPointPickers(root);
 
