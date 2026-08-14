@@ -16,6 +16,14 @@ describe('digital mathematical predicates', () => {
     expect(evaluateDigitalGroupRule('distinct-coordinate-pairs', ['-1', '5', '7', '3'])).toBe(false);
   });
 
+  it('accepts any two distinct points strictly above x and right of y', () => {
+    expect(evaluateDigitalGroupRule('two-distinct-positive-points', ['2', '3', '2', '5'])).toBe(true);
+    expect(evaluateDigitalGroupRule('two-distinct-positive-points', ['4', '1', '7', '1'])).toBe(true);
+    expect(evaluateDigitalGroupRule('two-distinct-positive-points', ['2', '3', '2', '3'])).toBe(false);
+    expect(evaluateDigitalGroupRule('two-distinct-positive-points', ['0', '3', '2', '5'])).toBe(false);
+    expect(evaluateDigitalGroupRule('two-distinct-positive-points', ['2', '0', '4', '5'])).toBe(false);
+  });
+
   it('checks axis and quadrant descriptions without choosing a model point', () => {
     expect(evaluateDigitalGroupRule('point-above-x-axis', ['0', '4'])).toBe(true);
     expect(evaluateDigitalGroupRule('point-above-x-axis', ['4', '0'])).toBe(false);
@@ -91,6 +99,7 @@ describe('digital mathematical predicates', () => {
   it('integrates every predicate through the normal LMS answer matcher', () => {
     expect(answersMatch('1|2|4|5', ['predicate:distinct-coordinate-pairs'])).toBe(true);
     expect(answersMatch('1|2|1|5', ['predicate:distinct-coordinate-pairs'])).toBe(false);
+    expect(answersMatch('2|3|2|5', ['predicate:two-distinct-positive-points'])).toBe(true);
     expect(answersMatch('8|0', ['predicate:point-on-x-axis'])).toBe(true);
     expect(answersMatch('0|8', ['predicate:point-on-x-axis'])).toBe(false);
     expect(answersMatch('7|6', ['predicate:point-y-equals-6'])).toBe(true);
