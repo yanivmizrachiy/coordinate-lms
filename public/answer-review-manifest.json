@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T13:47:07.684Z",
+  "generatedAt": "2026-08-14T13:47:34.012Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -8056,10 +8056,12 @@
           "targetId": "p39-q23",
           "signature": "08b44ca7",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:two-distinct-positive-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:two-distinct-positive-points"
+          ],
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -8067,10 +8069,12 @@
           "targetId": "p39-q24",
           "signature": "08b44ca7",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:two-distinct-positive-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:two-distinct-positive-points"
+          ],
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -8078,10 +8082,12 @@
           "targetId": "p39-q25",
           "signature": "08b44ca7",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:two-distinct-positive-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:two-distinct-positive-points"
+          ],
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…])."
         },
         {
@@ -8089,10 +8095,12 @@
           "targetId": "p39-q26",
           "signature": "08b44ca7",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:two-distinct-positive-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:two-distinct-positive-points"
+          ],
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…])."
         },
         {

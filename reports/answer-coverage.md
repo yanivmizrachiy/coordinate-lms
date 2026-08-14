@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:47:07.684Z
+Generated: 2026-08-14T13:47:34.012Z
 
-Overall: 878/1162 safely checkable targets (75.6%).
+Overall: 882/1162 safely checkable targets (75.9%).
 
 ## Classification totals
 
@@ -10,9 +10,9 @@ Overall: 878/1162 safely checkable targets (75.6%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 139 |
-| deterministic-mathematical | 553 |
+| deterministic-mathematical | 557 |
 | valid-range | 6 |
-| open-ended | 142 |
+| open-ended | 138 |
 | ambiguous | 142 |
 | unsupported | 0 |
 | missing | 0 |
@@ -854,7 +854,7 @@ No detected interactive response targets.
 
 ### Page 39 — משלימים שיעור חסר ודפוסים
 
-22/28 safely checkable (78.6%).
+26/28 safely checkable (92.9%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -880,10 +880,10 @@ No detected interactive response targets.
 | p39-q20 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y גדול ב־[…] משיעור x. |
 | p39-q21 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם (5,5) מתאים? […] |
 | p39-q22 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | התיאור הזה מתאים ל[…] נקודות, ולא לנקודה אחת. |
-| p39-q23 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
-| p39-q24 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
-| p39-q25 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
-| p39-q26 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
+| p39-q23 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
+| p39-q24 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
+| p39-q25 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
+| p39-q26 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q27 | text:letter | ambiguous | no | none | כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]. |
 | p39-q28 | text:relation | open-ended | no | teacher judgment required | ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x  |
 

@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:47:07.684Z",
+  "generatedAt": "2026-08-14T13:47:34.012Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 878,
-  "coveragePercentage": 75.6,
+  "automaticallyCheckableTargets": 882,
+  "coveragePercentage": 75.9,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 139,
-    "deterministic-mathematical": 553,
+    "deterministic-mathematical": 557,
     "valid-range": 6,
-    "open-ended": 142,
+    "open-ended": 138,
     "ambiguous": 142,
     "unsupported": 0,
     "missing": 0
@@ -9595,11 +9595,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]).",
           "signature": "08b44ca7",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:two-distinct-positive-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:two-distinct-positive-points"
+          ]
         },
         {
           "targetId": "p39-q24",
@@ -9607,11 +9609,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]).",
           "signature": "08b44ca7",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:two-distinct-positive-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:two-distinct-positive-points"
+          ]
         },
         {
           "targetId": "p39-q25",
@@ -9619,11 +9623,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]).",
           "signature": "08b44ca7",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:two-distinct-positive-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:two-distinct-positive-points"
+          ]
         },
         {
           "targetId": "p39-q26",
@@ -9631,11 +9637,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]).",
           "signature": "08b44ca7",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:two-distinct-positive-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:two-distinct-positive-points"
+          ]
         },
         {
           "targetId": "p39-q27",
@@ -9663,15 +9671,11 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p39-q23",
-        "p39-q24",
-        "p39-q25",
-        "p39-q26",
         "p39-q27",
         "p39-q28"
       ],
-      "automaticallyCheckableTargets": 22,
-      "coveragePercentage": 78.6
+      "automaticallyCheckableTargets": 26,
+      "coveragePercentage": 92.9
     },
     {
       "pageNumber": 40,
