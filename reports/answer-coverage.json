@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T14:38:55.790Z",
+  "generatedAt": "2026-08-14T14:52:18.840Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 989,
-  "coveragePercentage": 85.1,
+  "automaticallyCheckableTargets": 995,
+  "coveragePercentage": 85.6,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 262,
+    "canonical-metadata-derived": 268,
     "deterministic-mathematical": 541,
     "valid-range": 6,
     "open-ended": 118,
-    "ambiguous": 55,
+    "ambiguous": 49,
     "unsupported": 0,
     "missing": 0
   },
@@ -13038,11 +13038,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "16"
+          ]
         },
         {
           "targetId": "p52-q9",
@@ -13050,11 +13052,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "15"
+          ]
         },
         {
           "targetId": "p52-q10",
@@ -13062,11 +13066,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקודקוד החסר: ([…],[…])",
           "signature": "0dfbd62f",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p52-q11",
@@ -13074,11 +13080,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקודקוד החסר: ([…],[…])",
           "signature": "0dfbd62f",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p52-q12",
@@ -13086,11 +13094,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "16"
+          ]
         },
         {
           "targetId": "p52-q13",
@@ -13098,11 +13108,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "15"
+          ]
         },
         {
           "targetId": "p52-q14",
@@ -13118,16 +13130,10 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p52-q8",
-        "p52-q9",
-        "p52-q10",
-        "p52-q11",
-        "p52-q12",
-        "p52-q13",
         "p52-q14"
       ],
-      "automaticallyCheckableTargets": 7,
-      "coveragePercentage": 50
+      "automaticallyCheckableTargets": 13,
+      "coveragePercentage": 92.9
     },
     {
       "pageNumber": 53,

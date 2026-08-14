@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:38:55.790Z
+Generated: 2026-08-14T14:52:18.840Z
 
-Overall: 989/1162 safely checkable targets (85.1%).
+Overall: 995/1162 safely checkable targets (85.6%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 262 |
+| canonical-metadata-derived | 268 |
 | deterministic-mathematical | 541 |
 | valid-range | 6 |
 | open-ended | 118 |
-| ambiguous | 55 |
+| ambiguous | 49 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1172,7 +1172,7 @@ No detected interactive response targets.
 
 ### Page 52 — המלבן ברביע הראשון
 
-7/14 safely checkable (50%).
+13/14 safely checkable (92.9%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1183,12 +1183,12 @@ No detected interactive response targets.
 | p52-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=6 − 1=[…]יח' |
 | p52-q6 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הצלע BC מקבילה לציר […]: ה־y הגבוה פחות הנמוך. |
 | p52-q7 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=4 − 1=[…]יח' |
-| p52-q8 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p52-q9 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p52-q10 | ordered-pair-coordinate | ambiguous | no | none | הקודקוד החסר: ([…],[…]) |
-| p52-q11 | ordered-pair-coordinate | ambiguous | no | none | הקודקוד החסר: ([…],[…]) |
-| p52-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p52-q13 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p52-q8 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p52-q9 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p52-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקודקוד החסר: ([…],[…]) |
+| p52-q11 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקודקוד החסר: ([…],[…]) |
+| p52-q12 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p52-q13 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p52-q14 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 
 ### Page 53 — המלבן ברביע הראשון
