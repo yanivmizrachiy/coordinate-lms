@@ -127,6 +127,7 @@
   border-radius: 50%;
   color: #c72637;
   background: #fff;
+  box-shadow: 0 4px 16px rgba(199, 38, 55, 0.18);
   font-size: 2.2rem;
   font-weight: 950;
 }
@@ -134,7 +135,64 @@
 .lms-score__label {
   font-size: 1.05rem;
   font-weight: 800;
-  color: #30394b;
+  color: #c72637;
+}
+
+.lms-inline-check {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.2rem;
+  min-height: 2rem;
+  margin-inline: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid rgba(22, 55, 106, 0.34);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #16376a;
+  box-shadow: 0 2px 7px rgba(20, 40, 85, 0.1);
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 850;
+  line-height: 1;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+}
+
+.lms-inline-check:hover:not(:disabled),
+.lms-inline-check:focus-visible:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(20, 40, 85, 0.16);
+  outline: 2px solid rgba(22, 55, 106, 0.22);
+  outline-offset: 2px;
+}
+
+.lms-inline-check[data-state="correct"] {
+  width: 2rem;
+  min-width: 2rem;
+  padding: 0;
+  border-color: #169447;
+  background: #169447;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(22, 148, 71, 0.28);
+  font-size: 1rem;
+}
+
+.lms-inline-check[data-state="wrong"] {
+  border-color: #cf3645;
+  background: #fff3f3;
+  color: #a41f2b;
+}
+
+.lms-inline-check[data-state="locked"] {
+  border-color: #8a9099;
+  background: #eeeeef;
+  color: #606773;
+}
+
+.lms-inline-check:disabled:not([data-state="correct"]):not([data-state="locked"]) {
+  opacity: 0.58;
+  cursor: default;
 }
 
 .sheet [data-lms-editable="true"] {
@@ -329,6 +387,11 @@
     text-align: center;
   }
 
+  .lms-inline-check {
+    min-height: 2.15rem;
+    padding-inline: 0.62rem;
+  }
+
   .lms-summary {
     grid-template-columns: 1fr;
   }
@@ -348,6 +411,7 @@
   .lms-admin,
   .lms-gate,
   .lms-registration-note,
+  .lms-inline-check,
   [data-lms-editable="true"]::after {
     display: none !important;
   }
