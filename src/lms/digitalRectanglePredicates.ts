@@ -1,13 +1,6 @@
 export const OWN_AXIS_ALIGNED_RECTANGLE_WITH_WORK =
   'own-axis-aligned-rectangle-with-work' as const;
 
-interface RectangleBinding {
-  observer: MutationObserver;
-  targets: HTMLElement[];
-  proxy: HTMLElement;
-  onInput: EventListener;
-}
-
 function normalizedText(node: Element | null): string {
   return (node?.textContent || '')
     .replace(/[\u200e\u200f\u202a-\u202e\u2066-\u2069]/g, '')
