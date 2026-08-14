@@ -3,6 +3,11 @@ import {
   type DigitalGroupRule,
 } from './digitalPredicates';
 import {
+  HALL_SEAT_ABOVE_NOA_WITH_DISTANCE,
+  PHONE_SAME_COLUMN_WITH_DISTANCE,
+  lifeRuleMatches,
+} from './digitalLifePredicates';
+import {
   OWN_AXIS_ALIGNED_RECTANGLE_WITH_WORK,
   ownAxisAlignedRectangleWithWorkMatches,
 } from './digitalRectanglePredicates';
@@ -71,8 +76,6 @@ type AxisName = 'x' | 'y';
 function axisName(raw: string): AxisName | null {
   const value = normalizeAnswer(raw).replace(/[-'"׳״]/g, '');
 
-  // Keyboard/notation flexibility is accepted only when the expected answer
-  // is an axis name, so permissive aliases cannot leak into unrelated answers.
   if (
     ['x', 'צירx', 'איקס', 'אקס', 'ציראיקס', 'ציראקס', 'ס'].includes(value)
   ) {
@@ -101,6 +104,12 @@ function predicateMatches(raw: string, candidate: string): boolean {
   }
   if (ruleName === OWN_AXIS_ALIGNED_RECTANGLE_WITH_WORK) {
     return ownAxisAlignedRectangleWithWorkMatches(raw.split('|'));
+  }
+  if (
+    ruleName === PHONE_SAME_COLUMN_WITH_DISTANCE ||
+    ruleName === HALL_SEAT_ABOVE_NOA_WITH_DISTANCE
+  ) {
+    return lifeRuleMatches(ruleName, raw.split('|'));
   }
 
   const rule = ruleName as DigitalGroupRule;
