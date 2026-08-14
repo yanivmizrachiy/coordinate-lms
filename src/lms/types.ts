@@ -7,6 +7,7 @@ export interface StudentProfile {
   email: string;
   className?: string;
   school?: string;
+  city?: string;
   role?: StudentRole;
   createdAt: number;
   lastSeenAt: number;
