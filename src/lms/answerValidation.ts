@@ -2,6 +2,10 @@ import {
   evaluateDigitalGroupRule,
   type DigitalGroupRule,
 } from './digitalPredicates';
+import {
+  HORIZONTAL_LENGTH_FOUR_WITH_WORK,
+  horizontalLengthFourWithWorkMatches,
+} from './digitalSegmentPredicates';
 
 const MAX_ANSWER_LENGTH = 120;
 
@@ -87,7 +91,12 @@ function axisAliasMatches(raw: string, candidate: string): boolean {
 }
 
 function predicateMatches(raw: string, candidate: string): boolean {
-  const rule = candidate.slice('predicate:'.length) as DigitalGroupRule;
+  const ruleName = candidate.slice('predicate:'.length);
+  if (ruleName === HORIZONTAL_LENGTH_FOUR_WITH_WORK) {
+    return horizontalLengthFourWithWorkMatches(raw.split('|'));
+  }
+
+  const rule = ruleName as DigitalGroupRule;
   const values = rule === 'nonnegative-number'
     ? [raw]
     : raw.split('|');
