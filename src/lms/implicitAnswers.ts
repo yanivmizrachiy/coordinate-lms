@@ -1,3 +1,4 @@
+import { hydrateDigitalPredicates } from './digitalPredicates';
 import type { AnswerKey } from './types';
 
 function parseAnswers(raw: string | undefined): string[] {
@@ -31,7 +32,9 @@ function answerFromAria(target: HTMLElement): string[] {
 /**
  * Captures explicit authoring answers before the generic LMS engine replaces
  * descriptive aria-labels with sequential accessible labels such as
- * "תשובה 1". This runs only on labels that literally name the answer.
+ * "תשובה 1". Digital-only mathematical predicates are hydrated here as well,
+ * in one pre-engine preparation point; the canonical printable markup remains
+ * untouched.
  */
 export function hydrateExplicitAuthoringAnswers(
   root: ParentNode,
@@ -47,15 +50,14 @@ export function hydrateExplicitAuthoringAnswers(
       target.dataset['lmsAnswers'] = JSON.stringify(answers);
     }
   }
+
+  hydrateDigitalPredicates(root);
 }
 
 /**
- * Reads answers that the canonical worksheet already states explicitly:
- * - data-lms-answers added by interactive grid/choice hydrators
- * - authoring aria labels such as "מקום להשלמת המילה אופקי"
- *
- * It deliberately does not guess from surrounding prose. Ambiguous or open
- * questions still require a reviewed teacher answer key.
+ * Reads answers that the canonical worksheet already states explicitly or that
+ * the reviewed digital-only layer encodes as a deterministic mathematical
+ * predicate. It never guesses from surrounding prose.
  */
 export function implicitAnswerKey(
   pageNumber: number,
