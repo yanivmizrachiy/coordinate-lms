@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-05T18:54:36.992Z
+Generated: 2026-08-14T13:04:20.019Z
 
-Overall: 735/1162 safely checkable targets (63.3%).
+Overall: 796/1162 safely checkable targets (68.5%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 24 |
+| canonical-metadata-derived | 85 |
 | deterministic-mathematical | 525 |
 | valid-range | 6 |
-| open-ended | 162 |
-| ambiguous | 265 |
+| open-ended | 161 |
+| ambiguous | 205 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -445,16 +445,16 @@ Overall: 735/1162 safely checkable targets (63.3%).
 
 ### Page 18 — מסמנים נקודות
 
-0/8 safely checkable (0%).
+6/8 safely checkable (75%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p18-q1 | text:letter | ambiguous | no | none | מי הנקודה הגבוהה ביותר? […] |
-| p18-q2 | text:letter | ambiguous | no | none | מי הנקודה הימנית ביותר? […] |
-| p18-q3 | text:letter | ambiguous | no | none | מי הנקודה השמאלית ביותר? […] |
-| p18-q4 | text:letter | ambiguous | no | none | הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […]. |
-| p18-q5 | text:number | ambiguous | no | none | הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […]. |
-| p18-q6 | text:number | ambiguous | no | none | הנקודה R רחוקה מציר x […] יחידות, כי זה שיעור ה־y שלה. |
+| p18-q1 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | מי הנקודה הגבוהה ביותר? […] |
+| p18-q2 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | מי הנקודה הימנית ביותר? […] |
+| p18-q3 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | מי הנקודה השמאלית ביותר? […] |
+| p18-q4 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […]. |
+| p18-q5 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […]. |
+| p18-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה R רחוקה מציר x […] יחידות, כי זה שיעור ה־y שלה. |
 | p18-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]). |
 | p18-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]). |
 
@@ -466,16 +466,16 @@ No detected interactive response targets.
 
 ### Page 20 — ציור נסתר
 
-0/9 safely checkable (0%).
+6/9 safely checkable (66.7%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p20-q1 | word:concept | ambiguous | no | none | מה קיבלתם? […] |
-| p20-q2 | text:letter | ambiguous | no | none | תחתית הגוף, הקטע שבין (2,1) ובין (6,1), מקבילה לציר […]. |
-| p20-q3 | text:number | ambiguous | no | none | התורן מקביל לציר y, ואורכו […] יחידות. |
-| p20-q4 | ordered-pair-coordinate | ambiguous | no | none | הנקודה הגבוהה ביותר בציור היא ([…],[…]). |
-| p20-q5 | ordered-pair-coordinate | ambiguous | no | none | הנקודה הגבוהה ביותר בציור היא ([…],[…]). |
-| p20-q6 | text:number | ambiguous | no | none | קצה המפרש (7,3) רחוק מציר y […] יחידות. |
+| p20-q1 | word:concept | canonical-metadata-derived | yes | explicit canonical authoring label | מה קיבלתם? […] |
+| p20-q2 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | תחתית הגוף, הקטע שבין (2,1) ובין (6,1), מקבילה לציר […]. |
+| p20-q3 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | התורן מקביל לציר y, ואורכו […] יחידות. |
+| p20-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה הגבוהה ביותר בציור היא ([…],[…]). |
+| p20-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה הגבוהה ביותר בציור היא ([…],[…]). |
+| p20-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | קצה המפרש (7,3) רחוק מציר y […] יחידות. |
 | p20-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
 | p20-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
 | p20-q9 | text:number | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
@@ -602,19 +602,19 @@ No detected interactive response targets.
 
 ### Page 27 — פענוח צבעוני
 
-0/9 safely checkable (0%).
+9/9 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p27-q1 | word:concept | ambiguous | no | none | מה קיבלתם? […] |
-| p27-q2 | text:relation | ambiguous | no | none | הסמל הוא חץ שמצביע כלפי מעלה — אל תוך הרביע, לכיוון שבו שיעור ה־y […]. |
-| p27-q3 | ordered-pair-coordinate | ambiguous | no | none | התא הנמוך ביותר שצבעתם — תחתית הגזע — הוא ([…],[…]). |
-| p27-q4 | ordered-pair-coordinate | ambiguous | no | none | התא הנמוך ביותר שצבעתם — תחתית הגזע — הוא ([…],[…]). |
-| p27-q5 | text:number | ambiguous | no | none | כל תאי הגזע ממוקמים על אותו קו אנכי, כי לכולם אותו ערך x, והוא […]. |
-| p27-q6 | text:relation | ambiguous | no | none | לשני קצות בסיס הראש, (1,3) ו־(5,3), יש שיעור y […], ולכן הם על אותו קו אופקי. |
-| p27-q7 | ordered-pair-coordinate | ambiguous | no | none | חוד החץ הוא התא הגבוה ביותר, והוא ([…],[…]). |
-| p27-q8 | ordered-pair-coordinate | ambiguous | no | none | חוד החץ הוא התא הגבוה ביותר, והוא ([…],[…]). |
-| p27-q9 | text:number | ambiguous | no | none | ההפרש בין שיעור ה־y של החוד (3,5) ובין תחתית הגזע (3,0) הוא […] יחידות. |
+| p27-q1 | word:concept | canonical-metadata-derived | yes | explicit canonical authoring label | מה קיבלתם? […] |
+| p27-q2 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | הסמל הוא חץ שמצביע כלפי מעלה — אל תוך הרביע, לכיוון שבו שיעור ה־y […]. |
+| p27-q3 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | התא הנמוך ביותר שצבעתם — תחתית הגזע — הוא ([…],[…]). |
+| p27-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | התא הנמוך ביותר שצבעתם — תחתית הגזע — הוא ([…],[…]). |
+| p27-q5 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | כל תאי הגזע ממוקמים על אותו קו אנכי, כי לכולם אותו ערך x, והוא […]. |
+| p27-q6 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | לשני קצות בסיס הראש, (1,3) ו־(5,3), יש שיעור y […], ולכן הם על אותו קו אופקי. |
+| p27-q7 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | חוד החץ הוא התא הגבוה ביותר, והוא ([…],[…]). |
+| p27-q8 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | חוד החץ הוא התא הגבוה ביותר, והוא ([…],[…]). |
+| p27-q9 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | ההפרש בין שיעור ה־y של החוד (3,5) ובין תחתית הגזע (3,0) הוא […] יחידות. |
 
 ### Page 28 — גדול ב־, קטן ב־ וגדול פי
 
@@ -793,26 +793,26 @@ No detected interactive response targets.
 
 ### Page 37 — המסלול המוצפן
 
-0/22 safely checkable (0%).
+16/22 safely checkable (72.7%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p37-q1 | text:concept | ambiguous | no | none | פקודת תנועה אומרת לאן להזיז את העיפרון: הזזה ימינה או שמאלה משנה את ערך x, והזזה למעלה או למטה משנה את שיעור y. במסלול מבצעים את הפקודות לפי הסדר, והנקודה שמגיעים אליה בסוף היא התחנה. כל תחנה חושפת אות אחת בלוח התחנות, ושלוש האותיות יחד הן  |
-| p37-q2 | ordered-pair-coordinate | ambiguous | no | none | מסלול 1 נגמר בתחנה ([…],[…]), ולכן הוא חושף בלוח את האות […]. |
-| p37-q3 | ordered-pair-coordinate | ambiguous | no | none | מסלול 1 נגמר בתחנה ([…],[…]), ולכן הוא חושף בלוח את האות […]. |
-| p37-q4 | text:letter | ambiguous | no | none | מסלול 1 נגמר בתחנה ([…],[…]), ולכן הוא חושף בלוח את האות […]. |
-| p37-q5 | ordered-pair-coordinate | ambiguous | no | none | מסלול 2 נגמר בתחנה ([…],[…]), וההזזה האחרונה בו הקטינה את שיעור ה־y, כי היא הזזה […]. |
-| p37-q6 | ordered-pair-coordinate | ambiguous | no | none | מסלול 2 נגמר בתחנה ([…],[…]), וההזזה האחרונה בו הקטינה את שיעור ה־y, כי היא הזזה […]. |
-| p37-q7 | text:direction | ambiguous | no | none | מסלול 2 נגמר בתחנה ([…],[…]), וההזזה האחרונה בו הקטינה את שיעור ה־y, כי היא הזזה […]. |
-| p37-q8 | text:letter | ambiguous | no | none | מסלול 3 חושף בלוח את האות […], כי הוא נגמר בתחנה ([…],[…]). |
-| p37-q9 | ordered-pair-coordinate | ambiguous | no | none | מסלול 3 חושף בלוח את האות […], כי הוא נגמר בתחנה ([…],[…]). |
-| p37-q10 | ordered-pair-coordinate | ambiguous | no | none | מסלול 3 חושף בלוח את האות […], כי הוא נגמר בתחנה ([…],[…]). |
-| p37-q11 | text:concept | ambiguous | no | none | כתבו את שלוש האותיות לפי סדר המסלולים, מימין לשמאל: […]. |
-| p37-q12 | text:letter | ambiguous | no | none | האות האמצעית במילה שפענחתם היא […], והיא מתגלה בסוף מסלול […]. |
-| p37-q13 | text:number | ambiguous | no | none | האות האמצעית במילה שפענחתם היא […], והיא מתגלה בסוף מסלול […]. |
-| p37-q14 | text:relation | ambiguous | no | none | לתחנה של מסלול 1 ולתחנה של מסלול 2 יש ערך x […]. |
-| p37-q15 | text:direction | ambiguous | no | none | התחנה של מסלול 3 ממוקמת […] לתחנה של מסלול 1, כי ערך ה־x שלה גדול יותר. |
-| p37-q16 | text:number | ambiguous | no | none | התחנה של מסלול 3 רחוקה מציר x […] יחידות. |
+| p37-q1 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | פקודת תנועה אומרת לאן להזיז את העיפרון: הזזה ימינה או שמאלה משנה את ערך x, והזזה למעלה או למטה משנה את שיעור y. במסלול מבצעים את הפקודות לפי הסדר, והנקודה שמגיעים אליה בסוף היא התחנה. כל תחנה חושפת אות אחת בלוח התחנות, ושלוש האותיות יחד הן  |
+| p37-q2 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | מסלול 1 נגמר בתחנה ([…],[…]), ולכן הוא חושף בלוח את האות […]. |
+| p37-q3 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | מסלול 1 נגמר בתחנה ([…],[…]), ולכן הוא חושף בלוח את האות […]. |
+| p37-q4 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | מסלול 1 נגמר בתחנה ([…],[…]), ולכן הוא חושף בלוח את האות […]. |
+| p37-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | מסלול 2 נגמר בתחנה ([…],[…]), וההזזה האחרונה בו הקטינה את שיעור ה־y, כי היא הזזה […]. |
+| p37-q6 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | מסלול 2 נגמר בתחנה ([…],[…]), וההזזה האחרונה בו הקטינה את שיעור ה־y, כי היא הזזה […]. |
+| p37-q7 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | מסלול 2 נגמר בתחנה ([…],[…]), וההזזה האחרונה בו הקטינה את שיעור ה־y, כי היא הזזה […]. |
+| p37-q8 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | מסלול 3 חושף בלוח את האות […], כי הוא נגמר בתחנה ([…],[…]). |
+| p37-q9 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | מסלול 3 חושף בלוח את האות […], כי הוא נגמר בתחנה ([…],[…]). |
+| p37-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | מסלול 3 חושף בלוח את האות […], כי הוא נגמר בתחנה ([…],[…]). |
+| p37-q11 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את שלוש האותיות לפי סדר המסלולים, מימין לשמאל: […]. |
+| p37-q12 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | האות האמצעית במילה שפענחתם היא […], והיא מתגלה בסוף מסלול […]. |
+| p37-q13 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | האות האמצעית במילה שפענחתם היא […], והיא מתגלה בסוף מסלול […]. |
+| p37-q14 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | לתחנה של מסלול 1 ולתחנה של מסלול 2 יש ערך x […]. |
+| p37-q15 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | התחנה של מסלול 3 ממוקמת […] לתחנה של מסלול 1, כי ערך ה־x שלה גדול יותר. |
+| p37-q16 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | התחנה של מסלול 3 רחוקה מציר x […] יחידות. |
 | p37-q17 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות. |
 | p37-q18 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות. |
 | p37-q19 | text:number | open-ended | no | teacher judgment required | כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]. |
@@ -959,27 +959,27 @@ No detected interactive response targets.
 
 ### Page 42 — כספת הקואורדינטות
 
-0/17 safely checkable (0%).
+10/17 safely checkable (58.8%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p42-q1 | text:concept | ambiguous | no | none | כל משימה נותנת ספרה אחת של קוד הכספת. פותרים את ארבע המשימות לפי הסדר, וכותבים את הספרות בשורת הקוד שבסעיף ב. מספר היחידות בהזזה הוא ההפרש בין השיעורים, והוא התוצאה של תרגיל […]. |
+| p42-q1 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | כל משימה נותנת ספרה אחת של קוד הכספת. פותרים את ארבע המשימות לפי הסדר, וכותבים את הספרות בשורת הקוד שבסעיף ב. מספר היחידות בהזזה הוא ההפרש בין השיעורים, והוא התוצאה של תרגיל […]. |
 | p42-q2 | text:number | ambiguous | no | none | 5 − 1=[…]יחידות |
-| p42-q3 | text:number | ambiguous | no | none | שיעור ה־x של הנקודה C(7,3) הוא […], והוא גם המרחק של הנקודה C מציר […]. |
-| p42-q4 | text:letter | ambiguous | no | none | שיעור ה־x של הנקודה C(7,3) הוא […], והוא גם המרחק של הנקודה C מציר […]. |
-| p42-q5 | text:letter | ambiguous | no | none | הנקודה D(0,5) ממוקמת על ציר […], ולכן שיעור ה־x שלה הוא […]. |
-| p42-q6 | text:number | ambiguous | no | none | הנקודה D(0,5) ממוקמת על ציר […], ולכן שיעור ה־x שלה הוא […]. |
-| p42-q7 | text:relation | ambiguous | no | none | אם מזיזים את הנקודה E(2,1) למעלה, אז מגיעים אל הנקודה F(2,6). בהזזה הזאת שיעור ה־x נשאר […], ומספר היחידות הוא ההפרש בין שיעורי ה־y:6 − 1=[…]יחידות |
+| p42-q3 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | שיעור ה־x של הנקודה C(7,3) הוא […], והוא גם המרחק של הנקודה C מציר […]. |
+| p42-q4 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | שיעור ה־x של הנקודה C(7,3) הוא […], והוא גם המרחק של הנקודה C מציר […]. |
+| p42-q5 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה D(0,5) ממוקמת על ציר […], ולכן שיעור ה־x שלה הוא […]. |
+| p42-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה D(0,5) ממוקמת על ציר […], ולכן שיעור ה־x שלה הוא […]. |
+| p42-q7 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | אם מזיזים את הנקודה E(2,1) למעלה, אז מגיעים אל הנקודה F(2,6). בהזזה הזאת שיעור ה־x נשאר […], ומספר היחידות הוא ההפרש בין שיעורי ה־y:6 − 1=[…]יחידות |
 | p42-q8 | text:number | ambiguous | no | none | 6 − 1=[…]יחידות |
-| p42-q9 | text:number | ambiguous | no | none | כתבו את ארבע הספרות לפי סדר המשימות, משמאל לימין: […]. |
-| p42-q10 | text:letter | ambiguous | no | none | הספרה הקטנה ביותר בקוד התקבלה מהנקודה שממוקמת על ציר […]. |
-| p42-q11 | text:number | ambiguous | no | none | בכל נקודה שממוקמת על ציר y שיעור ה־x הוא […]. |
+| p42-q9 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את ארבע הספרות לפי סדר המשימות, משמאל לימין: […]. |
+| p42-q10 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הספרה הקטנה ביותר בקוד התקבלה מהנקודה שממוקמת על ציר […]. |
+| p42-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה שממוקמת על ציר y שיעור ה־x הוא […]. |
 | p42-q12 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…]). |
 | p42-q13 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…]). |
 | p42-q14 | ordered-pair-coordinate | ambiguous | no | none | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
 | p42-q15 | ordered-pair-coordinate | ambiguous | no | none | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
 | p42-q16 | text:number | ambiguous | no | none | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
-| p42-q17 | text:letter | ambiguous | no | none | בכל נקודה ששיעור ה־y שלה הוא 0, הנקודה ממוקמת על ציר […]. |
+| p42-q17 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה ששיעור ה־y שלה הוא 0, הנקודה ממוקמת על ציר […]. |
 
 ### Page 43 — מזהים ומתקנים טעויות
 
@@ -1024,24 +1024,24 @@ No detected interactive response targets.
 
 ### Page 45 — הנקודה החשודה
 
-0/15 safely checkable (0%).
+9/15 safely checkable (60%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p45-q1 | text:property | ambiguous | no | none | הרמזים מדברים על שיעור ה־x ועל שיעור ה־y של הנקודה. מתחו קו על כל נקודה שאינה מתאימה לרמז, והקיפו את הנקודה שנשארה. היא מתאימה לכל הרמזים יחד, ולכן היא הנקודה ה[…]. |
+| p45-q1 | text:property | canonical-metadata-derived | yes | explicit canonical authoring label | הרמזים מדברים על שיעור ה־x ועל שיעור ה־y של הנקודה. מתחו קו על כל נקודה שאינה מתאימה לרמז, והקיפו את הנקודה שנשארה. היא מתאימה לכל הרמזים יחד, ולכן היא הנקודה ה[…]. |
 | p45-q2 | text:letter | ambiguous | no | none | לרמז הראשון מתאימות שתי נקודות בלבד: הנקודה […] והנקודה […]. |
 | p45-q3 | text:letter | ambiguous | no | none | לרמז הראשון מתאימות שתי נקודות בלבד: הנקודה […] והנקודה […]. |
-| p45-q4 | text:relation | ambiguous | no | none | מבין השתיים, הרמז השני פוסל את זו שבה שיעור ה־y […] מ־2. |
-| p45-q5 | ordered-pair-coordinate | ambiguous | no | none | הקיפו את הנקודה שנשארה, וכתבו את שיעוריה: ([…],[…]). |
-| p45-q6 | ordered-pair-coordinate | ambiguous | no | none | הקיפו את הנקודה שנשארה, וכתבו את שיעוריה: ([…],[…]). |
+| p45-q4 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | מבין השתיים, הרמז השני פוסל את זו שבה שיעור ה־y […] מ־2. |
+| p45-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה שנשארה, וכתבו את שיעוריה: ([…],[…]). |
+| p45-q6 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה שנשארה, וכתבו את שיעוריה: ([…],[…]). |
 | p45-q7 | text:letter | ambiguous | no | none | לשתי נקודות שממוקמות על אותו קו אנכי יש שיעור […] זהה. |
-| p45-q8 | text:number | ambiguous | no | none | הקו האנכי שעובר דרך הנקודה (7,0) הוא הקו שבו ערך ה־x שווה […]. |
-| p45-q9 | text:direction | ambiguous | no | none | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
-| p45-q10 | ordered-pair-coordinate | ambiguous | no | none | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
-| p45-q11 | ordered-pair-coordinate | ambiguous | no | none | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
+| p45-q8 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הקו האנכי שעובר דרך הנקודה (7,0) הוא הקו שבו ערך ה־x שווה […]. |
+| p45-q9 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
+| p45-q10 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
+| p45-q11 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]). |
 | p45-q12 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודה G שרחוקה מציר x 6 יחידות, וכתבו את שיעוריה: G([…],[…]). |
 | p45-q13 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודה G שרחוקה מציר x 6 יחידות, וכתבו את שיעוריה: G([…],[…]). |
-| p45-q14 | text:relation | ambiguous | no | none | רמז שמתאים לנקודה G בלבד, ואינו מתאים לאף אחת משש הנקודות המודפסות: שיעור ה־y שלה […] מ־5. |
+| p45-q14 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | רמז שמתאים לנקודה G בלבד, ואינו מתאים לאף אחת משש הנקודות המודפסות: שיעור ה־y שלה […] מ־5. |
 | p45-q15 | text:number | open-ended | no | teacher judgment required | רמז נוסף שמתאים לנקודה G שסימנתם: ערך ה־x שלה שווה […]. |
 
 ### Page 46 — קטעים מקבילים לצירים
@@ -1461,17 +1461,17 @@ No detected interactive response targets.
 
 ### Page 64 — מסלולים במפת הפארק
 
-0/9 safely checkable (0%).
+5/9 safely checkable (55.6%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p64-q1 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…]). |
-| p64-q2 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…]). |
-| p64-q3 | text:number | ambiguous | no | none | הפנס ממוקם מתחת לנדנדה, וההפרש בין שיעורי ה־y שלהם הוא […] יחידות. |
+| p64-q1 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…]). |
+| p64-q2 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…]). |
+| p64-q3 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הפנס ממוקם מתחת לנדנדה, וההפרש בין שיעורי ה־y שלהם הוא […] יחידות. |
 | p64-q4 | ordered-pair-coordinate | ambiguous | no | none | סמנו גם נקודה ששיעור ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]). |
 | p64-q5 | ordered-pair-coordinate | ambiguous | no | none | סמנו גם נקודה ששיעור ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]). |
-| p64-q6 | text:number | open-ended | no | teacher judgment required | הנקודה שסימנתם רחוקה מציר y ‏[…] יחידות. |
-| p64-q7 | text:direction | ambiguous | no | none | מהשער אל הספסל הולכים לאורך השבילים: 2 יחידות ימינה ואחר כך 2 יחידות […], ובסך הכול: |
+| p64-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה שסימנתם רחוקה מציר y ‏[…] יחידות. |
+| p64-q7 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | מהשער אל הספסל הולכים לאורך השבילים: 2 יחידות ימינה ואחר כך 2 יחידות […], ובסך הכול: |
 | p64-q8 | text:number | ambiguous | no | none | 2 + 2=[…]יח' |
 | p64-q9 | text:number | ambiguous | no | none | 4 + 3 + 3=[…]יח' |
 

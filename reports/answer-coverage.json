@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-05T18:54:36.992Z",
+  "generatedAt": "2026-08-14T13:04:20.019Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 735,
-  "coveragePercentage": 63.3,
+  "automaticallyCheckableTargets": 796,
+  "coveragePercentage": 68.5,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 24,
+    "canonical-metadata-derived": 85,
     "deterministic-mathematical": 525,
     "valid-range": 6,
-    "open-ended": 162,
-    "ambiguous": 265,
+    "open-ended": 161,
+    "ambiguous": 205,
     "unsupported": 0,
     "missing": 0
   },
@@ -5005,11 +5005,13 @@
           "inputType": "text:letter",
           "context": "מי הנקודה הגבוהה ביותר? […]",
           "signature": "a60160b6",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "R"
+          ]
         },
         {
           "targetId": "p18-q2",
@@ -5017,11 +5019,13 @@
           "inputType": "text:letter",
           "context": "מי הנקודה הימנית ביותר? […]",
           "signature": "5fea1a80",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "Q"
+          ]
         },
         {
           "targetId": "p18-q3",
@@ -5029,11 +5033,13 @@
           "inputType": "text:letter",
           "context": "מי הנקודה השמאלית ביותר? […]",
           "signature": "a98da932",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "P"
+          ]
         },
         {
           "targetId": "p18-q4",
@@ -5041,11 +5047,13 @@
           "inputType": "text:letter",
           "context": "הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […].",
           "signature": "63e7ef56",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "Q"
+          ]
         },
         {
           "targetId": "p18-q5",
@@ -5053,11 +5061,13 @@
           "inputType": "text:number",
           "context": "הנקודה הנמוכה ביותר היא […], ושיעור ה־y שלה הוא […].",
           "signature": "efdc1715",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p18-q6",
@@ -5065,11 +5075,13 @@
           "inputType": "text:number",
           "context": "הנקודה R רחוקה מציר x […] יחידות, כי זה שיעור ה־y שלה.",
           "signature": "5730ad76",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p18-q7",
@@ -5097,17 +5109,11 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p18-q1",
-        "p18-q2",
-        "p18-q3",
-        "p18-q4",
-        "p18-q5",
-        "p18-q6",
         "p18-q7",
         "p18-q8"
       ],
-      "automaticallyCheckableTargets": 0,
-      "coveragePercentage": 0
+      "automaticallyCheckableTargets": 6,
+      "coveragePercentage": 75
     },
     {
       "pageNumber": 19,
@@ -5141,11 +5147,14 @@
           "inputType": "word:concept",
           "context": "מה קיבלתם? […]",
           "signature": "890601f8",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מפרשית",
+            "סירה"
+          ]
         },
         {
           "targetId": "p20-q2",
@@ -5153,11 +5162,13 @@
           "inputType": "text:letter",
           "context": "תחתית הגוף, הקטע שבין (2,1) ובין (6,1), מקבילה לציר […].",
           "signature": "2a8e4325",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x"
+          ]
         },
         {
           "targetId": "p20-q3",
@@ -5165,11 +5176,13 @@
           "inputType": "text:number",
           "context": "התורן מקביל לציר y, ואורכו […] יחידות.",
           "signature": "f7f48073",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p20-q4",
@@ -5177,11 +5190,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה הגבוהה ביותר בציור היא ([…],[…]).",
           "signature": "2027d033",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p20-q5",
@@ -5189,11 +5204,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הנקודה הגבוהה ביותר בציור היא ([…],[…]).",
           "signature": "2027d033",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p20-q6",
@@ -5201,11 +5218,13 @@
           "inputType": "text:number",
           "context": "קצה המפרש (7,3) רחוק מציר y […] יחידות.",
           "signature": "bcef6c9c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "7"
+          ]
         },
         {
           "targetId": "p20-q7",
@@ -5245,18 +5264,12 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p20-q1",
-        "p20-q2",
-        "p20-q3",
-        "p20-q4",
-        "p20-q5",
-        "p20-q6",
         "p20-q7",
         "p20-q8",
         "p20-q9"
       ],
-      "automaticallyCheckableTargets": 0,
-      "coveragePercentage": 0
+      "automaticallyCheckableTargets": 6,
+      "coveragePercentage": 66.7
     },
     {
       "pageNumber": 21,
@@ -6533,11 +6546,13 @@
           "inputType": "word:concept",
           "context": "מה קיבלתם? […]",
           "signature": "890601f8",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "חץ"
+          ]
         },
         {
           "targetId": "p27-q2",
@@ -6545,11 +6560,14 @@
           "inputType": "text:relation",
           "context": "הסמל הוא חץ שמצביע כלפי מעלה — אל תוך הרביע, לכיוון שבו שיעור ה־y […].",
           "signature": "718da4ac",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "גדל",
+            "עולה"
+          ]
         },
         {
           "targetId": "p27-q3",
@@ -6557,11 +6575,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "התא הנמוך ביותר שצבעתם — תחתית הגזע — הוא ([…],[…]).",
           "signature": "8fd61f3b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p27-q4",
@@ -6569,11 +6589,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "התא הנמוך ביותר שצבעתם — תחתית הגזע — הוא ([…],[…]).",
           "signature": "8fd61f3b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p27-q5",
@@ -6581,11 +6603,13 @@
           "inputType": "text:number",
           "context": "כל תאי הגזע ממוקמים על אותו קו אנכי, כי לכולם אותו ערך x, והוא […].",
           "signature": "7662cd04",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p27-q6",
@@ -6593,11 +6617,14 @@
           "inputType": "text:relation",
           "context": "לשני קצות בסיס הראש, (1,3) ו־(5,3), יש שיעור y […], ולכן הם על אותו קו אופקי.",
           "signature": "352548cf",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "שווה",
+            "זהה"
+          ]
         },
         {
           "targetId": "p27-q7",
@@ -6605,11 +6632,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "חוד החץ הוא התא הגבוה ביותר, והוא ([…],[…]).",
           "signature": "20ac79e8",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p27-q8",
@@ -6617,11 +6646,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "חוד החץ הוא התא הגבוה ביותר, והוא ([…],[…]).",
           "signature": "20ac79e8",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p27-q9",
@@ -6629,26 +6660,18 @@
           "inputType": "text:number",
           "context": "ההפרש בין שיעור ה־y של החוד (3,5) ובין תחתית הגזע (3,0) הוא […] יחידות.",
           "signature": "774a6a22",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p27-q1",
-        "p27-q2",
-        "p27-q3",
-        "p27-q4",
-        "p27-q5",
-        "p27-q6",
-        "p27-q7",
-        "p27-q8",
-        "p27-q9"
-      ],
-      "automaticallyCheckableTargets": 0,
-      "coveragePercentage": 0
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 9,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 28,
@@ -8508,11 +8531,13 @@
           "inputType": "text:concept",
           "context": "פקודת תנועה אומרת לאן להזיז את העיפרון: הזזה ימינה או שמאלה משנה את ערך x, והזזה למעלה או למטה משנה את שיעור y. במסלול מבצעים את הפקודות לפי הסדר, והנקודה שמגיעים אליה בסוף היא התחנה. כל תחנה חושפת אות אחת בלוח התחנות, ושלוש האותיות יחד הן ",
           "signature": "09902221",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מילה"
+          ]
         },
         {
           "targetId": "p37-q2",
@@ -8520,11 +8545,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "מסלול 1 נגמר בתחנה ([…],[…]), ולכן הוא חושף בלוח את האות […].",
           "signature": "188c4084",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p37-q3",
@@ -8532,11 +8559,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "מסלול 1 נגמר בתחנה ([…],[…]), ולכן הוא חושף בלוח את האות […].",
           "signature": "188c4084",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p37-q4",
@@ -8544,11 +8573,13 @@
           "inputType": "text:letter",
           "context": "מסלול 1 נגמר בתחנה ([…],[…]), ולכן הוא חושף בלוח את האות […].",
           "signature": "38cdf7f2",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ק"
+          ]
         },
         {
           "targetId": "p37-q5",
@@ -8556,11 +8587,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "מסלול 2 נגמר בתחנה ([…],[…]), וההזזה האחרונה בו הקטינה את שיעור ה־y, כי היא הזזה […].",
           "signature": "e3c53211",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p37-q6",
@@ -8568,11 +8601,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "מסלול 2 נגמר בתחנה ([…],[…]), וההזזה האחרונה בו הקטינה את שיעור ה־y, כי היא הזזה […].",
           "signature": "e3c53211",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "1"
+          ]
         },
         {
           "targetId": "p37-q7",
@@ -8580,11 +8615,14 @@
           "inputType": "text:direction",
           "context": "מסלול 2 נגמר בתחנה ([…],[…]), וההזזה האחרונה בו הקטינה את שיעור ה־y, כי היא הזזה […].",
           "signature": "f8162b02",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "למטה",
+            "מטה"
+          ]
         },
         {
           "targetId": "p37-q8",
@@ -8592,11 +8630,13 @@
           "inputType": "text:letter",
           "context": "מסלול 3 חושף בלוח את האות […], כי הוא נגמר בתחנה ([…],[…]).",
           "signature": "001d1e87",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ם"
+          ]
         },
         {
           "targetId": "p37-q9",
@@ -8604,11 +8644,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "מסלול 3 חושף בלוח את האות […], כי הוא נגמר בתחנה ([…],[…]).",
           "signature": "713fd869",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p37-q10",
@@ -8616,11 +8658,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "מסלול 3 חושף בלוח את האות […], כי הוא נגמר בתחנה ([…],[…]).",
           "signature": "713fd869",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p37-q11",
@@ -8628,11 +8672,13 @@
           "inputType": "text:concept",
           "context": "כתבו את שלוש האותיות לפי סדר המסלולים, מימין לשמאל: […].",
           "signature": "6059d1b4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "קסם"
+          ]
         },
         {
           "targetId": "p37-q12",
@@ -8640,11 +8686,13 @@
           "inputType": "text:letter",
           "context": "האות האמצעית במילה שפענחתם היא […], והיא מתגלה בסוף מסלול […].",
           "signature": "1e130cc2",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "ס"
+          ]
         },
         {
           "targetId": "p37-q13",
@@ -8652,11 +8700,13 @@
           "inputType": "text:number",
           "context": "האות האמצעית במילה שפענחתם היא […], והיא מתגלה בסוף מסלול […].",
           "signature": "9de1c269",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p37-q14",
@@ -8664,11 +8714,14 @@
           "inputType": "text:relation",
           "context": "לתחנה של מסלול 1 ולתחנה של מסלול 2 יש ערך x […].",
           "signature": "2019f384",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "שווה",
+            "זהה"
+          ]
         },
         {
           "targetId": "p37-q15",
@@ -8676,11 +8729,14 @@
           "inputType": "text:direction",
           "context": "התחנה של מסלול 3 ממוקמת […] לתחנה של מסלול 1, כי ערך ה־x שלה גדול יותר.",
           "signature": "17b15266",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מימין",
+            "ימינה"
+          ]
         },
         {
           "targetId": "p37-q16",
@@ -8688,11 +8744,13 @@
           "inputType": "text:number",
           "context": "התחנה של מסלול 3 רחוקה מציר x […] יחידות.",
           "signature": "c273af65",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p37-q17",
@@ -8768,22 +8826,6 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p37-q1",
-        "p37-q2",
-        "p37-q3",
-        "p37-q4",
-        "p37-q5",
-        "p37-q6",
-        "p37-q7",
-        "p37-q8",
-        "p37-q9",
-        "p37-q10",
-        "p37-q11",
-        "p37-q12",
-        "p37-q13",
-        "p37-q14",
-        "p37-q15",
-        "p37-q16",
         "p37-q17",
         "p37-q18",
         "p37-q19",
@@ -8791,8 +8833,8 @@
         "p37-q21",
         "p37-q22"
       ],
-      "automaticallyCheckableTargets": 0,
-      "coveragePercentage": 0
+      "automaticallyCheckableTargets": 16,
+      "coveragePercentage": 72.7
     },
     {
       "pageNumber": 38,
@@ -10460,11 +10502,13 @@
           "inputType": "text:concept",
           "context": "כל משימה נותנת ספרה אחת של קוד הכספת. פותרים את ארבע המשימות לפי הסדר, וכותבים את הספרות בשורת הקוד שבסעיף ב. מספר היחידות בהזזה הוא ההפרש בין השיעורים, והוא התוצאה של תרגיל […].",
           "signature": "227f577a",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "חיסור"
+          ]
         },
         {
           "targetId": "p42-q2",
@@ -10484,11 +10528,13 @@
           "inputType": "text:number",
           "context": "שיעור ה־x של הנקודה C(7,3) הוא […], והוא גם המרחק של הנקודה C מציר […].",
           "signature": "a0730aae",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "7"
+          ]
         },
         {
           "targetId": "p42-q4",
@@ -10496,11 +10542,13 @@
           "inputType": "text:letter",
           "context": "שיעור ה־x של הנקודה C(7,3) הוא […], והוא גם המרחק של הנקודה C מציר […].",
           "signature": "66879653",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y"
+          ]
         },
         {
           "targetId": "p42-q5",
@@ -10508,11 +10556,13 @@
           "inputType": "text:letter",
           "context": "הנקודה D(0,5) ממוקמת על ציר […], ולכן שיעור ה־x שלה הוא […].",
           "signature": "a706ebf8",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y"
+          ]
         },
         {
           "targetId": "p42-q6",
@@ -10520,11 +10570,13 @@
           "inputType": "text:number",
           "context": "הנקודה D(0,5) ממוקמת על ציר […], ולכן שיעור ה־x שלה הוא […].",
           "signature": "eb9c325b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p42-q7",
@@ -10532,11 +10584,14 @@
           "inputType": "text:relation",
           "context": "אם מזיזים את הנקודה E(2,1) למעלה, אז מגיעים אל הנקודה F(2,6). בהזזה הזאת שיעור ה־x נשאר […], ומספר היחידות הוא ההפרש בין שיעורי ה־y:6 − 1=[…]יחידות",
           "signature": "4fc187fa",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "זהה",
+            "קבוע"
+          ]
         },
         {
           "targetId": "p42-q8",
@@ -10556,11 +10611,13 @@
           "inputType": "text:number",
           "context": "כתבו את ארבע הספרות לפי סדר המשימות, משמאל לימין: […].",
           "signature": "c85202ab",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4705"
+          ]
         },
         {
           "targetId": "p42-q10",
@@ -10568,11 +10625,13 @@
           "inputType": "text:letter",
           "context": "הספרה הקטנה ביותר בקוד התקבלה מהנקודה שממוקמת על ציר […].",
           "signature": "7d9ca276",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y"
+          ]
         },
         {
           "targetId": "p42-q11",
@@ -10580,11 +10639,13 @@
           "inputType": "text:number",
           "context": "בכל נקודה שממוקמת על ציר y שיעור ה־x הוא […].",
           "signature": "fe5c02d9",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p42-q12",
@@ -10652,34 +10713,26 @@
           "inputType": "text:letter",
           "context": "בכל נקודה ששיעור ה־y שלה הוא 0, הנקודה ממוקמת על ציר […].",
           "signature": "a3ca657c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x"
+          ]
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p42-q1",
         "p42-q2",
-        "p42-q3",
-        "p42-q4",
-        "p42-q5",
-        "p42-q6",
-        "p42-q7",
         "p42-q8",
-        "p42-q9",
-        "p42-q10",
-        "p42-q11",
         "p42-q12",
         "p42-q13",
         "p42-q14",
         "p42-q15",
-        "p42-q16",
-        "p42-q17"
+        "p42-q16"
       ],
-      "automaticallyCheckableTargets": 0,
-      "coveragePercentage": 0
+      "automaticallyCheckableTargets": 10,
+      "coveragePercentage": 58.8
     },
     {
       "pageNumber": 43,
@@ -11144,11 +11197,13 @@
           "inputType": "text:property",
           "context": "הרמזים מדברים על שיעור ה־x ועל שיעור ה־y של הנקודה. מתחו קו על כל נקודה שאינה מתאימה לרמז, והקיפו את הנקודה שנשארה. היא מתאימה לכל הרמזים יחד, ולכן היא הנקודה ה[…].",
           "signature": "4a9cf052",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "חשודה"
+          ]
         },
         {
           "targetId": "p45-q2",
@@ -11180,11 +11235,14 @@
           "inputType": "text:relation",
           "context": "מבין השתיים, הרמז השני פוסל את זו שבה שיעור ה־y […] מ־2.",
           "signature": "4d93fb9a",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "קטן",
+            "קטן יותר"
+          ]
         },
         {
           "targetId": "p45-q5",
@@ -11192,11 +11250,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקיפו את הנקודה שנשארה, וכתבו את שיעוריה: ([…],[…]).",
           "signature": "2093fe69",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p45-q6",
@@ -11204,11 +11264,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקיפו את הנקודה שנשארה, וכתבו את שיעוריה: ([…],[…]).",
           "signature": "2093fe69",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p45-q7",
@@ -11228,11 +11290,13 @@
           "inputType": "text:number",
           "context": "הקו האנכי שעובר דרך הנקודה (7,0) הוא הקו שבו ערך ה־x שווה […].",
           "signature": "e0bfc713",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "7"
+          ]
         },
         {
           "targetId": "p45-q9",
@@ -11240,11 +11304,14 @@
           "inputType": "text:direction",
           "context": "הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]).",
           "signature": "cd278dd2",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מימין",
+            "ימינה"
+          ]
         },
         {
           "targetId": "p45-q10",
@@ -11252,11 +11319,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]).",
           "signature": "3094832b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "7"
+          ]
         },
         {
           "targetId": "p45-q11",
@@ -11264,11 +11333,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקיפו את הנקודה החשודה בסיבוב הזה. ערך ה־x שלה גדול יותר משל הנקודה שהקפתם בסיבוב 1, ולכן היא ממוקמת […] לה, ושיעוריה ([…],[…]).",
           "signature": "3094832b",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p45-q12",
@@ -11300,11 +11371,14 @@
           "inputType": "text:relation",
           "context": "רמז שמתאים לנקודה G בלבד, ואינו מתאים לאף אחת משש הנקודות המודפסות: שיעור ה־y שלה […] מ־5.",
           "signature": "fa682b65",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "גדול",
+            "גדול יותר"
+          ]
         },
         {
           "targetId": "p45-q15",
@@ -11320,24 +11394,15 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p45-q1",
         "p45-q2",
         "p45-q3",
-        "p45-q4",
-        "p45-q5",
-        "p45-q6",
         "p45-q7",
-        "p45-q8",
-        "p45-q9",
-        "p45-q10",
-        "p45-q11",
         "p45-q12",
         "p45-q13",
-        "p45-q14",
         "p45-q15"
       ],
-      "automaticallyCheckableTargets": 0,
-      "coveragePercentage": 0
+      "automaticallyCheckableTargets": 9,
+      "coveragePercentage": 60
     },
     {
       "pageNumber": 46,
@@ -15884,11 +15949,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…]).",
           "signature": "3e5d7b40",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "0"
+          ]
         },
         {
           "targetId": "p64-q2",
@@ -15896,11 +15963,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על המפה פנס שממוקם על ציר y, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ([…],[…]).",
           "signature": "3e5d7b40",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p64-q3",
@@ -15908,11 +15977,13 @@
           "inputType": "text:number",
           "context": "הפנס ממוקם מתחת לנדנדה, וההפרש בין שיעורי ה־y שלהם הוא […] יחידות.",
           "signature": "e8cf0e5c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ]
         },
         {
           "targetId": "p64-q4",
@@ -15944,11 +16015,13 @@
           "inputType": "text:number",
           "context": "הנקודה שסימנתם רחוקה מציר y ‏[…] יחידות.",
           "signature": "b00458b1",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p64-q7",
@@ -15956,11 +16029,14 @@
           "inputType": "text:direction",
           "context": "מהשער אל הספסל הולכים לאורך השבילים: 2 יחידות ימינה ואחר כך 2 יחידות […], ובסך הכול:",
           "signature": "b97991c4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "למעלה",
+            "מעלה"
+          ]
         },
         {
           "targetId": "p64-q8",
@@ -15988,18 +16064,13 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p64-q1",
-        "p64-q2",
-        "p64-q3",
         "p64-q4",
         "p64-q5",
-        "p64-q6",
-        "p64-q7",
         "p64-q8",
         "p64-q9"
       ],
-      "automaticallyCheckableTargets": 0,
-      "coveragePercentage": 0
+      "automaticallyCheckableTargets": 5,
+      "coveragePercentage": 55.6
     },
     {
       "pageNumber": 65,
