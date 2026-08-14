@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:10:48.270Z
+Generated: 2026-08-14T13:11:33.731Z
 
-Overall: 806/1162 safely checkable targets (69.4%).
+Overall: 815/1162 safely checkable targets (70.1%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 95 |
+| canonical-metadata-derived | 104 |
 | deterministic-mathematical | 525 |
 | valid-range | 6 |
 | open-ended | 160 |
-| ambiguous | 196 |
+| ambiguous | 187 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -705,20 +705,20 @@ No detected interactive response targets.
 
 ### Page 33 — מרחק נקודה מהצירים
 
-3/17 safely checkable (17.6%).
+5/17 safely checkable (29.4%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p33-q1 | word:number | canonical-metadata-derived | yes | explicit canonical authoring label | כדי להגיע אל ציר y משנים את ערך x ל־[…]. |
 | p33-q2 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | כדי להגיע אל ציר […] משנים את שיעור y ל־0. |
 | p33-q3 | text:letter | ambiguous | no | none | לשתי הנקודות E(2,5) ו־F(7,5) יש שיעור […] זהה. |
-| p33-q4 | text:number | ambiguous | no | none | EF=7 − 2=[…]יח' |
+| p33-q4 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | EF=7 − 2=[…]יח' |
 | p33-q5 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q6 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q9 | text:letter | ambiguous | no | none | לשתי הנקודות G(4,1) ו־H(4,6) יש שיעור […] זהה, ולכן הקטע GH מקביל לציר y. |
-| p33-q10 | text:number | ambiguous | no | none | GH=6 − 1=[…]יח' |
+| p33-q10 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | GH=6 − 1=[…]יח' |
 | p33-q11 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
@@ -822,7 +822,7 @@ No detected interactive response targets.
 
 ### Page 38 — מבוך הקואורדינטות
 
-10/25 safely checkable (40%).
+13/25 safely checkable (52%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -847,9 +847,9 @@ No detected interactive response targets.
 | p38-q19 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
 | p38-q20 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
 | p38-q21 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | את עמודת הקירות שבה שיעור ה־x הוא 2 אפשר לעבור רק בשיעור y שגדול מ־[…]. |
-| p38-q22 | text:number | ambiguous | no | none | את עמודת הקירות שבה שיעור ה־x הוא […] אפשר לעבור רק בשיעור y שקטן מ־3. |
-| p38-q23 | text:number | ambiguous | no | none | 6 − 0=[…]יחידות |
-| p38-q24 | text:number | ambiguous | no | none | 4 − 0=[…]יחידות |
+| p38-q22 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | את עמודת הקירות שבה שיעור ה־x הוא […] אפשר לעבור רק בשיעור y שקטן מ־3. |
+| p38-q23 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | 6 − 0=[…]יחידות |
+| p38-q24 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | 4 − 0=[…]יחידות |
 | p38-q25 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | מספר הצעדים במסלול שסימנתם […] מסכום שני ההפרשים, כי צריך לעקוף את הקירות. |
 
 ### Page 39 — משלימים שיעור חסר ודפוסים
@@ -959,18 +959,18 @@ No detected interactive response targets.
 
 ### Page 42 — כספת הקואורדינטות
 
-10/17 safely checkable (58.8%).
+12/17 safely checkable (70.6%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p42-q1 | text:concept | canonical-metadata-derived | yes | explicit canonical authoring label | כל משימה נותנת ספרה אחת של קוד הכספת. פותרים את ארבע המשימות לפי הסדר, וכותבים את הספרות בשורת הקוד שבסעיף ב. מספר היחידות בהזזה הוא ההפרש בין השיעורים, והוא התוצאה של תרגיל […]. |
-| p42-q2 | text:number | ambiguous | no | none | 5 − 1=[…]יחידות |
+| p42-q2 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | 5 − 1=[…]יחידות |
 | p42-q3 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | שיעור ה־x של הנקודה C(7,3) הוא […], והוא גם המרחק של הנקודה C מציר […]. |
 | p42-q4 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | שיעור ה־x של הנקודה C(7,3) הוא […], והוא גם המרחק של הנקודה C מציר […]. |
 | p42-q5 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה D(0,5) ממוקמת על ציר […], ולכן שיעור ה־x שלה הוא […]. |
 | p42-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה D(0,5) ממוקמת על ציר […], ולכן שיעור ה־x שלה הוא […]. |
 | p42-q7 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | אם מזיזים את הנקודה E(2,1) למעלה, אז מגיעים אל הנקודה F(2,6). בהזזה הזאת שיעור ה־x נשאר […], ומספר היחידות הוא ההפרש בין שיעורי ה־y:6 − 1=[…]יחידות |
-| p42-q8 | text:number | ambiguous | no | none | 6 − 1=[…]יחידות |
+| p42-q8 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | 6 − 1=[…]יחידות |
 | p42-q9 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו את ארבע הספרות לפי סדר המשימות, משמאל לימין: […]. |
 | p42-q10 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הספרה הקטנה ביותר בקוד התקבלה מהנקודה שממוקמת על ציר […]. |
 | p42-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה שממוקמת על ציר y שיעור ה־x הוא […]. |
@@ -1461,7 +1461,7 @@ No detected interactive response targets.
 
 ### Page 64 — מסלולים במפת הפארק
 
-5/9 safely checkable (55.6%).
+7/9 safely checkable (77.8%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1472,8 +1472,8 @@ No detected interactive response targets.
 | p64-q5 | ordered-pair-coordinate | ambiguous | no | none | סמנו גם נקודה ששיעור ה־x שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ([…],[…]). |
 | p64-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה שסימנתם רחוקה מציר y ‏[…] יחידות. |
 | p64-q7 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | מהשער אל הספסל הולכים לאורך השבילים: 2 יחידות ימינה ואחר כך 2 יחידות […], ובסך הכול: |
-| p64-q8 | text:number | ambiguous | no | none | 2 + 2=[…]יח' |
-| p64-q9 | text:number | ambiguous | no | none | 4 + 3 + 3=[…]יח' |
+| p64-q8 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | 2 + 2=[…]יח' |
+| p64-q9 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | 4 + 3 + 3=[…]יח' |
 
 ### Page 65 — קריאת גרפים ברביע הראשון
 

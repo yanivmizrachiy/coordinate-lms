@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T13:10:48.270Z",
+  "generatedAt": "2026-08-14T13:11:33.731Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 806,
-  "coveragePercentage": 69.4,
+  "automaticallyCheckableTargets": 815,
+  "coveragePercentage": 70.1,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 95,
+    "canonical-metadata-derived": 104,
     "deterministic-mathematical": 525,
     "valid-range": 6,
     "open-ended": 160,
-    "ambiguous": 196,
+    "ambiguous": 187,
     "unsupported": 0,
     "missing": 0
   },
@@ -7602,11 +7602,13 @@
           "inputType": "text:number",
           "context": "EF=7 − 2=[…]יח'",
           "signature": "953c6b70",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p33-q5",
@@ -7674,11 +7676,13 @@
           "inputType": "text:number",
           "context": "GH=6 − 1=[…]יח'",
           "signature": "e990bebe",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p33-q11",
@@ -7769,13 +7773,11 @@
       ],
       "missingOrAmbiguousTargetIds": [
         "p33-q3",
-        "p33-q4",
         "p33-q5",
         "p33-q6",
         "p33-q7",
         "p33-q8",
         "p33-q9",
-        "p33-q10",
         "p33-q11",
         "p33-q12",
         "p33-q13",
@@ -7783,8 +7785,8 @@
         "p33-q15",
         "p33-q17"
       ],
-      "automaticallyCheckableTargets": 3,
-      "coveragePercentage": 17.6
+      "automaticallyCheckableTargets": 5,
+      "coveragePercentage": 29.4
     },
     {
       "pageNumber": 34,
@@ -9148,11 +9150,13 @@
           "inputType": "text:number",
           "context": "את עמודת הקירות שבה שיעור ה־x הוא […] אפשר לעבור רק בשיעור y שקטן מ־3.",
           "signature": "b6a25c1f",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p38-q23",
@@ -9160,11 +9164,13 @@
           "inputType": "text:number",
           "context": "6 − 0=[…]יחידות",
           "signature": "4201ea5d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         },
         {
           "targetId": "p38-q24",
@@ -9172,11 +9178,13 @@
           "inputType": "text:number",
           "context": "4 − 0=[…]יחידות",
           "signature": "432f887f",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p38-q25",
@@ -9206,13 +9214,10 @@
         "p38-q11",
         "p38-q18",
         "p38-q19",
-        "p38-q20",
-        "p38-q22",
-        "p38-q23",
-        "p38-q24"
+        "p38-q20"
       ],
-      "automaticallyCheckableTargets": 10,
-      "coveragePercentage": 40
+      "automaticallyCheckableTargets": 13,
+      "coveragePercentage": 52
     },
     {
       "pageNumber": 39,
@@ -10531,11 +10536,13 @@
           "inputType": "text:number",
           "context": "5 − 1=[…]יחידות",
           "signature": "cf2ef4af",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p42-q3",
@@ -10614,11 +10621,13 @@
           "inputType": "text:number",
           "context": "6 − 1=[…]יחידות",
           "signature": "3462ce06",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "5"
+          ]
         },
         {
           "targetId": "p42-q9",
@@ -10738,16 +10747,14 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p42-q2",
-        "p42-q8",
         "p42-q12",
         "p42-q13",
         "p42-q14",
         "p42-q15",
         "p42-q16"
       ],
-      "automaticallyCheckableTargets": 10,
-      "coveragePercentage": 58.8
+      "automaticallyCheckableTargets": 12,
+      "coveragePercentage": 70.6
     },
     {
       "pageNumber": 43,
@@ -16059,11 +16066,13 @@
           "inputType": "text:number",
           "context": "2 + 2=[…]יח'",
           "signature": "42b05fc4",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "4"
+          ]
         },
         {
           "targetId": "p64-q9",
@@ -16071,21 +16080,21 @@
           "inputType": "text:number",
           "context": "4 + 3 + 3=[…]יח'",
           "signature": "656294cb",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "7"
+          ]
         }
       ],
       "missingOrAmbiguousTargetIds": [
         "p64-q4",
-        "p64-q5",
-        "p64-q8",
-        "p64-q9"
+        "p64-q5"
       ],
-      "automaticallyCheckableTargets": 5,
-      "coveragePercentage": 55.6
+      "automaticallyCheckableTargets": 7,
+      "coveragePercentage": 77.8
     },
     {
       "pageNumber": 65,
