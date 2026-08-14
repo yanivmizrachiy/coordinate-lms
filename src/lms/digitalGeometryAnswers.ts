@@ -70,7 +70,7 @@ function hydrateRectanglesIntro(root: ParentNode): void {
 }
 
 function hydrateRectanglesPracticeFixed(root: ParentNode): void {
-  const dimensions = cardByHeading(root, 'ב. אורך ורוחב של מלבן');
+  const dimensions = cardByHeading(root, 'אורך ורוחב של מלבן');
   if (!dimensions) return;
 
   // This unique canonical section defines PQRS as a 5×3 rectangle, so P=16
