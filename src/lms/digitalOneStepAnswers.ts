@@ -17,7 +17,7 @@ function setSequentialAnswers(item: HTMLElement, answers: readonly string[]): vo
 
 /** Tiny LMS-only fixes for answers that are literally determined by the canonical sentence or a reviewed digital choice. */
 export function hydrateDigitalOneStepAnswers(root: ParentNode): void {
-  for (const item of root.querySelectorAll<HTMLElement>('li, p, div')) {
+  for (const item of root.querySelectorAll<HTMLElement>('li, p')) {
     const text = normalizedText(item);
 
     if (text.includes('כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־')) {
