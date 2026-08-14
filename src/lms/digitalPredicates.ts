@@ -1,5 +1,6 @@
 export type DigitalGroupRule =
   | 'distinct-coordinate-pairs'
+  | 'two-distinct-positive-points'
   | 'point-above-x-axis'
   | 'point-right-of-y-axis'
   | 'point-on-x-axis'
@@ -126,6 +127,14 @@ export function evaluateDigitalGroupRule(
     return x1 !== x2 && y1 !== y2;
   }
 
+  if (rule === 'two-distinct-positive-points') {
+    if (values.length !== 4) return false;
+    const numbers = numericValues(values);
+    if (!numbers) return false;
+    const [x1, y1, x2, y2] = numbers as [number, number, number, number];
+    return x1 > 0 && y1 > 0 && x2 > 0 && y2 > 0 && (x1 !== x2 || y1 !== y2);
+  }
+
   if (rule === 'custom-y-equals-x-plus-k') {
     if (values.length !== 6) return false;
     const numbers = numericValues(values);
@@ -234,6 +243,11 @@ function isCustomRuleContext(context: string): boolean {
   );
 }
 
+function isTwoPositivePointsContext(context: string): boolean {
+  return context.includes('שתי נקודות שמתאימות לו') ||
+    (context.includes('מעל ציר x') && context.includes('מימין לציר y') && context.includes('שתי נקודות'));
+}
+
 function rectangleRuleForCoverage(context: string, inputType: string): DigitalGroupRule | null {
   if (inputType !== 'ordered-pair-coordinate') return null;
   if (
@@ -263,6 +277,9 @@ export function predicateRuleForCoverage(
   const rectangleRule = rectangleRuleForCoverage(context, inputType);
   if (rectangleRule) return rectangleRule;
   if (isCustomRuleContext(context)) return 'custom-y-equals-x-plus-k';
+  if (inputType === 'ordered-pair-coordinate' && isTwoPositivePointsContext(context)) {
+    return 'two-distinct-positive-points';
+  }
   if (
     inputType === 'ordered-pair-coordinate' &&
     context.includes('תנו דוגמה לשתי נקודות') &&
@@ -354,6 +371,26 @@ export function hydrateDigitalPredicates(root: ParentNode): () => void {
       if (targets.length === 4) {
         ordinal += 1;
         const binding = bindGroupPredicate(proxyHost, targets, 'distinct-coordinate-pairs', 'בדיקה מתמטית של שתי הנקודות שנבחרו', ordinal);
+        if (binding) bindings.push(binding);
+      }
+    }
+
+    if (isTwoPositivePointsContext(cardText)) {
+      const targetRow = Array.from(card.querySelectorAll<HTMLElement>('li')).find((item) =>
+        normalizedText(item).includes('שתי נקודות שמתאימות לו'),
+      );
+      const targets = targetRow
+        ? Array.from(targetRow.querySelectorAll<HTMLElement>('.pair-blank'))
+        : [];
+      if (targets.length === 4 && targets.every((target) => !target.dataset['lmsGroup'])) {
+        ordinal += 1;
+        const binding = bindGroupPredicate(
+          proxyHost,
+          targets,
+          'two-distinct-positive-points',
+          'בדיקה של שתי נקודות שונות שמעל ציר x ומימין לציר y',
+          ordinal,
+        );
         if (binding) bindings.push(binding);
       }
     }
