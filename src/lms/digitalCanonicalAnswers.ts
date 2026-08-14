@@ -148,6 +148,45 @@ function hydrateParkRoute(root: ParentNode): void {
   annotateContainer(root, '2 יחידות ימינה ואחר כך 2 יחידות', [['למעלה', 'מעלה']]);
 }
 
+function hydrateMissingCoordinatePatterns(root: ParentNode): void {
+  if (!pageContains(root, 'שיעור חסר ודפוסים')) return;
+
+  annotateContainer(root, 'A(', ['6']);
+  annotateContainer(root, 'C(3,', ['5']);
+  annotateContainer(root, 'E(', ['4', '0']);
+  annotateContainer(root, 'G(', ['0', '2']);
+
+  const patternCard = Array.from(root.querySelectorAll<HTMLElement>('.q-card'))
+    .find((card) => normalizedText(card.querySelector('h3')).includes('דפוס של שיעורים זהים'));
+  if (patternCard) {
+    const targets = answerTargets(patternCard);
+    const expected: Expected[] = ['5', '5', '6', '6', ['x = y', 'y = x', 'שיעור x שווה לשיעור y', 'שיעור y שווה לשיעור x']];
+    expected.forEach((answer, index) => {
+      if (targets[index]) setAnswers(targets[index]!, answer);
+    });
+  }
+
+  const seriesCard = Array.from(root.querySelectorAll<HTMLElement>('.q-card'))
+    .find((card) => normalizedText(card.querySelector('h3')).includes('משלימים סדרה'));
+  if (seriesCard) {
+    const targets = answerTargets(seriesCard);
+    const expected: Expected[] = ['4', '5', '5', '5', ['y', 'שיעור y'], ['x', 'שיעור x']];
+    expected.forEach((answer, index) => {
+      if (targets[index]) setAnswers(targets[index]!, answer);
+    });
+  }
+
+  const extraCard = Array.from(root.querySelectorAll<HTMLElement>('.q-card'))
+    .find((card) => normalizedText(card.querySelector('h3')).includes('שאלה נוספת'));
+  if (extraCard) {
+    const targets = answerTargets(extraCard);
+    const expected: Expected[] = ['3', '5', '5', '4', '7', '3', '1', '6', '5', '5'];
+    expected.forEach((answer, index) => {
+      if (targets[index]) setAnswers(targets[index]!, answer);
+    });
+  }
+}
+
 /**
  * Adds reviewed LMS-only answers that are stated or deterministically implied by
  * the canonical printable task. Matching is by canonical wording, never by page
@@ -163,4 +202,5 @@ export function hydrateDigitalCanonicalAnswers(root: ParentNode): void {
   hydrateCoordinateSafe(root);
   hydrateSuspectPoint(root);
   hydrateParkRoute(root);
+  hydrateMissingCoordinatePatterns(root);
 }
