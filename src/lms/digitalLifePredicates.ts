@@ -2,10 +2,13 @@ export const PHONE_SAME_COLUMN_WITH_DISTANCE =
   'phone-same-column-with-distance' as const;
 export const HALL_SEAT_ABOVE_NOA_WITH_DISTANCE =
   'hall-seat-above-noa-with-distance' as const;
+export const DELIVERY_SAME_STREET_WITH_DISTANCE_WORK =
+  'delivery-same-street-with-distance-work' as const;
 
 export type DigitalLifeRule =
   | typeof PHONE_SAME_COLUMN_WITH_DISTANCE
-  | typeof HALL_SEAT_ABOVE_NOA_WITH_DISTANCE;
+  | typeof HALL_SEAT_ABOVE_NOA_WITH_DISTANCE
+  | typeof DELIVERY_SAME_STREET_WITH_DISTANCE_WORK;
 
 interface LifeBinding {
   observer: MutationObserver;
@@ -28,6 +31,16 @@ function finiteInteger(raw: string): number | null {
   return Number.isSafeInteger(value) ? value : null;
 }
 
+function subtractionOperands(raw: string): [number, number] | null {
+  const normalized = raw
+    .trim()
+    .replace(/[−–—]/g, '-')
+    .replace(/\s+/g, '');
+  const match = normalized.match(/^([+]?\d+)-([+]?\d+)$/);
+  if (!match?.[1] || !match[2]) return null;
+  return [Number(match[1]), Number(match[2])];
+}
+
 function inDefaultGrid(x: number, y: number): boolean {
   return x >= 0 && x <= 8 && y >= 0 && y <= 6;
 }
@@ -42,9 +55,6 @@ export function phoneSameColumnWithDistanceMatches(
   if (x === null || y === null || distance === null || !inDefaultGrid(x, y)) {
     return false;
   }
-
-  // Maps is at (1,2). The new icon must stay in the same column and occupy a
-  // different position; its vertical distance is determined by the chosen y.
   return x === 1 && y !== 2 && distance === Math.abs(y - 2);
 }
 
@@ -59,19 +69,56 @@ export function hallSeatAboveNoaWithDistanceMatches(
     return false;
   }
 
-  // Noa is at (5,1). The prompt explicitly asks for a free seat in a row above
-  // hers. Existing occupied seats on rows above are Guy (2,4) and Uri (7,4).
   const occupiedAbove = (x === 2 && y === 4) || (x === 7 && y === 4);
   return y > 1 && !occupiedAbove && distance === y - 1;
+}
+
+export function deliverySameStreetWithDistanceWorkMatches(
+  values: readonly string[],
+): boolean {
+  if (values.length !== 5) return false;
+  const x = finiteInteger(values[0] || '');
+  const y = finiteInteger(values[1] || '');
+  const result = finiteInteger(values[3] || '');
+  const finalLength = finiteInteger(values[4] || '');
+  if (
+    x === null ||
+    y === null ||
+    result === null ||
+    finalLength === null ||
+    !inDefaultGrid(x, y)
+  ) {
+    return false;
+  }
+
+  // Restaurant A is at (1,1). A new address on the same street must keep y=1
+  // and be a different point. The written subtraction must be larger x minus
+  // smaller x, and both numeric answers must equal that horizontal distance.
+  if (y !== 1 || x === 1) return false;
+  const highX = Math.max(x, 1);
+  const lowX = Math.min(x, 1);
+  const distance = highX - lowX;
+  const subtraction = subtractionOperands(values[2] || '');
+  return Boolean(
+    subtraction &&
+    subtraction[0] === highX &&
+    subtraction[1] === lowX &&
+    result === distance &&
+    finalLength === distance,
+  );
 }
 
 export function lifeRuleMatches(
   rule: DigitalLifeRule,
   values: readonly string[],
 ): boolean {
-  return rule === PHONE_SAME_COLUMN_WITH_DISTANCE
-    ? phoneSameColumnWithDistanceMatches(values)
-    : hallSeatAboveNoaWithDistanceMatches(values);
+  if (rule === PHONE_SAME_COLUMN_WITH_DISTANCE) {
+    return phoneSameColumnWithDistanceMatches(values);
+  }
+  if (rule === HALL_SEAT_ABOVE_NOA_WITH_DISTANCE) {
+    return hallSeatAboveNoaWithDistanceMatches(values);
+  }
+  return deliverySameStreetWithDistanceWorkMatches(values);
 }
 
 export function lifePredicateRuleForCoverage(
@@ -83,6 +130,9 @@ export function lifePredicateRuleForCoverage(
   }
   if (pageNumber === 60 && /^p60-q(?:1[3-5])$/.test(targetId)) {
     return HALL_SEAT_ABOVE_NOA_WITH_DISTANCE;
+  }
+  if (pageNumber === 62 && /^p62-q(?:1[1-5])$/.test(targetId)) {
+    return DELIVERY_SAME_STREET_WITH_DISTANCE_WORK;
   }
   return null;
 }
@@ -107,33 +157,22 @@ function mirrorGroupState(proxy: HTMLElement, targets: readonly HTMLElement[]): 
   }
 }
 
-function bindLifeCard(
-  root: ParentNode,
+function createBinding(
   proxyHost: HTMLElement,
-  headingNeedle: string,
+  targets: HTMLElement[],
   rule: DigitalLifeRule,
+  ariaLabel: string,
 ): LifeBinding | null {
-  const card = Array.from(root.querySelectorAll<HTMLElement>('.q-card')).find((candidate) =>
-    normalizedText(candidate.querySelector('h3')).includes(headingNeedle),
-  );
-  if (!card) return null;
-
-  const coordinates = Array.from(card.querySelectorAll<HTMLElement>('.pair-blank'));
-  const distances = Array.from(
-    card.querySelectorAll<HTMLElement>('.blank[data-missing="number"]'),
-  );
-  const targets = [...coordinates, ...distances];
-  if (coordinates.length !== 2 || distances.length !== 1 || targets.length !== 3) {
+  if (targets.length === 0 || targets.some((target) => target.dataset['lmsGroup'])) {
     return null;
   }
-  if (targets.some((target) => target.dataset['lmsGroup'])) return null;
 
   const proxy = document.createElement('span');
   proxy.className = 'blank lms-group-proxy';
   proxy.hidden = true;
   proxy.dataset['lmsGroup'] = rule;
   proxy.dataset['lmsAnswers'] = JSON.stringify([`predicate:${rule}`]);
-  proxy.setAttribute('aria-label', 'בדיקה מתמטית של הנקודה שנבחרה והמרחק ממנה');
+  proxy.setAttribute('aria-label', ariaLabel);
   proxyHost.append(proxy);
 
   const onInput: EventListener = () => syncProxy(proxy, targets);
@@ -148,7 +187,53 @@ function bindLifeCard(
   return { observer, targets, proxy, onInput };
 }
 
-/** Adds atomic LMS-only grading to the two real-life point-choice tasks. */
+function cardByHeading(root: ParentNode, headingNeedle: string): HTMLElement | null {
+  return Array.from(root.querySelectorAll<HTMLElement>('.q-card')).find((candidate) =>
+    normalizedText(candidate.querySelector('h3')).includes(headingNeedle),
+  ) || null;
+}
+
+function bindPointAndDistanceCard(
+  root: ParentNode,
+  proxyHost: HTMLElement,
+  headingNeedle: string,
+  rule: DigitalLifeRule,
+): LifeBinding | null {
+  const card = cardByHeading(root, headingNeedle);
+  if (!card) return null;
+
+  const coordinates = Array.from(card.querySelectorAll<HTMLElement>('.pair-blank'));
+  const distances = Array.from(card.querySelectorAll<HTMLElement>('.blank[data-missing="number"]'));
+  if (coordinates.length !== 2 || distances.length !== 1) return null;
+  return createBinding(
+    proxyHost,
+    [...coordinates, ...distances],
+    rule,
+    'בדיקה מתמטית של הנקודה שנבחרה והמרחק ממנה',
+  );
+}
+
+function bindDeliveryCard(
+  root: ParentNode,
+  proxyHost: HTMLElement,
+): LifeBinding | null {
+  const card = cardByHeading(root, 'תכננו משלוח משלכם');
+  if (!card) return null;
+
+  const coordinates = Array.from(card.querySelectorAll<HTMLElement>('.pair-blank'));
+  const work = Array.from(
+    card.querySelectorAll<HTMLElement>('.calc-pair .blank[data-missing="number"]'),
+  );
+  if (coordinates.length !== 2 || work.length !== 3) return null;
+  return createBinding(
+    proxyHost,
+    [...coordinates, ...work],
+    DELIVERY_SAME_STREET_WITH_DISTANCE_WORK,
+    'בדיקה מתמטית של הכתובת שנבחרה, תרגיל החיסור ואורך המסלול',
+  );
+}
+
+/** Adds atomic LMS-only grading to real-life learner-choice tasks. */
 export function hydrateDigitalLifePredicates(root: ParentNode): () => void {
   if ((root as Node).nodeType === 9) return () => undefined;
   const proxyHost = root.querySelector<HTMLElement>('.sheet') ||
@@ -156,18 +241,19 @@ export function hydrateDigitalLifePredicates(root: ParentNode): () => void {
   if (!proxyHost) return () => undefined;
 
   const bindings = [
-    bindLifeCard(
+    bindPointAndDistanceCard(
       root,
       proxyHost,
       'הסדר קובע — גם בטלפון',
       PHONE_SAME_COLUMN_WITH_DISTANCE,
     ),
-    bindLifeCard(
+    bindPointAndDistanceCard(
       root,
       proxyHost,
       'בחרו לעצמכם מקום',
       HALL_SEAT_ABOVE_NOA_WITH_DISTANCE,
     ),
+    bindDeliveryCard(root, proxyHost),
   ].filter((binding): binding is LifeBinding => binding !== null);
 
   return () => {
