@@ -55,6 +55,31 @@ function hydrateOrderedPairIntro(root: ParentNode): void {
   ]);
 }
 
+function hydrateOnAxesIntro(root: ParentNode): void {
+  const text = normalizedText(root.querySelector('.sheet'));
+  if (
+    !text.includes('נקודות שעל הצירים') ||
+    !text.includes('A(4,0)') ||
+    !text.includes('B(0,5)') ||
+    !text.includes('O(0,0)')
+  ) return;
+
+  const originRule = Array.from(root.querySelectorAll<HTMLElement>('.rule-box.completion-intro'))[2];
+  setSequential(blanks(originRule, '.pair-blank'), ['0', '0']);
+
+  const complete = blanks(cardByHeading(root, 'ג. השלימו'), '.pair-blank');
+  setSequential(complete, ['0', '0', '2', '6']);
+
+  const origin = blanks(cardByHeading(root, 'ד. הנקודה שממוקמת על שני הצירים'));
+  setSequential(origin, [
+    ['x', 'X'],
+    ['y', 'Y'],
+    '0',
+    ['ראשית', 'ראשית הצירים'],
+    ['צירים', 'הצירים'],
+  ]);
+}
+
 function hydrateMissingCoordinateIntro(root: ParentNode): void {
   const text = normalizedText(root.querySelector('.sheet'));
   if (
@@ -132,13 +157,58 @@ function hydrateSameCoordinateIntro(root: ParentNode): void {
   setSequential(c, [['x', 'X'], ['x', 'X']]);
 }
 
+function hydrateErrorsIntro(root: ParentNode): void {
+  const text = normalizedText(root.querySelector('.sheet'));
+  if (
+    !text.includes('מזהים ומתקנים טעויות') ||
+    !text.includes('בקטע שקצותיו (1,3) ו־(4,3)')
+  ) return;
+
+  const cards = Array.from(root.querySelectorAll<HTMLElement>('.mist-card'));
+  const last = cards[cards.length - 1];
+  setAnswer(last?.querySelector<HTMLElement>('.blank') ?? undefined, ['x', 'X']);
+}
+
+function hydrateErrorsPractice(root: ParentNode): void {
+  const text = normalizedText(root.querySelector('.sheet'));
+  if (
+    !text.includes('זיהוי ותיקון טעויות') ||
+    !text.includes('שלושה קודקודים של מלבן הם (1,1), (6,1), (6,4)') ||
+    !text.includes('הנקודה (0,7)')
+  ) return;
+
+  const rectangle = blanks(cardByHeading(root, 'טעות במלבן'));
+  setSequential(rectangle, [
+    ['(1,4)', '1,4'],
+    ['ארוכה', 'ארוך'],
+    ['y', 'Y'],
+  ]);
+
+  const wording = blanks(cardByHeading(root, 'בודקים ניסוח'));
+  setAnswer(wording[0], [
+    'שיעור y הוא מחצית משיעור x',
+    'שיעור y שווה למחצית משיעור x',
+    'שיעור y שווה לחצי משיעור x',
+  ]);
+
+  const axis = blanks(cardByHeading(root, 'טעות בנקודה שעל ציר'));
+  setSequential(axis, [
+    ['y', 'Y'],
+    '0',
+    ['ראשית', 'ראשית הצירים'],
+  ]);
+}
+
 /**
  * Deterministic LMS-only answers derived directly from visible canonical data.
  * Learner-choice responses remain untouched and are handled by mathematical predicates.
  */
 export function hydrateDigitalDeterministicAnswers(root: ParentNode): void {
   hydrateOrderedPairIntro(root);
+  hydrateOnAxesIntro(root);
   hydrateMissingCoordinateIntro(root);
   hydrateMoveIntro(root);
   hydrateSameCoordinateIntro(root);
+  hydrateErrorsIntro(root);
+  hydrateErrorsPractice(root);
 }
