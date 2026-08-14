@@ -26,7 +26,7 @@ test('anonymous answers are checked on screen but never persisted', async ({ pag
   await page.goto('/#/workbook/1');
   const target = page.locator('[data-lms-qid="p1-q1"]');
   await target.fill('x');
-  await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
+  await page.getByRole('button', { name: 'בדיקת כל התשובות' }).click();
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 
   const persisted = await page.evaluate(() => ({
