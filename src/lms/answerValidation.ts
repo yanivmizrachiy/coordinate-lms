@@ -3,6 +3,7 @@ import {
   type DigitalGroupRule,
 } from './digitalPredicates';
 import {
+  DELIVERY_SAME_STREET_WITH_DISTANCE_WORK,
   HALL_SEAT_ABOVE_NOA_WITH_DISTANCE,
   PHONE_SAME_COLUMN_WITH_DISTANCE,
   lifeRuleMatches,
@@ -107,7 +108,8 @@ function predicateMatches(raw: string, candidate: string): boolean {
   }
   if (
     ruleName === PHONE_SAME_COLUMN_WITH_DISTANCE ||
-    ruleName === HALL_SEAT_ABOVE_NOA_WITH_DISTANCE
+    ruleName === HALL_SEAT_ABOVE_NOA_WITH_DISTANCE ||
+    ruleName === DELIVERY_SAME_STREET_WITH_DISTANCE_WORK
   ) {
     return lifeRuleMatches(ruleName, raw.split('|'));
   }
