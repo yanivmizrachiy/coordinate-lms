@@ -45,26 +45,28 @@ function hydratePlotShape(root: ParentNode): void {
 }
 
 function hydrateRectanglesIntro(root: ParentNode): void {
-  const sheetText = normalizedText(root.querySelector('.sheet'));
+  const lengths = cardByHeading(root, 'ב. אורכי הצלעות');
+  const missing = cardByHeading(root, 'ג. משלימים את הקודקוד החסר');
+  if (!lengths || !missing) return;
+
+  const lengthsText = normalizedText(lengths);
+  const missingText = normalizedText(missing);
   if (
-    !sheetText.includes('A(1,1)') ||
-    !sheetText.includes('B(6,1)') ||
-    !sheetText.includes('C(6,4)') ||
-    !sheetText.includes('P(2,2)') ||
-    !sheetText.includes('Q(7,2)') ||
-    !sheetText.includes('R(7,5)') ||
-    !sheetText.includes('הקודקוד החסר')
+    !lengthsText.includes('6 − 1') ||
+    !lengthsText.includes('4 − 1') ||
+    !missingText.includes('P(2,2)') ||
+    !missingText.includes('Q(7,2)') ||
+    !missingText.includes('R(7,5)')
   ) return;
 
-  // Main rectangle 5×3, then missing-corner rectangle 5×3.
-  setPageCalcFinals(root, ['16', '15', '16', '15']);
+  // Main rectangle: 5×3.
+  setCalcFinals(lengths, ['16', '15']);
 
-  const missing = cardByHeading(root, 'ג. משלימים את הקודקוד החסר');
-  if (missing) {
-    const coordinates = Array.from(missing.querySelectorAll<HTMLElement>('.pair-blank'));
-    setAnswer(coordinates[0], '2');
-    setAnswer(coordinates[1], '5');
-  }
+  // Missing-corner rectangle: S=(2,5), also 5×3.
+  const coordinates = Array.from(missing.querySelectorAll<HTMLElement>('.pair-blank'));
+  setAnswer(coordinates[0], '2');
+  setAnswer(coordinates[1], '5');
+  setCalcFinals(missing, ['16', '15']);
 }
 
 function hydrateSquaresSummary(root: ParentNode): void {
