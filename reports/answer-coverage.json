@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T14:01:03.855Z",
+  "generatedAt": "2026-08-14T14:02:07.530Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 912,
-  "coveragePercentage": 78.5,
+  "automaticallyCheckableTargets": 917,
+  "coveragePercentage": 78.9,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 179,
+    "canonical-metadata-derived": 184,
     "deterministic-mathematical": 547,
     "valid-range": 6,
-    "open-ended": 120,
-    "ambiguous": 130,
+    "open-ended": 119,
+    "ambiguous": 126,
     "unsupported": 0,
     "missing": 0
   },
@@ -12509,11 +12509,14 @@
           "inputType": "text:letter",
           "context": "אם שתי נקודות ממוקמות על קטע ושיעור ה־y שלהן זהה — הקטע מקביל בהכרח לציר […].",
           "signature": "68e811be",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ]
         },
         {
           "targetId": "p50-q4",
@@ -12521,11 +12524,14 @@
           "inputType": "text:letter",
           "context": "אם שתי נקודות ממוקמות על קטע ושיעור ה־[…] שלהן זהה — הקטע מקביל בהכרח לציר y.",
           "signature": "6fd1c52c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ]
         },
         {
           "targetId": "p50-q5",
@@ -12533,11 +12539,14 @@
           "inputType": "text:relation",
           "context": "קטע המקביל לציר x הוא בהכרח […] לציר y.",
           "signature": "f221e7c7",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מאונך",
+            "מאונכת"
+          ]
         },
         {
           "targetId": "p50-q6",
@@ -12545,11 +12554,14 @@
           "inputType": "text:relation",
           "context": "קטע […] לציר y הוא בהכרח מאונך לציר x.",
           "signature": "45ba4701",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מקביל",
+            "מקבילה"
+          ]
         },
         {
           "targetId": "p50-q7",
@@ -12650,26 +12662,24 @@
           "inputType": "text:letter",
           "context": "הקטע שסימנתם מאונך בהכרח לציר […].",
           "signature": "eadbaf7c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ]
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p50-q3",
-        "p50-q4",
-        "p50-q5",
-        "p50-q6",
         "p50-q10",
         "p50-q11",
         "p50-q12",
-        "p50-q13",
-        "p50-q14"
+        "p50-q13"
       ],
-      "automaticallyCheckableTargets": 5,
-      "coveragePercentage": 35.7
+      "automaticallyCheckableTargets": 10,
+      "coveragePercentage": 71.4
     },
     {
       "pageNumber": 51,

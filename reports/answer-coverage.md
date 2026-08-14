@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T14:01:03.855Z
+Generated: 2026-08-14T14:02:07.530Z
 
-Overall: 912/1162 safely checkable targets (78.5%).
+Overall: 917/1162 safely checkable targets (78.9%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 179 |
+| canonical-metadata-derived | 184 |
 | deterministic-mathematical | 547 |
 | valid-range | 6 |
-| open-ended | 120 |
-| ambiguous | 130 |
+| open-ended | 119 |
+| ambiguous | 126 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1134,16 +1134,16 @@ No detected interactive response targets.
 
 ### Page 50 — קטעים מקבילים לצירים
 
-5/14 safely checkable (35.7%).
+10/14 safely checkable (71.4%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p50-q1 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הקטע AB מקביל לציר […], כי בשתי הנקודות שעליו שיעור ה־y זהה. |
 | p50-q2 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הקטע CD מקביל לציר y, כי בשתי הנקודות שעליו שיעור ה־[…] זהה. |
-| p50-q3 | text:letter | ambiguous | no | none | אם שתי נקודות ממוקמות על קטע ושיעור ה־y שלהן זהה — הקטע מקביל בהכרח לציר […]. |
-| p50-q4 | text:letter | ambiguous | no | none | אם שתי נקודות ממוקמות על קטע ושיעור ה־[…] שלהן זהה — הקטע מקביל בהכרח לציר y. |
-| p50-q5 | text:relation | ambiguous | no | none | קטע המקביל לציר x הוא בהכרח […] לציר y. |
-| p50-q6 | text:relation | ambiguous | no | none | קטע […] לציר y הוא בהכרח מאונך לציר x. |
+| p50-q3 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | אם שתי נקודות ממוקמות על קטע ושיעור ה־y שלהן זהה — הקטע מקביל בהכרח לציר […]. |
+| p50-q4 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | אם שתי נקודות ממוקמות על קטע ושיעור ה־[…] שלהן זהה — הקטע מקביל בהכרח לציר y. |
+| p50-q5 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | קטע המקביל לציר x הוא בהכרח […] לציר y. |
+| p50-q6 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | קטע […] לציר y הוא בהכרח מאונך לציר x. |
 | p50-q7 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | קטע המקביל לציר x הוא בהכרח מאונך לציר y. נכוןלא נכון […] |
 | p50-q8 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | אם שתי נקודות ממוקמות על קטע המקביל לציר y, שיעור ה־y שלהן זהה. נכוןלא נכון […] |
 | p50-q9 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | אם שתי נקודות ממוקמות על קטע המקביל לציר x, שיעור ה־y שלהן זהה. נכוןלא נכון […] |
@@ -1151,7 +1151,7 @@ No detected interactive response targets.
 | p50-q11 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
 | p50-q12 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
 | p50-q13 | ordered-pair-coordinate | ambiguous | no | none | סמנו על המערכת שבסעיף א קטע EF המקביל לציר y, וכתבו את שיעורי קצותיו: E([…],[…]) F([…],[…]). |
-| p50-q14 | text:letter | open-ended | no | teacher judgment required | הקטע שסימנתם מאונך בהכרח לציר […]. |
+| p50-q14 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הקטע שסימנתם מאונך בהכרח לציר […]. |
 
 ### Page 51 — המלבן ברביע הראשון
 

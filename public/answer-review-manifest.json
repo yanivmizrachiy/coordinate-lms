@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T14:01:03.855Z",
+  "generatedAt": "2026-08-14T14:02:07.530Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -10497,10 +10497,13 @@
           "targetId": "p50-q3",
           "signature": "68e811be",
           "inputType": "text:letter",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ],
           "context": "אם שתי נקודות ממוקמות על קטע ושיעור ה־y שלהן זהה — הקטע מקביל בהכרח לציר […]."
         },
         {
@@ -10508,10 +10511,13 @@
           "targetId": "p50-q4",
           "signature": "6fd1c52c",
           "inputType": "text:letter",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ],
           "context": "אם שתי נקודות ממוקמות על קטע ושיעור ה־[…] שלהן זהה — הקטע מקביל בהכרח לציר y."
         },
         {
@@ -10519,10 +10525,13 @@
           "targetId": "p50-q5",
           "signature": "f221e7c7",
           "inputType": "text:relation",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מאונך",
+            "מאונכת"
+          ],
           "context": "קטע המקביל לציר x הוא בהכרח […] לציר y."
         },
         {
@@ -10530,10 +10539,13 @@
           "targetId": "p50-q6",
           "signature": "45ba4701",
           "inputType": "text:relation",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "מקביל",
+            "מקבילה"
+          ],
           "context": "קטע […] לציר y הוא בהכרח מאונך לציר x."
         },
         {
@@ -10627,10 +10639,13 @@
           "targetId": "p50-q14",
           "signature": "eadbaf7c",
           "inputType": "text:letter",
-          "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ],
           "context": "הקטע שסימנתם מאונך בהכרח לציר […]."
         }
       ]
