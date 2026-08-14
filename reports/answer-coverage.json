@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T16:18:28.100Z",
+  "generatedAt": "2026-08-14T16:19:11.329Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1038,
-  "coveragePercentage": 89.3,
+  "automaticallyCheckableTargets": 1054,
+  "coveragePercentage": 90.7,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 268,
-    "deterministic-mathematical": 584,
+    "deterministic-mathematical": 600,
     "valid-range": 6,
-    "open-ended": 90,
-    "ambiguous": 34,
+    "open-ended": 82,
+    "ambiguous": 26,
     "unsupported": 0,
     "missing": 0
   },
@@ -13367,11 +13367,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q14",
@@ -13379,11 +13381,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q15",
@@ -13391,11 +13395,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q16",
@@ -13403,11 +13409,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q17",
@@ -13415,11 +13423,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q18",
@@ -13427,11 +13437,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q19",
@@ -13439,11 +13451,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q20",
@@ -13451,11 +13465,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q21",
@@ -13463,11 +13479,13 @@
           "inputType": "text:number",
           "context": "AB=[…]=[…]יח'",
           "signature": "d1ab1133",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q22",
@@ -13475,11 +13493,13 @@
           "inputType": "text:number",
           "context": "AB=[…]=[…]יח'",
           "signature": "d1ab1133",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q23",
@@ -13487,11 +13507,13 @@
           "inputType": "text:number",
           "context": "AB=[…]יח'",
           "signature": "669ca6bc",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q24",
@@ -13499,11 +13521,13 @@
           "inputType": "text:number",
           "context": "BC=[…]=[…]יח'",
           "signature": "a0030abb",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q25",
@@ -13511,11 +13535,13 @@
           "inputType": "text:number",
           "context": "BC=[…]=[…]יח'",
           "signature": "a0030abb",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q26",
@@ -13523,11 +13549,13 @@
           "inputType": "text:number",
           "context": "BC=[…]יח'",
           "signature": "41b46d54",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q27",
@@ -13535,11 +13563,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         },
         {
           "targetId": "p53-q28",
@@ -13547,35 +13577,21 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalRectanglePredicates.ts:own-axis-aligned-rectangle-with-work",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:own-axis-aligned-rectangle-with-work"
+          ]
         }
       ],
       "missingOrAmbiguousTargetIds": [
         "p53-q11",
-        "p53-q12",
-        "p53-q13",
-        "p53-q14",
-        "p53-q15",
-        "p53-q16",
-        "p53-q17",
-        "p53-q18",
-        "p53-q19",
-        "p53-q20",
-        "p53-q21",
-        "p53-q22",
-        "p53-q23",
-        "p53-q24",
-        "p53-q25",
-        "p53-q26",
-        "p53-q27",
-        "p53-q28"
+        "p53-q12"
       ],
-      "automaticallyCheckableTargets": 10,
-      "coveragePercentage": 35.7
+      "automaticallyCheckableTargets": 26,
+      "coveragePercentage": 92.9
     },
     {
       "pageNumber": 54,

@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T16:18:28.100Z
+Generated: 2026-08-14T16:19:11.329Z
 
-Overall: 1038/1162 safely checkable targets (89.3%).
+Overall: 1054/1162 safely checkable targets (90.7%).
 
 ## Classification totals
 
@@ -10,10 +10,10 @@ Overall: 1038/1162 safely checkable targets (89.3%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 268 |
-| deterministic-mathematical | 584 |
+| deterministic-mathematical | 600 |
 | valid-range | 6 |
-| open-ended | 90 |
-| ambiguous | 34 |
+| open-ended | 82 |
+| ambiguous | 26 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1193,7 +1193,7 @@ No detected interactive response targets.
 
 ### Page 53 — המלבן ברביע הראשון
 
-10/28 safely checkable (35.7%).
+26/28 safely checkable (92.9%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1209,22 +1209,22 @@ No detected interactive response targets.
 | p53-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | QR=[…]יח' |
 | p53-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p53-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p53-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q16 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q17 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q18 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q19 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q20 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
-| p53-q21 | text:number | ambiguous | no | none | AB=[…]=[…]יח' |
-| p53-q22 | text:number | ambiguous | no | none | AB=[…]=[…]יח' |
-| p53-q23 | text:number | ambiguous | no | none | AB=[…]יח' |
-| p53-q24 | text:number | ambiguous | no | none | BC=[…]=[…]יח' |
-| p53-q25 | text:number | ambiguous | no | none | BC=[…]=[…]יח' |
-| p53-q26 | text:number | ambiguous | no | none | BC=[…]יח' |
-| p53-q27 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p53-q28 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p53-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q18 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q19 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q20 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…]) |
+| p53-q21 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | AB=[…]=[…]יח' |
+| p53-q22 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | AB=[…]=[…]יח' |
+| p53-q23 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | AB=[…]יח' |
+| p53-q24 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | BC=[…]=[…]יח' |
+| p53-q25 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | BC=[…]=[…]יח' |
+| p53-q26 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | BC=[…]יח' |
+| p53-q27 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p53-q28 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 
 ### Page 54 — המלבן ברביע הראשון
 
