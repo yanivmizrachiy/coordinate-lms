@@ -1,6 +1,6 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-10
+Updated: 2026-08-14
 
 This is the single source of truth for work in `yanivmizrachiy/coordinate-lms`.
 `USER_MEMORY.md` and `HANDOFF.md` preserve historical workbook decisions, but
@@ -34,6 +34,10 @@ this file, the current instruction wins and this file must be reconciled.
   and block a release rather than silently allowing the two versions to diverge.
 - LMS behavior is an interactive overlay. Interactive controls must be hidden or
   print-neutral and must not obstruct canonical diagrams.
+- **Printed-source protection:** the current interaction and answer-checking work
+  applies only to the computerized/LMS pages. Do not edit the printable workbook,
+  print-source files, printed wording, printed diagrams, or printed layout in
+  order to make computerized checking easier.
 - **Digital-only exception:** if a canonical printed question genuinely cannot
   support objective computerized checking, do not alter the printed source.
   The rendered digital layer may omit that response from grading or replace it
@@ -57,6 +61,23 @@ this file, the current instruction wins and this file must be reconciled.
 - An answer may be checked automatically only when it is reviewed explicitly,
   encoded in canonical metadata, mathematically deterministic, or a verified
   valid range.
+- **Interactive point-selection rule:** when the printed task asks the student to
+  mark, choose, or place a point on a diagram or coordinate grid, the computerized
+  task must use direct interaction with that diagram whenever practical. The
+  student clicks/taps the chosen location, the LMS visibly marks that selected
+  point, and submission checks the mathematical condition of the task. Typing a
+  coordinate is not a substitute when the intended computerized interaction is
+  point selection.
+- A point-selection task is **not open-ended merely because many points can be
+  correct**. If the requirement is mathematically objective, the checker must
+  accept every selectable point that satisfies the requirement and reject every
+  selectable point that does not. Examples include `y = 6`, a point on the x-axis,
+  a point on the x-axis to the right of B, or any other deterministic geometric
+  predicate. These tasks require no teacher judgment.
+- The checker must validate the student's actual selected location against the
+  task predicate at submission time. It must not rely on one pre-authored sample
+  coordinate, and it must not reject a mathematically valid alternative merely
+  because it differs from an example answer.
 - Reviewed proofs and reviewed open-ended decisions must be bound to the
   current target signature and cite canonical source evidence. Prompt drift
   must make the old decision inapplicable.
@@ -72,7 +93,9 @@ this file, the current instruction wins and this file must be reconciled.
   mixed invalid combinations must remain incorrect.
 - Never infer an answer merely from nearby prose. Open-ended, unsupported, or
   genuinely non-deterministic targets remain ungraded unless the digital-only
-  exception above replaces them with an objective equivalent.
+  exception above replaces them with an objective equivalent. A task with many
+  valid answers is not considered non-deterministic when membership in the set
+  of valid answers can be checked objectively.
 - Generated JSON and Markdown coverage reports must remain synchronized with
   target order, digital adaptations, and runtime answer keys.
 
