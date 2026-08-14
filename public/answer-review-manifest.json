@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T13:56:03.015Z",
+  "generatedAt": "2026-08-14T14:01:03.855Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -2251,106 +2251,90 @@
         {
           "pageNumber": 9,
           "targetId": "p9-q5",
-          "signature": "aad9137b",
+          "signature": "7565752f",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/ordered-pair-intro.ts — exact x/y values, ordered-pair rule, and checked correction",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "x=2, y=5 ← ([…],[…])"
         },
         {
           "pageNumber": 9,
           "targetId": "p9-q6",
-          "signature": "aad9137b",
+          "signature": "7565752f",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/ordered-pair-intro.ts — exact x/y values, ordered-pair rule, and checked correction",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "x=2, y=5 ← ([…],[…])"
         },
         {
           "pageNumber": 9,
           "targetId": "p9-q7",
-          "signature": "aad9137b",
+          "signature": "5d32c082",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/ordered-pair-intro.ts — exact x/y values, ordered-pair rule, and checked correction",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "7"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "x=7, y=1 ← ([…],[…])"
         },
         {
           "pageNumber": 9,
           "targetId": "p9-q8",
-          "signature": "aad9137b",
+          "signature": "5d32c082",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/ordered-pair-intro.ts — exact x/y values, ordered-pair rule, and checked correction",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "1"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "x=7, y=1 ← ([…],[…])"
         },
         {
           "pageNumber": 9,
           "targetId": "p9-q9",
-          "signature": "aad9137b",
+          "signature": "e0a9e98f",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/ordered-pair-intro.ts — exact x/y values, ordered-pair rule, and checked correction",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "x=3, y=6 ← ([…],[…])"
         },
         {
           "pageNumber": 9,
           "targetId": "p9-q10",
-          "signature": "aad9137b",
+          "signature": "e0a9e98f",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/ordered-pair-intro.ts — exact x/y values, ordered-pair rule, and checked correction",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "x=3, y=6 ← ([…],[…])"
         },
         {
           "pageNumber": 9,
           "targetId": "p9-q11",
-          "signature": "aad9137b",
+          "signature": "615f300b",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/ordered-pair-intro.ts — exact x/y values, ordered-pair rule, and checked correction",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "x=5, y=4 ← ([…],[…])"
         },
         {
           "pageNumber": 9,
           "targetId": "p9-q12",
-          "signature": "aad9137b",
+          "signature": "615f300b",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/ordered-pair-intro.ts — exact x/y values, ordered-pair rule, and checked correction",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "4"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "x=5, y=4 ← ([…],[…])"
         },
         {
           "pageNumber": 9,
@@ -3835,56 +3819,54 @@
         {
           "pageNumber": 15,
           "targetId": "p15-q5",
-          "signature": "6b5ef3a9",
+          "signature": "6f24925d",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/on-axes-intro.ts — exact axis-zero rule and origin definition",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
           "automaticCheckingSafe": true,
           "answers": [
-            "0",
-            "אפס"
+            "predicate:point-on-x-axis"
           ],
-          "context": "P(6,[…])"
+          "context": "הנקודה P(6,[…]) ממוקמת על ציר x."
         },
         {
           "pageNumber": 15,
           "targetId": "p15-q6",
-          "signature": "e76e791e",
+          "signature": "e1cbe669",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/on-axes-intro.ts — exact axis-zero rule and origin definition",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
           "automaticCheckingSafe": true,
           "answers": [
-            "0",
-            "אפס"
+            "predicate:point-on-y-axis"
           ],
-          "context": "Q([…],4)"
+          "context": "הנקודה Q([…],4) ממוקמת על ציר y."
         },
         {
           "pageNumber": 15,
           "targetId": "p15-q7",
-          "signature": "f877b9e3",
+          "signature": "313f086f",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/on-axes-intro.ts — exact axis-zero rule and origin definition",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
           "automaticCheckingSafe": true,
           "answers": [
-            "2"
+            "predicate:point-on-x-axis"
           ],
-          "context": "([…],0)"
+          "context": "הנקודה שממוקמת על ציר x וערך ה־x שלה 2 היא ([…],0)."
         },
         {
           "pageNumber": 15,
           "targetId": "p15-q8",
-          "signature": "ff7345a3",
+          "signature": "d9981f02",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/on-axes-intro.ts — exact axis-zero rule and origin definition",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
           "automaticCheckingSafe": true,
           "answers": [
-            "6"
+            "predicate:point-on-y-axis"
           ],
-          "context": "(0,[…])"
+          "context": "הנקודה שממוקמת על ציר y ושיעור ה־y שלה 6 היא (0,[…])."
         },
         {
           "pageNumber": 15,
@@ -5126,112 +5108,132 @@
         {
           "pageNumber": 25,
           "targetId": "p25-q1",
-          "signature": "aad9137b",
+          "signature": "d7067f34",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "([…],[…])"
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-above-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-above-x-axis"
+          ],
+          "context": "מעל ציר x: ([…],[…])"
         },
         {
           "pageNumber": 25,
           "targetId": "p25-q2",
-          "signature": "aad9137b",
+          "signature": "d7067f34",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "([…],[…])"
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-above-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-above-x-axis"
+          ],
+          "context": "מעל ציר x: ([…],[…])"
         },
         {
           "pageNumber": 25,
           "targetId": "p25-q3",
-          "signature": "aad9137b",
+          "signature": "b2da3f88",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "([…],[…])"
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-right-of-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-right-of-y-axis"
+          ],
+          "context": "מימין לציר y: ([…],[…])"
         },
         {
           "pageNumber": 25,
           "targetId": "p25-q4",
-          "signature": "aad9137b",
+          "signature": "b2da3f88",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "([…],[…])"
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-right-of-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-right-of-y-axis"
+          ],
+          "context": "מימין לציר y: ([…],[…])"
         },
         {
           "pageNumber": 25,
           "targetId": "p25-q5",
-          "signature": "aad9137b",
+          "signature": "cf70ec5a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "([…],[…])"
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-x-axis"
+          ],
+          "context": "על ציר x: ([…],[…])"
         },
         {
           "pageNumber": 25,
           "targetId": "p25-q6",
-          "signature": "aad9137b",
+          "signature": "cf70ec5a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "([…],[…])"
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-x-axis"
+          ],
+          "context": "על ציר x: ([…],[…])"
         },
         {
           "pageNumber": 25,
           "targetId": "p25-q7",
-          "signature": "aad9137b",
+          "signature": "f8f15fab",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "([…],[…])"
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-y-axis"
+          ],
+          "context": "על ציר y: ([…],[…])"
         },
         {
           "pageNumber": 25,
           "targetId": "p25-q8",
-          "signature": "aad9137b",
+          "signature": "f8f15fab",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "([…],[…])"
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-on-y-axis"
+          ],
+          "context": "על ציר y: ([…],[…])"
         },
         {
           "pageNumber": 25,
           "targetId": "p25-q9",
-          "signature": "aad9137b",
+          "signature": "d4f89193",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "([…],[…])"
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-above-and-right",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-above-and-right"
+          ],
+          "context": "גם מעל וגם מימין: ([…],[…])"
         },
         {
           "pageNumber": 25,
           "targetId": "p25-q10",
-          "signature": "aad9137b",
+          "signature": "d4f89193",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "([…],[…])"
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-above-and-right",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-above-and-right"
+          ],
+          "context": "גם מעל וגם מימין: ([…],[…])"
         },
         {
           "pageNumber": 25,
@@ -5684,54 +5686,46 @@
         {
           "pageNumber": 28,
           "targetId": "p28-q1",
-          "signature": "a004d48d",
+          "signature": "05032e0a",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-intro.ts — exact additive and multiplicative coordinate relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "A(3,[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "A(3,[…]) - y גדול ב־2 מ־x"
         },
         {
           "pageNumber": 28,
           "targetId": "p28-q2",
-          "signature": "fb03df87",
+          "signature": "7ff021bc",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-intro.ts — exact additive and multiplicative coordinate relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "B([…],6)"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "B([…],6) - y גדול פי 2 מ־x"
         },
         {
           "pageNumber": 28,
           "targetId": "p28-q3",
-          "signature": "b30d9137",
+          "signature": "90015708",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-intro.ts — exact additive and multiplicative coordinate relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "C(7,[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "C(7,[…]) - x גדול ב־4 מ־y"
         },
         {
           "pageNumber": 28,
           "targetId": "p28-q4",
-          "signature": "7b3ea657",
+          "signature": "fe19503e",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/relations-intro.ts — exact additive and multiplicative coordinate relations",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "4"
-          ],
-          "context": "D(8,[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "D(8,[…]) - y הוא מחצית x"
         },
         {
           "pageNumber": 28,
@@ -5959,106 +5953,90 @@
         {
           "pageNumber": 30,
           "targetId": "p30-q3",
-          "signature": "aad9137b",
+          "signature": "6fccc910",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/move-intro.ts — exact horizontal and vertical translations and inverse translation",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "6"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "(2,3) - 4 ימינה ← ([…],[…])"
         },
         {
           "pageNumber": 30,
           "targetId": "p30-q4",
-          "signature": "aad9137b",
+          "signature": "6fccc910",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/move-intro.ts — exact horizontal and vertical translations and inverse translation",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "(2,3) - 4 ימינה ← ([…],[…])"
         },
         {
           "pageNumber": 30,
           "targetId": "p30-q5",
-          "signature": "aad9137b",
+          "signature": "d1597a46",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/move-intro.ts — exact horizontal and vertical translations and inverse translation",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "2"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "(7,4) - 5 שמאלה ← ([…],[…])"
         },
         {
           "pageNumber": 30,
           "targetId": "p30-q6",
-          "signature": "aad9137b",
+          "signature": "d1597a46",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/move-intro.ts — exact horizontal and vertical translations and inverse translation",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "4"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "(7,4) - 5 שמאלה ← ([…],[…])"
         },
         {
           "pageNumber": 30,
           "targetId": "p30-q7",
-          "signature": "aad9137b",
+          "signature": "ebcf53af",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/move-intro.ts — exact horizontal and vertical translations and inverse translation",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "(5,1) - 4 למעלה ← ([…],[…])"
         },
         {
           "pageNumber": 30,
           "targetId": "p30-q8",
-          "signature": "aad9137b",
+          "signature": "ebcf53af",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/move-intro.ts — exact horizontal and vertical translations and inverse translation",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "(5,1) - 4 למעלה ← ([…],[…])"
         },
         {
           "pageNumber": 30,
           "targetId": "p30-q9",
-          "signature": "aad9137b",
+          "signature": "843b65d9",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/move-intro.ts — exact horizontal and vertical translations and inverse translation",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "(3,6) - 3 למטה ← ([…],[…])"
         },
         {
           "pageNumber": 30,
           "targetId": "p30-q10",
-          "signature": "aad9137b",
+          "signature": "843b65d9",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/move-intro.ts — exact horizontal and vertical translations and inverse translation",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "([…],[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "(3,6) - 3 למטה ← ([…],[…])"
         },
         {
           "pageNumber": 30,
@@ -7798,82 +7776,72 @@
         {
           "pageNumber": 39,
           "targetId": "p39-q1",
-          "signature": "5873b337",
+          "signature": "6105cafc",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-intro.ts — exact axis, equality, arithmetic-relation, and pattern constraints",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
           "automaticCheckingSafe": true,
           "answers": [
-            "0",
-            "אפס"
+            "predicate:point-on-x-axis"
           ],
-          "context": "A(5,[…])"
+          "context": "A(5,[…]) על ציר x"
         },
         {
           "pageNumber": 39,
           "targetId": "p39-q2",
-          "signature": "f7085669",
+          "signature": "b84e16f5",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-intro.ts — exact axis, equality, arithmetic-relation, and pattern constraints",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-y-axis",
           "automaticCheckingSafe": true,
           "answers": [
-            "0",
-            "אפס"
+            "predicate:point-on-y-axis"
           ],
-          "context": "B([…],4)"
+          "context": "B([…],4) על ציר y"
         },
         {
           "pageNumber": 39,
           "targetId": "p39-q3",
-          "signature": "e2a74493",
+          "signature": "6cd84bfd",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-intro.ts — exact axis, equality, arithmetic-relation, and pattern constraints",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "C(3,[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "C(3,[…]) - שני השיעורים זהים"
         },
         {
           "pageNumber": 39,
           "targetId": "p39-q4",
-          "signature": "cd8e419d",
+          "signature": "8b625cea",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-intro.ts — exact axis, equality, arithmetic-relation, and pattern constraints",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "3"
-          ],
-          "context": "D([…],6)"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "D([…],6) - שיעור y גדול פי 2 משיעור x"
         },
         {
           "pageNumber": 39,
           "targetId": "p39-q5",
-          "signature": "e6b876b0",
+          "signature": "54bb96c0",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-intro.ts — exact axis, equality, arithmetic-relation, and pattern constraints",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "5"
-          ],
-          "context": "E(2,[…])"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "E(2,[…]) - שיעור y גדול ב־3 משיעור x"
         },
         {
           "pageNumber": 39,
           "targetId": "p39-q6",
-          "signature": "04a3b79a",
+          "signature": "c24513a5",
           "inputType": "ordered-pair-coordinate",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/missing-coord-intro.ts — exact axis, equality, arithmetic-relation, and pattern constraints",
-          "automaticCheckingSafe": true,
-          "answers": [
-            "7"
-          ],
-          "context": "F([…],3)"
+          "classification": "ambiguous",
+          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "automaticCheckingSafe": false,
+          "answers": [],
+          "context": "F([…],3) - שיעור x גדול ב־4 משיעור y"
         },
         {
           "pageNumber": 39,
@@ -9850,10 +9818,12 @@
           "targetId": "p46-q12",
           "signature": "3c53a6a0",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:parallel-through-3-4-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:parallel-through-3-4-points"
+          ],
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…])."
         },
         {
@@ -9861,10 +9831,12 @@
           "targetId": "p46-q13",
           "signature": "3c53a6a0",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:parallel-through-3-4-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:parallel-through-3-4-points"
+          ],
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…])."
         },
         {
@@ -9872,10 +9844,12 @@
           "targetId": "p46-q14",
           "signature": "3c53a6a0",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:parallel-through-3-4-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:parallel-through-3-4-points"
+          ],
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…])."
         },
         {
@@ -9883,10 +9857,12 @@
           "targetId": "p46-q15",
           "signature": "3c53a6a0",
           "inputType": "ordered-pair-coordinate",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:parallel-through-3-4-points",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:parallel-through-3-4-points"
+          ],
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…])."
         },
         {
@@ -11577,10 +11553,12 @@
           "targetId": "p55-q6",
           "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "16"
+          ],
           "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
@@ -11588,10 +11566,12 @@
           "targetId": "p55-q7",
           "signature": "7cf9c57b",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "16"
+          ],
           "context": "היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח\"ר."
         },
         {
@@ -11625,10 +11605,12 @@
           "targetId": "p55-q10",
           "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "16"
+          ],
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
@@ -11636,10 +11618,12 @@
           "targetId": "p55-q11",
           "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "12"
+          ],
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
@@ -11647,10 +11631,12 @@
           "targetId": "p55-q12",
           "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "14"
+          ],
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {
@@ -11658,10 +11644,12 @@
           "targetId": "p55-q13",
           "signature": "3bd58709",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "12"
+          ],
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר."
         },
         {

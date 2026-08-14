@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:56:03.015Z
+Generated: 2026-08-14T14:01:03.855Z
 
-Overall: 916/1162 safely checkable targets (78.8%).
+Overall: 912/1162 safely checkable targets (78.5%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 173 |
-| deterministic-mathematical | 557 |
+| canonical-metadata-derived | 179 |
+| deterministic-mathematical | 547 |
 | valid-range | 6 |
-| open-ended | 134 |
-| ambiguous | 112 |
+| open-ended | 120 |
+| ambiguous | 130 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -230,7 +230,7 @@ Overall: 916/1162 safely checkable targets (78.8%).
 
 ### Page 9 — נקודות ברביע הראשון
 
-28/28 safely checkable (100%).
+20/28 safely checkable (71.4%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -238,14 +238,14 @@ Overall: 916/1162 safely checkable targets (78.8%).
 | p9-q2 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | בזוג הסדור (x,y) המספר שנכתב מצד ימין הוא שיעור […]. |
 | p9-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | לדוגמה: בנקודה שערך ה־x שלה 4 ושיעור ה־y שלה 3, הזוג הסדור הוא ([…],[…]). |
 | p9-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | לדוגמה: בנקודה שערך ה־x שלה 4 ושיעור ה־y שלה 3, הזוג הסדור הוא ([…],[…]). |
-| p9-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p9-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p9-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p9-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p9-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p9-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p9-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p9-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
+| p9-q5 | ordered-pair-coordinate | ambiguous | no | none | x=2, y=5 ← ([…],[…]) |
+| p9-q6 | ordered-pair-coordinate | ambiguous | no | none | x=2, y=5 ← ([…],[…]) |
+| p9-q7 | ordered-pair-coordinate | ambiguous | no | none | x=7, y=1 ← ([…],[…]) |
+| p9-q8 | ordered-pair-coordinate | ambiguous | no | none | x=7, y=1 ← ([…],[…]) |
+| p9-q9 | ordered-pair-coordinate | ambiguous | no | none | x=3, y=6 ← ([…],[…]) |
+| p9-q10 | ordered-pair-coordinate | ambiguous | no | none | x=3, y=6 ← ([…],[…]) |
+| p9-q11 | ordered-pair-coordinate | ambiguous | no | none | x=5, y=4 ← ([…],[…]) |
+| p9-q12 | ordered-pair-coordinate | ambiguous | no | none | x=5, y=4 ← ([…],[…]) |
 | p9-q13 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | A(6,2): שיעור x=[…], שיעור y=[…] |
 | p9-q14 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | A(6,2): שיעור x=[…], שיעור y=[…] |
 | p9-q15 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | B(1,5): שיעור x=[…], שיעור y=[…] |
@@ -398,10 +398,10 @@ Overall: 916/1162 safely checkable targets (78.8%).
 | p15-q2 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה שממוקמת על ציר […] ערך ה־x הוא 0. |
 | p15-q3 | ordered-pair-coordinate | ambiguous | no | none | שיעורי הנקודה שעל ראשית הצירים הם ([…],[…]). |
 | p15-q4 | ordered-pair-coordinate | ambiguous | no | none | שיעורי הנקודה שעל ראשית הצירים הם ([…],[…]). |
-| p15-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | P(6,[…]) |
-| p15-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | Q([…],4) |
-| p15-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],0) |
-| p15-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | (0,[…]) |
+| p15-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה P(6,[…]) ממוקמת על ציר x. |
+| p15-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה Q([…],4) ממוקמת על ציר y. |
+| p15-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה שממוקמת על ציר x וערך ה־x שלה 2 היא ([…],0). |
+| p15-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | הנקודה שממוקמת על ציר y ושיעור ה־y שלה 6 היא (0,[…]). |
 | p15-q9 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
 | p15-q10 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה O ממוקמת גם על ציר […] וגם על ציר […]. |
 | p15-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | היא היחידה כזאת, כי רק בה גם ערך ה־x הוא 0 וגם שיעור ה־y הוא […]. |
@@ -555,20 +555,20 @@ No detected interactive response targets.
 
 ### Page 25 — מסמנים נקודות לפי תיאור
 
-11/21 safely checkable (52.4%).
+21/21 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p25-q1 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
-| p25-q2 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
-| p25-q3 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
-| p25-q4 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
-| p25-q5 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
-| p25-q6 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
-| p25-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
-| p25-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
-| p25-q9 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
-| p25-q10 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ([…],[…]) |
+| p25-q1 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | מעל ציר x: ([…],[…]) |
+| p25-q2 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | מעל ציר x: ([…],[…]) |
+| p25-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | מימין לציר y: ([…],[…]) |
+| p25-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | מימין לציר y: ([…],[…]) |
+| p25-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | על ציר x: ([…],[…]) |
+| p25-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | על ציר x: ([…],[…]) |
+| p25-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | על ציר y: ([…],[…]) |
+| p25-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | על ציר y: ([…],[…]) |
+| p25-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | גם מעל וגם מימין: ([…],[…]) |
+| p25-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | גם מעל וגם מימין: ([…],[…]) |
 | p25-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה F שממוקמת על ציר x. שיעוריה: F([…],[…]). |
 | p25-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו על הסרטוט נקודה F שממוקמת על ציר x. שיעוריה: F([…],[…]). |
 | p25-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו נקודה G שממוקמת על ציר x וגם מימין לנקודה B. שיעוריה: G([…],[…]). |
@@ -618,14 +618,14 @@ No detected interactive response targets.
 
 ### Page 28 — גדול ב־, קטן ב־ וגדול פי
 
-4/5 safely checkable (80%).
+0/5 safely checkable (0%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p28-q1 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | A(3,[…]) |
-| p28-q2 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | B([…],6) |
-| p28-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | C(7,[…]) |
-| p28-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | D(8,[…]) |
+| p28-q1 | ordered-pair-coordinate | ambiguous | no | none | A(3,[…]) - y גדול ב־2 מ־x |
+| p28-q2 | ordered-pair-coordinate | ambiguous | no | none | B([…],6) - y גדול פי 2 מ־x |
+| p28-q3 | ordered-pair-coordinate | ambiguous | no | none | C(7,[…]) - x גדול ב־4 מ־y |
+| p28-q4 | ordered-pair-coordinate | ambiguous | no | none | D(8,[…]) - y הוא מחצית x |
 | p28-q5 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 
 ### Page 29 — יחסים בין שיעורים
@@ -651,20 +651,20 @@ No detected interactive response targets.
 
 ### Page 30 — הזזה של נקודות
 
-18/18 safely checkable (100%).
+10/18 safely checkable (55.6%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p30-q1 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הזזה ימינה או שמאלה משנה את שיעור […]. |
 | p30-q2 | word:direction | canonical-metadata-derived | yes | explicit canonical authoring label | הזזה למעלה או […] משנה את שיעור y. |
-| p30-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p30-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p30-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p30-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p30-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p30-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p30-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
-| p30-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | ([…],[…]) |
+| p30-q3 | ordered-pair-coordinate | ambiguous | no | none | (2,3) - 4 ימינה ← ([…],[…]) |
+| p30-q4 | ordered-pair-coordinate | ambiguous | no | none | (2,3) - 4 ימינה ← ([…],[…]) |
+| p30-q5 | ordered-pair-coordinate | ambiguous | no | none | (7,4) - 5 שמאלה ← ([…],[…]) |
+| p30-q6 | ordered-pair-coordinate | ambiguous | no | none | (7,4) - 5 שמאלה ← ([…],[…]) |
+| p30-q7 | ordered-pair-coordinate | ambiguous | no | none | (5,1) - 4 למעלה ← ([…],[…]) |
+| p30-q8 | ordered-pair-coordinate | ambiguous | no | none | (5,1) - 4 למעלה ← ([…],[…]) |
+| p30-q9 | ordered-pair-coordinate | ambiguous | no | none | (3,6) - 3 למטה ← ([…],[…]) |
+| p30-q10 | ordered-pair-coordinate | ambiguous | no | none | (3,6) - 3 למטה ← ([…],[…]) |
 | p30-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודת ביניים: ([…],[…]) |
 | p30-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודת ביניים: ([…],[…]) |
 | p30-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | נקודה סופית: ([…],[…]) |
@@ -854,16 +854,16 @@ No detected interactive response targets.
 
 ### Page 39 — משלימים שיעור חסר ודפוסים
 
-27/28 safely checkable (96.4%).
+23/28 safely checkable (82.1%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p39-q1 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | A(5,[…]) |
-| p39-q2 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | B([…],4) |
-| p39-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | C(3,[…]) |
-| p39-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | D([…],6) |
-| p39-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | E(2,[…]) |
-| p39-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | F([…],3) |
+| p39-q1 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | A(5,[…]) על ציר x |
+| p39-q2 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | B([…],4) על ציר y |
+| p39-q3 | ordered-pair-coordinate | ambiguous | no | none | C(3,[…]) - שני השיעורים זהים |
+| p39-q4 | ordered-pair-coordinate | ambiguous | no | none | D([…],6) - שיעור y גדול פי 2 משיעור x |
+| p39-q5 | ordered-pair-coordinate | ambiguous | no | none | E(2,[…]) - שיעור y גדול ב־3 משיעור x |
+| p39-q6 | ordered-pair-coordinate | ambiguous | no | none | F([…],3) - שיעור x גדול ב־4 משיעור y |
 | p39-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | על ציר x ושיעור x שלי 6: ([…],0) |
 | p39-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | על ציר y ושיעור y שלי 5: (0,[…]) |
 | p39-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שני שיעוריי 4: ([…],[…]) |
@@ -1046,7 +1046,7 @@ No detected interactive response targets.
 
 ### Page 46 — קטעים מקבילים לצירים
 
-7/16 safely checkable (43.8%).
+11/16 safely checkable (68.8%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1061,10 +1061,10 @@ No detected interactive response targets.
 | p46-q9 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לשתי נקודות שיש להן שיעור x זהה, הקטע שביניהן מקביל לציר […]. |
 | p46-q10 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לשתי הנקודות P(4,1) ו־Q(4,6) יש שיעור […] זהה, ולכן הקטע PQ מקביל לציר y. |
 | p46-q11 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הקטע RS מקביל לציר […], כי בשתי הנקודות שעליו שיעור ה־y זהה. |
-| p46-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
-| p46-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
-| p46-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
-| p46-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
+| p46-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
+| p46-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
+| p46-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
+| p46-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
 | p46-q16 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 
 ### Page 47 — קטעים מקבילים לצירים
@@ -1251,7 +1251,7 @@ No detected interactive response targets.
 
 ### Page 55 — המלבן ברביע הראשון
 
-8/14 safely checkable (57.1%).
+14/14 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1260,14 +1260,14 @@ No detected interactive response targets.
 | p55-q3 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]=[…]יח' |
 | p55-q4 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]=[…]יח' |
 | p55-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]יח' |
-| p55-q6 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
-| p55-q7 | text:number | ambiguous | no | none | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
+| p55-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
+| p55-q7 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
 | p55-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | באורך […] יח' וברוחב […] יח' — ולכן האורך והרוחב זהים. |
 | p55-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | באורך […] יח' וברוחב […] יח' — ולכן האורך והרוחב זהים. |
-| p55-q10 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p55-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p55-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p55-q13 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p55-q10 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p55-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p55-q12 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p55-q13 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p55-q14 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם אותו שטח מחייב אותו היקף? […] |
 
 ### Page 56 — המלבן ברביע הראשון
