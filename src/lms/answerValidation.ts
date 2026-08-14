@@ -3,6 +3,10 @@ import {
   type DigitalGroupRule,
 } from './digitalPredicates';
 import {
+  OWN_AXIS_ALIGNED_RECTANGLE_WITH_WORK,
+  ownAxisAlignedRectangleWithWorkMatches,
+} from './digitalRectanglePredicates';
+import {
   HORIZONTAL_LENGTH_FOUR_WITH_WORK,
   horizontalLengthFourWithWorkMatches,
 } from './digitalSegmentPredicates';
@@ -94,6 +98,9 @@ function predicateMatches(raw: string, candidate: string): boolean {
   const ruleName = candidate.slice('predicate:'.length);
   if (ruleName === HORIZONTAL_LENGTH_FOUR_WITH_WORK) {
     return horizontalLengthFourWithWorkMatches(raw.split('|'));
+  }
+  if (ruleName === OWN_AXIS_ALIGNED_RECTANGLE_WITH_WORK) {
+    return ownAxisAlignedRectangleWithWorkMatches(raw.split('|'));
   }
 
   const rule = ruleName as DigitalGroupRule;
