@@ -13,6 +13,11 @@ function setAnswer(target: HTMLElement | undefined, answers: string | string[]):
   target.dataset['lmsAnswers'] = JSON.stringify(Array.isArray(answers) ? answers : [answers]);
 }
 
+function forceAnswer(target: HTMLElement | undefined, answers: string | string[]): void {
+  if (!target) return;
+  target.dataset['lmsAnswers'] = JSON.stringify(Array.isArray(answers) ? answers : [answers]);
+}
+
 function cardByHeading(root: ParentNode, needle: string): HTMLElement | undefined {
   return Array.from(root.querySelectorAll<HTMLElement>('.q-card')).find((card) =>
     normalizedText(card.querySelector('h3')).includes(needle),
@@ -66,6 +71,56 @@ function hydrateRectangleVertices(root: ParentNode): void {
   setAnswer(finals[1], '12');
 }
 
+function hydrateSameAxisPrint(root: ParentNode): void {
+  const ruleBox = root.querySelector<HTMLElement>('.rule-box');
+  if (ruleBox) {
+    const target = answerTargets(ruleBox)[0];
+    setAnswer(target, ['אנכי', 'אנכית']);
+  }
+
+  const sameX = cardByHeading(root, 'אותו שיעור x');
+  if (sameX) {
+    const targets = answerTargets(sameX);
+    const expected: Array<string | string[]> = [
+      '2',
+      ['אנכי', 'אנכית'],
+      'ז',
+      'ה',
+    ];
+    expected.forEach((answer, index) => setAnswer(targets[index], answer));
+  }
+
+  const sameY = cardByHeading(root, 'אותו שיעור y');
+  if (sameY) {
+    const targets = answerTargets(sameY);
+    const expected: Array<string | string[]> = [
+      '2',
+      ['y', 'Y'],
+      'י',
+      'ם',
+    ];
+    expected.forEach((answer, index) => setAnswer(targets[index], answer));
+  }
+
+  const word = cardByHeading(root, 'מרכיבים את המילה');
+  if (word) {
+    const targets = Array.from(
+      word.querySelectorAll<HTMLElement>('.blank, .word-blank'),
+    );
+    setAnswer(targets[0], 'זהים');
+    // The aria label on this legacy word blank is descriptive ("שהתגלתה"),
+    // not an answer. Override that inferred value with the real revealed word.
+    forceAnswer(targets[1], 'זהים');
+    setAnswer(targets[2], ['x', 'X']);
+  }
+
+  const noDrawing = cardByHeading(root, 'מזהים בלי סרטוט');
+  if (noDrawing) {
+    const targets = answerTargets(noDrawing);
+    setAnswer(targets[0], '4');
+  }
+}
+
 /** LMS-only deterministic answers for canonical rule/table tasks. */
 export function hydrateDigitalRuleAnswers(root: ParentNode): void {
   const sheetText = normalizedText(root.querySelector('.sheet'));
@@ -76,5 +131,9 @@ export function hydrateDigitalRuleAnswers(root: ParentNode): void {
 
   if (sheetText.includes('קודקודים של מלבן')) {
     hydrateRectangleVertices(root);
+  }
+
+  if (sheetText.includes('אותו x או אותו y')) {
+    hydrateSameAxisPrint(root);
   }
 }
