@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-14T16:00:15.528Z",
+  "generatedAt": "2026-08-14T16:05:12.356Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1026,
-  "coveragePercentage": 88.3,
+  "automaticallyCheckableTargets": 1038,
+  "coveragePercentage": 89.3,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 268,
-    "deterministic-mathematical": 572,
+    "deterministic-mathematical": 584,
     "valid-range": 6,
-    "open-ended": 98,
-    "ambiguous": 38,
+    "open-ended": 90,
+    "ambiguous": 34,
     "unsupported": 0,
     "missing": 0
   },
@@ -13606,11 +13606,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…])",
           "signature": "6f305284",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-missing-opposite-corners",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-missing-opposite-corners"
+          ]
         },
         {
           "targetId": "p54-q2",
@@ -13618,11 +13620,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…])",
           "signature": "6f305284",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-missing-opposite-corners",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-missing-opposite-corners"
+          ]
         },
         {
           "targetId": "p54-q3",
@@ -13630,11 +13634,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…])",
           "signature": "6f305284",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-missing-opposite-corners",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-missing-opposite-corners"
+          ]
         },
         {
           "targetId": "p54-q4",
@@ -13642,11 +13648,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "([…],[…]) ([…],[…])",
           "signature": "6f305284",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-missing-opposite-corners",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-missing-opposite-corners"
+          ]
         },
         {
           "targetId": "p54-q5",
@@ -13682,11 +13690,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-from-corner-4x3",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-from-corner-4x3"
+          ]
         },
         {
           "targetId": "p54-q8",
@@ -13694,11 +13704,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-from-corner-4x3",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-from-corner-4x3"
+          ]
         },
         {
           "targetId": "p54-q9",
@@ -13706,11 +13718,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-from-corner-4x3",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-from-corner-4x3"
+          ]
         },
         {
           "targetId": "p54-q10",
@@ -13718,11 +13732,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-from-corner-4x3",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-from-corner-4x3"
+          ]
         },
         {
           "targetId": "p54-q11",
@@ -13730,11 +13746,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-from-corner-4x3",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-from-corner-4x3"
+          ]
         },
         {
           "targetId": "p54-q12",
@@ -13742,11 +13760,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-from-corner-4x3",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-from-corner-4x3"
+          ]
         },
         {
           "targetId": "p54-q13",
@@ -13754,11 +13774,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-from-corner-4x3",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-from-corner-4x3"
+          ]
         },
         {
           "targetId": "p54-q14",
@@ -13766,11 +13788,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalPredicates.ts:rectangle-from-corner-4x3",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:rectangle-from-corner-4x3"
+          ]
         },
         {
           "targetId": "p54-q15",
@@ -13801,22 +13825,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p54-q1",
-        "p54-q2",
-        "p54-q3",
-        "p54-q4",
-        "p54-q7",
-        "p54-q8",
-        "p54-q9",
-        "p54-q10",
-        "p54-q11",
-        "p54-q12",
-        "p54-q13",
-        "p54-q14"
-      ],
-      "automaticallyCheckableTargets": 4,
-      "coveragePercentage": 25
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 16,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 55,

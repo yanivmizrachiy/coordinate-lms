@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T16:00:15.528Z
+Generated: 2026-08-14T16:05:12.356Z
 
-Overall: 1026/1162 safely checkable targets (88.3%).
+Overall: 1038/1162 safely checkable targets (89.3%).
 
 ## Classification totals
 
@@ -10,10 +10,10 @@ Overall: 1026/1162 safely checkable targets (88.3%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 268 |
-| deterministic-mathematical | 572 |
+| deterministic-mathematical | 584 |
 | valid-range | 6 |
-| open-ended | 98 |
-| ambiguous | 38 |
+| open-ended | 90 |
+| ambiguous | 34 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1228,24 +1228,24 @@ No detected interactive response targets.
 
 ### Page 54 — המלבן ברביע הראשון
 
-4/16 safely checkable (25%).
+16/16 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p54-q1 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
-| p54-q2 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
-| p54-q3 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
-| p54-q4 | ordered-pair-coordinate | ambiguous | no | none | ([…],[…]) ([…],[…]) |
+| p54-q1 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ([…],[…]) ([…],[…]) |
+| p54-q2 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ([…],[…]) ([…],[…]) |
+| p54-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ([…],[…]) ([…],[…]) |
+| p54-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ([…],[…]) ([…],[…]) |
 | p54-q5 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | אורך המלבן: […] יח' רוחב המלבן: […] יח' |
 | p54-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | אורך המלבן: […] יח' רוחב המלבן: […] יח' |
-| p54-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
-| p54-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
-| p54-q9 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
-| p54-q10 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
-| p54-q11 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
-| p54-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
-| p54-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
-| p54-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
+| p54-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
+| p54-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
+| p54-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
+| p54-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
+| p54-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
+| p54-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
+| p54-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
+| p54-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]) |
 | p54-q15 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p54-q16 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 
