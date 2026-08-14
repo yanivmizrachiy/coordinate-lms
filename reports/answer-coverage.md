@@ -1,18 +1,18 @@
 # Answer-key coverage report
 
-Generated: 2026-08-14T13:37:34.881Z
+Generated: 2026-08-14T13:41:14.329Z
 
-Overall: 873/1162 safely checkable targets (75.1%).
+Overall: 876/1162 safely checkable targets (75.4%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 134 |
+| canonical-metadata-derived | 137 |
 | deterministic-mathematical | 553 |
 | valid-range | 6 |
-| open-ended | 145 |
+| open-ended | 142 |
 | ambiguous | 144 |
 | unsupported | 0 |
 | missing | 0 |
@@ -294,7 +294,7 @@ Overall: 873/1162 safely checkable targets (75.1%).
 
 ### Page 11 — נקודות ברביע הראשון
 
-19/21 safely checkable (90.5%).
+21/21 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -317,8 +317,8 @@ Overall: 873/1162 safely checkable targets (75.1%).
 | p11-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את שיעורי נקודה N: N([…],[…]) |
 | p11-q18 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | בשני הזוגות אותם מספרים, אבל ה[…] שלהם שונה. |
 | p11-q19 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בנקודה (2,5) ערך ה־x הוא […], ובנקודה (5,2) הוא 5. |
-| p11-q20 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
-| p11-q21 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p11-q20 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע (2,5) ו־(5,2) הן שתי נקודות שונות?כי סכום שני השיעורים משתנה כשמחליפים את הסדר.כי בזוג סדור המספר הראשון הוא ערך x והשני הוא שיעור y, ולכן החלפת הסדר מחליפה את תפקידי המספרים ואת מיקום הנקודה.כי שיעור y קובע גם את המיקום האופקי  |
+| p11-q21 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע (5,2) נמצאת ימינה יותר מ־(2,5)?כי שיעור ה־y שלה הוא 2, ושיעור y קובע את המיקום האופקי.כי סכום השיעורים של (5,2) גדול יותר מסכום השיעורים של (2,5).כי ערך ה־x שלה הוא 5 לעומת 2, וערך x קובע את המיקום האופקי.כי המספר השני בזוג הסדו |
 
 ### Page 12 — נקודות ברביע הראשון
 
@@ -854,7 +854,7 @@ No detected interactive response targets.
 
 ### Page 39 — משלימים שיעור חסר ודפוסים
 
-21/28 safely checkable (75%).
+22/28 safely checkable (78.6%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -876,7 +876,7 @@ No detected interactive response targets.
 | p39-q16 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מה משתנה בשיעור y? […] |
 | p39-q17 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מה הקשר בין שיעור x לשיעור y? […] |
 | p39-q18 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם (6,4) מתאים? […] |
-| p39-q19 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p39-q19 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: איזה כלל מתאר את כל הנקודות בדפוס (2,1), (4,2), (6,3), (8,4)?בכל נקודה שיעור ה־y גדול פי 2 מערך ה־x.בכל נקודה ערך ה־x גדול ב־1 משיעור ה־y.בכל נקודה ערך ה־x גדול פי 2 משיעור ה־y.בכל נקודה ההפרש בין ערך ה־x לשיעור ה־y נשאר קבוע.[…]. |
 | p39-q20 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y גדול ב־[…] משיעור x. |
 | p39-q21 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם (5,5) מתאים? […] |
 | p39-q22 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | התיאור הזה מתאים ל[…] נקודות, ולא לנקודה אחת. |
@@ -885,7 +885,7 @@ No detected interactive response targets.
 | p39-q25 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q26 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q27 | text:letter | ambiguous | no | none | כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]. |
-| p39-q28 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p39-q28 | text:relation | open-ended | no | teacher judgment required | ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x  |
 
 ### Page 40 — שיעור חסר ודפוסים
 

@@ -1167,12 +1167,12 @@
         {
           "targetId": "p11-q20",
           "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "signature": "fac7930e"
         },
         {
           "targetId": "p11-q21",
           "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "signature": "76092c63"
         }
       ]
     },
@@ -3138,7 +3138,7 @@
         {
           "targetId": "p39-q19",
           "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "signature": "3af3d6a6"
         },
         {
           "targetId": "p39-q20",
@@ -3183,7 +3183,7 @@
         {
           "targetId": "p39-q28",
           "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "signature": "09881042"
         }
       ]
     },

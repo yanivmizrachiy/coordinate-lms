@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T13:37:34.881Z",
+  "generatedAt": "2026-08-14T13:41:14.329Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -3135,24 +3135,28 @@
         {
           "pageNumber": 11,
           "targetId": "p11-q20",
-          "signature": "bd0fcb5c",
+          "signature": "fac7930e",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי בזוג סדור המספר הראשון הוא ערך x והשני הוא שיעור y, ולכן החלפת הסדר מחליפה את תפקידי המספרים ואת מיקום הנקודה."
+          ],
+          "context": "ההסבר: מדוע (2,5) ו־(5,2) הן שתי נקודות שונות?כי סכום שני השיעורים משתנה כשמחליפים את הסדר.כי בזוג סדור המספר הראשון הוא ערך x והשני הוא שיעור y, ולכן החלפת הסדר מחליפה את תפקידי המספרים ואת מיקום הנקודה.כי שיעור y קובע גם את המיקום האופקי "
         },
         {
           "pageNumber": 11,
           "targetId": "p11-q21",
-          "signature": "bd0fcb5c",
+          "signature": "76092c63",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי ערך ה־x שלה הוא 5 לעומת 2, וערך x קובע את המיקום האופקי."
+          ],
+          "context": "ההסבר: מדוע (5,2) נמצאת ימינה יותר מ־(2,5)?כי שיעור ה־y שלה הוא 2, ושיעור y קובע את המיקום האופקי.כי סכום השיעורים של (5,2) גדול יותר מסכום השיעורים של (2,5).כי ערך ה־x שלה הוא 5 לעומת 2, וערך x קובע את המיקום האופקי.כי המספר השני בזוג הסדו"
         }
       ]
     },
@@ -7995,13 +7999,15 @@
         {
           "pageNumber": 39,
           "targetId": "p39-q19",
-          "signature": "bd0fcb5c",
+          "signature": "3af3d6a6",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "בכל נקודה ערך ה־x גדול פי 2 משיעור ה־y."
+          ],
+          "context": "ההסבר: איזה כלל מתאר את כל הנקודות בדפוס (2,1), (4,2), (6,3), (8,4)?בכל נקודה שיעור ה־y גדול פי 2 מערך ה־x.בכל נקודה ערך ה־x גדול ב־1 משיעור ה־y.בכל נקודה ערך ה־x גדול פי 2 משיעור ה־y.בכל נקודה ההפרש בין ערך ה־x לשיעור ה־y נשאר קבוע.[…]."
         },
         {
           "pageNumber": 39,
@@ -8103,13 +8109,13 @@
         {
           "pageNumber": 39,
           "targetId": "p39-q28",
-          "signature": "bd0fcb5c",
+          "signature": "09881042",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "learner-created or explanatory response",
           "automaticCheckingSafe": false,
           "answers": [],
-          "context": "ההסבר: […]."
+          "context": "ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x "
         }
       ]
     },
