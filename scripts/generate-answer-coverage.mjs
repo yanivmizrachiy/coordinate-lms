@@ -94,6 +94,7 @@ try {
   const coverage = await server.ssrLoadModule('/src/lms/answerCoverage.ts');
   const predicates = await server.ssrLoadModule('/src/lms/digitalPredicates.ts');
   const segments = await server.ssrLoadModule('/src/lms/digitalSegmentPredicates.ts');
+  const grouped = await server.ssrLoadModule('/src/lms/groupCoverageBindings.ts');
   const report = applyRuntimePredicateCoverage(
     coverage.buildAnswerCoverageReport(await existingGeneratedAt()),
     (context, inputType, pageNumber, targetId) => {
@@ -110,10 +111,17 @@ try {
         pageNumber,
         targetId,
       );
-      return segmentRule
+      if (segmentRule) {
+        return {
+          rule: segmentRule,
+          source: 'src/lms/digitalSegmentPredicates.ts',
+        };
+      }
+      const groupedRule = grouped.canonicalGroupRuleForCoverage(pageNumber, targetId);
+      return groupedRule
         ? {
-            rule: segmentRule,
-            source: 'src/lms/digitalSegmentPredicates.ts',
+            rule: groupedRule,
+            source: 'src/lms/digitalPredicates.ts',
           }
         : null;
     },
