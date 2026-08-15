@@ -59,10 +59,8 @@ function hydrateRectanglesIntro(root: ParentNode): void {
     !missingText.includes('R(7,5)')
   ) return;
 
-  // Main rectangle: 5×3.
   setCalcFinals(lengths, ['16', '15']);
 
-  // Missing-corner rectangle: S=(2,5), also 5×3.
   const coordinates = Array.from(missing.querySelectorAll<HTMLElement>('.pair-blank'));
   setAnswer(coordinates[0], '2');
   setAnswer(coordinates[1], '5');
@@ -73,9 +71,6 @@ function hydrateRectanglesPracticeFixed(root: ParentNode): void {
   const dimensions = cardByHeading(root, 'אורך ורוחב של מלבן');
   if (!dimensions) return;
 
-  // This unique canonical section defines PQRS as a 5×3 rectangle, so P=16
-  // and S=15. Matching the section heading is more stable than serialized LTR
-  // coordinate text, which can differ across DOM implementations.
   setCalcFinals(dimensions, ['16', '15']);
 }
 
@@ -128,6 +123,22 @@ function hydratePixelArt(root: ParentNode): void {
   setCalcFinals(cardByHeading(root, 'ב. כמה פיקסלים צריך'), ['20', '24']);
 }
 
+function hydrateRightAngleBuild(root: ParentNode): void {
+  const sheetText = normalizedText(root.querySelector('.sheet'));
+  if (
+    !sheetText.includes('בונים זווית ישרה') ||
+    !sheetText.includes('A(1,1)') ||
+    !sheetText.includes('B(6,1)') ||
+    !sheetText.includes('C(6,4)') ||
+    !sheetText.includes('D(1,4)')
+  ) return;
+
+  setCalcFinals(
+    cardByHeading(root, 'ג. חשבו את היקף ושטח המלבן ABCD'),
+    ['16', '15'],
+  );
+}
+
 /** Deterministic LMS-only geometry answers derived from canonical coordinates. */
 export function hydrateDigitalGeometryAnswers(root: ParentNode): void {
   hydratePlotShape(root);
@@ -138,4 +149,5 @@ export function hydrateDigitalGeometryAnswers(root: ParentNode): void {
   hydrateShapeClaims(root);
   hydrateHallSeats(root);
   hydratePixelArt(root);
+  hydrateRightAngleBuild(root);
 }
