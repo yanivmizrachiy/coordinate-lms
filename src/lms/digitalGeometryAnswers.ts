@@ -124,19 +124,21 @@ function hydratePixelArt(root: ParentNode): void {
 }
 
 function hydrateRightAngleBuild(root: ParentNode): void {
-  const sheetText = normalizedText(root.querySelector('.sheet'));
+  const rectangle = cardByHeading(root, 'ב. אורי בונה מלבן ABCD');
+  const calculations = cardByHeading(
+    root,
+    'ג. חשבו את היקף ושטח המלבן ABCD מסעיף ב',
+  );
+  if (!rectangle || !calculations) return;
+
+  const rectangleText = normalizedText(rectangle);
   if (
-    !sheetText.includes('בונים זווית ישרה') ||
-    !sheetText.includes('A(1,1)') ||
-    !sheetText.includes('B(6,1)') ||
-    !sheetText.includes('C(6,4)') ||
-    !sheetText.includes('D(1,4)')
+    !rectangleText.includes('מספר הזוויות הישרות') ||
+    !rectangleText.includes('AB') ||
+    !rectangleText.includes('BC')
   ) return;
 
-  setCalcFinals(
-    cardByHeading(root, 'ג. חשבו את היקף ושטח המלבן ABCD'),
-    ['16', '15'],
-  );
+  setCalcFinals(calculations, ['16', '15']);
 }
 
 function hydrateRightAngleSummary(root: ParentNode): void {
