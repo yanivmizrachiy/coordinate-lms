@@ -20,6 +20,10 @@ import {
   HORIZONTAL_LENGTH_FOUR_WITH_WORK,
   horizontalLengthFourWithWorkMatches,
 } from './digitalSegmentPredicates';
+import {
+  SUSPECT_X_FIVE_LABEL_PAIR,
+  suspectXFiveLabelPairMatches,
+} from './digitalSuspectPredicate';
 
 const MAX_ANSWER_LENGTH = 120;
 
@@ -106,6 +110,9 @@ function predicateMatches(raw: string, candidate: string): boolean {
   const ruleName = candidate.slice('predicate:'.length);
   if (ruleName === AXIS_POINT_MOVED_UP_FOUR) {
     return axisPointMovedUpFourMatches(raw.split('|'));
+  }
+  if (ruleName === SUSPECT_X_FIVE_LABEL_PAIR) {
+    return suspectXFiveLabelPairMatches(raw.split('|'));
   }
   if (ruleName === HORIZONTAL_LENGTH_FOUR_WITH_WORK) {
     return horizontalLengthFourWithWorkMatches(raw.split('|'));
