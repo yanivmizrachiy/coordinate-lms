@@ -31,7 +31,7 @@ function canonicalPage58Root(): HTMLElement {
 describe('free equal-coordinate point predicate', () => {
   it('accepts any positive point with x equal to y', () => {
     expect(equalPositiveCoordinatePointMatches(['1', '1'])).toBe(true);
-    expect(equalPositiveCoordinatePointMatches(['3.5', '3.5'])).toBe(true);
+    expect(equalPositiveCoordinatePointMatches(['3,5', '3,5'])).toBe(true);
     expect(
       answersMatch('6|6', [`predicate:${EQUAL_POSITIVE_COORDINATE_POINT}`]),
     ).toBe(true);
