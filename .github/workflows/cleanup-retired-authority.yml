@@ -1,0 +1,103 @@
+name: Cleanup retired authority and generators
+
+on:
+  push:
+    branches:
+      - agent/canonical-lms-unified
+    paths:
+      - '.github/workflows/cleanup-retired-authority.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/canonical-lms-unified
+          fetch-depth: 0
+      - name: Remove retired generators and authority drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          required = [
+              Path('scripts/upgrade-lms-phase2.mjs'),
+              Path('scripts/phase3-extreme-generate.mjs'),
+              Path('MIGRATION_STATUS.md'),
+              Path('USER_MEMORY.md'),
+              Path('tests/workbook.test.ts'),
+              Path('tests/layout-rules.test.ts'),
+          ]
+          missing = [str(p) for p in required if not p.exists()]
+          if missing:
+              raise SystemExit('guard failed; expected files missing: ' + ', '.join(missing))
+
+          workbook = Path('tests/workbook.test.ts')
+          text = workbook.read_text(encoding='utf-8')
+          old = "describe('workbook integrity (USER_MEMORY.md mandatory checks)', () => {"
+          new = "describe('workbook integrity (RULES.md canonical checks)', () => {"
+          if text.count(old) != 1:
+              raise SystemExit('guard failed: workbook authority label drifted')
+          text = text.replace(old, new, 1)
+          old_comment = '''/* „המשימות שלנו רק להדפסה ולא מתוקשבות" (יניב, 30.07.2026, על עמוד 18):
+   דף עבודה ממוספר חייב להיות פתיר על נייר. שדות קלט וכפתורים בתוך ה-HTML של
+   עמוד הם משימה שאי אפשר לענות עליה בעיפרון. (שעשועון חי נטען בזמן ריצה אל
+   game-host — זה נשאר; אבל ה-HTML המודפס של עמוד לעולם לא מכיל קלט.) */'''
+          new_comment = '''/* RULES.md §§2–4: the printable canonical page remains pencil-answerable.
+   Computerized controls belong to the LMS overlay and never leak into the
+   printable page HTML. */'''
+          if old_comment not in text:
+              raise SystemExit('guard failed: workbook historical comment drifted')
+          text = text.replace(old_comment, new_comment, 1)
+          text = text.replace(
+              '''/* נכון/לא-נכון radios ARE the printed tick boxes Yaniv's rules demand —
+       a pencil answers them. A text field, a textarea or a button is a task
+       only a computer can answer, and that is what page 18 got wrong. */''',
+              '''/* True/false radios render printable tick boxes. Text fields, textareas and
+       buttons are LMS controls and therefore must not exist in canonical page HTML. */''',
+              1,
+          )
+          if 'USER_MEMORY' in text:
+              raise SystemExit('guard failed: USER_MEMORY still referenced in workbook.test.ts')
+          workbook.write_text(text, encoding='utf-8')
+
+          layout = Path('tests/layout-rules.test.ts')
+          text = layout.read_text(encoding='utf-8')
+          intro = '''/* Yaniv's standing layout rules, as executable checks. Each one here is a bug
+   that already reached a printed sheet once — the test is what stops it from
+   coming back the next time a page is edited. */'''
+          replacement = '''/* Canonical layout invariants as executable regression checks. RULES.md is
+   the only normative source; these tests prevent previously observed defects
+   from returning when a page is edited. */'''
+          if intro not in text:
+              raise SystemExit('guard failed: layout intro drifted')
+          text = text.replace(intro, replacement, 1)
+          text = re.sub(r'USER_MEMORY §\d+', 'regression invariant', text)
+          text = text.replace("Yaniv's rule (regression invariant)", 'Canonical regression invariant')
+          if 'USER_MEMORY' in text:
+              raise SystemExit('guard failed: USER_MEMORY still referenced in layout-rules.test.ts')
+          layout.write_text(text, encoding='utf-8')
+
+          for path in [
+              Path('scripts/upgrade-lms-phase2.mjs'),
+              Path('scripts/phase3-extreme-generate.mjs'),
+              Path('MIGRATION_STATUS.md'),
+              Path('USER_MEMORY.md'),
+          ]:
+              path.unlink()
+          PY
+
+          git diff --check
+          git status --short
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Remove retired generators and duplicate authority files'
+          git push origin HEAD:agent/canonical-lms-unified
