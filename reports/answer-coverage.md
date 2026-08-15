@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-15T18:20:20.856Z
+Generated: 2026-08-15T18:21:10.762Z
 
-Overall: 1069/1162 safely checkable targets (92%).
+Overall: 1071/1162 safely checkable targets (92.2%).
 
 ## Classification totals
 
@@ -10,10 +10,10 @@ Overall: 1069/1162 safely checkable targets (92%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 270 |
-| deterministic-mathematical | 613 |
+| deterministic-mathematical | 615 |
 | valid-range | 6 |
 | open-ended | 72 |
-| ambiguous | 21 |
+| ambiguous | 19 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1024,13 +1024,13 @@ No detected interactive response targets.
 
 ### Page 45 — הנקודה החשודה
 
-12/15 safely checkable (80%).
+14/15 safely checkable (93.3%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p45-q1 | text:property | canonical-metadata-derived | yes | explicit canonical authoring label | הרמזים מדברים על שיעור ה־x ועל שיעור ה־y של הנקודה. מתחו קו על כל נקודה שאינה מתאימה לרמז, והקיפו את הנקודה שנשארה. היא מתאימה לכל הרמזים יחד, ולכן היא הנקודה ה[…]. |
-| p45-q2 | text:letter | ambiguous | no | none | לרמז הראשון מתאימות שתי נקודות בלבד: הנקודה […] והנקודה […]. |
-| p45-q3 | text:letter | ambiguous | no | none | לרמז הראשון מתאימות שתי נקודות בלבד: הנקודה […] והנקודה […]. |
+| p45-q2 | text:letter | deterministic-mathematical | yes | runtime mathematical predicate | לרמז הראשון מתאימות שתי נקודות בלבד: הנקודה […] והנקודה […]. |
+| p45-q3 | text:letter | deterministic-mathematical | yes | runtime mathematical predicate | לרמז הראשון מתאימות שתי נקודות בלבד: הנקודה […] והנקודה […]. |
 | p45-q4 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | מבין השתיים, הרמז השני פוסל את זו שבה שיעור ה־y […] מ־2. |
 | p45-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה שנשארה, וכתבו את שיעוריה: ([…],[…]). |
 | p45-q6 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקיפו את הנקודה שנשארה, וכתבו את שיעוריה: ([…],[…]). |

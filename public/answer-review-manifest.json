@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-15T18:20:20.856Z",
+  "generatedAt": "2026-08-15T18:21:10.762Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -9622,10 +9622,12 @@
           "targetId": "p45-q2",
           "signature": "50541cad",
           "inputType": "text:letter",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSuspectPredicate.ts:suspect-x-five-label-pair",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:suspect-x-five-label-pair"
+          ],
           "context": "לרמז הראשון מתאימות שתי נקודות בלבד: הנקודה […] והנקודה […]."
         },
         {
@@ -9633,10 +9635,12 @@
           "targetId": "p45-q3",
           "signature": "50541cad",
           "inputType": "text:letter",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSuspectPredicate.ts:suspect-x-five-label-pair",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:suspect-x-five-label-pair"
+          ],
           "context": "לרמז הראשון מתאימות שתי נקודות בלבד: הנקודה […] והנקודה […]."
         },
         {

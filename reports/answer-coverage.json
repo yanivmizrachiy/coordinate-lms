@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-15T18:20:20.856Z",
+  "generatedAt": "2026-08-15T18:21:10.762Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1069,
-  "coveragePercentage": 92,
+  "automaticallyCheckableTargets": 1071,
+  "coveragePercentage": 92.2,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 270,
-    "deterministic-mathematical": 613,
+    "deterministic-mathematical": 615,
     "valid-range": 6,
     "open-ended": 72,
-    "ambiguous": 21,
+    "ambiguous": 19,
     "unsupported": 0,
     "missing": 0
   },
@@ -11366,11 +11366,13 @@
           "inputType": "text:letter",
           "context": "לרמז הראשון מתאימות שתי נקודות בלבד: הנקודה […] והנקודה […].",
           "signature": "50541cad",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalSuspectPredicate.ts:suspect-x-five-label-pair",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:suspect-x-five-label-pair"
+          ]
         },
         {
           "targetId": "p45-q3",
@@ -11378,11 +11380,13 @@
           "inputType": "text:letter",
           "context": "לרמז הראשון מתאימות שתי נקודות בלבד: הנקודה […] והנקודה […].",
           "signature": "50541cad",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalSuspectPredicate.ts:suspect-x-five-label-pair",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:suspect-x-five-label-pair"
+          ]
         },
         {
           "targetId": "p45-q4",
@@ -11556,12 +11560,10 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p45-q2",
-        "p45-q3",
         "p45-q15"
       ],
-      "automaticallyCheckableTargets": 12,
-      "coveragePercentage": 80
+      "automaticallyCheckableTargets": 14,
+      "coveragePercentage": 93.3
     },
     {
       "pageNumber": 46,
