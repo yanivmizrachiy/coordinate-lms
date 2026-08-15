@@ -92,6 +92,7 @@ try {
   const coverage = await server.ssrLoadModule('/src/lms/answerCoverage.ts');
   const predicates = await server.ssrLoadModule('/src/lms/digitalPredicates.ts');
   const coordinateSafe = await server.ssrLoadModule('/src/lms/digitalCoordinateSafePredicate.ts');
+  const suspect = await server.ssrLoadModule('/src/lms/digitalSuspectPredicate.ts');
   const segments = await server.ssrLoadModule('/src/lms/digitalSegmentPredicates.ts');
   const rectangles = await server.ssrLoadModule('/src/lms/digitalRectanglePredicates.ts');
   const life = await server.ssrLoadModule('/src/lms/digitalLifePredicates.ts');
@@ -107,6 +108,17 @@ try {
         return {
           rule: coordinateSafeRule,
           source: 'src/lms/digitalCoordinateSafePredicate.ts',
+        };
+      }
+
+      const suspectRule = suspect.suspectPredicateRuleForCoverage(
+        pageNumber,
+        targetId,
+      );
+      if (suspectRule) {
+        return {
+          rule: suspectRule,
+          source: 'src/lms/digitalSuspectPredicate.ts',
         };
       }
 
