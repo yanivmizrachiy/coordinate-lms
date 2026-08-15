@@ -32,7 +32,7 @@ describe('page 42 dependent coordinate predicate', () => {
   it('accepts every legal G on x-axis and derives the moved point and distance', () => {
     expect(axisPointMovedUpFourMatches(['3', '0', '3', '4', '4'])).toBe(true);
     expect(axisPointMovedUpFourMatches(['0', '0', '0', '4', '4'])).toBe(true);
-    expect(axisPointMovedUpFourMatches(['8', '0', '8', '4', '4'])).toBe(true);
+    expect(axisPointMovedUpFourMatches(['8', '0', '8', '4', '4.0'])).toBe(true);
     expect(
       answersMatch('5|0|5|4|4', [`predicate:${AXIS_POINT_MOVED_UP_FOUR}`]),
     ).toBe(true);
