@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-15T18:28:55.021Z",
+  "generatedAt": "2026-08-15T18:29:57.340Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1074,
-  "coveragePercentage": 92.4,
+  "automaticallyCheckableTargets": 1078,
+  "coveragePercentage": 92.8,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 271,
+    "canonical-metadata-derived": 275,
     "deterministic-mathematical": 617,
     "valid-range": 6,
     "open-ended": 70,
-    "ambiguous": 18,
+    "ambiguous": 14,
     "unsupported": 0,
     "missing": 0
   },
@@ -18718,11 +18718,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "18"
+          ]
         },
         {
           "targetId": "p78-q11",
@@ -18730,11 +18732,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "20"
+          ]
         },
         {
           "targetId": "p78-q12",
@@ -18784,11 +18788,13 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "14"
+          ]
         },
         {
           "targetId": "p78-q16",
@@ -18796,21 +18802,18 @@
           "inputType": "text:number",
           "context": "היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח\"ר.",
           "signature": "3bd58709",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "12"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p78-q10",
-        "p78-q11",
-        "p78-q15",
-        "p78-q16"
-      ],
-      "automaticallyCheckableTargets": 12,
-      "coveragePercentage": 75
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 16,
+      "coveragePercentage": 100
     }
   ]
 }

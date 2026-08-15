@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-15T18:28:55.021Z
+Generated: 2026-08-15T18:29:57.340Z
 
-Overall: 1074/1162 safely checkable targets (92.4%).
+Overall: 1078/1162 safely checkable targets (92.8%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 271 |
+| canonical-metadata-derived | 275 |
 | deterministic-mathematical | 617 |
 | valid-range | 6 |
 | open-ended | 70 |
-| ambiguous | 18 |
+| ambiguous | 14 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1702,7 +1702,7 @@ No detected interactive response targets.
 
 ### Page 78 — זווית ישרה במערכת הצירים
 
-12/16 safely checkable (75%).
+16/16 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1715,11 +1715,11 @@ No detected interactive response targets.
 | p78-q7 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=[…]=[…]יח' |
 | p78-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=[…]=[…]יח' |
 | p78-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=[…]יח' |
-| p78-q10 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p78-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p78-q10 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p78-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p78-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | S([…],[…]) |
 | p78-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | S([…],[…]) |
 | p78-q14 | text:text | reviewed-explicit | yes | target-bound reviewed proof | בקודקוד Q הזווית היא […]. |
-| p78-q15 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p78-q16 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p78-q15 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p78-q16 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 
