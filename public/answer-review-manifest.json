@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-15T18:38:06.753Z",
+  "generatedAt": "2026-08-15T19:16:43.277Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -4463,7 +4463,7 @@
           "signature": "1b541791",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות."
@@ -4474,7 +4474,7 @@
           "signature": "1b541791",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות."
@@ -4485,7 +4485,7 @@
           "signature": "dddcf268",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות."
@@ -5762,8 +5762,8 @@
           "targetId": "p28-q5",
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -6654,8 +6654,8 @@
           "targetId": "p33-q17",
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -6852,8 +6852,8 @@
           "targetId": "p34-q14",
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -7508,7 +7508,7 @@
           "signature": "26cc5405",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]."
@@ -7519,7 +7519,7 @@
           "signature": "8b64bfe5",
           "inputType": "text:direction",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]."
@@ -7585,7 +7585,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7596,7 +7596,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7607,7 +7607,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7618,7 +7618,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7629,7 +7629,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7640,7 +7640,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7651,7 +7651,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7662,7 +7662,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7673,7 +7673,7 @@
           "signature": "f221a6b1",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "במסלול שסימנתם יש […] צעדים."
@@ -7765,7 +7765,7 @@
           "signature": "159fcfc6",
           "inputType": "text:direction",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…])."
@@ -7776,7 +7776,7 @@
           "signature": "ee459183",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…])."
@@ -7787,7 +7787,7 @@
           "signature": "ee459183",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…])."
@@ -8231,8 +8231,8 @@
           "targetId": "p39-q28",
           "signature": "09881042",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "classification": "ambiguous",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x "
@@ -9796,7 +9796,7 @@
           "signature": "2d4053e5",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "רמז נוסף שמתאים לנקודה G שסימנתם: ערך ה־x שלה שווה […]."
@@ -10015,8 +10015,8 @@
           "targetId": "p46-q16",
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -11151,8 +11151,8 @@
           "targetId": "p52-q14",
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "classification": "ambiguous",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."

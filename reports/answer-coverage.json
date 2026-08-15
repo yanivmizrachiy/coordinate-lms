@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-15T18:38:06.753Z",
+  "generatedAt": "2026-08-15T19:16:43.277Z",
   "pageCount": 78,
   "targetCount": 1162,
   "automaticallyCheckableTargets": 1083,
@@ -10,8 +10,8 @@
     "canonical-metadata-derived": 277,
     "deterministic-mathematical": 620,
     "valid-range": 6,
-    "open-ended": 70,
-    "ambiguous": 9,
+    "open-ended": 64,
+    "ambiguous": 15,
     "unsupported": 0,
     "missing": 0
   },
@@ -2371,7 +2371,7 @@
           "context": "שיעורי הנקודה שסימנתם: E([…],[…]).",
           "signature": "e4f4cc55",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -2383,7 +2383,7 @@
           "context": "שיעורי הנקודה שסימנתם: E([…],[…]).",
           "signature": "e4f4cc55",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -2395,7 +2395,7 @@
           "context": "המרחק של הנקודה שסימנתם מציר y הוא […] יחידות.",
           "signature": "f952afbf",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -3810,7 +3810,7 @@
           "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
           "signature": "13c747ef",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -3822,7 +3822,7 @@
           "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
           "signature": "13c747ef",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -3834,7 +3834,7 @@
           "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
           "signature": "13c747ef",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -3846,7 +3846,7 @@
           "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
           "signature": "13c747ef",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -3872,7 +3872,7 @@
           "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
           "signature": "049b2a05",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -3884,7 +3884,7 @@
           "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
           "signature": "049b2a05",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -3896,7 +3896,7 @@
           "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
           "signature": "049b2a05",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -3908,7 +3908,7 @@
           "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
           "signature": "049b2a05",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -3920,7 +3920,7 @@
           "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
           "signature": "9edf80ab",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -5247,8 +5247,8 @@
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות.",
           "signature": "1b541791",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -5259,8 +5259,8 @@
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות.",
           "signature": "1b541791",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -5271,8 +5271,8 @@
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות.",
           "signature": "dddcf268",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -6512,7 +6512,7 @@
           "context": "[…] […]",
           "signature": "e6d5c219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -6524,7 +6524,7 @@
           "context": "[…] […]",
           "signature": "e6d5c219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -6790,9 +6790,9 @@
           "inputType": "text:relation",
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "currentAnswerSource": "four-option pedagogical digital adaptation required",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -7843,9 +7843,9 @@
           "inputType": "text:relation",
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "currentAnswerSource": "four-option pedagogical digital adaptation required",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -8077,9 +8077,9 @@
           "inputType": "text:relation",
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "currentAnswerSource": "four-option pedagogical digital adaptation required",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -8853,8 +8853,8 @@
           "context": "כתבו פקודת תנועה משלכם: הזזה של […] יחידות […].",
           "signature": "26cc5405",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8865,8 +8865,8 @@
           "context": "כתבו פקודת תנועה משלכם: הזזה של […] יחידות […].",
           "signature": "8b64bfe5",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8974,8 +8974,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8986,8 +8986,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8998,8 +8998,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9010,8 +9010,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9022,8 +9022,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9034,8 +9034,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9046,8 +9046,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9058,8 +9058,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9070,8 +9070,8 @@
           "context": "במסלול שסימנתם יש […] צעדים.",
           "signature": "f221a6b1",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9169,8 +9169,8 @@
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]).",
           "signature": "159fcfc6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9181,8 +9181,8 @@
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]).",
           "signature": "ee459183",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9193,8 +9193,8 @@
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]).",
           "signature": "ee459183",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9717,9 +9717,9 @@
           "inputType": "text:relation",
           "context": "ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x ",
           "signature": "09881042",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "classification": "ambiguous",
+          "currentAnswerSource": "four-option pedagogical digital adaptation required",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -11103,7 +11103,7 @@
           "context": "מה הייתה הטעות? […]",
           "signature": "b30606ed",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -11146,7 +11146,7 @@
           "context": "תנו דוגמה לנקודה על ציר x: […]",
           "signature": "f659763a",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -11553,8 +11553,8 @@
           "context": "רמז נוסף שמתאים לנקודה G שסימנתם: ערך ה־x שלה שווה […].",
           "signature": "2d4053e5",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "objective digital adaptation required",
+          "sourceEvidence": "learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -11812,9 +11812,9 @@
           "inputType": "text:relation",
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "classification": "ambiguous",
+          "currentAnswerSource": "four-option pedagogical digital adaptation required",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -13150,9 +13150,9 @@
           "inputType": "text:relation",
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "classification": "ambiguous",
+          "currentAnswerSource": "four-option pedagogical digital adaptation required",
+          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -14228,7 +14228,7 @@
           "context": "קודקודי הריבוע: […]",
           "signature": "4712f361",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -14240,7 +14240,7 @@
           "context": "קודקודי המלבן: […]",
           "signature": "08b4e4c4",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -15680,7 +15680,7 @@
           "context": "הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]).",
           "signature": "c9b992da",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -15692,7 +15692,7 @@
           "context": "הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]).",
           "signature": "c9b992da",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -15704,7 +15704,7 @@
           "context": "המרחק שלו מציר y הוא […] יח', וזה בדיוק ערך ה־x שלו.",
           "signature": "06808fd5",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -17331,7 +17331,7 @@
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]).",
           "signature": "06c216c8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -17343,7 +17343,7 @@
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]).",
           "signature": "06c216c8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -17355,7 +17355,7 @@
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]).",
           "signature": "06c216c8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -17367,7 +17367,7 @@
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]).",
           "signature": "06c216c8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -17379,7 +17379,7 @@
           "context": "ביום […] הקדשתם את מספר הדקות הגדול ביותר.",
           "signature": "8ea4981a",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -17418,7 +17418,7 @@
           "context": "הנקודה הגבוהה ביותר בגרף שלכם רחוקה מציר x […] יחידות.",
           "signature": "986c6f79",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -17600,7 +17600,7 @@
           "context": "לקטע BC קצה אחד בנקודה B(2,5) והקצה האחר בנקודה […], ולכן הוא מקביל לציר x.",
           "signature": "dca0bce4",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18032,7 +18032,7 @@
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]).",
           "signature": "195c6054",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18044,7 +18044,7 @@
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]).",
           "signature": "195c6054",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18056,7 +18056,7 @@
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]).",
           "signature": "195c6054",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18068,7 +18068,7 @@
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]).",
           "signature": "195c6054",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18119,7 +18119,7 @@
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]).",
           "signature": "d690ded0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18131,7 +18131,7 @@
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]).",
           "signature": "d690ded0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18143,7 +18143,7 @@
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]).",
           "signature": "d690ded0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18155,7 +18155,7 @@
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]).",
           "signature": "d690ded0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18272,7 +18272,7 @@
           "context": "סמנו נקודה C כך שהזווית ABC תהיה ישרה. הנקודה שסימנתם: C([…],[…]).",
           "signature": "86a530e9",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18284,7 +18284,7 @@
           "context": "סמנו נקודה C כך שהזווית ABC תהיה ישרה. הנקודה שסימנתם: C([…],[…]).",
           "signature": "86a530e9",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18296,7 +18296,7 @@
           "context": "סמנו נקודה D נוספת ושונה, שגם בה הזווית ABD ישרה: D([…],[…]).",
           "signature": "6e9d9dae",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18308,7 +18308,7 @@
           "context": "סמנו נקודה D נוספת ושונה, שגם בה הזווית ABD ישרה: D([…],[…]).",
           "signature": "6e9d9dae",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18349,7 +18349,7 @@
           "context": "הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB.",
           "signature": "ac7b4206",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18361,7 +18361,7 @@
           "context": "הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB.",
           "signature": "1cf23f6a",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18498,7 +18498,7 @@
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]).",
           "signature": "be5c8b3e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18510,7 +18510,7 @@
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]).",
           "signature": "be5c8b3e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18522,7 +18522,7 @@
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]).",
           "signature": "be5c8b3e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []
@@ -18534,7 +18534,7 @@
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]).",
           "signature": "be5c8b3e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
+          "currentAnswerSource": "objective digital adaptation required",
           "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": []

@@ -1,6 +1,6 @@
 # Answer-key coverage report
 
-Generated: 2026-08-15T18:38:06.753Z
+Generated: 2026-08-15T19:16:43.277Z
 
 Overall: 1083/1162 safely checkable targets (93.2%).
 
@@ -12,8 +12,8 @@ Overall: 1083/1162 safely checkable targets (93.2%).
 | canonical-metadata-derived | 277 |
 | deterministic-mathematical | 620 |
 | valid-range | 6 |
-| open-ended | 70 |
-| ambiguous | 9 |
+| open-ended | 64 |
+| ambiguous | 15 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -208,9 +208,9 @@ Overall: 1083/1162 safely checkable targets (93.2%).
 | p7-q9 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | נקודה […] רחוקה מציר x 5 יחידות. |
 | p7-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הזוג הסדור של נקודה D הוא ([…],[…]). |
 | p7-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הזוג הסדור של נקודה D הוא ([…],[…]). |
-| p7-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שיעורי הנקודה שסימנתם: E([…],[…]). |
-| p7-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שיעורי הנקודה שסימנתם: E([…],[…]). |
-| p7-q14 | text:number | open-ended | no | teacher judgment required | המרחק של הנקודה שסימנתם מציר y הוא […] יחידות. |
+| p7-q12 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | שיעורי הנקודה שסימנתם: E([…],[…]). |
+| p7-q13 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | שיעורי הנקודה שסימנתם: E([…],[…]). |
+| p7-q14 | text:number | open-ended | no | objective digital adaptation required | המרחק של הנקודה שסימנתם מציר y הוא […] יחידות. |
 
 ### Page 8 — נקודות ברביע הראשון
 
@@ -332,16 +332,16 @@ Overall: 1083/1162 safely checkable targets (93.2%).
 | p12-q4 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y שלה הוא 6 ← […] |
 | p12-q5 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הרחוקה ביותר ימינה: […] |
 | p12-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הגבוהה ביותר: […] |
-| p12-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
-| p12-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
-| p12-q9 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
-| p12-q10 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
+| p12-q7 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
+| p12-q8 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
+| p12-q9 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
+| p12-q10 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
 | p12-q11 | text:letter | reviewed-explicit | yes | target-bound reviewed proof | צודק/צודקת: […]. |
-| p12-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
-| p12-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
-| p12-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
-| p12-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
-| p12-q16 | text:relation | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
+| p12-q12 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
+| p12-q13 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
+| p12-q14 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
+| p12-q15 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
+| p12-q16 | text:relation | open-ended | no | objective digital adaptation required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
 
 ### Page 13 — נקודות ברביע הראשון
 
@@ -476,9 +476,9 @@ No detected interactive response targets.
 | p20-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה הגבוהה ביותר בציור היא ([…],[…]). |
 | p20-q5 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה הגבוהה ביותר בציור היא ([…],[…]). |
 | p20-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | קצה המפרש (7,3) רחוק מציר y […] יחידות. |
-| p20-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
-| p20-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
-| p20-q9 | text:number | open-ended | no | teacher judgment required | סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
+| p20-q7 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
+| p20-q8 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
+| p20-q9 | text:number | open-ended | no | objective digital adaptation required | סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
 
 ### Page 21 — מילת הצופן
 
@@ -595,8 +595,8 @@ No detected interactive response targets.
 | p26-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה שממוקמת משמאל לנקודה C ובאותו גובה היא […] |
 | p26-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מתחת לנקודה C ובאותו קו אנכי ממוקמת הנקודה […] |
 | p26-q8 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הנקודות שבהן שיעור ה־x ושיעור ה־y זהים הן […]. |
-| p26-q9 | text:text | open-ended | no | teacher judgment required | […] […] |
-| p26-q10 | text:text | open-ended | no | teacher judgment required | […] […] |
+| p26-q9 | text:text | open-ended | no | objective digital adaptation required | […] […] |
+| p26-q10 | text:text | open-ended | no | objective digital adaptation required | […] […] |
 | p26-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | גם בנקודה (0,0) ערך ה־x ושיעור ה־y שווים, ושניהם […]. |
 | p26-q12 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעוריה: […] |
 
@@ -626,7 +626,7 @@ No detected interactive response targets.
 | p28-q2 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | B([…],6) - y גדול פי 2 מ־x |
 | p28-q3 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | C(7,[…]) - x גדול ב־4 מ־y |
 | p28-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | D(8,[…]) - y הוא מחצית x |
-| p28-q5 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p28-q5 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: […]. |
 
 ### Page 29 — יחסים בין שיעורים
 
@@ -725,7 +725,7 @@ No detected interactive response targets.
 | p33-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q15 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | אורי חישב את המרחק בין (2,5) ובין (7,5) וקיבל 9 — הוא […] את שני ערכי ה־x במקום לחסר אותם. תרגיל החיסור הנכון: |
 | p33-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 7 − 2=[…]יח' |
-| p33-q17 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p33-q17 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: […]. |
 
 ### Page 34 — מרחק נקודה מהצירים
 
@@ -746,7 +746,7 @@ No detected interactive response targets.
 | p34-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את שיעורי נקודה R: R([…],[…]) |
 | p34-q12 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | לאיזה ציר המסלול קצר יותר? […] בכמה יחידות? […] |
 | p34-q13 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | לאיזה ציר המסלול קצר יותר? […] בכמה יחידות? […] |
-| p34-q14 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p34-q14 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: […]. |
 
 ### Page 35 — מזיזים צורה שלמה
 
@@ -815,8 +815,8 @@ No detected interactive response targets.
 | p37-q16 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | התחנה של מסלול 3 רחוקה מציר x […] יחידות. |
 | p37-q17 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות. |
 | p37-q18 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות. |
-| p37-q19 | text:number | open-ended | no | teacher judgment required | כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]. |
-| p37-q20 | text:direction | open-ended | no | teacher judgment required | כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]. |
+| p37-q19 | text:number | open-ended | no | objective digital adaptation required | כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]. |
+| p37-q20 | text:direction | open-ended | no | objective digital adaptation required | כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]. |
 | p37-q21 | ordered-pair-coordinate | ambiguous | no | none | התחנה שאליה הגעתם אחרי הפקודה היא ([…],[…]). |
 | p37-q22 | ordered-pair-coordinate | ambiguous | no | none | התחנה שאליה הגעתם אחרי הפקודה היא ([…],[…]). |
 
@@ -828,24 +828,24 @@ No detected interactive response targets.
 |---|---|---|:---:|---|---|
 | p38-q1 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | במבוך זזים צעד אחד בכל פעם, וכל צעד משנה שיעור אחד בלבד: צעד ימינה או שמאלה משנה את שיעור ה־x, וצעד למעלה או […] משנה את שיעור ה־[…]. הנקודות שמסומן עליהן הסימן ■ הן קירות, ואסור לעמוד עליהן. |
 | p38-q2 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | במבוך זזים צעד אחד בכל פעם, וכל צעד משנה שיעור אחד בלבד: צעד ימינה או שמאלה משנה את שיעור ה־x, וצעד למעלה או […] משנה את שיעור ה־[…]. הנקודות שמסומן עליהן הסימן ■ הן קירות, ואסור לעמוד עליהן. |
-| p38-q3 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
-| p38-q4 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
-| p38-q5 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
-| p38-q6 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
-| p38-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
-| p38-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
-| p38-q9 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
-| p38-q10 | ordered-pair-coordinate | open-ended | no | teacher judgment required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
-| p38-q11 | text:number | open-ended | no | teacher judgment required | במסלול שסימנתם יש […] צעדים. |
+| p38-q3 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
+| p38-q4 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
+| p38-q5 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
+| p38-q6 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
+| p38-q7 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
+| p38-q8 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
+| p38-q9 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
+| p38-q10 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]). |
+| p38-q11 | text:number | open-ended | no | objective digital adaptation required | במסלול שסימנתם יש […] צעדים. |
 | p38-q12 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
 | p38-q13 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
 | p38-q14 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
 | p38-q15 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | המסלול מתחיל בנקודה ([…],[…]), ונגמר בנקודה ([…],[…]). |
 | p38-q16 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | בכל צעד ימינה או שמאלה שיעור ה־x משתנה, ושיעור ה־y […]. |
 | p38-q17 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | בכל צעד למעלה או […] שיעור ה־y משתנה, ושיעור ה־x נשאר זהה. |
-| p38-q18 | text:direction | open-ended | no | teacher judgment required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
-| p38-q19 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
-| p38-q20 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
+| p38-q18 | text:direction | open-ended | no | objective digital adaptation required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
+| p38-q19 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
+| p38-q20 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]). |
 | p38-q21 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | את עמודת הקירות שבה שיעור ה־x הוא 2 אפשר לעבור רק בשיעור y שגדול מ־[…]. |
 | p38-q22 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | את עמודת הקירות שבה שיעור ה־x הוא […] אפשר לעבור רק בשיעור y שקטן מ־3. |
 | p38-q23 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | 6 − 0=[…]יחידות |
@@ -885,7 +885,7 @@ No detected interactive response targets.
 | p39-q25 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q26 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q27 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]. |
-| p39-q28 | text:relation | open-ended | no | teacher judgment required | ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x  |
+| p39-q28 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x  |
 
 ### Page 40 — שיעור חסר ודפוסים
 
@@ -1006,10 +1006,10 @@ No detected interactive response targets.
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p44-q1 | text:text | open-ended | no | teacher judgment required | מה הייתה הטעות? […] |
+| p44-q1 | text:text | open-ended | no | objective digital adaptation required | מה הייתה הטעות? […] |
 | p44-q2 | text:property | reviewed-explicit | yes | target-bound reviewed proof | ההוראה: קודם קוראים את המספר מצד […], והוא ערך ה־x. |
 | p44-q3 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | המשפט הנכון: כל נקודה שעל ציר x מקיימת y שווה […]. |
-| p44-q4 | text:text | open-ended | no | teacher judgment required | תנו דוגמה לנקודה על ציר x: […] |
+| p44-q4 | text:text | open-ended | no | objective digital adaptation required | תנו דוגמה לנקודה על ציר x: […] |
 | p44-q5 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מה צריך להישאר זהה? […] |
 | p44-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | התשובה הנכונה: […] |
 | p44-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם המשפט נכון? […] |
@@ -1042,7 +1042,7 @@ No detected interactive response targets.
 | p45-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה G שרחוקה מציר x 6 יחידות, וכתבו את שיעוריה: G([…],[…]). |
 | p45-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה G שרחוקה מציר x 6 יחידות, וכתבו את שיעוריה: G([…],[…]). |
 | p45-q14 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | רמז שמתאים לנקודה G בלבד, ואינו מתאים לאף אחת משש הנקודות המודפסות: שיעור ה־y שלה […] מ־5. |
-| p45-q15 | text:number | open-ended | no | teacher judgment required | רמז נוסף שמתאים לנקודה G שסימנתם: ערך ה־x שלה שווה […]. |
+| p45-q15 | text:number | open-ended | no | objective digital adaptation required | רמז נוסף שמתאים לנקודה G שסימנתם: ערך ה־x שלה שווה […]. |
 
 ### Page 46 — קטעים מקבילים לצירים
 
@@ -1065,7 +1065,7 @@ No detected interactive response targets.
 | p46-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
 | p46-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
 | p46-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
-| p46-q16 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p46-q16 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: […]. |
 
 ### Page 47 — קטעים מקבילים לצירים
 
@@ -1189,7 +1189,7 @@ No detected interactive response targets.
 | p52-q11 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקודקוד החסר: ([…],[…]) |
 | p52-q12 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p52-q13 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p52-q14 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p52-q14 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: […]. |
 
 ### Page 53 — המלבן ברביע הראשון
 
@@ -1285,8 +1285,8 @@ No detected interactive response targets.
 | p56-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | אם מזיזים את המלבן יחידה אחת ימינה, הקודקוד A מגיע אל ([…],[…]), וההיקף והשטח […]. |
 | p56-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | אם מזיזים את המלבן יחידה אחת ימינה, הקודקוד A מגיע אל ([…],[…]), וההיקף והשטח […]. |
 | p56-q9 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | אם מזיזים את המלבן יחידה אחת ימינה, הקודקוד A מגיע אל ([…],[…]), וההיקף והשטח […]. |
-| p56-q10 | text:text | open-ended | no | teacher judgment required | קודקודי הריבוע: […] |
-| p56-q11 | text:text | open-ended | no | teacher judgment required | קודקודי המלבן: […] |
+| p56-q10 | text:text | open-ended | no | objective digital adaptation required | קודקודי הריבוע: […] |
+| p56-q11 | text:text | open-ended | no | objective digital adaptation required | קודקודי המלבן: […] |
 
 ### Page 57 — המלבן ברביע הראשון
 
@@ -1411,9 +1411,9 @@ No detected interactive response targets.
 | p61-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | BC=5 − 1=[…]יח' |
 | p61-q9 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p61-q10 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p61-q11 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]). |
-| p61-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]). |
-| p61-q13 | text:number | open-ended | no | teacher judgment required | המרחק שלו מציר y הוא […] יח', וזה בדיוק ערך ה־x שלו. |
+| p61-q11 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]). |
+| p61-q12 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]). |
+| p61-q13 | text:number | open-ended | no | objective digital adaptation required | המרחק שלו מציר y הוא […] יח', וזה בדיוק ערך ה־x שלו. |
 
 ### Page 62 — מסלול השליח — כמה באמת נסע?
 
@@ -1574,14 +1574,14 @@ No detected interactive response targets.
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p70-q1 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
-| p70-q2 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
-| p70-q3 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
-| p70-q4 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
-| p70-q5 | text:number | open-ended | no | teacher judgment required | ביום […] הקדשתם את מספר הדקות הגדול ביותר. |
+| p70-q1 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
+| p70-q2 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
+| p70-q3 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
+| p70-q4 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
+| p70-q5 | text:number | open-ended | no | objective digital adaptation required | ביום […] הקדשתם את מספר הדקות הגדול ביותר. |
 | p70-q6 | text:number | ambiguous | no | none | ההפרש בין מספר הדקות הגדול ביותר ובין מספר הדקות הקטן ביותר הוא […] עשרות דקות. |
 | p70-q7 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | אם יש שני ימים שבהם הקדשתם אותו זמן, לשתי הנקודות שמתאימות להם יש שיעור […] זהה. |
-| p70-q8 | text:number | open-ended | no | teacher judgment required | הנקודה הגבוהה ביותר בגרף שלכם רחוקה מציר x […] יחידות. |
+| p70-q8 | text:number | open-ended | no | objective digital adaptation required | הנקודה הגבוהה ביותר בגרף שלכם רחוקה מציר x […] יחידות. |
 
 ### Page 71 — זווית ישרה במערכת הצירים
 
@@ -1598,7 +1598,7 @@ No detected interactive response targets.
 | p71-q7 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הקטע הראשון מקביל לציר […]; הקטע השני מקביל לציר […]. |
 | p71-q8 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הקטע הראשון מקביל לציר […]; הקטע השני מקביל לציר […]. |
 | p71-q9 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | לקטע AB קצה אחד בנקודה A(2,1) והקצה האחר בנקודה B(2,5), ולכן הוא מקביל לציר […]. |
-| p71-q10 | text:letter | open-ended | no | teacher judgment required | לקטע BC קצה אחד בנקודה B(2,5) והקצה האחר בנקודה […], ולכן הוא מקביל לציר x. |
+| p71-q10 | text:letter | open-ended | no | objective digital adaptation required | לקטע BC קצה אחד בנקודה B(2,5) והקצה האחר בנקודה […], ולכן הוא מקביל לציר x. |
 | p71-q11 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | הנקודה B ממוקמת על שני הקטעים, ולכן היא […] הזווית שנוצרת ביניהם. |
 | p71-q12 | text:property | reviewed-explicit | yes | target-bound reviewed proof | הזווית שקודקודה הוא הנקודה B היא זווית […]. |
 
@@ -1644,10 +1644,10 @@ No detected interactive response targets.
 | p74-q4 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | גודל הזווית שנוצרת בין שתי הקרניים הוא […] מעלות. |
 | p74-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בכל נקודה שעל הקרן OP שיעור ה־y הוא […]. |
 | p74-q6 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הקרן הזאת ממוקמת על ציר […], ולכן הקרן השנייה חייבת לשכב על הציר האחר. |
-| p74-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]). |
-| p74-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]). |
-| p74-q9 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]). |
-| p74-q10 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]). |
+| p74-q7 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]). |
+| p74-q8 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]). |
+| p74-q9 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]). |
+| p74-q10 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]). |
 | p74-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בשתיהן ערך ה־x הוא […], וזה מה שמעמיד אותן על אותה קרן. |
 
 ### Page 75 — זוויות ברביע הראשון
@@ -1656,10 +1656,10 @@ No detected interactive response targets.
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
-| p75-q1 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]). |
-| p75-q2 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]). |
-| p75-q3 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]). |
-| p75-q4 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]). |
+| p75-q1 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]). |
+| p75-q2 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]). |
+| p75-q3 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]). |
+| p75-q4 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]). |
 | p75-q5 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בשתיהן שיעור ה־y הוא […], כי שתיהן ממוקמות על ציר x. |
 | p75-q6 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הזווית הישרה נוצרת ליד הקודקוד […], כי שם נפגשים ציר x וציר y. |
 | p75-q7 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | אורך הצלע OP הוא […] יח', ואורך הצלע OQ הוא 4 יח'. |
@@ -1672,14 +1672,14 @@ No detected interactive response targets.
 |---|---|---|:---:|---|---|
 | p76-q1 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | זווית ישרה אפשר לבנות בכל מקום ברביע הראשון, ולא רק ב[…] הצירים. |
 | p76-q2 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הקטע AB מקביל לציר […], כי בשתי הנקודות שעליו שיעור ה־x זהה. |
-| p76-q3 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו נקודה C כך שהזווית ABC תהיה ישרה. הנקודה שסימנתם: C([…],[…]). |
-| p76-q4 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו נקודה C כך שהזווית ABC תהיה ישרה. הנקודה שסימנתם: C([…],[…]). |
-| p76-q5 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו נקודה D נוספת ושונה, שגם בה הזווית ABD ישרה: D([…],[…]). |
-| p76-q6 | ordered-pair-coordinate | open-ended | no | teacher judgment required | סמנו נקודה D נוספת ושונה, שגם בה הזווית ABD ישרה: D([…],[…]). |
+| p76-q3 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | סמנו נקודה C כך שהזווית ABC תהיה ישרה. הנקודה שסימנתם: C([…],[…]). |
+| p76-q4 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | סמנו נקודה C כך שהזווית ABC תהיה ישרה. הנקודה שסימנתם: C([…],[…]). |
+| p76-q5 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | סמנו נקודה D נוספת ושונה, שגם בה הזווית ABD ישרה: D([…],[…]). |
+| p76-q6 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | סמנו נקודה D נוספת ושונה, שגם בה הזווית ABD ישרה: D([…],[…]). |
 | p76-q7 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בשתי הנקודות שסימנתם שיעור ה־y הוא […], כמו שיעור ה־y של הנקודה B. |
 | p76-q8 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | קודקוד הזווית שבניתם ממוקם בנקודה […], ולא בראשית הצירים. |
-| p76-q9 | text:letter | open-ended | no | teacher judgment required | הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB. |
-| p76-q10 | text:relation | open-ended | no | teacher judgment required | הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB. |
+| p76-q9 | text:letter | open-ended | no | objective digital adaptation required | הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB. |
+| p76-q10 | text:relation | open-ended | no | objective digital adaptation required | הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB. |
 | p76-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=4 − 0=[…]יח' |
 | p76-q12 | ordered-pair-coordinate | ambiguous | no | none | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
 | p76-q13 | ordered-pair-coordinate | ambiguous | no | none | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
@@ -1694,10 +1694,10 @@ No detected interactive response targets.
 | p77-q1 | text:letter | reviewed-explicit | yes | target-bound reviewed proof | סמנו את שתי הנקודות על הסרטוט ובדקו. צודק/צודקת: […]. |
 | p77-q2 | text:property | deterministic-mathematical | yes | target-bound reviewed proof | הנימוק: הקטע AB מקביל לציר x, ולכן הקטע שיוצר איתו זווית ישרה חייב להיות […]. |
 | p77-q3 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | רחוב האורן מקביל לציר […], ולכן הרחוב החדש יהיה מקביל לציר y. |
-| p77-q4 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]). |
-| p77-q5 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]). |
-| p77-q6 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]). |
-| p77-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]). |
+| p77-q4 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]). |
+| p77-q5 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]). |
+| p77-q6 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]). |
+| p77-q7 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]). |
 | p77-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בשתיהן ערך ה־x הוא […], וזה מה שממקם אותן על אותו רחוב. |
 
 ### Page 78 — זווית ישרה במערכת הצירים
