@@ -3,6 +3,10 @@ import {
   axisPointMovedUpFourMatches,
 } from './digitalCoordinateSafePredicate';
 import {
+  EQUAL_POSITIVE_COORDINATE_POINT,
+  equalPositiveCoordinatePointMatches,
+} from './digitalFreePointPredicates';
+import {
   evaluateDigitalGroupRule,
   type DigitalGroupRule,
 } from './digitalPredicates';
@@ -110,6 +114,9 @@ function predicateMatches(raw: string, candidate: string): boolean {
   const ruleName = candidate.slice('predicate:'.length);
   if (ruleName === AXIS_POINT_MOVED_UP_FOUR) {
     return axisPointMovedUpFourMatches(raw.split('|'));
+  }
+  if (ruleName === EQUAL_POSITIVE_COORDINATE_POINT) {
+    return equalPositiveCoordinatePointMatches(raw.split('|'));
   }
   if (ruleName === SUSPECT_X_FIVE_LABEL_PAIR) {
     return suspectXFiveLabelPairMatches(raw.split('|'));
