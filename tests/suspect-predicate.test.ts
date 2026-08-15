@@ -31,7 +31,7 @@ function canonicalPage45Root(): HTMLElement {
 describe('page 45 suspect clue predicate', () => {
   it('accepts exactly B and C in either order', () => {
     expect(suspectXFiveLabelPairMatches(['B', 'C'])).toBe(true);
-    expect(suspectXFiveLabelPairMatches(['c', 'b'])).toBe(true);
+    expect(suspectXFiveLabelPairMatches([' c ', ' b '])).toBe(true);
     expect(
       answersMatch('C|B', [`predicate:${SUSPECT_X_FIVE_LABEL_PAIR}`]),
     ).toBe(true);
