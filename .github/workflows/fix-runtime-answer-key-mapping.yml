@@ -1,0 +1,129 @@
+name: Fix runtime answer-key mapping
+
+on:
+  push:
+    branches:
+      - agent/canonical-lms-unified
+    paths:
+      - '.github/workflows/fix-runtime-answer-key-mapping.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/canonical-lms-unified
+          fetch-depth: 0
+      - name: Patch current runtime mapping exactly once
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('src/lms/repository.ts')
+          text = path.read_text(encoding='utf-8')
+
+          old_imports = "import { DEFAULT_ANSWER_KEYS } from './answerKey';\nimport { db } from './firebase';\nimport { implicitAnswerKey } from './implicitAnswers';\nimport { provenAnswerKey } from './provenAnswerKey';\n"
+          new_imports = "import { canonicalAnswerKeyForCurrentPage } from './currentAnswerKey';\nimport { db } from './firebase';\nimport { implicitAnswerKey } from './implicitAnswers';\n"
+
+          old_block = """export async function loadAnswerKey(
+            pageNumber: number,
+          ): Promise<AnswerKey> {
+            assertPageNumber(pageNumber);
+            const defaults = DEFAULT_ANSWER_KEYS[pageNumber] || {};
+            const proven = provenAnswerKey(pageNumber);
+            const implicit = implicitAnswerKey(pageNumber);
+            const customKeys = loadMap<AnswerKey>(ANSWER_KEYS_KEY);
+            const local = customKeys[String(pageNumber)] || {};
+
+            let remote: AnswerKey = {};
+
+            if (db && currentSession()) {
+              try {
+                const snapshot = await getDoc(
+                  doc(db, 'answerKeys', 'page-' + String(pageNumber)),
+                );
+
+                if (snapshot.exists()) {
+                  const data = snapshot.data() as {
+                    answers?: AnswerKey;
+                  };
+
+                  remote = data.answers || {};
+                }
+              } catch {
+                remote = {};
+              }
+            }
+
+            return {
+              ...implicit,
+              ...proven,
+              ...defaults,
+              ...local,
+              ...remote,
+            };
+          }
+          """
+
+          new_block = """export async function loadAnswerKey(
+            pageNumber: number,
+          ): Promise<AnswerKey> {
+            assertPageNumber(pageNumber);
+            const canonical = canonicalAnswerKeyForCurrentPage(pageNumber);
+            const implicit = implicitAnswerKey(pageNumber);
+            const customKeys = loadMap<AnswerKey>(ANSWER_KEYS_KEY);
+            const local = customKeys[String(pageNumber)] || {};
+
+            let remote: AnswerKey = {};
+
+            if (db && currentSession()) {
+              try {
+                const snapshot = await getDoc(
+                  doc(db, 'answerKeys', 'page-' + String(pageNumber)),
+                );
+
+                if (snapshot.exists()) {
+                  const data = snapshot.data() as {
+                    answers?: AnswerKey;
+                  };
+
+                  remote = data.answers || {};
+                }
+              } catch {
+                remote = {};
+              }
+            }
+
+            return {
+              ...canonical,
+              ...implicit,
+              ...local,
+              ...remote,
+            };
+          }
+          """
+
+          if text.count(old_imports) != 1:
+              raise SystemExit('guard failed: expected import block exactly once')
+          if text.count(old_block) != 1:
+              raise SystemExit('guard failed: expected loadAnswerKey block exactly once')
+
+          text = text.replace(old_imports, new_imports, 1)
+          text = text.replace(old_block, new_block, 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+
+          git diff --check
+          git diff -- src/lms/repository.ts
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/lms/repository.ts
+          git commit -m 'Fix runtime answer-key mapping for 78-page workbook'
+          git push origin HEAD:agent/canonical-lms-unified
