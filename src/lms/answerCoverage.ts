@@ -388,12 +388,22 @@ function classify(
     };
   }
 
+  if (/הסבירו|ההסבר|נמקו|מדוע/.test(context)) {
+    return {
+      classification: 'ambiguous',
+      currentAnswerSource: 'four-option pedagogical digital adaptation required',
+      sourceEvidence: 'RULES.md §6: explanation task must be objectively computerized',
+      automaticCheckingSafe: false,
+      answers: [],
+    };
+  }
+
   const reviewedOpenEndedSignature =
     REVIEWED_OPEN_ENDED_TARGET_SIGNATURES[lookupTargetId];
   if (reviewedOpenEndedSignature === signature || isOpenEnded(context)) {
     return {
       classification: 'open-ended',
-      currentAnswerSource: 'teacher judgment required',
+      currentAnswerSource: 'objective digital adaptation required',
       sourceEvidence:
         reviewedOpenEndedSignature === signature
           ? 'signature-bound canonical review: learner-created or dependent response'
