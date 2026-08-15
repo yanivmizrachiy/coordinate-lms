@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-15T18:29:57.340Z
+Generated: 2026-08-15T18:31:24.000Z
 
-Overall: 1078/1162 safely checkable targets (92.8%).
+Overall: 1080/1162 safely checkable targets (92.9%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 275 |
+| canonical-metadata-derived | 277 |
 | deterministic-mathematical | 617 |
 | valid-range | 6 |
 | open-ended | 70 |
-| ambiguous | 14 |
+| ambiguous | 12 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1615,7 +1615,7 @@ No detected interactive response targets.
 
 ### Page 73 — בונים זווית ישרה
 
-10/12 safely checkable (83.3%).
+12/12 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1629,8 +1629,8 @@ No detected interactive response targets.
 | p73-q8 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | הצלעות […] ו־BC מקבילות לציר y, ולכן הן מאונכות ל־AB. |
 | p73-q9 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | האורך AB: […] יח'. הרוחב BC: […] יח'. |
 | p73-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | האורך AB: […] יח'. הרוחב BC: […] יח'. |
-| p73-q11 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p73-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p73-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
+| p73-q12 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 
 ### Page 74 — זוויות ברביע הראשון
 
