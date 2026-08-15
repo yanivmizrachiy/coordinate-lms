@@ -91,6 +91,7 @@ const server = await createServer({
 try {
   const coverage = await server.ssrLoadModule('/src/lms/answerCoverage.ts');
   const predicates = await server.ssrLoadModule('/src/lms/digitalPredicates.ts');
+  const coordinateSafe = await server.ssrLoadModule('/src/lms/digitalCoordinateSafePredicate.ts');
   const segments = await server.ssrLoadModule('/src/lms/digitalSegmentPredicates.ts');
   const rectangles = await server.ssrLoadModule('/src/lms/digitalRectanglePredicates.ts');
   const life = await server.ssrLoadModule('/src/lms/digitalLifePredicates.ts');
@@ -98,6 +99,17 @@ try {
   const report = applyRuntimePredicateCoverage(
     coverage.buildAnswerCoverageReport(await existingGeneratedAt()),
     (context, inputType, pageNumber, targetId) => {
+      const coordinateSafeRule = coordinateSafe.coordinateSafePredicateRuleForCoverage(
+        pageNumber,
+        targetId,
+      );
+      if (coordinateSafeRule) {
+        return {
+          rule: coordinateSafeRule,
+          source: 'src/lms/digitalCoordinateSafePredicate.ts',
+        };
+      }
+
       const generalRule = predicates.predicateRuleForCoverage(context, inputType);
       if (generalRule) return { rule: generalRule, source: 'src/lms/digitalPredicates.ts' };
 
