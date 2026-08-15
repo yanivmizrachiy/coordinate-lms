@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-15T18:32:28.199Z",
+  "generatedAt": "2026-08-15T18:32:54.932Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -12174,10 +12174,12 @@
           "targetId": "p57-q7",
           "signature": "682e1e7d",
           "inputType": "text:text",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSquareVertexPredicate.ts:described-square-other-vertices",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:described-square-other-vertices"
+          ],
           "context": "[…] […] […]"
         },
         {
@@ -12185,10 +12187,12 @@
           "targetId": "p57-q8",
           "signature": "682e1e7d",
           "inputType": "text:text",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSquareVertexPredicate.ts:described-square-other-vertices",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:described-square-other-vertices"
+          ],
           "context": "[…] […] […]"
         },
         {
@@ -12196,10 +12200,12 @@
           "targetId": "p57-q9",
           "signature": "682e1e7d",
           "inputType": "text:text",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalSquareVertexPredicate.ts:described-square-other-vertices",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:described-square-other-vertices"
+          ],
           "context": "[…] […] […]"
         },
         {

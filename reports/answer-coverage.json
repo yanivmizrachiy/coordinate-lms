@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-15T18:32:28.199Z",
+  "generatedAt": "2026-08-15T18:32:54.932Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1080,
-  "coveragePercentage": 92.9,
+  "automaticallyCheckableTargets": 1083,
+  "coveragePercentage": 93.2,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 277,
-    "deterministic-mathematical": 617,
+    "deterministic-mathematical": 620,
     "valid-range": 6,
     "open-ended": 70,
-    "ambiguous": 12,
+    "ambiguous": 9,
     "unsupported": 0,
     "missing": 0
   },
@@ -14382,11 +14382,13 @@
           "inputType": "text:text",
           "context": "[…] […] […]",
           "signature": "682e1e7d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalSquareVertexPredicate.ts:described-square-other-vertices",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:described-square-other-vertices"
+          ]
         },
         {
           "targetId": "p57-q8",
@@ -14394,11 +14396,13 @@
           "inputType": "text:text",
           "context": "[…] […] […]",
           "signature": "682e1e7d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalSquareVertexPredicate.ts:described-square-other-vertices",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:described-square-other-vertices"
+          ]
         },
         {
           "targetId": "p57-q9",
@@ -14406,11 +14410,13 @@
           "inputType": "text:text",
           "context": "[…] […] […]",
           "signature": "682e1e7d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalSquareVertexPredicate.ts:described-square-other-vertices",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:described-square-other-vertices"
+          ]
         },
         {
           "targetId": "p57-q10",
@@ -14699,13 +14705,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p57-q7",
-        "p57-q8",
-        "p57-q9"
-      ],
-      "automaticallyCheckableTargets": 26,
-      "coveragePercentage": 89.7
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 29,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 58,

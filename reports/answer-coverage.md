@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-15T18:32:28.199Z
+Generated: 2026-08-15T18:32:54.932Z
 
-Overall: 1080/1162 safely checkable targets (92.9%).
+Overall: 1083/1162 safely checkable targets (93.2%).
 
 ## Classification totals
 
@@ -10,10 +10,10 @@ Overall: 1080/1162 safely checkable targets (92.9%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 277 |
-| deterministic-mathematical | 617 |
+| deterministic-mathematical | 620 |
 | valid-range | 6 |
 | open-ended | 70 |
-| ambiguous | 12 |
+| ambiguous | 9 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1290,7 +1290,7 @@ No detected interactive response targets.
 
 ### Page 57 — המלבן ברביע הראשון
 
-26/29 safely checkable (89.7%).
+29/29 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1300,9 +1300,9 @@ No detected interactive response targets.
 | p57-q4 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=[…]יח' |
 | p57-q5 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
 | p57-q6 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
-| p57-q7 | text:text | ambiguous | no | none | […] […] […] |
-| p57-q8 | text:text | ambiguous | no | none | […] […] […] |
-| p57-q9 | text:text | ambiguous | no | none | […] […] […] |
+| p57-q7 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | […] […] […] |
+| p57-q8 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | […] […] […] |
+| p57-q9 | text:text | deterministic-mathematical | yes | runtime mathematical predicate | […] […] […] |
 | p57-q10 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
 | p57-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף הריבוע הוא […] יח'.שטח הריבוע הוא […] יח"ר. |
 | p57-q12 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | נקודה על ציר xy= […] |
