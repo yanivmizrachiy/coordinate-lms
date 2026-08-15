@@ -300,7 +300,7 @@ function inputTypeFor(target: HTMLElement): string {
 }
 
 function isOpenEnded(context: string): boolean {
-  return /משלכם|שסימנתם|שבחרתם|הנתונים שלכם|הסבירו|ההסבר|נמקו|דוגמה משלכם/.test(
+  return /משלכם|שסימנתם|שבחרתם|הנתונים שלכם|דוגמה משלכם/.test(
     context,
   );
 }
@@ -407,7 +407,7 @@ function classify(
       sourceEvidence:
         reviewedOpenEndedSignature === signature
           ? 'signature-bound canonical review: learner-created or dependent response'
-          : 'learner-created or explanatory response',
+          : 'learner-created or dependent response',
       automaticCheckingSafe: false,
       answers: [],
     };
