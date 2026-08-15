@@ -25,6 +25,10 @@ import {
   horizontalLengthFourWithWorkMatches,
 } from './digitalSegmentPredicates';
 import {
+  DESCRIBED_SQUARE_OTHER_VERTICES,
+  describedSquareOtherVerticesMatch,
+} from './digitalSquareVertexPredicate';
+import {
   SUSPECT_X_FIVE_LABEL_PAIR,
   suspectXFiveLabelPairMatches,
 } from './digitalSuspectPredicate';
@@ -120,6 +124,9 @@ function predicateMatches(raw: string, candidate: string): boolean {
   }
   if (ruleName === SUSPECT_X_FIVE_LABEL_PAIR) {
     return suspectXFiveLabelPairMatches(raw.split('|'));
+  }
+  if (ruleName === DESCRIBED_SQUARE_OTHER_VERTICES) {
+    return describedSquareOtherVerticesMatch(raw.split('|'));
   }
   if (ruleName === HORIZONTAL_LENGTH_FOUR_WITH_WORK) {
     return horizontalLengthFourWithWorkMatches(raw.split('|'));
