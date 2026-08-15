@@ -1,4 +1,8 @@
 import {
+  AXIS_POINT_MOVED_UP_FOUR,
+  axisPointMovedUpFourMatches,
+} from './digitalCoordinateSafePredicate';
+import {
   evaluateDigitalGroupRule,
   type DigitalGroupRule,
 } from './digitalPredicates';
@@ -100,6 +104,9 @@ function axisAliasMatches(raw: string, candidate: string): boolean {
 
 function predicateMatches(raw: string, candidate: string): boolean {
   const ruleName = candidate.slice('predicate:'.length);
+  if (ruleName === AXIS_POINT_MOVED_UP_FOUR) {
+    return axisPointMovedUpFourMatches(raw.split('|'));
+  }
   if (ruleName === HORIZONTAL_LENGTH_FOUR_WITH_WORK) {
     return horizontalLengthFourWithWorkMatches(raw.split('|'));
   }
