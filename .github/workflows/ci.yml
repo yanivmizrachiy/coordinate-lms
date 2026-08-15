@@ -10,6 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Checkout canonical printable source (read-only)
+        uses: actions/checkout@v7
+        with:
+          repository: yanivmizrachiy/coordinate-first-quadrant
+          ref: main
+          path: .canonical-print-source
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v7
         with:
           node-version: 20
@@ -20,6 +28,8 @@ jobs:
           distribution: temurin
           java-version: '21'
       - run: npm ci
+      - name: Canonical printable/LMS synchronization gate
+        run: node scripts/check-canonical-source.mjs .canonical-print-source
       - name: Production dependency security gate
         run: npm audit --omit=dev --audit-level=high
       - name: Development toolchain security gate
