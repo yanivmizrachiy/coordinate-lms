@@ -1,8 +1,9 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
-const ROOT = new URL('..', import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 
 function text(path: string): string {
   return readFileSync(join(ROOT, path), 'utf8');
@@ -62,8 +63,16 @@ describe('single source of truth guard', () => {
     expect(violations, violations.join('\n')).toEqual([]);
   });
 
-  it('does not keep retired status/rule documents that can compete with RULES.md', () => {
-    for (const retired of ['USER_MEMORY.md', 'MIGRATION_STATUS.md', 'docs/WORK_PLAN.md']) {
+  it('does not keep retired status/rule documents or obsolete alternate applications', () => {
+    for (const retired of [
+      'USER_MEMORY.md',
+      'MIGRATION_STATUS.md',
+      'docs/WORK_PLAN.md',
+      'reports/workbook-sync-status.md',
+      'reports/canonical-parity.md',
+      'reports/phase3-extreme-report.md',
+      '_legacy/perplexity-original',
+    ]) {
       expect(existsSync(join(ROOT, retired)), retired).toBe(false);
     }
   });
