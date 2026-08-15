@@ -100,7 +100,7 @@ describe('answer-key coverage intelligence', () => {
     expect(staleProofs).toBeGreaterThan(0);
   });
 
-  test('keeps reviewed open prompts signature-bound while allowing safe digital upgrades', () => {
+  test('keeps legacy reviewed prompts signature-bound while allowing objective digital upgrades', () => {
     const targets = new Map(
       report.pages.flatMap((page) =>
         page.targets.map((target) => [target.targetId, target] as const),
@@ -110,7 +110,7 @@ describe('answer-key coverage intelligence', () => {
     expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(161);
     let mapped = 0;
     let retained = 0;
-    let stillOpen = 0;
+    let needsDigitalWork = 0;
     let upgraded = 0;
     let stale = 0;
 
@@ -140,15 +140,18 @@ describe('answer-key coverage intelligence', () => {
         ).toContain(target.classification);
         expect(target.answers.length, targetId).toBeGreaterThan(0);
       } else {
-        stillOpen += 1;
-        expect(target.classification, targetId).toBe('open-ended');
+        needsDigitalWork += 1;
+        expect(['open-ended', 'ambiguous'], targetId).toContain(target.classification);
+        if (target.classification === 'ambiguous') {
+          expect(target.currentAnswerSource, targetId).toMatch(/digital adaptation|required/i);
+        }
       }
     }
 
     expect(retained + stale).toBe(mapped);
     expect(retained).toBeGreaterThan(stale);
     expect(upgraded).toBeGreaterThan(0);
-    expect(stillOpen).toBeGreaterThan(0);
+    expect(needsDigitalWork).toBeGreaterThan(0);
     expect(stale).toBeGreaterThan(0);
   });
 
