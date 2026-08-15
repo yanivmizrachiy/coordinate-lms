@@ -50,6 +50,12 @@ export function hydrateDigitalLinearFacts(root: ParentNode): void {
 
   setBlankInItem(
     root,
+    'לשתי נקודות שממוקמות על קטע אנכי יש שיעור',
+    ['x', 'X'],
+  );
+
+  setBlankInItem(
+    root,
     'לנקודות P(3,1) ו־Q(3,6) יש שיעור',
     ['x', 'X'],
   );
