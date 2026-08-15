@@ -12,6 +12,7 @@ import { hydrateDigitalPredicates } from './digitalPredicates';
 import { hydrateDigitalRectanglePredicates } from './digitalRectanglePredicates';
 import { hydrateDigitalRuleAnswers } from './digitalRuleAnswers';
 import { hydrateDigitalSegmentPredicates } from './digitalSegmentPredicates';
+import { hydrateDigitalSquareVertexPredicate } from './digitalSquareVertexPredicate';
 import { hydrateDigitalSuspectPredicate } from './digitalSuspectPredicate';
 import { hydrateGridPointPickers } from './gridPointPicker';
 import type { AnswerKey } from './types';
@@ -54,6 +55,7 @@ export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
   const cleanupCoordinateSafe = hydrateDigitalCoordinateSafePredicate(root);
   const cleanupSuspect = hydrateDigitalSuspectPredicate(root);
   const cleanupFreePoints = hydrateDigitalFreePointPredicates(root);
+  const cleanupSquareVertices = hydrateDigitalSquareVertexPredicate(root);
   const cleanupPredicates = hydrateDigitalPredicates(root);
   const cleanupSegments = hydrateDigitalSegmentPredicates(root);
   const cleanupRectangles = hydrateDigitalRectanglePredicates(root);
@@ -66,6 +68,7 @@ export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
     cleanupRectangles();
     cleanupSegments();
     cleanupPredicates();
+    cleanupSquareVertices();
     cleanupFreePoints();
     cleanupSuspect();
     cleanupCoordinateSafe();
