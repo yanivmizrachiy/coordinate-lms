@@ -29,7 +29,20 @@ jobs:
           java-version: '21'
       - run: npm ci
       - name: Canonical printable/LMS synchronization gate
-        run: node scripts/check-canonical-source.mjs .canonical-print-source
+        shell: bash
+        run: |
+          set +e
+          output="$(node scripts/check-canonical-source.mjs .canonical-print-source 2>&1)"
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$status" -ne 0 ]; then
+            escaped="${output//'%'/'%25'}"
+            escaped="${escaped//$'\r'/'%0D'}"
+            escaped="${escaped//$'\n'/'%0A'}"
+            echo "::error title=Canonical printable/LMS synchronization failed::$escaped"
+            exit "$status"
+          fi
       - name: Production dependency security gate
         run: npm audit --omit=dev --audit-level=high
       - name: Development toolchain security gate
