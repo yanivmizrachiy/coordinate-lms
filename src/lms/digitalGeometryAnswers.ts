@@ -139,6 +139,24 @@ function hydrateRightAngleBuild(root: ParentNode): void {
   );
 }
 
+function hydrateRightAngleSummary(root: ParentNode): void {
+  const sheetText = normalizedText(root.querySelector('.sheet'));
+  if (!sheetText.includes('זווית ישרה במערכת הצירים')) return;
+
+  const first = cardByHeading(
+    root,
+    'א. לפי המלבן ABCD שקודקודיו A(2,1), B(7,1), C(7,5), D(2,5)',
+  );
+  const second = cardByHeading(
+    root,
+    'ב. דניאל סימן שלושה קודקודים: P(2,2), Q(6,2), R(6,5)',
+  );
+  if (!first || !second) return;
+
+  setCalcFinals(first, ['18', '20']);
+  setCalcFinals(second, ['14', '12']);
+}
+
 /** Deterministic LMS-only geometry answers derived from canonical coordinates. */
 export function hydrateDigitalGeometryAnswers(root: ParentNode): void {
   hydratePlotShape(root);
@@ -150,4 +168,5 @@ export function hydrateDigitalGeometryAnswers(root: ParentNode): void {
   hydrateHallSeats(root);
   hydratePixelArt(root);
   hydrateRightAngleBuild(root);
+  hydrateRightAngleSummary(root);
 }
