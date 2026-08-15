@@ -803,13 +803,13 @@ describe('every page is valid markup', () => {
   });
 });
 
-/* regression history is the single rules page, and it is only worth reading if it
+/* RULES.md is the single rules page, and it is only worth reading if it
    is true. It kept drifting: it named a booklet of 55 pages when there were 74,
    it described a test that had been rewritten, it told the reader the arrow was
    drawn shorter after that had stopped being so. Anything it states in
    backticks about the code is checked here. */
 describe('the rules page still matches the code', () => {
-  const rules = readFileSync(new URL('../regression history', import.meta.url), 'utf8');
+  const rules = readFileSync(new URL('../RULES.md', import.meta.url), 'utf8');
   const suites = readdirSync(new URL('../tests/e2e', import.meta.url))
     .filter((f) => f.endsWith('.ts'))
     .map((f) => readFileSync(new URL('../tests/e2e/' + f, import.meta.url), 'utf8'))
