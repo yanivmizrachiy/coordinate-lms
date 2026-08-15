@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { WORKBOOK, pageByNumber } from '../src/data/workbook';
 
-/* Yaniv's standing layout rules, as executable checks. Each one here is a bug
+/* Canonical layout invariants as executable regression checks. Each one here is a bug
    that already reached a printed sheet once — the test is what stops it from
    coming back the next time a page is edited. */
 
@@ -80,7 +80,7 @@ describe('SVG text survives the RTL sheet', () => {
 });
 
 describe('completions ask for something different each time', () => {
-  /* Yaniv's rule (USER_MEMORY §8): "בכל השלמה חסר רכיב מסוג אחר".
+  /* Yaniv's rule (regression history): "בכל השלמה חסר רכיב מסוג אחר".
      It was written down for a long time and still got broken, because nothing
      checked it — a sheet can pass every other test while asking the learner
      the very same thing four times. Tagged blanks make it checkable. */
@@ -201,7 +201,7 @@ describe('Hebrew and punctuation hold up to proofreading', () => {
     }
   });
 
-  /* USER_MEMORY §5. „כפל כותרת” — every game repeated the sheet title as its
+  /* regression history. „כפל כותרת” — every game repeated the sheet title as its
      own heading, so the reader met the same words twice before any task. */
   it('no heading inside a sheet repeats the sheet title', () => {
     for (const p of WORKBOOK) {
@@ -250,7 +250,7 @@ describe('Hebrew and punctuation hold up to proofreading', () => {
 });
 
 describe('a group never asks the same question four times', () => {
-  /* USER_MEMORY §5. Four items reading "שיעור x הוא N ושיעור y הוא M" with
+  /* regression history. Four items reading "שיעור x הוא N ושיעור y הוא M" with
      nothing but the numbers changing is not practice, it is filler. */
   const shape = (li: string): string =>
     li
@@ -280,7 +280,7 @@ describe('a group never asks the same question four times', () => {
     }
   });
 
-  /* USER_MEMORY §5. Yaniv: „פעם המילה שווה ופעם הסימן שווה — ככה רציתי גיוון”.
+  /* regression history. Yaniv: „פעם המילה שווה ופעם הסימן שווה — ככה רציתי גיוון”.
      Stating a given one single way through a whole task is the monotony he
      objects to; the two forms have to sit side by side. */
   it('a task that states given coordinates uses the word שווה AND the sign =', () => {
@@ -294,7 +294,7 @@ describe('a group never asks the same question four times', () => {
     }
   });
 
-  /* USER_MEMORY §8. The blank has to MOVE. Two consecutive items whose text is
+  /* regression history. The blank has to MOVE. Two consecutive items whose text is
      identical once the blank is taken out are the same question twice, however
      different the numbers or the axis letter look. */
   it('two items in a row never leave the same sentence with the blank in one place', () => {
@@ -353,7 +353,7 @@ describe('a poster sheet keeps the design and drops what the rules forbid', () =
 });
 
 describe("a point's name stays attached to its brackets", () => {
-  /* USER_MEMORY §7: „האות באנגלית משמאל לסוגריים”. Splitting the name and the
+  /* regression history: „האות באנגלית משמאל לסוגריים”. Splitting the name and the
      brackets across two table cells cannot satisfy it — the sheet is RTL, so
      the first column lands on the right and it reads „(_,_) A”. */
   it('a name and its empty pair live in one element', () => {
@@ -367,13 +367,13 @@ describe("a point's name stays attached to its brackets", () => {
 });
 
 describe('a calculation gets units and room to work', () => {
-  /* USER_MEMORY §10. Both rules were written down and neither was checked, so
+  /* regression history. Both rules were written down and neither was checked, so
      five sheets asked for a perimeter with nowhere to work it out and no unit
      on the answer. */
   const readable = (h: string): string => h.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
   const computes = (h: string): boolean => /(היקף|שטח)\s*[=:]/.test(readable(h));
 
-  /* USER_MEMORY §5. „מרחק” is not extra vocabulary — it is what a coordinate
+  /* regression history. „מרחק” is not extra vocabulary — it is what a coordinate
      MEANS, and Yaniv asked for it by name. The page that introduces שיעור x
      and שיעור y has to say it, and its drawing needs a dashed line to EACH
      axis: one line teaches half the idea. */
@@ -391,7 +391,7 @@ describe('a calculation gets units and room to work', () => {
     expect(toY, 'no dashed line across to ציר y').toBe(true);
   });
 
-  /* USER_MEMORY §8: „גם כלל או הגדרה מוצגים כמשפט השלמה, לא כמשפט מוכן”.
+  /* regression history: „גם כלל או הגדרה מוצגים כמשפט השלמה, לא כמשפט מוכן”.
      A rule handed over finished is a rule the learner reads past. */
   it('a rule box states its rule as something to complete', () => {
     for (const p of WORKBOOK) {
@@ -410,7 +410,7 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §9. A box that floats loose is a box the learner has to guess
+  /* regression history. A box that floats loose is a box the learner has to guess
      at — Yaniv reported it twice, on two different drawings. Every label on a
      drawing states which point, tick or line it belongs to. */
   it('every label box on a drawing points at what it describes', () => {
@@ -454,7 +454,7 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §10. „הדרך חשובה מאוד מאוד” — a calculation gets room to work
+  /* regression history. „הדרך חשובה מאוד מאוד” — a calculation gets room to work
      in and then an answer that carries its unit, written with the letters an
      Israeli textbook uses: S for area, P for perimeter. */
   it('every area or perimeter answer is S or P, with its unit and room to work', () => {
@@ -484,7 +484,7 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §10. A rectangle has an אורך and a רוחב — the longer side and
+  /* regression history. A rectangle has an אורך and a רוחב — the longer side and
      the shorter one. „הצלע האופקית” describes the picture, not the shape. */
   it('a rectangle is described by its אורך and רוחב, not by which way it points', () => {
     for (const p of WORKBOOK) {
@@ -503,7 +503,7 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §8. A claim is „נכונה בהכרח / ייתכן שנכונה / לא ייתכן”. The old
+  /* regression history. A claim is „נכונה בהכרח / ייתכן שנכונה / לא ייתכן”. The old
      „תמיד / לפעמים / לעולם לא” describes frequency, not necessity. */
   it('a claim is judged as necessary, possible or impossible', () => {
     for (const p of WORKBOOK) {
@@ -525,7 +525,7 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §5. A shared coordinate is stated as a whole sentence naming
+  /* regression history. A shared coordinate is stated as a whole sentence naming
      both points — „לשתי הנקודות A ו־B יש שיעור y זהה” — never as a bare
      „השיעור הזהה: ____”, and the sheet then asks the learner to PRODUCE two
      such points, which is the half that cannot be copied. */
@@ -542,7 +542,7 @@ describe('a calculation gets units and room to work', () => {
       .toBeGreaterThan(0);
   });
 
-  /* USER_MEMORY §5, applied to the whole booklet rather than page by page: an
+  /* regression history, applied to the whole booklet rather than page by page: an
      open line is where a child writes nothing. Every ruled line either carries
      the working of a calculation or is a completion the sheet leads them into. */
   it('no sheet leaves an open line that is not the working of a calculation', () => {
@@ -562,7 +562,7 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §5. „הנקודה של היום הראשון” is possession; the point does not
+  /* regression history. „הנקודה של היום הראשון” is possession; the point does not
      belong to the day, it CORRESPONDS to it. Yaniv's word is התאמה. */
   it('a point corresponds to its datum — it does not belong to it', () => {
     for (const p of WORKBOOK) {
@@ -580,7 +580,7 @@ describe('a calculation gets units and room to work', () => {
     expect(new Set(graphs.map((p) => p.subtitle)).size, 'two sheets share a subtitle').toBe(6);
   });
 
-  /* USER_MEMORY §8. Varying by rewriting the sentence is the opposite of the
+  /* regression history. Varying by rewriting the sentence is the opposite of the
      rule: the sentence is written once and the GAP moves inside it. „בשתי
      נקודותיו” is the shape that came from rewriting instead of moving. */
   it('a parallel-segment item keeps the one sentence and moves the gap', () => {
@@ -803,13 +803,13 @@ describe('every page is valid markup', () => {
   });
 });
 
-/* USER_MEMORY.md is the single rules page, and it is only worth reading if it
+/* regression history is the single rules page, and it is only worth reading if it
    is true. It kept drifting: it named a booklet of 55 pages when there were 74,
    it described a test that had been rewritten, it told the reader the arrow was
    drawn shorter after that had stopped being so. Anything it states in
    backticks about the code is checked here. */
 describe('the rules page still matches the code', () => {
-  const rules = readFileSync(new URL('../USER_MEMORY.md', import.meta.url), 'utf8');
+  const rules = readFileSync(new URL('../regression history', import.meta.url), 'utf8');
   const suites = readdirSync(new URL('../tests/e2e', import.meta.url))
     .filter((f) => f.endsWith('.ts'))
     .map((f) => readFileSync(new URL('../tests/e2e/' + f, import.meta.url), 'utf8'))
