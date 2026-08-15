@@ -1,4 +1,5 @@
 import { hydrateDigitalCanonicalAnswers } from './digitalCanonicalAnswers';
+import { hydrateDigitalCoordinateSafePredicate } from './digitalCoordinateSafePredicate';
 import { hydrateDigitalDeterministicAnswers } from './digitalDeterministicAnswers';
 import { hydrateDigitalExplanationChoices } from './digitalExplanationChoices';
 import { hydrateDigitalGeometryAnswers } from './digitalGeometryAnswers';
@@ -48,6 +49,7 @@ export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
   hydrateDigitalLinearFacts(root);
   hydrateDigitalOneStepAnswers(root);
   const cleanupExplanations = hydrateDigitalExplanationChoices(root);
+  const cleanupCoordinateSafe = hydrateDigitalCoordinateSafePredicate(root);
   const cleanupPredicates = hydrateDigitalPredicates(root);
   const cleanupSegments = hydrateDigitalSegmentPredicates(root);
   const cleanupRectangles = hydrateDigitalRectanglePredicates(root);
@@ -60,6 +62,7 @@ export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
     cleanupRectangles();
     cleanupSegments();
     cleanupPredicates();
+    cleanupCoordinateSafe();
     cleanupExplanations();
   };
 }
