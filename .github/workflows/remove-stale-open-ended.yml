@@ -1,0 +1,49 @@
+name: Remove stale open-ended explanation path
+
+on:
+  push:
+    branches:
+      - agent/canonical-lms-unified
+    paths:
+      - .github/workflows/remove-stale-open-ended.yml
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/canonical-lms-unified
+          fetch-depth: 0
+      - name: Remove stale explanation terms from open-ended fallback
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('src/lms/answerCoverage.ts')
+          s = p.read_text(encoding='utf-8')
+          old = "  return /משלכם|שסימנתם|שבחרתם|הנתונים שלכם|הסבירו|ההסבר|נמקו|דוגמה משלכם/.test(\n    context,\n  );"
+          new = "  return /משלכם|שסימנתם|שבחרתם|הנתונים שלכם|דוגמה משלכם/.test(\n    context,\n  );"
+          if s.count(old) != 1:
+              raise SystemExit(f'expected one open-ended regex match, found {s.count(old)}')
+          s = s.replace(old, new, 1)
+          old2 = "          : 'learner-created or explanatory response',"
+          new2 = "          : 'learner-created or dependent response',"
+          if s.count(old2) != 1:
+              raise SystemExit(f'expected one stale evidence phrase, found {s.count(old2)}')
+          s = s.replace(old2, new2, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+          git diff --check
+      - name: Commit
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/lms/answerCoverage.ts
+          git commit -m "Remove stale explanation-as-open-ended fallback"
+          git pull --rebase origin agent/canonical-lms-unified
+          git push origin HEAD:agent/canonical-lms-unified
