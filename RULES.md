@@ -1,6 +1,6 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-14
+Updated: 2026-08-15
 
 This file is the **single and only source of truth** for work in `yanivmizrachiy/coordinate-lms`.
 No README, status document, handoff, memory file, PR description, comment, test fixture, legacy file, or old instruction may override it. If anything in the repository contradicts this file, the contradictory text/code/configuration must be removed or reconciled.
@@ -13,22 +13,26 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - Never print, commit, expose, or invent credentials.
 - Preserve unrelated work and never rewrite shared history with destructive git operations.
 
-## 2. Iron rule: every printable page becomes computerized
+## 2. Iron rule: the computerized workbook is a one-to-one digital twin of the printable workbook
 
 - The printable workbook is the canonical source for the computerized workbook.
-- **Every canonical printable page must have a corresponding computerized page. No printable page may be omitted, replaced by unrelated content, skipped, or treated as optional.**
+- **Every canonical printable page must have exactly one corresponding computerized page. No printable page may be omitted, replaced by unrelated content, skipped, reordered, redesigned independently, or treated as optional.**
 - The current canonical printable workbook contains **78 numbered pages**. The LMS must track the canonical source dynamically and must not hard-code an obsolete page count.
-- The computerized version starts from the printable page itself: same mathematical content, same questions, same diagrams, same page order, same Hebrew wording, same RTL behavior, same visual hierarchy, same colours, same typography, and the same intended learning progression.
-- The printable design is not merely a reference. It is the visual/content base from which the computerized page is built.
-- A change in the canonical printable source must propagate to the corresponding computerized page. CI must detect source/LMS drift and block release rather than silently allow divergence.
-- The LMS must maintain a one-to-one mapping between canonical printable pages and computerized pages.
+- **The computerized page must visually and structurally reproduce the printable page one-to-one:** same mathematical content, same questions, same diagrams, same page order, same Hebrew wording, same RTL behavior, same visual hierarchy, same colours, same typography, same spacing/layout intent, and the same intended learning progression.
+- The printable design is not merely inspiration or a loose reference. **It is the visual and content source that the computerized page must mirror.** A student looking at the computerized page should recognize the same worksheet/page; the difference is that the student answers through the technological device.
+- **The LMS must not invent an independent visual redesign of canonical worksheet content.** Digital-only controls may be added as an interaction layer, but they must not replace, distort, reorder, or visually redefine the underlying printable page.
+- **Any future change in the canonical printable source — wording, question, diagram, order, colour, typography, visual structure, layout, or page content — requires the corresponding computerized page to be updated to match it.**
+- CI must detect printable-source/LMS drift and block release rather than silently allow divergence.
+- The LMS must maintain a one-to-one mapping between canonical printable pages and computerized pages and must provide a verifiable synchronization path from the printable source to its computerized twin.
+- If any current LMS page differs from its canonical printable page beyond permitted digital-only interaction overlays, that difference is a defect and must be corrected.
 
 ## 3. Printable pages are never modified for LMS needs
 
 - All interaction, answer checking, scoring, registration, persistence, Firebase logic, pedagogical adaptation, and UI controls belong only to the computerized/LMS layer.
-- **Do not change printable wording, printable questions, printable diagrams, printable layout, printable page order, or printable source files in order to make computerized checking easier.**
+- **Do not change printable wording, printable questions, printable diagrams, printable layout, printable page order, printable styling, or printable source files in order to make computerized checking easier.**
 - Interactive controls must be digital-only and must not leak into printable output.
-- A computerized adaptation may change the response mechanism, but not the mathematical learning objective of the original printable question.
+- A computerized adaptation may change the **response mechanism only where needed for digital interaction**, but not the mathematical learning objective, canonical wording/content, or visual identity of the original printable question/page.
+- Examples of permitted digital-only overlays include answer fields, direct graph/diagram interactions, small check controls, feedback markers, registration/save UI, and page-score UI. These overlays sit on top of the canonical page; they do not authorize a separate worksheet design.
 
 ## 4. Computerized interaction must match the mathematical action
 
@@ -56,7 +60,7 @@ No README, status document, handoff, memory file, PR description, comment, test 
 - The correct option must not be identifiable merely because it is longer, more precise, uniquely formatted, or stylistically different.
 - The task must be neither artificially easy nor artificially difficult. It must require genuine mathematical thought appropriate to the original question.
 - Creating these alternatives requires high-level pedagogical reasoning: identify the concept, anticipate common misconceptions, preserve the original cognitive demand, and construct diagnostic distractors.
-- This adaptation occurs **only in the computerized layer**. The printable question remains unchanged.
+- This adaptation occurs **only in the computerized interaction layer**. The printable question remains unchanged, and the computerized page must still preserve the canonical printable page's visible identity.
 
 ## 7. Per-answer checking is the primary feedback interaction
 
@@ -146,12 +150,13 @@ No README, status document, handoff, memory file, PR description, comment, test 
 
 ## 15. Documentation and source-of-truth hygiene
 
-- `RULES.md` is the only normative rule document.
+- `RULES.md` is the **only normative rule document and the only source of truth**.
+- No other file may be described as a co-authority, secondary source of truth, fallback truth, or independent requirement source.
 - `README.md` may describe the project but must not define competing rules.
 - Status reports may describe current implementation gaps but must not redefine requirements.
 - Historical memory/handoff documents must not contain active rules that compete with `RULES.md`; contradictory historical instructions must be removed rather than left as an alternative authority.
-- PR descriptions and comments are status/history only and must be reconciled when they contain obsolete claims such as 77 pages, registration walls on workbook pages, durable guest progress, teacher judgment for mathematically deterministic tasks, or permanent ungraded treatment for tasks that can be objectively computerized.
-- Any repository text or code that conflicts with the canonical 78-page one-to-one mapping or the rules above is a defect.
+- PR descriptions and comments are status/history only and must be reconciled when they contain obsolete claims such as 77 pages, registration walls on workbook pages, durable guest progress, teacher judgment for mathematically deterministic tasks, permanent ungraded treatment for tasks that can be objectively computerized, or any permission to diverge visually/content-wise from the canonical printable page.
+- Any repository text, code, test, report, configuration, or workflow that conflicts with the canonical printable-to-LMS one-to-one mapping or the rules above is a defect and must be removed or corrected.
 
 ## 16. Required quality gates
 
@@ -170,6 +175,6 @@ npm run release:report
 npm run test:visual
 ```
 
-CI must also verify canonical print/LMS page synchronization and reject documentation/runtime drift.
+CI must also verify canonical print/LMS page synchronization, including visual/content parity, and reject documentation/runtime drift.
 A release must additionally have passing readiness, deployed authorization rules, and recorded two-device acceptance evidence.
 Do not describe the product as production-ready while any required gate or external prerequisite is incomplete.
