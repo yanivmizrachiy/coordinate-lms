@@ -93,6 +93,7 @@ try {
   const predicates = await server.ssrLoadModule('/src/lms/digitalPredicates.ts');
   const coordinateSafe = await server.ssrLoadModule('/src/lms/digitalCoordinateSafePredicate.ts');
   const freePoints = await server.ssrLoadModule('/src/lms/digitalFreePointPredicates.ts');
+  const squareVertices = await server.ssrLoadModule('/src/lms/digitalSquareVertexPredicate.ts');
   const suspect = await server.ssrLoadModule('/src/lms/digitalSuspectPredicate.ts');
   const segments = await server.ssrLoadModule('/src/lms/digitalSegmentPredicates.ts');
   const rectangles = await server.ssrLoadModule('/src/lms/digitalRectanglePredicates.ts');
@@ -120,6 +121,17 @@ try {
         return {
           rule: freePointRule,
           source: 'src/lms/digitalFreePointPredicates.ts',
+        };
+      }
+
+      const squareVertexRule = squareVertices.squareVertexPredicateRuleForCoverage(
+        pageNumber,
+        targetId,
+      );
+      if (squareVertexRule) {
+        return {
+          rule: squareVertexRule,
+          source: 'src/lms/digitalSquareVertexPredicate.ts',
         };
       }
 
