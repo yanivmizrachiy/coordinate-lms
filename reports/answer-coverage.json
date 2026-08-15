@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-15T18:25:23.893Z",
+  "generatedAt": "2026-08-15T18:27:17.788Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1073,
-  "coveragePercentage": 92.3,
+  "automaticallyCheckableTargets": 1074,
+  "coveragePercentage": 92.4,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 270,
+    "canonical-metadata-derived": 271,
     "deterministic-mathematical": 617,
     "valid-range": 6,
     "open-ended": 70,
-    "ambiguous": 19,
+    "ambiguous": 18,
     "unsupported": 0,
     "missing": 0
   },
@@ -17686,11 +17686,14 @@
           "inputType": "text:letter",
           "context": "לשתי נקודות שממוקמות על קטע אנכי יש שיעור […] זהה.",
           "signature": "5d3ebac0",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x",
+            "X"
+          ]
         },
         {
           "targetId": "p72-q4",
@@ -17709,11 +17712,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p72-q3"
-      ],
-      "automaticallyCheckableTargets": 3,
-      "coveragePercentage": 75
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 4,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 73,

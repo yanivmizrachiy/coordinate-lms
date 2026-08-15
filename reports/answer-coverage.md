@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-15T18:25:23.893Z
+Generated: 2026-08-15T18:27:17.788Z
 
-Overall: 1073/1162 safely checkable targets (92.3%).
+Overall: 1074/1162 safely checkable targets (92.4%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 270 |
+| canonical-metadata-derived | 271 |
 | deterministic-mathematical | 617 |
 | valid-range | 6 |
 | open-ended | 70 |
-| ambiguous | 19 |
+| ambiguous | 18 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1604,13 +1604,13 @@ No detected interactive response targets.
 
 ### Page 72 — קטעים מאונכים ברביע הראשון
 
-3/4 safely checkable (75%).
+4/4 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
 | p72-q1 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | זווית ישרה נוצרת כאשר קטע אחד מקביל לציר x והשני מקביל לציר […]. |
 | p72-q2 | text:property | deterministic-mathematical | yes | target-bound reviewed proof | זווית ישרה נוצרת רק כשקטע אחד […] והשני אנכי. |
-| p72-q3 | text:letter | ambiguous | no | none | לשתי נקודות שממוקמות על קטע אנכי יש שיעור […] זהה. |
+| p72-q3 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לשתי נקודות שממוקמות על קטע אנכי יש שיעור […] זהה. |
 | p72-q4 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | קטע המקביל לציר x הוא מאונך לציר […]. |
 
 ### Page 73 — בונים זווית ישרה
