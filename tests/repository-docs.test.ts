@@ -22,16 +22,14 @@ describe('repository source-of-truth documentation', () => {
     expect(readme).not.toMatch(/\b77 עמודים\b/);
   });
 
-  it('does not retain the retired work-plan document as a competing status authority', () => {
-    expect(existsSync(new URL('../docs/WORK_PLAN.md', import.meta.url))).toBe(false);
-  });
-
-  it('keeps the synchronization report aligned with the canonical workbook', () => {
-    const report = readRepositoryFile('reports/workbook-sync-status.md');
-
-    expect(report).toContain(`Numbered workbook pages: ${WORKBOOK.length}.`);
-    expect(report).toContain('Final cleaned-branch verification passed');
-    expect(report).not.toContain('running one final read-only verification');
+  it('does not retain retired plans or stale synchronization snapshots as competing authorities', () => {
+    for (const retired of [
+      'docs/WORK_PLAN.md',
+      'reports/workbook-sync-status.md',
+      'reports/canonical-parity.md',
+    ]) {
+      expect(existsSync(new URL(`../${retired}`, import.meta.url)), retired).toBe(false);
+    }
   });
 
   it('keeps the release gate data-driven instead of hardcoding a legacy count', () => {
@@ -39,5 +37,15 @@ describe('repository source-of-truth documentation', () => {
 
     expect(releaseGate).toContain('answer-target-order.json');
     expect(releaseGate).not.toMatch(/pageCount\s*===\s*77/);
+  });
+
+  it('keeps a permanent live canonical-source synchronization gate in CI', () => {
+    const ci = readRepositoryFile('.github/workflows/ci.yml');
+    const syncScript = readRepositoryFile('scripts/check-canonical-source.mjs');
+
+    expect(ci).toContain('yanivmizrachiy/coordinate-first-quadrant');
+    expect(ci).toContain('check-canonical-source.mjs');
+    expect(syncScript).toContain('Printable/LMS page content or layout markup drift detected');
+    expect(syncScript).toContain('Synchronize the LMS digital twin before updating the lock');
   });
 });
