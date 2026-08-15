@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-15T18:21:35.314Z
+Generated: 2026-08-15T18:24:57.915Z
 
-Overall: 1071/1162 safely checkable targets (92.2%).
+Overall: 1073/1162 safely checkable targets (92.3%).
 
 ## Classification totals
 
@@ -10,9 +10,9 @@ Overall: 1071/1162 safely checkable targets (92.2%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 270 |
-| deterministic-mathematical | 615 |
+| deterministic-mathematical | 617 |
 | valid-range | 6 |
-| open-ended | 72 |
+| open-ended | 70 |
 | ambiguous | 19 |
 | unsupported | 0 |
 | missing | 0 |
@@ -1326,7 +1326,7 @@ No detected interactive response targets.
 
 ### Page 58 — המלבן ברביע הראשון
 
-16/18 safely checkable (88.9%).
+18/18 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1335,8 +1335,8 @@ No detected interactive response targets.
 | p58-q3 | text:letter | reviewed-explicit | yes | target-bound reviewed proof | צודק/צודקת: […]. |
 | p58-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה היחידה ששני שיעוריה זהים והיא ממוקמת על ציר היא ([…],[…]). |
 | p58-q5 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה היחידה ששני שיעוריה זהים והיא ממוקמת על ציר היא ([…],[…]). |
-| p58-q6 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו נקודה ששני שיעוריה זהים והיא אינה ממוקמת על אף ציר: ([…],[…]). |
-| p58-q7 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו נקודה ששני שיעוריה זהים והיא אינה ממוקמת על אף ציר: ([…],[…]). |
+| p58-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו נקודה ששני שיעוריה זהים והיא אינה ממוקמת על אף ציר: ([…],[…]). |
+| p58-q7 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו נקודה ששני שיעוריה זהים והיא אינה ממוקמת על אף ציר: ([…],[…]). |
 | p58-q8 | text:concept | deterministic-mathematical | yes | target-bound reviewed proof | בהזזה ימינה משתנה רק […] של הנקודה. |
 | p58-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A(2,3) אחרי הזזה של 4 יחידות ימינה מגיעה אל הנקודה ([…],[…]). |
 | p58-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה A(2,3) אחרי הזזה של 4 יחידות ימינה מגיעה אל הנקודה ([…],[…]). |

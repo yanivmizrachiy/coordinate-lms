@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-15T18:21:35.314Z",
+  "generatedAt": "2026-08-15T18:24:57.915Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1071,
-  "coveragePercentage": 92.2,
+  "automaticallyCheckableTargets": 1073,
+  "coveragePercentage": 92.3,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 270,
-    "deterministic-mathematical": 615,
+    "deterministic-mathematical": 617,
     "valid-range": 6,
-    "open-ended": 72,
+    "open-ended": 70,
     "ambiguous": 19,
     "unsupported": 0,
     "missing": 0
@@ -14810,11 +14810,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו נקודה ששני שיעוריה זהים והיא אינה ממוקמת על אף ציר: ([…],[…]).",
           "signature": "eea1b535",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalFreePointPredicates.ts:equal-positive-coordinate-point",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:equal-positive-coordinate-point"
+          ]
         },
         {
           "targetId": "p58-q7",
@@ -14822,11 +14824,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "כתבו נקודה ששני שיעוריה זהים והיא אינה ממוקמת על אף ציר: ([…],[…]).",
           "signature": "eea1b535",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalFreePointPredicates.ts:equal-positive-coordinate-point",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:equal-positive-coordinate-point"
+          ]
         },
         {
           "targetId": "p58-q8",
@@ -14988,12 +14992,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p58-q6",
-        "p58-q7"
-      ],
-      "automaticallyCheckableTargets": 16,
-      "coveragePercentage": 88.9
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 18,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 59,
