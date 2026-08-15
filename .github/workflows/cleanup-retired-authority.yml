@@ -36,13 +36,14 @@ jobs:
           if text.count(old) != 1:
               raise SystemExit('guard failed: workbook authority label drifted')
           text = text.replace(old, "describe('workbook integrity (RULES.md canonical checks)', () => {", 1)
+          text = re.sub(r'USER_MEMORY(?:\.md)?(?: §\d+)?', 'regression history', text)
           if 'USER_MEMORY' in text:
               raise SystemExit('guard failed: workbook still references USER_MEMORY')
           workbook.write_text(text, encoding='utf-8')
           layout = Path('tests/layout-rules.test.ts')
           text = layout.read_text(encoding='utf-8')
           text = text.replace("/* Yaniv's standing layout rules, as executable checks.", '/* Canonical layout invariants as executable regression checks.')
-          text = re.sub(r'USER_MEMORY §\d+', 'regression invariant', text)
+          text = re.sub(r'USER_MEMORY(?:\.md)?(?: §\d+)?', 'regression history', text)
           if 'USER_MEMORY' in text:
               raise SystemExit('guard failed: layout still references USER_MEMORY')
           layout.write_text(text, encoding='utf-8')
