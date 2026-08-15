@@ -1,0 +1,43 @@
+name: Enforce explicit check before correctness feedback
+
+on:
+  push:
+    branches:
+      - agent/canonical-lms-unified
+    paths:
+      - .github/workflows/enforce-check-before-feedback.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/canonical-lms-unified
+          fetch-depth: 0
+      - name: Remove correctness reveal from typing
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('src/lms/engine.ts')
+          s = p.read_text(encoding='utf-8')
+          old = """      if (!progress.locked && !progress.correct) {\n        const expected = expectedAnswersFor(target);\n        const correctNow =\n          progress.answer.trim().length > 0 &&\n          expected.length > 0 &&\n          answersMatch(progress.answer, expected);\n\n        if (correctNow) {\n          progress.correct = true;\n          target.dataset.lmsFeedback = 'correct';\n          updateTarget(target, progress);\n        } else {\n          target.dataset.lmsState = progress.answer\n            ? 'filled'\n            : 'empty';\n          delete target.dataset.lmsFeedback;\n        }\n      }\n"""
+          new = """      if (!progress.locked && !progress.correct) {\n        target.dataset.lmsState = progress.answer\n          ? 'filled'\n          : 'empty';\n        delete target.dataset.lmsFeedback;\n      }\n"""
+          if s.count(old) != 1:
+              raise SystemExit(f'expected one immediate-feedback block, found {s.count(old)}')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+          git diff --check
+      - name: Commit
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/lms/engine.ts
+          git commit -m "Require explicit check before correctness feedback"
+          git pull --rebase origin agent/canonical-lms-unified
+          git push origin HEAD:agent/canonical-lms-unified
