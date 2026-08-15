@@ -845,10 +845,10 @@ describe('the rules page still matches the code', () => {
   });
 
   it('the page count it states is the page count there is', () => {
-    const stated = /\*\*החוברת = (\d+) עמודים ממוספרים\*\*/.exec(rules)?.[1];
+    const stated = /contains \*\*(\d+) numbered pages\*\*/.exec(rules)?.[1];
     expect(Number(stated), 'the rules page states a stale page count').toBe(WORKBOOK.length);
     // and no other page total may be left lying around
-    for (const m of rules.matchAll(/(\d+) עמודים ממוספרים/g)) {
+    for (const m of rules.matchAll(/\*\*(\d+) numbered pages\*\*/g)) {
       expect(Number(m[1]), 'a second, different page count in the rules').toBe(WORKBOOK.length);
     }
   });
