@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { WORKBOOK } from '../src/data/workbook';
 import { hydrateDigitalGeometryAnswers } from '../src/lms/digitalGeometryAnswers';
 
-function canonicalPage73Root(): HTMLElement {
-  const page = WORKBOOK.find((candidate) => candidate.n === 73);
+function canonicalPageRoot(pageNumber: number): HTMLElement {
+  const page = WORKBOOK.find((candidate) => candidate.n === pageNumber);
   expect(page).toBeDefined();
   const { document } = parseHTML(`<div id="root">${page!.html}</div>`);
   const root = document.querySelector<HTMLElement>('#root');
@@ -12,9 +12,15 @@ function canonicalPage73Root(): HTMLElement {
   return root!;
 }
 
+function calcAnswers(card: HTMLElement): string[] {
+  return Array.from(card.querySelectorAll<HTMLElement>('.calc-final .blank')).map(
+    (target) => target.dataset['lmsAnswers'] || '',
+  );
+}
+
 describe('right-angle rectangle calculations', () => {
   it('derives perimeter 16 and area 15 from the canonical 5 by 3 rectangle', () => {
-    const root = canonicalPage73Root();
+    const root = canonicalPageRoot(73);
     hydrateDigitalGeometryAnswers(root);
     const card = Array.from(root.querySelectorAll<HTMLElement>('.q-card')).find(
       (candidate) =>
@@ -23,11 +29,31 @@ describe('right-angle rectangle calculations', () => {
         ),
     );
     expect(card).toBeDefined();
-    const finals = Array.from(
-      card!.querySelectorAll<HTMLElement>('.calc-final .blank'),
+    expect(calcAnswers(card!)).toEqual([
+      JSON.stringify(['16']),
+      JSON.stringify(['15']),
+    ]);
+  });
+
+  it('keeps the two summary rectangles separated with their own calculations', () => {
+    const root = canonicalPageRoot(78);
+    hydrateDigitalGeometryAnswers(root);
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('.q-card'));
+    const first = cards.find((card) =>
+      card.querySelector('h3')?.textContent?.includes('לפי המלבן ABCD'),
     );
-    expect(finals).toHaveLength(2);
-    expect(finals[0]?.dataset['lmsAnswers']).toBe(JSON.stringify(['16']));
-    expect(finals[1]?.dataset['lmsAnswers']).toBe(JSON.stringify(['15']));
+    const second = cards.find((card) =>
+      card.querySelector('h3')?.textContent?.includes('דניאל סימן שלושה קודקודים'),
+    );
+    expect(first).toBeDefined();
+    expect(second).toBeDefined();
+    expect(calcAnswers(first!)).toEqual([
+      JSON.stringify(['18']),
+      JSON.stringify(['20']),
+    ]);
+    expect(calcAnswers(second!)).toEqual([
+      JSON.stringify(['14']),
+      JSON.stringify(['12']),
+    ]);
   });
 });
