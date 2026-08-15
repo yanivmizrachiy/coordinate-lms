@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-15T18:13:03.301Z",
+  "generatedAt": "2026-08-15T18:14:09.956Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1066,
-  "coveragePercentage": 91.7,
+  "automaticallyCheckableTargets": 1069,
+  "coveragePercentage": 92,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 270,
-    "deterministic-mathematical": 610,
+    "deterministic-mathematical": 613,
     "valid-range": 6,
     "open-ended": 72,
-    "ambiguous": 24,
+    "ambiguous": 21,
     "unsupported": 0,
     "missing": 0
   },
@@ -10793,10 +10793,10 @@
           "signature": "16a6d254",
           "classification": "deterministic-mathematical",
           "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:axis-point-moved-up-four",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-x-axis"
+            "predicate:axis-point-moved-up-four"
           ]
         },
         {
@@ -10807,10 +10807,10 @@
           "signature": "16a6d254",
           "classification": "deterministic-mathematical",
           "currentAnswerSource": "runtime mathematical predicate",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:axis-point-moved-up-four",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-x-axis"
+            "predicate:axis-point-moved-up-four"
           ]
         },
         {
@@ -10819,11 +10819,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות.",
           "signature": "144eb0f7",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:axis-point-moved-up-four",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:axis-point-moved-up-four"
+          ]
         },
         {
           "targetId": "p42-q15",
@@ -10831,11 +10833,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות.",
           "signature": "144eb0f7",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:axis-point-moved-up-four",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:axis-point-moved-up-four"
+          ]
         },
         {
           "targetId": "p42-q16",
@@ -10843,11 +10847,13 @@
           "inputType": "text:number",
           "context": "אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות.",
           "signature": "2a9724fa",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:axis-point-moved-up-four",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:axis-point-moved-up-four"
+          ]
         },
         {
           "targetId": "p42-q17",
@@ -10864,13 +10870,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p42-q14",
-        "p42-q15",
-        "p42-q16"
-      ],
-      "automaticallyCheckableTargets": 14,
-      "coveragePercentage": 82.4
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 17,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 43,

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-15T18:13:03.301Z",
+  "generatedAt": "2026-08-15T18:14:09.956Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -9145,10 +9145,10 @@
           "signature": "16a6d254",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:axis-point-moved-up-four",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-x-axis"
+            "predicate:axis-point-moved-up-four"
           ],
           "context": "סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…])."
         },
@@ -9158,10 +9158,10 @@
           "signature": "16a6d254",
           "inputType": "ordered-pair-coordinate",
           "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/lms/digitalPredicates.ts:point-on-x-axis",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:axis-point-moved-up-four",
           "automaticCheckingSafe": true,
           "answers": [
-            "predicate:point-on-x-axis"
+            "predicate:axis-point-moved-up-four"
           ],
           "context": "סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…])."
         },
@@ -9170,10 +9170,12 @@
           "targetId": "p42-q14",
           "signature": "144eb0f7",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:axis-point-moved-up-four",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:axis-point-moved-up-four"
+          ],
           "context": "אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות."
         },
         {
@@ -9181,10 +9183,12 @@
           "targetId": "p42-q15",
           "signature": "144eb0f7",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:axis-point-moved-up-four",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:axis-point-moved-up-four"
+          ],
           "context": "אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות."
         },
         {
@@ -9192,10 +9196,12 @@
           "targetId": "p42-q16",
           "signature": "2a9724fa",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:axis-point-moved-up-four",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:axis-point-moved-up-four"
+          ],
           "context": "אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות."
         },
         {

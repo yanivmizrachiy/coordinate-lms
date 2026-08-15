@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-15T18:13:03.301Z
+Generated: 2026-08-15T18:14:09.956Z
 
-Overall: 1066/1162 safely checkable targets (91.7%).
+Overall: 1069/1162 safely checkable targets (92%).
 
 ## Classification totals
 
@@ -10,10 +10,10 @@ Overall: 1066/1162 safely checkable targets (91.7%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 270 |
-| deterministic-mathematical | 610 |
+| deterministic-mathematical | 613 |
 | valid-range | 6 |
 | open-ended | 72 |
-| ambiguous | 24 |
+| ambiguous | 21 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -959,7 +959,7 @@ No detected interactive response targets.
 
 ### Page 42 — כספת הקואורדינטות
 
-14/17 safely checkable (82.4%).
+17/17 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -976,9 +976,9 @@ No detected interactive response targets.
 | p42-q11 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה שממוקמת על ציר y שיעור ה־x הוא […]. |
 | p42-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…]). |
 | p42-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודה G שממוקמת על ציר x, וכתבו את שיעוריה: G([…],[…]). |
-| p42-q14 | ordered-pair-coordinate | ambiguous | no | none | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
-| p42-q15 | ordered-pair-coordinate | ambiguous | no | none | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
-| p42-q16 | text:number | ambiguous | no | none | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
+| p42-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
+| p42-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
+| p42-q16 | text:number | deterministic-mathematical | yes | runtime mathematical predicate | אם מזיזים את הנקודה G 4 יחידות למעלה, אז מגיעים אל הנקודה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות. |
 | p42-q17 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | בכל נקודה ששיעור ה־y שלה הוא 0, הנקודה ממוקמת על ציר […]. |
 
 ### Page 43 — מזהים ומתקנים טעויות
