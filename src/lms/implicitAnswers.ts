@@ -1,6 +1,7 @@
 import { hydrateDigitalCanonicalAnswers } from './digitalCanonicalAnswers';
 import { hydrateDigitalCoordinateSafePredicate } from './digitalCoordinateSafePredicate';
 import { hydrateDigitalDeterministicAnswers } from './digitalDeterministicAnswers';
+import { hydrateDigitalEncryptedRoutePredicate } from './digitalEncryptedRoutePredicate';
 import { hydrateDigitalExplanationChoices } from './digitalExplanationChoices';
 import { hydrateDigitalFreePointPredicates } from './digitalFreePointPredicates';
 import { hydrateDigitalGeometryAnswers } from './digitalGeometryAnswers';
@@ -56,6 +57,7 @@ export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
   const cleanupSuspect = hydrateDigitalSuspectPredicate(root);
   const cleanupFreePoints = hydrateDigitalFreePointPredicates(root);
   const cleanupSquareVertices = hydrateDigitalSquareVertexPredicate(root);
+  const cleanupEncryptedRoute = hydrateDigitalEncryptedRoutePredicate(root);
   const cleanupPredicates = hydrateDigitalPredicates(root);
   const cleanupSegments = hydrateDigitalSegmentPredicates(root);
   const cleanupRectangles = hydrateDigitalRectanglePredicates(root);
@@ -68,6 +70,7 @@ export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
     cleanupRectangles();
     cleanupSegments();
     cleanupPredicates();
+    cleanupEncryptedRoute();
     cleanupSquareVertices();
     cleanupFreePoints();
     cleanupSuspect();
