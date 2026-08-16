@@ -18,4 +18,4 @@ jobs:
       - name: Dispatch official Firestore production workflow
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run deploy-firestore.yml --ref agent/canonical-lms-unified
+        run: gh workflow run deploy-firestore.yml -R yanivmizrachiy/coordinate-lms --ref agent/canonical-lms-unified
