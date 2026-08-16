@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T08:45:37.258Z",
+  "generatedAt": "2026-08-16T08:46:47.261Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -15580,10 +15580,12 @@
           "targetId": "p76-q12",
           "signature": "4ea33d2d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:nonnegative-number"
+          ],
           "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B."
         },
         {
@@ -15591,10 +15593,12 @@
           "targetId": "p76-q13",
           "signature": "4ea33d2d",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:nonnegative-number-not-four"
+          ],
           "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B."
         },
         {
@@ -15602,10 +15606,12 @@
           "targetId": "p76-q14",
           "signature": "b5508af7",
           "inputType": "text:relation",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "שונה"
+          ],
           "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B."
         }
       ]

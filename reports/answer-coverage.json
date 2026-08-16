@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-16T08:45:37.258Z",
+  "generatedAt": "2026-08-16T08:46:47.261Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1091,
-  "coveragePercentage": 93.9,
+  "automaticallyCheckableTargets": 1094,
+  "coveragePercentage": 94.1,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 283,
+    "canonical-metadata-derived": 286,
     "deterministic-mathematical": 622,
     "valid-range": 6,
     "open-ended": 64,
-    "ambiguous": 7,
+    "ambiguous": 4,
     "unsupported": 0,
     "missing": 0
   },
@@ -18388,11 +18388,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B.",
           "signature": "4ea33d2d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:nonnegative-number"
+          ]
         },
         {
           "targetId": "p76-q13",
@@ -18400,11 +18402,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B.",
           "signature": "4ea33d2d",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:nonnegative-number-not-four"
+          ]
         },
         {
           "targetId": "p76-q14",
@@ -18412,11 +18416,13 @@
           "inputType": "text:relation",
           "context": "נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B.",
           "signature": "b5508af7",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "שונה"
+          ]
         }
       ],
       "missingOrAmbiguousTargetIds": [
@@ -18425,13 +18431,10 @@
         "p76-q5",
         "p76-q6",
         "p76-q9",
-        "p76-q10",
-        "p76-q12",
-        "p76-q13",
-        "p76-q14"
+        "p76-q10"
       ],
-      "automaticallyCheckableTargets": 5,
-      "coveragePercentage": 35.7
+      "automaticallyCheckableTargets": 8,
+      "coveragePercentage": 57.1
     },
     {
       "pageNumber": 77,

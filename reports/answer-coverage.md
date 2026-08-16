@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-16T08:45:37.258Z
+Generated: 2026-08-16T08:46:47.261Z
 
-Overall: 1091/1162 safely checkable targets (93.9%).
+Overall: 1094/1162 safely checkable targets (94.1%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 283 |
+| canonical-metadata-derived | 286 |
 | deterministic-mathematical | 622 |
 | valid-range | 6 |
 | open-ended | 64 |
-| ambiguous | 7 |
+| ambiguous | 4 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -1666,7 +1666,7 @@ No detected interactive response targets.
 
 ### Page 76 — זוויות ברביע הראשון
 
-5/14 safely checkable (35.7%).
+8/14 safely checkable (57.1%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1681,9 +1681,9 @@ No detected interactive response targets.
 | p76-q9 | text:letter | open-ended | no | objective digital adaptation required | הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB. |
 | p76-q10 | text:relation | open-ended | no | objective digital adaptation required | הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB. |
 | p76-q11 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | AB=4 − 0=[…]יח' |
-| p76-q12 | ordered-pair-coordinate | ambiguous | no | none | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
-| p76-q13 | ordered-pair-coordinate | ambiguous | no | none | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
-| p76-q14 | text:relation | ambiguous | no | none | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
+| p76-q12 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
+| p76-q13 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
+| p76-q14 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | נקודה שבה הזווית ABC אינה ישרה: ([…],[…]), כי שיעור ה־y שלה […] משיעור ה־y של הנקודה B. |
 
 ### Page 77 — זוויות ברביע הראשון
 
