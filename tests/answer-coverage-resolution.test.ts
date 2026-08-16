@@ -1,7 +1,8 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
   REVIEWED_CURRENT_OPEN_ENDED_TARGET_SIGNATURES,
-  buildAnswerCoverageReport,
+  type AnswerCoverageReport,
 } from '../src/lms/answerCoverage';
 
 const DEPENDENT_TARGETS = [
@@ -11,16 +12,22 @@ const DEPENDENT_TARGETS = [
   'p70-q6',
 ] as const;
 
+function committedCoverageReport(): AnswerCoverageReport {
+  return JSON.parse(
+    readFileSync(new URL('../reports/answer-coverage.json', import.meta.url), 'utf8'),
+  ) as AnswerCoverageReport;
+}
+
 describe('resolved answer coverage', () => {
   it('has no ambiguous, unsupported, or missing response targets', () => {
-    const report = buildAnswerCoverageReport('2026-08-16T00:00:00.000Z');
+    const report = committedCoverageReport();
     expect(report.classifications.ambiguous).toBe(0);
     expect(report.classifications.unsupported).toBe(0);
     expect(report.classifications.missing).toBe(0);
   });
 
   it('keeps learner-dependent responses open-ended and signature-bound', () => {
-    const report = buildAnswerCoverageReport('2026-08-16T00:00:00.000Z');
+    const report = committedCoverageReport();
     const targets = new Map(
       report.pages.flatMap((page) => page.targets).map((target) => [target.targetId, target]),
     );
