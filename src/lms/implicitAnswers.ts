@@ -3,6 +3,7 @@ import { hydrateDigitalCoordinateSafePredicate } from './digitalCoordinateSafePr
 import { hydrateDigitalDeterministicAnswers } from './digitalDeterministicAnswers';
 import { hydrateDigitalEncryptedRoutePredicate } from './digitalEncryptedRoutePredicate';
 import { hydrateDigitalExplanationChoices } from './digitalExplanationChoices';
+import { hydrateDigitalExplanationExtensions } from './digitalExplanationExtensions';
 import { hydrateDigitalFreePointPredicates } from './digitalFreePointPredicates';
 import { hydrateDigitalGeometryAnswers } from './digitalGeometryAnswers';
 import { hydrateDigitalGraphAnswers } from './digitalGraphAnswers';
@@ -53,6 +54,7 @@ export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
   hydrateDigitalLinearFacts(root);
   hydrateDigitalOneStepAnswers(root);
   const cleanupExplanations = hydrateDigitalExplanationChoices(root);
+  const cleanupExplanationExtensions = hydrateDigitalExplanationExtensions(root);
   const cleanupCoordinateSafe = hydrateDigitalCoordinateSafePredicate(root);
   const cleanupSuspect = hydrateDigitalSuspectPredicate(root);
   const cleanupFreePoints = hydrateDigitalFreePointPredicates(root);
@@ -75,6 +77,7 @@ export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
     cleanupFreePoints();
     cleanupSuspect();
     cleanupCoordinateSafe();
+    cleanupExplanationExtensions();
     cleanupExplanations();
   };
 }
