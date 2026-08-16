@@ -5,6 +5,11 @@ import {
   type AnswerCoverageReport,
 } from '../src/lms/answerCoverage';
 
+interface OpenEndedReview {
+  schemaVersion: number;
+  targets: Array<{ targetId: string; signature: string; reason: string }>;
+}
+
 const DEPENDENT_TARGETS = [
   'p22-q14',
   'p37-q21',
@@ -16,6 +21,12 @@ function committedCoverageReport(): AnswerCoverageReport {
   return JSON.parse(
     readFileSync(new URL('../reports/answer-coverage.json', import.meta.url), 'utf8'),
   ) as AnswerCoverageReport;
+}
+
+function committedOpenEndedReview(): OpenEndedReview {
+  return JSON.parse(
+    readFileSync(new URL('../docs/open-ended-review.json', import.meta.url), 'utf8'),
+  ) as OpenEndedReview;
 }
 
 describe('resolved answer coverage', () => {
@@ -41,5 +52,26 @@ describe('resolved answer coverage', () => {
         REVIEWED_CURRENT_OPEN_ENDED_TARGET_SIGNATURES[targetId],
       );
     }
+  });
+
+  it('has signature-verified review evidence for every remaining open-ended target', () => {
+    const report = committedCoverageReport();
+    const review = committedOpenEndedReview();
+    expect(review.schemaVersion).toBe(1);
+    const ledger = new Map(
+      review.targets.map((entry) => [entry.targetId, entry]),
+    );
+
+    const unresolved = report.pages
+      .flatMap((page) => page.targets)
+      .filter((target) => target.classification === 'open-ended')
+      .filter((target) => {
+        if (target.sourceEvidence.startsWith('signature-bound')) return false;
+        const entry = ledger.get(target.targetId);
+        return !entry || entry.signature !== target.signature || entry.reason.trim() === '';
+      })
+      .map((target) => target.targetId);
+
+    expect(unresolved).toEqual([]);
   });
 });
