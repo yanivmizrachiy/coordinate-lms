@@ -11,10 +11,7 @@ import {
   localLmsFallbackEnabled,
   missingFirebaseSettings,
 } from '../lms/firebase';
-import {
-  claimGuestProgress,
-  logActivity,
-} from '../lms/repository';
+import { logActivity } from '../lms/repository';
 import type { ViewContext } from './context';
 
 export function lmsLogin({
@@ -38,7 +35,7 @@ export function lmsLogin({
         }),
         elem('p', {
           text:
-            'החשבון מחובר. כל תוצאה חדשה תישמר תחת המשתמש הזה.',
+            'החשבון מחובר. מעכשיו התוצאות, הניסיונות והתקדמות הלמידה שלך נשמרים בחשבון וניתנים להצגה בדוחות.',
         }),
       ),
     );
@@ -50,17 +47,17 @@ export function lmsLogin({
     const continueButton = elem('button', {
       class: 'btn btn--gold',
       type: 'button',
-      text: 'המשך לעמוד 2',
+      text: 'חזרה לתרגול',
     });
 
     continueButton.addEventListener('click', () => {
-      navigate('#/workbook/2');
+      navigate('#/workbook/1');
     });
 
     const progressButton = elem('button', {
       class: 'btn btn--ghost',
       type: 'button',
-      text: 'ההתקדמות שלי',
+      text: 'ההתקדמות והדוחות שלי',
     });
 
     progressButton.addEventListener('click', () => {
@@ -111,12 +108,12 @@ export function lmsLogin({
   }
 
   const title = elem('h1', {
-    text: 'הרשמה להמשך התרגול',
+    text: 'הרשמה לשמירת הלמידה ולקבלת דוחות',
   });
 
   const explanation = elem('p', {
     text:
-      'עמוד 1 פתוח ללא הרשמה. לאחר ההרשמה הציון שכבר התקבל נשמר בחשבון.',
+      'כל דפי התרגול פתוחים גם ללא הרשמה. הרשמה נדרשת רק אם רוצים שהמערכת תשמור את התוצאות, הניסיונות וההתקדמות ותאפשר לקבל דוחות על הלמידה.',
   });
 
   const registrationAvailable =
@@ -127,12 +124,12 @@ export function lmsLogin({
       ? 'lms-mode lms-mode--online'
       : 'lms-mode lms-mode--local',
     text: firebaseConfigured
-      ? 'שמירה מרכזית מחוברת ל־Firebase.'
+      ? 'הרשמה מאובטחת באמצעות Firebase Authentication. הסיסמה אינה נשמרת בפרופיל התלמיד או ב־Firestore.'
       : localLmsFallbackEnabled
-        ? 'מצב פיתוח מקומי בלבד — הנתונים אינם משותפים בין מכשירים.'
-        : 'ההרשמה נעולה: חסרות ' +
+        ? 'מצב פיתוח מקומי בלבד — אינו מיועד לפרסום. בייצור ההרשמה מתבצעת רק באמצעות Firebase Authentication.'
+        : 'ההרשמה זמנית אינה זמינה: חסרות ' +
           String(missingFirebaseSettings.length) +
-          ' הגדרות Firebase. כך נמנעת יצירת הרשמה מקומית שלא תופיע בדשבורד המורה.',
+          ' הגדרות Firebase. התרגול עצמו נשאר פתוח ללא הרשמה וללא מעקב מרכזי.',
   });
 
   const form = elem('form', {
@@ -143,6 +140,7 @@ export function lmsLogin({
     type: 'text',
     autocomplete: 'name',
     placeholder: 'שם מלא',
+    maxlength: '120',
     required: 'true',
   }) as HTMLInputElement;
 
@@ -150,6 +148,8 @@ export function lmsLogin({
     type: 'text',
     autocomplete: 'username',
     placeholder: 'שם משתמש',
+    minlength: '3',
+    maxlength: '32',
     required: 'true',
   }) as HTMLInputElement;
 
@@ -157,29 +157,45 @@ export function lmsLogin({
     type: 'email',
     autocomplete: 'email',
     placeholder: 'כתובת אימייל',
+    maxlength: '254',
     required: 'true',
   }) as HTMLInputElement;
 
   const password = elem('input', {
     type: 'password',
     autocomplete: 'new-password',
-    placeholder: 'סיסמה — לפחות 6 תווים',
+    placeholder: 'סיסמה — לפחות 10 תווים, כולל אות ומספר',
+    minlength: '10',
+    required: 'true',
+  }) as HTMLInputElement;
+
+  const school = elem('input', {
+    type: 'text',
+    autocomplete: 'organization',
+    placeholder: 'בית ספר',
+    maxlength: '120',
+    required: 'true',
+  }) as HTMLInputElement;
+
+  const city = elem('input', {
+    type: 'text',
+    autocomplete: 'address-level2',
+    placeholder: 'עיר',
+    maxlength: '120',
     required: 'true',
   }) as HTMLInputElement;
 
   const className = elem('input', {
     type: 'text',
     placeholder: 'כיתה',
-  }) as HTMLInputElement;
-
-  const school = elem('input', {
-    type: 'text',
-    placeholder: 'בית ספר',
+    maxlength: '120',
+    required: 'true',
   }) as HTMLInputElement;
 
   const status = elem('div', {
     class: 'lms-auth__status',
     role: 'status',
+    'aria-live': 'polite',
   });
 
   let registrationMode = true;
@@ -187,7 +203,7 @@ export function lmsLogin({
   const submitButton = elem('button', {
     class: 'btn btn--gold',
     type: 'submit',
-    text: 'הרשמה ושמירת הציון',
+    text: 'הרשמה והפעלת שמירה ודוחות',
   }) as HTMLButtonElement;
 
   const switchButton = elem('button', {
@@ -196,26 +212,29 @@ export function lmsLogin({
     text: 'כבר נרשמתי — התחברות',
   }) as HTMLButtonElement;
 
+  const registrationOnlyFields = [
+    fullName,
+    username,
+    school,
+    city,
+    className,
+  ];
+
   switchButton.addEventListener('click', () => {
     registrationMode = !registrationMode;
 
-    fullName.hidden = !registrationMode;
-    username.hidden = !registrationMode;
-    className.hidden = !registrationMode;
-    school.hidden = !registrationMode;
-    fullName.required = registrationMode;
-    username.required = registrationMode;
-    fullName.disabled = !registrationMode;
-    username.disabled = !registrationMode;
-    className.disabled = !registrationMode;
-    school.disabled = !registrationMode;
+    for (const field of registrationOnlyFields) {
+      field.hidden = !registrationMode;
+      field.required = registrationMode;
+      field.disabled = !registrationMode;
+    }
 
     password.autocomplete = registrationMode
       ? 'new-password'
       : 'current-password';
 
     submitButton.textContent = registrationMode
-      ? 'הרשמה ושמירת הציון'
+      ? 'הרשמה והפעלת שמירה ודוחות'
       : 'התחברות';
 
     switchButton.textContent = registrationMode
@@ -227,9 +246,8 @@ export function lmsLogin({
 
   if (!registrationAvailable) {
     submitButton.disabled = true;
-    switchButton.disabled = true;
     status.textContent =
-      'לא ניתן להירשם עד השלמת החיבור המרכזי. עמוד 1 עדיין זמין כאורח.';
+      'אפשר להמשיך לתרגל את כל הדפים ללא הרשמה. שמירה ודוחות יופעלו לאחר חיבור Firebase.';
     status.dataset.kind = 'error';
   }
 
@@ -239,7 +257,9 @@ export function lmsLogin({
     if (!registrationAvailable) return;
 
     submitButton.setAttribute('disabled', 'true');
-    status.textContent = 'מתבצעת שמירה…';
+    status.textContent = registrationMode
+      ? 'יוצר חשבון מאובטח…'
+      : 'מתחבר לחשבון…';
     status.dataset.kind = 'normal';
 
     const action = registrationMode
@@ -248,22 +268,14 @@ export function lmsLogin({
           username: username.value,
           email: email.value,
           password: password.value,
-          className: className.value,
           school: school.value,
+          city: city.value,
+          className: className.value,
         })
       : loginStudent(email.value, password.value);
 
     void action
       .then(async (session) => {
-        const guestClaim = await claimGuestProgress(session.uid);
-
-        if (!guestClaim.complete) {
-          status.textContent =
-            'החשבון נוצר, אבל העברת התקדמות האורח למערכת המרכזית נכשלה. ההתקדמות נשארה במכשיר; בדקו חיבור ונסו להתחבר שוב.';
-          status.dataset.kind = 'error';
-          return;
-        }
-
         const activityOutcome = await logActivity({
           uid: session.uid,
           pageNumber: 1,
@@ -274,14 +286,14 @@ export function lmsLogin({
         });
 
         status.textContent = activityOutcome.central === 'failed'
-          ? 'החשבון וההתקדמות נשמרו, אך רישום פעילות ההתחברות לא הסתנכרן. עוברים לתרגול…'
-          : 'החשבון וההתקדמות נשמרו. עוברים להמשך התרגול…';
+          ? 'החשבון פעיל, אבל רישום אירוע ההתחברות עדיין לא הסתנכרן. אפשר להמשיך לתרגל והמערכת תנסה לסנכרן שוב.'
+          : 'החשבון פעיל. מעכשיו הלמידה שלך נשמרת ומתועדת לצורך דוחות.';
         status.dataset.kind = activityOutcome.central === 'failed'
           ? 'error'
           : 'success';
 
         window.setTimeout(() => {
-          navigate('#/workbook/2');
+          navigate('#/workbook/1');
         }, 400);
       })
       .catch((error: unknown) => {
@@ -301,8 +313,9 @@ export function lmsLogin({
     username,
     email,
     password,
-    className,
     school,
+    city,
+    className,
     status,
     submitButton,
     switchButton,

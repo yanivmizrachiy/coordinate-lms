@@ -1,13 +1,12 @@
 # CLAUDE.md — pointer only
 
-The repository's single source of engineering rules is:
+The repository has exactly one source of truth:
 
-> ## `RULES.md`
+> `RULES.md`
 
-Read it before making changes. `USER_MEMORY.md` and `HANDOFF.md` are historical
-workbook records, not competing rule authorities.
+Read and obey `RULES.md` before making changes.
 
-The writable repository is `yanivmizrachiy/coordinate-lms`. The canonical
-source repository `yanivmizrachiy/coordinate-first-quadrant` is read-only.
-Merge and production deployment require explicit confirmation for the current
-operation.
+Do not derive active rules from README files, status documents, PR descriptions, comments, historical commits, `USER_MEMORY.md`, or `HANDOFF.md`.
+
+Writable LMS repository: `yanivmizrachiy/coordinate-lms`.
+Canonical printable source repository: `yanivmizrachiy/coordinate-first-quadrant` — read-only during LMS work.

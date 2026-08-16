@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, grid } from '../authoring';
+import { sheet, grid, wordBank } from '../authoring';
 
 export const RIGHT_ANGLE_INTRO: WorkbookPageContent = sheet({
   sectionClass: "sheet guided dense",
@@ -10,6 +10,7 @@ export const RIGHT_ANGLE_INTRO: WorkbookPageContent = sheet({
 <div class="completion-intro">
 <div class="completion-title">השלימו את המשפטים
 </div>
+${wordBank(['ישרה', 'אנכי', 'אופקי'])}
 <div class="completion-sentence">קטע המקביל לציר x הוא קטע <span class="word-blank word-medium"></span>.
 </div>
 <div class="completion-sentence">קטע המקביל לציר y הוא קטע <span class="word-blank word-medium"></span>.
@@ -41,7 +42,7 @@ export const RIGHT_ANGLE_INTRO: WorkbookPageContent = sheet({
 </section>
 <section class="q-card">
 <h3>ג. סמנו את הקטעים, ואז השלימו עליהם.</h3>
-<p>סמנו על הסרטוט את ארבע הנקודות, וציירו את שני הקטעים <span class="math-ltr" dir="ltr">AB</span> ו־<span class="math-ltr" dir="ltr">BC</span>.</p>
+<p>סמנו על הסרטוט את שלוש הנקודות, וציירו את שני הקטעים <span class="math-ltr" dir="ltr">AB</span> ו־<span class="math-ltr" dir="ltr">BC</span>.</p>
 ${grid({ size: 'md', label: 'מערכת צירים ריקה לסימון הנקודות ולציור שני הקטעים' })}
 <ul class="tasks">
 <li>לקטע <span class="math-ltr" dir="ltr">AB</span> קצה אחד בנקודה <span class="math-ltr" dir="ltr">A(2,1)</span> והקצה האחר בנקודה <span class="math-ltr" dir="ltr">B(2,5)</span>, ולכן הוא מקביל לציר <span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>

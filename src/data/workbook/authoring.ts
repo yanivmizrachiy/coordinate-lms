@@ -137,16 +137,42 @@ export const mixed = (whole: number, num: number, den: number): string =>
 /* Room to work, and then the answer — Yaniv's rule: „הדרך חשובה מאוד מאוד, לא
    לוותר על הכתיבה של הדרך”, and the answer is not an answer without its unit.
    `S` is area and `P` is perimeter, the letters an Israeli textbook uses. */
-export const calcBox = (o: { lines?: number; perimeter?: boolean; area?: boolean }): string => {
-  const rules = '<div class="answer-line"></div>'.repeat(o.lines ?? 2);
-  const finals: string[] = [];
-  if (o.perimeter) finals.push(`ההיקף: ${ltr('P')} = ${blank(4, 'number')} יח'`);
-  if (o.area) finals.push(`השטח: ${ltr('S')} = ${blank(4, 'number')} יח"ר`);
-  return (
-    '<div class="calc-box"><b>דרך החישוב:</b>' + rules +
-    (finals.length ? `<div class="calc-final">${finals.map((f) => `<span>${f}</span>`).join('')}</div>` : '') +
-    '</div>'
-  );
+export const calcBox = (o: { lines?: number; perimeter?: boolean; area?: boolean; name?: string; shape?: string }): string => {
+  /* Yaniv, 31.07.2026 — the binding format: the working is written on REAL
+     squared notebook paper („מחברת משבצות"), not ruled lines. The quantity's
+     letter opens the exercise at the LEFT with its equals sign — „P = ‎" —
+     and the learner continues writing after the equals, on the squares.
+     The answer is a construct phrase: „היקף המלבן הוא ____ יח'." — never
+     „ההיקף הוא". `shape` names the figure („המלבן" unless told otherwise —
+     „הריבוע" on the squares pages, „הצורה" where naming it would give the
+     answer away). Two quantities still sit side by side. */
+  const rows = o.lines ?? 2;
+  const shape = o.shape ?? 'המלבן';
+  const slot = (heading: string, letter: string, word: string): string =>
+    '<div class="calc-sec">' +
+    `<b class="calc-label">${heading}</b>` +
+    `<div class="calc-work calc-squared" style="--calc-rows:${rows}">` +
+    '<span class="calc-squared__opener" dir="ltr">' +
+    `<span class="calc-sym"><span class="calc-sym__math" dir="ltr">${letter}${o.name ? `<sub>${o.name}</sub>` : ''}</span>` +
+    `<span class="calc-sym__hint">${word}</span></span>` +
+    '<span class="calc-squared__eq">=</span>' +
+    '</span>' +
+    '</div>' +
+    '</div>';
+  const answer = (word: string, unit: string): string =>
+    `<div class="calc-final__row">${word} ${shape} הוא ${blank(6, 'number')} ${unit}.</div>`;
+  const slots: string[] = [];
+  const answers: string[] = [];
+  if (o.perimeter) { slots.push(slot('חישוב היקף המלבן:', 'P', 'היקף')); answers.push(answer('היקף', "יח'")); }
+  if (o.area) { slots.push(slot('חישוב שטח המלבן:', 'S', 'שטח')); answers.push(answer('שטח', 'יח"ר')); }
+  if (!slots.length) {
+    slots.push(`<b class="calc-label">תרגיל:</b><div class="calc-work calc-squared" style="--calc-rows:${rows}"></div>`);
+  }
+  const body = slots.length === 2 ? `<div class="calc-cols">${slots.join('')}</div>` : slots.join('');
+  const finals = answers.length
+    ? `<div class="calc-final${answers.length === 2 ? ' calc-cols' : ''}">${answers.join('')}</div>`
+    : '';
+  return `<div class="calc-box">${body}${finals}</div>`;
 };
 
 /* An exercise is written the way it is worked: LEFT to right. „BC = תרגיל =
@@ -192,6 +218,28 @@ export const exerciseGiven = (name: string, calc: string, unit = "יח'"): strin
      the same thing twice. The two-line block belongs to exercise(), where the
      learner writes the working and then states what the side equals. */
   '</div>';
+
+/** A labelled cell grid the learner COLOURS by hand — the printable stand-in
+    for the colour-decode game. Columns x:0..xmax, rows y:0..ymax. `.color-grid`
+    is `direction: ltr` so the origin sits bottom-LEFT and x grows to the right,
+    exactly like every coordinate drawing in the booklet — the first quadrant,
+    not a mirror of it. Plain spans, never a <button>: „המשימות שלנו הן
+    להדפסה", and a printed page carries no widget. */
+export const colorGrid = (xmax: number, ymax: number): string => {
+  const cols = xmax + 1;
+  let body = '';
+  for (let y = ymax; y >= 0; y--) {
+    let row = `<span class="cg-lab cg-lab--y">${y}</span>`;
+    for (let x = 0; x <= xmax; x++) row += `<span class="cg-cell" aria-label="תא ${x},${y}"></span>`;
+    body += row;
+  }
+  let foot = '<span class="cg-lab"></span>';
+  for (let x = 0; x <= xmax; x++) foot += `<span class="cg-lab cg-lab--x">${x}</span>`;
+  return (
+    `<div class="color-grid" role="img" aria-label="רשת תאים לצביעה" ` +
+    `style="--cg-cols:${cols}">${body}${foot}</div>`
+  );
+};
 
 /** „מחסן מילים” — the words to choose from, so the task needs no explaining. */
 export const wordBank = (words: string[]): string =>

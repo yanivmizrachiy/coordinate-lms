@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, grid } from '../authoring';
+import { sheet, blank, ltr, pair, grid, wordBank } from '../authoring';
 
 /* Based on the question Yaniv sent about a square's side against its area —
    the one that ends in an algebraic expression. Here the same idea for the
@@ -13,12 +13,13 @@ export const GRAPH_SQUARE_AREA: WorkbookPageContent = sheet({
 <div class="rule-box completion-intro">
 <div class="completion-sentence">בריבוע כל ארבע הצלעות ${blank(5, 'relation')}, ולכן ההיקף הוא אורך הצלע כפול ${blank(3, 'number')}.</div>
 </div>
+${wordBank(['4', 'שוות'])}
 <section class="q-card">
 <h3>א. בגרף מוצג היקף הריבוע לפי אורך הצלע שלו.</h3>
 ${grid({
   size: 'lg',
   axisX: 'אורך הצלע (יח\')',
-  axisY: 'ההיקף (עשרות יח\')',
+  axisY: 'ההיקף (יח\')',
   label: 'גרף נקודות: היקף הריבוע לפי אורך הצלע',
   points: [
     { x: 1, y: 0.4, label: '' },

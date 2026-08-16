@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-01T23:56:19.916Z",
+  "generatedAt": "2026-08-16T11:44:32.425Z",
   "mode": "static",
   "status": "blocked",
   "releaseReady": false,
@@ -9,12 +9,15 @@
       "id": "repository-engineering",
       "label": "Repository engineering gates",
       "status": "pass",
-      "summary": "The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent.",
+      "summary": "The repository contract, generated manifests, emulator command, CI runtime, deployment verifier, and patch hygiene are internally consistent.",
       "evidence": [
         "RULES.md",
         "reports/answer-coverage.json",
+        "reports/answer-target-order.json",
         "public/answer-review-manifest.json",
         ".github/workflows/ci.yml",
+        ".github/workflows/deploy-firestore.yml",
+        "scripts/verify-production-firebase.mjs",
         "git diff --check"
       ],
       "blockers": []
@@ -26,9 +29,9 @@
       "summary": "Real Firestore operations passed against the demo project with the pinned Firebase CLI.",
       "evidence": [
         "suite: tests/firestore-emulator.test.ts",
-        "generatedAt: 2026-08-01T23:45:34.735Z",
+        "generatedAt: 2026-08-16T11:44:31.542Z",
         "Firebase CLI: 15.25.1",
-        "contract SHA-256: 5219753cd0d484128af3e2568b0e9434d5b61bac54e708684c50f23e1ead2f06"
+        "contract SHA-256: 8d18094192a5fa7a7a5b6646ed6b265412f7a18901e134864d025576643854f9"
       ],
       "blockers": []
     },
@@ -36,11 +39,13 @@
       "id": "external-firebase",
       "label": "External Firebase configuration and deployment",
       "status": "blocked",
-      "summary": "Repository validation cannot supply console settings, service-account configuration, or deployment evidence.",
+      "summary": "Firebase Production remains blocked until a successful manual Firestore deployment produces current non-secret evidence and Email/Password Authentication is verified.",
       "evidence": [
-        "reports/firebase-readiness.json (static)"
+        "reports/firebase-readiness.json (static)",
+        "reports/firebase-production-evidence.json (required after successful manual production deployment)"
       ],
       "blockers": [
+        "No current verified Firebase production evidence matches the deployed Firestore rules/indexes and Email/Password Authentication configuration.",
         "VITE_FIREBASE_API_KEY is missing locally and was not found in GitHub Actions secrets.",
         "VITE_FIREBASE_AUTH_DOMAIN is missing locally and was not found in GitHub Actions secrets.",
         "VITE_FIREBASE_PROJECT_ID is missing locally and was not found in GitHub Actions secrets.",
@@ -53,15 +58,14 @@
     {
       "id": "pedagogical-review",
       "label": "Pedagogical answer-key review",
-      "status": "blocked",
-      "summary": "875/1061 targets are safely auto-checkable; 161 are signature-bound open-ended tasks; 25 remain unresolved.",
+      "status": "pass",
+      "summary": "1094/1162 targets are safely auto-checkable; 68 open-ended targets have signature-verified review evidence; 0 remain unresolved.",
       "evidence": [
         "reports/answer-coverage.json",
-        "public/answer-review-manifest.json"
+        "public/answer-review-manifest.json",
+        "docs/open-ended-review.json"
       ],
-      "blockers": [
-        "Resolve 25 targets in the answer-review studio without guessing."
-      ]
+      "blockers": []
     },
     {
       "id": "physical-acceptance",

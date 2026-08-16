@@ -1,0 +1,62 @@
+name: Refresh answer coverage
+
+on:
+  push:
+    branches:
+      - agent/canonical-lms-unified
+    paths:
+      - 'src/lms/**'
+      - 'src/data/workbook/**'
+      - 'scripts/generate-answer-coverage.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-answer-coverage-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: agent/canonical-lms-unified
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Regenerate and push derived coverage without losing concurrent work
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          for attempt in 1 2 3; do
+            git fetch origin agent/canonical-lms-unified
+            git reset --hard origin/agent/canonical-lms-unified
+            npm run answers:coverage
+            git add reports/answer-coverage.json reports/answer-coverage.md reports/answer-target-order.json public/answer-review-manifest.json
+
+            if git diff --cached --quiet; then
+              echo 'Answer coverage already current.'
+              exit 0
+            fi
+
+            git commit -m 'chore: refresh derived answer coverage'
+            if git push origin HEAD:agent/canonical-lms-unified; then
+              exit 0
+            fi
+
+            echo "Concurrent branch update detected; regenerating on latest head (attempt ${attempt}/3)."
+          done
+
+          echo 'Could not publish refreshed answer coverage after 3 concurrent updates.' >&2
+          exit 1

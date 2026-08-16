@@ -1,5 +1,6 @@
 import { parseHTML } from 'linkedom';
 import { WORKBOOK, TOTAL_PAGES } from '../data/workbook';
+import { legacyPageNumberForCurrent, legacyTargetIdForCurrent } from './legacyWorkbookMap';
 import { hydrateGrids } from '../lib/coordinateGrid';
 import { DEFAULT_ANSWER_KEYS } from './answerKey';
 import { hydrateChoiceAnswerInputs } from './choiceInputs';
@@ -255,6 +256,16 @@ export const REVIEWED_OPEN_ENDED_TARGET_SIGNATURES: Readonly<
   'p76-q7': 'be5c8b3e',
 };
 
+/** Current-page bindings for reviewed responses that depend on learner choices. */
+export const REVIEWED_CURRENT_OPEN_ENDED_TARGET_SIGNATURES: Readonly<
+  Record<string, string>
+> = {
+  'p22-q14': '4dfb3700',
+  'p37-q21': '9707758f',
+  'p37-q22': '9707758f',
+  'p70-q6': 'd548b7a9',
+};
+
 function hash(value: string): string {
   let result = 0x811c9dc5;
   for (let index = 0; index < value.length; index += 1) {
@@ -270,7 +281,7 @@ function cleanText(value: string): string {
 
 function contextFor(target: HTMLElement): string {
   const source = target.closest(
-    'li, tr, .completion-sentence, .calc-ltr, .calc-final, h3, p',
+    'li, tr, .completion-sentence, .calc-ltr, .calc-final, .task-grid > div, .axis-answer-box, h3, p',
   ) || target.parentElement;
 
   if (!source) return '';
@@ -299,7 +310,7 @@ function inputTypeFor(target: HTMLElement): string {
 }
 
 function isOpenEnded(context: string): boolean {
-  return /משלכם|שסימנתם|שבחרתם|הנתונים שלכם|הסבירו|ההסבר|נמקו|דוגמה משלכם/.test(
+  return /משלכם|שסימנתם|שבחרתם|הנתונים שלכם|דוגמה משלכם/.test(
     context,
   );
 }
@@ -307,6 +318,7 @@ function isOpenEnded(context: string): boolean {
 function classify(
   target: HTMLElement,
   targetId: string,
+  lookupTargetId: string,
   context: string,
   signature: string,
   defaults: AnswerKey,
@@ -319,17 +331,17 @@ function classify(
   | 'automaticCheckingSafe'
   | 'answers'
 > {
-  const defaultAnswers = (defaults[targetId] || []).filter(
+  const defaultAnswers = (defaults[lookupTargetId] || []).filter(
     isAllowedExpectedAnswer,
   );
   const implicitAnswers = (implicit[targetId] || []).filter(
     isAllowedExpectedAnswer,
   );
-  const proven = PROVEN_ANSWER_PROOFS[Number(targetId.match(/^p(\d+)-/)?.[1])]
-    ?.[targetId];
+  const proofPage = Number(lookupTargetId.match(/^p(\d+)-/)?.[1]);
+  const proven = PROVEN_ANSWER_PROOFS[proofPage]?.[lookupTargetId];
 
   if (defaultAnswers.length > 0) {
-    const classification: AnswerClassification = VALID_RANGE_TARGETS.has(targetId)
+    const classification: AnswerClassification = VALID_RANGE_TARGETS.has(lookupTargetId)
       ? 'valid-range'
       : 'reviewed-explicit';
     return {
@@ -386,16 +398,33 @@ function classify(
     };
   }
 
+  if (/הסבירו|ההסבר|נמקו|מדוע/.test(context)) {
+    return {
+      classification: 'ambiguous',
+      currentAnswerSource: 'four-option pedagogical digital adaptation required',
+      sourceEvidence: 'RULES.md §6: explanation task must be objectively computerized',
+      automaticCheckingSafe: false,
+      answers: [],
+    };
+  }
+
+  const reviewedCurrentOpenEndedSignature =
+    REVIEWED_CURRENT_OPEN_ENDED_TARGET_SIGNATURES[targetId];
   const reviewedOpenEndedSignature =
-    REVIEWED_OPEN_ENDED_TARGET_SIGNATURES[targetId];
-  if (reviewedOpenEndedSignature === signature || isOpenEnded(context)) {
+    REVIEWED_OPEN_ENDED_TARGET_SIGNATURES[lookupTargetId];
+  if (
+    reviewedCurrentOpenEndedSignature === signature ||
+    reviewedOpenEndedSignature === signature ||
+    isOpenEnded(context)
+  ) {
     return {
       classification: 'open-ended',
-      currentAnswerSource: 'teacher judgment required',
+      currentAnswerSource: 'objective digital adaptation required',
       sourceEvidence:
+        reviewedCurrentOpenEndedSignature === signature ||
         reviewedOpenEndedSignature === signature
           ? 'signature-bound canonical review: learner-created or dependent response'
-          : 'learner-created or explanatory response',
+          : 'learner-created or dependent response',
       automaticCheckingSafe: false,
       answers: [],
     };
@@ -446,15 +475,18 @@ export function buildAnswerCoverageReport(
     });
 
     const implicit = implicitAnswerKey(page.n);
-    const defaults = DEFAULT_ANSWER_KEYS[page.n] || {};
+    const legacyPage = legacyPageNumberForCurrent(page.n);
+    const defaults = DEFAULT_ANSWER_KEYS[legacyPage ?? page.n] || {};
     const targets = elements.map((target, index): AnswerCoverageTarget => {
       const targetId = target.dataset['lmsQid'] || '';
       const context = contextFor(target);
       const inputType = inputTypeFor(target);
+      const lookupTargetId = legacyTargetIdForCurrent(targetId);
       const signature = hash(inputType + '\n' + context);
       const details = classify(
         target,
         targetId,
+        lookupTargetId,
         context,
         signature,
         defaults,

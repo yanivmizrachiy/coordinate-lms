@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, wordBlank, ltr, pair, grid, exerciseGiven, exercise } from '../authoring';
+import { sheet, blank, wordBlank, ltr, pair, grid, exerciseGiven, exercise, wordBank } from '../authoring';
 
 /* The gap this fills: the booklet asked for lengths and never said how to get
    one. A child counted squares. The length of a segment parallel to an axis is
@@ -14,6 +14,7 @@ export const SEGMENT_LENGTH: WorkbookPageContent = sheet({
 <div class="completion-sentence">בקטע המקביל לציר ${ltr('x')}, האורך הוא ה־${ltr('x')} הימני <b>פחות</b> ה־${ltr('x')} השמאלי, והתוצאה נקראת ה${wordBlank('medium', 'concept', 'מקום להשלמת המילה הפרש')}.</div>
 <div class="completion-sentence">בקטע המקביל לציר ${ltr('y')}, האורך הוא ה־${ltr('y')} הגבוה <b>פחות</b> ה־${ltr('y')} ה${wordBlank('medium', 'property', 'מקום להשלמת המילה נמוך')}.</div>
 </div>
+${wordBank(['נמוך', 'הפרש'])}
 <section class="q-card">
 <h3>א. השלימו לפי הסרטוט.</h3>
 ${grid({
@@ -55,11 +56,11 @@ ${exerciseGiven('CD', '5 − 1')}
 <section class="q-card">
 <h3>ג. סמנו קטע משלכם, ואז השלימו את החסר.</h3>
 <ul class="tasks compact">
-<li>סמנו על הסרטוט שלמעלה קטע ${ltr('EF')} שמקביל לציר ${ltr('x')} ואורכו 4 יח'.</li>
-<li>הנקודה ${pair('E')} והנקודה ${pair('F')}.</li>
+<li>סמנו על הסרטוט שלמעלה קטע ${ltr('KL')} שמקביל לציר ${ltr('x')} ואורכו 4 יח'.</li>
+<li>הנקודה ${pair('K')} והנקודה ${pair('L')}.</li>
 <li>כתבו את תרגיל החיסור של הקטע שסימנתם, ואת ההפרש שקיבלתם:</li>
 </ul>
-${exercise('EF')}
+${exercise('KL')}
 </section>
 `,
 });

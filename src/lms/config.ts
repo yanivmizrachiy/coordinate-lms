@@ -11,7 +11,9 @@ export const LMS_CONFIG = {
   minScore: 1,
   maxScore: 100,
   maxAttempts: 3,
-  guestFreePages: 1,
+  // Practice is open to every canonical page. Registration controls persistence
+  // and reports, never access to the learning tasks themselves.
+  guestFreePages: Number.MAX_SAFE_INTEGER,
   activityIdleSeconds: 120,
   activityHeartbeatSeconds: 30,
 } as const;

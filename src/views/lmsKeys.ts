@@ -38,8 +38,8 @@ interface StudioPage {
 const DECISION_LABELS: Record<ReviewDecision, string> = {
   unreviewed: 'טרם נסקר',
   'answers-approved': 'תשובות אושרו',
-  'open-ended': 'פתוח להערכת מורה',
-  'intentionally-ungraded': 'לא מדורג במכוון',
+  'open-ended': 'דורש התאמה דיגיטלית אובייקטיבית',
+  'intentionally-ungraded': 'לא מדורג רק לאחר סקירה פדגוגית',
 };
 
 function download(fileName: string, value: unknown): void {
@@ -143,7 +143,7 @@ export function lmsKeys({ outlet, setTitle }: ViewContext): void {
       elem('h1', { text: 'סטודיו סקירת תשובות' }),
       elem('p', {
         text:
-          'כל 1,061 היעדים מגיעים מדוח הכיסוי המופק. אפשר לסנן, לייצא עבודה מלאה, לסקור באצווה ולייבא לתצוגה מקדימה לפני הפעלה.',
+          'כל יעדי המענה מגיעים מדוח הכיסוי המופק מהחוברת הקנונית. אפשר לסנן, לייצא עבודה מלאה, לסקור באצווה ולייבא לתצוגה מקדימה לפני הפעלה.',
       }),
     ),
   );
@@ -343,7 +343,7 @@ export function lmsKeys({ outlet, setTitle }: ViewContext): void {
         manifest.pageCount !== TOTAL_PAGES ||
         manifest.pages.length !== TOTAL_PAGES
       ) {
-        throw new Error('מניפסט סקירת התשובות אינו תואם ל־77 העמודים.');
+        throw new Error('מניפסט סקירת התשובות אינו תואם למספר העמודים הקנוני.');
       }
       const classifications = new Set<string>();
       const collected: StudioPage[] = [];

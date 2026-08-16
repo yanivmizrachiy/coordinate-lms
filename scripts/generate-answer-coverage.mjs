@@ -22,6 +22,81 @@ async function existingGeneratedAt() {
   }
 }
 
+function isHiddenRuntimeGroupProxy(target) {
+  return target.inputType === 'text:text' &&
+    target.currentAnswerSource === 'explicit canonical authoring label' &&
+    target.sourceEvidence === 'aria-label/data-lms-answers' &&
+    target.answers.some((answer) => answer.startsWith('predicate:'));
+}
+
+function recalculateCoverage(report) {
+  for (const page of report.pages) {
+    page.targetIds = page.targets.map((target) => target.targetId);
+    page.interactiveTargetCount = page.targets.length;
+    const safe = page.targets.filter((target) => target.automaticCheckingSafe).length;
+    page.automaticallyCheckableTargets = safe;
+    page.missingOrAmbiguousTargetIds = page.targets
+      .filter((target) => !target.automaticCheckingSafe)
+      .map((target) => target.targetId);
+    page.coveragePercentage = page.targets.length === 0
+      ? 100
+      : Math.round((safe / page.targets.length) * 1000) / 10;
+  }
+
+  const allTargets = report.pages.flatMap((page) => page.targets);
+  const safe = allTargets.filter((target) => target.automaticCheckingSafe).length;
+  report.targetCount = allTargets.length;
+  report.automaticallyCheckableTargets = safe;
+  report.coveragePercentage = allTargets.length === 0
+    ? 100
+    : Math.round((safe / allTargets.length) * 1000) / 10;
+  report.classifications = Object.fromEntries(
+    Object.keys(report.classifications).map((classification) => [
+      classification,
+      allTargets.filter((target) => target.classification === classification).length,
+    ]),
+  );
+  return report;
+}
+
+function applyRuntimePredicateCoverage(report, resolveRule) {
+  for (const page of report.pages) {
+    for (const target of page.targets) {
+      if (target.automaticCheckingSafe) continue;
+      const resolved = resolveRule(
+        target.context,
+        target.inputType,
+        page.pageNumber,
+        target.targetId,
+      );
+      if (!resolved) continue;
+      target.classification = 'deterministic-mathematical';
+      target.currentAnswerSource = 'runtime mathematical predicate';
+      target.sourceEvidence = `${resolved.source}:${resolved.rule}`;
+      target.automaticCheckingSafe = true;
+      target.answers = [`predicate:${resolved.rule}`];
+    }
+    page.targets = page.targets.filter((target) => !isHiddenRuntimeGroupProxy(target));
+  }
+  return recalculateCoverage(report);
+}
+
+function applyReviewedExplanationCoverage(report, resolveAnswers) {
+  for (const page of report.pages) {
+    for (const target of page.targets) {
+      if (target.automaticCheckingSafe) continue;
+      const answers = resolveAnswers(page.pageNumber, target.targetId, target.signature);
+      if (!Array.isArray(answers) || answers.length === 0) continue;
+      target.classification = 'reviewed-explicit';
+      target.currentAnswerSource = 'signature-bound reviewed four-option explanation';
+      target.sourceEvidence = 'src/lms/digitalExplanationChoices.ts:signature-bound coverage binding';
+      target.automaticCheckingSafe = true;
+      target.answers = [...answers];
+    }
+  }
+  return recalculateCoverage(report);
+}
+
 const server = await createServer({
   root,
   appType: 'custom',
@@ -31,9 +106,94 @@ const server = await createServer({
 
 try {
   const coverage = await server.ssrLoadModule('/src/lms/answerCoverage.ts');
-  const report = coverage.buildAnswerCoverageReport(
-    await existingGeneratedAt(),
+  const predicates = await server.ssrLoadModule('/src/lms/digitalPredicates.ts');
+  const coordinateSafe = await server.ssrLoadModule('/src/lms/digitalCoordinateSafePredicate.ts');
+  const freePoints = await server.ssrLoadModule('/src/lms/digitalFreePointPredicates.ts');
+  const squareVertices = await server.ssrLoadModule('/src/lms/digitalSquareVertexPredicate.ts');
+  const suspect = await server.ssrLoadModule('/src/lms/digitalSuspectPredicate.ts');
+  const segments = await server.ssrLoadModule('/src/lms/digitalSegmentPredicates.ts');
+  const rectangles = await server.ssrLoadModule('/src/lms/digitalRectanglePredicates.ts');
+  const life = await server.ssrLoadModule('/src/lms/digitalLifePredicates.ts');
+  const grouped = await server.ssrLoadModule('/src/lms/groupCoverageBindings.ts');
+  const explanations = await server.ssrLoadModule('/src/lms/digitalExplanationChoices.ts');
+
+  const predicateReport = applyRuntimePredicateCoverage(
+    coverage.buildAnswerCoverageReport(await existingGeneratedAt()),
+    (context, inputType, pageNumber, targetId) => {
+      const coordinateSafeRule = coordinateSafe.coordinateSafePredicateRuleForCoverage(
+        pageNumber,
+        targetId,
+      );
+      if (coordinateSafeRule) {
+        return {
+          rule: coordinateSafeRule,
+          source: 'src/lms/digitalCoordinateSafePredicate.ts',
+        };
+      }
+
+      const freePointRule = freePoints.freePointPredicateRuleForCoverage(
+        pageNumber,
+        targetId,
+      );
+      if (freePointRule) {
+        return {
+          rule: freePointRule,
+          source: 'src/lms/digitalFreePointPredicates.ts',
+        };
+      }
+
+      const squareVertexRule = squareVertices.squareVertexPredicateRuleForCoverage(
+        pageNumber,
+        targetId,
+      );
+      if (squareVertexRule) {
+        return {
+          rule: squareVertexRule,
+          source: 'src/lms/digitalSquareVertexPredicate.ts',
+        };
+      }
+
+      const suspectRule = suspect.suspectPredicateRuleForCoverage(
+        pageNumber,
+        targetId,
+      );
+      if (suspectRule) {
+        return {
+          rule: suspectRule,
+          source: 'src/lms/digitalSuspectPredicate.ts',
+        };
+      }
+
+      const generalRule = predicates.predicateRuleForCoverage(context, inputType);
+      if (generalRule) return { rule: generalRule, source: 'src/lms/digitalPredicates.ts' };
+
+      const segmentRule = segments.segmentPredicateRuleForCoverage(
+        context,
+        inputType,
+        pageNumber,
+        targetId,
+      );
+      if (segmentRule) return { rule: segmentRule, source: 'src/lms/digitalSegmentPredicates.ts' };
+
+      const rectangleRule = rectangles.rectanglePredicateRuleForCoverage(pageNumber, targetId);
+      if (rectangleRule) return { rule: rectangleRule, source: 'src/lms/digitalRectanglePredicates.ts' };
+
+      const lifeRule = life.lifePredicateRuleForCoverage(pageNumber, targetId);
+      if (lifeRule) return { rule: lifeRule, source: 'src/lms/digitalLifePredicates.ts' };
+
+      const groupedRule = grouped.canonicalGroupRuleForCoverage(pageNumber, targetId);
+      return groupedRule
+        ? { rule: groupedRule, source: 'src/lms/digitalPredicates.ts' }
+        : null;
+    },
   );
+
+  const report = applyReviewedExplanationCoverage(
+    predicateReport,
+    (pageNumber, targetId, signature) =>
+      explanations.explanationAnswerForCoverage(pageNumber, targetId, signature),
+  );
+
   const order = coverage.answerTargetOrderSnapshot(report);
   const reviewManifest = {
     schemaVersion: 2,
@@ -56,6 +216,7 @@ try {
       })),
     })),
   };
+
   const outputs = [
     [jsonPath, JSON.stringify(report, null, 2) + '\n'],
     [markdownPath, coverage.renderAnswerCoverageMarkdown(report)],

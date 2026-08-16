@@ -1,16 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { WORKBOOK, TOTAL_PAGES, TOPICS, pageByNumber } from '../src/data/workbook';
-import { GAMES } from '../src/games';
 
 const FOOTER_F1 = 'יניב רז - מדריך מחוזי חט"ב בעיר ירושלים';
 const FOOTER_F2 = 'הדרכה במחוז ירושלים והעיר ירושלים - מנח"י, בהובלת איילת קריספין';
 
-describe('workbook integrity (USER_MEMORY.md mandatory checks)', () => {
-  it('has pages numbered 1..77 with no holes (worksheets + games interleaved)', () => {
-    expect(TOTAL_PAGES).toBe(77);
-    for (let n = 1; n <= 77; n++) expect(pageByNumber(n), `page ${n}`).toBeDefined();
-    expect(WORKBOOK.map((p) => p.n)).toEqual(Array.from({ length: 77 }, (_, i) => i + 1));
+describe('workbook integrity (RULES.md canonical checks)', () => {
+  it('has pages numbered 1..78 with no holes', () => {
+    expect(TOTAL_PAGES).toBe(78);
+    for (let n = 1; n <= 78; n++) expect(pageByNumber(n), `page ${n}`).toBeDefined();
+    expect(WORKBOOK.map((p) => p.n)).toEqual(Array.from({ length: 78 }, (_, i) => i + 1));
   });
 
   it('every page carries the canonical footer', () => {
@@ -47,11 +46,9 @@ describe('workbook integrity (USER_MEMORY.md mandatory checks)', () => {
     expect(pageByNumber(1)!.html).toMatch(/pair-blank|word-blank|class="blank"/);
   });
 
-  it('every game is a numbered page exactly once, in a topic', () => {
-    for (const g of GAMES) {
-      const hosts = WORKBOOK.filter((p) => p.gameId === g.id);
-      expect(hosts.length, `game ${g.id}`).toBe(1);
-      expect(hosts[0]!.html, `game ${g.id} host`).toContain(`data-game-host="${g.id}"`);
+  it('no numbered page hosts a runtime game', () => {
+    for (const page of WORKBOOK) {
+      expect(page.html, `page ${page.n}`).not.toContain('data-game-host');
     }
   });
 
@@ -65,7 +62,7 @@ describe('workbook integrity (USER_MEMORY.md mandatory checks)', () => {
 
   it('topics cover all pages exactly once', () => {
     const covered = TOPICS.flatMap((t) => t.pages).sort((a, b) => a - b);
-    expect(covered).toEqual(Array.from({ length: 77 }, (_, i) => i + 1));
+    expect(covered).toEqual(Array.from({ length: 78 }, (_, i) => i + 1));
   });
 
   it('every true/false table row has two uniform checkboxes', () => {

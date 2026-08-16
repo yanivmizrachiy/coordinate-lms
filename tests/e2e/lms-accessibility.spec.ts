@@ -1,18 +1,33 @@
 import { expect, test } from '@playwright/test';
 
-test('answer fields keep meaningful labels and support keyboard completion', async ({ page }) => {
+test('answer fields keep meaningful labels and support keyboard completion through the nearby check control', async ({ page }) => {
   await page.goto('/#/workbook/10');
   const target = page.locator('[data-lms-qid="p10-q1"]');
+  const localCheck = page.locator('.lms-inline-check[data-lms-check-for="p10-q1"]');
   await expect(target).toBeVisible();
   await expect(target).toHaveAttribute('aria-label', /מקום להשלמת|תשובה.+:/);
+  await expect(localCheck).toHaveCount(1);
+
+  const answers = JSON.parse(
+    (await target.getAttribute('data-lms-answers')) || '[]',
+  ) as string[];
+  expect(answers[0]).toBeTruthy();
 
   await target.focus();
   await expect(target).toBeFocused();
-  await target.fill('שמאל');
+  await target.fill(answers[0]!);
+  await expect(target).toHaveAttribute('data-lms-state', 'filled');
+  await expect(target).toHaveAttribute('data-lms-attempts', '0');
   await target.press('Enter');
   await expect(target).not.toBeFocused();
-  await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
+
+  await localCheck.focus();
+  await expect(localCheck).toBeFocused();
+  await localCheck.press('Enter');
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
+  await expect(target).toHaveAttribute('data-lms-attempts', '1');
+  await expect(localCheck).toHaveAttribute('data-state', 'correct');
+  await expect(localCheck).toHaveText('✓');
 
   const status = page.locator('.lms-panel__status');
   await expect(status).toHaveAttribute('role', 'status');
@@ -34,7 +49,7 @@ test('true-false groups include their statement in the accessible name', async (
   expect(new Set(names).size).toBe(1);
 });
 
-test('LMS overlays do not alter the printed workbook and controls are touch-sized', async ({ page }) => {
+test('LMS overlays do not alter the printed workbook and controls remain usable', async ({ page }) => {
   await page.goto('/#/workbook/2');
   const buttons = page.locator('.lms-panel__buttons .btn');
   await expect(buttons.first()).toBeVisible();
@@ -45,7 +60,26 @@ test('LMS overlays do not alter the printed workbook and controls are touch-size
   );
   expect(tooSmall).toEqual([]);
 
+  const keyed = page.locator('[data-lms-answers]').filter({ hasNot: page.locator('input') }).first();
+  if (await keyed.count()) {
+    const answers = JSON.parse((await keyed.getAttribute('data-lms-answers')) || '[]') as string[];
+    if (answers[0] && (await keyed.getAttribute('contenteditable')) === 'true') {
+      await keyed.fill(answers[0]);
+      await expect(keyed).toHaveAttribute('data-lms-state', 'filled');
+      const qid = await keyed.getAttribute('data-lms-qid');
+      expect(qid).toBeTruthy();
+      const localCheck = page.locator(`[data-lms-check-for="${qid}"]`);
+      await expect(localCheck).toBeVisible();
+      await localCheck.click();
+      await expect(keyed).toHaveAttribute('data-lms-state', 'correct');
+    }
+  }
+
   await page.emulateMedia({ media: 'print' });
   await expect(page.locator('.lms-panel')).toBeHidden();
+  await expect(page.locator('.lms-inline-check').first()).toBeHidden();
   await expect(page.locator('.lms-grid-answer').first()).toBeHidden();
+  if (await keyed.count()) {
+    expect(await keyed.evaluate((el) => getComputedStyle(el, '::after').content)).toBe('none');
+  }
 });

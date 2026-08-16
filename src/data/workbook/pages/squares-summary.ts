@@ -17,7 +17,7 @@ export const SQUARES_SUMMARY: WorkbookPageContent = sheet({
 <li>הצלעות המקבילות לציר <span class="math-ltr" dir="ltr">x</span> הן <span class="blank" data-missing="letter" style="--blank-width:8ch"></span>.</li>
 <li>ה<b>אורך</b> הוא הצלע <span class="blank" data-missing="letter" style="--blank-width:4ch"></span>, וה<b>רוחב</b> הוא הצלע <span class="math-ltr" dir="ltr">AB</span>.</li>
 </ul>
-${calcBox({ perimeter: true, area: true })}
+${calcBox({ lines: 1, perimeter: true, area: true })}
 <ul class="tasks compact">
 <li>אם מזיזים את המלבן יחידה אחת ימינה, הקודקוד <span class="math-ltr" dir="ltr">A</span> מגיע אל <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>, וההיקף והשטח <span class="blank" data-missing="relation" style="--blank-width:5ch"></span>.</li>
 </ul>

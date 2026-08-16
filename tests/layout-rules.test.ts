@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { WORKBOOK, pageByNumber } from '../src/data/workbook';
 
-/* Yaniv's standing layout rules, as executable checks. Each one here is a bug
+/* Canonical layout invariants as executable regression checks. Each one here is a bug
    that already reached a printed sheet once — the test is what stops it from
    coming back the next time a page is edited. */
 
@@ -80,7 +80,7 @@ describe('SVG text survives the RTL sheet', () => {
 });
 
 describe('completions ask for something different each time', () => {
-  /* Yaniv's rule (USER_MEMORY §8): "בכל השלמה חסר רכיב מסוג אחר".
+  /* Yaniv's rule (regression history): "בכל השלמה חסר רכיב מסוג אחר".
      It was written down for a long time and still got broken, because nothing
      checked it — a sheet can pass every other test while asking the learner
      the very same thing four times. Tagged blanks make it checkable. */
@@ -94,7 +94,8 @@ describe('completions ask for something different each time', () => {
            numbers — the subtraction, its result, and the side's value. That is
            not a lack of variety, so calculations are not counted here. */
         const body = card
-          .replace(/<div class="calc-final">[\s\S]*?<\/div>\s*<\/div>/g, ' ')
+          .replace(/<div class="calc-box">[\s\S]*?<\/section>/g, ' ')
+          .replace(/<div class="calc-final[^"]*">[\s\S]*?<\/div>\s*<\/div>/g, ' ')
           .replace(/<div class="calc-pair">[\s\S]*?<\/div><\/div><\/div>/g, ' ')
           .replace(/<div class="calc-ltr"[\s\S]*?<\/div>/g, ' ');
         const kinds = [...body.matchAll(/data-missing="(\w+)"/g)].map((m) => m[1]);
@@ -200,7 +201,7 @@ describe('Hebrew and punctuation hold up to proofreading', () => {
     }
   });
 
-  /* USER_MEMORY §5. „כפל כותרת” — every game repeated the sheet title as its
+  /* regression history. „כפל כותרת” — every game repeated the sheet title as its
      own heading, so the reader met the same words twice before any task. */
   it('no heading inside a sheet repeats the sheet title', () => {
     for (const p of WORKBOOK) {
@@ -249,7 +250,7 @@ describe('Hebrew and punctuation hold up to proofreading', () => {
 });
 
 describe('a group never asks the same question four times', () => {
-  /* USER_MEMORY §5. Four items reading "שיעור x הוא N ושיעור y הוא M" with
+  /* regression history. Four items reading "שיעור x הוא N ושיעור y הוא M" with
      nothing but the numbers changing is not practice, it is filler. */
   const shape = (li: string): string =>
     li
@@ -279,7 +280,7 @@ describe('a group never asks the same question four times', () => {
     }
   });
 
-  /* USER_MEMORY §5. Yaniv: „פעם המילה שווה ופעם הסימן שווה — ככה רציתי גיוון”.
+  /* regression history. Yaniv: „פעם המילה שווה ופעם הסימן שווה — ככה רציתי גיוון”.
      Stating a given one single way through a whole task is the monotony he
      objects to; the two forms have to sit side by side. */
   it('a task that states given coordinates uses the word שווה AND the sign =', () => {
@@ -293,7 +294,7 @@ describe('a group never asks the same question four times', () => {
     }
   });
 
-  /* USER_MEMORY §8. The blank has to MOVE. Two consecutive items whose text is
+  /* regression history. The blank has to MOVE. Two consecutive items whose text is
      identical once the blank is taken out are the same question twice, however
      different the numbers or the axis letter look. */
   it('two items in a row never leave the same sentence with the blank in one place', () => {
@@ -352,7 +353,7 @@ describe('a poster sheet keeps the design and drops what the rules forbid', () =
 });
 
 describe("a point's name stays attached to its brackets", () => {
-  /* USER_MEMORY §7: „האות באנגלית משמאל לסוגריים”. Splitting the name and the
+  /* regression history: „האות באנגלית משמאל לסוגריים”. Splitting the name and the
      brackets across two table cells cannot satisfy it — the sheet is RTL, so
      the first column lands on the right and it reads „(_,_) A”. */
   it('a name and its empty pair live in one element', () => {
@@ -366,18 +367,18 @@ describe("a point's name stays attached to its brackets", () => {
 });
 
 describe('a calculation gets units and room to work', () => {
-  /* USER_MEMORY §10. Both rules were written down and neither was checked, so
+  /* regression history. Both rules were written down and neither was checked, so
      five sheets asked for a perimeter with nowhere to work it out and no unit
      on the answer. */
   const readable = (h: string): string => h.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
   const computes = (h: string): boolean => /(היקף|שטח)\s*[=:]/.test(readable(h));
 
-  /* USER_MEMORY §5. „מרחק” is not extra vocabulary — it is what a coordinate
+  /* regression history. „מרחק” is not extra vocabulary — it is what a coordinate
      MEANS, and Yaniv asked for it by name. The page that introduces שיעור x
      and שיעור y has to say it, and its drawing needs a dashed line to EACH
      axis: one line teaches half the idea. */
   it('the coordinates page teaches the word מרחק, and measures to both axes', () => {
-    const page = WORKBOOK.find((p) => p.title.includes('שיעור x'));
+    const page = WORKBOOK.find((p) => p.title.includes('שיעור x') || p.subtitle.includes('שיעור x'));
     expect(page, 'the page that introduces the coordinates is gone').toBeDefined();
     const html = page!.html;
     expect(html, 'the word מרחק never appears').toMatch(/מרחק|רחוק/);
@@ -390,7 +391,7 @@ describe('a calculation gets units and room to work', () => {
     expect(toY, 'no dashed line across to ציר y').toBe(true);
   });
 
-  /* USER_MEMORY §8: „גם כלל או הגדרה מוצגים כמשפט השלמה, לא כמשפט מוכן”.
+  /* regression history: „גם כלל או הגדרה מוצגים כמשפט השלמה, לא כמשפט מוכן”.
      A rule handed over finished is a rule the learner reads past. */
   it('a rule box states its rule as something to complete', () => {
     for (const p of WORKBOOK) {
@@ -409,7 +410,7 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §9. A box that floats loose is a box the learner has to guess
+  /* regression history. A box that floats loose is a box the learner has to guess
      at — Yaniv reported it twice, on two different drawings. Every label on a
      drawing states which point, tick or line it belongs to. */
   it('every label box on a drawing points at what it describes', () => {
@@ -453,17 +454,22 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §10. „הדרך חשובה מאוד מאוד” — a calculation gets room to work
+  /* regression history. „הדרך חשובה מאוד מאוד” — a calculation gets room to work
      in and then an answer that carries its unit, written with the letters an
      Israeli textbook uses: S for area, P for perimeter. */
   it('every area or perimeter answer is S or P, with its unit and room to work', () => {
     for (const p of WORKBOOK) {
       const text = p.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
       if (!/שטח|היקף/.test(text)) continue;
-      for (const f of p.html.matchAll(/<div class="calc-final">([\s\S]*?)<\/div>\s*<\/div>/g)) {
-        const plain = f[1]!.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-        expect(plain, `page ${p.n}: a final answer without S or P`).toMatch(/[SP] =/);
-        expect(plain, `page ${p.n}: a final answer without its unit`).toMatch(/יח/);
+      for (const box of p.html.split('<div class="calc-box">').slice(1)) {
+        const head = box.slice(0, 1600);
+        /* Some calc-box blocks contain only side-length subtraction. They need
+           units and writing room, but S/P belongs only to an actual area or
+           perimeter result. */
+        if (!/calc-final|calc-sym__math/.test(head)) continue;
+        expect(head, `page ${p.n}: a calculation without S or P`)
+          .toMatch(/calc-sym__math[^>]*>[^<]*[SP]|[SP] =/);
+        expect(head, `page ${p.n}: a calculation without its unit`).toMatch(/יח/);
       }
       /* Room to work means ruled lines OR the named exercise lines that replaced
          them — „PQ = ____ = ____ יח'”, written left to right. Either is room; a
@@ -471,14 +477,14 @@ describe('a calculation gets units and room to work', () => {
       for (const box of p.html.split('<div class="calc-box">').slice(1)) {
         const head = box.slice(0, 400);
         expect(
-          /answer-line|calc-ltr/.test(head),
+          /answer-line|calc-ltr|calc-squared/.test(head),
           `page ${p.n}: a calculation with no room to write the working`,
         ).toBe(true);
       }
     }
   });
 
-  /* USER_MEMORY §10. A rectangle has an אורך and a רוחב — the longer side and
+  /* regression history. A rectangle has an אורך and a רוחב — the longer side and
      the shorter one. „הצלע האופקית” describes the picture, not the shape. */
   it('a rectangle is described by its אורך and רוחב, not by which way it points', () => {
     for (const p of WORKBOOK) {
@@ -497,7 +503,7 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §8. A claim is „נכונה בהכרח / ייתכן שנכונה / לא ייתכן”. The old
+  /* regression history. A claim is „נכונה בהכרח / ייתכן שנכונה / לא ייתכן”. The old
      „תמיד / לפעמים / לעולם לא” describes frequency, not necessity. */
   it('a claim is judged as necessary, possible or impossible', () => {
     for (const p of WORKBOOK) {
@@ -519,7 +525,7 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §5. A shared coordinate is stated as a whole sentence naming
+  /* regression history. A shared coordinate is stated as a whole sentence naming
      both points — „לשתי הנקודות A ו־B יש שיעור y זהה” — never as a bare
      „השיעור הזהה: ____”, and the sheet then asks the learner to PRODUCE two
      such points, which is the half that cannot be copied. */
@@ -536,7 +542,7 @@ describe('a calculation gets units and room to work', () => {
       .toBeGreaterThan(0);
   });
 
-  /* USER_MEMORY §5, applied to the whole booklet rather than page by page: an
+  /* regression history, applied to the whole booklet rather than page by page: an
      open line is where a child writes nothing. Every ruled line either carries
      the working of a calculation or is a completion the sheet leads them into. */
   it('no sheet leaves an open line that is not the working of a calculation', () => {
@@ -556,7 +562,7 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §5. „הנקודה של היום הראשון” is possession; the point does not
+  /* regression history. „הנקודה של היום הראשון” is possession; the point does not
      belong to the day, it CORRESPONDS to it. Yaniv's word is התאמה. */
   it('a point corresponds to its datum — it does not belong to it', () => {
     for (const p of WORKBOOK) {
@@ -574,7 +580,7 @@ describe('a calculation gets units and room to work', () => {
     expect(new Set(graphs.map((p) => p.subtitle)).size, 'two sheets share a subtitle').toBe(6);
   });
 
-  /* USER_MEMORY §8. Varying by rewriting the sentence is the opposite of the
+  /* regression history. Varying by rewriting the sentence is the opposite of the
      rule: the sentence is written once and the GAP moves inside it. „בשתי
      נקודותיו” is the shape that came from rewriting instead of moving. */
   it('a parallel-segment item keeps the one sentence and moves the gap', () => {
@@ -590,18 +596,31 @@ describe('a calculation gets units and room to work', () => {
      was never examined. An area or a perimeter is answered in the calculation
      block, with S and P — nowhere else. */
   it('an area or perimeter is never asked as a loose blank', () => {
+    const insideCalcBox = (html: string, index: number): boolean => {
+      let depth = 0;
+      let calcDepth = -1;
+      for (const match of html.slice(0, index).matchAll(/<div\b[^>]*>|<\/div>/g)) {
+        const tag = match[0];
+        if (tag.startsWith('</')) {
+          if (depth === calcDepth) calcDepth = -1;
+          depth -= 1;
+        } else {
+          depth += 1;
+          if (/class="[^"]*calc-box/.test(tag)) calcDepth = depth;
+        }
+      }
+      return calcDepth !== -1;
+    };
+    const answerPattern = /(היקף|שטח)[^<]{0,16}<span class="blank"[^>]*><\/span>\s*יח/g;
     for (const p of WORKBOOK) {
       const t = p.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-      if (!/היקף|שטח/.test(t)) continue;
-      /* Only a sheet that CALCULATES — one with a working block. Reading a
-         perimeter off a graph („ההיקף הוא ___ יח'”) has nothing to show. */
-      if (!p.html.includes('calc-box')) continue;
-      /* An ANSWER is a blank followed by its unit. „ההיקף והשטח ____, כי הזזה
-         אינה משנה את הצורה” is a relation, not an answer, and stays. */
-      expect(
-        p.html,
-        `page ${p.n}: „היקף/שטח: ____ יח'” outside a calculation block`,
-      ).not.toMatch(/(היקף|שטח)[^<]{0,16}<span class="blank"[^>]*><\/span>\s*יח/);
+      if (!/היקף|שטח/.test(t) || !p.html.includes('calc-box')) continue;
+      for (const match of p.html.matchAll(answerPattern)) {
+        expect(
+          insideCalcBox(p.html, match.index ?? 0),
+          `page ${p.n}: area/perimeter answer outside a calculation block`,
+        ).toBe(true);
+      }
     }
   });
 
@@ -741,8 +760,17 @@ describe('a calculation is written left to right', () => {
   it('every exercise leaves room to write the subtraction', () => {
     for (const page of WORKBOOK) {
       for (const b of page.html.match(/<div class="calc-pair">[\s\S]*?<\/div><\/div><\/div>/g) ?? []) {
-        const first = b.match(/--blank-width:(\d+)ch/);
-        expect(Number(first?.[1] ?? 0), `page ${page.n}: no room to write the exercise`).toBeGreaterThanOrEqual(14);
+        const firstLine = b.match(/<div class="calc-ltr"[^>]*>[\s\S]*?<\/div>/)?.[0] ?? '';
+        /* A handwritten subtraction has the form NAME = [wide workspace] =
+           [short result]. A preprinted subtraction has literal arithmetic
+           between the first two equals signs and must not be mistaken for the
+           learner's workspace. */
+        const handwritten = firstLine.match(
+          /<span class="calc-ltr__eq">=<\/span>\s*<span class="blank"[^>]*--blank-width:(\d+)ch[^>]*><\/span>\s*<span class="calc-ltr__eq">=<\/span>/,
+        );
+        if (!handwritten) continue;
+        expect(Number(handwritten[1]), `page ${page.n}: no room to write the exercise`)
+          .toBeGreaterThanOrEqual(14);
       }
     }
   });
@@ -775,13 +803,13 @@ describe('every page is valid markup', () => {
   });
 });
 
-/* USER_MEMORY.md is the single rules page, and it is only worth reading if it
+/* RULES.md is the single rules page, and it is only worth reading if it
    is true. It kept drifting: it named a booklet of 55 pages when there were 74,
    it described a test that had been rewritten, it told the reader the arrow was
    drawn shorter after that had stopped being so. Anything it states in
    backticks about the code is checked here. */
 describe('the rules page still matches the code', () => {
-  const rules = readFileSync(new URL('../USER_MEMORY.md', import.meta.url), 'utf8');
+  const rules = readFileSync(new URL('../RULES.md', import.meta.url), 'utf8');
   const suites = readdirSync(new URL('../tests/e2e', import.meta.url))
     .filter((f) => f.endsWith('.ts'))
     .map((f) => readFileSync(new URL('../tests/e2e/' + f, import.meta.url), 'utf8'))
@@ -817,10 +845,10 @@ describe('the rules page still matches the code', () => {
   });
 
   it('the page count it states is the page count there is', () => {
-    const stated = /\*\*החוברת = (\d+) עמודים ממוספרים\*\*/.exec(rules)?.[1];
+    const stated = /contains \*\*(\d+) numbered pages\*\*/.exec(rules)?.[1];
     expect(Number(stated), 'the rules page states a stale page count').toBe(WORKBOOK.length);
     // and no other page total may be left lying around
-    for (const m of rules.matchAll(/(\d+) עמודים ממוספרים/g)) {
+    for (const m of rules.matchAll(/\*\*(\d+) numbered pages\*\*/g)) {
       expect(Number(m[1]), 'a second, different page count in the rules').toBe(WORKBOOK.length);
     }
   });

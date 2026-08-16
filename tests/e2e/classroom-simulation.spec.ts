@@ -24,9 +24,12 @@ async function register(
   await page.getByPlaceholder('שם מלא').fill(fullName);
   await page.getByPlaceholder('שם משתמש').fill(username);
   await page.getByPlaceholder('כתובת אימייל').fill(email);
-  await page.getByPlaceholder('סיסמה — לפחות 6 תווים').fill(password);
-  await page.getByRole('button', { name: 'הרשמה ושמירת הציון' }).click();
-  await expect(page).toHaveURL(/#\/workbook\/2$/);
+  await page.getByPlaceholder('סיסמה — לפחות 10 תווים, כולל אות ומספר').fill(password);
+  await page.getByPlaceholder('בית ספר').fill('בית ספר בדיקה');
+  await page.getByPlaceholder('עיר').fill('ירושלים');
+  await page.getByPlaceholder('כיתה').fill('ז1');
+  await page.getByRole('button', { name: 'הרשמה והפעלת שמירה ודוחות' }).click();
+  await expect(page).toHaveURL(/#\/workbook\/1$/);
 }
 
 async function studentSnapshot(page: Page): Promise<StudentData> {
@@ -63,29 +66,28 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
 
   try {
     await studentA.goto('/#/workbook/1');
-    await expect(studentA.locator('.lms-panel__identity')).toContainText('מצב אורח');
+    await expect(studentA.locator('.lms-panel__identity'))
+      .toContainText('תרגול ללא הרשמה — אין שמירה או מעקב');
     await studentA.locator('[data-lms-qid="p1-q1"]').fill('טיוטת אורח');
-    await expect
-      .poll(() =>
-        studentA.evaluate(() =>
-          Boolean(
-            (JSON.parse(
-              localStorage.getItem('coordinate_lms_drafts_v2') || '{}',
-            ) as Record<string, unknown>)['guest:1'],
-          ),
-        ),
-      )
-      .toBe(true);
+    await studentA.waitForTimeout(150);
+    const guestDrafts = await studentA.evaluate(() =>
+      JSON.parse(
+        localStorage.getItem('coordinate_lms_drafts_v2') || '{}',
+      ) as Record<string, unknown>,
+    );
+    expect(Object.keys(guestDrafts)).toHaveLength(0);
+
     await register(
       studentA,
       'נועה כהן',
       'noa',
       'noa-browser@example.test',
-      'student-a-password',
+      'student-a-password1',
     );
+    await studentA.goto('/#/workbook/2');
     const target = studentA.locator('[data-lms-qid="p2-q1"]');
     await target.fill('תשובה שגויה');
-    await studentA.getByRole('button', { name: 'בדיקת תשובות' }).click();
+    await studentA.getByRole('button', { name: 'בדיקת כל התשובות' }).click();
     await expect(target).toHaveAttribute('data-lms-attempts', '1');
     await studentA.reload();
     await expect(studentA.locator('[data-lms-qid="p2-q1"]'))
@@ -96,17 +98,18 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
       .toBeVisible();
     await studentA.getByRole('button', { name: 'כבר נרשמתי — התחברות' }).click();
     await studentA.getByPlaceholder('כתובת אימייל').fill('noa-browser@example.test');
-    await studentA.getByPlaceholder('סיסמה — לפחות 6 תווים').fill('student-a-password');
+    await studentA.getByPlaceholder('סיסמה — לפחות 10 תווים, כולל אות ומספר').fill('student-a-password1');
     await studentA.getByRole('button', { name: 'התחברות' }).click();
-    await expect(studentA).toHaveURL(/#\/workbook\/2$/);
+    await expect(studentA).toHaveURL(/#\/workbook\/1$/);
 
     await register(
       studentB,
       'אורי לוי',
       'uri',
       'uri-browser@example.test',
-      'student-b-password',
+      'student-b-password1',
     );
+    await studentB.goto('/#/workbook/2');
     await studentB.locator('[data-lms-qid="p2-q1"]').fill('טיוטת תלמיד ב');
     await expect
       .poll(() =>
@@ -129,7 +132,7 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
       'מורה',
       'teacher',
       'yanivmiz77@gmail.com',
-      'teacher-password',
+      'teacher-password1',
     );
     await teacher.evaluate(
       ([left, right]) => {
@@ -171,12 +174,12 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     expect(csv.startsWith('\uFEFF')).toBe(true);
     expect(csv).toContain('נועה כהן');
     expect(csv).toContain('אורי לוי');
-    expect(csv.trimEnd().split('\r\n')).toHaveLength(155);
+    expect(csv.trimEnd().split('\r\n')).toHaveLength(157);
 
     await teacher.goto('/#/keys');
     await expect(teacher.getByRole('heading', { name: 'סטודיו סקירת תשובות' }))
       .toBeVisible();
-    await expect(teacher.locator('.lms-panel__status')).toContainText('מתוך 1061');
+    await expect(teacher.locator('.lms-panel__status')).toContainText('מתוך 1162');
     await teacher.getByLabel('סינון לפי מצב סקירה').selectOption('unreviewed');
     await expect(teacher.locator('.lms-keys__card').first()).toBeVisible();
   } finally {

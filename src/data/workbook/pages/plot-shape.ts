@@ -36,7 +36,7 @@ export const PLOT_SHAPE: WorkbookPageContent = sheet({
 <ul class="tasks compact">
 <li>אורך <span class="math-ltr" dir="ltr">AB</span>: <span class="blank" style="--blank-width:4ch"></span> יח'. &nbsp; אורך <span class="math-ltr" dir="ltr">BC</span>: <span class="blank" style="--blank-width:4ch"></span> יח'.</li>
 </ul>
-${calcBox({ perimeter: true, area: true })}
+${calcBox({ perimeter: true, area: true, shape: 'הצורה' })}
 </section>
 `,
 });

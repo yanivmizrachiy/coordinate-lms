@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, grid, exercise, exerciseGiven } from '../authoring';
+import { sheet, blank, ltr, pair, grid, exercise, exerciseGiven, wordBank } from '../authoring';
 
 /* נשאב מריפו parabula-next של יניב („רביע ראשון — 21 דפי עבודה", עמוד 19,
    „מפת הפארק"), שוחזר ממפתח התשובות למורה והותאם לכללי USER_MEMORY.md.
@@ -15,27 +15,33 @@ export const LIFE_PARK_MAP: WorkbookPageContent = sheet({
 <div class="completion-sentence">במפת הפארק כל עצם הוא ${blank(4, 'concept')}, וכל שביל מקביל לאחד הצירים.</div>
 <div class="completion-sentence">אורך כל שביל הוא תוצאה של תרגיל ${blank(4, 'concept')} בין השיעורים.</div>
 </div>
+${wordBank(['חיסור', 'נקודה'])}
 <section class="q-card">
 <h3>א. קוראים את המפה.</h3>
-<p>השער ממוקם בנקודה ${ltr('A(1,0)')}, הספסל בנקודה ${ltr('B(3,2)')}, והמזרקה בנקודה ${ltr('C(6,2)')}.</p>
-<p>הנדנדה ממוקמת בנקודה ${ltr('D(0,5)')}, העץ בנקודה ${ltr('E(6,5)')}, והיציאה בנקודה ${ltr('F(8,0)')}.</p>
+<p>על מפת הפארק מסומנים שישה עצמים:</p>
+<ul class="tasks compact">
+<li>השער ממוקם בנקודה ${ltr('A(1,0)')}, והספסל ממוקם בנקודה ${ltr('B(3,2)')}.</li>
+<li>המזרקה ממוקמת בנקודה ${ltr('C(6,2)')}, והנדנדה ממוקמת בנקודה ${ltr('D(0,5)')}.</li>
+<li>העץ ממוקם בנקודה ${ltr('E(6,5)')}, והיציאה ממוקמת בנקודה ${ltr('F(8,0)')}.</li>
+</ul>
 ${grid({
   /* md גלש 18px מה-A4 עם ארבעת הסעיפים; sm מחזיר את הדף לגבולו — והבדיקות
      של גודל-הכתב והתוויות שומרות שהמפה נשארת קריאה. */
-  size: 'sm',
+  size: 'md',
   label: 'מפת הפארק: שער, ספסל, מזרקה, נדנדה, עץ ויציאה',
   points: [
-    { x: 1, y: 0, label: 'A' },
-    { x: 3, y: 2, label: 'B' },
-    { x: 6, y: 2, label: 'C' },
-    { x: 0, y: 5, label: 'D' },
-    { x: 6, y: 5, label: 'E' },
-    { x: 8, y: 0, label: 'F' },
+    { x: 1, y: 0, label: 'A', icon: 'gate' },
+    { x: 3, y: 2, label: 'B', icon: 'bench' },
+    { x: 6, y: 2, label: 'C', icon: 'fountain' },
+    { x: 0, y: 5, label: 'D', icon: 'swing' },
+    { x: 6, y: 5, label: 'E', icon: 'tree' },
+    { x: 8, y: 0, label: 'F', icon: 'exit' },
   ],
   segments: [
     { from: [3, 2], to: [6, 2], type: 'shape' },
     { from: [6, 2], to: [6, 5], type: 'shape' },
     { from: [6, 5], to: [0, 5], type: 'shape' },
+    { from: [1, 0], to: [8, 0], type: 'guide' },
   ],
 })}
 <ul class="tasks compact">
@@ -57,27 +63,6 @@ ${exercise('AF')}
 <ul class="tasks compact">
 <li>כתבו שתי נקודות משלכם שיש להן שיעור ${ltr('x')} זהה: ${pair()} ו־${pair()}.</li>
 </ul>
-</section>
-<section class="q-card">
-<h3>ג. מציבים פנס חדש.</h3>
-<ul class="tasks compact">
-<li>סמנו על המפה פנס שממוקם על ציר ${ltr('y')}, בגובה 3 יחידות. הנקודה שמתאימה לפנס היא ${pair()}.</li>
-<li>הפנס ממוקם מתחת לנדנדה, וההפרש בין שיעורי ה־${ltr('y')} שלהם הוא ${blank(2, 'number')}.</li>
-<li>סמנו גם נקודה שערך ה־${ltr('x')} שלה כמו של הספסל, מעל הספסל ומתחת לעץ, וכתבו אותה: ${pair()}.</li>
-<li>הנקודה שסימנתם רחוקה מציר ${ltr('y')} ‏${blank(2, 'number')} יחידות.</li>
-</ul>
-</section>
-<section class="q-card">
-<h3>ד. המסלול של נועם.</h3>
-<p>נועם נכנס בשער ${ltr('A')}, יושב על הספסל ${ltr('B')}, שותה מהמזרקה ${ltr('C')} ומגיע אל העץ ${ltr('E')}.</p>
-<ul class="tasks compact">
-<li>מהשער אל הספסל הולכים לאורך השבילים: 2 יחידות ימינה ואחר כך 2 יחידות ${blank(4, 'direction')}, ובסך הכול:</li>
-</ul>
-${exerciseGiven('', '2 + 2')}
-<ul class="tasks compact">
-<li>אורך המסלול כולו, מהשער אל העץ:</li>
-</ul>
-${exerciseGiven('', '4 + 3 + 3')}
 </section>
 `,
 });

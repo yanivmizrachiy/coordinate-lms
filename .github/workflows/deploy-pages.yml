@@ -61,6 +61,8 @@ jobs:
             echo "Deployment stopped: central registration must be configured before publishing."
             exit 1
           fi
+      - name: Full production release-readiness gate
+        run: npm run release:report
       - run: npm test
       - run: npm run build
       - uses: actions/configure-pages@v6

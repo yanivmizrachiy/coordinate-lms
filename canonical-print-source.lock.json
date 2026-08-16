@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "repository": "yanivmizrachiy/coordinate-first-quadrant",
+  "branch": "main",
+  "verifiedCommit": "d89e4e07ea55af5941b1de5c8efc2323e4a39188",
+  "purpose": "Synchronization evidence only. RULES.md is the sole normative source of truth. Updating this lock requires verifying and synchronizing any relevant printable-source changes into the LMS digital twin."
+}

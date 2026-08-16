@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, grid, exerciseGiven } from '../authoring';
+import { sheet, blank, ltr, pair, grid, exerciseGiven, wordBank } from '../authoring';
 
 /* The second half of „בונים זווית ישרה”. It was the third section of a page
    that already carried two drawings, and a drawing there had nowhere to grow:
@@ -14,6 +14,7 @@ export const RAYS_VERTEX_OFF_ORIGIN: WorkbookPageContent = sheet({
 <div class="rule-box completion-intro">
 <div class="completion-sentence">זווית ישרה אפשר לבנות בכל מקום ברביע הראשון, ולא רק ב${blank(6, 'concept')} הצירים.</div>
 </div>
+${wordBank(['ראשית'])}
 <section class="q-card">
 <h3>א. סמנו על הסרטוט, ואז השלימו עליו.</h3>
 ${grid({
@@ -38,7 +39,7 @@ ${grid({
 </ul>
 ${exerciseGiven('AB', '4 − 0')}
 <ul class="tasks compact">
-<li>נקודה שבה הזווית ${ltr('ABC')} <b>אינה</b> ישרה: ${pair()}, כי שיעור ה־${ltr('y')} שלה ${blank(5, 'relation')} משיעור ה־${ltr('y')} של ${ltr('B')}.</li>
+<li>נקודה שבה הזווית ${ltr('ABC')} <b>אינה</b> ישרה: ${pair()}, כי שיעור ה־${ltr('y')} שלה ${blank(5, 'relation')} משיעור ה־${ltr('y')} של הנקודה ${ltr('B')}.</li>
 </ul>
 </section>
 `,

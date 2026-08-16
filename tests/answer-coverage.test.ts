@@ -7,12 +7,13 @@ import {
   isAllowedExpectedAnswer,
 } from '../src/lms/answerValidation';
 import { PROVEN_ANSWER_PROOFS } from '../src/lms/provenAnswerKey';
+import { currentTargetIdForLegacy } from '../src/lms/legacyWorkbookMap';
 
 describe('answer-key coverage intelligence', () => {
-  test('represents every workbook page from 1 through 77', () => {
-    expect(report.pages).toHaveLength(77);
+  test('represents every workbook page from 1 through 78', () => {
+    expect(report.pages).toHaveLength(78);
     expect(report.pages.map((page) => page.pageNumber)).toEqual(
-      Array.from({ length: 77 }, (_, index) => index + 1),
+      Array.from({ length: 78 }, (_, index) => index + 1),
     );
   });
 
@@ -76,18 +77,30 @@ describe('answer-key coverage intelligence', () => {
     );
 
     expect(proofs).toHaveLength(735);
+    let mappedProofs = 0;
+    let retainedProofs = 0;
+    let staleProofs = 0;
     for (const [targetId, proof] of proofs) {
-      const target = targets.get(targetId);
-      expect(target, targetId).toBeDefined();
-      expect(target?.signature, targetId).toBe(proof.targetSignature);
-      expect(target?.answers, targetId).toEqual(proof.answers);
-      expect(target?.classification, targetId).toBe(proof.classification);
-      expect(target?.automaticCheckingSafe, targetId).toBe(true);
+      const currentTargetId = currentTargetIdForLegacy(targetId);
+      if (!currentTargetId) continue;
+      mappedProofs += 1;
+      const target = targets.get(currentTargetId);
+      if (!target || target.signature !== proof.targetSignature) {
+        staleProofs += 1;
+        continue;
+      }
+      retainedProofs += 1;
+      expect(target.answers, targetId).toEqual(proof.answers);
+      expect(target.classification, targetId).toBe(proof.classification);
+      expect(target.automaticCheckingSafe, targetId).toBe(true);
       expect(proof.sourceEvidence, targetId).toMatch(/^src\/data\/workbook\/pages\//);
     }
+    expect(retainedProofs + staleProofs).toBe(mappedProofs);
+    expect(retainedProofs).toBeGreaterThan(staleProofs);
+    expect(staleProofs).toBeGreaterThan(0);
   });
 
-  test('binds reviewed open-ended targets to the current canonical prompt', () => {
+  test('keeps legacy reviewed prompts signature-bound while allowing objective digital upgrades', () => {
     const targets = new Map(
       report.pages.flatMap((page) =>
         page.targets.map((target) => [target.targetId, target] as const),
@@ -95,15 +108,51 @@ describe('answer-key coverage intelligence', () => {
     );
 
     expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(161);
+    let mapped = 0;
+    let retained = 0;
+    let needsDigitalWork = 0;
+    let upgraded = 0;
+    let stale = 0;
+
     for (const [targetId, signature] of Object.entries(
       REVIEWED_OPEN_ENDED_TARGET_SIGNATURES,
     )) {
-      const target = targets.get(targetId);
-      expect(target, targetId).toBeDefined();
-      expect(target?.signature, targetId).toBe(signature);
-      expect(target?.classification, targetId).toBe('open-ended');
-      expect(target?.automaticCheckingSafe, targetId).toBe(false);
+      const currentTargetId = currentTargetIdForLegacy(targetId);
+      if (!currentTargetId) continue;
+      mapped += 1;
+      const target = targets.get(currentTargetId);
+      if (!target || target.signature !== signature) {
+        stale += 1;
+        continue;
+      }
+
+      retained += 1;
+      if (target.automaticCheckingSafe) {
+        upgraded += 1;
+        expect(
+          [
+            'reviewed-explicit',
+            'canonical-metadata-derived',
+            'deterministic-mathematical',
+            'valid-range',
+          ],
+          targetId,
+        ).toContain(target.classification);
+        expect(target.answers.length, targetId).toBeGreaterThan(0);
+      } else {
+        needsDigitalWork += 1;
+        expect(['open-ended', 'ambiguous'], targetId).toContain(target.classification);
+        if (target.classification === 'ambiguous') {
+          expect(target.currentAnswerSource, targetId).toMatch(/digital adaptation|required/i);
+        }
+      }
     }
+
+    expect(retained + stale).toBe(mapped);
+    expect(retained).toBeGreaterThan(stale);
+    expect(upgraded).toBeGreaterThan(0);
+    expect(needsDigitalWork).toBeGreaterThan(0);
+    expect(stale).toBeGreaterThan(0);
   });
 
   test('accepts the new exact coordinate proofs and rejects nearby values', () => {

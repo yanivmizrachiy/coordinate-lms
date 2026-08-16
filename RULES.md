@@ -1,84 +1,164 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-01
+Updated: 2026-08-16
 
-This is the single source of truth for work in `yanivmizrachiy/coordinate-lms`.
-`USER_MEMORY.md` and `HANDOFF.md` preserve historical workbook decisions, but
-they do not override this file. When a current user instruction conflicts with
-this file, the current instruction wins and this file must be reconciled.
+This file is the **single and only source of truth** for work in `yanivmizrachiy/coordinate-lms`.
+No README, status document, handoff, memory file, PR description, comment, test fixture, legacy file, or old instruction may override it. If anything in the repository contradicts this file, the contradictory text/code/configuration must be removed or reconciled.
 
-## Repository and change boundary
+## 1. Repository boundary
 
-- The only writable repository for LMS work is
-  `yanivmizrachiy/coordinate-lms`.
-- `yanivmizrachiy/coordinate-first-quadrant` is the canonical source workbook
-  and is read-only. Never commit, push, merge, deploy, or otherwise modify it.
-- Preserve unrelated work and never rewrite shared history. Do not use
-  `git reset --hard`, force-push, or forced dependency-audit fixes.
-- A feature branch and draft pull request are allowed. Merging and production
-  deployment require explicit confirmation for the current operation.
+- The only writable repository for LMS work is `yanivmizrachiy/coordinate-lms`.
+- `yanivmizrachiy/coordinate-first-quadrant` is the canonical printable workbook repository and is **strictly read-only** during LMS work.
+- Never commit, push, merge, deploy, rewrite, or otherwise modify the printable repository while implementing or fixing the computerized version.
 - Never print, commit, expose, or invent credentials.
+- Preserve unrelated work and never rewrite shared history with destructive git operations.
 
-## Canonical workbook integrity
+## 2. Iron rule: the computerized workbook is a one-to-one digital twin of the printable workbook
 
-- Preserve all 77 numbered pages, Hebrew RTL behavior, canonical wording,
-  mathematics, diagrams, page order, A4 pagination, and print layout.
-- LMS behavior is an interactive layer. Interactive controls must be hidden or
-  made print-neutral and must not obstruct canonical diagrams.
-- Canonical workbook details recorded in `USER_MEMORY.md` remain a historical
-  content contract only where they do not conflict with this file or a current
-  instruction.
+- The printable workbook is the canonical source for the computerized workbook.
+- **Every canonical printable page must have exactly one corresponding computerized page. No printable page may be omitted, replaced by unrelated content, skipped, reordered, redesigned independently, or treated as optional.**
+- The current canonical printable workbook contains **78 numbered pages**. The LMS must track the canonical source dynamically and must not hard-code an obsolete page count.
+- **The computerized page must visually and structurally reproduce the printable page one-to-one:** same mathematical content, same questions, same diagrams, same page order, same Hebrew wording, same RTL behavior, same visual hierarchy, same colours, same typography, same spacing/layout intent, and the same intended learning progression.
+- The printable design is not merely inspiration or a loose reference. **It is the visual and content source that the computerized page must mirror.** A student looking at the computerized page should recognize the same worksheet/page; the difference is that the student answers through the technological device.
+- **The LMS must not invent an independent visual redesign of canonical worksheet content.** Digital-only controls may be added as an interaction layer, but they must not replace, distort, reorder, or visually redefine the underlying printable page.
+- **Any future change in the canonical printable source — wording, question, diagram, order, colour, typography, visual structure, layout, or page content — requires the corresponding computerized page to be updated to match it.**
+- CI must detect printable-source/LMS drift and block release rather than silently allow divergence.
+- The LMS must maintain a one-to-one mapping between canonical printable pages and computerized pages and must provide a verifiable synchronization path from the printable source to its computerized twin.
+- If any current LMS page differs from its canonical printable page beyond permitted digital-only interaction overlays, that difference is a defect and must be corrected.
 
-## Scoring, access, and answer policy
+## 3. Printable pages are never modified for LMS needs
 
-- Every submitted page score is an integer from 1 through 100. The retired
-  0–1200 model must never return.
-- Every automatically checked answer allows at most three attempts. Reload,
-  retry, stale writes, or reconnection must never reset that count.
-- Page 1 is guest-accessible. Page 2 onward requires registration.
-- An answer may be checked automatically only when it is reviewed explicitly,
-  encoded in canonical metadata, mathematically deterministic, or a verified
-  valid range.
-- Reviewed proofs and reviewed open-ended decisions must be bound to the
-  current target signature and cite canonical source evidence. Prompt drift
-  must make the old decision inapplicable.
-- Unordered answer sets may be accepted only through the strict `set:` format;
-  duplicates, omissions, and extra labels must remain incorrect.
-- Never infer an answer merely from nearby prose. Open-ended, ambiguous,
-  unsupported, and missing targets remain visibly ungraded for teacher review.
-- The generated JSON and Markdown coverage reports must represent all pages
-  1–77 and must remain synchronized with target order and runtime answer keys.
+- All interaction, answer checking, scoring, registration, persistence, Firebase logic, pedagogical adaptation, and UI controls belong only to the computerized/LMS layer.
+- **Do not change printable wording, printable questions, printable diagrams, printable layout, printable page order, printable styling, or printable source files in order to make computerized checking easier.**
+- Interactive controls must be digital-only and must not leak into printable output.
+- A computerized adaptation may change the **response mechanism only where needed for digital interaction**, but not the mathematical learning objective, canonical wording/content, or visual identity of the original printable question/page.
+- Examples of permitted digital-only overlays include answer fields, direct graph/diagram interactions, small check controls, feedback markers, registration/save UI, and page-score UI. These overlays sit on top of the canonical page; they do not authorize a separate worksheet design.
 
-## Persistence truth and classroom data
+## 4. Computerized interaction must match the mathematical action
 
-- Local persistence success and central Firebase synchronization success are
-  distinct states. Never tell a student that data was saved centrally unless
-  the central write actually succeeded.
-- Central failures must be visible and retryable. Retries must be idempotent and
-  must not duplicate results, attempts, or activity events.
-- Guest progress is copied to an account before guest source records are
-  removed. A failed central transfer leaves the guest source intact.
-- Concurrent and stale writes must preserve the latest valid state, the best
-  score, the highest attempt count, and any completed/locked state.
-- Teacher views must distinguish a central class snapshot from local fallback
-  data and expose synchronization errors rather than hiding them.
+- Do not reduce every computerized task to typing into a text field.
+- If the printable task asks the student to mark, choose, drag, place, connect, or identify something visually, the computerized version must use a suitable direct interaction whenever practical.
+- For coordinate-grid point tasks, the student clicks/taps the desired point directly on the grid, the LMS visibly marks the selected point, and submission checks that graphical choice.
+- Typing a coordinate is not a substitute when the intended computerized action is direct point selection.
 
-## Firebase and authorization
+## 5. Multiple valid answers are checked mathematically
 
-- Production registration fails closed unless all six required Firebase client
-  settings are configured. Browser-only accounts are development-only or
-  require an explicit opt-in that is disabled by production workflows.
-- Never claim Firebase is operational until Authentication, Firestore, GitHub
-  secrets, rules/index deployment, and a real two-device acceptance test have
-  all been verified.
-- Students may read and write only their own profile and subcollections.
-  Dashboard-wide reads and answer-key writes are administrator-only.
-- Firestore writes must use field allowlists and enforce page 1–77, score
-  1–100, attempt summary 0–3, monotonic progress, and bounded document shapes.
-- Keep the client administrator list and the Firestore administrator rule
-  aligned before deployment.
+- A task is **not open-ended merely because many answers can be correct**.
+- If correctness can be expressed as an objective mathematical condition, the LMS must check that condition automatically. No teacher judgment is required.
+- For point-selection tasks, validate the student's selected location against the mathematical predicate at submission time.
+- Accept every selectable point that satisfies the requirement and reject every selectable point that does not.
+- Examples: any point with `y = 6`; any point on the x-axis; any point on the x-axis to the right of B; any other deterministic geometric condition.
+- Never rely on one sample coordinate when the task permits an entire set of correct coordinates.
+- Never reject a mathematically valid alternative merely because it differs from an example answer.
 
-## Required quality gates
+## 6. Pedagogical conversion of explanation questions
+
+- Questions such as **"הסבר מדוע"** must not remain uncheckable free text by default in the computerized version.
+- The default computerized adaptation is a carefully designed choice task with **four answer options**, unless pedagogical review establishes that another objectively checkable interaction preserves the original learning goal better.
+- Normally use one best correct explanation and three plausible distractors based on realistic student misconceptions or partial reasoning.
+- Distractors must be mathematically and didactically meaningful. Do not use silly, unrelated, grammatically revealing, or obviously wrong options.
+- The correct option must not be identifiable merely because it is longer, more precise, uniquely formatted, or stylistically different.
+- The task must be neither artificially easy nor artificially difficult. It must require genuine mathematical thought appropriate to the original question.
+- Creating these alternatives requires high-level pedagogical reasoning: identify the concept, anticipate common misconceptions, preserve the original cognitive demand, and construct diagnostic distractors.
+- This adaptation occurs **only in the computerized interaction layer**. The printable question remains unchanged, and the computerized page must still preserve the canonical printable page's visible identity.
+
+## 7. Per-answer checking is the primary feedback interaction
+
+- **Every objectively checkable student response must have a small, clear digital-only check button immediately next to the response control.** This applies to ordinary text/number answers, an ordered pair treated as one answer unit, a graphical selection, and a grouped mathematical response.
+- The student enters or selects the answer and then presses that nearby check button. Correctness is evaluated at that moment; merely typing must not consume an attempt or be the primary correctness-reveal interaction.
+- A correct checked response receives a clearly visible **green ✓** immediately next to/over the response and becomes completed according to the attempt policy.
+- An incorrect checked response receives clear local error feedback and may be corrected while attempts remain.
+- The nearby button must check the complete mathematical answer unit. For an ordered pair this means the pair, not two unrelated mini-checks. For a predicate/group task it means the whole condition/group, not one arbitrary field.
+- A page-wide “check all answers” control may remain as a convenience, but it is secondary; it must use exactly the same checking logic as the nearby per-answer buttons.
+- Check buttons and feedback markers are LMS-only and must never appear in print.
+
+## 8. Answer-checking policy
+
+- An answer may be checked automatically when it is reviewed explicitly, encoded in canonical metadata, mathematically deterministic, or expressible as a verified valid range/predicate.
+- Reviewed answer logic must be bound to the current target signature and canonical source evidence. Prompt drift invalidates stale grading logic.
+- Normal unambiguous notation variants must be accepted, including harmless spacing, equivalent numeric forms, safe x/X variants, and safe Hebrew axis spellings where context permits.
+- Flexible matching must remain context-bound and must never make a mathematically different answer pass.
+- Unordered sets and order-flexible multi-blank answers may pass only when the complete mathematical combination is valid; duplicates, omissions, and invalid mixtures remain wrong.
+- Never invent one fixed answer for a task whose valid solution set contains many responses. Encode the mathematical condition instead.
+- A target may remain genuinely ungraded only after pedagogical review proves that no objective computerized equivalent can preserve the original learning objective.
+
+## 9. Iron rule: practice is open; registration is only for saving and documentation
+
+- **Every student, registered or not, may open and solve every computerized page and every exercise in the LMS. There is no registration wall on any workbook page.**
+- Registration/login is optional for practice. It becomes necessary only when the student wants their work, answers, scores, attempts, progress, and activity to be saved and documented to their personal account.
+- A non-registered visitor may receive normal on-screen checking, feedback, and a score during the current practice session, but the LMS must not persist that visitor's work as student progress.
+- **For a non-registered visitor, do not save drafts, results, scores, attempts, activity history, or progress to Firebase, to the teacher dashboard, or to persistent local LMS storage.** Refreshing/leaving may therefore discard unsaved guest work.
+- Do not create a durable `guest` student record, do not transfer guest history into a later account, and do not include guest activity in teacher reports or class statistics.
+- Only registered users have persistent save/sync. Once a registered student is signed in, their work is documented to their account according to the persistence rules below.
+- The first computerized page must contain a clear, visible digital-only information box explaining in student-friendly Hebrew that registration is **not required to practice**, but registration is required to save and document progress, and that work performed while signed in is recorded to the student's account.
+- The information box must explicitly tell the student that a registered account enables saved learning history and personal progress reports.
+- That information box is an LMS overlay only and must not modify or appear in the printable source page.
+
+## 10. Registration identity and security
+
+- Registration for persistent learning records requires all of these fields: **full name, username, email address, password, school, city, and class**. These are required, not optional, for a newly registered student.
+- The registration screen must explain why registration exists: to save, document and report the student's learning activity and progress.
+- Production authentication must use **Firebase Authentication**. Do not implement a custom production password database.
+- A student's password must never be stored in Firestore, in the student profile, in reports, in logs, in repository files, or in application analytics.
+- Development-only local authentication may exist only behind an explicit development fallback that production workflows keep disabled; it is never presented as production security.
+- Enforce a reasonable password policy in the UI and application validation. The current minimum is 10 characters including at least one letter and one number; Firebase remains the authentication authority.
+- Profile strings must be validated, length-bounded and treated as untrusted user input.
+- Registration must fail closed when the real production authentication backend is unavailable; failure of registration must never block anonymous practice.
+- Do not expose one student's profile or learning records to another student. Class-wide access is administrator-only.
+
+## 11. Scoring and attempts
+
+- **Every computerized page has its own independent page score.** Scores are not merged across pages for the page-completion display.
+- Every submitted page score is an integer from 1 through 100.
+- At page completion/submission, show that page's score prominently in **red**, with the numeric score surrounded by a clearly visible **red circle/ring** and a label identifying it as the score for that page.
+- The red score circle is shown to registered and anonymous students; persistence still follows the registration rules.
+- Every automatically checked answer allows at most three attempts during the active practice state.
+- An attempt is consumed when the student explicitly checks/submits that response, not merely while typing or editing it.
+- For registered students, reload, retry, stale writes, or reconnection must never reset a persisted attempt count.
+- Each objectively checkable response gives immediate local feedback **after its check action**: green ✓ for correct and red/local failure for incorrect, while preserving the attempt rule.
+- For graphical tasks, feedback applies to the submitted graphical choice, not to a surrogate typed answer.
+- After page submission, show the score to every user. Persist the score, answers, and attempt counts **only when the user is registered and signed in**.
+
+## 12. Student and teacher visibility
+
+- Registered students may view only their own saved data.
+- Only the configured administrator may view class-wide registered-student results in the initial release.
+- The administrator view must expose question-level correctness and attempts, not only page-level scores.
+- The teacher dashboard and reports contain **registered students only**. Anonymous/guest practice must not create student records, activity rows, progress records, or statistics.
+
+## 13. Persistence and Firebase truth
+
+- Persistence applies only to a registered, signed-in student (or the configured administrator where appropriate).
+- Local persistence success and central Firebase synchronization success are different states for registered users.
+- Never tell a student data was saved centrally unless the central write actually succeeded.
+- Central failures must be visible, retryable, and idempotent.
+- Retries must not duplicate results, attempts, or activity events.
+- Concurrent/stale writes must preserve the latest valid state, best score, highest attempt count, and completed/locked state.
+- Teacher views must distinguish central Firebase data from any registered-user local fallback and expose synchronization errors.
+- **There is no guest-progress persistence or guest-progress transfer workflow.** Any code, test, copy, storage key usage, or migration rule that assumes durable guest progress is obsolete and must be removed.
+
+## 14. Firebase and authorization
+
+- Production registration fails closed unless all required Firebase client settings are configured.
+- Browser-only accounts are development-only or require explicit production-disabled opt-in.
+- Never claim Firebase is operational until Authentication, Firestore, GitHub secrets, rules/index deployment, and a real two-device acceptance test have all been verified.
+- Students may read/write only their own profile and subcollections.
+- Class-wide reads and answer-key writes are administrator-only.
+- Firestore rules must use field allowlists and validate the **current canonical page range**, score 1–100, attempt summary 0–3, monotonic progress, and bounded document shapes.
+- Do not hard-code a stale workbook page count.
+- Anonymous practice must not require or create a Firebase student identity merely to solve exercises.
+
+## 15. Documentation and source-of-truth hygiene
+
+- `RULES.md` is the **only normative rule document and the only source of truth**.
+- No other file may be described as a co-authority, secondary source of truth, fallback truth, or independent requirement source.
+- `README.md` may describe the project but must not define competing rules.
+- Status reports may describe current implementation gaps but must not redefine requirements.
+- Historical memory/handoff documents must not contain active rules that compete with `RULES.md`; contradictory historical instructions must be removed rather than left as an alternative authority.
+- PR descriptions and comments are status/history only and must be reconciled when they contain obsolete claims such as 77 pages, registration walls on workbook pages, durable guest progress, teacher judgment for mathematically deterministic tasks, permanent ungraded treatment for tasks that can be objectively computerized, or any permission to diverge visually/content-wise from the canonical printable page.
+- Any repository text, code, test, report, configuration, or workflow that conflicts with the canonical printable-to-LMS one-to-one mapping or the rules above is a defect and must be removed or corrected.
+
+## 16. Required quality gates
 
 Before presenting a branch as ready for review, run at least:
 
@@ -95,8 +175,16 @@ npm run release:report
 npm run test:visual
 ```
 
-The Firebase readiness command is expected to fail while real configuration is
-absent; report the missing prerequisite exactly. A release must additionally
-have a passing readiness result, deployed authorization rules, and recorded
-two-device acceptance evidence. Do not describe the product as production
-ready while any of those external requirements remain incomplete.
+CI must also verify canonical print/LMS page synchronization, including visual/content parity, and reject documentation/runtime drift.
+A release must additionally have passing readiness, deployed authorization rules, and recorded two-device acceptance evidence.
+Do not describe the product as production-ready while any required gate or external prerequisite is incomplete.
+
+## 17. Production deployment and release safety
+
+- The production website is released through the repository's **manual GitHub Pages workflow** after all release gates pass. A push, pull request, bot commit, or ordinary branch commit must not publish production automatically.
+- Vercel is not a required production host for this LMS. Automatic Vercel Git deployments must remain disabled so preview/build quota is not consumed by ordinary commits. Do not pay for or upgrade Vercel in order to release this project.
+- Production Firebase deployment must never rely on the local/default `.firebaserc` target. The committed default Firebase target must remain a `demo-*` namespace used only for emulator/local safety.
+- Firestore rules and indexes may be deployed to production only through an explicit Firebase project ID supplied by the protected release configuration, together with the required deployment credentials. The deployment command must pass the project explicitly.
+- A production release must not proceed until the six required `VITE_FIREBASE_*` client settings, the Firestore deployment credential, Email/Password Authentication, Firestore, deployed rules/indexes, and the intended production project identity have all been verified without exposing secret values.
+- A physical two-device acceptance record may be marked `pass` only when it identifies a real non-demo Firebase project, the exact deployed commit, at least one tester, a real student phone and a separate teacher computer, and all required acceptance checks with non-empty evidence notes.
+- Partial physical evidence, omitted checks, demo-project evidence, or a manually edited `status: pass` is not sufficient for release readiness. Automated validation must reject incomplete pass evidence.

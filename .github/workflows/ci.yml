@@ -4,12 +4,21 @@ on:
   push:
     branches: ['**']
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Checkout canonical printable source (read-only)
+        uses: actions/checkout@v7
+        with:
+          repository: yanivmizrachiy/coordinate-first-quadrant
+          ref: main
+          path: .canonical-print-source
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v7
         with:
           node-version: 20
@@ -20,6 +29,21 @@ jobs:
           distribution: temurin
           java-version: '21'
       - run: npm ci
+      - name: Canonical printable/LMS synchronization gate
+        shell: bash
+        run: |
+          set +e
+          output="$(node scripts/check-canonical-source.mjs .canonical-print-source 2>&1)"
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$status" -ne 0 ]; then
+            escaped="${output//'%'/'%25'}"
+            escaped="${escaped//$'\r'/'%0D'}"
+            escaped="${escaped//$'\n'/'%0A'}"
+            echo "::error title=Canonical printable/LMS synchronization failed::$escaped"
+            exit "$status"
+          fi
       - name: Production dependency security gate
         run: npm audit --omit=dev --audit-level=high
       - name: Development toolchain security gate
@@ -30,13 +54,12 @@ jobs:
         run: npm run firebase:check:static
       - name: Typecheck
         run: npm run typecheck
-      - name: Unit & content tests
-        run: npm test
       - name: Firestore emulator authorization tests
         run: npm run test:firestore
       - name: Separated classroom release contract
-        if: always()
         run: npm run release:report:static
+      - name: Unit & content tests
+        run: npm test
       - name: Build
         run: npm run build
       - name: Keep readiness evidence
@@ -55,10 +78,6 @@ jobs:
             reports/release-readiness.md
           retention-days: 14
 
-  # The rules Yaniv repeats most — drawings big enough to write on, nothing cut
-  # off the page, labels not printing backwards, 13px body text — can only be
-  # checked by measuring a real render. Without this job they were verified by
-  # hand, which means whenever nobody looked, they were not verified at all.
   visual-checks:
     runs-on: ubuntu-latest
     steps:

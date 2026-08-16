@@ -1,3 +1,4 @@
+import { TOTAL_PAGES } from '../data/workbook';
 import type {
   ActivityEvent,
   DashboardSnapshot,
@@ -12,6 +13,7 @@ export const DASHBOARD_CSV_COLUMNS = [
   'email',
   'class_name',
   'school',
+  'city',
   'registered_at',
   'last_activity_at',
   'current_page',
@@ -45,7 +47,7 @@ export function dashboardCurrentPage(student: DashboardStudent): number {
   const latestResult = [...student.results].sort(
     (a, b) => b.submittedAt - a.submittedAt,
   )[0];
-  return Math.min((latestResult?.pageNumber || 0) + 1, 77) || 1;
+  return Math.min((latestResult?.pageNumber || 0) + 1, TOTAL_PAGES) || 1;
 }
 
 export function dashboardTotalActiveSeconds(student: DashboardStudent): number {
@@ -92,7 +94,7 @@ export function buildDashboardCsv(snapshot: DashboardSnapshot): string {
   const rows: string[][] = [Array.from(DASHBOARD_CSV_COLUMNS)];
 
   for (const student of snapshot.students) {
-    for (let pageNumber = 1; pageNumber <= 77; pageNumber += 1) {
+    for (let pageNumber = 1; pageNumber <= TOTAL_PAGES; pageNumber += 1) {
       const result = student.results.find(
         (item) => item.pageNumber === pageNumber,
       );
@@ -110,6 +112,7 @@ export function buildDashboardCsv(snapshot: DashboardSnapshot): string {
         student.profile.email,
         student.profile.className || '',
         student.profile.school || '',
+        student.profile.city || '',
         iso(student.profile.createdAt),
         iso(latestActivityAt(student)),
         String(dashboardCurrentPage(student)),

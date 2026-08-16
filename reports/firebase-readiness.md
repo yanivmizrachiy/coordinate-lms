@@ -1,6 +1,6 @@
 # Firebase readiness report
 
-Generated: 2026-08-01T23:56:19.850Z
+Generated: 2026-08-16T09:03:44.699Z
 
 Mode: static
 
@@ -22,8 +22,8 @@ Summary: 14 pass, 8 warning, 0 failure.
 | pass | initialization:VITE_FIREBASE_APP_ID | yes | Firebase initialization references VITE_FIREBASE_APP_ID. |
 | pass | initialization:guard | yes | Firebase initialization is guarded by complete configuration. |
 | pass | production:local-fallback | yes | Local LMS fallback is limited to development or explicit opt-in. |
-| pass | workflow:pages | yes | .github\workflows\deploy-pages.yml exists. |
-| pass | workflow:firestore | yes | .github\workflows\deploy-firestore.yml exists. |
+| pass | workflow:pages | yes | .github/workflows/deploy-pages.yml exists. |
+| pass | workflow:firestore | yes | .github/workflows/deploy-firestore.yml exists. |
 | pass | production:fallback-env | yes | Production deployment explicitly disables local fallback. |
 | pass | admin:emails | no | Admin-email configuration is present without exposing its value. |
 | warn | actions:service-account | no | FIREBASE_SERVICE_ACCOUNT was not found in GitHub Actions secrets. |

@@ -18,9 +18,28 @@ async function json(path) {
   }
 }
 
+async function fileSha256(path) {
+  return createHash('sha256').update(await readFile(resolve(root, path))).digest('hex');
+}
+
 function domain(id, label, status, summary, evidence = [], blockers = []) {
   if (!allowedStatuses.has(status)) throw new Error(`Invalid status: ${status}`);
   return { id, label, status, summary, evidence, blockers };
+}
+
+function pages(value) {
+  return Array.isArray(value?.pages) ? value.pages : [];
+}
+
+function targetCountFromPages(pageList) {
+  return pageList.reduce(
+    (sum, page) => sum + (Array.isArray(page?.targets) ? page.targets.length : 0),
+    0,
+  );
+}
+
+function hasContiguousPageNumbers(pageList) {
+  return pageList.every((page, index) => page?.pageNumber === index + 1);
 }
 
 const firebaseRun = spawnSync(
@@ -32,30 +51,55 @@ if (firebaseRun.stdout) process.stdout.write(firebaseRun.stdout);
 if (firebaseRun.stderr) process.stderr.write(firebaseRun.stderr);
 
 const answerCoverage = await json(resolve(reports, 'answer-coverage.json'));
-const reviewManifest = await json(
-  resolve(root, 'public', 'answer-review-manifest.json'),
-);
+const answerTargetOrder = await json(resolve(reports, 'answer-target-order.json'));
+const reviewManifest = await json(resolve(root, 'public', 'answer-review-manifest.json'));
+const openEndedReview = await json(resolve(root, 'docs', 'open-ended-review.json'));
 const firebaseReadiness = await json(resolve(reports, 'firebase-readiness.json'));
+const firebaseProductionEvidence = await json(
+  resolve(reports, 'firebase-production-evidence.json'),
+);
 const emulator = await json(resolve(reports, 'firestore-emulator.json'));
 const physical = await json(resolve(reports, 'two-device-acceptance.json'));
 const packageJson = await json(resolve(root, 'package.json'));
 const ci = existsSync(resolve(root, '.github', 'workflows', 'ci.yml'))
   ? await readFile(resolve(root, '.github', 'workflows', 'ci.yml'), 'utf8')
   : '';
+const deployFirestore = existsSync(
+  resolve(root, '.github', 'workflows', 'deploy-firestore.yml'),
+)
+  ? await readFile(resolve(root, '.github', 'workflows', 'deploy-firestore.yml'), 'utf8')
+  : '';
 const diffCheck = spawnSync('git', ['diff', '--check'], {
   cwd: root,
   encoding: 'utf8',
 });
 
+const coveragePages = pages(answerCoverage);
+const orderedPages = pages(answerTargetOrder);
+const pageCount = Number(answerCoverage?.pageCount || 0);
+const targetCount = Number(answerCoverage?.targetCount || 0);
+const releaseStepIndex = ci.indexOf('npm run release:report:static');
+const unitTestStepIndex = ci.indexOf('npm test');
+
 const repositoryChecks = [
   existsSync(resolve(root, 'RULES.md')),
-  answerCoverage?.pageCount === 77,
-  answerCoverage?.targetCount === reviewManifest?.targetCount,
+  Number.isInteger(pageCount) && pageCount > 0,
+  coveragePages.length === pageCount,
+  orderedPages.length === pageCount,
+  hasContiguousPageNumbers(coveragePages),
+  hasContiguousPageNumbers(orderedPages),
+  targetCountFromPages(coveragePages) === targetCount,
+  targetCountFromPages(orderedPages) === targetCount,
+  targetCount === Number(reviewManifest?.targetCount || 0),
   answerCoverage?.generatedAt === reviewManifest?.generatedAt,
   packageJson?.scripts?.['test:firestore'] ===
     'node scripts/run-firestore-emulator-tests.mjs',
   ci.includes('actions/setup-java@v5'),
   ci.includes('npm run test:firestore'),
+  releaseStepIndex >= 0 && unitTestStepIndex >= 0 && releaseStepIndex < unitTestStepIndex,
+  existsSync(resolve(root, 'scripts', 'verify-production-firebase.mjs')),
+  deployFirestore.includes('node scripts/verify-production-firebase.mjs'),
+  deployFirestore.includes('firebase-production-evidence'),
   diffCheck.status === 0,
 ];
 const repositoryPass = repositoryChecks.every(Boolean);
@@ -65,13 +109,16 @@ const domains = [
     'Repository engineering gates',
     repositoryPass ? 'pass' : 'failure',
     repositoryPass
-      ? 'The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent.'
+      ? 'The repository contract, generated manifests, emulator command, CI runtime, deployment verifier, and patch hygiene are internally consistent.'
       : 'One or more repository contracts or generated artifacts are missing or inconsistent.',
     [
       'RULES.md',
       'reports/answer-coverage.json',
+      'reports/answer-target-order.json',
       'public/answer-review-manifest.json',
       '.github/workflows/ci.yml',
+      '.github/workflows/deploy-firestore.yml',
+      'scripts/verify-production-firebase.mjs',
       'git diff --check',
     ],
     repositoryPass ? [] : ['Repair repository contract failures before review.'],
@@ -121,51 +168,109 @@ const firebaseChecks = Array.isArray(firebaseReadiness?.checks)
   ? firebaseReadiness.checks
   : [];
 const firebaseEvidenceMissing = !firebaseReadiness || firebaseChecks.length === 0;
-const firebaseStructuralFailure = firebaseEvidenceMissing || firebaseChecks.some(
-  (check) =>
-    check.status === 'fail' &&
-    !String(check.id).startsWith('runtime:') &&
-    check.id !== 'actions:service-account',
-);
-const firebaseMissing = firebaseChecks.filter(
+const firebaseStructuralFailure =
+  firebaseEvidenceMissing ||
+  firebaseChecks.some(
+    (check) =>
+      check.status === 'fail' &&
+      !String(check.id).startsWith('runtime:') &&
+      check.id !== 'actions:service-account',
+  );
+const currentRulesSha256 = await fileSha256('firestore.rules');
+const currentIndexesSha256 = await fileSha256('firestore.indexes.json');
+const productionFirebasePass =
+  firebaseProductionEvidence?.schemaVersion === 1 &&
+  firebaseProductionEvidence?.status === 'pass' &&
+  typeof firebaseProductionEvidence?.firebaseProjectId === 'string' &&
+  firebaseProductionEvidence.firebaseProjectId.length > 0 &&
+  !/^demo(?:-|$)/i.test(firebaseProductionEvidence.firebaseProjectId) &&
+  /^[0-9a-f]{40}$/i.test(
+    String(firebaseProductionEvidence?.deployedCommit || ''),
+  ) &&
+  /^\d+$/.test(String(firebaseProductionEvidence?.workflowRunId || '')) &&
+  firebaseProductionEvidence?.firestoreRulesAndIndexesDeployed === true &&
+  firebaseProductionEvidence?.authentication?.emailEnabled === true &&
+  firebaseProductionEvidence?.authentication?.passwordRequired === true &&
+  firebaseProductionEvidence?.contractHashes?.firestoreRulesSha256 ===
+    currentRulesSha256 &&
+  firebaseProductionEvidence?.contractHashes?.firestoreIndexesSha256 ===
+    currentIndexesSha256;
+
+const firebaseWarnings = firebaseChecks.filter(
   (check) => check.status !== 'pass' && check.id !== 'firestore:cli',
 );
 const firebaseStatus = firebaseStructuralFailure
   ? 'failure'
-  : firebaseMissing.length > 0
-    ? 'blocked'
-    : firebaseChecks.some((check) => check.status === 'warn')
-      ? 'warning'
-      : 'pass';
+  : productionFirebasePass
+    ? 'pass'
+    : 'blocked';
+const firebaseBlockers = [];
+if (!firebaseStructuralFailure && !productionFirebasePass) {
+  firebaseBlockers.push(
+    'No current verified Firebase production evidence matches the deployed Firestore rules/indexes and Email/Password Authentication configuration.',
+  );
+  for (const check of firebaseWarnings) {
+    firebaseBlockers.push(check.message);
+  }
+}
 domains.push(
   domain(
     'external-firebase',
     'External Firebase configuration and deployment',
     firebaseStatus,
     firebaseStatus === 'pass'
-      ? 'Required runtime settings, GitHub configuration, and repository Firebase checks are present.'
+      ? `Verified Firebase Production evidence passes for project ${firebaseProductionEvidence.firebaseProjectId}; Email/Password is enabled and deployed Firestore rules/index hashes match the current contract.`
       : firebaseStatus === 'failure'
         ? 'Firebase readiness evidence is missing or a repository-side contract failed.'
-        : 'Repository validation cannot supply console settings, service-account configuration, or deployment evidence.',
-    [`reports/firebase-readiness.json (${firebaseReadiness?.mode || 'missing'})`],
-    firebaseMissing.map((check) => check.message),
+        : 'Firebase Production remains blocked until a successful manual Firestore deployment produces current non-secret evidence and Email/Password Authentication is verified.',
+    productionFirebasePass
+      ? [
+          'reports/firebase-production-evidence.json',
+          `Firebase project: ${firebaseProductionEvidence.firebaseProjectId}`,
+          `deployed commit: ${firebaseProductionEvidence.deployedCommit}`,
+          `workflow run: ${firebaseProductionEvidence.workflowRunId}`,
+          `rules SHA-256: ${currentRulesSha256}`,
+          `indexes SHA-256: ${currentIndexesSha256}`,
+        ]
+      : [
+          `reports/firebase-readiness.json (${firebaseReadiness?.mode || 'missing'})`,
+          'reports/firebase-production-evidence.json (required after successful manual production deployment)',
+        ],
+    firebaseStatus === 'pass' ? [] : firebaseBlockers,
   ),
 );
 
 const safelyCheckable = Number(answerCoverage?.automaticallyCheckableTargets || 0);
-const targetCount = Number(answerCoverage?.targetCount || 0);
-const answerTargets = Array.isArray(answerCoverage?.pages)
-  ? answerCoverage.pages.flatMap((page) =>
-      Array.isArray(page?.targets) ? page.targets : [],
-    )
-  : [];
+const answerTargets = coveragePages.flatMap((page) =>
+  Array.isArray(page?.targets) ? page.targets : [],
+);
+const reviewedLedger = new Map(
+  Array.isArray(openEndedReview?.targets)
+    ? openEndedReview.targets
+        .filter(
+          (entry) =>
+            typeof entry?.targetId === 'string' &&
+            typeof entry?.signature === 'string' &&
+            typeof entry?.reason === 'string' &&
+            entry.reason.trim().length > 0,
+        )
+        .map((entry) => [entry.targetId, entry.signature])
+    : [],
+);
 const reviewedOpenEnded = answerTargets.filter(
   (target) =>
     target?.classification === 'open-ended' &&
-    String(target?.sourceEvidence || '').startsWith('signature-bound'),
+    (String(target?.sourceEvidence || '').startsWith('signature-bound') ||
+      reviewedLedger.get(target?.targetId) === target?.signature),
 ).length;
+const unresolvedReviewTargets = answerTargets.filter(
+  (target) =>
+    target?.classification === 'open-ended' &&
+    !String(target?.sourceEvidence || '').startsWith('signature-bound') &&
+    reviewedLedger.get(target?.targetId) !== target?.signature,
+);
 const unresolvedReview = Math.max(
-  0,
+  unresolvedReviewTargets.length,
   targetCount - safelyCheckable - reviewedOpenEnded,
 );
 const pedagogicalPass = targetCount > 0 && unresolvedReview === 0;
@@ -175,13 +280,17 @@ domains.push(
     'Pedagogical answer-key review',
     pedagogicalPass ? 'pass' : targetCount > 0 ? 'blocked' : 'failure',
     targetCount > 0
-      ? `${String(safelyCheckable)}/${String(targetCount)} targets are safely auto-checkable; ${String(reviewedOpenEnded)} are signature-bound open-ended tasks; ${String(unresolvedReview)} remain unresolved.`
+      ? `${String(safelyCheckable)}/${String(targetCount)} targets are safely auto-checkable; ${String(reviewedOpenEnded)} open-ended targets have signature-verified review evidence; ${String(unresolvedReview)} remain unresolved.`
       : 'Answer coverage evidence is missing or invalid.',
-    ['reports/answer-coverage.json', 'public/answer-review-manifest.json'],
+    [
+      'reports/answer-coverage.json',
+      'public/answer-review-manifest.json',
+      'docs/open-ended-review.json',
+    ],
     pedagogicalPass
       ? []
       : [
-          `Resolve ${String(unresolvedReview)} targets in the answer-review studio without guessing.`,
+          `Resolve ${String(unresolvedReview)} targets without guessing; stale review signatures must be re-reviewed.`,
         ],
   ),
 );
@@ -190,9 +299,9 @@ const physicalPass =
   physical?.schemaVersion === 1 &&
   physical?.status === 'pass' &&
   typeof physical?.testedAt === 'string' &&
-  physical?.testedAt.length > 0 &&
+  physical.testedAt.length > 0 &&
   typeof physical?.commit === 'string' &&
-  physical?.commit.length >= 7 &&
+  physical.commit.length >= 7 &&
   Array.isArray(physical?.devices) &&
   physical.devices.length >= 2 &&
   Array.isArray(physical?.checks) &&
