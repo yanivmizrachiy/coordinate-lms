@@ -1,6 +1,6 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-15
+Updated: 2026-08-16
 
 This file is the **single and only source of truth** for work in `yanivmizrachiy/coordinate-lms`.
 No README, status document, handoff, memory file, PR description, comment, test fixture, legacy file, or old instruction may override it. If anything in the repository contradicts this file, the contradictory text/code/configuration must be removed or reconciled.
@@ -178,3 +178,13 @@ npm run test:visual
 CI must also verify canonical print/LMS page synchronization, including visual/content parity, and reject documentation/runtime drift.
 A release must additionally have passing readiness, deployed authorization rules, and recorded two-device acceptance evidence.
 Do not describe the product as production-ready while any required gate or external prerequisite is incomplete.
+
+## 17. Production deployment and release safety
+
+- The production website is released through the repository's **manual GitHub Pages workflow** after all release gates pass. A push, pull request, bot commit, or ordinary branch commit must not publish production automatically.
+- Vercel is not a required production host for this LMS. Automatic Vercel Git deployments must remain disabled so preview/build quota is not consumed by ordinary commits. Do not pay for or upgrade Vercel in order to release this project.
+- Production Firebase deployment must never rely on the local/default `.firebaserc` target. The committed default Firebase target must remain a `demo-*` namespace used only for emulator/local safety.
+- Firestore rules and indexes may be deployed to production only through an explicit Firebase project ID supplied by the protected release configuration, together with the required deployment credentials. The deployment command must pass the project explicitly.
+- A production release must not proceed until the six required `VITE_FIREBASE_*` client settings, the Firestore deployment credential, Email/Password Authentication, Firestore, deployed rules/indexes, and the intended production project identity have all been verified without exposing secret values.
+- A physical two-device acceptance record may be marked `pass` only when it identifies a real non-demo Firebase project, the exact deployed commit, at least one tester, a real student phone and a separate teacher computer, and all required acceptance checks with non-empty evidence notes.
+- Partial physical evidence, omitted checks, demo-project evidence, or a manually edited `status: pass` is not sufficient for release readiness. Automated validation must reject incomplete pass evidence.
