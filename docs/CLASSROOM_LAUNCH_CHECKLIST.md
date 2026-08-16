@@ -29,7 +29,7 @@ In **Repository settings → Secrets and variables → Actions**, add these secr
 - `VITE_FIREBASE_APP_ID`
 - `FIREBASE_SERVICE_ACCOUNT`
 
-The service account needs only the permissions required to deploy Firestore rules and indexes. Never paste its JSON into a file, issue, PR, log, or chat.
+The service account must have the minimum permissions required to deploy Firestore rules/indexes **and** read the Firebase Authentication project configuration (`firebaseauth.configs.get`) so the production verifier can confirm Email/Password is actually enabled. Never paste its JSON into a file, issue, PR, log, or chat.
 
 Optionally add the repository variable `VITE_ADMIN_EMAILS` as a comma-separated list of teacher emails. Keep the Firestore admin rule and this list aligned before deployment.
 
@@ -37,8 +37,8 @@ Optionally add the repository variable `VITE_ADMIN_EMAILS` as a comma-separated 
 
 1. Install Java 21 and run `npm run test:firestore`. Confirm all authorization scenarios pass against `demo-coordinate-lms`; this command cannot access a production Firebase project.
 2. Run `npm run firebase:check` and resolve every failure.
-3. In GitHub Actions, run **Deploy Firestore rules (manual)**.
-4. Confirm the workflow deploys both `firestore.rules` and `firestore.indexes.json` to the intended project.
+3. In GitHub Actions, run **Deploy Firestore rules (manual)** from the intended release branch.
+4. Confirm the workflow deploys both `firestore.rules` and `firestore.indexes.json` to the intended non-demo project, verifies Email/Password Authentication through the Google API, uploads a non-secret `firebase-production-evidence` artifact, and persists `reports/firebase-production-evidence.json` back to the same branch only after verification succeeds.
 5. Verify with production acceptance accounts that a student cannot read another student's profile, drafts, results, or activity, and that only an authorized teacher can read class-wide data.
 
 ## 5. First production deployment
@@ -49,7 +49,7 @@ Optionally add the repository variable `VITE_ADMIN_EMAILS` as a comma-separated 
 4. For “הסבר מדוע” tasks, verify that the computerized interaction preserves the original learning objective and, by default, uses four didactically meaningful answer options unless another objectively checkable interaction is demonstrably better.
 5. Reviewed proof and digital grading logic must remain bound to current target signatures; prompt drift must be resolved before release.
 6. Run `npm run release:check` locally or in the release environment.
-7. Manually run **Deploy to GitHub Pages (manual)** only when all required gates pass. Do not deploy from an unreviewed branch and do not enable local LMS fallback in production.
+7. Manually run **Deploy to GitHub Pages (manual)** only when all required gates pass. The workflow itself runs the full production `release:report` gate and must stop automatically while Firebase production evidence or two-device acceptance is incomplete. Do not deploy from an unreviewed branch and do not enable local LMS fallback in production.
 
 ## 6. Two-device acceptance test
 
