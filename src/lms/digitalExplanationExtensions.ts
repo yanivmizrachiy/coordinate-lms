@@ -37,7 +37,7 @@ const SPECS: readonly ExplanationSpec[] = [
     ],
   },
   {
-    headingIncludes: 'ה. המסלול הקצר',
+    headingIncludes: 'המסלול הקצר',
     prompt: 'מדוע המסלול הקצר מהנקודה M הוא אל ציר y ובכמה הוא קצר יותר?',
     correct: 'כי M נמצאת במרחק 3 מציר y ובמרחק 5 מציר x, ולכן הדרך לציר y קצרה ב־2 יחידות.',
     options: [
