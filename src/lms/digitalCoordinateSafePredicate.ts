@@ -38,6 +38,7 @@ export function axisPointMovedUpFourMatches(values: readonly string[]): boolean 
   );
 }
 
+// In the first quadrant, distance from the y-axis is exactly the x-coordinate.
 export function pointDistanceTwoFromYAxisMatches(values: readonly string[]): boolean {
   if (values.length !== 2) return false;
   const numbers = values.map(finiteNumber);
