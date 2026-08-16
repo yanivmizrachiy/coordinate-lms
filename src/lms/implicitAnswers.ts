@@ -9,6 +9,7 @@ import { hydrateDigitalGeometryAnswers } from './digitalGeometryAnswers';
 import { hydrateDigitalGraphAnswers } from './digitalGraphAnswers';
 import { hydrateDigitalLifePredicates } from './digitalLifePredicates';
 import { hydrateDigitalLinearFacts } from './digitalLinearFacts';
+import { hydrateNonRightAngleExample } from './digitalNonRightAngleExample';
 import { hydrateDigitalOneStepAnswers } from './digitalOneStepAnswers';
 import { hydrateDigitalPredicates } from './digitalPredicates';
 import { hydrateDigitalRectanglePredicates } from './digitalRectanglePredicates';
@@ -55,6 +56,7 @@ export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
   hydrateDigitalOneStepAnswers(root);
   const cleanupExplanations = hydrateDigitalExplanationChoices(root);
   const cleanupExplanationExtensions = hydrateDigitalExplanationExtensions(root);
+  const cleanupNonRightAngle = hydrateNonRightAngleExample(root);
   const cleanupCoordinateSafe = hydrateDigitalCoordinateSafePredicate(root);
   const cleanupSuspect = hydrateDigitalSuspectPredicate(root);
   const cleanupFreePoints = hydrateDigitalFreePointPredicates(root);
@@ -77,6 +79,7 @@ export function hydrateExplicitAuthoringAnswers(root: ParentNode): () => void {
     cleanupFreePoints();
     cleanupSuspect();
     cleanupCoordinateSafe();
+    cleanupNonRightAngle();
     cleanupExplanationExtensions();
     cleanupExplanations();
   };
