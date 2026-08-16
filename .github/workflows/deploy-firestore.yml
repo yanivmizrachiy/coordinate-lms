@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: firestore-deploy
@@ -21,9 +21,14 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 20
-      - name: Validate deployment credentials
+      - name: Validate deployment credentials and ref
         shell: bash
         run: |
+          if [[ "$GITHUB_REF_TYPE" != "branch" ]]; then
+            echo "::error::Production Firestore deployment must run from a branch, not a tag"
+            exit 1
+          fi
+
           if [[ -z "$FIREBASE_PROJECT_ID" ]]; then
             echo "::error::VITE_FIREBASE_PROJECT_ID secret is missing"
             exit 1
@@ -53,9 +58,23 @@ jobs:
           --non-interactive
       - name: Verify Firebase Authentication and deployment evidence
         run: node scripts/verify-production-firebase.mjs
-      - name: Keep non-secret production Firebase evidence
+      - name: Keep non-secret production Firebase evidence artifact
         uses: actions/upload-artifact@v7
         with:
           name: firebase-production-evidence
           path: reports/firebase-production-evidence.json
           retention-days: 30
+      - name: Persist verified non-secret evidence to the triggering branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/firebase-production-evidence.json
+
+          if git diff --cached --quiet; then
+            echo "Production Firebase evidence is already current."
+            exit 0
+          fi
+
+          git commit -m "Record verified Firebase production evidence"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
