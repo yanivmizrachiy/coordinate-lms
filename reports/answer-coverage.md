@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-16T08:20:37.699Z
+Generated: 2026-08-16T08:23:22.922Z
 
-Overall: 1084/1162 safely checkable targets (93.3%).
+Overall: 1086/1162 safely checkable targets (93.5%).
 
 ## Classification totals
 
@@ -10,10 +10,10 @@ Overall: 1084/1162 safely checkable targets (93.3%).
 |---|---:|
 | reviewed-explicit | 181 |
 | canonical-metadata-derived | 277 |
-| deterministic-mathematical | 620 |
+| deterministic-mathematical | 622 |
 | valid-range | 6 |
 | open-ended | 64 |
-| ambiguous | 14 |
+| ambiguous | 12 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -793,7 +793,7 @@ No detected interactive response targets.
 
 ### Page 37 — המסלול המוצפן
 
-16/22 safely checkable (72.7%).
+18/22 safely checkable (81.8%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -813,8 +813,8 @@ No detected interactive response targets.
 | p37-q14 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | לתחנה של מסלול 1 ולתחנה של מסלול 2 יש ערך x […]. |
 | p37-q15 | text:direction | canonical-metadata-derived | yes | explicit canonical authoring label | התחנה של מסלול 3 ממוקמת […] לתחנה של מסלול 1, כי ערך ה־x שלה גדול יותר. |
 | p37-q16 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | התחנה של מסלול 3 רחוקה מציר x […] יחידות. |
-| p37-q17 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות. |
-| p37-q18 | ordered-pair-coordinate | ambiguous | no | none | סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות. |
+| p37-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות. |
+| p37-q18 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות. |
 | p37-q19 | text:number | open-ended | no | objective digital adaptation required | כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]. |
 | p37-q20 | text:direction | open-ended | no | objective digital adaptation required | כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]. |
 | p37-q21 | ordered-pair-coordinate | ambiguous | no | none | התחנה שאליה הגעתם אחרי הפקודה היא ([…],[…]). |

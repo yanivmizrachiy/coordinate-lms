@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-16T08:20:37.699Z",
+  "generatedAt": "2026-08-16T08:23:22.922Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1084,
-  "coveragePercentage": 93.3,
+  "automaticallyCheckableTargets": 1086,
+  "coveragePercentage": 93.5,
   "classifications": {
     "reviewed-explicit": 181,
     "canonical-metadata-derived": 277,
-    "deterministic-mathematical": 620,
+    "deterministic-mathematical": 622,
     "valid-range": 6,
     "open-ended": 64,
-    "ambiguous": 14,
+    "ambiguous": 12,
     "unsupported": 0,
     "missing": 0
   },
@@ -8828,11 +8828,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות.",
           "signature": "2fd261dc",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:point-distance-two-from-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-distance-two-from-y-axis"
+          ]
         },
         {
           "targetId": "p37-q18",
@@ -8840,11 +8842,13 @@
           "inputType": "ordered-pair-coordinate",
           "context": "סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות.",
           "signature": "2fd261dc",
-          "classification": "ambiguous",
-          "currentAnswerSource": "none",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "runtime mathematical predicate",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:point-distance-two-from-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-distance-two-from-y-axis"
+          ]
         },
         {
           "targetId": "p37-q19",
@@ -8896,15 +8900,13 @@
         }
       ],
       "missingOrAmbiguousTargetIds": [
-        "p37-q17",
-        "p37-q18",
         "p37-q19",
         "p37-q20",
         "p37-q21",
         "p37-q22"
       ],
-      "automaticallyCheckableTargets": 16,
-      "coveragePercentage": 72.7
+      "automaticallyCheckableTargets": 18,
+      "coveragePercentage": 81.8
     },
     {
       "pageNumber": 38,

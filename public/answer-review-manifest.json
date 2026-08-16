@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T08:20:37.699Z",
+  "generatedAt": "2026-08-16T08:23:22.922Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -7485,10 +7485,12 @@
           "targetId": "p37-q17",
           "signature": "2fd261dc",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:point-distance-two-from-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-distance-two-from-y-axis"
+          ],
           "context": "סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות."
         },
         {
@@ -7496,10 +7498,12 @@
           "targetId": "p37-q18",
           "signature": "2fd261dc",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "deterministic-mathematical",
+          "sourceEvidence": "src/lms/digitalCoordinateSafePredicate.ts:point-distance-two-from-y-axis",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "predicate:point-distance-two-from-y-axis"
+          ],
           "context": "סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות."
         },
         {
