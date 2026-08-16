@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-01T23:56:19.850Z",
+  "generatedAt": "2026-08-16T09:03:44.699Z",
   "mode": "static",
   "summary": {
     "pass": 14,
@@ -97,13 +97,13 @@
       "id": "workflow:pages",
       "status": "pass",
       "critical": true,
-      "message": ".github\\workflows\\deploy-pages.yml exists."
+      "message": ".github/workflows/deploy-pages.yml exists."
     },
     {
       "id": "workflow:firestore",
       "status": "pass",
       "critical": true,
-      "message": ".github\\workflows\\deploy-firestore.yml exists."
+      "message": ".github/workflows/deploy-firestore.yml exists."
     },
     {
       "id": "production:fallback-env",
