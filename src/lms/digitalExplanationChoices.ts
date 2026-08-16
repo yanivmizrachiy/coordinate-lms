@@ -109,6 +109,34 @@ const SPECS: readonly ExplanationSpec[] = [
   },
 ];
 
+const COVERAGE_BINDINGS = [
+  {
+    pageNumber: 39,
+    targetId: 'p39-q28',
+    signature: '09881042',
+    specIndex: 6,
+  },
+] as const;
+
+/**
+ * Returns only signature-bound, already-reviewed four-option answers.
+ * Prompt drift intentionally invalidates the binding instead of inheriting stale grading logic.
+ */
+export function explanationAnswerForCoverage(
+  pageNumber: number,
+  targetId: string,
+  signature: string,
+): readonly string[] | null {
+  const binding = COVERAGE_BINDINGS.find((candidate) =>
+    candidate.pageNumber === pageNumber &&
+    candidate.targetId === targetId &&
+    candidate.signature === signature,
+  );
+  if (!binding) return null;
+  const spec = SPECS[binding.specIndex];
+  return spec ? [spec.correct] : null;
+}
+
 function normalizedText(node: Element | ParentNode | null): string {
   return node?.textContent?.replace(/\s+/g, ' ').trim() || '';
 }
