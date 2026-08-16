@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-16T08:44:35.453Z
+Generated: 2026-08-16T08:45:37.258Z
 
-Overall: 1090/1162 safely checkable targets (93.8%).
+Overall: 1091/1162 safely checkable targets (93.9%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 282 |
+| canonical-metadata-derived | 283 |
 | deterministic-mathematical | 622 |
 | valid-range | 6 |
 | open-ended | 64 |
-| ambiguous | 8 |
+| ambiguous | 7 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -729,7 +729,7 @@ No detected interactive response targets.
 
 ### Page 34 — מרחק נקודה מהצירים
 
-13/14 safely checkable (92.9%).
+14/14 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -746,7 +746,7 @@ No detected interactive response targets.
 | p34-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את שיעורי נקודה R: R([…],[…]) |
 | p34-q12 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | לאיזה ציר המסלול קצר יותר? […] בכמה יחידות? […] |
 | p34-q13 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | לאיזה ציר המסלול קצר יותר? […] בכמה יחידות? […] |
-| p34-q14 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: […]. |
+| p34-q14 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע המסלול הקצר מהנקודה M הוא אל ציר y ובכמה הוא קצר יותר?כי M נמצאת במרחק 3 מציר y ובמרחק 5 מציר x, ולכן הדרך לציר y קצרה ב־2 יחידות.כי M נמצאת במרחק 5 מציר y ובמרחק 3 מציר x, ולכן הדרך לציר x קצרה ב־2 יחידות.כי המרחק מכל נקודה אל  |
 
 ### Page 35 — מזיזים צורה שלמה
 

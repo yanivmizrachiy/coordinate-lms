@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-16T08:44:35.453Z",
+  "generatedAt": "2026-08-16T08:45:37.258Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1090,
-  "coveragePercentage": 93.8,
+  "automaticallyCheckableTargets": 1091,
+  "coveragePercentage": 93.9,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 282,
+    "canonical-metadata-derived": 283,
     "deterministic-mathematical": 622,
     "valid-range": 6,
     "open-ended": 64,
-    "ambiguous": 8,
+    "ambiguous": 7,
     "unsupported": 0,
     "missing": 0
   },
@@ -8075,20 +8075,20 @@
           "targetId": "p34-q14",
           "order": 14,
           "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "four-option pedagogical digital adaptation required",
-          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "ההסבר: מדוע המסלול הקצר מהנקודה M הוא אל ציר y ובכמה הוא קצר יותר?כי M נמצאת במרחק 3 מציר y ובמרחק 5 מציר x, ולכן הדרך לציר y קצרה ב־2 יחידות.כי M נמצאת במרחק 5 מציר y ובמרחק 3 מציר x, ולכן הדרך לציר x קצרה ב־2 יחידות.כי המרחק מכל נקודה אל ",
+          "signature": "19cb8009",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי M נמצאת במרחק 3 מציר y ובמרחק 5 מציר x, ולכן הדרך לציר y קצרה ב־2 יחידות."
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p34-q14"
-      ],
-      "automaticallyCheckableTargets": 13,
-      "coveragePercentage": 92.9
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 14,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 35,

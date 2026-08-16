@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T08:44:35.453Z",
+  "generatedAt": "2026-08-16T08:45:37.258Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -6854,13 +6854,15 @@
         {
           "pageNumber": 34,
           "targetId": "p34-q14",
-          "signature": "bd0fcb5c",
+          "signature": "19cb8009",
           "inputType": "text:relation",
-          "classification": "ambiguous",
-          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי M נמצאת במרחק 3 מציר y ובמרחק 5 מציר x, ולכן הדרך לציר y קצרה ב־2 יחידות."
+          ],
+          "context": "ההסבר: מדוע המסלול הקצר מהנקודה M הוא אל ציר y ובכמה הוא קצר יותר?כי M נמצאת במרחק 3 מציר y ובמרחק 5 מציר x, ולכן הדרך לציר y קצרה ב־2 יחידות.כי M נמצאת במרחק 5 מציר y ובמרחק 3 מציר x, ולכן הדרך לציר x קצרה ב־2 יחידות.כי המרחק מכל נקודה אל "
         }
       ]
     },
