@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T08:24:49.482Z",
+  "generatedAt": "2026-08-16T08:30:15.156Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -8233,15 +8233,15 @@
         {
           "pageNumber": 39,
           "targetId": "p39-q28",
-          "signature": "09881042",
+          "signature": "786d9953",
           "inputType": "text:relation",
-          "classification": "reviewed-explicit",
-          "sourceEvidence": "src/lms/digitalExplanationChoices.ts:signature-bound coverage binding",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם."
+            "כי התנאים אומרים רק ש־x חיובי ו־y חיובי, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם."
           ],
-          "context": "ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x "
+          "context": "ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x חיובי ו־y חיובי, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמע"
         }
       ]
     },

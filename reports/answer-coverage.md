@@ -1,6 +1,6 @@
 # Answer-key coverage report
 
-Generated: 2026-08-16T08:24:49.482Z
+Generated: 2026-08-16T08:30:15.156Z
 
 Overall: 1086/1162 safely checkable targets (93.5%).
 
@@ -8,8 +8,8 @@ Overall: 1086/1162 safely checkable targets (93.5%).
 
 | Classification | Targets |
 |---|---:|
-| reviewed-explicit | 181 |
-| canonical-metadata-derived | 277 |
+| reviewed-explicit | 180 |
+| canonical-metadata-derived | 278 |
 | deterministic-mathematical | 622 |
 | valid-range | 6 |
 | open-ended | 64 |
@@ -885,7 +885,7 @@ No detected interactive response targets.
 | p39-q25 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q26 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q27 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]. |
-| p39-q28 | text:relation | reviewed-explicit | yes | signature-bound reviewed four-option explanation | ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x  |
+| p39-q28 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x חיובי ו־y חיובי, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמע |
 
 ### Page 40 — שיעור חסר ודפוסים
 

@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-16T08:24:49.482Z",
+  "generatedAt": "2026-08-16T08:30:15.156Z",
   "pageCount": 78,
   "targetCount": 1162,
   "automaticallyCheckableTargets": 1086,
   "coveragePercentage": 93.5,
   "classifications": {
-    "reviewed-explicit": 181,
-    "canonical-metadata-derived": 277,
+    "reviewed-explicit": 180,
+    "canonical-metadata-derived": 278,
     "deterministic-mathematical": 622,
     "valid-range": 6,
     "open-ended": 64,
@@ -9717,14 +9717,14 @@
           "targetId": "p39-q28",
           "order": 28,
           "inputType": "text:relation",
-          "context": "ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x ",
-          "signature": "09881042",
-          "classification": "reviewed-explicit",
-          "currentAnswerSource": "signature-bound reviewed four-option explanation",
-          "sourceEvidence": "src/lms/digitalExplanationChoices.ts:signature-bound coverage binding",
+          "context": "ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x חיובי ו־y חיובי, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמע",
+          "signature": "786d9953",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם."
+            "כי התנאים אומרים רק ש־x חיובי ו־y חיובי, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם."
           ]
         }
       ],
