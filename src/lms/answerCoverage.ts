@@ -256,6 +256,16 @@ export const REVIEWED_OPEN_ENDED_TARGET_SIGNATURES: Readonly<
   'p76-q7': 'be5c8b3e',
 };
 
+/** Current-page bindings for reviewed responses that depend on learner choices. */
+export const REVIEWED_CURRENT_OPEN_ENDED_TARGET_SIGNATURES: Readonly<
+  Record<string, string>
+> = {
+  'p22-q14': '4dfb3700',
+  'p37-q21': '9707758f',
+  'p37-q22': '9707758f',
+  'p70-q6': 'd548b7a9',
+};
+
 function hash(value: string): string {
   let result = 0x811c9dc5;
   for (let index = 0; index < value.length; index += 1) {
@@ -398,13 +408,20 @@ function classify(
     };
   }
 
+  const reviewedCurrentOpenEndedSignature =
+    REVIEWED_CURRENT_OPEN_ENDED_TARGET_SIGNATURES[targetId];
   const reviewedOpenEndedSignature =
     REVIEWED_OPEN_ENDED_TARGET_SIGNATURES[lookupTargetId];
-  if (reviewedOpenEndedSignature === signature || isOpenEnded(context)) {
+  if (
+    reviewedCurrentOpenEndedSignature === signature ||
+    reviewedOpenEndedSignature === signature ||
+    isOpenEnded(context)
+  ) {
     return {
       classification: 'open-ended',
       currentAnswerSource: 'objective digital adaptation required',
       sourceEvidence:
+        reviewedCurrentOpenEndedSignature === signature ||
         reviewedOpenEndedSignature === signature
           ? 'signature-bound canonical review: learner-created or dependent response'
           : 'learner-created or dependent response',
