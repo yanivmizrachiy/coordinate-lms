@@ -49,6 +49,7 @@ if (firebaseRun.stderr) process.stderr.write(firebaseRun.stderr);
 const answerCoverage = await json(resolve(reports, 'answer-coverage.json'));
 const answerTargetOrder = await json(resolve(reports, 'answer-target-order.json'));
 const reviewManifest = await json(resolve(root, 'public', 'answer-review-manifest.json'));
+const openEndedReview = await json(resolve(root, 'docs', 'open-ended-review.json'));
 const firebaseReadiness = await json(resolve(reports, 'firebase-readiness.json'));
 const emulator = await json(resolve(reports, 'firestore-emulator.json'));
 const physical = await json(resolve(reports, 'two-device-acceptance.json'));
@@ -187,13 +188,33 @@ const safelyCheckable = Number(answerCoverage?.automaticallyCheckableTargets || 
 const answerTargets = coveragePages.flatMap((page) =>
   Array.isArray(page?.targets) ? page.targets : [],
 );
+const reviewedLedger = new Map(
+  Array.isArray(openEndedReview?.targets)
+    ? openEndedReview.targets
+        .filter(
+          (entry) =>
+            typeof entry?.targetId === 'string' &&
+            typeof entry?.signature === 'string' &&
+            typeof entry?.reason === 'string' &&
+            entry.reason.trim().length > 0,
+        )
+        .map((entry) => [entry.targetId, entry.signature])
+    : [],
+);
 const reviewedOpenEnded = answerTargets.filter(
   (target) =>
     target?.classification === 'open-ended' &&
-    String(target?.sourceEvidence || '').startsWith('signature-bound'),
+    (String(target?.sourceEvidence || '').startsWith('signature-bound') ||
+      reviewedLedger.get(target?.targetId) === target?.signature),
 ).length;
+const unresolvedReviewTargets = answerTargets.filter(
+  (target) =>
+    target?.classification === 'open-ended' &&
+    !String(target?.sourceEvidence || '').startsWith('signature-bound') &&
+    reviewedLedger.get(target?.targetId) !== target?.signature,
+);
 const unresolvedReview = Math.max(
-  0,
+  unresolvedReviewTargets.length,
   targetCount - safelyCheckable - reviewedOpenEnded,
 );
 const pedagogicalPass = targetCount > 0 && unresolvedReview === 0;
@@ -203,13 +224,17 @@ domains.push(
     'Pedagogical answer-key review',
     pedagogicalPass ? 'pass' : targetCount > 0 ? 'blocked' : 'failure',
     targetCount > 0
-      ? `${String(safelyCheckable)}/${String(targetCount)} targets are safely auto-checkable; ${String(reviewedOpenEnded)} are signature-bound open-ended tasks; ${String(unresolvedReview)} remain unresolved.`
+      ? `${String(safelyCheckable)}/${String(targetCount)} targets are safely auto-checkable; ${String(reviewedOpenEnded)} open-ended targets have signature-verified review evidence; ${String(unresolvedReview)} remain unresolved.`
       : 'Answer coverage evidence is missing or invalid.',
-    ['reports/answer-coverage.json', 'public/answer-review-manifest.json'],
+    [
+      'reports/answer-coverage.json',
+      'public/answer-review-manifest.json',
+      'docs/open-ended-review.json',
+    ],
     pedagogicalPass
       ? []
       : [
-          `Resolve ${String(unresolvedReview)} targets in the answer-review studio without guessing.`,
+          `Resolve ${String(unresolvedReview)} targets without guessing; stale review signatures must be re-reviewed.`,
         ],
   ),
 );
