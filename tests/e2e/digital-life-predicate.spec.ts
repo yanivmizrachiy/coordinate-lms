@@ -47,6 +47,14 @@ async function checkAll(page: Page): Promise<void> {
   await page.getByRole('button', { name: 'בדיקת כל התשובות' }).click();
 }
 
+async function checkTarget(page: Page, target: Locator): Promise<void> {
+  const qid = await target.getAttribute('data-lms-qid');
+  if (!qid) throw new Error('LMS target is missing data-lms-qid');
+  const button = page.locator(`[data-lms-check-for="${qid}"]`);
+  await expect(button).toBeVisible();
+  await button.click();
+}
+
 test('phone icon choice is filled by touching the grid and distance is checked from Maps', async ({ page }) => {
   await page.goto('/#/workbook/59');
   const grid = page.locator('.coordinate-grid[data-lms-picker="ready"]');
@@ -62,15 +70,18 @@ test('phone icon choice is filled by touching the grid and distance is checked f
   );
 
   await distance.fill('3');
-  await expect(proxy).not.toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-state', 'filled');
   await expect(proxy).toHaveAttribute('data-lms-attempts', '0');
   await checkAll(page);
   await expect(proxy).toHaveAttribute('data-lms-state', 'wrong');
   await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
 
   await distance.fill('2');
-  await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-state', 'filled');
   await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
+  await checkTarget(page, proxy);
+  await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '2');
   for (let q = 15; q <= 17; q += 1) {
     await expect(page.locator(`[data-lms-qid="p59-q${q}"]`))
       .toHaveAttribute('data-lms-group-state', 'correct');
@@ -92,8 +103,11 @@ test('split-line hall instruction still lets the learner pick a free seat by tou
   );
 
   await distance.fill('2');
-  await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-state', 'filled');
   await expect(proxy).toHaveAttribute('data-lms-attempts', '0');
+  await checkTarget(page, proxy);
+  await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
   for (let q = 13; q <= 15; q += 1) {
     await expect(page.locator(`[data-lms-qid="p60-q${q}"]`))
       .toHaveAttribute('data-lms-group-state', 'correct');
@@ -116,15 +130,18 @@ test('delivery address choice is filled by touch and the subtraction stays tied 
   const proxy = page.locator(
     '.lms-group-proxy[data-lms-group="delivery-same-street-with-distance-work"]',
   );
-  await expect(proxy).not.toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-state', 'filled');
   await expect(proxy).toHaveAttribute('data-lms-attempts', '0');
   await checkAll(page);
   await expect(proxy).toHaveAttribute('data-lms-state', 'wrong');
   await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
 
   await page.locator('[data-lms-qid="p62-q13"]').fill('6 − 1');
-  await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-state', 'filled');
   await expect(proxy).toHaveAttribute('data-lms-attempts', '1');
+  await checkTarget(page, proxy);
+  await expect(proxy).toHaveAttribute('data-lms-state', 'correct');
+  await expect(proxy).toHaveAttribute('data-lms-attempts', '2');
   for (let q = 11; q <= 15; q += 1) {
     await expect(page.locator(`[data-lms-qid="p62-q${q}"]`))
       .toHaveAttribute('data-lms-group-state', 'correct');
