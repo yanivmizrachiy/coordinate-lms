@@ -5,13 +5,20 @@
   "firebaseProjectId": "",
   "commit": "",
   "testers": [],
-  "devices": [],
+  "devices": [
+    { "role": "student-phone", "details": "" },
+    { "role": "teacher-computer", "details": "" }
+  ],
   "checks": [
+    { "id": "guest-open-practice", "status": "blocked", "notes": "" },
+    { "id": "guest-no-persistence", "status": "blocked", "notes": "" },
     { "id": "guest-transfer", "status": "blocked", "notes": "" },
     { "id": "attempts-survive-reload", "status": "blocked", "notes": "" },
     { "id": "offline-reconnect-truth", "status": "blocked", "notes": "" },
     { "id": "teacher-central-snapshot", "status": "blocked", "notes": "" },
+    { "id": "registered-data-attribution", "status": "blocked", "notes": "" },
     { "id": "utf8-csv", "status": "blocked", "notes": "" },
-    { "id": "duplicate-submit-idempotency", "status": "blocked", "notes": "" }
+    { "id": "duplicate-submit-idempotency", "status": "blocked", "notes": "" },
+    { "id": "canonical-parity", "status": "blocked", "notes": "" }
   ]
 }
