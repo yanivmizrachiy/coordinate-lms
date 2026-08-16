@@ -18,6 +18,7 @@ import {
   PHONE_SAME_COLUMN_WITH_DISTANCE,
   lifeRuleMatches,
 } from './digitalLifePredicates';
+import { NONNEGATIVE_NUMBER_NOT_FOUR } from './digitalNonRightAngleExample';
 import {
   OWN_AXIS_ALIGNED_RECTANGLE_WITH_WORK,
   ownAxisAlignedRectangleWithWorkMatches,
@@ -145,6 +146,10 @@ function predicateMatches(raw: string, candidate: string): boolean {
     ruleName === DELIVERY_SAME_STREET_WITH_DISTANCE_WORK
   ) {
     return lifeRuleMatches(ruleName, raw.split('|'));
+  }
+  if (ruleName === NONNEGATIVE_NUMBER_NOT_FOUR) {
+    const value = numericValue(raw);
+    return value !== null && value >= 0 && value !== 4;
   }
 
   const rule = ruleName as DigitalGroupRule;
