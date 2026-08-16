@@ -1,6 +1,8 @@
 import {
   AXIS_POINT_MOVED_UP_FOUR,
+  POINT_DISTANCE_TWO_FROM_Y_AXIS,
   axisPointMovedUpFourMatches,
+  pointDistanceTwoFromYAxisMatches,
 } from './digitalCoordinateSafePredicate';
 import {
   EQUAL_POSITIVE_COORDINATE_POINT,
@@ -118,6 +120,9 @@ function predicateMatches(raw: string, candidate: string): boolean {
   const ruleName = candidate.slice('predicate:'.length);
   if (ruleName === AXIS_POINT_MOVED_UP_FOUR) {
     return axisPointMovedUpFourMatches(raw.split('|'));
+  }
+  if (ruleName === POINT_DISTANCE_TWO_FROM_Y_AXIS) {
+    return pointDistanceTwoFromYAxisMatches(raw.split('|'));
   }
   if (ruleName === EQUAL_POSITIVE_COORDINATE_POINT) {
     return equalPositiveCoordinatePointMatches(raw.split('|'));
