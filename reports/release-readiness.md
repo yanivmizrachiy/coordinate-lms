@@ -1,6 +1,6 @@
 # Classroom release-readiness contract
 
-Generated: 2026-08-05T19:54:29.717Z
+Generated: 2026-08-16T09:03:44.818Z
 
 Mode: static
 
@@ -11,7 +11,7 @@ Overall status: **blocked**
 | Repository engineering gates | pass | The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent. |
 | Firestore emulator-backed validation | pass | Real Firestore operations passed against the demo project with the pinned Firebase CLI. |
 | External Firebase configuration and deployment | blocked | Repository validation cannot supply console settings, service-account configuration, or deployment evidence. |
-| Pedagogical answer-key review | blocked | 735/1162 targets are safely auto-checkable; 130 are signature-bound open-ended tasks; 297 remain unresolved. |
+| Pedagogical answer-key review | pass | 1094/1162 targets are safely auto-checkable; 68 open-ended targets have signature-verified review evidence; 0 remain unresolved. |
 | Physical two-device classroom acceptance | blocked | No passing real student-phone and separate teacher-computer acceptance record exists. |
 
 ## Repository engineering gates
@@ -38,9 +38,9 @@ Real Firestore operations passed against the demo project with the pinned Fireba
 Evidence:
 
 - suite: tests/firestore-emulator.test.ts
-- generatedAt: 2026-08-05T19:54:20.668Z
+- generatedAt: 2026-08-16T09:03:43.998Z
 - Firebase CLI: 15.25.1
-- contract SHA-256: ad2bd6c1851c885fcc40949542a136df1552c468151346407a98cd3b88f0c000
+- contract SHA-256: 8d18094192a5fa7a7a5b6646ed6b265412f7a18901e134864d025576643854f9
 
 ## External Firebase configuration and deployment
 
@@ -64,18 +64,15 @@ Blockers:
 
 ## Pedagogical answer-key review
 
-Status: **blocked**
+Status: **pass**
 
-735/1162 targets are safely auto-checkable; 130 are signature-bound open-ended tasks; 297 remain unresolved.
+1094/1162 targets are safely auto-checkable; 68 open-ended targets have signature-verified review evidence; 0 remain unresolved.
 
 Evidence:
 
 - reports/answer-coverage.json
 - public/answer-review-manifest.json
-
-Blockers:
-
-- Resolve 297 targets in the answer-review studio without guessing.
+- docs/open-ended-review.json
 
 ## Physical two-device classroom acceptance
 
