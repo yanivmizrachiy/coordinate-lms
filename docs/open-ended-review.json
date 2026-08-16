@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-16",
+  "purpose": "Evidence that learner-dependent responses were reviewed against the canonical workbook and intentionally remain open-ended rather than receiving invented fixed answers.",
+  "targets": [
+    {"targetId":"p20-q7","signature":"1b541791","reason":"The learner chooses a point inside the sailboat body; the x-coordinate depends on that choice."},
+    {"targetId":"p20-q8","signature":"1b541791","reason":"The learner chooses a point inside the sailboat body; the y-coordinate depends on that choice."},
+    {"targetId":"p20-q9","signature":"dddcf268","reason":"The distance from the x-axis depends on the learner-chosen point."},
+    {"targetId":"p37-q19","signature":"26cc5405","reason":"The learner writes their own movement command, so the distance is learner-selected."},
+    {"targetId":"p37-q20","signature":"8b64bfe5","reason":"The learner writes their own movement command, so the direction is learner-selected."},
+    {"targetId":"p38-q3","signature":"05ec9859","reason":"The turning points depend on the route the learner marked."},
+    {"targetId":"p38-q4","signature":"05ec9859","reason":"The turning points depend on the route the learner marked."},
+    {"targetId":"p38-q5","signature":"05ec9859","reason":"The turning points depend on the route the learner marked."},
+    {"targetId":"p38-q6","signature":"05ec9859","reason":"The turning points depend on the route the learner marked."},
+    {"targetId":"p38-q7","signature":"05ec9859","reason":"The turning points depend on the route the learner marked."},
+    {"targetId":"p38-q8","signature":"05ec9859","reason":"The turning points depend on the route the learner marked."},
+    {"targetId":"p38-q9","signature":"05ec9859","reason":"The turning points depend on the route the learner marked."},
+    {"targetId":"p38-q10","signature":"05ec9859","reason":"The turning points depend on the route the learner marked."},
+    {"targetId":"p38-q11","signature":"f221a6b1","reason":"The number of steps depends on the route the learner marked."},
+    {"targetId":"p38-q18","signature":"159fcfc6","reason":"The first step direction depends on the route the learner marked."},
+    {"targetId":"p38-q19","signature":"ee459183","reason":"The reached x-coordinate depends on the learner's first marked step."},
+    {"targetId":"p38-q20","signature":"ee459183","reason":"The reached y-coordinate depends on the learner's first marked step."},
+    {"targetId":"p45-q15","signature":"2d4053e5","reason":"The extra clue must match point G chosen by the learner, so its x-value is choice-dependent."}
+  ]
+}
