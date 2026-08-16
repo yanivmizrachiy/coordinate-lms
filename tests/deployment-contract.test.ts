@@ -9,6 +9,10 @@ const firestoreWorkflow = readFileSync(
   '.github/workflows/deploy-firestore.yml',
   'utf8',
 );
+const releaseReadiness = readFileSync(
+  'scripts/release-readiness.mjs',
+  'utf8',
+);
 const vercel = JSON.parse(readFileSync('vercel.json', 'utf8')) as {
   git?: { deploymentEnabled?: boolean };
 };
@@ -27,7 +31,7 @@ describe('production deployment safety contract', () => {
     expect(vercel.git?.deploymentEnabled).toBe(false);
   });
 
-  it('deploys Firestore only to an explicitly supplied project', () => {
+  it('deploys Firestore only to an explicitly supplied real project', () => {
     expect(firestoreWorkflow).toContain(
       'FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}',
     );
@@ -35,6 +39,23 @@ describe('production deployment safety contract', () => {
       'FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}',
     );
     expect(firestoreWorkflow).toContain('--project "$FIREBASE_PROJECT_ID"');
+    expect(firestoreWorkflow).toContain('if [[ "$FIREBASE_PROJECT_ID" == demo-* ]]');
+  });
+
+  it('requires verified Firebase production evidence and persists it only after verification', () => {
+    const verifyIndex = firestoreWorkflow.indexOf(
+      'node scripts/verify-production-firebase.mjs',
+    );
+    const persistIndex = firestoreWorkflow.indexOf(
+      'Persist verified non-secret evidence to the triggering branch',
+    );
+
+    expect(verifyIndex).toBeGreaterThanOrEqual(0);
+    expect(persistIndex).toBeGreaterThan(verifyIndex);
+    expect(firestoreWorkflow).toContain('git add reports/firebase-production-evidence.json');
+    expect(firestoreWorkflow).toContain('permissions:\n  contents: write');
+    expect(releaseReadiness).toContain("reports', 'firebase-production-evidence.json");
+    expect(releaseReadiness).toContain('productionFirebasePass');
   });
 
   it('keeps the local Firebase default on an emulator/demo namespace', () => {
