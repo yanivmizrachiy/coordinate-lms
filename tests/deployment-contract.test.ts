@@ -21,10 +21,18 @@ const firebaseRc = JSON.parse(readFileSync('.firebaserc', 'utf8')) as {
 };
 
 describe('production deployment safety contract', () => {
-  it('keeps GitHub Pages manual-only', () => {
+  it('keeps GitHub Pages manual-only and gated by full release readiness before upload', () => {
     expect(pagesWorkflow).toMatch(/\bworkflow_dispatch\s*:/);
     expect(pagesWorkflow).not.toMatch(/^\s*(push|pull_request)\s*:/m);
     expect(pagesWorkflow).toContain('VITE_ALLOW_LOCAL_LMS: \'false\'');
+
+    const releaseGateIndex = pagesWorkflow.indexOf('npm run release:report');
+    const uploadIndex = pagesWorkflow.indexOf('actions/upload-pages-artifact@v5');
+    const deployIndex = pagesWorkflow.indexOf('actions/deploy-pages@v5');
+
+    expect(releaseGateIndex).toBeGreaterThanOrEqual(0);
+    expect(uploadIndex).toBeGreaterThan(releaseGateIndex);
+    expect(deployIndex).toBeGreaterThan(uploadIndex);
   });
 
   it('keeps automatic Vercel Git deployments disabled', () => {
@@ -43,6 +51,7 @@ describe('production deployment safety contract', () => {
   });
 
   it('requires verified Firebase production evidence and persists it only after verification', () => {
+    const deployIndex = firestoreWorkflow.indexOf('Deploy rules and indexes');
     const verifyIndex = firestoreWorkflow.indexOf(
       'node scripts/verify-production-firebase.mjs',
     );
@@ -50,11 +59,12 @@ describe('production deployment safety contract', () => {
       'Persist verified non-secret evidence to the triggering branch',
     );
 
-    expect(verifyIndex).toBeGreaterThanOrEqual(0);
+    expect(deployIndex).toBeGreaterThanOrEqual(0);
+    expect(verifyIndex).toBeGreaterThan(deployIndex);
     expect(persistIndex).toBeGreaterThan(verifyIndex);
     expect(firestoreWorkflow).toContain('git add reports/firebase-production-evidence.json');
     expect(firestoreWorkflow).toContain('permissions:\n  contents: write');
-    expect(releaseReadiness).toContain("reports', 'firebase-production-evidence.json");
+    expect(releaseReadiness).toContain("reports, 'firebase-production-evidence.json'");
     expect(releaseReadiness).toContain('productionFirebasePass');
   });
 
