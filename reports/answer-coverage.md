@@ -1,6 +1,6 @@
 # Answer-key coverage report
 
-Generated: 2026-08-16T08:46:47.261Z
+Generated: 2026-08-16T08:48:31.504Z
 
 Overall: 1094/1162 safely checkable targets (94.1%).
 
@@ -12,8 +12,8 @@ Overall: 1094/1162 safely checkable targets (94.1%).
 | canonical-metadata-derived | 286 |
 | deterministic-mathematical | 622 |
 | valid-range | 6 |
-| open-ended | 64 |
-| ambiguous | 4 |
+| open-ended | 68 |
+| ambiguous | 0 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -505,7 +505,7 @@ No detected interactive response targets.
 | p22-q11 | text:property | canonical-metadata-derived | yes | explicit canonical authoring label | הנקודה של האות ד היא ה[…] ביותר במערכת — שיעור ה־y שלה קטן מכולם. |
 | p22-q12 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]). |
 | p22-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]). |
-| p22-q14 | text:concept | ambiguous | no | none | כתבו לצד הנקודה את האות ם. איזו מילה נוצרת עכשיו מכל האותיות? […]. |
+| p22-q14 | text:concept | open-ended | no | objective digital adaptation required | כתבו לצד הנקודה את האות ם. איזו מילה נוצרת עכשיו מכל האותיות? […]. |
 | p22-q15 | text:letter | reviewed-explicit | yes | target-bound reviewed proof | האות האמצעית במילה שפענחתם היא […]. |
 | p22-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | ההפרש בין שיעור ה־x של ק לשיעור ה־x של ה הוא […] יחידות. |
 | p22-q17 | text:direction | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה של ק ממוקמת […] לנקודה של ה. |
@@ -817,8 +817,8 @@ No detected interactive response targets.
 | p37-q18 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | סמנו על הסרטוט נקודת התחלה D([…],[…]) שרחוקה מציר y 2 יחידות. |
 | p37-q19 | text:number | open-ended | no | objective digital adaptation required | כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]. |
 | p37-q20 | text:direction | open-ended | no | objective digital adaptation required | כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]. |
-| p37-q21 | ordered-pair-coordinate | ambiguous | no | none | התחנה שאליה הגעתם אחרי הפקודה היא ([…],[…]). |
-| p37-q22 | ordered-pair-coordinate | ambiguous | no | none | התחנה שאליה הגעתם אחרי הפקודה היא ([…],[…]). |
+| p37-q21 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | התחנה שאליה הגעתם אחרי הפקודה היא ([…],[…]). |
+| p37-q22 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | התחנה שאליה הגעתם אחרי הפקודה היא ([…],[…]). |
 
 ### Page 38 — מבוך הקואורדינטות
 
@@ -1579,7 +1579,7 @@ No detected interactive response targets.
 | p70-q3 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
 | p70-q4 | ordered-pair-coordinate | open-ended | no | objective digital adaptation required | הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]). |
 | p70-q5 | text:number | open-ended | no | objective digital adaptation required | ביום […] הקדשתם את מספר הדקות הגדול ביותר. |
-| p70-q6 | text:number | ambiguous | no | none | ההפרש בין מספר הדקות הגדול ביותר ובין מספר הדקות הקטן ביותר הוא […] עשרות דקות. |
+| p70-q6 | text:number | open-ended | no | objective digital adaptation required | ההפרש בין מספר הדקות הגדול ביותר ובין מספר הדקות הקטן ביותר הוא […] עשרות דקות. |
 | p70-q7 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | אם יש שני ימים שבהם הקדשתם אותו זמן, לשתי הנקודות שמתאימות להם יש שיעור […] זהה. |
 | p70-q8 | text:number | open-ended | no | objective digital adaptation required | הנקודה הגבוהה ביותר בגרף שלכם רחוקה מציר x […] יחידות. |
 

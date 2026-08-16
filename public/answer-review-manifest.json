@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T08:46:47.261Z",
+  "generatedAt": "2026-08-16T08:48:31.504Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -4676,8 +4676,8 @@
           "targetId": "p22-q14",
           "signature": "4dfb3700",
           "inputType": "text:concept",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "classification": "open-ended",
+          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו לצד הנקודה את האות ם. איזו מילה נוצרת עכשיו מכל האותיות? […]."
@@ -7539,8 +7539,8 @@
           "targetId": "p37-q21",
           "signature": "9707758f",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "classification": "open-ended",
+          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "התחנה שאליה הגעתם אחרי הפקודה היא ([…],[…])."
@@ -7550,8 +7550,8 @@
           "targetId": "p37-q22",
           "signature": "9707758f",
           "inputType": "ordered-pair-coordinate",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "classification": "open-ended",
+          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "התחנה שאליה הגעתם אחרי הפקודה היא ([…],[…])."
@@ -14760,8 +14760,8 @@
           "targetId": "p70-q6",
           "signature": "d548b7a9",
           "inputType": "text:number",
-          "classification": "ambiguous",
-          "sourceEvidence": "no explicit canonical metadata or reviewed mathematical proof",
+          "classification": "open-ended",
+          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההפרש בין מספר הדקות הגדול ביותר ובין מספר הדקות הקטן ביותר הוא […] עשרות דקות."
