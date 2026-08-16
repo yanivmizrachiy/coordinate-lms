@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-16T08:30:15.156Z
+Generated: 2026-08-16T08:44:06.871Z
 
-Overall: 1086/1162 safely checkable targets (93.5%).
+Overall: 1090/1162 safely checkable targets (93.8%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 180 |
-| canonical-metadata-derived | 278 |
+| canonical-metadata-derived | 282 |
 | deterministic-mathematical | 622 |
 | valid-range | 6 |
 | open-ended | 64 |
-| ambiguous | 12 |
+| ambiguous | 8 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -618,7 +618,7 @@ No detected interactive response targets.
 
 ### Page 28 — גדול ב־, קטן ב־ וגדול פי
 
-4/5 safely checkable (80%).
+5/5 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -626,7 +626,7 @@ No detected interactive response targets.
 | p28-q2 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | B([…],6) - y גדול פי 2 מ־x |
 | p28-q3 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | C(7,[…]) - x גדול ב־4 מ־y |
 | p28-q4 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | D(8,[…]) - y הוא מחצית x |
-| p28-q5 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: […]. |
+| p28-q5 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע העובדה ששיעור y גדול ב־2 מערך x וגם גדול ממנו פי 2 אינה נכונה לכל נקודה?כי חיבור 2 וכפל ב־2 הן פעולות שונות; כש־x שווה 2 שתיהן נותנות 4, אבל לא לכל ערך x.כי בכל נקודה ברביע הראשון שיעור y תמיד כפול מערך x.כי אם שיעור y גדול ב־2  |
 
 ### Page 29 — יחסים בין שיעורים
 
@@ -705,7 +705,7 @@ No detected interactive response targets.
 
 ### Page 33 — מרחק נקודה מהצירים
 
-16/17 safely checkable (94.1%).
+17/17 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -725,7 +725,7 @@ No detected interactive response targets.
 | p33-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q15 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | אורי חישב את המרחק בין (2,5) ובין (7,5) וקיבל 9 — הוא […] את שני ערכי ה־x במקום לחסר אותם. תרגיל החיסור הנכון: |
 | p33-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 7 − 2=[…]יח' |
-| p33-q17 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: […]. |
+| p33-q17 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע בנקודה שמרחקה זהה משני הצירים שני השיעורים חייבים להיות שווים?כי המרחק מציר y הוא ערך x והמרחק מציר x הוא שיעור y; מרחקים שווים מחייבים x ו־y שווים.כי בכל נקודה ברביע הראשון ערך x ושיעור y שווים.כי המרחק משני הצירים נקבע רק מערך |
 
 ### Page 34 — מרחק נקודה מהצירים
 
@@ -1046,7 +1046,7 @@ No detected interactive response targets.
 
 ### Page 46 — קטעים מקבילים לצירים
 
-15/16 safely checkable (93.8%).
+16/16 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1065,7 +1065,7 @@ No detected interactive response targets.
 | p46-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
 | p46-q14 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
 | p46-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
-| p46-q16 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: […]. |
+| p46-q16 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע לא יכולות להיות שתי נקודות שונות עם אותו שיעור x וגם אותו שיעור y?לא. אותו ערך x ואותו שיעור y יוצרים אותו זוג סדור, ולכן זו אותה נקודה ולא שתי נקודות שונות.כן. מספיק ששמות הנקודות שונים כדי שמיקומן יהיה שונה.כן. אותו ערך x קובע |
 
 ### Page 47 — קטעים מקבילים לצירים
 
@@ -1172,7 +1172,7 @@ No detected interactive response targets.
 
 ### Page 52 — המלבן ברביע הראשון
 
-13/14 safely checkable (92.9%).
+14/14 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1189,7 +1189,7 @@ No detected interactive response targets.
 | p52-q11 | ordered-pair-coordinate | canonical-metadata-derived | yes | explicit canonical authoring label | הקודקוד החסר: ([…],[…]) |
 | p52-q12 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p52-q13 | text:number | canonical-metadata-derived | yes | explicit canonical authoring label | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p52-q14 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: […]. |
+| p52-q14 | text:relation | canonical-metadata-derived | yes | explicit canonical authoring label | ההסבר: מדוע (2,5) הוא הקודקוד הרביעי של המלבן?כי הקודקוד הרביעי צריך ערך x כמו A ושיעור y כמו C, ולכן שיעוריו (2,5).כי הקודקוד הרביעי צריך להחליף בין השיעורים של B ולכן הוא (2,7).כי בכל מלבן כל ארבעת הקודקודים חייבים להיות בעלי אותו ערך x.כ |
 
 ### Page 53 — המלבן ברביע הראשון
 

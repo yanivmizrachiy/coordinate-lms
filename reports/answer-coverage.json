@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-16T08:30:15.156Z",
+  "generatedAt": "2026-08-16T08:44:06.871Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1086,
-  "coveragePercentage": 93.5,
+  "automaticallyCheckableTargets": 1090,
+  "coveragePercentage": 93.8,
   "classifications": {
     "reviewed-explicit": 180,
-    "canonical-metadata-derived": 278,
+    "canonical-metadata-derived": 282,
     "deterministic-mathematical": 622,
     "valid-range": 6,
     "open-ended": 64,
-    "ambiguous": 12,
+    "ambiguous": 8,
     "unsupported": 0,
     "missing": 0
   },
@@ -6788,20 +6788,20 @@
           "targetId": "p28-q5",
           "order": 5,
           "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "four-option pedagogical digital adaptation required",
-          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "ההסבר: מדוע העובדה ששיעור y גדול ב־2 מערך x וגם גדול ממנו פי 2 אינה נכונה לכל נקודה?כי חיבור 2 וכפל ב־2 הן פעולות שונות; כש־x שווה 2 שתיהן נותנות 4, אבל לא לכל ערך x.כי בכל נקודה ברביע הראשון שיעור y תמיד כפול מערך x.כי אם שיעור y גדול ב־2 ",
+          "signature": "fdba308a",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי חיבור 2 וכפל ב־2 הן פעולות שונות; כש־x שווה 2 שתיהן נותנות 4, אבל לא לכל ערך x."
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p28-q5"
-      ],
-      "automaticallyCheckableTargets": 4,
-      "coveragePercentage": 80
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 5,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 29,
@@ -7841,20 +7841,20 @@
           "targetId": "p33-q17",
           "order": 17,
           "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "four-option pedagogical digital adaptation required",
-          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "ההסבר: מדוע בנקודה שמרחקה זהה משני הצירים שני השיעורים חייבים להיות שווים?כי המרחק מציר y הוא ערך x והמרחק מציר x הוא שיעור y; מרחקים שווים מחייבים x ו־y שווים.כי בכל נקודה ברביע הראשון ערך x ושיעור y שווים.כי המרחק משני הצירים נקבע רק מערך",
+          "signature": "b9832e99",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי המרחק מציר y הוא ערך x והמרחק מציר x הוא שיעור y; מרחקים שווים מחייבים x ו־y שווים."
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p33-q17"
-      ],
-      "automaticallyCheckableTargets": 16,
-      "coveragePercentage": 94.1
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 17,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 34,
@@ -11812,20 +11812,20 @@
           "targetId": "p46-q16",
           "order": 16,
           "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "four-option pedagogical digital adaptation required",
-          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "ההסבר: מדוע לא יכולות להיות שתי נקודות שונות עם אותו שיעור x וגם אותו שיעור y?לא. אותו ערך x ואותו שיעור y יוצרים אותו זוג סדור, ולכן זו אותה נקודה ולא שתי נקודות שונות.כן. מספיק ששמות הנקודות שונים כדי שמיקומן יהיה שונה.כן. אותו ערך x קובע",
+          "signature": "8480d9f0",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "לא. אותו ערך x ואותו שיעור y יוצרים אותו זוג סדור, ולכן זו אותה נקודה ולא שתי נקודות שונות."
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p46-q16"
-      ],
-      "automaticallyCheckableTargets": 15,
-      "coveragePercentage": 93.8
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 16,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 47,
@@ -13150,20 +13150,20 @@
           "targetId": "p52-q14",
           "order": 14,
           "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "ambiguous",
-          "currentAnswerSource": "four-option pedagogical digital adaptation required",
-          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "ההסבר: מדוע (2,5) הוא הקודקוד הרביעי של המלבן?כי הקודקוד הרביעי צריך ערך x כמו A ושיעור y כמו C, ולכן שיעוריו (2,5).כי הקודקוד הרביעי צריך להחליף בין השיעורים של B ולכן הוא (2,7).כי בכל מלבן כל ארבעת הקודקודים חייבים להיות בעלי אותו ערך x.כ",
+          "signature": "33c71b3c",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי הקודקוד הרביעי צריך ערך x כמו A ושיעור y כמו C, ולכן שיעוריו (2,5)."
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p52-q14"
-      ],
-      "automaticallyCheckableTargets": 13,
-      "coveragePercentage": 92.9
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 14,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 53,
