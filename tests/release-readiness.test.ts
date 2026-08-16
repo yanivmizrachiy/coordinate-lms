@@ -15,6 +15,8 @@ interface ReleaseReport {
 }
 
 interface CoverageTarget {
+  targetId: string;
+  signature: string;
   classification?: string;
   sourceEvidence?: string;
 }
@@ -29,6 +31,10 @@ interface AnswerCoverage {
   pages: CoveragePage[];
 }
 
+interface OpenEndedReview {
+  targets: Array<{ targetId: string; signature: string; reason: string }>;
+}
+
 const report = JSON.parse(
   readFileSync('reports/release-readiness.json', 'utf8'),
 ) as ReleaseReport;
@@ -36,14 +42,25 @@ const markdown = readFileSync('reports/release-readiness.md', 'utf8');
 const coverage = JSON.parse(
   readFileSync('reports/answer-coverage.json', 'utf8'),
 ) as AnswerCoverage;
+const openEndedReview = JSON.parse(
+  readFileSync('docs/open-ended-review.json', 'utf8'),
+) as OpenEndedReview;
+const reviewLedger = new Map(
+  openEndedReview.targets.map((entry) => [entry.targetId, entry]),
+);
 
 const reviewedOpenEnded = coverage.pages
   .flatMap((page) => page.targets ?? [])
-  .filter(
-    (target) =>
-      target.classification === 'open-ended' &&
-      target.sourceEvidence?.startsWith('signature-bound'),
-  ).length;
+  .filter((target) => {
+    if (target.classification !== 'open-ended') return false;
+    if (target.sourceEvidence?.startsWith('signature-bound')) return true;
+    const entry = reviewLedger.get(target.targetId);
+    return (
+      entry?.signature === target.signature &&
+      typeof entry.reason === 'string' &&
+      entry.reason.trim().length > 0
+    );
+  }).length;
 const unresolved = Math.max(
   0,
   coverage.targetCount -
@@ -74,7 +91,7 @@ describe('separated classroom release contract', () => {
     expect(report.releaseReady).toBe(false);
   });
 
-  it('derives pedagogical readiness from the current answer coverage', () => {
+  it('derives pedagogical readiness from current coverage and signature-verified review evidence', () => {
     const pedagogical = report.domains.find(
       (domain) => domain.id === 'pedagogical-review',
     );
@@ -83,7 +100,7 @@ describe('separated classroom release contract', () => {
       `${coverage.automaticallyCheckableTargets}/${coverage.targetCount}`,
     );
     expect(pedagogical?.summary).toContain(
-      `${reviewedOpenEnded} are signature-bound open-ended`,
+      `${reviewedOpenEnded} open-ended targets have signature-verified review evidence`,
     );
     expect(pedagogical?.summary).toContain(`${unresolved} remain unresolved`);
   });
