@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-05T19:54:29.717Z",
+  "generatedAt": "2026-08-16T09:03:44.818Z",
   "mode": "static",
   "status": "blocked",
   "releaseReady": false,
@@ -27,9 +27,9 @@
       "summary": "Real Firestore operations passed against the demo project with the pinned Firebase CLI.",
       "evidence": [
         "suite: tests/firestore-emulator.test.ts",
-        "generatedAt: 2026-08-05T19:54:20.668Z",
+        "generatedAt: 2026-08-16T09:03:43.998Z",
         "Firebase CLI: 15.25.1",
-        "contract SHA-256: ad2bd6c1851c885fcc40949542a136df1552c468151346407a98cd3b88f0c000"
+        "contract SHA-256: 8d18094192a5fa7a7a5b6646ed6b265412f7a18901e134864d025576643854f9"
       ],
       "blockers": []
     },
@@ -54,15 +54,14 @@
     {
       "id": "pedagogical-review",
       "label": "Pedagogical answer-key review",
-      "status": "blocked",
-      "summary": "735/1162 targets are safely auto-checkable; 130 are signature-bound open-ended tasks; 297 remain unresolved.",
+      "status": "pass",
+      "summary": "1094/1162 targets are safely auto-checkable; 68 open-ended targets have signature-verified review evidence; 0 remain unresolved.",
       "evidence": [
         "reports/answer-coverage.json",
-        "public/answer-review-manifest.json"
+        "public/answer-review-manifest.json",
+        "docs/open-ended-review.json"
       ],
-      "blockers": [
-        "Resolve 297 targets in the answer-review studio without guessing."
-      ]
+      "blockers": []
     },
     {
       "id": "physical-acceptance",
