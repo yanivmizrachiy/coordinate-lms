@@ -1,19 +1,19 @@
 # Answer-key coverage report
 
-Generated: 2026-08-15T19:16:43.277Z
+Generated: 2026-08-16T08:20:10.365Z
 
-Overall: 1083/1162 safely checkable targets (93.2%).
+Overall: 1084/1162 safely checkable targets (93.3%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
-| reviewed-explicit | 180 |
+| reviewed-explicit | 181 |
 | canonical-metadata-derived | 277 |
 | deterministic-mathematical | 620 |
 | valid-range | 6 |
 | open-ended | 64 |
-| ambiguous | 15 |
+| ambiguous | 14 |
 | unsupported | 0 |
 | missing | 0 |
 
@@ -854,7 +854,7 @@ No detected interactive response targets.
 
 ### Page 39 — משלימים שיעור חסר ודפוסים
 
-27/28 safely checkable (96.4%).
+28/28 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -885,7 +885,7 @@ No detected interactive response targets.
 | p39-q25 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q26 | ordered-pair-coordinate | deterministic-mathematical | yes | runtime mathematical predicate | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q27 | text:letter | canonical-metadata-derived | yes | explicit canonical authoring label | כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]. |
-| p39-q28 | text:relation | ambiguous | no | four-option pedagogical digital adaptation required | ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x  |
+| p39-q28 | text:relation | reviewed-explicit | yes | signature-bound reviewed four-option explanation | ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x  |
 
 ### Page 40 — שיעור חסר ודפוסים
 

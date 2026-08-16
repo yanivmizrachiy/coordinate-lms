@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-15T19:16:43.277Z",
+  "generatedAt": "2026-08-16T08:20:10.365Z",
   "pageCount": 78,
   "targetCount": 1162,
-  "automaticallyCheckableTargets": 1083,
-  "coveragePercentage": 93.2,
+  "automaticallyCheckableTargets": 1084,
+  "coveragePercentage": 93.3,
   "classifications": {
-    "reviewed-explicit": 180,
+    "reviewed-explicit": 181,
     "canonical-metadata-derived": 277,
     "deterministic-mathematical": 620,
     "valid-range": 6,
     "open-ended": 64,
-    "ambiguous": 15,
+    "ambiguous": 14,
     "unsupported": 0,
     "missing": 0
   },
@@ -9717,18 +9717,18 @@
           "inputType": "text:relation",
           "context": "ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x ",
           "signature": "09881042",
-          "classification": "ambiguous",
-          "currentAnswerSource": "four-option pedagogical digital adaptation required",
-          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "classification": "reviewed-explicit",
+          "currentAnswerSource": "signature-bound reviewed four-option explanation",
+          "sourceEvidence": "src/lms/digitalExplanationChoices.ts:signature-bound coverage binding",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם."
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p39-q28"
-      ],
-      "automaticallyCheckableTargets": 27,
-      "coveragePercentage": 96.4
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 28,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 40,

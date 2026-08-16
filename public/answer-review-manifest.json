@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-15T19:16:43.277Z",
+  "generatedAt": "2026-08-16T08:20:10.365Z",
   "pageCount": 78,
   "targetCount": 1162,
   "pages": [
@@ -8231,10 +8231,12 @@
           "targetId": "p39-q28",
           "signature": "09881042",
           "inputType": "text:relation",
-          "classification": "ambiguous",
-          "sourceEvidence": "RULES.md §6: explanation task must be objectively computerized",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "classification": "reviewed-explicit",
+          "sourceEvidence": "src/lms/digitalExplanationChoices.ts:signature-bound coverage binding",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם."
+          ],
           "context": "ההסבר: מדוע „מעל ציר x ומימין לציר y” מתאים להרבה נקודות ולא לנקודה אחת?כי התנאים אומרים רק ש־x>0 ו־y>0, ויש הרבה זוגות סדורים שונים שמקיימים את שניהם.כי בכל נקודה ברביע הראשון ערך ה־x ושיעור ה־y חייבים להיות שווים.כי כל הנקודות שמעל ציר x "
         }
       ]
