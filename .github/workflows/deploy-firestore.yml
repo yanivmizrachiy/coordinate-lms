@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: firestore-deploy
@@ -78,3 +79,10 @@ jobs:
 
           git commit -m "Record verified Firebase production evidence"
           git push origin "HEAD:${GITHUB_REF_NAME}"
+
+          # Pushes made with GITHUB_TOKEN do not start ordinary push-triggered
+          # workflows. Explicitly dispatch CI so the new evidence commit receives
+          # the same full verification gates required before release.
+          gh workflow run ci.yml --ref "$GITHUB_REF_NAME"
+        env:
+          GH_TOKEN: ${{ github.token }}
