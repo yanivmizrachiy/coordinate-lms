@@ -81,6 +81,22 @@ function applyRuntimePredicateCoverage(report, resolveRule) {
   return recalculateCoverage(report);
 }
 
+function applyReviewedExplanationCoverage(report, resolveAnswers) {
+  for (const page of report.pages) {
+    for (const target of page.targets) {
+      if (target.automaticCheckingSafe) continue;
+      const answers = resolveAnswers(page.pageNumber, target.targetId, target.signature);
+      if (!Array.isArray(answers) || answers.length === 0) continue;
+      target.classification = 'reviewed-explicit';
+      target.currentAnswerSource = 'signature-bound reviewed four-option explanation';
+      target.sourceEvidence = 'src/lms/digitalExplanationChoices.ts:signature-bound coverage binding';
+      target.automaticCheckingSafe = true;
+      target.answers = [...answers];
+    }
+  }
+  return recalculateCoverage(report);
+}
+
 const server = await createServer({
   root,
   appType: 'custom',
@@ -99,7 +115,9 @@ try {
   const rectangles = await server.ssrLoadModule('/src/lms/digitalRectanglePredicates.ts');
   const life = await server.ssrLoadModule('/src/lms/digitalLifePredicates.ts');
   const grouped = await server.ssrLoadModule('/src/lms/groupCoverageBindings.ts');
-  const report = applyRuntimePredicateCoverage(
+  const explanations = await server.ssrLoadModule('/src/lms/digitalExplanationChoices.ts');
+
+  const predicateReport = applyRuntimePredicateCoverage(
     coverage.buildAnswerCoverageReport(await existingGeneratedAt()),
     (context, inputType, pageNumber, targetId) => {
       const coordinateSafeRule = coordinateSafe.coordinateSafePredicateRuleForCoverage(
@@ -168,6 +186,12 @@ try {
         ? { rule: groupedRule, source: 'src/lms/digitalPredicates.ts' }
         : null;
     },
+  );
+
+  const report = applyReviewedExplanationCoverage(
+    predicateReport,
+    (pageNumber, targetId, signature) =>
+      explanations.explanationAnswerForCoverage(pageNumber, targetId, signature),
   );
 
   const order = coverage.answerTargetOrderSnapshot(report);
