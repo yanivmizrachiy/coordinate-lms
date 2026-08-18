@@ -45,7 +45,6 @@ img, svg { max-width: 100%; }
 }
 .appbar__title { font-size: 17px; font-weight: 800; color: var(--brand-ink); flex: 1 1 auto; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.appbar__spacer { flex: 1 1 auto; }
 .iconbtn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   min-width: var(--tapsize); min-height: var(--tapsize);
@@ -55,7 +54,6 @@ img, svg { max-width: 100%; }
 .iconbtn:hover { background: var(--surface-2); }
 .iconbtn--primary { background: var(--brand); color: #fff; border-color: var(--brand); }
 .iconbtn--primary:hover { background: var(--brand-strong); }
-.iconbtn--ghost { border-color: transparent; background: transparent; }
 
 /* Router outlet */
 .app-main { min-height: calc(100vh - var(--header-h)); }

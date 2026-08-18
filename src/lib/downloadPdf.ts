@@ -6,7 +6,11 @@ import { printPages } from './printPages';
    שני קבצים נבנים מראש ממנוע ההדפסה של Chromium (`npm run pdf`):
    `hoveret.pdf` בצבע ו-`hoveret-bw.pdf` בשחור-לבן — כך שגם הורדה בשחור-לבן
    היא קובץ מיידי, לא חלון הדפסה. עמודים נבחרים נגזרים מהקובץ המתאים בדפדפן
-   עם pdf-lib (נטען עצל). מפת העמודים: 1=שער, 2=תוכן, עמוד חוברת n = n+2. */
+   עם pdf-lib (נטען עצל), לפי `hoveret-map.json` שנכתב ואומת בזמן הבנייה:
+   גיליון גבוה (שעשועון, פוסטר) תופס יותר מעמוד PDF אחד, ולכן הקירוב הישן
+   „עמוד n = n+2" החזיר עמודים שגויים אחרי הגיליון הנשפך הראשון. */
+
+interface PdfMap { total: number; pages: Record<string, { at: number; len: number }> }
 
 const pdfUrl = (bw: boolean): string =>
   `${import.meta.env.BASE_URL}${bw ? 'hoveret-bw.pdf' : 'hoveret.pdf'}`;
@@ -38,17 +42,28 @@ export function downloadBooklet(bw = false): void {
 export async function downloadPages(pages: ReadonlySet<number>, bw = false): Promise<void> {
   if (!pages.size) return;
   try {
-    const [{ PDFDocument }, bytes] = await Promise.all([
+    const [{ PDFDocument }, bytes, rawMap] = await Promise.all([
       import('pdf-lib'),
       fetch(pdfUrl(bw)).then((r) => {
         if (!r.ok) throw new Error(String(r.status));
         return r.arrayBuffer();
       }),
+      fetch(`${import.meta.env.BASE_URL}hoveret-map.json`)
+        .then((r) => (r.ok ? (r.json() as Promise<PdfMap>) : null))
+        .catch(() => null),
     ]);
     const src = await PDFDocument.load(bytes);
+    // מפה שלא נבנתה מהקובץ הזה (סביבת פיתוח, קובץ ישן) לא קובעת כלום.
+    const map = rawMap && rawMap.total === src.getPageCount() ? rawMap : null;
     const out = await PDFDocument.create();
     const ordered = [...pages].sort((a, b) => a - b);
-    const copied = await out.copyPages(src, ordered.map((n) => n + 1)); // n+2, אפס-מבוסס
+    const indices = ordered.flatMap((n) => {
+      const entry = map?.pages[String(n)];
+      // בלי מפה — הקירוב הישן (נכון רק כשכל גיליון הוא עמוד PDF אחד).
+      if (!entry) return [n + 1];
+      return Array.from({ length: entry.len }, (_, i) => entry.at + i);
+    });
+    const copied = await out.copyPages(src, indices);
     for (const pg of copied) out.addPage(pg);
     const outBytes = await out.save();
     saveBlob(

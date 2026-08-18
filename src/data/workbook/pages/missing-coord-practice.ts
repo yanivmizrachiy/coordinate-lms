@@ -10,10 +10,10 @@ export const MISSING_COORD_PRACTICE: WorkbookPageContent = sheet({
 <section class="q-card">
 <h3>שיעור חסר</h3>
 <ul class="tasks">
-<li>הנקודה <span class="pair math-ltr" dir="ltr">A(<span class="pair-blank"></span>,4)</span> ממוקמת על אותו קו אנכי כמו <span class="math-ltr" dir="ltr">B(6,1)</span>. לכן <span class="math-ltr" dir="ltr">A=</span> <span class="blank" style="--blank-width:10ch"></span></li>
-<li>הנקודה <span class="pair math-ltr" dir="ltr">C(3,<span class="pair-blank"></span>)</span> ממוקמת על אותו קו אופקי כמו <span class="math-ltr" dir="ltr">D(7,5)</span>. לכן <span class="math-ltr" dir="ltr">C=</span> <span class="blank" style="--blank-width:10ch"></span></li>
-<li>הנקודה <span class="pair math-ltr" dir="ltr">E(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> ממוקמת על ציר <span class="math-ltr" dir="ltr">x</span> מתחת לנקודה <span class="math-ltr" dir="ltr">F(4,3)</span>. לכן <span class="math-ltr" dir="ltr">E=</span> <span class="blank" style="--blank-width:10ch"></span></li>
-<li>הנקודה <span class="pair math-ltr" dir="ltr">G(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> ממוקמת על ציר <span class="math-ltr" dir="ltr">y</span> משמאל לנקודה <span class="math-ltr" dir="ltr">H(5,2)</span>. לכן <span class="math-ltr" dir="ltr">G=</span> <span class="blank" style="--blank-width:10ch"></span></li>
+<li>הנקודה <span class="pair math-ltr" dir="ltr">A(<span class="pair-blank"></span>,4)</span> ממוקמת על אותו קו אנכי כמו <span class="math-ltr" dir="ltr">B(6,1)</span>.</li>
+<li>הנקודה <span class="pair math-ltr" dir="ltr">C(3,<span class="pair-blank"></span>)</span> ממוקמת על אותו קו אופקי כמו <span class="math-ltr" dir="ltr">D(7,5)</span>.</li>
+<li>הנקודה <span class="pair math-ltr" dir="ltr">E(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> ממוקמת על ציר <span class="math-ltr" dir="ltr">x</span> מתחת לנקודה <span class="math-ltr" dir="ltr">F(4,3)</span>.</li>
+<li>הנקודה <span class="pair math-ltr" dir="ltr">G(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> ממוקמת על ציר <span class="math-ltr" dir="ltr">y</span> משמאל לנקודה <span class="math-ltr" dir="ltr">H(5,2)</span>.</li>
 </ul>
 </section>
 <section class="q-card">
@@ -46,6 +46,9 @@ export const MISSING_COORD_PRACTICE: WorkbookPageContent = sheet({
 <p>כתבו את שלוש הנקודות הבאות:</p>
 <ul class="tasks compact">
 <li><span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> &nbsp; <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> &nbsp; <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span></li>
+<li>בדפוס שבסעיף הראשון, ההפרש בין שיעורי ה־<span class="math-ltr" dir="ltr">y</span> של שתי נקודות סמוכות הוא בהכרח <span class="blank" data-missing="number" style="--blank-width:2ch"></span>.</li>
+<li>כתבו את הנקודה שתופיע בטבלה במקום השישי: <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>
+<li>בסדרה שבטבלה, שיעור ה־<span class="math-ltr" dir="ltr">y</span> של כל הנקודות הוא בהכרח <span class="blank" data-missing="number" style="--blank-width:2ch"></span>.</li>
 </ul>
 </section>
 </div>

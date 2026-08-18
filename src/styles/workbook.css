@@ -1,7 +1,5 @@
 /* ===========================================================================
-   Workbook sheet styles — a faithful port of the original 34-page booklet
-   layout, so pages 1–30 render pixel-identical. The parabula-next remote
-   iframe hacks are intentionally removed; pages 31–34 are now native sheets.
+   Canonical workbook sheet styles for the current printable A4 workbook.
    The cascade (including the later "override" blocks) is preserved on purpose.
    =========================================================================== */
 
@@ -11,7 +9,7 @@
   width: 210mm; min-height: 297mm; margin: 0 auto 18px; padding: 13mm 14mm 11mm;
   background: var(--paper); box-shadow: 0 8px 28px #1f2a4425; border: 1px solid #dfe4ec;
   display: block; position: relative; break-after: page; page-break-after: always;
-  /* Body text is 13px on EVERY sheet variant (practice/guided/dense/game). */
+  /* Body text is 13px on EVERY sheet variant (practice/guided/dense/poster). */
   font-size: 13px;
 }
 .sheet:last-child { break-after: auto; page-break-after: auto; }
@@ -21,16 +19,13 @@
 }
 .sheet h1 { font-size: 27px; line-height: 1.15; margin: 3px 0 4px; }
 .sheet-header p { margin: 0; color: var(--muted); font-size: 13px; }
+/* מספר העמוד בגובה זהה לגובה הכותרות (שורה 1+2) — „הגובה של מספר העמוד
+   חייב להיות זהה לגובה של המלל כולל 2 השורות של הכותרות" (31.07.2026). */
 .sheet-number {
-  width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
-  background: var(--ink); color: white; font-size: 20px; font-weight: 900; flex: none;
+  width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--ink); color: white; font-size: 28px; font-weight: 900; flex: none;
 }
 .sheet-content { padding-bottom: 12mm; }
-.sheet-footer {
-  position: absolute; right: 14mm; left: 14mm; bottom: 7mm; display: flex;
-  justify-content: space-between; gap: 20px; border-top: 1px solid var(--border);
-  padding-top: 2.5mm; color: var(--muted); font-size: 13px;
-}
 .two-col { display: block; font-size: 0; }
 /* .two-col zeroes the font to kill inline-block whitespace, so the child must
    restate it — keep it at the canonical 13px. */
@@ -46,6 +41,11 @@
   font-size: 13px; color: var(--ink);
 }
 .q-card p { margin: 5px 0; }
+/* שורת הוראה קצרה שמשאירה חלל גדול בצד — „יש מקום לרווח לרוחב את המלל".
+   `text-align-last` פורש גם את השורה האחרונה, ולכן שורה בודדת נמתחת על כל
+   הרוחב במקום להשאיר אוויר. רק על שורות הוראה — לא על משפטי השלמה, ששם
+   ריווח משתנה היה מזיז את התיבות. (02.08.2026) */
+.q-card h3.spread, .spread { text-align: justify; text-align-last: justify; }
 /* No browser bullet discs on worksheets — items are already grouped under an
    א/ב/ג task heading, so the dots are just visual noise. */
 .tasks { list-style: none; padding-right: 0; margin: 5px 0; }
@@ -60,8 +60,8 @@
 /* `vertical-align: middle` centres the fraction on the whole number, so a
    mixed number reads as ONE number. Anything baseline-relative drops the
    fraction below the digit and it looks like a second line. */
-/* A button a game draws inside a sheet is sheet text, and sheet text is 13px.
-   (The app toolbar outside the sheet keeps its own size.) */
+/* Any icon button inside a sheet uses the canonical sheet text size.
+   The app toolbar outside the sheet keeps its own size. */
 .sheet .iconbtn { font-size: 13px; }
 
 .frac {
@@ -72,6 +72,28 @@
 .frac__n { padding: 0 2px; }
 .frac__d { padding: 0 2px; border-top: 1.3px solid currentColor; }
 .mixed { font-family: var(--font-math); font-weight: 700; white-space: nowrap; }
+
+/* רשת תאים לצביעה — הגרסה המודפסת של „פענוח צבעוני". תאים ריקים שהתלמיד
+   צובע בעיפרון. „זה לא הצירים הנכונים!!" (יניב, 02.08.2026): הרשת היתה RTL
+   ו-x=0 ישב מימין וגדל שמאלה — הפוך מכל סרטוט אחר בחוברת. עכשיו `ltr`, כמו
+   הרביע הראשון: ראשית הצירים בפינה שמאל־תחתונה, x גדל ימינה, y עולה למעלה.
+   print-color-adjust שומר על הקווים גם בנייר. */
+.color-grid {
+  direction: ltr;
+  display: grid;
+  grid-template-columns: 22px repeat(var(--cg-cols, 7), 1fr);
+  gap: 4px; max-width: 388px; margin: 8px auto 4px;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.cg-cell {
+  aspect-ratio: 1; min-height: 30px;
+  border: 1.4px solid #9fb0cc; border-radius: 6px; background: #fff;
+}
+.cg-lab {
+  display: grid; place-items: center;
+  font-weight: 800; color: var(--muted); font-size: 13px;
+}
+.cg-lab--y { justify-self: end; }
 
 /* מחסן מילים — the words to choose from, so the task needs no explaining. */
 .word-bank {
@@ -84,6 +106,9 @@
   padding: 1px 8px; font-weight: 700;
 }
 .math-ltr { direction: ltr; unicode-bidi: isolate; font-family: var(--font-math); font-weight: 700; }
+/* „תרווח בשורה הזאת את המלל — הכל צמוד ולא נוח" (31.07.2026): זוג סדור בתוך
+   משפט מקבל אוויר משני צדדיו, בכל החוברת. */
+li .pair, p .pair, .completion-sentence .pair { margin-inline: 3px; }
 .blank {
   display: inline-block;
   /* requested width, but never wider than the line — avoids overflow at ~320px */
@@ -92,12 +117,6 @@
   height: 1.2em; border-bottom: 1.5px solid var(--ink); vertical-align: -.08em;
 }
 .answer-line { height: 1.5em; border-bottom: 1px solid #8994a5; margin-top: 4px; }
-/* A game sheet is a numbered worksheet page that hosts an interactive game.
-   Games are interactive and can run taller than one A4 sheet, so this sheet
-   grows instead of clipping its content. */
-/* A game board is as tall as its puzzle, so this sheet grows instead of
-   clipping. Two class names on purpose: a plain `.sheet` rule further down the
-   file would otherwise win on source order and cut the board off mid-question. */
 /* A ready-made puzzle sheet: the artwork IS the page. No header and no page
    number are drawn on it, so its own design stays intact; the canonical footer
    still appears. object-fit keeps the A4 artwork from ever being stretched. */
@@ -122,18 +141,15 @@
 .poster-number { position: absolute; left: 3mm; top: 3mm; }
 /* אין דריסה — הכותרת התחתונה נשארת מוצמדת, כמו בכל עמוד. */
 
-.sheet.game-sheet { height: auto; min-height: 297mm; overflow: visible; }
-.sheet.game-sheet .sheet-content { display: block; }
-/* גם על דף שעשועון שגדל מעבר ל-A4 הכותרת מוצמדת לתחתית הדף — אותו מקום,
-   אותם שוליים; הריפוד שומר שהלוח לא ירוץ מתחתיה. */
-.sheet.game-sheet { padding-bottom: 20mm; }
-.game-host { min-height: 150mm; }
-.game-host > * { max-width: 100%; }
-/* No sub-13px text anywhere on a sheet, including game-rendered markup. */
+/* אין יותר דף שעשועון: כל עמוד הוא דף מודפס בגובה A4 („המשימות שלנו הן
+   להדפסה", 31.07.2026), ולכן כללי `.game-sheet`/`.game-host` נמחקו. */
+/* No sub-13px text anywhere on a sheet. */
 .sheet small, .mist-card small { font-size: 13px; }
 
 .calc-box { border: 1px dashed #9aa6b6; border-radius: 8px; padding: 7px 10px 5px; margin: 7px 0; background: #fbfcfe; }
 .calc-box > b { display: block; margin-bottom: 3px; color: #40506a; }
+.calc-box > .calc-label + .calc-final { margin-top: 2px; }
+.calc-box > .calc-work + .calc-label { margin-top: 6px; }
 .calc-box .answer-line { border-bottom-style: dashed; }
 .work-table, .tf-table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 13px; }
 .work-table th, .work-table td, .tf-table td {
@@ -141,7 +157,7 @@
 }
 .work-table th { background: #f1f4f8; font-weight: 800; }
 .work-table.center td, .work-table.center th { text-align: center; }
-.work-table td:empty { height: 30px; }
+.work-table td:empty { height: 26px; }
 .work-table .tall { height: 65px; }
 .tf-table td:last-child { width: 34%; text-align: center; font-weight: 700; }
 /* The drawing keeps its own proportions inside the box, so a box wider than
@@ -173,6 +189,8 @@
 .compact-top { align-items: center; }
 .span-2 { grid-column: 1 / -1; }
 .choice-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0; }
+/* עמוד 38: שלוש שאלות הציר-הקרוב יושבות בשורה אחת, לא זו מתחת לזו. */
+.task-grid--row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .choice { border: 1px solid #9da9b8; border-radius: 999px; padding: 3px 9px; background: #fff; display: inline-block; }
 .choice-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; text-align: center; }
 .choice-grid .coordinate-grid { margin-top: 2px; }
@@ -180,7 +198,7 @@
 .pair-blank { display: inline-block; width: 20px; height: 17px; border-bottom: 1.5px solid #1f2a44; }
 .match { display: grid; grid-template-columns: 1fr 1fr; gap: 35%; line-height: 2.2; padding: 4px 12%; }
 .mc-stack > div { margin: 5px 0; border-bottom: 1px dashed #d8dee8; padding-bottom: 3px; }
-.error-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.error-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .mist-card { border: 1px solid #cbd3df; border-radius: 8px; padding: 7px 9px; break-inside: avoid; }
 .mist-card p { margin: 5px 0; font-size: 13px; }
 .mist-card small { color: #5f6b7a; }
@@ -240,19 +258,27 @@
   margin: 0;
 }
 .sheet-number {
-  width: 32px; height: 32px;
+  width: 54px; height: 54px;
   border: 2px solid #1d4ed8; color: #1d4ed8; background: #fff;
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 16px; font-weight: 400; flex: 0 0 auto;
+  font-size: 28px; font-weight: 600; flex: 0 0 auto;
 }
 .sheet { width: 210mm; min-height: 297mm; height: 297mm; padding: 10mm 18mm; overflow: hidden; }
 .sheet-content { padding-bottom: 17mm; }
 /* The district's badge stands beside the credit lines. The row is centred as a
    whole, so the two lines keep the place they have always had and the badge sits
    at their leading edge — the right, in Hebrew. */
+/* „הקו של הכותרת התחתונה חייב להיות לכל רוחב העמוד" (31.07.2026) — the rule
+   runs edge to edge of the A4, not inset to the text margins. The text itself
+   keeps its margins via the inline padding. */
 .gz-footer {
-  position: absolute; right: 18mm; left: 18mm; bottom: 5mm; margin: 0;
-  padding-top: 3px; border-top: 1px solid #1d4ed8;
+  position: absolute; right: 0; left: 0; bottom: 5mm; margin: 0;
+  /* „הקו של הכותרת התחתונה צריך להיות כחול כמו הכותרות הראשיות של האתר"
+     (02.08.2026). היה `var(--ink)` — #1f2a44, כחול־דיו כהה שנקרא כמעט שחור
+     ליד הכחול של קו הכותרת. עכשיו אותו `--brand` בדיוק (#1d4ed8) שבו צבוע
+     `border-bottom` של `.sheet-header`. נשאר 1px רגיל ולא 4px כפול — כותרת
+     תחתונה לא אמורה לגבור על הכותרת הראשית, רק לדבר באותו צבע. */
+  padding: 3px 14mm 0; border-top: 1px solid var(--brand);
   display: flex; align-items: center; justify-content: center; gap: 9px;
   line-height: 1.2; background: #fff;
 }
@@ -306,7 +332,12 @@
 .tf-option input { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; margin: 0; border: 1.8px solid #334155; border-radius: 3px; background: #fff; display: grid; place-content: center; flex: 0 0 auto; }
 .tf-option input:checked::after { content: "✓"; font-size: 15px; line-height: 1; font-weight: 900; color: #111827; transform: translateY(-1px); }
 .tf-table td:last-child { width: 38%; min-width: 170px; padding-inline: 8px; }
-.mist-head > .tf-options { display: flex; min-width: auto; gap: 8px; font-size: 13px; font-weight: 700; }
+/* „לא נוח שזה מאוזן" (31.07.2026): מתחת לטענה, זו מתחת לזו — לא בשורה איתה. */
+.mist-head { display: block; }
+.mist-head > .tf-options {
+  display: flex; flex-direction: column; align-items: flex-start;
+  min-width: auto; gap: 6px; margin-top: 6px; font-size: 13px; font-weight: 700;
+}
 .mist-head > .tf-options .tf-option { gap: 3px; }
 .mist-head > .tf-options input { width: 15px; height: 15px; }
 
@@ -336,34 +367,49 @@
 .cover-placeholder__file { font-family: var(--font-math); font-weight: 800; color: var(--ink); background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 8px; padding: 6px 12px; display: inline-block; }
 .cover-placeholder__hint { margin-top: 10px; font-size: 13px; }
 
-/* ---- Responsive (screen, phones) ---- */
-@media (max-width: 850px) {
-  .sheet {
-    width: 100%; min-height: auto; height: auto; margin: 0 0 14px; padding: 18px 15px;
-    border-left: 0; border-right: 0; overflow: visible;
+/* ---- Responsive (screen, phones) ----
+   „תצוגת הנייד — שהכל יתאים אם פותחים בטלפון או במחשב בהתאמה אוטומטית”
+   (02.08.2026). עד כאן הגיליון נפרס מחדש לרוחב הטלפון (width:100%;
+   height:auto), וזה יצר בנייד מסמך אחר לגמרי מזה שיוצא מהמדפסת: הטורים
+   נערמו זה על זה, יחס העמוד קפץ מ-1:1.414 ל-1:4.4, והכותרת התחתונה
+   (position:absolute) עלתה לאמצע הדף והשאירה רבע עמוד לבן. החוברת היא
+   מוצר מודפס — ולכן הגיליון שומר על A4 אמיתי ומוקטן כמו תצלום: מה
+   שרואים בטלפון הוא בדיוק מה שמודפס, רק קטן יותר.
+     • ‎#/workbook/:n‎ — מקטין בעצמו (‎--sheet-scale‎ ב-pageViewer)
+     • ‎#/book‎        — במת הפליפבוק מקטינה
+     • ‎#/print‎       — כאן, ב-transform
+
+   ‎screen and‎ — חובה! ב-‎page.pdf()‎ הדפדפן מפריס לרוחב A4 (~794px < 850px),
+   ולכן בלי ‎screen‎ החוקים האלה חלים גם על ה-PDF: ‎margin-block: 0 18px‎ נוסף
+   לכל גיליון, וה-‎break-after: page‎ דחף את ה-18px לעמוד חדש — ‎40 עמודים ריקים
+   בחוברת המודפסת (‎total‎ קפץ מ-80 ל-120). ההקטנה למובייל היא ‎screen‎ בלבד;
+   המדפסת מקבלת A4 מלא בלי שוליים נוספים. */
+@media screen and (max-width: 850px) {
+  .book { padding-inline: 0; display: flex; flex-direction: column; align-items: center; }
+  .book > .sheet {
+    /* ‎transform‎ ולא ‎zoom‎: ‎zoom‎ מחשב את הפריסה מחדש בגודל שברי, והעיגול
+       התת-פיקסלי דחף את תחתית עמוד 16 אל מחוץ לגיליון (‎-2px‎). ‎transform‎
+       הוא הקטנה חזותית בלבד — הפריסה בטלפון זהה לחלוטין לזו של המחשב
+       ושל המדפסת. */
+    transform: scale(var(--sheet-fit, 1));
+    transform-origin: top center;
+    /* ‎transform‎ אינו מקטין את תיבת-הפריסה: היא נשארת 210mm על 297mm, וכך
+       גלשה מהמסך ואף מנעה מ-flex למרכז אותה. המרווחים השליליים מצמצמים את
+       טביעת-הרגל בדיוק למידה שאחרי ההקטנה — הגיליון ממורכז, אין גלילה
+       אופקית, ובין גיליון לגיליון נשארים 18px. */
+    margin-inline: calc(210mm * (var(--sheet-fit, 1) - 1) / 2);
+    margin-block: 0 calc(297mm * (var(--sheet-fit, 1) - 1) + 18px);
   }
-  .two-col > .q-card, .two-col > .span-2 { display: block; width: 100%; margin-left: 0; }
-  .cols-2, .cols-3, .choice-grid, .error-grid { grid-template-columns: 1fr; }
-  .span-2 { grid-column: auto; }
-  .gz-footer { position: static; margin-top: 14px; }
-  .sheet-content { padding-bottom: 0; }
-  .axis-answer-box { margin-inline: 0 !important; }
-  .tf-table td:last-child { min-width: 0; width: 43%; }
-  .tf-options { min-width: 0; grid-template-columns: 1fr; gap: 4px; }
-  /* narrow-screen hardening: break long LTR coordinate strings and shrink tables */
-  .math-ltr { overflow-wrap: anywhere; word-break: break-word; }
-  .work-table { table-layout: fixed; }
-  .work-table td, .work-table th, .tf-table td { overflow-wrap: anywhere; }
-  .pair { flex-wrap: wrap; }
-}
-@media (max-width: 720px) {
-  .completion-sentence { font-size: 13px; }
-  .word-long { min-width: 12ch; }
 }
 
 /* ---- Print (A4) ---- */
 @page { size: A4; margin: 0; }
 @media print {
+  /* On screen the continuous #/print view gets breathing room; on paper that
+     18px/42px padding pushed the cover 18px down (its bottom spilled to a blank
+     page 2) and left 42px past the last sheet (a trailing blank). Zeroed here so
+     every normal sheet is EXACTLY one A4 page and the hoveret-map stays honest. */
+  .book { padding: 0; }
   .sheet {
     width: 210mm; height: 297mm; min-height: 297mm; margin: 0; padding: 9mm 10mm 8mm;
     box-shadow: none; border: 0; break-after: page; page-break-after: always; overflow: hidden;
@@ -373,7 +419,7 @@
   .sheet-header { padding-bottom: 2.5mm; margin-bottom: 2.5mm; }
   .sheet-header h1 { font-size: 23px; }
   .sheet-header p { font-size: 13px; }
-  .sheet-number { width: 36px; height: 36px; font-size: 17px; }
+  .sheet-number { width: 54px; height: 54px; font-size: 28px; }
   .two-col > .q-card { font-size: 13px; margin-bottom: 6px; }
   .q-card { padding: 7px 9px; border-radius: 8px; }
   .q-card h3 { margin: -7px -9px 6px; padding: 5px 8px; font-size: 13px; }
@@ -384,7 +430,6 @@
   .answer-line { height: 1.25em; }
   .grid-large { height: 190px; }
   .sheet-content { padding-bottom: 10mm; }
-  .sheet-footer { right: 10mm; left: 10mm; bottom: 5mm; font-size: 13px; }
   .gz-footer { position: absolute; margin: 0; }
 
   .sheet.guided { font-size: 13px; }
@@ -414,14 +459,56 @@
 
 /* The final answer of a calculation, with the letter and the unit the answer is
    not an answer without. „האות S מסמנת שטח, האות P מסמנת היקף.” */
-.calc-final { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 5px; font-weight: 700; }
-.calc-final > span { display: inline-flex; align-items: baseline; gap: 4px; }
+/* התשובות הסופיות — שורה נפרדת לכל גודל, כמו בספר לימוד. שתי תשובות על שורה
+   אחת נמעכו זו לתוך זו („יחשטח") — יניב, 31.07.2026. */
+.calc-final { margin-top: 6px; font-weight: 700; }
+/* שורה אחת רצופה — „היקף המלבן הוא ____ יח'." זורם כמשפט, כמו בספר לימוד.
+   flex פירק את המשפט לטור מילים בתוך עמודה צרה (31.07.2026). */
+.calc-final__row { display: block; padding: 1px 0; white-space: nowrap; }
+.calc-final__row + .calc-final__row { border-top: 1px solid #e3e8f0; }
+/* מחברת משבצות אמיתית (31.07.2026): „לא שורות אלא משבצות, כמו מחברת
+   משבצות — שייראה כמו מחברת אמיתית". הדרך נכתבת על רשת משבצות; האות פותחת
+   את התרגיל משמאל עם סימן השווה — P = — והתלמיד ממשיך אחרי השווה.
+   print-color-adjust שומר שהמשבצות מגיעות גם לנייר. */
+.calc-work { border-radius: 8px; padding: 5px 8px; }
+.calc-work.calc-squared {
+  /* התרגיל נכתב משמאל לימין, ולכן הפותחן — P = — יושב בפינה השמאלית
+     העליונה של המחברת, והכתיבה ממשיכה ממנו ימינה. */
+  display: flex; align-items: flex-start; justify-content: flex-start; direction: ltr;
+  border: 1.6px solid #8fa9cf;
+  background:
+    linear-gradient(#d9e6f7 1px, transparent 1px) 0 0 / 14px 14px,
+    linear-gradient(90deg, #d9e6f7 1px, transparent 1px) 0 0 / 14px 14px,
+    #fffdf8;
+  min-height: calc(var(--calc-rows, 2) * 28px + 18px);
+  box-shadow: inset 0 1px 5px #1f2a4416;
+  print-color-adjust: exact; -webkit-print-color-adjust: exact;
+}
+/* פותחן התרגיל — האות הגדולה עם השווה, על כרית לבנה קלה שצפה מעל המשבצות. */
+.calc-squared__opener {
+  display: inline-flex; align-items: flex-start; gap: 8px; direction: ltr;
+  background: #ffffffdb; border-radius: 6px; padding: 1px 6px 2px;
+}
+.calc-squared__eq {
+  font-family: var(--font-math); font-weight: 800; font-size: 19px;
+  line-height: 1.25; color: var(--blue);
+}
+.calc-sym { flex: none; display: inline-flex; flex-direction: column; align-items: center; gap: 1px; }
+.calc-sym__math {
+  font-family: var(--font-math); font-weight: 700; font-size: 24px; line-height: 1;
+  direction: ltr; unicode-bidi: isolate; color: var(--blue);
+}
+.calc-sym__math sub { font-size: 13px; font-weight: 700; }
+.calc-sym__hint { font-size: 13px; color: var(--muted); }
+/* היקף ושטח זה לצד זה — התיבה מנצלת את רוחב העמוד במקום להכפיל את גובהו. */
+.calc-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 12px; }
+.calc-sec { min-width: 0; }
 .calc-box .answer-line { margin: 5px 0; }
 
 /* An exercise reads left to right, whatever the sheet's direction is. */
 /* The exercise and the value under it are one block: they are read together and
    must never be split across a column or a page. */
-.calc-pair { margin: 3px 0 5px; }
+.calc-pair { margin: 2px 0 3px; }
 .calc-pair .calc-ltr { margin: 1px 0; }
 /* A given subtraction is one line, so it needs no block spacing around it. */
 .calc-pair:has(> .calc-ltr:only-child) { margin: 2px 0; }
@@ -433,71 +520,94 @@ td > .calc-pair, td .calc-pair { margin: 2px 0; }
 .calc-ltr__unit { color: var(--muted); font-weight: 600; }
 
 /* ---- the contents sheet ---------------------------------------------------
-   Second sheet of the booklet: a coloured button per chapter, in the palette
-   Yaniv chose. Two columns on paper, one on a phone. The type stays at the
-   sheet's 13px so the page reads as part of the booklet, not as a web menu. */
-.toc-sheet .sheet-content { display: block; }
-
-/* עמוד תוכן העניינים — צבעוני ומיוחד (30.07.2026, מחליף את „עמוד תוכן שקט").
-   יניב: „תעצב מחדש את תוכן העניינים בצבעים שונים — כל פרק במשבצת בצבע שונה,
-   צבעוני ומיוחד". כל פרק הוא משבצת מלאה בצבע משלו מהפלטה של יניב; מספר
-   הפרק יושב בעיגול לבן, שם הפרק לבן (או כהה על צבע בהיר — מחושב, לא מנוחש),
-   והמשבצות רוקדות מעט — הטיה עדינה מתחלפת, כמו כרטיסיות שהונחו ביד. */
-.toc-buttons { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 12px;
+   עמוד תוכן העניינים — „דף עיזבון על נייר" (31.07.2026, מחליף את גרסת ליל־הדיו).
+   הבחירה של יניב (אפשרות 2, בהשראת Hermès/Aesop): נייר שמנת חם, כותרת סריף
+   ממורכזת, וכל פרק בשורה משלו — שם הפרק בכתב סריף גדול מצד ימין, ספרת הפרק
+   הגדולה בצבע משלה, ומספר העמוד („עמוד N") מצד שמאל, גם הוא מוגדל.
+   „תגדיל מספרי העמודים ותגדיל כתב של שמות הפרקים, יותר רווחים כדי לנצל כל
+   העמוד כל הזמן": הטיפוגרפיה גדולה, וחמשת הפרקים נפרשים על מלוא גובה ה־A4.
+   הסריפים: Frank Ruhl Libre לעברית, Cormorant לספרות — ארוזים מקומית
+   (@fontsource), בלי fetch חיצוני בזמן ריצה. */
+.toc-sheet {
+  display: flex; flex-direction: column;
+  background: #f5efe3; border-color: #e6ddca;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }
+.toc-head { text-align: center; padding-top: 6mm; }
+.toc-head__frame {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 8px;
+}
+.toc-head__frame::before, .toc-head__frame::after {
+  content: ''; height: 1px; flex: 1; background: #c3b696;
+}
+.toc-head__kicker {
+  margin: 0; color: #8f8467; font-size: 13px; font-weight: 400;
+  letter-spacing: .4em; text-indent: .4em; white-space: nowrap;
+  font-family: 'Frank Ruhl Libre', serif;
+}
+.toc-sheet h1.toc-head__title {
+  margin: 0; color: #241f14; font-size: 46px; font-weight: 300; line-height: 1.1;
+  font-family: 'Frank Ruhl Libre', serif;
+}
+.toc-head__sub {
+  margin: 4px 0 0; color: #8f8467; font-size: 15px; font-style: italic;
+  font-family: 'Frank Ruhl Libre', serif;
+}
+/* the chapters fill the whole height of the page */
+.toc-sheet .sheet-content { flex: 1; display: flex; padding-bottom: 16mm; }
+.toc-buttons {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: space-evenly; align-items: stretch;
+}
+/* one chapter per row: big colour index (right) · name · page (left).
+   The name flexes, so the row always spans the full width of the sheet. */
 .toc-btn {
-  position: relative; overflow: hidden;
-  display: flex; align-items: center; gap: 18px;
-  width: 100%; padding: 44px 24px 44px 0;
-  border: 0; border-radius: 20px; cursor: pointer;
-  background: var(--toc-colour); color: #fff; font: inherit; text-align: start;
-  box-shadow: 0 3px 10px #1f2a4426, 0 14px 30px #1f2a441f;
-  transition: box-shadow var(--dur-quick) ease, transform var(--dur-quick) var(--ease);
+  display: flex; align-items: center; gap: 22px;
+  width: 100%; padding: 14px 6px; border: 0; border-top: 1px solid #ddd3bd;
+  background: transparent; cursor: pointer; font: inherit; text-align: start;
+  transition: background var(--dur-quick) ease, transform var(--dur-quick) var(--ease);
+}
+.toc-buttons .toc-btn:last-child { border-bottom: 1px solid #ddd3bd; }
+/* שם הפרק — סריף גדול. „תגדיל כתב של שמות הפרקים". */
+.toc-btn__name {
+  /* השם תופס רק את רוחבו — הקו המנוקד ממלא את השאר עד המספר. */
+  flex: 0 1 auto; min-width: 0;
+  color: #241f14; font-family: 'Frank Ruhl Libre', serif;
+  font-size: 30px; font-weight: 400; line-height: 1.2;
   -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }
-/* the gentle alternating tilt — special, but still a book page */
-.toc-buttons .toc-btn:nth-child(odd) { transform: rotate(-0.6deg); }
-.toc-buttons .toc-btn:nth-child(even) { transform: rotate(0.6deg); }
-/* a soft light sweeping the tile's corner, so the colour has depth on screen */
-.toc-btn::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(115deg, rgba(255,255,255,.22), transparent 42%);
-}
-/* the chapter's number, in a white disc at the leading edge */
-.toc-btn__rule {
-  flex: none; width: 54px; height: 54px; margin-inline-start: 20px;
-  border-radius: 50%; background: var(--toc-colour);
-  border: 3px solid #fff; box-shadow: 0 2px 8px #1f2a4433;
-  display: grid; place-items: center;
+/* הקו המנוקד — מוביל את העין מהכותרת אל מספר העמוד בשמאל, כמו בתוכן
+   עניינים של ספר אמיתי (31.07.2026). */
+.toc-btn__leader {
+  flex: 1 1 auto; min-width: 28px; align-self: center;
+  border-bottom: 3px dotted #b9ac8b; transform: translateY(9px);
   -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }
-.toc-btn__rule::after {
-  /* דיו כהה קבוע: ספרה בצבע-הפרק על דיסקית לבנה נבלעה בשלושה מהצבעים. */
-  content: attr(data-no); color: var(--ink); font-size: 22px; font-weight: 900;
-}
-.toc-btn__body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px;
-}
-.toc-btn__kicker {
-  font-size: 13px; font-weight: 700; letter-spacing: .06em; color: var(--toc-text, #fff); opacity: .85;
-  -webkit-print-color-adjust: exact; print-color-adjust: exact;
-}
-.toc-btn__name { font-weight: 800; font-size: 13px; line-height: 1.3; color: var(--toc-text, #fff);
-}
-/* the page number closes the line — 13px like every sheet text, weight does
-   the talking */
+/* מספר אחד בלבד: המספר הצבעוני הגדול הוא מספר העמוד, בקצה השמאלי, בצבע
+   הפרק. הצבע דוהק דיו כדי לעבור 4.5:1 על השמנת; רוחב מזערי קבוע כדי שכל
+   המספרים יתיישרו בטור. */
 .toc-btn__no {
-  flex: none; font-size: 13px; font-weight: 900; line-height: 1; color: var(--toc-text, #fff);
-  padding-inline-start: 8px; opacity: .95;
+  flex: none; min-width: 1.6em; text-align: left;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 60px; font-weight: 700; line-height: .85; color: var(--toc-colour);
   -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }
-.toc-btn:hover {
-  transform: translateY(-3px) rotate(0deg);
-  box-shadow: 0 6px 16px #1f2a4433, 0 20px 44px #1f2a4429;
-}
-.toc-btn:active { transform: translateY(0); transition-duration: var(--dur-press);
-}
-.toc-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px;
-}
-body.bw-print .sheet .toc-btn { background: #fff !important; border-color: #999; box-shadow: none; }
-body.bw-print .sheet .toc-btn__rule { background: #555 !important; }
-body.bw-print .sheet .toc-btn__kicker, body.bw-print .sheet .toc-btn__no { color: #333 !important; }
+.toc-btn:hover { background: #00000008; transform: translateX(-3px); }
+.toc-btn:active { transform: translateX(0); transition-duration: var(--dur-press); }
+.toc-btn:focus-visible { outline: 2px solid #8f8467; outline-offset: 3px; }
+/* the canonical footer keeps its place; on the cream page its rule warms up */
+.toc-sheet .gz-footer { background: transparent; border-top-color: #c3b696; }
+.toc-sheet .gz-footer .f1 { color: #2a2417; }
+.toc-sheet .gz-footer .f2 { color: #6b6349; }
+/* black-and-white print: the cream lifts to white, the colours to measured ink */
+body.bw-print .sheet.toc-sheet { background: #fff; border-color: #dfe4ec; }
+body.bw-print .toc-head__kicker, body.bw-print .toc-head__sub { color: #555 !important; }
+body.bw-print .toc-sheet h1.toc-head__title,
+body.bw-print .toc-btn__name, body.bw-print .toc-btn__no { color: #111 !important; }
+body.bw-print .toc-btn__leader { border-bottom-color: #888 !important; }
+body.bw-print .toc-head__frame::before, body.bw-print .toc-head__frame::after { background: #999; }
+body.bw-print .toc-btn { border-top-color: #ccc; }
+body.bw-print .toc-buttons .toc-btn:last-child { border-bottom-color: #ccc; }
+body.bw-print .toc-sheet .gz-footer { border-top-color: #1d4ed8; }
+body.bw-print .toc-sheet .gz-footer .f1 { color: #1f2a44; }
+body.bw-print .toc-sheet .gz-footer .f2 { color: #475569; }

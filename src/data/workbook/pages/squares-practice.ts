@@ -17,7 +17,7 @@ export const SQUARES_PRACTICE: WorkbookPageContent = sheet({
 <li>כתבו את תרגיל החיסור של אורך הצלע, ואת ההפרש שקיבלתם:</li>
 </ul>
 ${exercise('AB')}
-${calcBox({ perimeter: true, area: true })}
+${calcBox({ perimeter: true, area: true, shape: 'הריבוע' })}
 </section>
 <section class="q-card">
 <h3>ריבוע מתיאור</h3>
@@ -26,7 +26,7 @@ ${calcBox({ perimeter: true, area: true })}
 <ul class="tasks compact">
 <li><span class="blank" style="--blank-width:10ch"></span> &nbsp; <span class="blank" style="--blank-width:10ch"></span> &nbsp; <span class="blank" style="--blank-width:10ch"></span></li>
 </ul>
-${calcBox({ perimeter: true, area: true })}
+${calcBox({ perimeter: true, area: true, shape: 'הריבוע' })}
 </section>
 <section class="q-card">
 <h3>סיכום קצר</h3>
@@ -48,6 +48,8 @@ ${calcBox({ perimeter: true, area: true })}
 <ul class="tasks compact">
 <li><span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> → <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> → <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> → <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span></li>
 <li>מהי נקודת הסיום? <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span></li>
+<li>אורך המסלול כולו הוא בהכרח <span class="blank" data-missing="number" style="--blank-width:2ch"></span> יחידות.</li>
+<li>שיעור ה־<span class="math-ltr" dir="ltr">x</span> של נקודת הסיום גדול משיעור ה־<span class="math-ltr" dir="ltr">x</span> של הנקודה <span class="math-ltr" dir="ltr">P</span> ב־<span class="blank" data-missing="number" style="--blank-width:2ch"></span>.</li>
 </ul>
 </section>
 </div>

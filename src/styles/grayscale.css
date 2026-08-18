@@ -20,8 +20,20 @@ body.bw-print .sheet .q-card h3 { background: #e2e2e2 !important; color: #111 !i
 body.bw-print .sheet .rule-box { background: #e6e6e6 !important; border-right-color: #222 !important; }
 body.bw-print .sheet .note-box { background: #f2f2f2 !important; border-right-color: #666 !important; }
 body.bw-print .sheet .word-bank { background: #f4f4f4 !important; border-color: #333 !important; }
+body.bw-print .sheet .cg-cell { border-color: #555 !important; background: #fff !important; }
 body.bw-print .sheet .word-bank__item { border-color: #666 !important; }
 body.bw-print .sheet .calc-box { background: #fafafa !important; border-color: #666 !important; }
+body.bw-print .sheet .calc-work.calc-squared {
+  border-color: #777 !important;
+  background:
+    linear-gradient(#c9c9c9 1px, transparent 1px) 0 0 / 14px 14px,
+    linear-gradient(90deg, #c9c9c9 1px, transparent 1px) 0 0 / 14px 14px,
+    #fff !important;
+}
+body.bw-print .sheet .calc-squared__opener { background: #ffffffe6 !important; }
+body.bw-print .sheet .calc-squared__eq { color: #111 !important; }
+body.bw-print .sheet .calc-sym__math { color: #111 !important; }
+body.bw-print .sheet .calc-final__row + .calc-final__row { border-top-color: #999 !important; }
 body.bw-print .sheet .work-table th { background: #d9d9d9 !important; }
 body.bw-print .sheet .work-table td,
 body.bw-print .sheet .work-table th,

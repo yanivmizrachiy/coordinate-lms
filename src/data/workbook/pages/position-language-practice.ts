@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet } from '../authoring';
+import { sheet, wordBank } from '../authoring';
 
 export const POSITION_LANGUAGE_PRACTICE: WorkbookPageContent = sheet({
   sectionClass: "sheet practice",
@@ -13,6 +13,7 @@ export const POSITION_LANGUAGE_PRACTICE: WorkbookPageContent = sheet({
 <div class="completion-sentence">בכל נקודה שממוקמת מימין לציר <span class="math-ltr" dir="ltr">y</span> ערך ה־<span class="blank" data-missing="letter" style="--blank-width:3ch"></span> גדול מ־0.</div>
 <div class="completion-sentence">בכל נקודה ששיעוריה שווים, ערך ה־<span class="math-ltr" dir="ltr">x</span> <span class="blank" data-missing="relation" style="--blank-width:5ch"></span> לשיעור ה־<span class="math-ltr" dir="ltr">y</span>.</div>
 </div>
+${wordBank(['שווה', 'x', '0'])}
 <div aria-label="מערכת צירים ובה הנקודות A עד E" class="coordinate-grid grid-large" data-arrows="[]" data-points='[{"x": 2, "y": 2, "label": "A", "dx": 10, "dy": -10}, {"x": 5, "y": 2, "label": "B", "dx": 10, "dy": -10}, {"x": 5, "y": 5, "label": "C", "dx": 10, "dy": -10}, {"x": 1, "y": 5, "label": "D", "dx": 10, "dy": -10}, {"x": 4, "y": 4, "label": "E", "dx": 10, "dy": -10}]' data-polygons="[]" data-segments="[]" role="img">
 </div>
 </section>

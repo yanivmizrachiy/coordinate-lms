@@ -60,9 +60,10 @@ export function home({ outlet, setTitle }: ViewContext): (() => void) | void {
   root.append(
     elem('nav', { class: 'ls-nav', 'aria-label': 'ניווט בעמוד' },
       elem('div', { class: 'ls-container ls-nav__inner' },
+        /* „תמחק את הכפתור כל הפעולות — מיותר ממש" (31.07.2026): the nav keeps
+           only the two materials; the menu is reachable from the app itself. */
         navLink('סרטון עדכון ת"ל', toAnchor('video')),
         navLink('חוברת העבודה', toAnchor('booklet')),
-        navLink('כל הפעולות', () => navigate('#/menu')),
       ),
     ),
   );
@@ -204,6 +205,15 @@ export function home({ outlet, setTitle }: ViewContext): (() => void) | void {
 
   const openBtn = elem('button', { class: 'ls-btn ls-btn--gold', type: 'button', text: 'פתיחת החוברת' });
   openBtn.addEventListener('click', () => navigate('#/book'));
+  /* „על החוברת למטה צריך להופיע במקום נוח כפתור ההתחל" (31.07.2026) — the
+     big way in sits right under the cover, centred, where the eye lands. */
+  const startBtn = elem('button', { class: 'ls-btn ls-btn--gold ls-pdfframe__start', type: 'button', text: 'התחל' });
+  /* „התחל" פותח את העמוד הבא — תוכן העניינים — לעולם לא את הדף האחרון
+     שביקרת בו (31.07.2026). הדגל נקרא ונמחק בכניסת החוברת. */
+  startBtn.addEventListener('click', () => {
+    try { window.sessionStorage.setItem('quadrant:lxbook:open', 'toc'); } catch { /* private mode */ }
+    navigate('#/book');
+  });
   const dlBtn = elem('button', { class: 'ls-btn ls-btn--ghost', type: 'button', text: '⬇ הורדה (PDF)' });
   dlBtn.addEventListener('click', () => openActionChooser('download'));
   const printBtn = elem('button', { class: 'ls-btn ls-btn--ghost', type: 'button', text: '🖨 הדפסה' });
@@ -219,7 +229,9 @@ export function home({ outlet, setTitle }: ViewContext): (() => void) | void {
             elem('span', { class: 'ls-pdfframe__title', text: 'מערכת צירים — הרביע הראשון · חוברת עבודה' }),
             elem('span', { class: 'ls-pdfframe__acts' }, openBtn, dlBtn, printBtn),
           ),
-          elem('div', { class: 'ls-pdfframe__stage' }, coverLink),
+          elem('div', { class: 'ls-pdfframe__stage' }, coverLink,
+            elem('div', { class: 'ls-pdfframe__startrow' }, startBtn),
+          ),
         ),
       ),
     ),

@@ -10,8 +10,10 @@ import { sheet, blank, wordBlank, wordBank, grid, ltr, mixed } from '../authorin
    The `data-missing` tags are what the variety test reads. */
 export const AXES_IDENTIFY: WorkbookPageContent = sheet({
   sectionClass: 'sheet guided',
-  title: 'מכירים את הצירים',
-  subtitle: 'הציר האופקי, הציר האנכי וראשית הצירים',
+  /* עמוד 1 פותח את הפרק, ולכן נושא בדיוק את שם הפרק מתוכן העניינים —
+     „חייבת להיות התאמה" (31.07.2026). */
+  title: 'הרביע הראשון — מושגים בסיסיים',
+  subtitle: 'מכירים את הצירים: הציר האופקי, הציר האנכי וראשית הצירים',
   content: `
 <div class="rule-box completion-intro">
 <div class="completion-sentence">ציר ${wordBlank('short', 'letter', 'מקום להשלמת האות x')} הוא הציר האופקי.</div>

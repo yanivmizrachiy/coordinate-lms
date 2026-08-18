@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet } from '../authoring';
+import { sheet, wordBank } from '../authoring';
 
 export const HERO_INTRO: WorkbookPageContent = sheet({
   sectionClass: "sheet guided dense",
@@ -9,6 +9,7 @@ export const HERO_INTRO: WorkbookPageContent = sheet({
 <div class="rule-box completion-intro">
 <div class="completion-sentence">כל נקודה נכתבת כ<b>זוג סדור</b> בתוך סוגריים: <span class="math-ltr" dir="ltr">(x,y)</span>.
 </div>
+${wordBank(['סדור', 'ימין', 'x'])}
 <div class="completion-sentence">ערך <span class="word-blank word-short" aria-label="מקום להשלמת האות x"></span> נכתב מצד שמאל, ושיעור <span class="math-ltr" dir="ltr">y</span> נכתב מצד <span class="word-blank word-short" aria-label="מקום להשלמת המילה ימין"></span>.
 </div>
 <div class="completion-sentence">מכיוון שיש סֵדֶר, קוראים לזה זוג <span class="word-blank word-medium" aria-label="מקום להשלמת המילה סדור"></span>.

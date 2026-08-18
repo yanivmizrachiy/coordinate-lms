@@ -11,7 +11,7 @@ import { chapterSpans } from './tocSheet';
    מועתק מבורר העמודים של פרויקט הזוויות (WorksheetPicker): אותה חלונית, אותם
    פריסטים לפי שערי החוברת, אותה רשת ממוזערות עם סימן וי בפינה, ואותה שורת
    פעולות למטה. ההבדל היחיד הוא שאצלנו העמוד הוא DOM חי ולא תמונה — ולכן
-   הממוזערת נבנית רק כשהיא נכנסת למסך, ולא 74 פעמים מראש.
+   הממוזערת נבנית רק כשהיא נכנסת למסך, ולא 77 פעמים מראש.
    =========================================================================== */
 
 export interface PickerAction {
@@ -70,7 +70,7 @@ export function openPagePicker(action: PickerAction = { mode: 'print', bw: false
   const cards = new Map<number, HTMLButtonElement>();
 
   /* A real miniature of the page, built only when the card reaches the screen.
-     Building all 74 up front means 74 sheets of SVG before the teacher has
+     Building all 77 up front means 77 sheets of SVG before the teacher has
      chosen anything — the reason their picker uses flat images and ours does
      not have any to use. */
   const lazy = new IntersectionObserver((entries) => {

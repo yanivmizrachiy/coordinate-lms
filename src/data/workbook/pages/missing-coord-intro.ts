@@ -62,7 +62,7 @@ export const MISSING_COORD_INTRO: WorkbookPageContent = sheet({
 <ul class="tasks compact">
 <li>התיאור הזה מתאים ל<span class="blank" data-missing="relation" style="--blank-width:6ch"></span> נקודות, ולא לנקודה אחת.</li>
 <li>שתי נקודות שמתאימות לו: <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> ו־<span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>
-<li>כדי לקבוע נקודה **אחת** צריך לדעת גם את ערך ה־<span class="math-ltr" dir="ltr">x</span> וגם את שיעור ה־<span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>
+<li>כדי לקבוע נקודה <b>אחת</b> צריך לדעת גם את ערך ה־<span class="math-ltr" dir="ltr">x</span> וגם את שיעור ה־<span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>
 </ul>
 <ul class="tasks compact">
 <li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>

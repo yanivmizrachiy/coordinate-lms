@@ -23,7 +23,7 @@ export const POSTER_SECRET_WORD: WorkbookPageContent = posterSheet({
 export const POSTER_TREASURE_MAZE: WorkbookPageContent = posterSheet({
   file: 'treasure-maze.png',
   title: 'מבוך האוצר',
-  alt: 'שעשועון מבוך: נעים על קווי הרשת מהראשית אל האוצר ורושמים את שיעורי הכוכבים',
+  alt: 'שעשועון מבוך: נעים על קווי הרשת מראשית הצירים אל האוצר ורושמים את שיעורי הכוכבים',
 });
 
 /** Follow written movement instructions, land on an end point. */

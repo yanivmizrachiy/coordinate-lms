@@ -3,7 +3,6 @@ import { hydrateGrids } from '../lib/coordinateGrid';
 import { fitSheets } from '../lib/fitSheet';
 import { bookletBar } from './wsbar';
 import { WORKBOOK } from '../data/workbook';
-import { gameById } from '../games';
 import { renderCoverSheet } from './coverSheet';
 import { renderTocSheet } from './tocSheet';
 import type { ViewContext } from './context';
@@ -25,19 +24,22 @@ export function book({ outlet, setTitle }: ViewContext): (() => void) | void {
     bookEl.append(fromHTML(page.html));
   }
   hydrateGrids(bookEl);
-    fitSheets(bookEl);
+  fitSheets(bookEl);
 
-  // Game sheets host their interactive game inline, like any other page.
-  const cleanups: Array<() => void> = [];
-  for (const page of WORKBOOK) {
-    if (!page.gameId) continue;
-    const host = bookEl.querySelector<HTMLElement>(`#${page.id} [data-game-host]`);
-    const g = gameById(page.gameId);
-    if (host && g) cleanups.push(g.mount(host));
-  }
+  /* בטלפון אין 794px לרוחב גיליון A4, והפתרון הישן היה לפרוס את העמוד מחדש —
+     מה שיצר מסמך שונה מזה שמודפס. במקום זה מוסרים ל-CSS את יחס ההקטנה והוא
+     מכווץ את הגיליון כמו תצלום. 210mm = 794px ב-96dpi. */
+  const fitToScreen = (): void => {
+    const room = document.documentElement.clientWidth;
+    bookEl.style.setProperty('--sheet-fit', Math.min(1, (room - 8) / 794).toFixed(4));
+  };
+  fitToScreen();
+  window.addEventListener('resize', fitToScreen);
 
+  /* אין יותר מה להטעין: „המשימות שלנו הן להדפסה" (31.07.2026) — כל עמוד
+     בחוברת הוא דף מודפס, ואין עמוד שמארח שעשועון. */
   c.append(bookEl);
   outlet.append(c);
   window.scrollTo({ top: 0 });
-  return () => { for (const fn of cleanups) fn(); };
+  return () => window.removeEventListener('resize', fitToScreen);
 }

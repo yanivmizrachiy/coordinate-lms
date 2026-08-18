@@ -8,7 +8,7 @@ export const RIGHT_ANGLE_SUMMARY: WorkbookPageContent = sheet({
   contentTag: 'div',
   content: `
 <section class="q-card">
-<h3>א. לפני המלבן ABCD שקודקודיו A(2,1), B(7,1), C(7,5), D(2,5).</h3>
+<h3>א. לפי המלבן ABCD שקודקודיו A(2,1), B(7,1), C(7,5), D(2,5).</h3>
 <div class="cols-2">
 <div aria-label="מלבן ABCD ברביע הראשון" class="coordinate-grid grid-md" data-arrows="[]" data-labelboxes="[]" data-points='[{"x": 2, "y": 1, "label": "A"}, {"x": 7, "y": 1, "label": "B"}, {"x": 7, "y": 5, "label": "C"}, {"x": 2, "y": 5, "label": "D"}]' data-polygons='[{"points": [[2, 1], [7, 1], [7, 5], [2, 5]]}]' data-segments="[]" role="img">
 </div>

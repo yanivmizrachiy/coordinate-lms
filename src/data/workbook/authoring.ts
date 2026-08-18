@@ -38,7 +38,6 @@ export interface SheetSpec {
   content: string;
   /** `main` on most sheets; a few legacy sheets use `div`. */
   contentTag?: 'main' | 'div';
-  gameId?: string;
 }
 
 export function sheet(spec: SheetSpec): WorkbookPageContent {
@@ -58,7 +57,6 @@ export function sheet(spec: SheetSpec): WorkbookPageContent {
     sectionClass: spec.sectionClass,
     title: spec.title,
     subtitle: spec.subtitle ?? '',
-    ...(spec.gameId === undefined ? {} : { gameId: spec.gameId }),
     html,
   };
 }
@@ -104,8 +102,7 @@ export type Missing =
   | 'direction' // כיוון: ימינה / למעלה
   | 'concept'   // מושג: ראשית הצירים
   | 'number'    // מספר
-  | 'relation'  // מה קורה: גדלים / קטנים / זהה
-  | 'pair';     // זוג סדור
+  | 'relation'; // מה קורה: גדלים / קטנים / זהה
 
 /** A line for the learner to write on: `blank(4, 'number')` → four wide. */
 export const blank = (width = 4, missing?: Missing): string =>
@@ -137,16 +134,49 @@ export const mixed = (whole: number, num: number, den: number): string =>
 /* Room to work, and then the answer — Yaniv's rule: „הדרך חשובה מאוד מאוד, לא
    לוותר על הכתיבה של הדרך”, and the answer is not an answer without its unit.
    `S` is area and `P` is perimeter, the letters an Israeli textbook uses. */
-export const calcBox = (o: { lines?: number; perimeter?: boolean; area?: boolean }): string => {
-  const rules = '<div class="answer-line"></div>'.repeat(o.lines ?? 2);
-  const finals: string[] = [];
-  if (o.perimeter) finals.push(`ההיקף: ${ltr('P')} = ${blank(4, 'number')} יח'`);
-  if (o.area) finals.push(`השטח: ${ltr('S')} = ${blank(4, 'number')} יח"ר`);
-  return (
-    '<div class="calc-box"><b>דרך החישוב:</b>' + rules +
-    (finals.length ? `<div class="calc-final">${finals.map((f) => `<span>${f}</span>`).join('')}</div>` : '') +
-    '</div>'
-  );
+export const calcBox = (o: { lines?: number; perimeter?: boolean; area?: boolean; name?: string; shape?: string }): string => {
+  /* Yaniv, 31.07.2026 — the binding format: the working is written on REAL
+     squared notebook paper („מחברת משבצות"), not ruled lines. The quantity's
+     letter opens the exercise at the LEFT with its equals sign — „P = ‎" —
+     and the learner continues writing after the equals, on the squares.
+     The answer is a construct phrase: „היקף המלבן הוא ____ יח'." — never
+     „ההיקף הוא". `shape` names the figure („המלבן" unless told otherwise —
+     „הריבוע" on the squares pages, „הצורה" where naming it would give the
+     answer away). Two quantities still sit side by side. */
+  const rows = o.lines ?? 2;
+  const shape = o.shape ?? 'המלבן';
+  const slot = (heading: string, letter: string, word: string): string =>
+    '<div class="calc-sec">' +
+    `<b class="calc-label">${heading}</b>` +
+    `<div class="calc-work calc-squared" style="--calc-rows:${rows}">` +
+    '<span class="calc-squared__opener" dir="ltr">' +
+    `<span class="calc-sym"><span class="calc-sym__math" dir="ltr">${letter}${o.name ? `<sub>${o.name}</sub>` : ''}</span>` +
+    `<span class="calc-sym__hint">${word}</span></span>` +
+    '<span class="calc-squared__eq">=</span>' +
+    '</span>' +
+    '</div>' +
+    '</div>';
+  /* התשובה — שורה אחת רצופה, כמו בספר לימוד. בתוך עמודת-חצי צרה המשפט נשבר
+     לטור מילים, ולכן התשובות יושבות מתחת לזוג המשבצות, ברוחב המלא של התיבה. */
+  const answer = (word: string, unit: string): string =>
+    `<div class="calc-final__row">${word} ${shape} הוא ${blank(6, 'number')} ${unit}.</div>`;
+  const slots: string[] = [];
+  const answers: string[] = [];
+  if (o.perimeter) { slots.push(slot('חישוב היקף המלבן:', 'P', 'היקף')); answers.push(answer('היקף', "יח'")); }
+  if (o.area) { slots.push(slot('חישוב שטח המלבן:', 'S', 'שטח')); answers.push(answer('שטח', 'יח"ר')); }
+  /* A box with neither quantity is a plain squared slot („תרגיל:"). */
+  if (!slots.length) {
+    slots.push(`<b class="calc-label">תרגיל:</b><div class="calc-work calc-squared" style="--calc-rows:${rows}"></div>`);
+  }
+  /* Both quantities sit SIDE BY SIDE — „חישוב היקף המלבן" beside „חישוב שטח המלבן" — so
+     the box uses the sheet's width instead of doubling its height. */
+  const body = slots.length === 2 ? `<div class="calc-cols">${slots.join('')}</div>` : slots.join('');
+  /* „השטח שיופיע מתחת לשטח ולא מתחת להיקף" (31.07.2026): שתי התשובות יושבות
+     באותה רשת-עמודות כמו המשבצות, כך שכל תשובה נוחתת בדיוק מתחת לתיבה שלה. */
+  const finals = answers.length
+    ? `<div class="calc-final${answers.length === 2 ? ' calc-cols' : ''}">${answers.join('')}</div>`
+    : '';
+  return `<div class="calc-box">${body}${finals}</div>`;
 };
 
 /* An exercise is written the way it is worked: LEFT to right. „BC = תרגיל =
@@ -158,18 +188,16 @@ export const sideValue = (name: string, unit = "יח'"): string =>
   `<span class="calc-ltr__name">${name}</span><span class="calc-ltr__eq">=</span>` +
   `${blank(4, 'number')}<span class="calc-ltr__unit" dir="rtl">${unit}</span></div>`;
 
-/* Yaniv's format is TWO lines, and they may never come apart: „יש תרגיל ותשובה
-   מתחת… וצריך מספיק מקום לכל תרגיל ולכתוב תשובה בשורה מתחת." So one call emits
-   both — the working, with room to write it, and the value on the line below.
-   Splitting them into two calls is how page 74 ended up with exercises and no
-   answers under them. */
+/* ONE line per exercise — „לא צריך לכתוב פעמיים את התשובה! אחרי שכותבים תשובה
+   בסוף התרגיל זה מספיק" (31.07.2026, מחליף את פורמט שתי-השורות): the learner
+   writes the working and its result on the same pinned line, with the unit at
+   its end. The separate value line underneath repeated the same answer. */
 export const exercise = (name: string, unit = "יח'"): string =>
   '<div class="calc-pair">' +
   '<div class="calc-ltr" dir="ltr">' +
   `<span class="calc-ltr__name">${name}</span><span class="calc-ltr__eq">=</span>` +
   `${blank(16, 'number')}<span class="calc-ltr__eq">=</span>${blank(5, 'number')}` +
   `<span class="calc-ltr__unit" dir="rtl">${unit}</span></div>` +
-  sideValue(name, unit) +
   '</div>';
 
 /* The unit („יח'”, „יח\"ר”) is a Hebrew word, and the geresh at its end is a
@@ -192,6 +220,28 @@ export const exerciseGiven = (name: string, calc: string, unit = "יח'"): strin
      the same thing twice. The two-line block belongs to exercise(), where the
      learner writes the working and then states what the side equals. */
   '</div>';
+
+/** A labelled cell grid the learner COLOURS by hand — the printable stand-in
+    for the colour-decode game. Columns x:0..xmax, rows y:0..ymax. `.color-grid`
+    is `direction: ltr` so the origin sits bottom-LEFT and x grows to the right,
+    exactly like every coordinate drawing in the booklet — the first quadrant,
+    not a mirror of it. Plain spans, never a <button>: „המשימות שלנו הן
+    להדפסה", and a printed page carries no widget. */
+export const colorGrid = (xmax: number, ymax: number): string => {
+  const cols = xmax + 1;
+  let body = '';
+  for (let y = ymax; y >= 0; y--) {
+    let row = `<span class="cg-lab cg-lab--y">${y}</span>`;
+    for (let x = 0; x <= xmax; x++) row += `<span class="cg-cell" aria-label="תא ${x},${y}"></span>`;
+    body += row;
+  }
+  let foot = '<span class="cg-lab"></span>';
+  for (let x = 0; x <= xmax; x++) foot += `<span class="cg-lab cg-lab--x">${x}</span>`;
+  return (
+    `<div class="color-grid" role="img" aria-label="רשת תאים לצביעה" ` +
+    `style="--cg-cols:${cols}">${body}${foot}</div>`
+  );
+};
 
 /** „מחסן מילים” — the words to choose from, so the task needs no explaining. */
 export const wordBank = (words: string[]): string =>

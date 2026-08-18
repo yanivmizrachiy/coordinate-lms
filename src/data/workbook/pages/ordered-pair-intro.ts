@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, wordBlank, ltr, pair } from '../authoring';
+import { sheet, blank, wordBlank, ltr, pair, wordBank } from '../authoring';
 
 export const ORDERED_PAIR_INTRO: WorkbookPageContent = sheet({
   sectionClass: "sheet guided",
@@ -11,6 +11,7 @@ export const ORDERED_PAIR_INTRO: WorkbookPageContent = sheet({
 <div class="completion-sentence">בזוג הסדור ${ltr('(x,y)')} המספר שנכתב מצד ימין הוא <b>שיעור ${wordBlank('short', 'letter', 'מקום להשלמת האות y')}</b>.</div>
 <div class="completion-sentence">לדוגמה: בנקודה שערך ה־${ltr('x')} שלה 4 ושיעור ה־${ltr('y')} שלה 3, הזוג הסדור הוא ${pair()}.</div>
 </div>
+${wordBank(['y', 'שמאל'])}
 <section class="q-card">
 <h3>א. השלימו את הזוג הסדור.</h3>
 <div class="cols-2 task-grid">

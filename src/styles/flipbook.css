@@ -210,7 +210,6 @@
     0 14px 34px rgba(0, 0, 0, 0.26),
     0 40px 90px rgba(0, 0, 0, 0.18);
 }
-.lx-paper--blank { background: var(--color-warm-ivory); }
 .lx-blankpage {
   position: absolute;
   inset: 0;
@@ -260,15 +259,6 @@
 .lx-paper--interactive .lx-pagescale { pointer-events: auto; }
 
 /* הצללת דפדוף על העמודים שמתחת (מוזנת מ---fold-shade) */
-.lx-undershade {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 5;
-  opacity: var(--fold-shade);
-}
-.lx-undershade--left { background: linear-gradient(to left, rgba(8, 6, 2, 0.34), transparent 55%); }
-.lx-undershade--right { background: linear-gradient(to right, rgba(8, 6, 2, 0.3), transparent 55%); }
 
 /* --- הדף המתהפך --- */
 .lx-leaf {
@@ -387,9 +377,6 @@
 }
 
 /* אלמנט הזווית */
-.lxa-ray { stroke: rgba(245, 241, 232, 0.85); stroke-width: 2; stroke-linecap: round; }
-.lxa-arc { stroke: var(--color-champagne); stroke-width: 2; stroke-linecap: round; fill: none; }
-.lxa-vertex { fill: var(--color-champagne); }
 
 /* פנים הכריכה האחורית — קולופון */
 .lx-cover--colophon {
@@ -397,15 +384,6 @@
   color: var(--color-graphite);
   justify-content: center;
   padding: 10%;
-}
-.lx-cover--colophon .lxa-ray { stroke: rgba(41, 41, 45, 0.34); stroke-width: 1.6; }
-.lx-cover--colophon .lxa-arc { stroke: rgba(168, 135, 74, 0.55); stroke-width: 1.6; }
-.lx-cover__innermark {
-  width: 22%;
-  max-width: 120px;
-  opacity: 0.85;
-  display: block;
-  margin: 0 auto;
 }
 .lx-colophon__title {
   margin: 7% 0 5%;
@@ -431,11 +409,6 @@
   letter-spacing: 0.22em;
   margin-inline-end: -0.22em;
   color: var(--color-antique-gold);
-}
-.lx-cover__backmark {
-  width: 30%;
-  max-width: 170px;
-  margin-bottom: 7%;
 }
 .lx-cover__backtitle {
   margin: 0 0 2.5%;
@@ -518,7 +491,10 @@
 .lx-zone:active { cursor: grabbing; }
 
 .lx-arrow {
-  position: absolute;
+  /* קבועים על המסך — לא על הבמה: חץ שמעוגן לאמצע הבמה נגלל החוצה עם הדף,
+     ו„נעלם" בדיוק כשמגיעים לתחתית עמוד („למה נמחקו הכפתורים", 31.07.2026).
+     כמו בקורא ספרים אמיתי, החצים תמיד באמצע גובה המסך. */
+  position: fixed;
   top: 50%;
   transform: translateY(-50%);
   z-index: 14;
@@ -789,9 +765,6 @@
 section:first-of-type > .lx-toc__group {
   margin-top: 2px;
 }
-.lx-toc__group--thumbs {
-  margin: 14px 0 8px;
-}
 .lx-toc__row {
   appearance: none;
   width: 100%;
@@ -827,14 +800,6 @@ section:first-of-type > .lx-toc__group {
   font-size: 0.96rem;
   color: var(--color-warm-ivory);
   line-height: 1.4;
-}
-.lx-toc__sub {
-  display: block;
-  font-family: var(--lx-sans);
-  font-weight: 300;
-  font-size: 0.78rem;
-  color: rgba(145, 135, 122, 1);
-  margin-top: 2px;
 }
 .lx-toc__page {
   flex: none;
@@ -917,68 +882,8 @@ section:first-of-type > .lx-toc__group {
 }
 
 /* ---------------------------------------------------------------------------
-   מספור עמודים — ברור וקריא בתחתית כל עמוד (השער נשאר נקי), כמו בדפוס:
-   עמוד ימני (זוגי) ⇒ המספר בפינה הימנית-תחתונה; עמוד שמאלי (אי-זוגי) ⇒
-   בפינה השמאלית-תחתונה. אינו נגרר עם הזום של תוכן העמוד.
---------------------------------------------------------------------------- */
-.lx-pagenum {
-  position: absolute;
-  bottom: 1.4%;
-  z-index: 5;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--lx-serif);
-  font-weight: 700;
-  font-size: clamp(0.8rem, 2.6cqw, 1.15rem);
-  letter-spacing: 0.05em;
-  color: #7a5c17;
-  direction: ltr;
-  unicode-bidi: isolate;
-}
-.lx-pagenum--right {
-  right: 3.5%;
-}
-.lx-pagenum--left {
-  left: 3.5%;
-}
-.lx-pagenum::before,
-.lx-pagenum::after {
-  content: "";
-  width: 16px;
-  height: 1.5px;
-  background: rgba(169, 134, 58, 0.6);
-}
-
-/* ---------------------------------------------------------------------------
    עטיפת עמוד המצגת בתוך דף A4
 --------------------------------------------------------------------------- */
-.lx-preswrap {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: var(--color-paper);
-  padding: 34px 30px;
-}
-.lx-preswrap__title {
-  margin: 0 0 6px;
-  text-align: center;
-  font-family: var(--lx-serif);
-  font-weight: 400;
-  font-size: 1.5rem;
-  color: var(--color-graphite);
-}
-.lx-preswrap__sub {
-  margin: 0 0 20px;
-  text-align: center;
-  font-family: var(--lx-sans);
-  font-weight: 300;
-  font-size: 0.95rem;
-  color: var(--color-muted-text);
-}
 
 /* ---------------------------------------------------------------------------
    רספונסיביות + נגישות
