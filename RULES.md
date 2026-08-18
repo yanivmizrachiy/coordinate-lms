@@ -86,6 +86,40 @@ this file, the current instruction wins and this file must be reconciled.
 - The generated JSON and Markdown coverage reports must represent all pages
   1–78 and must remain synchronized with target order and runtime answer keys.
 
+## Interactive feedback model (LMS layer)
+
+- Feedback is per QUESTION, not per keystroke. A question is the unit the
+  canonical content already groups blanks into — a `.q-card`, or the finest
+  labelled unit (`li`/`tr`/`completion-sentence`) where there is no card. Each
+  question carries its own „סיימתי שאלה" control that checks only its targets.
+- A verdict shows as a shape AND a word, never colour alone: ✓ נכון (all
+  correct), ◐ יש מה לתקן (partial — some right, some not), ✕ נסה שוב (wrong),
+  🔒 (locked after three attempts), ? נשמר לבדיקת המורה (unkeyed/open-ended).
+  Screen readers hear the verdict; none of it appears in print.
+- A correct target is preserved and locked — never re-typed or re-counted; the
+  learner fixes only the part still marked. Typing is never an attempt; an
+  attempt is counted only when a check is actually run. Reload never resets.
+- Progress counts QUESTIONS completed (correct, locked-out, or saved for
+  review), not raw targets. Question state is DERIVED from target progress and
+  never stored twice.
+- Page submit must always be reachable. An empty checkable blank never locks on
+  its own, so submit warns once when answers are unfinished and finalises on a
+  second press, scoring unanswered targets as 0 — a page score is never made
+  permanently unreachable.
+- The dynamic solutions screen is teacher-gated (admin session only); open
+  solutions would empty the three-attempt practice model.
+
+## Bundle and loading
+
+- The first download must stay small: every screen is fetched on demand
+  (dynamic `import()` in `main.ts`), and the Firebase SDK is loaded only by the
+  screens that sign a student in. A static view import in `main.ts`, or Firebase
+  reaching the entry module, is a regression — `tests/ssot-guard.test.ts` fails
+  the build on either.
+- Async screen loading must stay honest: a stale navigation is dropped, a wait
+  long enough to feel like one is explained, and a screen whose code never
+  arrives offers a retry rather than a blank page.
+
 ## Persistence truth and classroom data
 
 - Local persistence success and central Firebase synchronization success are
