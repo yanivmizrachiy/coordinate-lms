@@ -34,6 +34,10 @@ targets. Measured coverage: **729/1,150 targets (63.4%)** across 78 pages
 (previously 875/1,061 across 77). Raising it goes through the review studio
 only — never guessing.
 
+Because `firestore.rules` changed (page bound 1–78), the stored Firestore
+emulator evidence is stale: `npm run test:firestore` (Java 21) must re-run
+against the new contract before the emulator domain reports pass again.
+
 The branch is materially closer to classroom use, but it is **not production
 ready**. Firebase is not configured, Firestore rules have not been deployed,
 a two-device acceptance test has not run, and 186 response targets remain

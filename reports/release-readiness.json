@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-18T09:36:24.652Z",
+  "generatedAt": "2026-08-18T09:57:18.327Z",
   "mode": "static",
   "status": "failure",
   "releaseReady": false,
@@ -8,8 +8,8 @@
     {
       "id": "repository-engineering",
       "label": "Repository engineering gates",
-      "status": "failure",
-      "summary": "One or more repository contracts or generated artifacts are missing or inconsistent.",
+      "status": "pass",
+      "summary": "The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent.",
       "evidence": [
         "RULES.md",
         "reports/answer-coverage.json",
@@ -17,9 +17,7 @@
         ".github/workflows/ci.yml",
         "git diff --check"
       ],
-      "blockers": [
-        "Repair repository contract failures before review."
-      ]
+      "blockers": []
     },
     {
       "id": "emulator-validation",

@@ -1,6 +1,6 @@
 # Classroom release-readiness contract
 
-Generated: 2026-08-18T09:36:24.652Z
+Generated: 2026-08-18T09:57:18.327Z
 
 Mode: static
 
@@ -8,7 +8,7 @@ Overall status: **failure**
 
 | Domain | Status | Summary |
 |---|---|---|
-| Repository engineering gates | failure | One or more repository contracts or generated artifacts are missing or inconsistent. |
+| Repository engineering gates | pass | The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent. |
 | Firestore emulator-backed validation | failure | No current passing Firestore emulator result is available. |
 | External Firebase configuration and deployment | blocked | Repository validation cannot supply console settings, service-account configuration, or deployment evidence. |
 | Pedagogical answer-key review | blocked | 729/1150 targets are safely auto-checkable; 137 are signature-bound open-ended tasks; 284 remain unresolved. |
@@ -16,9 +16,9 @@ Overall status: **failure**
 
 ## Repository engineering gates
 
-Status: **failure**
+Status: **pass**
 
-One or more repository contracts or generated artifacts are missing or inconsistent.
+The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent.
 
 Evidence:
 
@@ -27,10 +27,6 @@ Evidence:
 - public/answer-review-manifest.json
 - .github/workflows/ci.yml
 - git diff --check
-
-Blockers:
-
-- Repair repository contract failures before review.
 
 ## Firestore emulator-backed validation
 

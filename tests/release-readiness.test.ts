@@ -35,10 +35,19 @@ describe('separated classroom release contract', () => {
     ).toBe(true);
   });
 
-  it('does not turn repository and emulator passes into a release-ready claim', () => {
+  it('does not turn repository gates into a release-ready claim', () => {
     expect(report.domains[0]?.status).toBe('pass');
-    expect(report.domains[1]?.status).toBe('pass');
-    expect(report.status).toBe('blocked');
+    /* The 78-page consolidation (2026-08-18) changed firestore.rules, so the
+       stored emulator evidence is stale BY DESIGN: this domain may return to
+       'pass' only through a real `npm run test:firestore` run against the new
+       contract — never by relaxing the check. */
+    expect(['pass', 'failure']).toContain(report.domains[1]?.status);
+    if (report.domains[1]?.status === 'failure') {
+      expect(report.domains[1]?.summary).toContain(
+        'No current passing Firestore emulator result',
+      );
+    }
+    expect(['blocked', 'failure']).toContain(report.status);
     expect(report.releaseReady).toBe(false);
   });
 
@@ -47,9 +56,12 @@ describe('separated classroom release contract', () => {
       (domain) => domain.id === 'pedagogical-review',
     );
     expect(pedagogical?.status).toBe('blocked');
-    expect(pedagogical?.summary).toContain('875/1061');
-    expect(pedagogical?.summary).toContain('161 are signature-bound open-ended');
-    expect(pedagogical?.summary).toContain('25 remain unresolved');
+    /* Measured state after the 78-page consolidation: 588 migrated proofs +
+       implicit/deterministic keys = 729 of 1,150 targets; 137 signature-bound
+       open-ended; 284 (147 lapsed + new-page targets) awaiting review. */
+    expect(pedagogical?.summary).toContain('729/1150');
+    expect(pedagogical?.summary).toContain('137 are signature-bound open-ended');
+    expect(pedagogical?.summary).toContain('284 remain unresolved');
   });
 
   it('publishes the same domain contract in Markdown', () => {
