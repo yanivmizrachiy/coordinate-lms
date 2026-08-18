@@ -26,6 +26,33 @@ test('answer fields keep meaningful labels and support keyboard completion', asy
   await expect(status).toHaveAttribute('aria-live', 'polite');
 });
 
+test('feedback never rides on colour alone, and never reaches the paper', async ({ page }) => {
+  await page.goto('/#/workbook/10');
+  const target = page.locator('[data-lms-answers]').first();
+  const expected = JSON.parse(
+    (await target.getAttribute('data-lms-answers')) ?? '[]',
+  )[0] as string;
+
+  await target.fill(expected);
+  await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
+  await expect(target).toHaveAttribute('data-lms-state', 'correct');
+
+  /* Someone who cannot see the green hears the verdict… */
+  await expect(target).toHaveAttribute('aria-label', /נכון/);
+  /* …and someone who cannot tell green from red still sees a mark. */
+  const mark = await target.evaluate(
+    (el) => getComputedStyle(el, '::after').content,
+  );
+  expect(mark).toContain('✓');
+
+  /* On paper there is no verdict at all — the sheet prints as authored. */
+  await page.emulateMedia({ media: 'print' });
+  const printed = await target.evaluate(
+    (el) => getComputedStyle(el, '::after').display,
+  );
+  expect(printed).toBe('none');
+});
+
 test('true-false groups include their statement in the accessible name', async ({ page }) => {
   await page.goto('/#/workbook/3');
   const groups = page.locator('.tf-options[data-lms-choice="ready"]');

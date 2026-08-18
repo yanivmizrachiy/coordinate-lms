@@ -292,6 +292,35 @@ export function attachLmsToPage(
     draft.updatedAt = now;
   }
 
+  /* What each state MEANS, in words. The ✓/✕ marks are drawn in CSS for the
+     eye; a screen reader gets the same verdict spoken, because a colour and a
+     glyph both vanish for someone listening. */
+  const STATE_WORDS: Record<string, string> = {
+    correct: 'נכון',
+    wrong: 'לא נכון, אפשר לתקן',
+    missing: 'עדיין לא מולא',
+    locked: 'נעול לאחר שלושה ניסיונות',
+    pending: 'נשמר לבדיקת המורה',
+  };
+
+  /* The label a target was born with — the question it asks. The verdict is
+     appended to it, never instead of it, so the field keeps saying what it
+     wants even after it has been graded. */
+  const baseLabels = new WeakMap<HTMLElement, string>();
+
+  function announceState(target: HTMLElement, state: string): void {
+    let base = baseLabels.get(target);
+    if (base === undefined) {
+      base = target.getAttribute('aria-label')?.trim() || '';
+      baseLabels.set(target, base);
+    }
+    const verdict = STATE_WORDS[state];
+    target.setAttribute(
+      'aria-label',
+      verdict ? (base ? base + ' — ' + verdict : verdict) : base,
+    );
+  }
+
   function updateTarget(
     target: HTMLElement,
     progress: QuestionProgress,
@@ -305,6 +334,7 @@ export function attachLmsToPage(
 
     target.dataset.lmsState = state;
     target.dataset.lmsAttempts = String(progress.attempts);
+    announceState(target, state);
     target.contentEditable =
       draft.submitted || progress.correct || progress.locked
         ? 'false'
@@ -447,9 +477,9 @@ export function attachLmsToPage(
 
       if (expected.length === 0) {
         unkeyed += 1;
-        target.dataset.lmsState = progress.answer
-          ? 'pending'
-          : 'empty';
+        const state = progress.answer ? 'pending' : 'empty';
+        target.dataset.lmsState = state;
+        announceState(target, state);
         continue;
       }
 
@@ -462,6 +492,7 @@ export function attachLmsToPage(
 
       if (!progress.answer.trim()) {
         target.dataset.lmsState = 'missing';
+        announceState(target, 'missing');
         remaining += 1;
         continue;
       }

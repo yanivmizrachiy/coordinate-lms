@@ -118,9 +118,27 @@
   box-shadow: 0 0 0 2px rgba(224, 172, 31, 0.35);
 }
 
+/* Feedback never rides on colour alone — „לא להסתמך על צבע בלבד". Every
+   graded state also carries a mark the eye reads as a shape and a screen
+   reader reads as a word (the word itself lives in aria-label, set by the
+   engine). The mark sits after the answer, never on paper: @media print
+   below drops the whole overlay. */
+.sheet [data-lms-state]::after {
+  font-weight: 900;
+  font-size: 0.86em;
+  margin-inline-start: 4px;
+  vertical-align: baseline;
+  speak: never;
+}
+
 .sheet [data-lms-state="correct"] {
   background: rgba(200, 244, 214, 0.8);
   box-shadow: inset 0 -3px #25944a;
+}
+
+.sheet [data-lms-state="correct"]::after {
+  content: "✓";
+  color: #1c7a3c;
 }
 
 .sheet [data-lms-state="wrong"],
@@ -129,15 +147,48 @@
   box-shadow: inset 0 -3px #cf3645;
 }
 
+.sheet [data-lms-state="wrong"]::after {
+  content: "✕";
+  color: #b32233;
+}
+
+/* A blank left empty is not a mistake — it is unfinished, and saying so with
+   the same ✕ as a wrong answer would tell the learner they failed at
+   something they never tried. */
+.sheet [data-lms-state="missing"]::after {
+  content: "…";
+  color: #b32233;
+}
+
 .sheet [data-lms-state="locked"] {
   background: rgba(235, 235, 235, 0.9);
   box-shadow: inset 0 -3px #6f7783;
   cursor: not-allowed;
 }
 
+.sheet [data-lms-state="locked"]::after {
+  content: "🔒";
+  color: #5b626d;
+}
+
 .sheet [data-lms-state="pending"] {
   background: rgba(230, 238, 255, 0.8);
   box-shadow: inset 0 -3px #557bb8;
+}
+
+/* Nothing automatic can judge this one, and a mark that looked like a verdict
+   would be a lie: „?" says saved, awaiting the teacher. */
+.sheet [data-lms-state="pending"]::after {
+  content: "?";
+  color: #3c62a3;
+}
+
+@media (prefers-contrast: more) {
+  .sheet [data-lms-state="correct"] { outline: 2px solid #1c7a3c; }
+  .sheet [data-lms-state="wrong"],
+  .sheet [data-lms-state="missing"] { outline: 2px solid #b32233; }
+  .sheet [data-lms-state="locked"] { outline: 2px solid #5b626d; }
+  .sheet [data-lms-state="pending"] { outline: 2px solid #3c62a3; }
 }
 
 .lms-auth,
@@ -304,7 +355,9 @@
   .lms-auth,
   .lms-admin,
   .lms-gate,
-  [data-lms-editable="true"]::after {
+  [data-lms-editable="true"]::after,
+  /* the ✓/✕/🔒/? verdicts: screen only, never on the printed sheet */
+  [data-lms-state]::after {
     display: none !important;
   }
 
