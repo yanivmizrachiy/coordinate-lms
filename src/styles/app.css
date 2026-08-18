@@ -234,3 +234,15 @@
      is a fifth of the page the reader came for. */
   .zoomer { display: none; }
 }
+
+/* The between-screens notice. It only ever appears when a screen's code takes
+   longer than a quarter second to arrive (see main.ts), so it marks a real
+   wait and never a flicker. */
+.route-loading {
+  display: grid;
+  place-items: center;
+  min-height: 40vh;
+  color: var(--muted, #5b626d);
+  font-size: 1.05rem;
+  font-weight: 600;
+}

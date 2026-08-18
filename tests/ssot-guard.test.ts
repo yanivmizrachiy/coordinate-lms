@@ -79,3 +79,36 @@ describe('no second repository behind the content', () => {
     expect(read('README.md')).toContain('MASTER היחיד');
   });
 });
+
+describe('the first download stays small', () => {
+  const main = read('src/main.ts');
+
+  it('reaches every screen through a dynamic import', () => {
+    /* A static `import { x } from './views/…'` in main.ts drags that screen —
+       and everything it touches — into the file every visitor downloads
+       before the opening film can play. That is how the entry chunk once
+       reached 1.18 MB: one static import chain pulled in all 78 sheets and
+       the whole Firebase SDK. Screens are fetched when they are opened. */
+    const staticViewImport = /^import\s+\{[^}]*\}\s+from\s+'\.\/views\//m;
+    expect(
+      staticViewImport.test(main),
+      'main.ts imports a view statically — route chunks would merge back into the entry',
+    ).toBe(false);
+
+    for (const route of [
+      'home', 'menu', 'pageViewer', 'flipbook', 'book',
+      'solutions', 'printAids', 'lmsLogin', 'lmsAdmin', 'lmsProgress', 'lmsKeys',
+    ]) {
+      expect(main, `route ${route} is not lazily imported`)
+        .toContain(`import('./views/${route}')`);
+    }
+  });
+
+  it('never pulls the Firebase SDK into the entry module', () => {
+    /* Firebase is 683 kB — a third of the old first download — and a reader
+       who only watches the film or prints a sheet never signs in. It must
+       stay behind the LMS screens that actually use it. */
+    expect(main).not.toMatch(/from\s+'firebase/);
+    expect(main).not.toMatch(/from\s+'\.\/lms\//);
+  });
+});

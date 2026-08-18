@@ -20,7 +20,9 @@ test('coordinate-grid blanks carry their exact mathematical answers', async ({ p
   await page.goto('/#/workbook/2');
 
   const gridAnswers = page.locator('.lms-grid-answer[data-lms-answers]');
-  expect(await gridAnswers.count()).toBeGreaterThan(0);
+  /* Screens are fetched on demand, so assert with a retrying matcher rather
+     than reading the count once the moment navigation is requested. */
+  await expect(gridAnswers.first()).toBeVisible();
   await expect(gridAnswers.first()).toHaveAttribute(
     'data-lms-answers',
     /\["\d+"\]/,
