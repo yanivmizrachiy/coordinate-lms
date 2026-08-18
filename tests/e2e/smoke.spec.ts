@@ -85,6 +85,12 @@ test('the opening film runs once on load, no buttons, and comes to rest', async 
 test('the booklet frame shows the cover and opens the book', async ({ page }) => {
   await page.goto('/#/');
   await expect(page.locator('.ls-pdfframe__bar')).toContainText('חוברת עבודה');
+  // „על החוברת למטה צריך להופיע במקום נוח כפתור ההתחל" — big, centred, under
+  // the cover, and it opens the booklet like the cover itself does
+  const start = page.locator('.ls-pdfframe__start');
+  await expect(start).toHaveText('התחל');
+  const [s2, c2] = await Promise.all([start.boundingBox(), page.locator('.ls-pdfframe__page').boundingBox()]);
+  expect(s2!.y, 'the start button is not under the cover').toBeGreaterThan(c2!.y + c2!.height - 4);
   await page.locator('.ls-pdfframe__page').click();
   await expect(page).toHaveURL(/#\/book$/);
   // the flipbook opens closed, the approved cover on its stage
@@ -122,6 +128,21 @@ test('the flipbook opens from the cover to the first spread', async ({ page }) =
     expect(await page.locator('.lx-half--left .toc-sheet').count()).toBe(1);
   }
   await expect(page.locator('.lx-toolbar')).toBeVisible();
+});
+
+/* „אם בעמוד הראשי לוחצים על כפתור התחל צריך שייפתח… תוכן העניינים, ולא…
+   העמוד האחרון שהייתי בו" (31.07.2026). זיכרון-המיקום בוטל; התחל = תוכן
+   העניינים, תמיד. */
+test('התחל opens the contents, never the remembered page', async ({ page }) => {
+  await page.goto('/#/');
+  // שריד של הזיכרון הישן לא קובע כלום — ומנוקה בכניסה
+  await page.evaluate(() => window.localStorage.setItem('quadrant:lxbook:pos', '40'));
+  await page.locator('.ls-pdfframe__start').click();
+  await expect(page).toHaveURL(/#\/book$/);
+  await expect(page.locator('.lxbook')).toHaveAttribute('data-open', 'true');
+  await expect(page.locator('.lx-half .toc-sheet')).toHaveCount(1);
+  const leftover = await page.evaluate(() => window.localStorage.getItem('quadrant:lxbook:pos'));
+  expect(leftover, 'the old position key was not wiped').toBeNull();
 });
 
 test('the flipbook top bar carries the way back, the reader, the download and the picker', async ({ page }) => {
@@ -222,42 +243,58 @@ test('the contents sheet lists every chapter and each button reaches its page', 
   await page.waitForTimeout(4000);
   const buttons = page.locator('.toc-sheet .toc-btn');
   const topics = await page.evaluate(() => document.querySelectorAll('.toc-sheet .toc-btn').length);
-  /* Five chapters, named by Yaniv, and no others: „כל השאר תמחק מהתוכן". */
-  expect(topics, 'the contents sheet does not list the five chapters').toBe(5);
+  /* The chapters Yaniv named, and no others: „כל השאר תמחק מהתוכן". */
+  expect(topics, 'the contents sheet does not list the six chapters').toBe(6);
 
-  /* Each chapter carries a colour of its own — now as a rule at the leading
-     edge rather than a slab of fill, so the page reads as a contents page and
-     prints on a fraction of the ink. */
+  /* „לא צריך כפל מספרים" (31.07.2026): ONE number per row — the big colour
+     number IS the page number. Each chapter carries a colour of its own. */
   const colours = await buttons.evaluateAll((els) =>
-    els.map((e) => getComputedStyle(e.querySelector('.toc-btn__rule')!).backgroundColor),
+    els.map((e) => getComputedStyle(e.querySelector('.toc-btn__no')!).color),
   );
   expect(new Set(colours).size, 'the chapters are not colour-coded').toBe(5);
+  const doubled = await buttons.evaluateAll((els) =>
+    els.filter((e) => ((e.textContent ?? '').match(/\d+/g) ?? []).length !== 1).length,
+  );
+  expect(doubled, 'a row carries more than one number').toBe(0);
 
   /* Each chip carries the page its chapter STARTS on, and nothing else. The
      chapters must run in order and start at page 1. */
   const starts = await buttons.evaluateAll((els) =>
     els.map((e) => Number((e.getAttribute('aria-label') ?? '').match(/בעמוד (\d+)/)?.[1] ?? 0)),
   );
-  expect(starts, 'the contents point at the wrong pages').toEqual([1, 12, 29, 51, 63]);
+  expect(starts, 'the contents point at the wrong pages').toEqual([1, 4, 15, 46, 51, 65]);
   const ranged = await buttons.evaluateAll((els) => els.filter((e) => /[–-]/.test(e.textContent ?? '')).length);
   expect(ranged, 'a chip still shows a page range instead of the starting page').toBe(0);
 
-  /* The chapter leads and the page number closes the line — the reader is
-     looking for a chapter, not for a number. In RTL that puts the name at the
-     right and the number at the left. */
+  /* The row reads like a real book's contents: the chapter name at the right,
+     a dotted leader running left, and the colour page number at the LEFT edge.
+     „יהיה קו נקודתי שיוביל מהמשפט לשמאל הדף". */
   const wrongWayRound = await buttons.evaluateAll((els) =>
     els.filter((e) => {
-      const no = e.querySelector('.toc-btn__no')?.getBoundingClientRect();
       const name = e.querySelector('.toc-btn__name')?.getBoundingClientRect();
-      const rule = e.querySelector('.toc-btn__rule')?.getBoundingClientRect();
-      return !no || !name || !rule || no.left > name.left || rule.left < name.left;
+      const leader = e.querySelector('.toc-btn__leader')?.getBoundingClientRect();
+      const no = e.querySelector('.toc-btn__no')?.getBoundingClientRect();
+      return !name || !leader || !no ||
+        name.left <= no.right ||          // השם מימין למספר
+        leader.width < 20 ||              // הקו באמת נמתח
+        leader.left < no.right - 2 || leader.right > name.left + 2; // ובין שניהם
     }).length,
   );
-  expect(wrongWayRound, 'the contents row does not read name-then-page').toBe(0);
+  expect(wrongWayRound, 'the row does not read name, dotted leader, page number').toBe(0);
 
-  /* The number sits ON the coloured tile now, so the contrast is measured
-     against the tile itself — white on a bright tile vanishes just as surely
-     as pale ink on white did. Measured, not eyeballed. */
+  /* „תגדיל מספרי העמודים ותגדיל כתב של שמות הפרקים" (31.07.2026) — the page
+     number and the chapter name are LARGE, not the sheet's 13px body size. */
+  const small = await buttons.evaluateAll((els) =>
+    els.filter((e) =>
+      parseFloat(getComputedStyle(e.querySelector('.toc-btn__no')!).fontSize) < 32 ||
+      parseFloat(getComputedStyle(e.querySelector('.toc-btn__name')!).fontSize) < 20,
+    ).length,
+  );
+  expect(small, 'a page number or chapter name shrank back to body size').toBe(0);
+
+  /* The metal sits on the night ink, so the contrast is measured against the
+     sheet itself — a faint metal vanishes on dark just as pale ink did on
+     white. Measured, not eyeballed. */
   const faint = await buttons.evaluateAll((els) =>
     els.map((e) => {
       const no = e.querySelector('.toc-btn__no');
@@ -265,15 +302,15 @@ test('the contents sheet lists every chapter and each button reaches its page', 
       const lin = (c: number) => { const v = c / 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
       const lum = (rgb: number[]) => 0.2126 * lin(rgb[0]!) + 0.7152 * lin(rgb[1]!) + 0.0722 * lin(rgb[2]!);
       const ink = lum(getComputedStyle(no).color.match(/\d+/g)!.map(Number));
-      const tile = lum(getComputedStyle(e).backgroundColor.match(/\d+/g)!.map(Number));
-      const ratio = (Math.max(ink, tile) + 0.05) / (Math.min(ink, tile) + 0.05);
+      const sheet = lum(getComputedStyle(e.closest('.toc-sheet')!).backgroundColor.match(/\d+/g)!.map(Number));
+      const ratio = (Math.max(ink, sheet) + 0.05) / (Math.min(ink, sheet) + 0.05);
       return ratio < 4.5 ? `${no.textContent} at ${ratio.toFixed(1)}:1` : null;
     }).filter(Boolean),
   );
   expect(faint, `a page number is too faint to read: ${faint.join(', ')}`).toEqual([]);
 
   /* Every chip opens the page it names, straight away. */
-  for (const [i, n] of [1, 12, 29, 51, 63].entries()) {
+  for (const [i, n] of [1, 4, 15, 46, 51, 65].entries()) {
     await page.goto('/#/print');
     await page.waitForTimeout(3500);
     await page.locator('.toc-btn').nth(i).click();
@@ -393,6 +430,10 @@ test('every sheet keeps its body text at 13px', async ({ page }) => {
   const offenders = await page.evaluate(() => {
     const out: string[] = [];
     for (const s of document.querySelectorAll('.sheet')) {
+      /* The contents sheet is the reader's designed opening page — Yaniv asked
+         for LARGE chapter names and page numbers there (31.07.2026), and its
+         own test pins those sizes. The 13px rule holds for every worksheet. */
+      if (s.classList.contains('toc-sheet')) continue;
       const n = s.querySelector('.sheet-number')?.textContent?.trim() ?? 'cover';
       for (const el of s.querySelectorAll('*')) {
         if (el.closest('svg')) continue; // drawings scale as a unit
@@ -402,11 +443,17 @@ test('every sheet keeps its body text at 13px', async ({ page }) => {
         if (px === 13) continue;
         const allowed =
           el.tagName === 'H1' ||                    // page title
-          el.tagName === 'H2' ||                    // game title
           el.classList.contains('sheet-number') ||  // the numbered circle
-          el.classList.contains('reveal') ||        // a game's result display
+          // („כותרת משחק h2" ו־„.reveal" הוסרו מהרשימה ב־31.07.2026 —
+          //  אין יותר שעשועונים, ולכן אין מי שיפיק אותם.)
           el.classList.contains('frac__n') ||       // fraction — two digits in one line
-          el.classList.contains('frac__d');
+          el.classList.contains('frac__d') ||
+          // P and S are written LARGE, the way a real textbook writes them —
+          // „האותיות P S מקובל לכתוב אותן יותר גדולות" (31.07.2026)
+          !!el.closest('.calc-sym__math') || // the symbol AND its <sub> name
+          // the „=" that opens the squared exercise is part of the same
+          // approved textbook opener — sized with the letter, not body text
+          el.classList.contains('calc-squared__eq');
         if (!allowed) out.push(`page ${n}: ${el.tagName.toLowerCase()} at ${px}px`);
       }
     }
@@ -415,35 +462,31 @@ test('every sheet keeps its body text at 13px', async ({ page }) => {
   expect(offenders, offenders.join(', ')).toHaveLength(0);
 });
 
-test('a game sheet reveals its answer when solved correctly', async ({ page }) => {
-  /* Find the sheet by what it hosts, never by its number — page numbers come
-     from the position in BOOK and move whenever a page is added or split. */
+/* יניב, 31.07.2026: „המשימות שלנו הן להדפסה!!" — כל שבעת השעשועונים המקוונים
+   הוחלפו בדפי עבודה מודפסים. הבדיקה הקודמת כאן פתרה שעשועון בלחיצות; במקומה
+   באה השמירה על הכלל עצמו: אין בחוברת עמוד שמארח ווידג'ט, ואין בו פקד
+   שעיפרון לא יכול לענות עליו. תיבות נכון/לא־נכון נשארות — עיפרון מסמן אותן. */
+test('no numbered page hosts a widget — the booklet is answerable in pencil', async ({ page }) => {
   await page.goto('/#/print');
-  await page.waitForTimeout(4000);
-  const n = await page.evaluate(() => {
-    const host = document.querySelector('[data-game-host="coordinate-safe"]');
-    return host?.closest('.sheet')?.querySelector('.sheet-number')?.textContent?.trim() ?? '';
-  });
-  expect(n, 'the coordinate-safe game is not on any sheet').not.toBe('');
-  await page.goto(`/#/workbook/${n}`);
-  /* the viewer re-fits the sheet ~420ms after mount (fitSheet settle) — a
-     click aimed before that lands where the button USED to be */
-  await page.waitForTimeout(900);
-  const answers = ['4', '7', '0', '5'];
-  const rows = page.locator('.game__board .game__row');
-  const count = await rows.count();
-  for (let i = 0; i < count; i++) {
-    const input = rows.nth(i).locator('input.answer-input');
-    if (await input.count()) {
-      /* centre the row first — the app bar above and the page navigator below
-         are sticky, and a row scrolled to an EDGE sits under one of them.
-         A person looks at the row mid-screen; the test should too. */
-      await rows.nth(i).evaluate((el) => el.scrollIntoView({ block: 'center', behavior: 'instant' as ScrollBehavior }));
-      await input.fill(answers[i] ?? '');
-      await rows.nth(i).locator('button', { hasText: 'בדקו' }).click();
+  await page.waitForTimeout(9000);
+  const faults = await page.evaluate(() => {
+    const out: string[] = [];
+    for (const s of document.querySelectorAll('.sheet')) {
+      /* עמוד ממוספר בלבד. דף תוכן העניינים אינו ממוספר, והכפתורים שבו הם
+         ניווט בין פרקים על המסך — בהדפסה הם שורות טקסט, לא משימה. */
+      const n = s.querySelector('.sheet-number')?.textContent?.trim() ?? '';
+      if (!n) continue;
+      if (s.querySelector('[data-game-host]')) out.push(`page ${n}: hosts an interactive game`);
+      for (const el of s.querySelectorAll('button, select, textarea, input')) {
+        const type = (el as HTMLInputElement).type;
+        // a checkbox/radio is a box a pencil ticks — that stays
+        if (el.tagName === 'INPUT' && (type === 'checkbox' || type === 'radio')) continue;
+        out.push(`page ${n}: has a <${el.tagName.toLowerCase()}> a pencil cannot answer`);
+      }
     }
-  }
-  await expect(page.locator('.reveal').last()).toContainText('4705');
+    return [...new Set(out)];
+  });
+  expect(faults, faults.join(' | ')).toHaveLength(0);
 });
 
 /* The screen always shows colour. Black and white exists only as a choice at
@@ -524,9 +567,9 @@ test('a picker preset chooses a whole chapter', async ({ page }) => {
   await expect(page.locator('.pick__grid')).toBeVisible();
   // the first chapter runs from page 1 up to the second chapter's start
   await page.locator('.pick__chip', { hasText: 'מושגים בסיסיים' }).click();
-  await expect(page.locator('.pick__count')).toHaveText('נבחרו 11 עמודים');
+  await expect(page.locator('.pick__count')).toHaveText('נבחרו 3 עמודים');
   await page.locator('.pick__chip', { hasText: 'כל החוברת' }).click();
-  await expect(page.locator('.pick__count')).toHaveText('נבחרו 77 עמודים');
+  await expect(page.locator('.pick__count')).toHaveText('נבחרו 78 עמודים');
   await page.locator('.pick__chip', { hasText: 'ניקוי הבחירה' }).click();
   await expect(page.locator('.pick__count')).toHaveText('לא נבחרו עמודים');
 });
@@ -548,7 +591,7 @@ test('the reading bars speak the zaviyot button language', async ({ page }) => {
   expect(navy, 'the bar lost the navy of the zaviyot bars').toBe('rgb(22, 35, 63)');
 
   await page.goto('/#/workbook/5');
-  await expect(page.locator('.wsbar__title')).toHaveText('דף עבודה מספר 5 מתוך 77');
+  await expect(page.locator('.wsbar__title')).toHaveText('דף עבודה מספר 5 מתוך 78');
   await expect(page.locator('.wsbar__nav .btn')).toHaveCount(2);
   // the way to the next page lives at the BOTTOM too — under the thumb
   await expect(page.locator('.pagenav .btn', { hasText: 'הבא' })).toBeVisible();
@@ -730,8 +773,12 @@ test('no label sits on a mark, an arrowhead or a vertex', async ({ page }, testI
       if (!svg) continue;
       const n = g.closest('.sheet')?.querySelector('.sheet-number')?.textContent?.trim() ?? '?';
       // an arrowhead inside <defs> is never painted where its box claims to be
+      /* `[data-icon]` is a pictogram that BELONGS to its point (the park map's
+         bench, tree, gate…). It is decoration drawn beside its own label by
+         design, so it is not a structural mark a label may not touch. */
       const drawn = (sel: string) =>
-        [...svg.querySelectorAll<SVGElement>(sel)].filter((e) => !e.closest('defs') && !e.closest('marker'));
+        [...svg.querySelectorAll<SVGElement>(sel)].filter(
+          (e) => !e.closest('defs') && !e.closest('marker') && !e.closest('[data-icon]'));
       const paths = drawn('path');
       const marks = drawn('circle');
 
@@ -774,6 +821,87 @@ test('every calculation really is painted left to right', async ({ page }, testI
       const text = (d as HTMLElement).innerText.replace(/\s+/g, ' ').trim();
       if (first >= last) out.push(`page ${n}: „${text}” is painted right to left`);
     }
+    return [...new Set(out)];
+  });
+  expect(faults.length, faults.join(' | ')).toBe(0);
+});
+
+/* יניב, 02.08.2026, על עמוד 14: „יש כאן בעיה בכתיבה מתמטית". „שיעור x = 4"
+   יצא „4 = x", כי המספר נשאר מחוץ לתיבה הנעוצה ולכן קיבל את כיוון הפסקה.
+   הבדיקה שלמעלה מודדת רק שורות `.calc-ltr`, ומתמטיקה בתוך משפט חמקה ממנה.
+   כאן נמדד מה שנצבע בפועל: אחרי אי-שוויון או פעולה, האופרנד חייב לשבת
+   מימין לה על המסך — אחרת המשוואה נקראת הפוך. */
+test('inline maths reads left to right where it is painted', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'measured on the A4 sheet');
+  await page.goto('/#/print');
+  await page.waitForTimeout(9000);
+  const faults = await page.evaluate(() => {
+    const out: string[] = [];
+    const R = (el: Element) => el.getBoundingClientRect();
+    for (const span of document.querySelectorAll('.sheet .math-ltr')) {
+      const txt = (span.textContent ?? '').trim();
+      if (!/[=+−-]$/.test(txt)) continue;              // ends on an operator
+      const next = span.nextSibling;
+      if (!next || next.nodeType !== Node.TEXT_NODE) continue;
+      const after = (next.textContent ?? '').trim();
+      const m = after.match(/^[0-9(]+/);
+      if (!m) continue;
+      // measure where that operand actually landed
+      const rng = document.createRange();
+      const start = (next.textContent ?? '').indexOf(m[0]);
+      rng.setStart(next, start); rng.setEnd(next, start + m[0].length);
+      const ob = rng.getBoundingClientRect(); const sb = R(span);
+      if (ob.width && ob.left < sb.right - 2) {
+        const n = span.closest('.sheet')?.querySelector('.sheet-number')?.textContent?.trim() ?? '?';
+        out.push(`page ${n}: „${txt} ${m[0]}” is painted „${m[0]} ${txt}”`);
+      }
+    }
+    return [...new Set(out)];
+  });
+  expect(faults.length, faults.join(' | ')).toBe(0);
+});
+
+/* Yaniv, 31.07.2026: two final answers crushed onto one line rendered as
+   „יחשטח", and the box was headed „דרך החישוב" instead of the textbook's
+   תרגיל/תשובה. Each final answer must be PAINTED on a line of its own,
+   below the working slot. */
+test('each final answer sits on its own painted line', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'measured on the A4 sheet');
+  await page.goto('/#/print');
+  await page.waitForTimeout(9000);
+  const faults = await page.evaluate(() => {
+    const out: string[] = [];
+    let seen = 0;
+    for (const fin of document.querySelectorAll('.sheet .calc-final')) {
+      const n = fin.closest('.sheet')?.querySelector('.sheet-number')?.textContent?.trim() ?? '?';
+      const rows = [...fin.querySelectorAll('.calc-final__row')].map((r) => r.getBoundingClientRect());
+      seen += rows.length;
+      /* יניב, 31.07.2026: „השטח שיופיע מתחת לשטח ולא מתחת להיקף" — שתי
+         התשובות יושבות זו לצד זו, כל אחת מתחת לתיבה שלה. הכלל שנשמר כאן הוא
+         שהן לעולם לא נדרסות זו על זו: או שורה מתחת לשורה, או עמודה לצד
+         עמודה — אף פעם לא שתי תשובות מרוחות על אותו מקום. */
+      for (let i = 1; i < rows.length; i++) {
+        const a = rows[i - 1]!, b = rows[i]!;
+        const overlaps =
+          a.left < b.right - 2 && b.left < a.right - 2 &&
+          a.top < b.bottom - 2 && b.top < a.bottom - 2;
+        if (overlaps) out.push(`page ${n}: two final answers are painted over each other`);
+      }
+      /* וכל תשובה מיושרת עם תיבת החישוב שלה — לא מתחת לתיבה של הכמות האחרת. */
+      const secs = [...(fin.closest('.calc-box')?.querySelectorAll('.calc-sec') ?? [])];
+      if (secs.length === rows.length && rows.length === 2) {
+        for (let i = 0; i < rows.length; i++) {
+          const sb = secs[i]!.getBoundingClientRect();
+          const centred = rows[i]!.left + rows[i]!.width / 2;
+          if (centred < sb.left - 4 || centred > sb.right + 4) {
+            out.push(`page ${n}: an answer is not under its own working box`);
+          }
+        }
+      }
+      const work = fin.closest('.calc-box')?.querySelector('.calc-work')?.getBoundingClientRect();
+      if (work && rows.length && rows[0]!.top < work.bottom - 1) out.push(`page ${n}: the answer is not under the working slot`);
+    }
+    if (!seen) out.push('no final-answer rows were found at all');
     return [...new Set(out)];
   });
   expect(faults.length, faults.join(' | ')).toBe(0);
@@ -889,7 +1017,7 @@ test('the origin is never labelled twice', async ({ page }, testInfo) => {
 
 /* עמוד 16 לימד: הפוסטר מילא את כל ה-A4 ודחף את השורה השנייה של הכותרת
    התחתונה אל מחוץ לגיליון. כלל ברזל — כותרת תחתית אחידה ושלמה בכל עמוד —
-   נמדד עכשיו על כל 76 הגיליונות, מסך והדפסה. */
+   נמדד עכשיו על כל 79 הגיליונות, מסך והדפסה. */
 test('the canonical footer sits whole — and in the SAME place — on every sheet', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'measured on the A4 sheet');
   await page.goto('/#/print');
@@ -926,7 +1054,7 @@ test('the canonical footer sits whole — and in the SAME place — on every she
 });
 
 /* עמודים 13, 21 ו-45 הראו את אותה תקלה: שרטוט שגדל מעבר לכרטיס שלו ונמרח על
-   השכן — „עמוד על עמוד". הבדיקה הזו עוברת על כל 74 העמודים: שרטוט לעולם לא
+   השכן — „עמוד על עמוד". הבדיקה הזו עוברת על כל 77 העמודים: שרטוט לעולם לא
    רחב מהכרטיס שהוא יושב בו, ושני שרטוטים לעולם לא נוגעים זה בזה. */
 test('no drawing escapes its card and no two drawings overlap', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'measured on the A4 sheet');
@@ -956,4 +1084,207 @@ test('no drawing escapes its card and no two drawings overlap', async ({ page },
     return [...new Set(out)];
   });
   expect(faults, faults.join(' | ')).toHaveLength(0);
+});
+
+/* כלל הברזל של ניצול העמוד, סוף-סוף נאכף: עמוד 69 נשאר עם פס לבן ענק למרות
+   כל מנגנוני הריווח, כי אף בדיקה לא מדדה. עכשיו נמדדת השארית שבין תחתית
+   התוכן לכותרת התחתונה על כל גיליון — יותר מ-120px היא עמוד שלא נוצל. */
+test('no sheet leaves a band of white above its footer', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'measured on the A4 sheet');
+  await page.goto('/#/print');
+  await page.waitForTimeout(9000);
+  const bands = await page.evaluate(() =>
+    [...document.querySelectorAll('.book > .sheet')].flatMap((sheet) => {
+      if (sheet.classList.contains('cover-sheet') || sheet.classList.contains('poster-sheet')) return [];
+      const n = sheet.querySelector('.sheet-number')?.textContent?.trim() ?? '(cover)';
+      const f = sheet.querySelector('.gz-footer');
+      const content = sheet.querySelector('.sheet-content');
+      if (!f || !content) return [];
+      let lowest = 0;
+      for (const el of content.querySelectorAll('*')) {
+        const r = el.getBoundingClientRect();
+        if (r.height && r.bottom > lowest) lowest = r.bottom;
+      }
+      const gap = f.getBoundingClientRect().top - lowest;
+      return gap > 120 ? [`page ${n}: ${Math.round(gap)}px of unused page`] : [];
+    }),
+  );
+  expect(bands, bands.join(' | ')).toEqual([]);
+});
+
+/* „תצוגת הנייד — שהכל יתאים אם פותחים בטלפון או במחשב בהתאמה אוטומטית”
+   (02.08.2026). הגיליון נפרס פעם מחדש לרוחב הטלפון, ואז יחס העמוד קפץ
+   מ-1:1.414 ל-1:4.4: הטורים נערמו, הציורים התכווצו והכותרת התחתונה עלתה
+   לאמצע הדף. החוברת היא מוצר מודפס — בטלפון רואים את אותו עמוד A4, מוקטן.
+   הבדיקה רצה גם ב-desktop וגם ב-mobile, ולכן היא נופלת ברגע שמישהו יחזיר
+   פריסה-מחדש כלשהי. */
+test('every sheet keeps its A4 shape on a phone exactly as on a desktop', async ({ page }) => {
+  for (const route of ['/#/print', '/#/workbook/18']) {
+    await page.goto(route);
+    await page.locator('.sheet').first().waitFor();
+    await page.waitForTimeout(600);
+    const off = await page.evaluate(() => {
+      const bad: string[] = [];
+      document.querySelectorAll('.sheet').forEach((el, i) => {
+        const r = el.getBoundingClientRect();
+        if (r.width < 50) return;
+        const ratio = r.height / r.width;
+        if (Math.abs(ratio - 1.414) > 0.03) bad.push(`sheet ${i}: ${ratio.toFixed(2)} instead of 1.41`);
+      });
+      return bad;
+    });
+    expect(off.slice(0, 5), `${route}: ${off.length} sheets lost their A4 shape — ${off.slice(0, 5).join(' | ')}`).toEqual([]);
+    // ובלי גלילה אופקית: הגיליון מוקטן, לא נדחף אל מחוץ למסך.
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    );
+    expect(overflow, `${route} scrolls sideways by ${overflow}px`).toBeLessThanOrEqual(1);
+  }
+});
+
+/* `.spread` מותחת שורת הוראה על כל רוחב הכרטיס (‎text-align-last: justify‎).
+   על שורה שממילא כמעט מלאה זו התאמה עדינה — אבל על שורה שממלאת רק שליש
+   מהרוחב המתיחה יוצרת פערי ענק בין המילים, וזה נראה גרוע יותר מהחלל
+   שבאנו לתקן. הבדיקה מודדת כמה השורה האחרונה מלאה **לפני** המתיחה. */
+test('a spread instruction line was nearly full before it was stretched', async ({ page }) => {
+  await page.goto('/#/print');
+  await page.locator('.sheet').first().waitFor();
+  await page.waitForTimeout(2500);
+  const thin = await page.evaluate(() => {
+    const bad: string[] = [];
+    document.querySelectorAll<HTMLElement>('.sheet .spread').forEach((el) => {
+      /* בטלפון הגיליון מוקטן ב-transform, ולכן ‎getBoundingClientRect‎ מחזיר
+         מידות מוקטנות בעוד הפריסה עצמה נשארת בגודל A4 מלא. המדידה נעשית
+         ב-‎offsetWidth‎ (מרחב הפריסה), והמלבנים מנורמלים חזרה לפיו. */
+      const w = el.offsetWidth;
+      const scale = w ? el.getBoundingClientRect().width / w : 1;
+      if (!w || !scale) return;
+      const copy = el.cloneNode(true) as HTMLElement;
+      copy.style.cssText = `position:absolute;left:-9999px;top:0;width:${w}px;text-align:start;text-align-last:auto`;
+      el.parentElement!.appendChild(copy);
+      const range = document.createRange();
+      range.selectNodeContents(copy);
+      const lines = new Map<number, { l: number; r: number }>();
+      for (const r of range.getClientRects()) {
+        if (r.width < 0.5) continue;
+        const key = Math.round(r.top / 2);
+        const line = lines.get(key) ?? { l: Infinity, r: -Infinity };
+        lines.set(key, { l: Math.min(line.l, r.left), r: Math.max(line.r, r.right) });
+      }
+      const keys = [...lines.keys()].sort((a, b) => a - b);
+      const lastKey = keys[keys.length - 1];
+      const last = lastKey === undefined ? undefined : lines.get(lastKey);
+      copy.remove();
+      if (!last) return;
+      const fill = Math.round((((last.r - last.l) / scale) / w) * 100);
+      const n = el.closest('.sheet')?.querySelector('.sheet-number')?.textContent?.trim() ?? '?';
+      if (fill < 45) bad.push(`page ${n}: last line fills ${fill}% — „${el.textContent!.trim().slice(0, 40)}”`);
+    });
+    return bad;
+  });
+  expect(thin, thin.join(' | ')).toEqual([]);
+});
+
+/* „הקו של הכותרת התחתונה צריך להיות כחול כמו הכותרות הראשיות של האתר"
+   (02.08.2026). הקו היה `var(--ink)` — כחול־דיו כהה שנקרא כמעט שחור ליד
+   הכחול של קו הכותרת, ושני הקווים על אותו עמוד לא דיברו באותו צבע. */
+test('the footer rule is the same blue as the heading rule, on every sheet', async ({ page }) => {
+  await page.goto('/#/print');
+  await page.locator('.sheet').first().waitFor();
+  await page.waitForTimeout(2500);
+  const off = await page.evaluate(() => {
+    const bad: string[] = [];
+    document.querySelectorAll('.sheet').forEach((s, i) => {
+      const foot = s.querySelector('.gz-footer');
+      const head = s.querySelector('.sheet-header');
+      if (!foot || !head) return;
+      /* התוכן ומספר העמוד מודפסים על נייר שמנת עם מבטאי זהב — קו כחול שם
+         היה זר לעיצוב שיניב אישר, ולכן הוא נמדד מול הכותרת שלו עצמו. */
+      if (s.classList.contains('toc-sheet')) return;
+      const f = getComputedStyle(foot).borderTopColor;
+      const h = getComputedStyle(head).borderBottomColor;
+      if (f !== h) bad.push(`sheet ${i}: footer ${f} vs heading ${h}`);
+    });
+    return bad;
+  });
+  expect(off.slice(0, 4), off.join(' | ')).toEqual([]);
+});
+
+/* Every poster ships twice — a .png and a .webp twin — and `posterSheet()`
+   derives the webp path at runtime, so a browser that speaks webp (all of
+   them) shows the TWIN, never the png. On 02.08.2026 that cost Yaniv a wrong
+   page: the poster's dot at (7,7) was repaired in the png, the webp was left
+   at its old build, and page 21 kept printing the dot half a square off — a
+   fix reported as done that no reader could see. Timestamps do not survive
+   git, so the twins are compared as pictures. */
+test('every poster and its webp twin show the same picture', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'one decode of every poster is enough');
+  const { readdirSync } = await import('node:fs');
+  const posters = readdirSync('public/assets/games')
+    .filter((f) => f.endsWith('.png'))
+    .map((f) => `/assets/games/${f}`);
+  expect(posters.length, 'no posters found to compare').toBeGreaterThan(0);
+  await page.goto('/#/');
+  const drifted = await page.evaluate(async (paths: string[]) => {
+    const load = (src: string): Promise<HTMLImageElement> =>
+      new Promise((ok, no) => {
+        const img = new Image();
+        img.onload = () => ok(img);
+        img.onerror = () => no(new Error(`cannot load ${src}`));
+        img.src = src;
+      });
+    const pixels = async (src: string, w: number, h: number): Promise<Uint8ClampedArray> => {
+      const img = await load(src);
+      const c = document.createElement('canvas');
+      c.width = w;
+      c.height = h;
+      c.getContext('2d')!.drawImage(img, 0, 0, w, h);
+      return c.getContext('2d')!.getImageData(0, 0, w, h).data;
+    };
+    const bad: string[] = [];
+    const BLOCK = 32;
+    for (const png of paths) {
+      const twin = png.replace(/\.png$/, '.webp');
+      const img = await load(png);
+      const W = img.naturalWidth;
+      const H = img.naturalHeight;
+      const [a, b] = [await pixels(png, W, H), await pixels(twin, W, H)];
+      /* Measured over the WHOLE picture this defect is invisible: one moved
+         dot reads 1.62 against 1.53 for a clean re-encode, because webp's own
+         noise is spread everywhere and the dot is 200 pixels out of 1.5
+         million. Per 32px block it is unmissable — a stale twin peaks at 50
+         where every in-sync poster stays under 15. */
+      let worst = 0;
+      for (let by = 0; by + BLOCK <= H; by += BLOCK) {
+        for (let bx = 0; bx + BLOCK <= W; bx += BLOCK) {
+          let sum = 0;
+          for (let y = by; y < by + BLOCK; y++) {
+            for (let x = bx; x < bx + BLOCK; x++) {
+              const i = (y * W + x) * 4;
+              sum += Math.abs(a[i]! - b[i]!) + Math.abs(a[i + 1]! - b[i + 1]!) + Math.abs(a[i + 2]! - b[i + 2]!);
+            }
+          }
+          const mean = sum / (BLOCK * BLOCK * 3);
+          if (mean > worst) worst = mean;
+        }
+      }
+      if (worst > 25) bad.push(`${png}: twin drifted — worst 32px block differs by ${worst.toFixed(0)}/255`);
+    }
+    return bad;
+  }, posters);
+  expect(drifted, drifted.join(' | ')).toEqual([]);
+});
+
+/* A missing </div> once nested error-case 9 inside error-case 8's box on the
+   error-correction pages (02.08.2026): the grid showed 8 cards with the ninth
+   stuffed inside the eighth. Every .mist-card is a direct child of its
+   .error-grid — none is ever nested inside another. */
+test('no error-correction card is nested inside another', async ({ page }) => {
+  await page.goto('/#/print');
+  await page.locator('.sheet').first().waitFor();
+  await page.waitForTimeout(2000);
+  const nested = await page.evaluate(() =>
+    document.querySelectorAll('.mist-card .mist-card').length,
+  );
+  expect(nested, `${nested} error card(s) render nested inside another card`).toBe(0);
 });
