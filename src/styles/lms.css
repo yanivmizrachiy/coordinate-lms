@@ -356,8 +356,10 @@
   .lms-admin,
   .lms-gate,
   [data-lms-editable="true"]::after,
-  /* the ✓/✕/🔒/? verdicts: screen only, never on the printed sheet */
-  [data-lms-state]::after {
+  /* the ✓/✕/🔒/? verdicts and the per-question controls: screen only */
+  [data-lms-state]::after,
+  .lms-qcheck,
+  .lms-progress {
     display: none !important;
   }
 
@@ -365,4 +367,38 @@
     background: transparent !important;
     box-shadow: none !important;
   }
+}
+
+/* ---- per-question controls: „סיימתי שאלה" + its verdict ------------------
+   Added by the LMS engine to each .q-card (never in the canonical content),
+   and dropped entirely from print by the @media print rule below. */
+.lms-qcheck {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 12px 0 2px;
+}
+
+.lms-qstatus {
+  font-weight: 800;
+  font-size: 0.98rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lms-qstatus[data-qstate="idle"] { display: none; }
+.lms-qstatus[data-qstate="correct"] { color: #1c7a3c; }
+.lms-qstatus[data-qstate="partial"] { color: #9a6a00; }
+.lms-qstatus[data-qstate="wrong"] { color: #b32233; }
+.lms-qstatus[data-qstate="locked"] { color: #5b626d; }
+.lms-qstatus[data-qstate="pending"] { color: #3c62a3; }
+
+.lms-progress {
+  font-weight: 800;
+  color: #30394b;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }

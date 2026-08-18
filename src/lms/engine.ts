@@ -36,6 +36,39 @@ interface CheckSummary {
   remaining: number;
 }
 
+/** The result of grading one answer target. */
+type TargetOutcome = 'unkeyed' | 'correct' | 'locked' | 'missing' | 'wrong';
+
+/** A question groups the targets a learner completes and checks together. */
+type QuestionState =
+  | 'idle'
+  | 'correct'
+  | 'partial'
+  | 'wrong'
+  | 'locked'
+  | 'pending';
+
+interface QuestionGroup {
+  id: string;
+  targets: HTMLElement[];
+  chip: HTMLElement;
+  button: HTMLButtonElement;
+}
+
+/* How each question state shows itself — a shape and a word, never colour
+   alone, and „done" for the ones the learner has nothing left to do on. */
+const QUESTION_CHIP: Record<
+  QuestionState,
+  { icon: string; text: string; done: boolean }
+> = {
+  idle: { icon: '', text: '', done: false },
+  correct: { icon: '✓', text: 'נכון', done: true },
+  partial: { icon: '◐', text: 'יש מה לתקן', done: false },
+  wrong: { icon: '✕', text: 'נסה שוב', done: false },
+  locked: { icon: '🔒', text: 'נעול — נוצלו שלושת הניסיונות', done: true },
+  pending: { icon: '?', text: 'נשמר לבדיקת המורה', done: true },
+};
+
 function targetValue(target: HTMLElement): string {
   return (target.textContent || '').trim();
 }
@@ -458,6 +491,52 @@ export function attachLmsToPage(
     );
   }
 
+  /* Grade ONE target against the key, in place. Shared by the page-level check
+     and the per-question „סיימתי שאלה" button, so both count an attempt and
+     lock after three exactly the same way — a target that is already correct
+     or locked is never re-graded, and an empty one is „missing", never wrong.
+     `countAttempt` is true only when the learner actually asked for a check. */
+  function gradeTarget(
+    target: HTMLElement,
+    key: AnswerKey,
+    countAttempt: boolean,
+  ): TargetOutcome {
+    const qid = target.dataset.lmsQid;
+    if (!qid) return 'unkeyed';
+
+    const expected = key[qid] || [];
+    const progress = progressFor(qid);
+
+    if (expected.length === 0) {
+      const state = progress.answer ? 'pending' : 'empty';
+      target.dataset.lmsState = state;
+      announceState(target, state);
+      return 'unkeyed';
+    }
+
+    if (progress.correct || progress.locked) {
+      updateTarget(target, progress);
+      return progress.correct ? 'correct' : 'locked';
+    }
+
+    if (!progress.answer.trim()) {
+      target.dataset.lmsState = 'missing';
+      announceState(target, 'missing');
+      return 'missing';
+    }
+
+    if (countAttempt) progress.attempts += 1;
+
+    if (answersMatch(progress.answer, expected)) {
+      progress.correct = true;
+    } else if (progress.attempts >= LMS_CONFIG.maxAttempts) {
+      progress.locked = true;
+    }
+
+    updateTarget(target, progress);
+    return progress.correct ? 'correct' : progress.locked ? 'locked' : 'wrong';
+  }
+
   async function performCheck(): Promise<CheckSummary> {
     touch();
     snapshotAnswers();
@@ -468,52 +547,19 @@ export function attachLmsToPage(
     let remaining = 0;
 
     for (const target of targets) {
-      const qid = target.dataset.lmsQid;
+      if (!target.dataset.lmsQid) continue;
 
-      if (!qid) continue;
+      const outcome = gradeTarget(target, answerKey, true);
 
-      const expected = answerKey[qid] || [];
-      const progress = progressFor(qid);
-
-      if (expected.length === 0) {
+      if (outcome === 'unkeyed') {
         unkeyed += 1;
-        const state = progress.answer ? 'pending' : 'empty';
-        target.dataset.lmsState = state;
-        announceState(target, state);
-        continue;
-      }
-
-      keyed += 1;
-
-      if (progress.correct || progress.locked) {
-        updateTarget(target, progress);
-        continue;
-      }
-
-      if (!progress.answer.trim()) {
-        target.dataset.lmsState = 'missing';
-        announceState(target, 'missing');
-        remaining += 1;
-        continue;
-      }
-
-      progress.attempts += 1;
-
-      const correct = answersMatch(progress.answer, expected);
-
-      if (correct) {
-        progress.correct = true;
-      } else if (
-        progress.attempts >= LMS_CONFIG.maxAttempts
-      ) {
-        progress.locked = true;
       } else {
-        remaining += 1;
+        keyed += 1;
+        if (outcome === 'missing' || outcome === 'wrong') remaining += 1;
       }
-
-      updateTarget(target, progress);
     }
 
+    refreshQuestions();
     draft.updatedAt = Date.now();
     const draftOutcome = await persistDraft();
 
@@ -655,6 +701,7 @@ export function attachLmsToPage(
       draft.updatedAt = submittedAt;
       const draftOutcome = await persistDraft();
       showScore(score);
+      refreshQuestions();
 
       const activityOutcome = await persistActivity({
         uid,
@@ -860,6 +907,179 @@ export function attachLmsToPage(
     });
   });
 
+  /* ---- questions: a card the learner finishes and checks on its own -------
+     A „question" is the .q-card the canonical content already groups its
+     blanks into (1,029 of 1,115 blanks sit in one); a blank with no card is
+     its own question. The controls are added here, in the LMS layer, and are
+     no-print — the canonical sheet is never touched. */
+  const questionAnchorOf = (target: HTMLElement): HTMLElement =>
+    target.closest<HTMLElement>('.q-card') ??
+    target.closest<HTMLElement>('li, tr, p, .completion-sentence') ??
+    target;
+
+  const questionGroups: QuestionGroup[] = [];
+  const groupByAnchor = new Map<HTMLElement, QuestionGroup>();
+
+  const progressHost = elem('div', {
+    class: 'lms-progress no-print',
+    role: 'status',
+    'aria-live': 'polite',
+  });
+
+  /* A question's state is DERIVED from its targets — never stored twice. */
+  function deriveQuestion(group: QuestionGroup): QuestionState {
+    let hasKeyed = false;
+    let allCorrect = true;
+    let anyCorrect = false;
+    let anyAttempt = false;
+    let anyPending = false;
+    let allResolved = true;
+
+    for (const target of group.targets) {
+      const qid = target.dataset.lmsQid;
+      if (!qid) continue;
+      const progress = progressFor(qid);
+      const keyed = (answerKey[qid] || []).length > 0;
+
+      if (keyed) {
+        hasKeyed = true;
+        if (progress.correct) anyCorrect = true;
+        else allCorrect = false;
+        if (progress.attempts > 0) anyAttempt = true;
+        if (!(progress.correct || progress.locked)) allResolved = false;
+      } else if (progress.answer.trim()) {
+        anyPending = true;
+      }
+    }
+
+    if (!hasKeyed) return anyPending ? 'pending' : 'idle';
+    if (allCorrect) return 'correct';
+    if (anyCorrect) return 'partial';
+    if (allResolved) return 'locked';
+    if (anyAttempt) return 'wrong';
+    return 'idle';
+  }
+
+  function renderQuestion(group: QuestionGroup): QuestionState {
+    const state = deriveQuestion(group);
+    const chip = QUESTION_CHIP[state];
+    group.chip.dataset.qstate = state;
+    group.chip.textContent = chip.icon ? chip.icon + ' ' + chip.text : '';
+    group.button.disabled =
+      draft.submitted || state === 'correct' || state === 'locked';
+    return state;
+  }
+
+  function refreshQuestions(): void {
+    if (questionGroups.length === 0) return;
+    let done = 0;
+    for (const group of questionGroups) {
+      if (QUESTION_CHIP[renderQuestion(group)].done) done += 1;
+    }
+    progressHost.textContent =
+      String(done) +
+      ' מתוך ' +
+      String(questionGroups.length) +
+      ' שאלות הושלמו';
+  }
+
+  async function checkQuestion(group: QuestionGroup): Promise<void> {
+    if (draft.submitted) return;
+    touch();
+
+    for (const target of group.targets) {
+      const qid = target.dataset.lmsQid;
+      if (qid) progressFor(qid).answer = targetValue(target);
+    }
+
+    answerKey = await loadAnswerKey(pageNumber);
+    for (const target of group.targets) {
+      gradeTarget(target, answerKey, true);
+    }
+
+    draft.updatedAt = Date.now();
+    refreshQuestions();
+
+    const draftOutcome = await persistDraft();
+    const activityOutcome = await persistActivity({
+      uid,
+      pageNumber,
+      type: 'answer_check',
+      createdAt: Date.now(),
+      metadata: {
+        question: group.id,
+        targets: group.targets.length,
+      },
+    });
+
+    const state = deriveQuestion(group);
+
+    if (
+      draftOutcome.central === 'failed' ||
+      activityOutcome.central === 'failed'
+    ) {
+      setMessage(status, 'הבדיקה נשמרה במכשיר, אך הסנכרון המרכזי נכשל.', 'error');
+    } else if (state === 'correct') {
+      setMessage(status, 'כל הכבוד! השאלה נכונה.', 'success');
+    } else if (state === 'partial') {
+      setMessage(
+        status,
+        'חלק מהתשובות נכונות. תקנו את החלק המסומן והשלימו את השאלה.',
+      );
+    } else if (state === 'pending') {
+      setMessage(status, 'התשובה נשמרה לבדיקת המורה.', 'success');
+    } else if (state === 'locked') {
+      setMessage(status, 'נוצלו שלושת הניסיונות בשאלה זו.', 'error');
+    } else {
+      setMessage(status, 'עדיין לא נכון — אפשר לנסות שוב.', 'error');
+    }
+  }
+
+  for (const target of targets) {
+    const anchor = questionAnchorOf(target);
+    let group = groupByAnchor.get(anchor);
+
+    if (!group) {
+      const chip = elem('span', {
+        class: 'lms-qstatus',
+        role: 'status',
+        'aria-live': 'polite',
+      });
+      const button = elem('button', {
+        class: 'btn btn--gold btn--sm lms-qcheck__btn',
+        type: 'button',
+        text: 'סיימתי שאלה',
+      }) as HTMLButtonElement;
+      const controls = elem(
+        'div',
+        { class: 'lms-qcheck no-print' },
+        button,
+        chip,
+      );
+
+      group = {
+        id: 'q' + String(questionGroups.length + 1),
+        targets: [],
+        chip,
+        button,
+      };
+      questionGroups.push(group);
+      groupByAnchor.set(anchor, group);
+
+      const boundGroup = group;
+      button.addEventListener('click', () => {
+        void checkQuestion(boundGroup);
+      });
+
+      if (anchor === target) target.insertAdjacentElement('afterend', controls);
+      else anchor.append(controls);
+    }
+
+    group.targets.push(target);
+  }
+
+  if (questionGroups.length > 0) panel.append(progressHost);
+
   void Promise.all([
     loadDraft(uid, pageNumber),
     loadAnswerKey(pageNumber),
@@ -890,6 +1110,7 @@ export function attachLmsToPage(
       showScore(draft.score);
     }
 
+    refreshQuestions();
     checkButton.disabled = draft.submitted;
     submitButton.disabled = draft.submitted;
     if (draft.submitted) submitButton.textContent = 'העמוד הוגש';
