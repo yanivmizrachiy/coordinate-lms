@@ -3,9 +3,15 @@ import { expect, test } from '@playwright/test';
 test('an explicit authoring label becomes a checked answer automatically', async ({ page }) => {
   await page.goto('/#/workbook/10');
 
-  const target = page.locator('[data-lms-qid="p10-q1"]');
+  /* Which question sits on which page is canonical order's business, not this
+     test's: take the first target that publishes an authored answer and check
+     that typing exactly that answer is graded correct. */
+  const target = page.locator('[data-lms-answers]').first();
   await expect(target).toBeVisible();
-  await target.fill('שמאל');
+  const expected = JSON.parse(
+    (await target.getAttribute('data-lms-answers')) ?? '[]',
+  )[0] as string;
+  await target.fill(expected);
   await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 });

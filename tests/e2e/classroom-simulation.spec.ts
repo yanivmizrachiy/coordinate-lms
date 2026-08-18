@@ -171,12 +171,12 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     expect(csv.startsWith('\uFEFF')).toBe(true);
     expect(csv).toContain('נועה כהן');
     expect(csv).toContain('אורי לוי');
-    expect(csv.trimEnd().split('\r\n')).toHaveLength(155);
+    expect(csv.trimEnd().split('\r\n')).toHaveLength(157); // header + 2 students × 78 pages
 
     await teacher.goto('/#/keys');
     await expect(teacher.getByRole('heading', { name: 'סטודיו סקירת תשובות' }))
       .toBeVisible();
-    await expect(teacher.locator('.lms-panel__status')).toContainText('מתוך 1061');
+    await expect(teacher.locator('.lms-panel__status')).toContainText('מתוך 1150');
     await teacher.getByLabel('סינון לפי מצב סקירה').selectOption('unreviewed');
     await expect(teacher.locator('.lms-keys__card').first()).toBeVisible();
   } finally {

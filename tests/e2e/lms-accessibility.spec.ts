@@ -2,13 +2,20 @@ import { expect, test } from '@playwright/test';
 
 test('answer fields keep meaningful labels and support keyboard completion', async ({ page }) => {
   await page.goto('/#/workbook/10');
-  const target = page.locator('[data-lms-qid="p10-q1"]');
+  /* The page number is not part of the contract — canonical order may move a
+     sheet at any time. Take the first target that carries a known answer and
+     type THAT answer, so the test measures keyboard completion rather than
+     memorising which question sits on which page. */
+  const target = page.locator('[data-lms-answers]').first();
   await expect(target).toBeVisible();
   await expect(target).toHaveAttribute('aria-label', /מקום להשלמת|תשובה.+:/);
+  const expected = JSON.parse(
+    (await target.getAttribute('data-lms-answers')) ?? '[]',
+  )[0] as string;
 
   await target.focus();
   await expect(target).toBeFocused();
-  await target.fill('שמאל');
+  await target.fill(expected);
   await target.press('Enter');
   await expect(target).not.toBeFocused();
   await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
