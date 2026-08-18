@@ -48,7 +48,27 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       hydrateExplicitAuthoringAnswers(sheetWrap);
       fitSheets(sheetWrap);
       if (data.gameId) {
-        const host = sheetWrap.querySelector<HTMLElement>('[data-game-host]');
+        /* The canonical sheet is pure print; the game plays ON SCREEN. A page
+           that carries its own [data-game-host] uses it; a printed puzzle page
+           gets a no-print host mounted after the sheet, so paper and screen
+           come from the same single content source. */
+        let host = sheetWrap.querySelector<HTMLElement>('[data-game-host]');
+        if (!host) {
+          host = elem('div', {
+            class: 'game-host game-host--screen no-print',
+            'data-game-host': data.gameId,
+          });
+          const screenGame = elem(
+            'section',
+            {
+              class: 'game-screen-layer no-print',
+              'aria-label': 'המשחק המקוון של העמוד',
+            },
+            elem('h2', { class: 'game-screen-layer__title', text: '🎮 המשחק על המסך — אותה משימה, אינטראקטיבית' }),
+            host,
+          );
+          sheetWrap.append(screenGame);
+        }
         const g = gameById(data.gameId);
         if (host && g) gameCleanup = g.mount(host);
       }
@@ -65,16 +85,31 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
        phone the reader is at the bottom when the page ends, and the way to
        the next page has to be under the thumb, not back at the top. */
     const nav = elem('div', { class: 'pagenav no-print' });
-    const select = elem('select', { 'aria-label': 'בחירת עמוד' }) as HTMLSelectElement;
-    for (let i = 1; i <= TOTAL_PAGES; i++) {
-      const opt = elem('option', { value: String(i), text: `עמוד ${i}` }) as HTMLOptionElement;
-      if (i === page) opt.selected = true;
-      select.append(opt);
-    }
-    select.addEventListener('change', () => navigate(`#/workbook/${select.value}`));
 
-    const prevB = elem('button', { class: 'btn btn--ghost btn--sm', type: 'button', text: '› הקודם' }) as HTMLButtonElement;
-    const nextB = elem('button', { class: 'btn btn--gold btn--sm', type: 'button', text: 'הבא ‹' }) as HTMLButtonElement;
+    /* מספר עמוד בכתיבה חופשית — „תוסיף אפשרות לכתוב חופשי מספר עמוד וזה
+       יעבור מייד" (31.07.2026). Enter או יציאה מהשדה קופצים; הרשימה הנפתחת
+       של כל האפשרויות נמחקה — היא סתרה את זה. */
+    const pageInput = elem('input', {
+      class: 'pagenav__input', type: 'number', inputmode: 'numeric',
+      min: '1', max: String(TOTAL_PAGES), value: String(page), 'aria-label': 'מספר עמוד',
+    }) as HTMLInputElement;
+    const jump = (): void => {
+      const n = Math.min(TOTAL_PAGES, Math.max(1, Math.trunc(Number(pageInput.value)) || page));
+      if (n !== page) navigate(`#/workbook/${n}`);
+      else pageInput.value = String(page);
+    };
+    pageInput.addEventListener('change', jump);
+    pageInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') jump(); });
+
+    /* חצים גדולים, בכיוון הדפדוף העברי: הקודם חוזר ימינה, הבא ממשיך שמאלה. */
+    const prevB = elem('button', { class: 'btn btn--sm btn--nav btn--prev', type: 'button' },
+      elem('span', { class: 'btn__arrow', 'aria-hidden': 'true', text: '→' }),
+      elem('span', { text: 'הקודם' }),
+    ) as HTMLButtonElement;
+    const nextB = elem('button', { class: 'btn btn--sm btn--nav btn--next', type: 'button' },
+      elem('span', { text: 'הבא' }),
+      elem('span', { class: 'btn__arrow', 'aria-hidden': 'true', text: '←' }),
+    ) as HTMLButtonElement;
     prevB.disabled = page <= 1;
     nextB.disabled = page >= TOTAL_PAGES;
     prevB.classList.toggle('btn--disabled', prevB.disabled);
@@ -85,7 +120,7 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     nav.append(
       prevB,
       elem('span', { class: 'pagenav__indicator', text: `${page} / ${TOTAL_PAGES}` }),
-      select,
+      elem('label', { class: 'pagenav__jump' }, elem('span', { text: 'עמוד' }), pageInput),
       nextB,
       linkBtn('☰ תוכן העניינים', goToContents),
       zoom,
