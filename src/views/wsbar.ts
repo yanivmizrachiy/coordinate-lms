@@ -43,8 +43,16 @@ export function bookletBar(): HTMLElement {
 
 /** סרגל הדף הבודד. */
 export function readerBar(page: number): HTMLElement {
-  const prev = ghost('› הקודם', () => navigate(`#/workbook/${page - 1}`));
-  const next = ghost('הבא ‹', () => navigate(`#/workbook/${page + 1}`));
+  const navBtn = (arrow: string, label: string, cls: string, go: () => void): HTMLButtonElement => {
+    const b = elem('button', { class: `btn btn--sm btn--nav ${cls}`, type: 'button' }) as HTMLButtonElement;
+    const a = elem('span', { class: 'btn__arrow', 'aria-hidden': 'true', text: arrow });
+    const t = elem('span', { text: label });
+    if (cls === 'btn--prev') b.append(a, t); else b.append(t, a);
+    b.addEventListener('click', go);
+    return b;
+  };
+  const prev = navBtn('→', 'הקודם', 'btn--prev', () => navigate(`#/workbook/${page - 1}`));
+  const next = navBtn('←', 'הבא', 'btn--next', () => navigate(`#/workbook/${page + 1}`));
   prev.disabled = page <= 1;
   next.disabled = page >= TOTAL_PAGES;
   prev.classList.toggle('btn--disabled', prev.disabled);

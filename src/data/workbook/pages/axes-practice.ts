@@ -4,7 +4,7 @@ import { sheet, blank, ltr, pair, grid, wordBank } from '../authoring';
 export const AXES_PRACTICE: WorkbookPageContent = sheet({
   sectionClass: 'sheet practice',
   title: 'הכרת מערכת הצירים',
-  subtitle: 'שמות הצירים, הראשית ומיקום ביחס לצירים',
+  subtitle: 'שמות הצירים, ראשית הצירים ומיקום ביחס לצירים',
   content: `
 <div class="two-col">
 <section class="q-card span-2">
@@ -15,7 +15,7 @@ ${grid({
   // One drawing serves the whole sheet: naming the axes, marking the origin,
   // reading where A and B sit, and marking the learner's own points.
   axisNames: false,
-  label: 'מערכת צירים ובה תיבות ריקות לשמות הצירים ולראשית, והנקודות A ו־B',
+  label: 'מערכת צירים ובה תיבות ריקות לשמות הצירים ולראשית הצירים, והנקודות A ו־B',
   points: [
     { x: 3, y: 4, label: 'A' },
     { x: 6, y: 2, label: 'B' },

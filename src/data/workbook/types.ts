@@ -1,7 +1,7 @@
 /* Shared workbook data types. */
 
 export interface WorkbookPageContent {
-  /** 1-based page number (1..34). */
+  /** 1-based page number, assigned by position in BOOK. */
   n: number;
   /** DOM id, e.g. "page-1". */
   id: string;
@@ -13,10 +13,8 @@ export interface WorkbookPageContent {
   subtitle: string;
   /** Full <section>…</section> markup for the sheet. */
   html: string;
-  /**
-   * When set, this sheet hosts an interactive game: the view mounts it into the
-   * page's `[data-game-host]` element and unmounts it on navigation.
-   */
+  /** LMS layer only: the interactive game mounted ON SCREEN alongside this
+      printed sheet (see workbook/index.ts). Never affects the printed page. */
   gameId?: string;
 }
 

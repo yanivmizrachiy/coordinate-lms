@@ -33,17 +33,17 @@ describe('drawings stay big and readable', () => {
 });
 
 describe('nothing is silently cut off the page', () => {
-  it('game sheets grow instead of clipping their board', () => {
-    // `.sheet` is re-declared further down the file; a single-class override
-    // loses on source order and the board gets cut mid-question.
-    expect(css).toContain('.sheet.game-sheet { height: auto;');
-    expect(css).not.toMatch(/^\.game-sheet \{/m);
-    /* הכותרת התחתונה מוצמדת בכל סוג עמוד — „כמו ספר לימוד" (31.07.2026).
-       דריסת static על שעשועונים/פוסטרים היא בדיוק מה שיצר את חוסר האחידות
-       בעמודים 22–23, ואסור שתחזור. הריפוד התחתון שומר על הלוח מתחתיה. */
-    expect(css).not.toContain('.sheet.game-sheet .gz-footer');
+  /* הכותרת התחתונה מוצמדת בכל סוג עמוד — „כמו ספר לימוד" (31.07.2026).
+     דריסת static על עמוד פוסטר היא בדיוק מה שיצר את חוסר האחידות בעמודים
+     22–23, ואסור שתחזור. (כללי `.game-sheet` נמחקו עם השעשועונים —
+     31.07.2026 — ולכן אין יותר מה לבדוק עליהם.) */
+  it('a poster sheet keeps the footer pinned like every other page', () => {
     expect(css).not.toContain('.sheet.poster-sheet .gz-footer { position: static');
-    expect(css).toContain('.sheet.game-sheet { padding-bottom:');
+    expect(css).toContain('.sheet.poster-sheet { padding:');
+    /* והכללים מתקופת הווידג'טים נמחקו — נבדק על כלל אמיתי (סלקטור ואחריו
+       סוגר), כדי שהערה שמזכירה אותם בשמם לא תיחשב כאילו הם חזרו. */
+    expect(css).not.toMatch(/\.game-host\s*[{,>]/);
+    expect(css).not.toMatch(/\.sheet\.game-sheet\s*[{,]/);
   });
 });
 
@@ -94,7 +94,7 @@ describe('completions ask for something different each time', () => {
            numbers — the subtraction, its result, and the side's value. That is
            not a lack of variety, so calculations are not counted here. */
         const body = card
-          .replace(/<div class="calc-final">[\s\S]*?<\/div>\s*<\/div>/g, ' ')
+          .replace(/<div class="calc-final[^"]*">[\s\S]*?<\/div>\s*<\/div>/g, ' ')
           .replace(/<div class="calc-pair">[\s\S]*?<\/div><\/div><\/div>/g, ' ')
           .replace(/<div class="calc-ltr"[\s\S]*?<\/div>/g, ' ');
         const kinds = [...body.matchAll(/data-missing="(\w+)"/g)].map((m) => m[1]);
@@ -377,7 +377,8 @@ describe('a calculation gets units and room to work', () => {
      and שיעור y has to say it, and its drawing needs a dashed line to EACH
      axis: one line teaches half the idea. */
   it('the coordinates page teaches the word מרחק, and measures to both axes', () => {
-    const page = WORKBOOK.find((p) => p.title.includes('שיעור x'));
+    /* בפרק עם כותרת אחידה שם הדף יורד לכותרת המשנה — מחפשים בשתיהן. */
+    const page = WORKBOOK.find((p) => p.title.includes('שיעור x') || p.subtitle.includes('שיעור x'));
     expect(page, 'the page that introduces the coordinates is gone').toBeDefined();
     const html = page!.html;
     expect(html, 'the word מרחק never appears').toMatch(/מרחק|רחוק/);
@@ -405,6 +406,98 @@ describe('a calculation gets units and room to work', () => {
         if (/^(הדגמה|דוגמה)/.test(words)) continue;
         expect(body, `page ${p.n}: rule box reads as a finished sentence — „${words.slice(0, 54)}”`)
           .toMatch(/class="(word-)?blank|pair-blank/);
+      }
+    }
+  });
+
+  /* USER_MEMORY §5: „לא כותבים כפול את ההוראות — פעם אחת, ברור, מרוכז
+     ומסודר". Yaniv reported it on page 20: the rule box said „סמנו את
+     הנקודות… וחברו בסרגל”, and the card heading right under it said „סמנו
+     וחברו לפי התוכנית”. A learner who reads the same order twice starts
+     skipping headings — which is where the pages that DO carry a new
+     instruction lose them. The box holds the instruction; the heading names
+     the section. A worked example is exempt: it demonstrates, then the
+     heading instructs, and those are two different things. */
+  const SAME_VERB: Array<[RegExp, string]> = [
+    [/^ו?סמנו$|^מסמנים$|^לסמן$/, 'סמן'],
+    [/^ו?חברו$|^מחברים$|^לחבר$/, 'חבר'],
+    [/^ו?צבעו$|^צובעים$|^לצבוע$/, 'צבע'],
+    [/^ו?כתבו$|^כותבים$|^לכתוב$/, 'כתב'],
+    [/^ו?השלימו$|^משלימים$|^להשלים$/, 'שלם'],
+    [/^ו?בצעו$|^מבצעים$|^לבצע$/, 'בצע'],
+    [/^ו?מיינו$|^ממיינים$|^למיין$/, 'מיין'],
+    [/^ו?הקיפו$|^מקיפים$|^להקיף$/, 'הקף'],
+    [/^ו?פתרו$|^פותרים$|^לפתור$/, 'פתר'],
+    [/^ו?מצאו$|^מוצאים$|^למצוא$/, 'מצא'],
+    [/^ו?מתחו$|^מותחים$|^למתוח$/, 'מתח'],
+    [/^ו?קראו$|^קוראים$|^לקרוא$/, 'קרא'],
+    [/^ו?השוו$|^משווים$|^להשוות$/, 'שווה'],
+  ];
+  const instructionVerbs = (text: string): Set<string> => {
+    const found = new Set<string>();
+    for (const word of text.replace(/[^֐-׿\s]/g, ' ').split(/\s+/)) {
+      for (const [form, root] of SAME_VERB) if (form.test(word)) found.add(root);
+    }
+    return found;
+  };
+
+  /* USER_MEMORY §8: „מחסן המילים למעלה מיותר… צריך לשאול בסיום מה קיבלתם?"
+     (02.08.2026, עמוד 20). On a reveal page the reveal IS the exercise: the
+     learner connects the points and sees what appears. A word bank sitting
+     above it — מפרשית / מטוס / בית — turns that into a one-of-three guess and
+     spoils the surprise before they have drawn a line. */
+  /* USER_MEMORY §5: „כאן להשתמש במילה מייצג — שיעור איקס מייצג…" (02.08.2026,
+     עמוד 23). „שיעור x הוא המשקל" אומר שהמספר 3 הוא שלושה קילו. הוא לא —
+     הוא מייצג אותם. זה בדיוק הבלבול שגורם לתלמיד לחבר שיעור עם שיעור ולקבל
+     „7 ק"ג ועוד 5 ₪". השיעור מייצג את הגודל, ואינו הגודל עצמו. */
+  it('a coordinate represents a real-world quantity, it is not that quantity', () => {
+    for (const p of WORKBOOK) {
+      const prose = p.html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ');
+      for (const m of prose.matchAll(/(שיעור|ערך)\s+ה?[־-]?\s*[xy]\s+(הוא|היא)\s+ה\S+/g)) {
+        expect(
+          m[0],
+          `page ${p.n}: „${m[0]}” — a coordinate represents the quantity, it is not the quantity`,
+        ).toBe('');
+      }
+    }
+  });
+
+  it('a page that asks מה קיבלתם? does not list the answer above the question', () => {
+    for (const p of WORKBOOK) {
+      if (!p.html.includes('מה קיבלתם?')) continue;
+      expect(p.html, `page ${p.n}: the reveal is offered from a word bank`).not.toContain('word-bank');
+    }
+  });
+
+  it('a rule box and the heading under it do not give the same order twice', () => {
+    const strip = (s: string): string => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    for (const p of WORKBOOK) {
+      for (const chunk of p.html.split('<div class="rule-box').slice(1)) {
+        const openTag = chunk.slice(0, chunk.indexOf('>'));
+        if (openTag.includes('completion-intro')) continue; // sentences to fill in, not an order
+        /* Cut the box at its OWN closing tag, counting nested <div>s. Splitting
+           on the first `</div>` truncates a box that wraps its lines; splitting
+           on the section swallowed the card underneath, and page 28's heading
+           was then read as part of its own rule box. */
+        const rest = chunk.slice(chunk.indexOf('>') + 1);
+        let depth = 1;
+        let end = rest.length;
+        for (const tag of rest.matchAll(/<(\/?)div\b/g)) {
+          depth += tag[1] ? -1 : 1;
+          if (depth === 0) { end = tag.index!; break; }
+        }
+        const box = strip(rest.slice(0, end));
+        if (/^(הדגמה|דוגמה)/.test(box)) continue;
+        const boxVerbs = instructionVerbs(box);
+        if (!boxVerbs.size) continue;
+        for (const m of p.html.matchAll(/<h3[^>]*>(.*?)<\/h3>/gs)) {
+          const head = strip(m[1]!);
+          const twice = [...instructionVerbs(head)].filter((v) => boxVerbs.has(v));
+          expect(
+            twice,
+            `page ${p.n}: „${head.slice(0, 44)}” repeats an order the rule box already gave — „${box.slice(0, 52)}”`,
+          ).toEqual([]);
+        }
       }
     }
   });
@@ -453,28 +546,64 @@ describe('a calculation gets units and room to work', () => {
     }
   });
 
-  /* USER_MEMORY §10. „הדרך חשובה מאוד מאוד” — a calculation gets room to work
-     in and then an answer that carries its unit, written with the letters an
-     Israeli textbook uses: S for area, P for perimeter. */
-  it('every area or perimeter answer is S or P, with its unit and room to work', () => {
+  /* USER_MEMORY §10 (31.07.2026 — replaces the „S = ____” final): the textbook
+     letters P and S stand LARGE at the head of the working slot, the rectangle's
+     name small beside them and the word היקף/שטח small underneath; the final
+     answer is written ONCE, as a completion — „ההיקף הוא ____ יח'.” A second
+     „P = ____” under the working wrote the same answer twice. */
+  it('every area or perimeter answer is a completion with its unit, and P/S lead the working', () => {
     for (const p of WORKBOOK) {
       const text = p.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
       if (!/שטח|היקף/.test(text)) continue;
-      for (const f of p.html.matchAll(/<div class="calc-final">([\s\S]*?)<\/div>\s*<\/div>/g)) {
+      for (const f of p.html.matchAll(/<div class="calc-final[^"]*">([\s\S]*?)<\/div>\s*<\/div>/g)) {
         const plain = f[1]!.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-        expect(plain, `page ${p.n}: a final answer without S or P`).toMatch(/[SP] =/);
+        /* „לא לכתוב ההיקף הוא — לכתוב היקף המלבן הוא" (31.07.2026): the
+           answer names the figure, in the construct form a textbook uses. */
+        expect(plain, `page ${p.n}: a final answer that does not name the figure`).toMatch(/(היקף|שטח) ה\S+ הוא/);
         expect(plain, `page ${p.n}: a final answer without its unit`).toMatch(/יח/);
+        expect(plain, `page ${p.n}: the answer written twice — P/S belong to the working slot`).not.toMatch(/[SP] =/);
       }
-      /* Room to work means ruled lines OR the named exercise lines that replaced
-         them — „PQ = ____ = ____ יח'”, written left to right. Either is room; a
-         box with neither is a calculation with nowhere to do it. */
+      /* Room to work is the squared notebook surface — or the named exercise
+         lines („PQ = ____ = ____ יח'”). A box with neither is a calculation
+         with nowhere to do it. */
       for (const box of p.html.split('<div class="calc-box">').slice(1)) {
         const head = box.slice(0, 400);
         expect(
-          /answer-line|calc-ltr/.test(head),
+          /calc-squared|calc-ltr/.test(head),
           `page ${p.n}: a calculation with no room to write the working`,
         ).toBe(true);
       }
+      /* And wherever a perimeter/area is computed, the LARGE letter leads. */
+      if (/חישוב ההיקף|חישוב השטח/.test(text)) {
+        expect(p.html, `page ${p.n}: no large textbook letter at the working slot`).toContain('calc-sym__math');
+      }
+    }
+  });
+
+  /* Yaniv, 31.07.2026: „צריך משבצת של מקום לתרגיל באופן נוח וכתוב ברור,
+     ומתחתיה תשובה סופית". Two finals crushed onto one line rendered as
+     „יחשטח" — so the working sits in a slot of its own, and every final
+     answer stands on a row of its own. */
+  it('every final answer stands on a row of its own', () => {
+    for (const p of WORKBOOK) {
+      for (const f of p.html.matchAll(/<div class="calc-final[^"]*">([\s\S]*?)<\/div>\s*<\/div>/g)) {
+        const rows = f[1]!.split('calc-final__row').length - 1;
+        const answers = (f[1]!.match(/[SP] =/g) ?? []).length;
+        expect(rows, `page ${p.n}: a calc box with finals but no answer rows`).toBeGreaterThan(0);
+        expect(answers, `page ${p.n}: two final answers share one row`).toBeLessThanOrEqual(rows);
+      }
+      for (const box of p.html.split('<div class="calc-box">').slice(1)) {
+        expect(
+          /calc-work|calc-ltr/.test(box.slice(0, 400)),
+          `page ${p.n}: a calculation without its working slot`,
+        ).toBe(true);
+      }
+      /* „תמחק את המילים דרך החישוב" — the only labels a calc box may carry are
+         the tool's own תרגיל/תשובה, so a hand-written heading cannot drift. */
+      expect(p.html, `page ${p.n}: a hand-written calc-box label`).not.toMatch(
+        /<div class="calc-box"><b(?! class="calc-label")/,
+      );
+      expect(p.html.replace(/<[^>]+>/g, ' '), `page ${p.n} still says דרך החישוב`).not.toContain('דרך החישוב');
     }
   });
 
@@ -489,6 +618,44 @@ describe('a calculation gets units and room to work', () => {
   });
 
   /* An exercise is worked left to right, whatever direction the sheet runs. */
+  /* יניב, 02.08.2026, על עמוד 14: „יש כאן בעיה בכתיבה מתמטית". הדף כתב
+     `<span dir="ltr">x =</span> 4` — הסימן והאות ננעצו משמאל-לימין, אבל
+     **המספר נשאר בחוץ**, בזרימה העברית, ולכן נצבע משמאלם והמשוואה נקראה
+     „4 = x". משוואה חייבת להיות **יחידה אחת** בתוך התיבה הנעוצה. */
+  it('a pinned maths island never leaves its operand outside', () => {
+    const bad: string[] = [];
+    for (const p of WORKBOOK) {
+      // an island that ENDS on an operator, with the number left behind it
+      for (const m of p.html.matchAll(/<span[^>]*dir="ltr"[^>]*>([^<]*[=+−-])\s*<\/span>\s*([0-9(])/g)) {
+        bad.push(`page ${p.n}: „${m[1]!.trim()}” is pinned but „${m[2]}” was left outside it`);
+      }
+      // …and the mirror image: the number outside, the operator pinned after it
+      for (const m of p.html.matchAll(/([0-9])\s*<span[^>]*dir="ltr"[^>]*>\s*([=+−-])/g)) {
+        bad.push(`page ${p.n}: „${m[1]}” sits outside the island that opens with „${m[2]}”`);
+      }
+    }
+    expect([...new Set(bad)], bad.join(' | ')).toEqual([]);
+  });
+
+  /* יניב, 02.08.2026: „תוסיף את המילה הנקודה — מי הנקודה הימנית ביותר, ולא
+     מי הימנית ביותר". שאלת „הכי" בלי שם העצם נשענת על ההקשר, והתלמיד צריך
+     לנחש על מה נשאל. */
+  it('a superlative question names what it is asking about', () => {
+    const bad: string[] = [];
+    for (const p of WORKBOOK) {
+      const t = p.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+      // „מי הימנית ביותר" — an adjective straight after מי/איזו, with no noun
+      for (const m of t.matchAll(/(?:מי|איזו)\s+ה(ימנית|שמאלית|גבוהה|נמוכה|ארוכה|קצרה|קרובה|רחוקה)\s+ביותר/g)) {
+        bad.push(`page ${p.n}: „${m[0]}" — say „מי הנקודה ה${m[1]} ביותר"`);
+      }
+      // „מי מהנקודות הגבוהה ביותר" — the partitive reads as a list, not a point
+      for (const m of t.matchAll(/מי\s+מהנקודות\s+ה\S+\s+ביותר/g)) {
+        bad.push(`page ${p.n}: „${m[0]}" — say „מי הנקודה …"`);
+      }
+    }
+    expect([...new Set(bad)], bad.join(' | ')).toEqual([]);
+  });
+
   it('an exercise line is pinned left to right', () => {
     for (const p of WORKBOOK) {
       for (const m of p.html.matchAll(/<div class="calc-ltr"([^>]*)>/g)) {
@@ -542,8 +709,14 @@ describe('a calculation gets units and room to work', () => {
   it('no sheet leaves an open line that is not the working of a calculation', () => {
     for (const p of WORKBOOK) {
       const open = (p.html.match(/<div class="answer-line">/g) ?? []).length;
-      const inCalc = (p.html.match(/calc-box/g) ?? []).length * 2;
-      expect(open, `page ${p.n}: ${open - inCalc} open line(s) with no guidance`).toBeLessThanOrEqual(inCalc);
+      /* אין יותר שורות מסורגלות בחוברת: משבצת החישוב היא משטח משבצות
+         (`calc-squared`), וכל השלמה אחרת היא תיבה בתוך משפט. לכן כל
+         `answer-line` שיופיע היום הוא בדיוק מה שהכלל אוסר — שורה פתוחה
+         שאיש לא הוביל אליה. (עד 02.08.2026 נספרו כאן שורות בתוך
+         `calc-work__lines`, מחלקה שכבר לא קיימת, ולכן הצד המתיר של
+         ההשוואה היה מת. אם פורמט השורות יחזור — להתיר אותן שוב, אבל רק
+         בתוך `calc-box`.) */
+      expect(open, `page ${p.n}: ${open} open ruled line(s) with no guidance`).toBe(0);
     }
   });
 
@@ -597,9 +770,12 @@ describe('a calculation gets units and room to work', () => {
          perimeter off a graph („ההיקף הוא ___ יח'”) has nothing to show. */
       if (!p.html.includes('calc-box')) continue;
       /* An ANSWER is a blank followed by its unit. „ההיקף והשטח ____, כי הזזה
-         אינה משנה את הצורה” is a relation, not an answer, and stays. */
+         אינה משנה את הצורה” is a relation, not an answer, and stays. The
+         canonical completion — „ההיקף הוא ____ יח'.” — lives inside the
+         calc-final row, so the finals are stripped before looking for strays. */
+      const outside = p.html.replace(/<div class="calc-final[^"]*">[\s\S]*?<\/div>\s*<\/div>/g, ' ');
       expect(
-        p.html,
+        outside,
         `page ${p.n}: „היקף/שטח: ____ יח'” outside a calculation block`,
       ).not.toMatch(/(היקף|שטח)[^<]{0,16}<span class="blank"[^>]*><\/span>\s*יח/);
     }
@@ -710,10 +886,11 @@ describe('a calculation is written left to right', () => {
      geresh fix reached every calculation except the two on the page that had
      been written by hand. */
   it('no page writes the calculation markup by hand', () => {
-    const inline = WORKBOOK.filter((p) => /class="calc-ltr__name"/.test(p.html) === false && false).map(() => '');
+    /* המרקאפ שנכתב ביד מזוהה לפי היעדר `dir="rtl"` על יחידת המידה — התיקון
+       של הגרש הגיע רק דרך הכלי. (היה כאן גם משתנה `inline` עם `&& false`
+       בתנאי, כלומר תמיד ריק ותמיד עובר — הוסר, 02.08.2026.) */
     const handmade = WORKBOOK.filter((p) => /<span class="calc-ltr__unit">/.test(p.html));
     expect(handmade.map((p) => `page ${p.n}`), 'calc markup written by hand — use exercise()/exerciseGiven()/sideValue()').toEqual([]);
-    expect(inline).toEqual([]);
   });
 
   /* „יש תרגיל ותשובה מתחת… וצריך מספיק מקום לכל תרגיל ולכתוב תשובה בשורה
@@ -737,12 +914,18 @@ describe('a calculation is written left to right', () => {
   });
 
   /* „צריך מספיק מקום לכל תרגיל.” A subtraction written by hand needs a real
-     line to write it on, not a few characters. */
+     line to write it on, not a few characters. The rule holds where the learner
+     WRITES the working (two blanks on the line); a printed subtraction from
+     exerciseGiven() carries one short result blank by design and is exempt —
+     the old greedy regex swallowed a given-block into the exercise after it
+     and failed the wrong line. */
   it('every exercise leaves room to write the subtraction', () => {
     for (const page of WORKBOOK) {
-      for (const b of page.html.match(/<div class="calc-pair">[\s\S]*?<\/div><\/div><\/div>/g) ?? []) {
-        const first = b.match(/--blank-width:(\d+)ch/);
-        expect(Number(first?.[1] ?? 0), `page ${page.n}: no room to write the exercise`).toBeGreaterThanOrEqual(14);
+      for (const seg of page.html.split('<div class="calc-pair">').slice(1)) {
+        const line = seg.match(/<div class="calc-ltr"[\s\S]*?<\/div>/)?.[0] ?? '';
+        const blanks = [...line.matchAll(/--blank-width:(\d+)ch/g)].map((m) => Number(m[1]));
+        if (blanks.length < 2) continue;
+        expect(blanks[0], `page ${page.n}: no room to write the exercise`).toBeGreaterThanOrEqual(14);
       }
     }
   });
@@ -889,5 +1072,120 @@ describe('no demo copy anywhere', () => {
       for (const phrase of banned) if (text.includes(phrase)) hits.push(`${f}: ${phrase}`);
     }
     expect(hits, hits.join(' | ')).toEqual([]);
+  });
+});
+
+/* „חובה שיהיה במקרה כזה מחסן מילים" (31.07.2026): השלמות-פתיח מושגיות בלי
+   מחסן השאירו את הלומד לנחש מילים. כל עמוד עם קופסת השלמות נושא מחסן. */
+describe('a completion box always brings its word bank', () => {
+  /* חריג יחיד ומכוון (יניב, 02.08.2026: „באופן חד פעמי מחסן המילים מיותר").
+     בעמוד „מתי x=0 ומתי y=0" שלוש קופסאות ההשלמה עונות זו על זו: הקופסה
+     השנייה כתוב בה „ערך ה־x הוא 0", והראשונה מבקשת בדיוק את ה-0 הזה; המילה
+     „y" מודפסת בקופסה השנייה עצמה. מחסן שחוזר על מה שכבר כתוב מעל הוא רעש,
+     לא עזרה. מזוהה לפי כותרת המשנה, שהיא ייחודית לעמוד הזה בלבד. */
+  const BANK_NOT_NEEDED = new Set(['מתי x=0 ומתי y=0']);
+
+  it('every completion-intro page carries a word bank', () => {
+    const bad = WORKBOOK
+      .filter((p) => p.html.includes('completion-intro') && !p.html.includes('word-bank'))
+      .filter((p) => !BANK_NOT_NEEDED.has(p.subtitle))
+      .map((p) => `page ${p.n} (${p.title})`);
+    expect(bad, bad.join(', ')).toEqual([]);
+  });
+
+  it('the one page excused from a word bank is still the page we excused', () => {
+    for (const sub of BANK_NOT_NEEDED) {
+      const p = WORKBOOK.find((x) => x.subtitle === sub);
+      expect(p, `the excused page „${sub}" is gone — drop it from the list`).toBeDefined();
+      expect(p!.html, `„${sub}" grew a word bank — the exception is stale`).not.toContain('word-bank');
+    }
+  });
+});
+
+/* „לא איקס של E אלא של הנקודה E" (31.07.2026): אות של נקודה לעולם לא עומדת
+   לבדה אחרי „של" — תמיד „של הנקודה E". */
+describe('a point letter never stands bare after של', () => {
+  it('every "של X" is written "של הנקודה X"', () => {
+    const bare = /(?<!הנקודה )(?<!הנקודות )של ה?<span class="math-ltr" dir="ltr">[A-Z]<\/span>/;
+    const bad = WORKBOOK
+      .filter((p) => bare.test(p.html))
+      .map((p) => `page ${p.n}`);
+    expect(bad, bad.join(', ')).toEqual([]);
+  });
+});
+
+/* „לא לכתוב ראשית — לכתוב ראשית הצירים" (31.07.2026). המילה נבדקת בטקסט
+   שהלומד קורא בלבד: פריט במחסן מילים הוא מילה בודדת בכוונה, כי „ראשית
+   הצירים" נכתב בשתי תיבות נפרדות — וזה כלל אחר, ותיק, עם בדיקה משלו. */
+describe('the origin is always named in full', () => {
+  it('no sheet says "ראשית" without "הצירים" in its prose', () => {
+    const bad: string[] = [];
+    for (const p of WORKBOOK) {
+      const prose = p.html
+        .replace(/<div class="word-bank">[\s\S]*?<\/div>/g, ' ')  // bank items
+        .replace(/aria-label="[^"]*"/g, ' ')                       // box hints
+        .replace(/<[^>]+>/g, ' ');
+      if (/ראשית(?! הצירים)/.test(prose)) bad.push(`page ${p.n}`);
+    }
+    expect(bad, bad.join(', ')).toEqual([]);
+  });
+});
+
+/* Every drawing's geometry, validated against the axis range it is drawn in.
+   graph-years marked a point at (8,7) inside a grid that defaulted to ymax 6,
+   so the point fell outside the axes („הנקודה יצאה מהמערכת", 02.08.2026). This
+   sweeps all 94 drawings: no point, segment end, arrow end or polygon vertex
+   ever sits outside its own system, and no letter labels two different points. */
+describe('every drawing keeps its geometry inside the system', () => {
+  type Pt = { x: number; y: number; label?: string };
+  const grids = (html: string): string[] =>
+    [...html.matchAll(/class="[^"]*coordinate-grid[^"]*"[\s\S]*?role="img"/g)].map((m) => m[0]);
+  const attrNum = (g: string, a: string, d: number): number => {
+    const m = g.match(new RegExp(`data-${a}="(\d+)"`));
+    return m ? Number(m[1]) : d;
+  };
+  const attrJson = (g: string, a: string): any[] => {
+    const m = g.match(new RegExp(`data-${a}='([^']*)'`));
+    if (!m) return [];
+    try { return JSON.parse(m[1]!.replace(/&#39;/g, "'")); } catch { return []; }
+  };
+
+  it('no point, endpoint or vertex is drawn outside its own axes', () => {
+    const bad: string[] = [];
+    for (const p of WORKBOOK) {
+      for (const g of grids(p.html)) {
+        const xmax = attrNum(g, 'xmax', 8);
+        const ymax = attrNum(g, 'ymax', 6);
+        const inRange = (x: number, y: number): boolean => x >= 0 && y >= 0 && x <= xmax && y <= ymax;
+        for (const pt of attrJson(g, 'points') as Pt[])
+          if (!inRange(pt.x, pt.y)) bad.push(`page ${p.n}: point ${pt.label ?? ''}(${pt.x},${pt.y}) outside ${xmax}×${ymax}`);
+        for (const s of [...attrJson(g, 'segments'), ...attrJson(g, 'arrows')] as { from: number[]; to: number[] }[])
+          for (const e of [s.from, s.to])
+            if (e && !inRange(e[0]!, e[1]!)) bad.push(`page ${p.n}: endpoint (${e[0]},${e[1]}) outside ${xmax}×${ymax}`);
+        for (const poly of attrJson(g, 'polygons') as ({ points: number[][] } | number[][])[]) {
+          const verts = Array.isArray(poly) ? poly : poly.points;
+          for (const v of verts ?? [])
+            if (!inRange(v[0]!, v[1]!)) bad.push(`page ${p.n}: polygon vertex (${v[0]},${v[1]}) outside ${xmax}×${ymax}`);
+        }
+      }
+    }
+    expect(bad, bad.join(' | ')).toEqual([]);
+  });
+
+  it('within one drawing a letter never labels two different points', () => {
+    const bad: string[] = [];
+    for (const p of WORKBOOK) {
+      for (const g of grids(p.html)) {
+        const seen = new Map<string, string>();
+        for (const pt of attrJson(g, 'points') as Pt[]) {
+          if (!pt.label) continue;
+          const at = `${pt.x},${pt.y}`;
+          const prev = seen.get(pt.label);
+          if (prev && prev !== at) bad.push(`page ${p.n}: "${pt.label}" at (${at}) and (${prev})`);
+          seen.set(pt.label, at);
+        }
+      }
+    }
+    expect(bad, bad.join(' | ')).toEqual([]);
   });
 });

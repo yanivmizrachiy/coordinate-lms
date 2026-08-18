@@ -3,6 +3,7 @@ import { navigate } from '../router';
 import { TOTAL_PAGES } from '../data/workbook';
 import { DISTRICT_BADGE } from '../data/cover';
 import { openActionChooser } from './printChoice';
+import { isAdminSession } from '../lms/auth';
 import type { ViewContext } from './context';
 import { goToContents } from './tocSheet';
 
@@ -56,7 +57,16 @@ export function menu({ outlet, setTitle }: ViewContext): void {
     act('act--view', '📖', 'תצוגה', 'החוברת הנפתחת', () => navigate('#/book')),
     act('act--download', '⬇️', 'הורדה', 'הכול או דפים · צבע או שחור-לבן', () => openActionChooser('download')),
     act('act--print', '🖨️', 'הדפסה', 'הכול או דפים · צבע או שחור-לבן', () => openActionChooser('print')),
+    act('act--aids', '📐', 'המחשות', 'דפי צירים להדפסה', () => navigate('#/print-aids')),
   );
+
+  /* הפתרונות הם כלי מורה: במערכת המתוקשבת הם שער למפתח המלא, ולכן הקישור
+     מוצג רק בכניסת מנהל. בחוברת המודפסת הם ממילא אינם קיימים. */
+  if (isAdminSession()) {
+    actions.append(
+      act('act--view', '✓', 'פתרונות', 'לפי עמוד ותרגיל · למורה', () => navigate('#/solutions')),
+    );
+  }
 
   const wa = elem('a', {
     class: 'act act--wa',

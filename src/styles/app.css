@@ -1,5 +1,5 @@
 /* ===========================================================================
-   App views — home, tables of contents, games hub, game shell, page navigator.
+   App views — the page navigator and the reading bars.
    =========================================================================== */
 
 /* A screen arrives with one short fade and a hair of travel. Anything longer is
@@ -170,52 +170,6 @@
    numbered worksheet pages. Their styles went with them: 86 lines, fourteen
    class names, none of which appears anywhere in src/, tests/ or index.html. */
 
-/* ---------- Game shell ---------- */
-.game { max-width: 760px; margin: 0 auto; }
-.game__intro {
-  background: var(--brand-tint); border: 1px solid #cfe0ff; border-radius: var(--r-md);
-  padding: 14px 16px; margin-bottom: 18px; line-height: 1.6;
-}
-.game__intro h2 { font-size: 20px; color: var(--brand-ink); margin-bottom: 4px; }
-.game__board { display: grid; gap: 14px; }
-.game__row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  padding: 12px 14px; background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-md); }
-.game__prompt { font-weight: 800; }
-/* No bullet discs on a sheet — same rule as .tasks in workbook.css. */
-.game__hintlist { margin: 0; padding-inline-start: 0; list-style: none; }
-
-.answer-input {
-  min-height: var(--tapsize); min-width: 72px; padding: 8px 12px;
-  border: 2px solid var(--hairline); border-radius: 10px; font: inherit; font-weight: 800;
-  text-align: center; background: #fff; color: var(--ink);
-}
-.answer-input:focus { border-color: var(--brand); outline: none; }
-.answer-input.is-correct { border-color: var(--ok); background: #f0fdf4; }
-.answer-input.is-wrong { border-color: var(--danger); background: #fef2f2; }
-
-.chip-choice {
-  display: inline-flex; align-items: center; min-height: var(--tapsize);
-  padding: 8px 16px; border-radius: 999px; border: 2px solid var(--hairline);
-  background: #fff; font-weight: 800; color: var(--ink);
-}
-.chip-choice[aria-pressed="true"] { border-color: var(--brand); background: var(--brand-tint); color: var(--brand-ink); }
-.chip-choice.is-correct { border-color: var(--ok); background: #f0fdf4; color: var(--ok); }
-.chip-choice.is-wrong { border-color: var(--danger); background: #fef2f2; color: var(--danger); }
-
-.reveal {
-  margin-top: 16px; padding: 16px; border-radius: var(--r-md);
-  background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; font-weight: 800;
-  text-align: center; font-size: 20px;
-}
-.reveal--pending { background: var(--surface-2); border-color: var(--hairline); color: var(--muted); font-weight: 700; font-size: 16px; }
-
-.word-slots { display: inline-flex; gap: 6px; flex-wrap: wrap; direction: rtl; }
-.word-slot {
-  width: 38px; height: 46px; border-radius: 8px; border: 2px solid var(--hairline);
-  display: grid; place-items: center; font-size: 24px; font-weight: 900; background: #fff;
-}
-.word-slot.is-filled { border-color: var(--brand); color: var(--brand-ink); background: var(--brand-tint); }
-
 /* ---------- Page navigator (single-sheet workbook viewer) ---------- */
 .pageviewer { max-width: 210mm; margin: 0 auto; }
 
@@ -225,10 +179,16 @@
 .pageviewer__sheetwrap {
   display: flex; justify-content: center;
   --sheet-scale: 1;
+  /* הגיליון שומר על A4 אמיתי גם בטלפון ורק מוקטן, ולכן תיבת-הפריסה שלו רחבה
+     מהמסך בזמן שהציור עצמו מוקטן ומרוכז בתוכה. החיתוך מסתיר את העודף הריק
+     ומונע גלילה אופקית — הכלל הוא בלי גלילה אופקית באף מסך קריאה. */
+  overflow: hidden;
 }
 .pageviewer__sheetwrap > .sheet {
   transform: scale(var(--sheet-scale));
   transform-origin: top center;
+  /* בלי זה ה-flex היה מכווץ את ה-A4 לרוחב הטלפון ומחזיר את הפריסה-מחדש. */
+  flex: 0 0 auto;
 }
 @media print {
   .pageviewer__sheetwrap { height: auto !important; }
@@ -246,50 +206,15 @@
 .pagenav__indicator { font-weight: 900; color: var(--brand-ink); min-width: 108px; text-align: center; }
 .pagenav select { min-height: var(--tapsize); border: 1px solid var(--hairline); border-radius: 10px; padding: 6px 10px; font: inherit; font-weight: 700; }
 
-.toolbar-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 14px; }
-
 .empty-note { text-align: center; color: var(--muted); padding: 40px 20px; }
 
 /* ---------- Print: hide all app chrome ---------- */
 @media print {
-  .hero, .appbar, .pagenav, .toolbar-row, .section-title, .home-grid, .games-grid,
-  .toc-topic, .skip-link, .no-print { display: none !important; }
+  .hero, .appbar, .pagenav, .skip-link, .no-print { display: none !important; }
   .container { padding: 0; max-width: none; }
   .app-main { min-height: 0; }
 }
 
-/* ---- print bar -----------------------------------------------------------
-   Choosing pages and printing them, in one row that never leaves the booklet.
-   The controls keep their colour: black and white is for the SHEETS. */
-.printbar {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
-  max-width: 210mm; margin: 0 auto 8px; padding: 6px;
-  background: var(--paper); border: 1px solid var(--border); border-radius: 12px;
-  box-shadow: 0 2px 10px #1f2a4412;
-}
-.printbar__range {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 14px; font-weight: 700; color: var(--muted);
-}
-.printbar__num {
-  width: 3.4rem; padding: 6px 4px; font: inherit; font-weight: 800; text-align: center;
-  border: 1.5px solid var(--border); border-radius: 8px; background: #fff; color: var(--ink);
-}
-.printbar__num:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
-.printbar__go, .printbar__toggle {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 7px 12px; font: inherit; font-weight: 800; cursor: pointer;
-  border: 1.5px solid var(--blue); border-radius: 10px;
-  background: var(--blue); color: #fff;
-}
-.printbar__toggle { background: #fff; color: var(--blue); }
-.printbar__toggle.is-on { background: #1f2a44; border-color: #1f2a44; color: #fff; }
-.printbar__go:hover, .printbar__toggle:hover { filter: brightness(1.08); }
-.printbar__go:active, .printbar__toggle:active { transform: translateY(1px); }
-/* the second print button is the quieter one */
-.printbar__go + .printbar__go { background: #fff; color: var(--blue); }
-/* pushes the print controls to the far end, away from the navigation */
-.printbar__gap { flex: 1 1 8px; }
 
 /* --- how big the sheet is drawn on screen --- */
 .zoomer { display: inline-flex; align-items: center; gap: 0; }
@@ -304,28 +229,8 @@
 .zoombtn:hover { background: var(--screen); }
 
 @media (max-width: 620px) {
-  .printbar { gap: 6px; padding: 7px 8px; }
   /* A phone already shows the sheet at the width it has, so there is nothing
      for the zoom control to do — and four rows of buttons on an 812px screen
      is a fifth of the page the reader came for. */
-  .zoomer, .printbar__gap { display: none; }
-  .printbar__go, .printbar__toggle { flex: 1 1 auto; justify-content: center; padding: 10px 10px; }
-  .printbar__range { width: 100%; justify-content: center; }
-}
-
-/* ---- a game sheet on paper ------------------------------------------------
-   The games are a screen experience, but every one of them is also a numbered
-   page in a printed booklet. A text field and a „בדקו” button mean nothing on
-   paper — Yaniv's point: „זה לא עבודה מתוקשבת”. In print the controls give way
-   to a ruled box the learner writes the answer in, by hand. */
-@media print {
-  .game .answer-input {
-    border: 0; border-bottom: 1.4px solid var(--ink); border-radius: 0;
-    background: transparent; min-width: 9ch;
-  }
-  .game .answer-input::placeholder { color: transparent; }
-  .game button,
-  .game .reveal--pending,
-  .game__prompt:empty { display: none !important; }
-  .game .word-slots .slot { border: 1.4px solid var(--ink); background: #fff; }
+  .zoomer { display: none; }
 }

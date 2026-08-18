@@ -18,7 +18,10 @@ import { normaliseGridText } from './coordinateGrid';
    airy, it may not look broken. */
 
 const BASE = 0;
-const MAX = 44;
+/* הועלה מ-44 (31.07.2026): יניב — „יש המון שטח לא מנוצל… תרווח את הסעיפים".
+   פס לבן גדול מפר את כלל הברזל; ביקורת e2e מודדת עכשיו את השארית על כל
+   גיליון, אז עמוד שעדיין נשאר ריק מדי ייתפס — והתיקון שם הוא תוכן, לא אוויר. */
+const MAX = 110;
 /** How much taller a single drawing may get, at most. */
 const GRID_GROWTH = 120;
 /** How much air a task item the learner writes in may gain, top and bottom. */
@@ -42,10 +45,6 @@ export function fitSheet(sheet: HTMLElement): void {
   const content = sheet.querySelector<HTMLElement>('.sheet-content');
   const footer = sheet.querySelector<HTMLElement>('.gz-footer');
   if (!content || !footer) return;
-  /* A game sheet grows with its board, so its DRAWINGS must not be stretched —
-     but it now carries printed questions under the grid, and those deserve the
-     same room to write in as anywhere else. */
-  const isGame = sheet.classList.contains('game-sheet');
 
   /* The page viewer shrinks the sheet to fit the screen. getBoundingClientRect
      reports those shrunken pixels, but `style.height` is written in unscaled
@@ -67,6 +66,10 @@ export function fitSheet(sheet: HTMLElement): void {
   const canSpace = box.childElementCount >= 2 && stacked(box);
   const kids = [...box.children] as HTMLElement[];
   for (const k of kids) k.style.paddingTop = '';
+  /* Grid rows can be given air too (see the spare-height step below); a rerun
+     must measure the sheet as authored, so the gap resets with everything else. */
+  const airGrids = [...content.querySelectorAll<HTMLElement>('.error-grid, .choice-grid, .cols-2, .cols-3')];
+  for (const g of airGrids) g.style.rowGap = '';
 
   /* Safe to run twice: anything this function resized remembers the height it
      started at, so a second pass measures the sheet as authored rather than
@@ -97,7 +100,7 @@ export function fitSheet(sheet: HTMLElement): void {
        one drawing painted over another;
      - the box must stay the DRAWING's shape. Once max-width binds, more height
        is only empty bands above and below the drawing, not a bigger drawing. */
-  const grids = isGame ? [] : [...content.querySelectorAll<HTMLElement>('.coordinate-grid')];
+  const grids = [...content.querySelectorAll<HTMLElement>('.coordinate-grid')];
   const RATIO = 560 / 380;
   const wasted = (g: HTMLElement): boolean => {
     const r = g.getBoundingClientRect();
@@ -190,6 +193,21 @@ export function fitSheet(sheet: HTMLElement): void {
   while (air > 0 && room() < 0) {
     air -= 3;
     for (const li of writable) li.style.paddingBlock = air > 0 ? `${air}px` : '';
+  }
+
+  /* A page whose cards sit in a GRID (the error-spotting page, choice pages)
+     is not "stacked", so the padding path below cannot reach it — and page 47
+     ended at 70% with a band of white underneath. The spare height goes into
+     the grid's row gaps instead, a step at a time on top of the gap the CSS
+     gave, capped so the page reads as airy rather than scattered. */
+  if (airGrids.length) {
+    const baseGap = new Map(airGrids.map((g) => [g, parseFloat(getComputedStyle(g).rowGap) || 0]));
+    let extraGap = 0;
+    while (extraGap < 34 && room() > 40) {
+      extraGap += 4;
+      for (const g of airGrids) g.style.rowGap = `${(baseGap.get(g) ?? 0) + extraGap}px`;
+    }
+    if (room() < 0) for (const g of airGrids) g.style.rowGap = '';
   }
 
   const leftover = room();

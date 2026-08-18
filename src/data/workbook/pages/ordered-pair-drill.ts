@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, wordBlank, ltr } from '../authoring';
+import { sheet, blank, wordBlank, ltr, wordBank } from '../authoring';
 
 const PB = '<span class="pair-blank"></span>';
 const pair = (name = ''): string =>
@@ -18,6 +18,7 @@ export const ORDERED_PAIR_DRILL: WorkbookPageContent = sheet({
 <div class="completion-sentence">המספר שנכתב מצד שמאל הוא ערך ${wordBlank('short', 'letter', 'מקום להשלמת האות x')}, והמספר שנכתב מצד ימין הוא שיעור ${ltr('y')}.</div>
 <div class="completion-sentence">מכיוון שיש סֵדֶר, קוראים לזה זוג ${wordBlank('medium', 'concept', 'מקום להשלמת המילה סדור')}.</div>
 </div>
+${wordBank(['סדור', 'x', 'סוגריים'])}
 <section class="q-card">
 <h3>א. נתונה נקודה — השלימו את שיעוריה.</h3>
 <ul class="tasks">

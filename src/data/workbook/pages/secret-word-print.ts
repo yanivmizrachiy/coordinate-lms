@@ -32,10 +32,10 @@ ${grid({
 <h3>ב. מפענחים אות־אות.</h3>
 <ul class="tasks">
 <li>האות שממוקמת בנקודה ${ltr('(3,2)')} היא ${blank(2, 'letter')}.</li>
-<li>שיעור ה־${ltr('x')} של הנקודה של האות <strong>ו</strong> הוא ${blank(3, 'number')}.</li>
-<li>הנקודה של האות <strong>ד</strong> היא הנקודה ה${blank(5, 'property')} ביותר במערכת.</li>
-<li>האות שממוקמת בנקודה ${ltr('(4,3)')} היא ${blank(2, 'letter')}.</li>
 <li>הנקודה של האות <strong>ק</strong> רחוקה ${blank(3, 'number')} יחידות מציר ה־${ltr('y')}.</li>
+<li>שיעור ה־${ltr('x')} של הנקודה של האות <strong>ו</strong> הוא ${blank(3, 'number')}.</li>
+<li>הנקודה של האות <strong>ד</strong> היא הימנית ביותר, ושיעור ה־${ltr('x')} שלה הוא ${blank(3, 'number')}.</li>
+<li>האות שממוקמת בנקודה ${ltr('(4,3)')} היא ${blank(2, 'letter')}.</li>
 </ul>
 </section>
 <section class="q-card">
@@ -51,7 +51,7 @@ ${grid({
 <ul class="tasks">
 <li>האות שממוקמת הכי גבוה במערכת היא ${blank(2, 'letter')}.</li>
 <li>המרחק האופקי בין הנקודה של <strong>נ</strong> לנקודה של <strong>ה</strong> הוא ${blank(3, 'number')} יחידה.</li>
-<li>הנקודה של האות <strong>ד</strong> היא ה${blank(5, 'property')} ביותר במערכת.</li>
+<li>הנקודה של האות <strong>ד</strong> היא ה${blank(5, 'property')} ביותר במערכת — שיעור ה־${ltr('y')} שלה קטן מכולם.</li>
 </ul>
 </section>
 <section class="q-card">

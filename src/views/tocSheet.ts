@@ -2,80 +2,79 @@
    cover, before page 1. It is a real A4 sheet, so it prints with the rest; on
    screen every chapter is a button that jumps to that chapter's first page.
 
-   The colours are the palette Yaniv chose. The chapters come from BOOK, so this
-   page can never go stale; there are more chapters than colours, so the palette
-   cycles — and two chapters of one colour are never neighbours, because the
-   cycle is longer than any run of related work. */
+   The design Yaniv chose (31.07.2026): „דף עיזבון על נייר" — the Hermès/Aesop
+   estate page. Warm cream paper, a centred serif title, and one chapter per
+   row: the chapter name in a large serif on the right, a dotted leader, and the
+   page it starts on as a big colour number on the left. Large type and generous
+   spacing so the entries fill the whole A4 page — „תגדיל מספרי העמודים ותגדיל
+   כתב של שמות הפרקים, יותר רווחים כדי לנצל כל העמוד".
+   Serif faces are bundled locally (no runtime fetch). */
+/* רק תת-הקבוצות והמשקלים שבאמת בשימוש. הייבוא הכללי (`400.css`) מושך את כל
+   תת-הקבוצות — כולל קירילית וּויאטנמית — ומכניס 30 קובצי Cormorant לבנייה
+   כדי לצייר ספרות. Frank Ruhl נדרש לעברית במשקלים 300 (הכותרת) ו-400 (השאר),
+   ו-latin לספרות/אותיות לועזיות שעשויות להופיע בשם פרק. Cormorant משמש רק
+   למספרי העמודים — משקל 700, לטינית בלבד. (02.08.2026) */
+import '@fontsource/frank-ruhl-libre/hebrew-300.css';
+import '@fontsource/frank-ruhl-libre/hebrew-400.css';
+import '@fontsource/frank-ruhl-libre/latin-300.css';
+import '@fontsource/frank-ruhl-libre/latin-400.css';
+import '@fontsource/cormorant-garamond/latin-700.css';
 import { elem } from '../lib/dom';
 import { navigate } from '../router';
-/* The contents Yaniv asked for: five chapters, named by him, each opening the
-   page he named. It is NOT derived from BOOK any more — he wants a reader's
-   map, not an index of every section, and „כל השאר תמחק מהתוכן".
+/* The contents Yaniv asked for: the chapters he named, each opening the page he
+   named. It is NOT derived from BOOK any more — he wants a reader's map, not an
+   index of every section, and „כל השאר תמחק מהתוכן".
    A test checks that every page number here exists. */
+/* הפרקים בשמות שיניב נתן (31.07.2026) — הכותרת בתוכן זהה מילה במילה לכותרת
+   האחידה שעל דפי הפרק. */
 export const CONTENTS: ReadonlyArray<{ title: string; page: number }> = [
   { title: 'הרביע הראשון — מושגים בסיסיים', page: 1 },
-  { title: 'נקודות במערכת הצירים', page: 12 },
-  { title: 'קטעים מקבילים לצירים', page: 29 },
-  { title: 'שטחים והיקפים במערכת הצירים', page: 51 },
-  { title: 'קריאת גרפים ברביע הראשון', page: 63 },
+  { title: 'נקודות ברביע הראשון', page: 4 },
+  { title: 'נקודות שעל הצירים', page: 15 },
+  { title: 'קטעים מקבילים לצירים', page: 46 },
+  { title: 'המלבן ברביע הראשון', page: 51 },
+  { title: 'קריאת גרפים ברביע הראשון', page: 65 },
 ];
 import { DISTRICT_BADGE } from '../data/cover';
 
-/* Yaniv's ten colours, in the order he gave them — „אלה הצבעים של תוכן העניינים
-   המסודר שלנו". I had reordered them so no two neighbours shared a hue family;
-   the palette is his, so it goes back the way he wrote it. */
-const PALETTE = [
-  '#2962FF', '#00C853', '#FF6D00', '#D500F9', '#AA00FF',
-  '#0091EA', '#FFD600', '#FF1744', '#00E5FF', '#64FFDA',
+/* One colour per chapter — Yaniv's palette family (blue, green, orange,
+   magenta, blue), each DARKENED so it clears 4.5:1 as large ink on the cream
+   paper. A saturated hue that reads on white would vanish on cream; a test
+   measures the real ratio and fails if a number goes faint. */
+const CHAPTER_COLOURS = [
+  '#1A4FD1', '#1B6E36', '#9C4A0A', '#A312C0', '#0A6FA8',
 ] as const;
-
-/** The ink that sits ON the coloured tile itself: white where white reads,
-    near-black where the tile is too bright to carry it. Measured, not guessed —
-    the hand-picked guess was wrong on 8 of these 10 colours once already. */
-function textOn(hex: string): string {
-  const rgb = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
-  const lin = (c: number): number => {
-    const v = c / 255;
-    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
-  };
-  const L = 0.2126 * lin(rgb[0]!) + 0.7152 * lin(rgb[1]!) + 0.0722 * lin(rgb[2]!);
-  const whiteRatio = 1.05 / (L + 0.05);
-  if (whiteRatio >= 4.5) return '#ffffff';
-  /* A mid-luminance tile (the magenta) defeats the navy too — then only true
-     black clears the bar. Checked, because 4.1:1 already slipped through once. */
-  const navyL = 0.0142; // #0b1f3a
-  return (L + 0.05) / (navyL + 0.05) >= 4.6 ? '#0b1f3a' : '#000000';
-}
 
 export function renderTocSheet(): HTMLElement {
   const section = elem('section', {
     class: 'sheet toc-sheet', id: 'toc', 'aria-label': 'תוכן העניינים',
   });
 
-  const head = elem('header', { class: 'sheet-header' },
-    elem('div', {},
-      elem('h1', { text: 'תוכן העניינים' }),
-      elem('p', { text: 'מערכת צירים — הרביע הראשון' }),
+  /* The heading is centred: the unit's name as a letterspaced kicker between
+     two hairlines, the title in a large light serif, then the unit in italic. */
+  const head = elem('header', { class: 'toc-head' },
+    elem('div', { class: 'toc-head__frame' },
+      elem('p', { class: 'toc-head__kicker', text: 'חוברת עבודה' }),
     ),
+    elem('h1', { class: 'toc-head__title', text: 'תוכן העניינים' }),
+    elem('p', { class: 'toc-head__sub', text: 'מערכת צירים — הרביע הראשון' }),
   );
 
   const list = elem('div', { class: 'toc-buttons' });
   for (const [i, topic] of CONTENTS.entries()) {
-    const colour = PALETTE[i % PALETTE.length]!;
+    const colour = CHAPTER_COLOURS[i % CHAPTER_COLOURS.length]!;
     const first = topic.page;
     const btn = elem('button', {
       class: 'toc-btn',
       type: 'button',
-      style: `--toc-colour:${colour};--toc-text:${textOn(colour)}`,
+      style: `--toc-colour:${colour}`,
       'aria-label': `${topic.title}, מתחיל בעמוד ${first}`,
     },
-      /* The tile IS the chapter's colour — „כל פרק במשבצת בצבע שונה". The
-         white disc carries the chapter number; the CSS reads it from data-no. */
-      elem('span', { class: 'toc-btn__rule', 'aria-hidden': 'true', 'data-no': String(i + 1) }),
-      elem('span', { class: 'toc-btn__body' },
-        elem('span', { class: 'toc-btn__kicker', text: `פרק ${i + 1}` }),
-        elem('span', { class: 'toc-btn__name', text: topic.title }),
-      ),
+      /* מספר אחד בלבד — „לא צריך כפל מספרים" (31.07.2026): המספר הצבעוני
+         הגדול הוא מספר העמוד, בקצה השמאלי, וקו מנוקד מוביל אליו מהכותרת —
+         כמו בתוכן עניינים של ספר אמיתי. */
+      elem('span', { class: 'toc-btn__name', text: topic.title }),
+      elem('span', { class: 'toc-btn__leader', 'aria-hidden': 'true' }),
       elem('span', { class: 'toc-btn__no', dir: 'ltr', text: String(first) }),
     );
     btn.addEventListener('click', () => navigate(`#/workbook/${first}`));

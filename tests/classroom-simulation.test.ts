@@ -140,7 +140,7 @@ describe('two-student classroom simulation', () => {
     );
     expect(dashboard.students.every((student) => student.results.length > 0)).toBe(true);
     const csv = buildDashboardCsv(dashboard);
-    expect(csv.trimEnd().split('\r\n')).toHaveLength(155);
+    expect(csv.trimEnd().split('\r\n')).toHaveLength(157); // header + 2 students × 78 pages
     expect(csv).toContain(studentA.uid);
     expect(csv).toContain(studentB.uid);
     expect(csv).not.toContain(currentSession()?.uid || 'missing-admin');

@@ -343,7 +343,7 @@ export function lmsKeys({ outlet, setTitle }: ViewContext): void {
         manifest.pageCount !== TOTAL_PAGES ||
         manifest.pages.length !== TOTAL_PAGES
       ) {
-        throw new Error('מניפסט סקירת התשובות אינו תואם ל־77 העמודים.');
+        throw new Error(`מניפסט סקירת התשובות אינו תואם ל־${TOTAL_PAGES} העמודים.`);
       }
       const classifications = new Set<string>();
       const collected: StudioPage[] = [];

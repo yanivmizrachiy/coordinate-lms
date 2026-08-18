@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, grid, exerciseGiven } from '../authoring';
+import { sheet, blank, ltr, pair, grid, exerciseGiven, wordBank } from '../authoring';
 
 /* Real life, grade 7: a phone home screen IS a coordinate system. The icons sit
    on a grid, „הזזתי את האפליקציה” is a translation, and the child already knows
@@ -13,6 +13,7 @@ export const LIFE_PHONE_SCREEN: WorkbookPageContent = sheet({
 <div class="completion-sentence">האפליקציות על המסך מסודרות בשורות ובעמודות, בדיוק כמו נקודות ב${blank(6, 'concept')} הצירים.</div>
 <div class="completion-sentence">ערך ה־${ltr('x')} אומר באיזו עמודה האפליקציה, ושיעור ה־${ltr('y')} אומר באיזו ${blank(5, 'property')}.</div>
 </div>
+${wordBank(['שורה', 'מערכת'])}
 <section class="q-card">
 <h3>א. השלימו לפי המסך.</h3>
 ${grid({

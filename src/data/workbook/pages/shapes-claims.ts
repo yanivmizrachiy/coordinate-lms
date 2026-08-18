@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, grid, calcBox } from '../authoring';
+import { sheet, blank, ltr, pair, grid, calcBox, wordBank } from '../authoring';
 
 /* נשאב מריפו parabula-next של יניב („רביע ראשון — 21 דפי עבודה", עמוד 18,
    דף הטענות), שוחזר ממפתח התשובות למורה והותאם לכללי USER_MEMORY.md —
@@ -17,6 +17,7 @@ export const SHAPES_CLAIMS: WorkbookPageContent = sheet({
 <div class="completion-sentence">יש טענות שנכונות בהכרח, יש שלא ייתכן שהן נכונות, ויש טענות ש${blank(5, 'relation')} שהן נכונות.</div>
 <div class="completion-sentence">טענה כזאת מכריעים בעזרת ${blank(5, 'concept')} — נקודה או צורה שמראות מה באמת קורה.</div>
 </div>
+${wordBank(['דוגמה', 'ייתכן'])}
 <div class="two-col">
 <section class="q-card">
 <h3>א. נקודה ששני שיעוריה זהים ממוקמת על אחד הצירים.</h3>

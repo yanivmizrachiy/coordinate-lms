@@ -9,10 +9,10 @@ import {
 import { PROVEN_ANSWER_PROOFS } from '../src/lms/provenAnswerKey';
 
 describe('answer-key coverage intelligence', () => {
-  test('represents every workbook page from 1 through 77', () => {
-    expect(report.pages).toHaveLength(77);
+  test('represents every workbook page from 1 through 78', () => {
+    expect(report.pages).toHaveLength(78);
     expect(report.pages.map((page) => page.pageNumber)).toEqual(
-      Array.from({ length: 77 }, (_, index) => index + 1),
+      Array.from({ length: 78 }, (_, index) => index + 1),
     );
   });
 
@@ -75,7 +75,11 @@ describe('answer-key coverage intelligence', () => {
       Object.entries(page),
     );
 
-    expect(proofs).toHaveLength(735);
+    /* 588 = the proofs that survived the 78-page canonical import (2026-08-18)
+       with an unchanged prompt signature. 147 of the previous 735 lapsed
+       because their wording changed in the archive's content fixes; they may
+       return only through a fresh review with cited evidence. */
+    expect(proofs).toHaveLength(588);
     for (const [targetId, proof] of proofs) {
       const target = targets.get(targetId);
       expect(target, targetId).toBeDefined();
@@ -94,7 +98,9 @@ describe('answer-key coverage intelligence', () => {
       ),
     );
 
-    expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(161);
+    /* 137 = reviewed open-ended targets whose prompts survived the 78-page
+       canonical import (2026-08-18) unchanged; 24 lapsed with their wording. */
+    expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(137);
     for (const [targetId, signature] of Object.entries(
       REVIEWED_OPEN_ENDED_TARGET_SIGNATURES,
     )) {
@@ -115,8 +121,10 @@ describe('answer-key coverage intelligence', () => {
     expect(answersMatch('1', PROVEN_ANSWER_PROOFS[11]?.['p11-q11']?.answers || [])).toBe(false);
     expect(answersMatch('6', PROVEN_ANSWER_PROOFS[13]?.['p13-q15']?.answers || [])).toBe(true);
     expect(answersMatch('5', PROVEN_ANSWER_PROOFS[13]?.['p13-q15']?.answers || [])).toBe(false);
-    expect(answersMatch('4', PROVEN_ANSWER_PROOFS[20]?.['p20-q12']?.answers || [])).toBe(true);
-    expect(answersMatch('3', PROVEN_ANSWER_PROOFS[20]?.['p20-q12']?.answers || [])).toBe(false);
+    // The same reviewed proof (signature 1e0c6e0b) sits on page 17 since the
+    // 78-page canonical order (2026-08-18); previously p20-q12.
+    expect(answersMatch('4', PROVEN_ANSWER_PROOFS[17]?.['p17-q12']?.answers || [])).toBe(true);
+    expect(answersMatch('3', PROVEN_ANSWER_PROOFS[17]?.['p17-q12']?.answers || [])).toBe(false);
   });
 });
 

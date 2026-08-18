@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet } from '../authoring';
+import { sheet, wordBank } from '../authoring';
 
 export const SAME_COORD_INTRO: WorkbookPageContent = sheet({
   sectionClass: "sheet guided dense",
@@ -30,6 +30,7 @@ export const SAME_COORD_INTRO: WorkbookPageContent = sheet({
 <div class="completion-sentence">לשתי נקודות שיש להן שיעור <span class="math-ltr" dir="ltr">x</span> זהה, הקטע שביניהן מקביל לציר <span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</div>
 <div class="completion-sentence">לשתי נקודות שיש להן שיעור <span class="math-ltr" dir="ltr">y</span> זהה, הקטע שביניהן מקביל לציר <span class="math-ltr" dir="ltr">x</span>.</div>
 </div>
+${wordBank(['y'])}
 <section class="q-card">
 <h3>ג. השלימו.</h3>
 <ul class="tasks compact">

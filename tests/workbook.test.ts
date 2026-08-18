@@ -1,16 +1,47 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { WORKBOOK, TOTAL_PAGES, TOPICS, pageByNumber } from '../src/data/workbook';
-import { GAMES } from '../src/games';
+import { CONTENTS } from '../src/views/tocSheet';
 
 const FOOTER_F1 = 'יניב רז - מדריך מחוזי חט"ב בעיר ירושלים';
 const FOOTER_F2 = 'הדרכה במחוז ירושלים והעיר ירושלים - מנח"י, בהובלת איילת קריספין';
 
 describe('workbook integrity (USER_MEMORY.md mandatory checks)', () => {
-  it('has pages numbered 1..77 with no holes (worksheets + games interleaved)', () => {
-    expect(TOTAL_PAGES).toBe(77);
-    for (let n = 1; n <= 77; n++) expect(pageByNumber(n), `page ${n}`).toBeDefined();
-    expect(WORKBOOK.map((p) => p.n)).toEqual(Array.from({ length: 77 }, (_, i) => i + 1));
+  it('has pages numbered 1..78 with no holes (worksheets + games interleaved)', () => {
+    expect(TOTAL_PAGES).toBe(78);
+    for (let n = 1; n <= 78; n++) expect(pageByNumber(n), `page ${n}`).toBeDefined();
+    expect(WORKBOOK.map((p) => p.n)).toEqual(Array.from({ length: 78 }, (_, i) => i + 1));
+  });
+
+  /* תוכן העניינים מחזיק מספרי עמוד **ביד**, בעוד שמספרי העמודים עצמם נגזרים
+     מהמיקום ב-BOOK. לכן כל הוספה, מחיקה או סידור מחדש של עמוד מזיז את תחילת
+     הפרק — והתוכן ממשיך להצביע על העמוד הישן, בלי שאיש ישים לב. זה כבר קרה
+     פעם אחת (1/12/29/51/63 → 1/4/15/46/51/65 אחרי שינוי מבנה הפרקים), ולא
+     היה מה שיתפוס את זה: גם בדיקת הדפדפן משווה לרשימת מספרים קשיחה, כלומר
+     מעתיקה את אותה טעות. כאן הציפייה **נגזרת מהמבנה**. (02.08.2026) */
+  it('every contents entry points at the real first page of its chapter', () => {
+    expect(CONTENTS.length, 'the contents lists a different number of chapters').toBeGreaterThan(0);
+    for (const c of CONTENTS) {
+      const page = pageByNumber(c.page);
+      expect(page, `the contents points at page ${c.page}, which does not exist`).toBeDefined();
+
+      const topic = TOPICS.find((t) => t.pages.includes(c.page));
+      expect(topic, `page ${c.page} belongs to no chapter`).toBeDefined();
+      expect(
+        Math.min(...topic!.pages),
+        `„${c.title}" points at page ${c.page}, but its chapter starts on page ${Math.min(...topic!.pages)}`,
+      ).toBe(c.page);
+
+      /* הכותרת בתוכן זהה מילה במילה לכותרת האחידה שעל דפי הפרק. */
+      expect(
+        page!.title,
+        `the contents calls it „${c.title}" but page ${c.page} is titled „${page!.title}"`,
+      ).toBe(c.title);
+    }
+    const pages = CONTENTS.map((c) => c.page);
+    expect(pages, 'the chapters are not in reading order').toEqual([...pages].sort((a, b) => a - b));
+    expect(new Set(pages).size, 'two chapters start on the same page').toBe(pages.length);
+    expect(pages[0], 'the booklet does not open on chapter 1').toBe(1);
   });
 
   it('every page carries the canonical footer', () => {
@@ -47,11 +78,12 @@ describe('workbook integrity (USER_MEMORY.md mandatory checks)', () => {
     expect(pageByNumber(1)!.html).toMatch(/pair-blank|word-blank|class="blank"/);
   });
 
-  it('every game is a numbered page exactly once, in a topic', () => {
-    for (const g of GAMES) {
-      const hosts = WORKBOOK.filter((p) => p.gameId === g.id);
-      expect(hosts.length, `game ${g.id}`).toBe(1);
-      expect(hosts[0]!.html, `game ${g.id} host`).toContain(`data-game-host="${g.id}"`);
+  /* „המשימות שלנו הן להדפסה!!" (יניב, 31.07.2026). קודם נבדק כאן שכל שעשועון
+     רשום יושב על עמוד ממוספר; היום הכלל הפוך — אין שעשועונים, ואין עמוד
+     שמארח אחד. (הפקדים עצמם נבדקים ב־„answerable on paper" שלמטה.) */
+  it('no page hosts a game', () => {
+    for (const p of WORKBOOK) {
+      expect(p.html, `page ${p.n} hosts a game`).not.toContain('data-game-host');
     }
   });
 
@@ -65,7 +97,7 @@ describe('workbook integrity (USER_MEMORY.md mandatory checks)', () => {
 
   it('topics cover all pages exactly once', () => {
     const covered = TOPICS.flatMap((t) => t.pages).sort((a, b) => a - b);
-    expect(covered).toEqual(Array.from({ length: 77 }, (_, i) => i + 1));
+    expect(covered).toEqual(Array.from({ length: 78 }, (_, i) => i + 1));
   });
 
   it('every true/false table row has two uniform checkboxes', () => {
@@ -125,8 +157,8 @@ describe('every drawn coordinate stays inside its own system', () => {
 
 /* „המשימות שלנו רק להדפסה ולא מתוקשבות" (יניב, 30.07.2026, על עמוד 18):
    דף עבודה ממוספר חייב להיות פתיר על נייר. שדות קלט וכפתורים בתוך ה-HTML של
-   עמוד הם משימה שאי אפשר לענות עליה בעיפרון. (שעשועון חי נטען בזמן ריצה אל
-   game-host — זה נשאר; אבל ה-HTML המודפס של עמוד לעולם לא מכיל קלט.) */
+   עמוד הם משימה שאי אפשר לענות עליה בעיפרון. מ־31.07.2026 אין יותר גם חריג
+   של „שעשועון חי שנטען בזמן ריצה" — הוא בוטל, וכל עמוד הוא דף מודפס. */
 describe('a numbered page is answerable on paper', () => {
   it('no page HTML carries typing widgets — ticks are pencil-friendly, keyboards are not', () => {
     /* נכון/לא-נכון radios ARE the printed tick boxes Yaniv's rules demand —

@@ -13,6 +13,7 @@ import {
 } from './auth';
 import { DEFAULT_ANSWER_KEYS } from './answerKey';
 import { db } from './firebase';
+import { TOTAL_PAGES } from '../data/workbook';
 import { implicitAnswerKey } from './implicitAnswers';
 import { provenAnswerKey } from './provenAnswerKey';
 import type {
@@ -82,7 +83,7 @@ function validateDraft(draft: PageDraft): PageDraft {
   if (
     !Number.isInteger(draft.pageNumber) ||
     draft.pageNumber < 1 ||
-    draft.pageNumber > 77
+    draft.pageNumber > TOTAL_PAGES
   ) {
     throw new Error('מספר עמוד לא תקין.');
   }
@@ -99,7 +100,7 @@ function validateResult(result: PageResult): PageResult {
   if (
     !Number.isInteger(result.pageNumber) ||
     result.pageNumber < 1 ||
-    result.pageNumber > 77
+    result.pageNumber > TOTAL_PAGES
   ) {
     throw new Error('מספר עמוד לא תקין.');
   }

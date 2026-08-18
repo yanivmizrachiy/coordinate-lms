@@ -49,7 +49,7 @@ const diffCheck = spawnSync('git', ['diff', '--check'], {
 
 const repositoryChecks = [
   existsSync(resolve(root, 'RULES.md')),
-  answerCoverage?.pageCount === 77,
+  answerCoverage?.pageCount === 78,
   answerCoverage?.targetCount === reviewManifest?.targetCount,
   answerCoverage?.generatedAt === reviewManifest?.generatedAt,
   packageJson?.scripts?.['test:firestore'] ===

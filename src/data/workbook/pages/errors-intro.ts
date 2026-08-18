@@ -87,6 +87,16 @@ export const ERRORS_INTRO: WorkbookPageContent = sheet({
 <li>קטע המקביל לציר <span class="math-ltr" dir="ltr">x</span> הוא <span class="blank" data-missing="relation" style="--blank-width:5ch"></span> לציר <span class="math-ltr" dir="ltr">y</span>, כי הצירים מאונכים זה לזה.</li>
 </ul>
 </div>
+<div class="mist-card" data-answer="false">
+<div class="mist-head">מקרה 9<span>נכון / לא נכון</span>
+<div class="tf-options" role="group" aria-label="סמנו נכון או לא נכון"><label class="tf-option"><input type="radio" name="tf-error-9" value="true"><span>נכון</span></label><label class="tf-option"><input type="radio" name="tf-error-9" value="false"><span>לא נכון</span></label>
+</div>
+</div>
+<p>בקטע שקצותיו (1,3) ו־(4,3), את האורך מחשבים לפי שיעורי ה־y.</p><small>התיקון:</small>
+<ul class="tasks compact">
+<li>שיעורי ה־<span class="math-ltr" dir="ltr">y</span> כאן זהים, ולכן האורך מחושב בהכרח לפי שיעורי ה־<span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>
+</ul>
+</div>
 </div>
 `,
 });

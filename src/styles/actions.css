@@ -290,3 +290,28 @@
 @media print {
   .wsbar, .pick, [data-noprint] { display: none !important; }
 }
+
+/* חצי דפדוף גדולים — הקודם מצביע ימינה, הבא שמאלה (כיוון הקריאה העברי) */
+.btn--nav { gap: 7px; }
+.btn--nav .btn__arrow, .btn--nav { font-variant-emoji: text; }
+/* חץ מובלט — „תבליט את החיצים": גדול, מלא, עם משקל של שלט דרכים */
+.btn__arrow { font-size: 24px; font-weight: 900; line-height: 1; }
+
+/* הקודם והבא בצבעי הפרויקט — סגול וירוק מהפלטה של יניב (תוכן העניינים).
+   הדיו נבחר לפי מדידה: לבן קורא על הסגול; על הירוק רק נייבי עומד ב-4.5:1. */
+.btn--prev { background: #AA00FF; color: #fff; border-color: transparent; }
+.btn--prev:hover { filter: brightness(1.12); }
+.btn--next { background: #00C853; color: var(--act-ink); border-color: transparent; }
+.btn--next:hover { filter: brightness(1.07); }
+.btn--prev:focus-visible, .btn--next:focus-visible {
+  outline-color: var(--act-ink);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.9);
+}
+
+/* קפיצה חופשית לעמוד */
+.pagenav__jump { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+.pagenav__input {
+  width: 64px; min-height: var(--tapsize);
+  border: 1px solid var(--hairline); border-radius: 10px;
+  padding: 6px 8px; font: inherit; font-weight: 700; text-align: center;
+}

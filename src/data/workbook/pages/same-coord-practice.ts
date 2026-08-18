@@ -16,7 +16,7 @@ export const SAME_COORD_PRACTICE: WorkbookPageContent = sheet({
 </div>
 <p>השלימו:</p>
 <ul class="tasks">
-<li>הנקודה <span class="math-ltr" dir="ltr">P(3,1)</span> ו־<span class="math-ltr" dir="ltr">Q(3,6)</span> - שיעור <span class="blank" data-missing="letter" style="--blank-width:3ch"></span> זהה.</li>
+<li>לנקודות <span class="math-ltr" dir="ltr">P(3,1)</span> ו־<span class="math-ltr" dir="ltr">Q(3,6)</span> יש שיעור <span class="blank" data-missing="letter" style="--blank-width:3ch"></span> זהה.</li>
 <li>ב־<span class="math-ltr" dir="ltr">R(1,4)</span> ו־<span class="math-ltr" dir="ltr">S(7,4)</span> שיעור <span class="math-ltr" dir="ltr">y</span> זהה, ולכן הקטע <span class="math-ltr" dir="ltr">RS</span> מקביל לציר <span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>
 </ul>
 </section>

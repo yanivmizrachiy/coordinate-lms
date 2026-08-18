@@ -1,5 +1,5 @@
 import type { WorkbookPageContent } from '../types';
-import { sheet, blank, ltr, pair, exercise, grid } from '../authoring';
+import { sheet, blank, ltr, pair, exercise, calcBox, grid } from '../authoring';
 
 export const RECTANGLES_PRACTICE: WorkbookPageContent = sheet({
   sectionClass: "sheet practice",
@@ -31,12 +31,11 @@ ${grid({
 <li>ה<b>אורך</b> של מלבן הוא הצלע הארוכה, וה<b>רוחב</b> שלו הוא הצלע ה${blank(6, 'property')}.</li>
 <li>במלבן ${ltr('PQRS')} האורך הוא הצלע ${blank(4, 'letter')}, והרוחב הוא הצלע ${ltr('QR')}.</li>
 </ul>
-<div class="calc-box"><b>דרך החישוב:</b>
+<div class="calc-box">
 ${exercise('PQ')}
 ${exercise('QR')}
-${exercise('P')}
-${exercise('S', 'יח"ר')}
 </div>
+${calcBox({ lines: 1, perimeter: true, area: true, name: 'PQRS' })}
 </section>
 <section class="q-card span-2">
 <h3>ג. סמנו מלבן משלכם, ואז השלימו את החסר.</h3>
@@ -44,12 +43,11 @@ ${exercise('S', 'יח"ר')}
 <li>סמנו על הסרטוט שלמעלה מלבן ${ltr('ABCD')} שצלעותיו מקבילות לצירים, והאורך שלו גדול מהרוחב.</li>
 <li>הקודקודים שבחרתם: ${pair('A')} ${pair('B')} ${pair('C')} ${pair('D')}</li>
 </ul>
-<div class="calc-box"><b>דרך החישוב:</b>
+<div class="calc-box">
 ${exercise('AB')}
 ${exercise('BC')}
-${exercise('P')}
-${exercise('S', 'יח"ר')}
 </div>
+${calcBox({ lines: 1, perimeter: true, area: true, name: 'ABCD' })}
 </section>
 </div>
 `,

@@ -166,7 +166,7 @@ describe('LMS persistence merging', () => {
 });
 
 describe('teacher dashboard CSV', () => {
-  test('uses stable columns, UTF-8 BOM, ISO timestamps, and all 77 pages', () => {
+  test('uses stable columns, UTF-8 BOM, ISO timestamps, and all 78 pages', () => {
     const snapshot: DashboardSnapshot = {
       generatedAt: 300,
       source: 'firebase',
@@ -199,7 +199,7 @@ describe('teacher dashboard CSV', () => {
     const csv = buildDashboardCsv(snapshot);
     const lines = csv.trimEnd().split('\r\n');
     expect(csv.startsWith('\uFEFF')).toBe(true);
-    expect(lines).toHaveLength(78);
+    expect(lines).toHaveLength(79); // header + one row per page (78)
     expect(lines[0]).toContain(DASHBOARD_CSV_COLUMNS.join('\",\"'));
     expect(csv).toContain('1970-01-01T00:00:00.100Z');
     expect(csv).toContain('"נועה, ""כהן""\nכיתה ז"');

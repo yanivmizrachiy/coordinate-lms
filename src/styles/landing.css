@@ -122,14 +122,12 @@
 .ls-hero__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 44px; align-items: center; padding-block: 60px 64px; }
 .ls-hero__film { min-width: 0; }
 .ls-hero__film .ls-viewer { margin-top: 0; box-shadow: var(--ls-shadow-lg); }
-.ls-hero__filmcap { margin: 12px 4px 0; font-size: var(--ls-step--1); color: var(--ls-text-soft); }
 @media (max-width: 860px) {
   .ls-hero__grid { grid-template-columns: 1fr; gap: 26px; }
   .ls-hero__film { order: -1; }
 }
 .ls-hero__eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--ls-teal); font-weight: 800; font-size: var(--ls-step--1); margin-bottom: 10px; }
 .ls-hero__title { font-size: var(--ls-step-4); font-weight: 800; line-height: 1.05; color: var(--ls-ink); }
-.ls-hero__desc { margin-top: 18px; font-size: var(--ls-step-1); color: var(--ls-text); max-width: 34rem; }
 .ls-hero__actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* the axes motif, standing where misparim puts its +1/−1 badges */
@@ -189,19 +187,6 @@
 .ls-facade:hover .ls-facade__play { transform: scale(1.06); }
 .ls-facade:focus-visible { outline: 3px solid var(--ls-blue); outline-offset: 3px; }
 
-/* overlay controls on the local film */
-.ls-filmbtn {
-  position: absolute; z-index: 2; top: 12px; inset-inline-end: 12px;
-  display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 14px;
-  border: 0; border-radius: var(--ls-pill); cursor: pointer;
-  background: rgba(17, 32, 60, 0.72); color: #fff; font: inherit; font-weight: 700; font-size: var(--ls-step--1);
-  backdrop-filter: blur(6px);
-  transition: background var(--dur-quick) ease, transform var(--dur-press) ease;
-}
-.ls-filmbtn:hover { background: rgba(17, 32, 60, 0.88); }
-.ls-filmbtn:active { transform: scale(0.95); }
-.ls-filmbtn--replay { top: auto; inset-block-end: 12px; width: 40px; padding: 0; justify-content: center; font-size: 18px; }
-
 /* ---- the booklet, presented in the misparim pdfframe --------------------- */
 .ls-pdfframe { border: 1px solid var(--ls-gold-line); border-radius: var(--ls-radius); overflow: hidden; box-shadow: var(--ls-shadow-md); background: var(--ls-ink); }
 .ls-pdfframe__bar {
@@ -210,7 +195,11 @@
 }
 .ls-pdfframe__title { font-family: var(--ls-font-head); font-weight: 600; font-size: var(--ls-step-0); }
 .ls-pdfframe__acts { display: flex; gap: 8px; flex-wrap: wrap; }
-.ls-pdfframe__stage { background: #eef1f6; padding: 22px; display: grid; place-items: center; }
+.ls-pdfframe__stage { background: #eef1f6; padding: 22px 22px 26px; display: grid; place-items: center; gap: 18px; }
+/* „על החוברת למטה צריך להופיע במקום נוח כפתור ההתחל" — גדול, ממורכז, זהב,
+   מתחת לכריכה; אותו יעד כמו לחיצה על הכריכה עצמה. */
+.ls-pdfframe__startrow { display: flex; justify-content: center; }
+.ls-btn.ls-pdfframe__start { font-size: 22px; font-weight: 700; padding: 14px 72px; letter-spacing: .12em; }
 .ls-pdfframe__page {
   display: block; width: min(430px, 88%); border-radius: 8px; overflow: hidden;
   background: #fff; box-shadow: 0 8px 28px rgba(17, 32, 60, 0.2);

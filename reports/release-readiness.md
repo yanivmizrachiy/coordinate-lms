@@ -1,24 +1,24 @@
 # Classroom release-readiness contract
 
-Generated: 2026-08-01T23:56:19.916Z
+Generated: 2026-08-18T09:36:24.652Z
 
 Mode: static
 
-Overall status: **blocked**
+Overall status: **failure**
 
 | Domain | Status | Summary |
 |---|---|---|
-| Repository engineering gates | pass | The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent. |
-| Firestore emulator-backed validation | pass | Real Firestore operations passed against the demo project with the pinned Firebase CLI. |
+| Repository engineering gates | failure | One or more repository contracts or generated artifacts are missing or inconsistent. |
+| Firestore emulator-backed validation | failure | No current passing Firestore emulator result is available. |
 | External Firebase configuration and deployment | blocked | Repository validation cannot supply console settings, service-account configuration, or deployment evidence. |
-| Pedagogical answer-key review | blocked | 875/1061 targets are safely auto-checkable; 161 are signature-bound open-ended tasks; 25 remain unresolved. |
+| Pedagogical answer-key review | blocked | 729/1150 targets are safely auto-checkable; 137 are signature-bound open-ended tasks; 284 remain unresolved. |
 | Physical two-device classroom acceptance | blocked | No passing real student-phone and separate teacher-computer acceptance record exists. |
 
 ## Repository engineering gates
 
-Status: **pass**
+Status: **failure**
 
-The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent.
+One or more repository contracts or generated artifacts are missing or inconsistent.
 
 Evidence:
 
@@ -28,18 +28,23 @@ Evidence:
 - .github/workflows/ci.yml
 - git diff --check
 
+Blockers:
+
+- Repair repository contract failures before review.
+
 ## Firestore emulator-backed validation
 
-Status: **pass**
+Status: **failure**
 
-Real Firestore operations passed against the demo project with the pinned Firebase CLI.
+No current passing Firestore emulator result is available.
 
 Evidence:
 
-- suite: tests/firestore-emulator.test.ts
-- generatedAt: 2026-08-01T23:45:34.735Z
-- Firebase CLI: 15.25.1
-- contract SHA-256: 5219753cd0d484128af3e2568b0e9434d5b61bac54e708684c50f23e1ead2f06
+- reports/firestore-emulator.json
+
+Blockers:
+
+- Run npm run test:firestore with Java 21.
 
 ## External Firebase configuration and deployment
 
@@ -65,7 +70,7 @@ Blockers:
 
 Status: **blocked**
 
-875/1061 targets are safely auto-checkable; 161 are signature-bound open-ended tasks; 25 remain unresolved.
+729/1150 targets are safely auto-checkable; 137 are signature-bound open-ended tasks; 284 remain unresolved.
 
 Evidence:
 
@@ -74,7 +79,7 @@ Evidence:
 
 Blockers:
 
-- Resolve 25 targets in the answer-review studio without guessing.
+- Resolve 284 targets in the answer-review studio without guessing.
 
 ## Physical two-device classroom acceptance
 

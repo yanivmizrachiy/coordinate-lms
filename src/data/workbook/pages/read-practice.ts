@@ -34,7 +34,7 @@ export const READ_PRACTICE: WorkbookPageContent = sheet({
 </section>
 <section class="q-card span-2">
 <h3>שאלה נוספת</h3>
-<p>נקודה ממוקמת בגובה של <span class="math-ltr" dir="ltr">L</span> ובאותו קו אנכי כמו <span class="math-ltr" dir="ltr">M</span>.</p>
+<p>נקודה ממוקמת בגובה של הנקודה <span class="math-ltr" dir="ltr">L</span> ובאותו קו אנכי כמו <span class="math-ltr" dir="ltr">M</span>.</p>
 <ul class="tasks compact">
 <li>מהם שיעוריה? <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span></li>
 </ul>
@@ -44,6 +44,13 @@ export const READ_PRACTICE: WorkbookPageContent = sheet({
 </ul>
 <ul class="tasks compact">
 <li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
+</ul>
+</section>
+<section class="q-card">
+<h3>עוד נקודה אחת.</h3>
+<ul class="tasks compact">
+<li>סמנו נקודה <span class="math-ltr" dir="ltr">R</span> ששיעור ה־<span class="math-ltr" dir="ltr">y</span> שלה זהה לזה של הנקודה <span class="math-ltr" dir="ltr">K</span> ושיעור ה־<span class="math-ltr" dir="ltr">x</span> שלה 5, וכתבו: <span class="pair math-ltr" dir="ltr">R(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>
+<li>הנקודה <span class="math-ltr" dir="ltr">R</span> ממוקמת <span class="blank" data-missing="direction" style="--blank-width:5ch"></span> לנקודה <span class="math-ltr" dir="ltr">K</span>.</li>
 </ul>
 </section>
 </div>

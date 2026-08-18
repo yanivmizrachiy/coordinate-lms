@@ -1,6 +1,38 @@
 # Coordinate LMS — migration and launch status
 
-Updated: 2026-08-02
+Updated: 2026-08-18
+
+## 2026-08-18 — Source-of-truth consolidation (master-consolidation branch)
+
+`coordinate-lms` is now the ONLY master and source of truth for the whole
+project. The source repository `coordinate-first-quadrant` had continued to
+evolve after the original import (2026-07-31 → 2026-08-18): its entire final
+delta was imported here and it is now a frozen read-only archive.
+
+What the import brought:
+
+- Content fixes to 66 existing pages (wording, mathematics, drawings —
+  including the multi-agent audit fixes of 2026-08-02).
+- The canonical book restructure: **78 numbered pages** in a new chapter
+  order, uniform chapter headings (`chapterTitle`/`rechapter`), and 8 new
+  pages — 7 printed puzzle pages (`*-print`) plus `life-park-route`.
+- The seven interactive games remain available ON SCREEN: each printed puzzle
+  page hosts its game through the LMS-layer `SCREEN_GAMES` map; print output
+  stays exactly the canonical worksheet.
+- The dynamic solutions module (`src/data/solutions/`, `#/solutions`) —
+  teacher-gated in the LMS (admin session only).
+- Printable aid sheets (`#/print-aids`), regenerated booklet PDFs +
+  `hoveret-map.json`, updated poster asset, font packages
+  (Frank Ruhl Libre, Cormorant Garamond), and the archive's updated
+  presentation views and tests.
+
+Answer-coverage state after the renumbering: 588/735 reviewed proofs and
+137/161 reviewed open-ended decisions survived on unchanged prompt signatures
+and were mechanically re-keyed; 147 proofs + 24 open-ended lapsed with their
+changed wording and await fresh evidence-cited review, as do the new pages'
+targets. Measured coverage: **729/1,150 targets (63.4%)** across 78 pages
+(previously 875/1,061 across 77). Raising it goes through the review studio
+only — never guessing.
 
 The branch is materially closer to classroom use, but it is **not production
 ready**. Firebase is not configured, Firestore rules have not been deployed,
