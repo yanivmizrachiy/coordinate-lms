@@ -402,3 +402,62 @@
   padding-top: 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
+
+/* ---- a perfect 100: a gold, glowing badge apart from the plain red score ---
+   „ציון 100 לעשות עיצוב מיוחד יפה זוהר". The shine animates only where motion
+   is welcome, and the whole score block is dropped from print above. */
+.lms-score__num { line-height: 1; }
+
+.lms-score--perfect .lms-score__circle {
+  position: relative;
+  border-color: #b8860b;
+  color: #7a5200;
+  background:
+    radial-gradient(circle at 30% 28%, #fffbe6 0%, #ffe58a 42%, #f5c033 100%);
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.85),
+    0 0 22px 6px rgba(240, 190, 40, 0.75),
+    0 10px 26px rgba(150, 110, 0, 0.35);
+  animation: lms-score-glow 2.2s ease-in-out infinite;
+}
+
+.lms-score--perfect .lms-score__spark {
+  position: absolute;
+  top: -10px;
+  inset-inline-end: -8px;
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.9));
+  animation: lms-score-spark 1.6s ease-in-out infinite;
+}
+
+.lms-score--perfect .lms-score__label {
+  color: #7a5200;
+  font-weight: 900;
+}
+
+@keyframes lms-score-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px rgba(255, 255, 255, 0.85),
+      0 0 18px 4px rgba(240, 190, 40, 0.6),
+      0 10px 26px rgba(150, 110, 0, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgba(255, 255, 255, 0.95),
+      0 0 30px 10px rgba(245, 200, 60, 0.95),
+      0 10px 30px rgba(150, 110, 0, 0.4);
+  }
+}
+
+@keyframes lms-score-spark {
+  0%, 100% { transform: scale(1) rotate(-8deg); opacity: 0.85; }
+  50% { transform: scale(1.25) rotate(10deg); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lms-score--perfect .lms-score__circle,
+  .lms-score--perfect .lms-score__spark {
+    animation: none;
+  }
+}

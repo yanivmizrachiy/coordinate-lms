@@ -146,13 +146,6 @@ export function lmsLogin({
     required: 'true',
   }) as HTMLInputElement;
 
-  const username = elem('input', {
-    type: 'text',
-    autocomplete: 'username',
-    placeholder: 'שם משתמש',
-    required: 'true',
-  }) as HTMLInputElement;
-
   const email = elem('input', {
     type: 'email',
     autocomplete: 'email',
@@ -167,14 +160,11 @@ export function lmsLogin({
     required: 'true',
   }) as HTMLInputElement;
 
-  const className = elem('input', {
-    type: 'text',
-    placeholder: 'כיתה',
-  }) as HTMLInputElement;
-
   const school = elem('input', {
     type: 'text',
+    autocomplete: 'organization',
     placeholder: 'בית ספר',
+    required: 'true',
   }) as HTMLInputElement;
 
   const status = elem('div', {
@@ -200,14 +190,10 @@ export function lmsLogin({
     registrationMode = !registrationMode;
 
     fullName.hidden = !registrationMode;
-    username.hidden = !registrationMode;
-    className.hidden = !registrationMode;
     school.hidden = !registrationMode;
     fullName.required = registrationMode;
-    username.required = registrationMode;
+    school.required = registrationMode;
     fullName.disabled = !registrationMode;
-    username.disabled = !registrationMode;
-    className.disabled = !registrationMode;
     school.disabled = !registrationMode;
 
     password.autocomplete = registrationMode
@@ -229,7 +215,7 @@ export function lmsLogin({
     submitButton.disabled = true;
     switchButton.disabled = true;
     status.textContent =
-      'לא ניתן להירשם עד השלמת החיבור המרכזי. עמוד 1 עדיין זמין כאורח.';
+      'לא ניתן להירשם עד השלמת החיבור המרכזי. אפשר להמשיך לתרגל כאורח בכל העמודים — ההתקדמות נשמרת במכשיר.';
     status.dataset.kind = 'error';
   }
 
@@ -245,10 +231,8 @@ export function lmsLogin({
     const action = registrationMode
       ? registerStudent({
           fullName: fullName.value,
-          username: username.value,
           email: email.value,
           password: password.value,
-          className: className.value,
           school: school.value,
         })
       : loginStudent(email.value, password.value);
@@ -298,11 +282,9 @@ export function lmsLogin({
 
   form.append(
     fullName,
-    username,
+    school,
     email,
     password,
-    className,
-    school,
     status,
     submitButton,
     switchButton,

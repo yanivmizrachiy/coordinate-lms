@@ -503,37 +503,34 @@ export async function claimGuestProgress(
   const results = loadMap<PageResult>(RESULTS_KEY);
   const outcomes: PersistenceOutcome[] = [];
 
-  const guestDraftKey = compoundKey('guest', 1);
-  const guestResultKey = compoundKey('guest', 1);
+  /* A guest can now work on any page, so every guest record moves to the
+     account — not only page 1. Keys are `guest:<pageNumber>`; each draft and
+     result already carries its real pageNumber, so re-saving under the new uid
+     lands it on the right page. */
+  const isGuestKey = (key: string): boolean => key.startsWith('guest:');
+  const guestDraftKeys = Object.keys(drafts).filter(isGuestKey);
+  const guestResultKeys = Object.keys(results).filter(isGuestKey);
 
-  const guestDraft = drafts[guestDraftKey];
-  const guestResult = results[guestResultKey];
-
-  if (guestDraft) {
-    const claimedDraft: PageDraft = {
-      ...guestDraft,
-      uid,
-      updatedAt: Date.now(),
-    };
-
-    outcomes.push(await saveDraft(claimedDraft));
+  for (const key of guestDraftKeys) {
+    const guestDraft = drafts[key];
+    if (guestDraft) {
+      outcomes.push(await saveDraft({ ...guestDraft, uid, updatedAt: Date.now() }));
+    }
   }
 
-  if (guestResult) {
-    const claimedResult: PageResult = {
-      ...guestResult,
-      uid,
-    };
-
-    outcomes.push(await savePageResult(claimedResult));
+  for (const key of guestResultKeys) {
+    const guestResult = results[key];
+    if (guestResult) {
+      outcomes.push(await savePageResult({ ...guestResult, uid }));
+    }
   }
 
   const complete = canFinalizeGuestTransfer(outcomes);
   if (complete) {
     const latestDrafts = loadMap<PageDraft>(DRAFTS_KEY);
     const latestResults = loadMap<PageResult>(RESULTS_KEY);
-    delete latestDrafts[guestDraftKey];
-    delete latestResults[guestResultKey];
+    for (const key of guestDraftKeys) delete latestDrafts[key];
+    for (const key of guestResultKeys) delete latestResults[key];
     saveMap(DRAFTS_KEY, latestDrafts);
     saveMap(RESULTS_KEY, latestResults);
     clearSyncError(uid, 1, 'guest-transfer');

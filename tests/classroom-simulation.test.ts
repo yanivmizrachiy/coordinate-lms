@@ -75,8 +75,9 @@ beforeEach(() => {
 
 describe('two-student classroom simulation', () => {
   it('covers guest transfer, registration, page access, persistence, relogin, dashboard, and CSV', async () => {
+    // Every page is open to a guest now — access no longer gates on the page.
     expect(canAccessPage(1)).toBe(true);
-    expect(canAccessPage(2)).toBe(false);
+    expect(canAccessPage(2)).toBe(true);
     await saveDraft({ ...draft('guest', 1, 2), pageNumber: 1 });
     await savePageResult({ ...result('guest', 1, 84), pageNumber: 1 });
 
@@ -99,7 +100,8 @@ describe('two-student classroom simulation', () => {
       createdAt: 300,
     });
     await logoutStudent();
-    expect(canAccessPage(2)).toBe(false);
+    // Even after logout the page stays open — a guest may work anywhere.
+    expect(canAccessPage(2)).toBe(true);
     const reloggedA = await loginStudent(
       'noa@example.test',
       'student-a-password',

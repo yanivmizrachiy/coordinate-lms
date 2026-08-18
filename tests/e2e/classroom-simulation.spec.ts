@@ -16,13 +16,13 @@ interface StudentData {
 async function register(
   page: Page,
   fullName: string,
-  username: string,
+  school: string,
   email: string,
   password: string,
 ): Promise<void> {
   await page.goto('/#/login');
   await page.getByPlaceholder('שם מלא').fill(fullName);
-  await page.getByPlaceholder('שם משתמש').fill(username);
+  await page.getByPlaceholder('בית ספר').fill(school);
   await page.getByPlaceholder('כתובת אימייל').fill(email);
   await page.getByPlaceholder('סיסמה — לפחות 6 תווים').fill(password);
   await page.getByRole('button', { name: 'הרשמה ושמירת הציון' }).click();

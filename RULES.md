@@ -59,10 +59,18 @@ this file, the current instruction wins and this file must be reconciled.
 ## Scoring, access, and answer policy
 
 - Every submitted page score is an integer from 1 through 100. The retired
-  0–1200 model must never return.
+  0–1200 model must never return. A perfect 100 is shown with a distinct
+  celebratory glowing badge; every other score keeps the plain red badge.
 - Every automatically checked answer allows at most three attempts. Reload,
   retry, stale writes, or reconnection must never reset that count.
-- Page 1 is guest-accessible. Page 2 onward requires registration.
+- Every page is open to a guest (Yaniv, 2026-08-18): a guest solves, receives
+  feedback, and earns a page score exactly like a registered student. A
+  guest's progress is saved on the device only — never centrally, never in the
+  teacher dashboard. Registration (full name, school, email, password — no
+  username or class field; the stored username is derived from the email) adds
+  central save, cross-device resume, and dashboard visibility, and copies the
+  full guest history to the account. The single teacher/admin is Yaniv; only
+  the admin sees class-wide results.
 - An answer may be checked automatically only when it is reviewed explicitly,
   encoded in canonical metadata, mathematically deterministic, or a verified
   valid range.

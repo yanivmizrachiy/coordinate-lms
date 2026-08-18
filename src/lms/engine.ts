@@ -115,11 +115,13 @@ function setMessage(
   node.dataset.kind = kind;
 }
 
-export function canAccessPage(pageNumber: number): boolean {
-  return (
-    pageNumber <= LMS_CONFIG.guestFreePages ||
-    currentSession() !== null
-  );
+export function canAccessPage(_pageNumber: number): boolean {
+  /* Every page is open to a guest (Yaniv, 2026-08-18). A guest solves, gets
+     feedback and a page score exactly like a registered student; the only
+     difference is where it is kept — a guest's progress lives on the device
+     only, never centrally and never in the teacher dashboard. Registration is
+     for central save, cross-device resume, and being seen by the teacher. */
+  return true;
 }
 
 export function renderAccessGate(
@@ -205,7 +207,7 @@ export function attachLmsToPage(
       class: 'lms-panel__identity',
       text: session
         ? 'תלמיד: ' + session.fullName
-        : 'מצב אורח — עמוד ראשון בלבד',
+        : 'מצב אורח — ההתקדמות נשמרת במכשיר בלבד',
     }),
   );
 
@@ -475,18 +477,39 @@ export function attachLmsToPage(
   }
 
   function showScore(score: number): void {
+    /* A perfect page earns a perfect look — Yaniv: „ציון 100 לעשות עיצוב
+       מיוחד יפה זוהר". A gold, glowing badge with a spark, apart from the
+       plain red score of every other page; the shine stops under
+       prefers-reduced-motion, and none of it reaches print. */
+    const perfect = score >= LMS_CONFIG.maxScore;
+
     scoreHost.replaceChildren(
       elem(
         'div',
-        { class: 'lms-score' },
-        elem('div', {
-          class: 'lms-score__circle',
-          text: String(score),
-          'aria-label': 'ציון ' + String(score),
-        }),
+        { class: perfect ? 'lms-score lms-score--perfect' : 'lms-score' },
+        elem(
+          'div',
+          {
+            class: 'lms-score__circle',
+            'aria-label':
+              'ציון ' + String(score) + (perfect ? ' — ציון מושלם' : ''),
+          },
+          ...(perfect
+            ? [
+                elem('span', {
+                  class: 'lms-score__spark',
+                  text: '✨',
+                  'aria-hidden': 'true',
+                }),
+                elem('span', { class: 'lms-score__num', text: String(score) }),
+              ]
+            : [elem('span', { class: 'lms-score__num', text: String(score) })]),
+        ),
         elem('div', {
           class: 'lms-score__label',
-          text: 'הציון בעמוד: ' + String(score) + ' מתוך 100',
+          text: perfect
+            ? '🎉 ציון מושלם! ' + String(score) + ' מתוך 100'
+            : 'הציון בעמוד: ' + String(score) + ' מתוך 100',
         }),
       ),
     );
@@ -740,10 +763,10 @@ export function attachLmsToPage(
           'ההגשה נשמרה במכשיר, אבל הסנכרון המרכזי לא הושלם. לחצו על ניסיון סנכרון נוסף.',
           'error',
         );
-      } else if (uid === 'guest' && pageNumber === 1) {
+      } else if (uid === 'guest') {
         setMessage(
           status,
-          'העמוד נשמר במכשיר במצב אורח. כדי לעבור לעמוד 2 יש להירשם, ואז הציון ישויך לחשבון.',
+          'העמוד נשמר במכשיר במצב אורח. כדי לשמור בענן, להמשיך בכל מכשיר ולהופיע אצל המורה — יש להירשם, וההתקדמות תעבור לחשבון.',
           'success',
         );
         accountButton.textContent = 'הרשמה ושמירת ההתקדמות';

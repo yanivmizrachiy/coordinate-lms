@@ -28,11 +28,15 @@ interface LocalAccount {
 
 interface RegistrationInput {
   fullName: string;
-  username: string;
   email: string;
   password: string;
-  className?: string;
   school?: string;
+  /* Registration collects only full name, school, email and password (Yaniv,
+     2026-08-18). `username` is kept in the stored profile so the dashboard,
+     CSV and Firestore rules are unchanged — it is derived from the email when
+     the form does not supply one. */
+  username?: string;
+  className?: string;
 }
 
 function safeParse<T>(raw: string | null, fallback: T): T {
@@ -125,12 +129,12 @@ export async function registerStudent(
   input: RegistrationInput,
 ): Promise<LmsSession> {
   const fullName = input.fullName.trim();
-  const username = input.username.trim();
   const email = input.email.trim().toLowerCase();
   const password = input.password;
+  const username = input.username?.trim() || email;
 
-  if (!fullName || !username || !email || !password) {
-    throw new Error('יש למלא שם, שם משתמש, אימייל וסיסמה.');
+  if (!fullName || !email || !password) {
+    throw new Error('יש למלא שם מלא, בית ספר, אימייל וסיסמה.');
   }
 
   if (password.length < 6) {
