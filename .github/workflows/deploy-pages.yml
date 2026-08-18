@@ -5,6 +5,14 @@ name: Deploy to GitHub Pages (manual)
 
 on:
   workflow_dispatch:
+    inputs:
+      guest_preview:
+        description: >-
+          Publish a GUEST-ONLY site even without Firebase. Guests solve every
+          page and get scores; registration stays fail-closed until the six
+          Firebase secrets are added. Leave false for a full classroom release.
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -58,8 +66,13 @@ jobs:
           done
 
           if [[ "$missing" -ne 0 ]]; then
-            echo "Deployment stopped: central registration must be configured before publishing."
-            exit 1
+            if [[ "${{ inputs.guest_preview }}" == "true" ]]; then
+              echo "::warning title=Guest-only publish::Firebase is not configured — publishing a GUEST-ONLY site. Every page is solvable and scored as a guest (progress stays on the device); registration remains fail-closed and will refuse until the six Firebase secrets are added. This is NOT a full classroom release."
+            else
+              echo "Deployment stopped: central registration must be configured before publishing."
+              echo "To publish a guest-only site now, re-run this workflow with guest_preview = true."
+              exit 1
+            fi
           fi
       - run: npm test
       - run: npm run build
