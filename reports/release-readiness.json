@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-01T23:56:19.916Z",
+  "generatedAt": "2026-08-18T09:36:24.652Z",
   "mode": "static",
-  "status": "blocked",
+  "status": "failure",
   "releaseReady": false,
   "domains": [
     {
       "id": "repository-engineering",
       "label": "Repository engineering gates",
-      "status": "pass",
-      "summary": "The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent.",
+      "status": "failure",
+      "summary": "One or more repository contracts or generated artifacts are missing or inconsistent.",
       "evidence": [
         "RULES.md",
         "reports/answer-coverage.json",
@@ -17,20 +17,21 @@
         ".github/workflows/ci.yml",
         "git diff --check"
       ],
-      "blockers": []
+      "blockers": [
+        "Repair repository contract failures before review."
+      ]
     },
     {
       "id": "emulator-validation",
       "label": "Firestore emulator-backed validation",
-      "status": "pass",
-      "summary": "Real Firestore operations passed against the demo project with the pinned Firebase CLI.",
+      "status": "failure",
+      "summary": "No current passing Firestore emulator result is available.",
       "evidence": [
-        "suite: tests/firestore-emulator.test.ts",
-        "generatedAt: 2026-08-01T23:45:34.735Z",
-        "Firebase CLI: 15.25.1",
-        "contract SHA-256: 5219753cd0d484128af3e2568b0e9434d5b61bac54e708684c50f23e1ead2f06"
+        "reports/firestore-emulator.json"
       ],
-      "blockers": []
+      "blockers": [
+        "Run npm run test:firestore with Java 21."
+      ]
     },
     {
       "id": "external-firebase",
@@ -54,13 +55,13 @@
       "id": "pedagogical-review",
       "label": "Pedagogical answer-key review",
       "status": "blocked",
-      "summary": "875/1061 targets are safely auto-checkable; 161 are signature-bound open-ended tasks; 25 remain unresolved.",
+      "summary": "729/1150 targets are safely auto-checkable; 137 are signature-bound open-ended tasks; 284 remain unresolved.",
       "evidence": [
         "reports/answer-coverage.json",
         "public/answer-review-manifest.json"
       ],
       "blockers": [
-        "Resolve 25 targets in the answer-review studio without guessing."
+        "Resolve 284 targets in the answer-review studio without guessing."
       ]
     },
     {
