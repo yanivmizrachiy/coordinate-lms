@@ -291,6 +291,7 @@ export function attachLmsToPage(
   let draftSyncFailed = false;
   let resultSyncFailed = false;
   let submissionInFlight = false;
+  let submitConfirmPending = false;
   let checkPromise: Promise<CheckSummary> | null = null;
   const pendingActivity = new Map<string, ActivityEvent>();
 
@@ -649,19 +650,26 @@ export function attachLmsToPage(
               Boolean(progress),
           );
 
-        if (
-          keyedEntries.some(
-            (progress) =>
-              !progress.correct && !progress.locked,
-          )
-        ) {
+        const unresolved = keyedEntries.filter(
+          (progress) => !progress.correct && !progress.locked,
+        ).length;
+
+        if (unresolved > 0 && !submitConfirmPending) {
+          /* Don't trap a learner who does not know one answer: an empty
+             checkable blank never locks on its own, so a hard block would make
+             the page score unreachable forever. The first press explains; the
+             next one finalises and scores the unanswered targets as 0. */
+          submitConfirmPending = true;
           setMessage(
             status,
-            'עדיין יש תשובות שניתן לתקן. לאחר 3 ניסיונות התשובה תינעל.',
-            'error',
+            'נותרו ' +
+              String(unresolved) +
+              ' תשובות שלא הושלמו. אפשר להמשיך לתרגל, או ללחוץ „הגשת העמוד" שוב כדי לקבל ציון על מה שנפתר.',
           );
           return;
         }
+
+        submitConfirmPending = false;
 
         score = calculatePageScore(
           keyedEntries.map((progress) => ({
@@ -868,6 +876,9 @@ export function attachLmsToPage(
       const progress = progressFor(qid);
       progress.answer = targetValue(target);
       progress.correct = false;
+      /* An edit after the „press again to submit" prompt means the learner
+         is still working — so finalising should be a deliberate press again. */
+      submitConfirmPending = false;
 
       if (!progress.locked) {
         target.dataset.lmsState = progress.answer
