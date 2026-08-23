@@ -4,29 +4,48 @@
   margin-top: 9px;
 }
 
+/* The hit target stays 44px for touch, while the painted control is only 32px
+   high. Small-looking must not mean hard to tap. */
 .lms-qcheck__btn {
+  position: relative;
   min-height: 44px;
-  padding: 6px 10px;
-  border-radius: 9px;
-  background: #f7f9fb;
-  border-color: #cfd8e3;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: #334b63;
   box-shadow: none;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
 }
 
-.lms-qcheck__btn:hover {
-  background: #edf2f6;
-  border-color: #bcc9d6;
+.lms-qcheck__btn::before {
+  content: '';
+  position: absolute;
+  inset: 6px 0;
+  border: 1px solid #cfd8e3;
+  border-radius: 8px;
+  background: #f8fafc;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 4%);
+  pointer-events: none;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.lms-qcheck__btn:hover::before {
+  background: #f1f5f8;
+  border-color: #bac7d4;
+}
+
+.lms-qcheck__btn:focus-visible {
+  outline-offset: -3px;
 }
 
 .lms-qstatus {
-  min-height: 34px;
-  padding: 5px 9px;
+  min-height: 32px;
+  padding: 4px 8px;
   border: 1px solid transparent;
-  border-radius: 9px;
-  font-size: 13px;
+  border-radius: 8px;
+  font-size: 12.5px;
   font-weight: 750;
   line-height: 1.25;
 }
@@ -68,7 +87,7 @@
 
   .lms-qcheck__btn {
     width: auto !important;
-    min-width: 88px;
+    min-width: 82px;
     min-height: 44px;
     flex: 0 0 auto;
   }
