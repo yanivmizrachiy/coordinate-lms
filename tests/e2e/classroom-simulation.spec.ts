@@ -63,7 +63,8 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
 
   try {
     await studentA.goto('/#/workbook/1');
-    await expect(studentA.locator('.lms-panel__identity')).toContainText('מצב אורח');
+    await expect(studentA.locator('.sheet')).toHaveCount(1);
+    await expect(studentA.locator('.lms-panel__identity')).toHaveCount(0);
     await studentA.locator('[data-lms-qid="p1-q1"]').fill('טיוטת אורח');
     await expect
       .poll(() =>
@@ -85,7 +86,10 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     );
     const target = studentA.locator('[data-lms-qid="p2-q1"]');
     await target.fill('תשובה שגויה');
-    await studentA.getByRole('button', { name: 'בדיקת תשובות' }).click();
+    const question = target.locator(
+      'xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")][1]',
+    );
+    await question.getByRole('button', { name: 'להגיש שאלה לבדיקה' }).click();
     await expect(target).toHaveAttribute('data-lms-attempts', '1');
     await studentA.reload();
     await expect(studentA.locator('[data-lms-qid="p2-q1"]'))
@@ -171,7 +175,7 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     expect(csv.startsWith('\uFEFF')).toBe(true);
     expect(csv).toContain('נועה כהן');
     expect(csv).toContain('אורי לוי');
-    expect(csv.trimEnd().split('\r\n')).toHaveLength(157); // header + 2 students × 78 pages
+    expect(csv.trimEnd().split('\r\n')).toHaveLength(157);
 
     await teacher.goto('/#/keys');
     await expect(teacher.getByRole('heading', { name: 'סטודיו סקירת תשובות' }))
