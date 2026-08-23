@@ -1,6 +1,6 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-18
+Updated: 2026-08-23
 
 This is the single source of truth for work in `yanivmizrachiy/coordinate-lms`.
 `USER_MEMORY.md` and `HANDOFF.md` preserve historical workbook decisions, but
@@ -34,6 +34,26 @@ this file, the current instruction wins and this file must be reconciled.
   deployment require explicit confirmation for the current operation.
 - Never print, commit, expose, or invent credentials.
 
+## First-entry screen and registration explanation
+
+- `#/` is the mandatory first screen on every normal entry to the site. It must
+  explain in very simple Hebrew, before the learner starts, the difference
+  between free guest practice and a registered account.
+- The screen presents two clear primary choices: **תרגול חופשי — בלי רישום**
+  and **הרשמה ושמירת ציונים**, plus an obvious route for an existing user to
+  sign in. The rich workbook/materials landing remains available at `#/home`.
+- Guest copy must say plainly: all practice pages are open, feedback is
+  immediate, up to three attempts are available, a page score may be shown at
+  the end, but **the guest score is not saved**, is not available on another
+  device, and is not visible to the teacher.
+- Registered-account copy must say plainly: registration uses full name,
+  school, email and password; scores and progress are saved to the account,
+  cross-device resume is available after sign-in, and the teacher/admin can
+  see the student's results and progress.
+- Student-facing registration errors must be understandable Hebrew messages,
+  never raw Firebase error codes. The registration backend must enforce all
+  four required fields, not rely only on browser `required` attributes.
+
 ## Canonical workbook integrity
 
 - The canonical booklet has **78 numbered pages** (since the 2026-08-18
@@ -58,19 +78,26 @@ this file, the current instruction wins and this file must be reconciled.
 
 ## Scoring, access, and answer policy
 
-- Every submitted page score is an integer from 1 through 100. The retired
-  0–1200 model must never return. A perfect 100 is shown with a distinct
-  celebratory glowing badge; every other score keeps the plain red badge.
+- Every submitted registered-account page score is an integer from 1 through
+  100. The retired 0–1200 model must never return. A perfect 100 is shown with
+  a distinct celebratory glowing badge; every other score keeps the plain red
+  badge. A guest may see the same calculated score on screen, but that score is
+  ephemeral and is not persisted.
 - Every automatically checked answer allows at most three attempts. Reload,
   retry, stale writes, or reconnection must never reset that count.
-- Every page is open to a guest (Yaniv, 2026-08-18): a guest solves, receives
-  feedback, and earns a page score exactly like a registered student. A
-  guest's progress is saved on the device only — never centrally, never in the
-  teacher dashboard. Registration (full name, school, email, password — no
-  username or class field; the stored username is derived from the email) adds
-  central save, cross-device resume, and dashboard visibility, and copies the
-  full guest history to the account. The single teacher/admin is Yaniv; only
-  the admin sees class-wide results.
+- Every page is open to a guest. A guest solves and receives the same immediate
+  feedback as a registered student. Guest answer/draft state and attempt counts
+  may be kept on the current device solely to preserve the three-attempt model,
+  but guest **page scores/results are never saved locally or centrally and never
+  appear in the teacher dashboard**. Reloading may restore draft/attempt state,
+  but it must not restore a submitted guest score.
+- Registration uses full name, school, email and password — no username or
+  class field; the stored username is derived from the email. Registration
+  enables central score/result persistence, progress persistence,
+  cross-device resume and dashboard visibility. If a learner registers after
+  guest practice, unsent guest draft/attempt state may be transferred, but a
+  previously displayed guest score must not be imported into the account.
+  The single teacher/admin is Yaniv; only the admin sees class-wide results.
 - An answer may be checked automatically only when it is reviewed explicitly,
   encoded in canonical metadata, mathematically deterministic, or a verified
   valid range.
@@ -123,7 +150,8 @@ this file, the current instruction wins and this file must be reconciled.
   (dynamic `import()` in `main.ts`), and the Firebase SDK is loaded only by the
   screens that sign a student in. A static view import in `main.ts`, or Firebase
   reaching the entry module, is a regression — `tests/ssot-guard.test.ts` fails
-  the build on either.
+  the build on either. The first-entry explanation must therefore remain free
+  of Firebase imports.
 - Async screen loading must stay honest: a stale navigation is dropped, a wait
   long enough to feel like one is explained, and a screen whose code never
   arrives offers a retry rather than a blank page.
@@ -135,10 +163,13 @@ this file, the current instruction wins and this file must be reconciled.
   the central write actually succeeded.
 - Central failures must be visible and retryable. Retries must be idempotent and
   must not duplicate results, attempts, or activity events.
-- Guest progress is copied to an account before guest source records are
-  removed. A failed central transfer leaves the guest source intact.
-- Concurrent and stale writes must preserve the latest valid state, the best
-  score, the highest attempt count, and any completed/locked state.
+- Guest draft/attempt state may be copied to a registered account before the
+  guest draft source is removed. A failed central transfer leaves that draft
+  source intact. Guest score/result records are forbidden: legacy guest result
+  entries are ignored and purged rather than copied into an account.
+- Concurrent and stale registered-user writes must preserve the latest valid
+  state, the best score, the highest attempt count, and any completed/locked
+  state.
 - Teacher views must distinguish a central class snapshot from local fallback
   data and expose synchronization errors rather than hiding them.
 
