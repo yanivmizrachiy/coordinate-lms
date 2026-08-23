@@ -10,6 +10,8 @@ interface TargetSnapshot {
   state: string;
 }
 
+const maxCorrections = LMS_CONFIG.maxAttempts - 1;
+
 function targetsFor(control: HTMLElement): HTMLElement[] {
   const anchor = control.parentElement ?? control;
   return Array.from(anchor.querySelectorAll<HTMLElement>('[data-lms-qid]'));
@@ -37,9 +39,11 @@ function roundedPoints(value: number): number {
 
 function attemptLabel(attempts: number): string {
   if (attempts <= 0) return '';
-  if (attempts === 1) return 'זה היה הניסיון הראשון. נשארו 3 אפשרויות תיקון.';
-  const correction = Math.min(3, attempts - 1);
-  return `זה היה תיקון ${correction} מתוך 3.`;
+  if (attempts === 1) {
+    return `זה היה הניסיון הראשון. נשארו ${maxCorrections} אפשרויות תיקון.`;
+  }
+  const correction = Math.min(maxCorrections, attempts - 1);
+  return `זה היה תיקון ${correction} מתוך ${maxCorrections}.`;
 }
 
 function feedbackState(qstate: string): TeacherFeedbackState {
@@ -70,23 +74,23 @@ function messageFor(
       0,
     ) / relevant.length;
 
-  const remainingPoints = roundedPoints(remaining * 100);
-  const lostPoints = 100 - remainingPoints;
+  const remainingPoints = roundedPoints(remaining * LMS_CONFIG.maxScore);
+  const lostPoints = LMS_CONFIG.maxScore - remainingPoints;
   const voice = teacherVoice(feedbackState(qstate), maxAttempt, questionIndex);
 
   if (qstate === 'correct') {
     if (lostPoints === 0) {
-      return `${voice} נשמרו כל 100 הנקודות של השאלה.`;
+      return `${voice} נשמרו כל ${LMS_CONFIG.maxScore} הנקודות של השאלה.`;
     }
-    return `${voice} ${attemptLabel(maxAttempt)} בגלל הניסיונות הקודמים ירדו ${lostPoints} נקודות; נשארו ${remainingPoints} מתוך 100 נקודות לשאלה.`;
+    return `${voice} ${attemptLabel(maxAttempt)} בגלל הניסיונות הקודמים ירדו ${lostPoints} נקודות; נשארו ${remainingPoints} מתוך ${LMS_CONFIG.maxScore} נקודות לשאלה.`;
   }
 
   if (qstate === 'locked') {
-    return `${voice} נוצלו הניסיון הראשון וכל 3 אפשרויות התיקון. בחלקים שלא תוקנו לא נשאר ניקוד. קרא את ההסבר כדי להבין את הדרך לפני שממשיכים.`;
+    return `${voice} נוצלו הניסיון הראשון וכל ${maxCorrections} אפשרויות התיקון. בחלקים שלא תוקנו לא נשאר ניקוד. קרא את ההסבר כדי להבין את הדרך לפני שממשיכים.`;
   }
 
   const used = Math.min(maxAttempt, LMS_CONFIG.maxAttempts);
-  return `${voice} ${attemptLabel(used)} עד עכשיו ירדו ${lostPoints} נקודות מהניקוד האפשרי של השאלה; המקסימום שנותר הוא ${remainingPoints} מתוך 100. תקן רק את החלקים שסומנו ונסה שוב.`.trim();
+  return `${voice} ${attemptLabel(used)} עד עכשיו ירדו ${lostPoints} נקודות מהניקוד האפשרי של השאלה; המקסימום שנותר הוא ${remainingPoints} מתוך ${LMS_CONFIG.maxScore}. תקן רק את החלקים שסומנו ונסה שוב.`.trim();
 }
 
 function attach(control: HTMLElement, questionIndex: number): () => void {
