@@ -38,7 +38,7 @@ export function lmsLogin({
         }),
         elem('p', {
           text:
-            'החשבון מחובר. כל תוצאה חדשה תישמר תחת המשתמש הזה.',
+            'החשבון מחובר. מעכשיו ציונים והתקדמות חדשים נשמרים בחשבון.',
         }),
       ),
     );
@@ -50,11 +50,11 @@ export function lmsLogin({
     const continueButton = elem('button', {
       class: 'btn btn--gold',
       type: 'button',
-      text: 'המשך לעמוד 2',
+      text: 'המשך לתרגול',
     });
 
     continueButton.addEventListener('click', () => {
-      navigate('#/workbook/2');
+      navigate('#/workbook/1');
     });
 
     const progressButton = elem('button', {
@@ -111,12 +111,12 @@ export function lmsLogin({
   }
 
   const title = elem('h1', {
-    text: 'הרשמה להמשך התרגול',
+    text: 'הרשמה ושמירת ציונים',
   });
 
   const explanation = elem('p', {
     text:
-      'עמוד 1 פתוח ללא הרשמה. לאחר ההרשמה הציון שכבר התקבל נשמר בחשבון.',
+      'אפשר לתרגל בלי רישום, אבל ציוני אורח אינם נשמרים. בהרשמה הציונים וההתקדמות נשמרים בחשבון ואפשר להמשיך גם ממכשיר אחר.',
   });
 
   const registrationAvailable =
@@ -127,12 +127,12 @@ export function lmsLogin({
       ? 'lms-mode lms-mode--online'
       : 'lms-mode lms-mode--local',
     text: firebaseConfigured
-      ? 'שמירה מרכזית מחוברת ל־Firebase.'
+      ? 'שמירת הציונים לחשבון פעילה.'
       : localLmsFallbackEnabled
         ? 'מצב פיתוח מקומי בלבד — הנתונים אינם משותפים בין מכשירים.'
-        : 'ההרשמה נעולה: חסרות ' +
+        : 'ההרשמה אינה זמינה כרגע כי החיבור לשמירת חשבונות עדיין לא הושלם (' +
           String(missingFirebaseSettings.length) +
-          ' הגדרות Firebase. כך נמנעת יצירת הרשמה מקומית שלא תופיע בדשבורד המורה.',
+          ' הגדרות חסרות). אפשר להמשיך לתרגל בלי רישום; הציונים לא יישמרו.',
   });
 
   const form = elem('form', {
@@ -177,7 +177,7 @@ export function lmsLogin({
   const submitButton = elem('button', {
     class: 'btn btn--gold',
     type: 'submit',
-    text: 'הרשמה ושמירת הציון',
+    text: 'הרשמה ושמירת ציונים',
   }) as HTMLButtonElement;
 
   const switchButton = elem('button', {
@@ -201,7 +201,7 @@ export function lmsLogin({
       : 'current-password';
 
     submitButton.textContent = registrationMode
-      ? 'הרשמה ושמירת הציון'
+      ? 'הרשמה ושמירת ציונים'
       : 'התחברות';
 
     switchButton.textContent = registrationMode
@@ -215,7 +215,7 @@ export function lmsLogin({
     submitButton.disabled = true;
     switchButton.disabled = true;
     status.textContent =
-      'לא ניתן להירשם עד השלמת החיבור המרכזי. אפשר להמשיך לתרגל כאורח בכל העמודים — ההתקדמות נשמרת במכשיר.';
+      'כרגע אי אפשר להירשם או להתחבר. אפשר להמשיך לתרגל כאורח בכל העמודים; הציונים אינם נשמרים.';
     status.dataset.kind = 'error';
   }
 
@@ -225,7 +225,9 @@ export function lmsLogin({
     if (!registrationAvailable) return;
 
     submitButton.setAttribute('disabled', 'true');
-    status.textContent = 'מתבצעת שמירה…';
+    status.textContent = registrationMode
+      ? 'יוצר את החשבון…'
+      : 'מתחבר…';
     status.dataset.kind = 'normal';
 
     const action = registrationMode
@@ -243,7 +245,7 @@ export function lmsLogin({
 
         if (!guestClaim.complete) {
           status.textContent =
-            'החשבון נוצר, אבל העברת התקדמות האורח למערכת המרכזית נכשלה. ההתקדמות נשארה במכשיר; בדקו חיבור ונסו להתחבר שוב.';
+            'החשבון נוצר, אבל העברת טיוטת התרגול מהמכשיר לחשבון לא הושלמה. הטיוטה נשארה במכשיר; בדקו חיבור ונסו להתחבר שוב.';
           status.dataset.kind = 'error';
           return;
         }
@@ -258,14 +260,14 @@ export function lmsLogin({
         });
 
         status.textContent = activityOutcome.central === 'failed'
-          ? 'החשבון וההתקדמות נשמרו, אך רישום פעילות ההתחברות לא הסתנכרן. עוברים לתרגול…'
-          : 'החשבון וההתקדמות נשמרו. עוברים להמשך התרגול…';
+          ? 'החשבון פעיל. מעכשיו הציונים יישמרו, אך רישום פעילות ההתחברות עדיין לא הסתנכרן.'
+          : 'החשבון פעיל. מעכשיו הציונים וההתקדמות יישמרו בחשבון.';
         status.dataset.kind = activityOutcome.central === 'failed'
           ? 'error'
           : 'success';
 
         window.setTimeout(() => {
-          navigate('#/workbook/2');
+          navigate('#/workbook/1');
         }, 400);
       })
       .catch((error: unknown) => {
