@@ -12,6 +12,7 @@ import {
   listLocalProfiles,
 } from './auth';
 import { DEFAULT_ANSWER_KEYS } from './answerKey';
+import { LMS_CONFIG } from './config';
 import { db } from './firebase';
 import { TOTAL_PAGES } from '../data/workbook';
 import { implicitAnswerKey } from './implicitAnswers';
@@ -74,8 +75,16 @@ function maxAttemptCount(
 }
 
 function assertAttemptCount(value: number): void {
-  if (!Number.isInteger(value) || value < 0 || value > 3) {
-    throw new Error('מספר הניסיונות חייב להיות מספר שלם בין 0 ל־3.');
+  if (
+    !Number.isInteger(value) ||
+    value < 0 ||
+    value > LMS_CONFIG.maxAttempts
+  ) {
+    throw new Error(
+      'מספר הניסיונות חייב להיות מספר שלם בין 0 ל־' +
+        String(LMS_CONFIG.maxAttempts) +
+        '.',
+    );
   }
 }
 
