@@ -2,6 +2,10 @@
    Base reset + app chrome (RTL, mobile-first).
    =========================================================================== */
 * { box-sizing: border-box; }
+/* The HTML hidden contract must win over component display rules. Without this,
+   classes such as .iconbtn { display:inline-flex } can accidentally resurrect
+   controls that the current product flow deliberately hides. */
+[hidden] { display: none !important; }
 /* scroll-padding: anything scrolled INTO view stops CLEAR of the sticky bars —
    the app bar above, the page navigator below. Without this, a game button
    scrolled to an edge sat under a bar and swallowed the tap — found on a
