@@ -46,11 +46,63 @@ export function isAllowedExpectedAnswer(value: unknown): value is string {
 
 export function normalizeAnswer(raw: string): string {
   return raw
+    .normalize('NFKC')
     .trim()
+    .replace(/[\u0591-\u05C7]/g, '')
     .replace(/[־–—]/g, '-')
+    .replace(/[׳']/g, '')
+    .replace(/[״"]/g, '')
+    .replace(/[.,;:!?()[\]{}]/g, '')
     .replace(/\u00a0/g, ' ')
     .replace(/\s+/g, '')
     .toLocaleLowerCase('he');
+}
+
+function isHebrewWordLike(value: string): boolean {
+  return value.length >= 3 && /^[\u05D0-\u05EA-]+$/.test(value);
+}
+
+/**
+ * Bounded Damerau-Levenshtein distance for harmless spelling tolerance.
+ * This is intentionally used only for Hebrew word-like answers — never for
+ * numbers, ordered data or set answers — so mathematical meaning stays strict.
+ */
+function editDistance(a: string, b: string): number {
+  const rows = a.length + 1;
+  const cols = b.length + 1;
+  const matrix = Array.from({ length: rows }, () => Array<number>(cols).fill(0));
+
+  for (let i = 0; i < rows; i += 1) matrix[i]![0] = i;
+  for (let j = 0; j < cols; j += 1) matrix[0]![j] = j;
+
+  for (let i = 1; i < rows; i += 1) {
+    for (let j = 1; j < cols; j += 1) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      let best = Math.min(
+        matrix[i - 1]![j]! + 1,
+        matrix[i]![j - 1]! + 1,
+        matrix[i - 1]![j - 1]! + cost,
+      );
+      if (
+        i > 1 &&
+        j > 1 &&
+        a[i - 1] === b[j - 2] &&
+        a[i - 2] === b[j - 1]
+      ) {
+        best = Math.min(best, matrix[i - 2]![j - 2]! + 1);
+      }
+      matrix[i]![j] = best;
+    }
+  }
+
+  return matrix[a.length]![b.length]!;
+}
+
+function harmlessHebrewVariant(actual: string, expected: string): boolean {
+  if (!isHebrewWordLike(actual) || !isHebrewWordLike(expected)) return false;
+  const longest = Math.max(actual.length, expected.length);
+  const allowed = longest >= 8 ? 2 : 1;
+  return editDistance(actual, expected) <= allowed;
 }
 
 export function answersMatch(raw: string, expected: readonly string[]): boolean {
@@ -83,12 +135,15 @@ export function answersMatch(raw: string, expected: readonly string[]): boolean 
           [...expectedTokens].sort().join(',')
       );
     }
-    const candidateNumber = numericValue(candidate);
 
+    const candidateNumber = numericValue(candidate);
     if (rawNumber !== null && candidateNumber !== null) {
       return Math.abs(rawNumber - candidateNumber) < 1e-12;
     }
 
-    return normalizeAnswer(candidate) === normalized;
+    const expectedNormalized = normalizeAnswer(candidate);
+    if (expectedNormalized === normalized) return true;
+
+    return harmlessHebrewVariant(normalized, expectedNormalized);
   });
 }
