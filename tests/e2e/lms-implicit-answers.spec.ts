@@ -12,7 +12,10 @@ test('an explicit authoring label becomes a checked answer automatically', async
     (await target.getAttribute('data-lms-answers')) ?? '[]',
   )[0] as string;
   await target.fill(expected);
-  await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
+  const question = target.locator(
+    'xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")][1]',
+  );
+  await question.getByRole('button', { name: 'להגיש שאלה לבדיקה' }).click();
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 });
 
@@ -20,8 +23,6 @@ test('coordinate-grid blanks carry their exact mathematical answers', async ({ p
   await page.goto('/#/workbook/2');
 
   const gridAnswers = page.locator('.lms-grid-answer[data-lms-answers]');
-  /* Screens are fetched on demand, so assert with a retrying matcher rather
-     than reading the count once the moment navigation is requested. */
   await expect(gridAnswers.first()).toBeVisible();
   await expect(gridAnswers.first()).toHaveAttribute(
     'data-lms-answers',
