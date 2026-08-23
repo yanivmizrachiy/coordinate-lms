@@ -12,11 +12,13 @@ import './styles/lms.css';
 import './styles/lms-phase3.css';
 import './styles/lms-grid-inputs.css';
 import './styles/controls-refined.css';
+import './styles/question-submit.css';
 
 import { startRouter, navigate, type RouteMatch } from './router';
 import { elem, clear } from './lib/dom';
 import type { View, ViewContext } from './views/context';
 import { ensureFreshBuild } from './lib/freshBuild';
+import { refineQuestionSubmitControls } from './lms/questionSubmitUi';
 
 const app = document.getElementById('app');
 if (!app) throw new Error('#app root missing');
@@ -113,6 +115,7 @@ function render(match: RouteMatch): void {
     clear(outlet);
     const ctx: ViewContext = { outlet, setTitle };
     const result = view(ctx);
+    refineQuestionSubmitControls(outlet);
     cleanup = typeof result === 'function' ? result : undefined;
 
     if (CROSSFADE) {
