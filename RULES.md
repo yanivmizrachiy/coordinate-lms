@@ -63,6 +63,11 @@ this file, the current instruction wins and this file must be reconciled.
   celebratory glowing badge; every other score keeps the plain red badge.
 - Every automatically checked answer allows at most three attempts. Reload,
   retry, stale writes, or reconnection must never reset that count.
+- A mistake still has a scoring consequence: a correct answer on the first
+  checked attempt earns full credit for that target, on the second checked
+  attempt 75%, and on the third checked attempt 50%. Corrective hints never
+  refund, reset, or hide an attempt; they exist to turn the lost credit into
+  learning rather than punishment without guidance.
 - Every page is open to a guest (Yaniv, 2026-08-18): a guest solves, receives
   feedback, and earns a page score exactly like a registered student. A
   guest's progress is saved on the device only — never centrally, never in the
@@ -108,11 +113,31 @@ this file, the current instruction wins and this file must be reconciled.
   לתקן** (partial) or **נסה שוב** (wrong); the incorrect part remains editable
   and the same small submit control stays available so the learner can correct
   and submit again until the three-attempt limit is reached.
+- **A wrong verdict may never be the end of the feedback.** After every wrong
+  or partially wrong checked attempt the LMS must also give a short,
+  pedagogical correction hint beside that same question. The hint must direct
+  the learner toward a rule, representation, comparison or step of reasoning;
+  it must not merely repeat „לא נכון”.
+- Hints are progressive. Attempt 1 gives a concise conceptual clue; attempt 2
+  gives a more explicit strategy or worked direction; after attempt 3 / lock,
+  the learner receives a compact explanation of the governing rule. The
+  student may keep editing the unresolved part while attempts remain.
+- Hints must be derived from canonical task metadata and mathematical context,
+  never from a second hand-authored answer source. Relevant categories include
+  axis identity, horizontal/vertical property, direction, scale/number,
+  origin, relation, and ordered-pair position. A correct part stays locked and
+  the hint addresses only unresolved parts where possible.
+- Coordinate-system guidance must follow the Ministry of Education grade-7
+  teaching emphases: x is the horizontal axis, y the vertical axis; pupils
+  practise both plotting given points and reading coordinates of given points;
+  coordinate systems support orientation, graphs and geometric
+  representation; and scale must be read correctly. The implementation is
+  self-contained and must not fetch curriculum content at runtime.
 - A verdict always shows as a shape AND a word, never colour alone: ✓ נכון
   (all correct), ◐ יש מה לתקן (partial — some right, some not), ✕ נסה שוב
   (wrong), 🔒 (locked after three attempts), ? נשמר לבדיקת המורה
-  (unkeyed/open-ended). Screen readers hear the verdict; none of it appears in
-  print.
+  (unkeyed/open-ended). Screen readers hear the verdict and the corrective hint;
+  none of it appears in print.
 - A correct target is preserved and locked — never re-typed or re-counted; the
   learner fixes only the part still marked. Typing is never an attempt; an
   attempt is counted only when a check is actually run. Reload never resets.
@@ -149,6 +174,9 @@ this file, the current instruction wins and this file must be reconciled.
 - The per-question **„להגיש ←”** control is deliberately narrow and understated,
   remains at least 44px high for touch, and sits immediately beside its result
   so the action and feedback read as one compact unit.
+- Corrective hints use a calm neutral panel with restrained borders and no
+  neon/glow. They sit immediately with the question feedback and remain compact
+  enough not to overwhelm the worksheet on mobile.
 - Previous/next navigation is distinguished by position, label and arrow rather
   than loud colour. Hover/press feedback is subtle and must not move controls
   enough to feel jumpy on touch devices.
