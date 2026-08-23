@@ -83,6 +83,7 @@ describe('two-student classroom simulation', () => {
       username: 'noa',
       email: 'noa@example.test',
       password: 'student-a-password',
+      school: 'בית ספר א',
       className: 'ז1',
     });
     expect((await claimGuestProgress(studentA.uid)).complete).toBe(true);
@@ -109,6 +110,7 @@ describe('two-student classroom simulation', () => {
       username: 'uri',
       email: 'uri@example.test',
       password: 'student-b-password',
+      school: 'בית ספר א',
       className: 'ז1',
     });
     await saveDraft(draft(studentB.uid, 2, 1));
@@ -127,6 +129,7 @@ describe('two-student classroom simulation', () => {
       username: 'teacher',
       email: 'yanivmiz77@gmail.com',
       password: 'teacher-password',
+      school: 'צוות הוראה',
     });
     expect(currentSession()?.role).toBe('admin');
     const dashboard = await loadDashboard();
