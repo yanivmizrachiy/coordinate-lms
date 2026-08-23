@@ -98,51 +98,55 @@ this file, the current instruction wins and this file must be reconciled.
   made print-neutral and must not obstruct canonical diagrams.
 - The dynamic solutions module (`src/data/solutions/`, `#/solutions`) is
   canonical content but is **teacher-gated in the LMS** (admin session only):
-  open solutions would empty the three-attempt practice model. Reversing this
-  gate is a product decision for Yaniv, recorded here when made.
+  open solutions would undermine the first-attempt-plus-three-corrections
+  practice model. Reversing this gate is a product decision and must be recorded
+  here when made.
 - Canonical workbook details recorded in `USER_MEMORY.md` remain a historical
   content contract only where they do not conflict with this file or a current
   instruction.
 
 ## Scoring, access, and answer policy
 
-- Every submitted page score is an integer from 1 through 100. The retired
-  0–1200 model must never return. A perfect 100 is shown with a distinct
-  celebratory glowing badge; every other score keeps the plain red badge.
-- Every automatically checked answer allows at most three attempts. Reload,
-  retry, stale writes, or reconnection must never reset that count.
-- A mistake still has a scoring consequence: a correct answer on the first
-  checked attempt earns full credit for that target, on the second checked
-  attempt 75%, and on the third checked attempt 50%. A third wrong checked
-  attempt locks the unresolved target with no credit. Corrective hints never
-  refund, reset or hide an attempt.
+- A learner completes a page and receives a page score. **100 is the maximum
+  possible score.** A perfect 100 is shown with a distinct celebratory badge.
+- A correct answer on the **first checked attempt loses no credit**. A mistake
+  costs credit only when the learner actually submits/checks that answer; typing
+  or editing by itself never costs points.
+- After an initial wrong checked answer, the learner gets **up to three
+  correction opportunities**. This means at most four checked attempts in
+  total: first attempt + correction 1 + correction 2 + correction 3. Reload,
+  retry, stale writes, reconnection, or changing devices must never reset the
+  count.
+- Credit falls consistently after checked mistakes: correct on the first
+  attempt = 100% of that target's credit; correct on correction 1 = 75%; correct
+  on correction 2 = 50%; correct on correction 3 = 25%. If the final correction
+  is still wrong, the unresolved target locks with 0 credit. Corrective hints
+  never refund, reset or hide an attempt.
 - **The learner must be told the scoring consequence in plain language.** After
-  checking, feedback explains which attempt was used, how much of the
-  question's 100-point local credit has been lost, and how much can still be
-  earned. A first wrong attempt leaves at most 75/100 for that part; a second
-  leaves at most 50/100; a third wrong attempt leaves 0. Correcting on attempt
-  two earns 75/100 and correcting on attempt three earns 50/100. This local
-  explanation mirrors the page-score calculation rather than inventing a
-  separate grading model.
+  each checked mistake/correction the feedback states which stage was used,
+  how much credit was lost, and how much can still be earned. The explanation
+  must mirror the real scoring calculation; there must never be a second
+  display-only grading model.
+- The scoring constants belong in one central configuration/calculation path.
+  Do not scatter hard-coded attempt limits or credit percentages across UI,
+  persistence and tests. Firestore may duplicate a bound only where its separate
+  execution environment requires it, and tests must keep that bound aligned.
 - **Harmless input variation must not cost a child points.** Latin answer
   letters such as `x/X` and `y/Y` are case-insensitive. Hebrew textual answers
   accept tightly bounded spelling variants such as common full/defective
-  spelling and a small typo (for example `אופקי/אפקי` or `ציר/צייר`) when the
-  mathematical concept is still unambiguous. Diacritics, harmless punctuation
-  and spacing are ignored where appropriate.
+  spelling and one small typo (for example `אופקי/אפקי` or `ציר/צייר`) when the
+  mathematical concept is still unambiguous. Diacritics and harmless spacing
+  are ignored where appropriate; harmless punctuation may be ignored for
+  word-like Hebrew answers only.
 - Fuzzy tolerance applies only to word-like textual answers. It must never make
   a different mathematical concept correct (`אנכי` is not `אופקי`), and it
-  must not loosen numeric answers, ordered data, strict sets or mathematical
-  structures. Numeric equivalence such as `1/2 = 0.5` remains mathematical,
-  not spelling-based.
-- Every page is open to a guest (Yaniv, 2026-08-18): a guest solves, receives
-  feedback, and earns a page score exactly like a registered student. A
-  guest's progress is saved on the device only — never centrally, never in the
-  teacher dashboard. Registration (full name, school, email, password — no
-  username or class field; the stored username is derived from the email) adds
-  central save, cross-device resume, and dashboard visibility, and copies the
-  full guest history to the account. The single teacher/admin is Yaniv; only
-  the admin sees class-wide results.
+  must not loosen numeric answers, ordered data, strict sets, coordinates or
+  mathematical structures. Numeric equivalence such as `1/2 = 0.5` remains
+  mathematical, not spelling-based.
+- Every page is open to a guest: a guest solves, receives feedback, and earns a
+  page score exactly like a registered student. Guest progress is saved on the
+  device only. Registration adds central save, cross-device resume, and teacher
+  dashboard visibility, and copies guest history to the account.
 - An answer may be checked automatically only when it is reviewed explicitly,
   encoded in canonical metadata, mathematically deterministic, or a verified
   valid range.
@@ -152,21 +156,19 @@ this file, the current instruction wins and this file must be reconciled.
 - **Consolidation state (2026-08-18):** the 78-page import renumbered every
   page and changed wording on 66 pages. 588 of 735 reviewed proofs and 137 of
   161 reviewed open-ended decisions survived on unchanged prompt signatures
-  and were mechanically re-keyed (`scripts/`-external migration, occurrence-
-  aligned per page, verified by regeneration). The lapsed 147 proofs and 24
-  open-ended decisions, plus the new pages' targets, are deliberately
-  unkeyed until a fresh review cites exact canonical evidence. Current
-  measured coverage: **729/1,150 targets (63.4%)** — see
-  `reports/answer-coverage.json`. Raising it happens ONLY through the review
-  studio or evidence-cited proofs, never by guessing.
+  and were mechanically re-keyed. The lapsed 147 proofs and 24 open-ended
+  decisions, plus the new pages' targets, remain deliberately unkeyed until a
+  fresh review cites exact canonical evidence. Current measured coverage is
+  **729/1,150 targets (63.4%)** in `reports/answer-coverage.json`; coverage is
+  raised only through reviewed/evidence-cited answers, never guessing.
 - Unordered answer sets may be accepted only through the strict `set:` format;
   duplicates, omissions, and extra labels must remain incorrect.
 - Never infer an answer merely from nearby prose. Open-ended, ambiguous,
   unsupported, and missing targets remain visibly ungraded for teacher review.
-- The generated JSON and Markdown coverage reports must represent all pages
-  1–78 and must remain synchronized with target order and runtime answer keys.
+- Generated coverage reports must represent all pages 1–78 and remain
+  synchronized with target order and runtime answer keys.
 
-## Interactive feedback model (LMS layer)
+## Interactive feedback model — a teacher beside the learner
 
 - Feedback is per QUESTION, not per keystroke. A question is the unit the
   canonical content already groups blanks into — a `.q-card`, or the finest
@@ -175,46 +177,56 @@ this file, the current instruction wins and this file must be reconciled.
   its accessible name is **„להגיש שאלה לבדיקה”**. The old wording „סיימתי
   שאלה” is retired and must not appear as the question-check action.
 - Pressing the question submit control gives immediate feedback beside that
-  same question. A fully correct question shows a clearly visible **green
-  ✓ נכון** verdict. If correction is needed, the verdict must say **יש מה
-  לתקן** (partial) or **נסה שוב** (wrong); the incorrect part remains editable
-  and the same small submit control stays available so the learner can correct
-  and submit again until the three-attempt limit is reached.
-- **A wrong verdict may never be the end of the feedback.** After every wrong
-  or partially wrong checked attempt the LMS must also give a short,
-  pedagogical correction hint beside that same question. The hint must direct
-  the learner toward a rule, representation, comparison or step of reasoning;
-  it must not merely repeat „לא נכון”.
-- **Hints must never reveal the answer.** This applies on attempt 1, attempt 2
-  and after the third attempt. Increasing support means a clearer strategy,
-  decomposition, comparison, representation or self-check — not printing the
-  missing word, target letter, coordinate or number. Even after lock, explain
-  how to reason without converting the hint into a solution key.
-- Hints are progressive. Attempt 1 gives a concise conceptual clue; attempt 2
-  gives a more explicit strategy or worked direction; after attempt 3 / lock,
-  the learner receives stronger guidance about the governing reasoning. The
-  student may keep editing the unresolved part while attempts remain.
-- Hints must be derived from canonical task metadata and mathematical context,
-  never from a second hand-authored answer source. Relevant categories include
-  axis identity, horizontal/vertical property, direction, scale/number,
-  origin, relation, and ordered-pair position. A correct part stays locked and
-  the hint addresses only unresolved parts where possible.
-- Coordinate-system guidance must follow the Ministry of Education grade-7
-  teaching emphases: pupils distinguish the two axes, practise both plotting
-  given points and reading coordinates of given points, use coordinate systems
-  for orientation/graphs/geometric representation, and read scale correctly.
-  Guidance may teach these ideas but must not state the current blank's answer.
+  same question. A fully correct question shows **✓ נכון**. If correction is
+  needed, the verdict says **יש מה לתקן** or **נסה שוב**; correct parts remain
+  locked and only unresolved parts stay editable.
+- **The LMS should feel as if a supportive mathematics teacher is beside the
+  learner.** Feedback is conversational, warm, encouraging, specific and
+  pedagogically useful, while remaining truthful. It must never shame,
+  frighten, mock, scold, or make a wrong answer sound correct.
+- **Use a broad, non-repetitive bank of teacher feedback.** Consecutive
+  questions should not mechanically repeat one phrase. Positive responses may
+  vary naturally (for example: „כל הכבוד”, „איזה יופי”, „מצוין”, „יפה מאוד”,
+  „בדיוק”, „מעולה — ממשיכים”, „נהדר, תפסת את הרעיון”, „עוד צעד טוב”). Wrong
+  answers also receive positive support before correction (for example:
+  „ננסה שוב”, „יש כאן משהו קטן לתקן”, „יפה שניסית — בוא נבדוק את הכיוון”,
+  „כמעט; נשתמש ברמז וננסה שוב”). These are examples of tone, not a fixed list.
+- Feedback should react to progress when possible: first-try success, successful
+  correction, several consecutive correct answers, persistence after a mistake,
+  completing a question, and completing a page can receive different wording.
+  Avoid exaggerated praise on every click; variety and relevance matter more
+  than decoration.
+- A wrong verdict may **never** be the end of the feedback. Every wrong or
+  partially wrong checked answer gets all three: (1) supportive teacher voice,
+  (2) a useful mathematical hint/direction, and (3) a clear statement of the
+  attempt/credit consequence. These are one coherent learning response, not
+  three competing popups.
+- **Hints never reveal the current answer.** They teach the rule, representation,
+  comparison, self-check or next reasoning step without printing the missing
+  word, target letter, coordinate or number. This remains true even after the
+  final correction is exhausted.
+- Guidance grows with the learner's need: after the initial mistake give a
+  concise conceptual clue; after correction 1 give a clearer strategy; after
+  correction 2 give stronger step-by-step direction; after correction 3, if
+  still unresolved, give a final explanatory teaching message without turning
+  it into a solution key.
+- Hints derive from canonical task metadata and mathematical context, never a
+  second hand-authored answer source. Relevant categories include axis identity,
+  horizontal/vertical property, direction, scale/number, origin, relation, and
+  ordered-pair position. A correct part stays locked and guidance addresses only
+  unresolved parts where possible.
+- Coordinate-system guidance follows the grade-7 curriculum emphases: distinguish
+  axes, plot and read coordinates, orient within a coordinate system, use it for
+  graphs/geometric representation, and read scale correctly. Guidance teaches
+  these ideas without stating the current blank's answer.
 - Registration, login, account and save-mode explanations belong **only on the
-  landing/start screen before practice begins**. Once the learner enters any
-  numbered `#/workbook/:n` page, the practice surface must not show registration
-  explanations, guest/account identity copy, or an account/login call-to-action.
-  Numbered pages stay focused on the mathematics, submit control, feedback,
-  corrective hints, score, navigation, and essential error recovery only.
-- A verdict always shows as a shape AND a word, never colour alone: ✓ נכון
-  (all correct), ◐ יש מה לתקן (partial — some right, some not), ✕ נסה שוב
-  (wrong), 🔒 (locked after three attempts), ? נשמר לבדיקת המורה
-  (unkeyed/open-ended). Screen readers hear the verdict, correction guidance
-  and score-loss explanation; none of it appears in print.
+  landing/start screen before practice begins**. Numbered `#/workbook/:n` pages
+  stay focused on mathematics, submit, feedback, hints, score, navigation, and
+  essential error recovery.
+- A verdict always uses shape + word, never colour alone: ✓ נכון, ◐ יש מה לתקן,
+  ✕ נסה שוב, 🔒 נעול after first attempt + all three corrections, or ? נשמר
+  לבדיקת המורה for unkeyed/open-ended work. Screen readers hear verdict,
+  guidance and score-loss explanation; none of it appears in print.
 - A correct target is preserved and locked — never re-typed or re-counted; the
   learner fixes only the part still marked. Typing is never an attempt; an
   attempt is counted only when a check is actually run. Reload never resets.
@@ -225,8 +237,8 @@ this file, the current instruction wins and this file must be reconciled.
   its own, so submit warns once when answers are unfinished and finalises on a
   second press, scoring unanswered targets as 0 — a page score is never made
   permanently unreachable.
-- The dynamic solutions screen is teacher-gated (admin session only); open
-  solutions would empty the three-attempt practice model.
+- The dynamic solutions screen is teacher-gated; open solutions would undermine
+  the first-attempt-plus-three-corrections learning model.
 
 ## Bundle and loading
 
@@ -252,9 +264,9 @@ this file, the current instruction wins and this file must be reconciled.
 - The per-question **„להגיש ←”** control is deliberately narrow and understated
   and sits immediately beside its result so the action and feedback read as one
   compact unit. It must never look like a large page-level call-to-action.
-- Corrective hints and score-loss feedback use calm neutral panels with
-  restrained borders and no neon/glow. They sit immediately with the question
-  feedback and remain compact enough not to overwhelm the worksheet on mobile.
+- Corrective hints, teacher feedback and score-loss feedback use calm neutral
+  treatment with restrained borders and no neon/glow. They sit with the question
+  and must not overwhelm the worksheet on mobile.
 - Previous/next navigation is distinguished by position, label and arrow rather
   than loud colour. Hover/press feedback is subtle and must not move controls
   enough to feel jumpy on touch devices.
@@ -287,7 +299,7 @@ this file, the current instruction wins and this file must be reconciled.
 - Students may read and write only their own profile and subcollections.
   Dashboard-wide reads and answer-key writes are administrator-only.
 - Firestore writes must use field allowlists and enforce page 1–78, score
-  1–100, attempt summary 0–3, monotonic progress, and bounded document shapes.
+  1–100, attempt summary 0–4, monotonic progress, and bounded document shapes.
 - Keep the client administrator list and the Firestore administrator rule
   aligned before deployment.
 
