@@ -65,11 +65,35 @@ this file, the current instruction wins and this file must be reconciled.
   canonical wording, mathematics, diagrams, page order, A4 pagination, and
   print layout. Page numbers and the topic map derive from position in `BOOK`
   (`src/data/workbook/index.ts`); nothing is hand-numbered.
-- Every numbered page is a printed worksheet — „המשימות שלנו הן להדפסה"
-  (31.07.2026). The seven interactive games are an ON-SCREEN layer attached to
-  their printed puzzle pages through the `SCREEN_GAMES` map in
-  `src/data/workbook/index.ts`; the games never appear in print and never
-  modify canonical sheet HTML.
+- **Printable and computerized pages are two renderings of the SAME worksheet
+  content, never two content products.** The canonical worksheet content lives
+  only in `src/data/workbook/`. The printable page renders that source as paper;
+  `#/workbook/:n` renders that exact same source and then overlays the LMS
+  interaction layer. There must never be a separate computerized copy of a
+  question, sentence, diagram, value, page order or mathematical task.
+- **Any content correction to a worksheet must propagate automatically to both
+  print and computerized practice.** If wording, mathematics, a diagram,
+  ordering, a blank, a value or any other canonical page content changes, make
+  the change once in the canonical workbook source. The printable rendering and
+  LMS rendering must both update from that same change; manually synchronizing
+  or retyping the change in the LMS is a defect.
+- Before changing a numbered practice page, classify the request explicitly as
+  either a CONTENT change or an INTERACTION/PRESENTATION change. CONTENT changes
+  are made in the canonical workbook and therefore affect both printable and
+  computerized renderings. LMS-only controls, feedback, hints, scoring,
+  persistence and navigation belong only to the interactive overlay and must
+  not alter the printable worksheet content.
+- Print/download controls are utilities for print/booklet surfaces, not part of
+  the student practice experience. They must not appear merely because the
+  underlying worksheet also has a printable rendering. A computerized practice
+  page should expose only controls that serve solving, feedback, progress and
+  navigation.
+- Every numbered page is a printable worksheet at the content layer — „המשימות
+  שלנו הן להדפסה” (31.07.2026) — and the same numbered page is also the basis of
+  its computerized practice rendering. The seven interactive games are an
+  ON-SCREEN layer attached to their canonical puzzle pages through the
+  `SCREEN_GAMES` map in `src/data/workbook/index.ts`; the games never appear in
+  print and never modify canonical sheet HTML.
 - LMS behavior is an interactive layer. Interactive controls must be hidden or
   made print-neutral and must not obstruct canonical diagrams.
 - The dynamic solutions module (`src/data/solutions/`, `#/solutions`) is
