@@ -17,6 +17,7 @@ import { hydrateGridAnswerInputs } from '../lms/gridInputs';
 import { hydrateChoiceAnswerInputs } from '../lms/choiceInputs';
 import { hydrateExplicitAuthoringAnswers } from '../lms/implicitAnswers';
 import { installHintCoach } from '../lms/hintCoach';
+import { focusPracticePanel } from '../lms/practiceFocus';
 
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
@@ -80,6 +81,7 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     const lms = data
       ? attachLmsToPage(sheetWrap, page)
       : undefined;
+    if (lms) focusPracticePanel(lms.panel);
     const hintCleanup = data && lms
       ? installHintCoach(sheetWrap)
       : undefined;
