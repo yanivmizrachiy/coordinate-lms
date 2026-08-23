@@ -8,15 +8,16 @@ describe('learner answer tolerance', () => {
     expect(answersMatch('X', ['x'])).toBe(true);
   });
 
-  it('accepts small Hebrew spelling and full/defective variants', () => {
+  it('accepts one harmless Hebrew spelling or full/defective variation', () => {
     expect(answersMatch('אפקי', ['אופקי'])).toBe(true);
     expect(answersMatch('צייר', ['ציר'])).toBe(true);
     expect(answersMatch('אנכי', ['אנכי'])).toBe(true);
   });
 
-  it('does not turn a different mathematical concept into a match', () => {
+  it('does not let fuzzy spelling become a different answer policy', () => {
     expect(answersMatch('אנכי', ['אופקי'])).toBe(false);
     expect(answersMatch('ימינה', ['שמאלה'])).toBe(false);
+    expect(answersMatch('אפקיי', ['אופקי'])).toBe(false);
   });
 
   it('keeps numeric answers mathematically strict', () => {
