@@ -21,18 +21,30 @@ async function pickQuestion(page: Page, min: number): Promise<Locator> {
   throw new Error(`no question with ${min} drawing answers`);
 }
 
-test('page 1 vertical-axis box accepts y even though it is visually the first axis-name box', async ({ page }) => {
+test('page 1 canonical vertical-axis y overrides a stale saved answer key', async ({ page }) => {
   await page.goto('/#/workbook/1');
-  const target = page.locator('[data-grid-answer="axis-y"]');
+  let target = page.locator('[data-grid-answer="axis-y"]');
   await expect(target).toHaveCount(1);
   await expect(target).toHaveAttribute('data-lms-answers', /"y"/i);
 
+  const qid = await target.getAttribute('data-lms-qid');
+  expect(qid).toBeTruthy();
+
+  await page.evaluate((id) => {
+    localStorage.setItem(
+      'coordinate_lms_answer_keys_v2',
+      JSON.stringify({ '1': { [id]: ['stale-wrong-answer'] } }),
+    );
+  }, qid!);
+  await page.reload();
+
+  target = page.locator('[data-grid-answer="axis-y"]');
   const question = target.locator('xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")]');
   const submit = question.getByRole('button', { name: 'להגיש שאלה לבדיקה' });
   await target.fill('y');
   await submit.click();
 
-  // Other blanks in section א may still need work, but this specific answer is correct.
+  // The canonical answer attached to the current target is authoritative.
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
   await expect(target).toHaveAttribute('contenteditable', 'false');
 });
