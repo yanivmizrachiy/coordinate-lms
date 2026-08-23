@@ -96,12 +96,19 @@ describe('the first download stays small', () => {
     ).toBe(false);
 
     for (const route of [
-      'home', 'menu', 'pageViewer', 'flipbook', 'book',
+      'welcome', 'home', 'menu', 'pageViewer', 'flipbook', 'book',
       'solutions', 'printAids', 'lmsLogin', 'lmsAdmin', 'lmsProgress', 'lmsKeys',
     ]) {
       expect(main, `route ${route} is not lazily imported`)
         .toContain(`import('./views/${route}')`);
     }
+  });
+
+  it('keeps the first-entry explanation free of Firebase', () => {
+    const welcome = read('src/views/welcome.ts');
+    expect(welcome).toContain('הציון בתרגול חופשי אינו נשמר');
+    expect(welcome).toContain('הרשמה ושמירת ציונים');
+    expect(welcome).not.toMatch(/from\s+'firebase|from\s+'\.\.\/lms\//);
   });
 
   it('never pulls the Firebase SDK into the entry module', () => {
