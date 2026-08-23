@@ -2,8 +2,11 @@ import { beforeEach, describe, expect, test } from 'vitest';
 import {
   canFinalizeGuestTransfer,
   claimGuestProgress,
+  loadPageResult,
   mergePageDrafts,
   mergePageResults,
+  saveDraft,
+  savePageResult,
 } from '../src/lms/repository';
 import {
   buildDashboardCsv,
@@ -119,7 +122,48 @@ describe('LMS persistence merging', () => {
     expect(() => mergePageResults(null, result(50, 1, 4))).toThrow(/0 ל־3/);
   });
 
-  test('guest progress is copied before its source records are removed', async () => {
+  test('guest result scores are not stored and legacy guest scores are purged', async () => {
+    localStorage.setItem(
+      'coordinate_lms_results_v2',
+      JSON.stringify({
+        'guest:1': { ...result(90, 20, 2), uid: 'guest', pageNumber: 1 },
+      }),
+    );
+
+    expect(await loadPageResult('guest', 1)).toBeNull();
+
+    const outcome = await savePageResult({
+      ...result(88, 30, 2),
+      uid: 'guest',
+      pageNumber: 1,
+    });
+    expect(outcome.localSaved).toBe(false);
+    expect(outcome.central).toBe('not-required');
+
+    const results = JSON.parse(
+      localStorage.getItem('coordinate_lms_results_v2') || '{}',
+    ) as Record<string, PageResult>;
+    expect(results['guest:1']).toBeUndefined();
+  });
+
+  test('guest draft keeps attempts but never stores a submitted score', async () => {
+    await saveDraft({
+      ...draft(20, 2, 'x'),
+      uid: 'guest',
+      pageNumber: 1,
+      submitted: true,
+      score: 95,
+    });
+
+    const drafts = JSON.parse(
+      localStorage.getItem('coordinate_lms_drafts_v2') || '{}',
+    ) as Record<string, PageDraft>;
+    expect(drafts['guest:1']?.questions['p4-q1']?.attempts).toBe(2);
+    expect(drafts['guest:1']?.submitted).toBe(false);
+    expect(drafts['guest:1']?.score).toBeUndefined();
+  });
+
+  test('registration may transfer guest draft progress but never a guest score', async () => {
     localStorage.setItem(
       'coordinate_lms_session_v2',
       JSON.stringify({
@@ -152,7 +196,7 @@ describe('LMS persistence merging', () => {
     expect(drafts['guest:1']).toBeUndefined();
     expect(results['guest:1']).toBeUndefined();
     expect(drafts['student-1:1']?.questions['p4-q1']?.attempts).toBe(2);
-    expect(results['student-1:1']?.score).toBe(90);
+    expect(results['student-1:1']).toBeUndefined();
   });
 
   test('guest source progress is not eligible for removal after central failure', () => {
