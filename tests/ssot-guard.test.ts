@@ -80,6 +80,29 @@ describe('no second repository behind the content', () => {
   });
 });
 
+describe('print and computerized practice stay directly linked but operationally separate', () => {
+  const viewer = read('src/views/pageViewer.ts');
+  const rules = read('RULES.md');
+
+  it('renders computerized practice from the canonical workbook page itself', () => {
+    expect(viewer).toContain('pageByNumber(page)');
+    expect(viewer).toContain('fromHTML(data.html)');
+    expect(viewer).not.toMatch(/computerizedPages|digitalPages|lmsPageContent/);
+  });
+
+  it('keeps print and download actions out of the student practice shell', () => {
+    expect(viewer).not.toContain('openActionChooser');
+    expect(viewer).not.toContain('readerBar(');
+    expect(viewer).not.toMatch(/🖨|הדפסה|הורדת הדף/);
+  });
+
+  it('states that a canonical content change updates both renderings', () => {
+    expect(rules).toContain('Printable and computerized pages are two renderings of the SAME worksheet');
+    expect(rules).toContain('must propagate automatically to both');
+    expect(rules).toContain('Print/download controls are utilities for print/booklet surfaces');
+  });
+});
+
 describe('the first download stays small', () => {
   const main = read('src/main.ts');
 
