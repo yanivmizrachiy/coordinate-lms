@@ -1,5 +1,7 @@
 /* Per-question submit: compact action, immediate readable feedback. */
 .lms-qcheck {
+  position: relative;
+  z-index: 2;
   gap: 8px;
   margin-top: 9px;
 }
@@ -35,13 +37,15 @@
 
 /* The sheet uses --sheet-scale on screen. At 0.5 scale a 44px DOM button is
    only 22px on the glass; this invisible region expands by the exact inverse
-   amount. It does not participate in layout and is removed with the LMS in
-   print. */
+   amount. The question-control layer is stacked above the following card so
+   the lower half of the transparent target cannot be masked by that card. */
 .lms-qcheck__btn::after {
   content: '';
   position: absolute;
+  z-index: 1;
   inset-block: calc((44px - (44px / var(--sheet-scale, 1))) / 2);
   inset-inline: calc((44px - (44px / var(--sheet-scale, 1))) / 2);
+  pointer-events: auto;
 }
 
 .lms-qcheck__btn:hover::before {
