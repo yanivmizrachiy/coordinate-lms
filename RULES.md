@@ -133,6 +133,12 @@ this file, the current instruction wins and this file must be reconciled.
   coordinate systems support orientation, graphs and geometric
   representation; and scale must be read correctly. The implementation is
   self-contained and must not fetch curriculum content at runtime.
+- Registration, login, account and save-mode explanations belong **only on the
+  landing/start screen before practice begins**. Once the learner enters any
+  numbered `#/workbook/:n` page, the practice surface must not show registration
+  explanations, guest/account identity copy, or an account/login call-to-action.
+  Numbered pages stay focused on the mathematics, submit control, feedback,
+  corrective hints, score, navigation, and essential error recovery only.
 - A verdict always shows as a shape AND a word, never colour alone: ✓ נכון
   (all correct), ◐ יש מה לתקן (partial — some right, some not), ✕ נסה שוב
   (wrong), 🔒 (locked after three attempts), ? נשמר לבדיקת המורה
