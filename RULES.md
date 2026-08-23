@@ -35,10 +35,14 @@ A current user instruction wins over older wording and this file must be reconci
 - On-screen games may be attached as an LMS layer, but must not fork or rewrite canonical sheet HTML and must never appear in print.
 - Solutions remain teacher-gated in the student LMS so they do not bypass the correction-and-learning process.
 
-## 4. Student practice surface
+## 4. First entry and student practice surface
 
+- `#/` is the mandatory first-entry screen. It explains, in very simple Hebrew and before practice begins, the difference between **תרגול חופשי — בלי רישום** and **הרשמה ושמירת ציונים**. Existing users also get an obvious sign-in route.
+- The first-entry screen must say plainly that every practice page is open to guests, feedback is immediate, a page score may be shown, but **guest scores are not saved**, are not available on another device and are not visible to the teacher.
+- It must say plainly that registration uses **full name, school, email and password**, and enables saved scores/progress, cross-device continuation and teacher visibility.
+- The rich learning/materials landing remains available separately at `#/home` and may appear below the first-entry explanation. The explanation itself must remain lightweight and must not import Firebase.
 - A numbered computerized page is first and foremost a student practice screen. Show only what helps the learner solve, receive feedback, understand progress and move between pages.
-- Registration/login/account/save-mode explanations belong **only on the landing/start screen before practice**. Do not show them in numbered practice pages.
+- Registration/login/account/save-mode explanations belong **only before practice**, never inside numbered practice pages.
 - Do not show legacy print/download actions, duplicate reader toolbars, duplicate navigation, a general `בדיקת תשובות` button, or other unrelated chrome inside practice.
 - Each question has one small action displayed as **`להגיש ←`** with accessible name **`להגיש שאלה לבדיקה`**. The old action wording `סיימתי שאלה` is retired.
 - Page submission remains separate: when the learner finishes the page, the page is submitted and receives its final page score.
@@ -112,11 +116,15 @@ A current user instruction wins over older wording and this file must be reconci
 - Feedback/hint/score-loss panels are compact, calm and readable on mobile and must not overwhelm the worksheet.
 - The special celebration for a perfect page score of 100 is an intentional exception to the otherwise restrained interface.
 
-## 10. Persistence, privacy and authorization
+## 10. Persistence, registration and authorization
 
 - Local save and central Firebase synchronization are different states. Never tell a learner that central save succeeded unless it actually did.
 - Central failures must be visible and retryable without duplicating attempts, results or activity events.
-- Guest progress is local-only; registration enables central save, cross-device continuation and teacher-dashboard visibility. Guest history is copied safely before source guest records are removed.
+- **Guest draft/answer/attempt state may be stored locally only to preserve learning continuity and prevent attempt reset. Guest page scores/results must never be persisted locally or centrally.** A legacy guest result from an older build must be ignored/purged, never restored and never transferred into a newly registered account.
+- Registration transfers eligible guest draft/attempt state only after account creation; it never imports an already displayed guest score.
+- Registration requires full name, school, email and password in backend validation as well as the form. Student-facing authentication errors must be plain Hebrew, never raw Firebase codes.
+- If Firebase Authentication creates a user but the required profile write fails, do not leave a known partial registration behind; roll back the just-created auth user where possible and report a clear error.
+- Registration enables central save, cross-device continuation and teacher-dashboard visibility.
 - Concurrent/stale writes must preserve the latest valid state, best score, highest attempt count and completed/locked states.
 - Students may access only their own data. Class-wide data and answer-key writes are administrator-only.
 - Firestore writes use field allowlists and enforce pages 1–78, scores 0–100, attempt summary 0–4, monotonic progress and bounded document shapes.
@@ -133,15 +141,17 @@ A current user instruction wins over older wording and this file must be reconci
 ## 12. Future change map — edit the owner, not every consumer
 
 - **Worksheet text, mathematics, diagrams, blanks and page order:** `src/data/workbook/`.
+- **First-entry explanation:** `src/views/welcome.ts`; **route ownership:** `src/router.ts`; **first-entry styling:** `src/styles/welcome.css`.
+- **Registration/authentication semantics:** `src/lms/auth.ts` and `src/views/lmsLogin.ts`.
 - **Attempt limit:** `src/lms/config.ts`. The Firestore bound in `firestore.rules` is the only intentional mirror because security rules execute separately; its contract tests must change in the same commit.
 - **Score/credit curve:** `src/lms/scoring.ts`.
 - **Answer normalization/tolerance:** `src/lms/answerValidation.ts`.
 - **Explicit canonical answer capture:** `src/lms/implicitAnswers.ts`; **answer-key precedence/persistence:** `src/lms/repository.ts`.
+- **Guest/result persistence, retries, merge semantics and dashboard loading:** `src/lms/repository.ts` plus dedicated sync modules.
 - **Teacher wording/encouragement:** `src/lms/teacherVoice.ts`.
 - **Pedagogical hints:** `src/lms/hintCoach.ts`.
 - **Per-question grading/state machine and page submission:** `src/lms/engine.ts`.
 - **Computerized page shell/navigation:** `src/views/pageViewer.ts` and its practice-shell styles; do not copy worksheet content there.
-- **Persistence, retries, merge semantics and dashboard loading:** `src/lms/repository.ts` plus the dedicated sync modules.
 - **Authorization/data boundaries:** `firestore.rules`.
 - Tests should import runtime policy/configuration where possible instead of repeating magic numbers. A test may duplicate a value only when it is deliberately verifying an external contract such as Firestore rules.
 - Do not create another architecture/preferences/rules document. If ownership changes, update this map here.
