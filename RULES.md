@@ -130,7 +130,23 @@ A current user instruction wins over older wording and this file must be reconci
 - Do not delete a working subsystem merely to reduce file count. Delete/move only code that is demonstrably duplicate, dead, obsolete or contradictory.
 - Automated guards should protect product principles, not incidental filenames or implementation trivia.
 
-## 12. Required quality gates
+## 12. Future change map — edit the owner, not every consumer
+
+- **Worksheet text, mathematics, diagrams, blanks and page order:** `src/data/workbook/`.
+- **Attempt limit:** `src/lms/config.ts`. The Firestore bound in `firestore.rules` is the only intentional mirror because security rules execute separately; its contract tests must change in the same commit.
+- **Score/credit curve:** `src/lms/scoring.ts`.
+- **Answer normalization/tolerance:** `src/lms/answerValidation.ts`.
+- **Explicit canonical answer capture:** `src/lms/implicitAnswers.ts`; **answer-key precedence/persistence:** `src/lms/repository.ts`.
+- **Teacher wording/encouragement:** `src/lms/teacherVoice.ts`.
+- **Pedagogical hints:** `src/lms/hintCoach.ts`.
+- **Per-question grading/state machine and page submission:** `src/lms/engine.ts`.
+- **Computerized page shell/navigation:** `src/views/pageViewer.ts` and its practice-shell styles; do not copy worksheet content there.
+- **Persistence, retries, merge semantics and dashboard loading:** `src/lms/repository.ts` plus the dedicated sync modules.
+- **Authorization/data boundaries:** `firestore.rules`.
+- Tests should import runtime policy/configuration where possible instead of repeating magic numbers. A test may duplicate a value only when it is deliberately verifying an external contract such as Firestore rules.
+- Do not create another architecture/preferences/rules document. If ownership changes, update this map here.
+
+## 13. Required quality gates
 
 Before presenting a branch as ready for review, run at least:
 
@@ -146,5 +162,7 @@ npm run firebase:check
 npm run release:report
 npm run test:visual
 ```
+
+`npm run verify` must cover answer coverage, typecheck, unit/content tests, Firestore authorization tests, build and visual/e2e checks in one command.
 
 Do not describe the product as production-ready while required external configuration or acceptance evidence is incomplete. Do not merge or deploy to production without the required explicit confirmation.
