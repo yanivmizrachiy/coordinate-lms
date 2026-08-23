@@ -44,6 +44,9 @@ export function isAllowedExpectedAnswer(value: unknown): value is string {
   );
 }
 
+/** Conservative normalization shared by every answer type. Mathematical
+ * punctuation stays intact; otherwise `(2,3)` could accidentally become `23`.
+ */
 export function normalizeAnswer(raw: string): string {
   return raw
     .normalize('NFKC')
@@ -52,10 +55,13 @@ export function normalizeAnswer(raw: string): string {
     .replace(/[־–—]/g, '-')
     .replace(/[׳']/g, '')
     .replace(/[״"]/g, '')
-    .replace(/[.,;:!?()[\]{}]/g, '')
     .replace(/\u00a0/g, ' ')
     .replace(/\s+/g, '')
     .toLocaleLowerCase('he');
+}
+
+function normalizeHebrewWord(raw: string): string {
+  return normalizeAnswer(raw).replace(/[.,;:!?()[\]{}]/g, '');
 }
 
 function isHebrewWordLike(value: string): boolean {
@@ -98,7 +104,9 @@ function editDistance(a: string, b: string): number {
   return matrix[a.length]![b.length]!;
 }
 
-function harmlessHebrewVariant(actual: string, expected: string): boolean {
+function harmlessHebrewVariant(actualRaw: string, expectedRaw: string): boolean {
+  const actual = normalizeHebrewWord(actualRaw);
+  const expected = normalizeHebrewWord(expectedRaw);
   if (!isHebrewWordLike(actual) || !isHebrewWordLike(expected)) return false;
   return editDistance(actual, expected) <= 1;
 }
@@ -142,6 +150,6 @@ export function answersMatch(raw: string, expected: readonly string[]): boolean 
     const expectedNormalized = normalizeAnswer(candidate);
     if (expectedNormalized === normalized) return true;
 
-    return harmlessHebrewVariant(normalized, expectedNormalized);
+    return harmlessHebrewVariant(raw, candidate);
   });
 }
