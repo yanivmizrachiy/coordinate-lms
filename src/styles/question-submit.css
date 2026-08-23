@@ -5,7 +5,7 @@
 }
 
 .lms-qcheck__btn {
-  min-height: 38px;
+  min-height: 44px;
   padding: 6px 10px;
   border-radius: 9px;
   background: #f7f9fb;
@@ -69,7 +69,7 @@
   .lms-qcheck__btn {
     width: auto !important;
     min-width: 88px;
-    min-height: 40px;
+    min-height: 44px;
     flex: 0 0 auto;
   }
 
