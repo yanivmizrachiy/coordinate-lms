@@ -22,8 +22,7 @@ import type {
   QuestionProgress,
 } from './types';
 
-const TARGET_SELECTOR =
-  '.blank, .word-blank, .pair-blank';
+const TARGET_SELECTOR = '.blank, .word-blank, .pair-blank';
 
 interface AttachResult {
   panel: HTMLElement;
@@ -36,10 +35,8 @@ interface CheckSummary {
   remaining: number;
 }
 
-/** The result of grading one answer target. */
 type TargetOutcome = 'unkeyed' | 'correct' | 'locked' | 'missing' | 'wrong';
 
-/** A question groups the targets a learner completes and checks together. */
 type QuestionState =
   | 'idle'
   | 'correct'
@@ -55,8 +52,6 @@ interface QuestionGroup {
   button: HTMLButtonElement;
 }
 
-/* How each question state shows itself — a shape and a word, never colour
-   alone, and „done" for the ones the learner has nothing left to do on. */
 const QUESTION_CHIP: Record<
   QuestionState,
   { icon: string; text: string; done: boolean }
@@ -65,7 +60,7 @@ const QUESTION_CHIP: Record<
   correct: { icon: '✓', text: 'נכון', done: true },
   partial: { icon: '◐', text: 'יש מה לתקן', done: false },
   wrong: { icon: '✕', text: 'נסה שוב', done: false },
-  locked: { icon: '🔒', text: 'נעול — נוצלו שלושת הניסיונות', done: true },
+  locked: { icon: '🔒', text: 'נעול — נוצלו שלושת התיקונים', done: true },
   pending: { icon: '?', text: 'נשמר לבדיקת המורה', done: true },
 };
 
@@ -73,10 +68,7 @@ function targetValue(target: HTMLElement): string {
   return (target.textContent || '').trim();
 }
 
-function setTargetValue(
-  target: HTMLElement,
-  value: string,
-): void {
+function setTargetValue(target: HTMLElement, value: string): void {
   target.textContent = value;
 }
 
@@ -89,12 +81,8 @@ function defaultProgress(): QuestionProgress {
   };
 }
 
-function defaultDraft(
-  uid: string,
-  pageNumber: number,
-): PageDraft {
+function defaultDraft(uid: string, pageNumber: number): PageDraft {
   const now = Date.now();
-
   return {
     uid,
     pageNumber,
@@ -115,69 +103,6 @@ function setMessage(
   node.dataset.kind = kind;
 }
 
-export function canAccessPage(_pageNumber: number): boolean {
-  /* Every page is open to a guest (Yaniv, 2026-08-18). A guest solves, gets
-     feedback and a page score exactly like a registered student; the only
-     difference is where it is kept — a guest's progress lives on the device
-     only, never centrally and never in the teacher dashboard. Registration is
-     for central save, cross-device resume, and being seen by the teacher. */
-  return true;
-}
-
-export function renderAccessGate(
-  outlet: HTMLElement,
-  pageNumber: number,
-): void {
-  const card = elem(
-    'section',
-    {
-      class: 'lms-gate no-print',
-      role: 'region',
-      'aria-label': 'נדרשת הרשמה',
-    },
-    elem('div', {
-      class: 'lms-gate__icon',
-      text: '🔐',
-      'aria-hidden': 'true',
-    }),
-    elem('h1', {
-      text: 'כדי להמשיך לעמוד ' + String(pageNumber) + ' יש להירשם',
-    }),
-    elem('p', {
-      text:
-        'עמוד 1 פתוח ללא הרשמה. לאחר קבלת הציון ההתקדמות נשמרת בחשבון התלמיד.',
-    }),
-  );
-
-  const actions = elem('div', {
-    class: 'lms-gate__actions',
-  });
-
-  const registerButton = elem('button', {
-    class: 'btn btn--gold',
-    type: 'button',
-    text: 'הרשמה והמשך',
-  });
-
-  registerButton.addEventListener('click', () => {
-    location.hash = '#/login';
-  });
-
-  const backButton = elem('button', {
-    class: 'btn btn--ghost',
-    type: 'button',
-    text: 'חזרה לעמוד הראשון',
-  });
-
-  backButton.addEventListener('click', () => {
-    location.hash = '#/workbook/1';
-  });
-
-  actions.append(registerButton, backButton);
-  card.append(actions);
-  outlet.replaceChildren(card);
-}
-
 export function attachLmsToPage(
   sheetWrap: HTMLElement,
   pageNumber: number,
@@ -193,23 +118,6 @@ export function attachLmsToPage(
     class: 'lms-panel no-print',
     'aria-label': 'תרגול מתוקשב',
   });
-
-  const heading = elem('div', {
-    class: 'lms-panel__heading',
-  });
-
-  heading.append(
-    elem('div', {
-      class: 'lms-panel__title',
-      text: '✍️ תרגול מתוקשב — עמוד ' + String(pageNumber),
-    }),
-    elem('div', {
-      class: 'lms-panel__identity',
-      text: session
-        ? 'תלמיד: ' + session.fullName
-        : 'מצב אורח — ההתקדמות נשמרת במכשיר בלבד',
-    }),
-  );
 
   const status = elem('div', {
     class: 'lms-panel__status',
@@ -228,12 +136,6 @@ export function attachLmsToPage(
     class: 'lms-panel__buttons',
   });
 
-  const checkButton = elem('button', {
-    class: 'btn btn--ghost',
-    type: 'button',
-    text: 'בדיקת תשובות',
-  }) as HTMLButtonElement;
-
   const submitButton = elem('button', {
     class: 'btn btn--gold',
     type: 'button',
@@ -242,18 +144,7 @@ export function attachLmsToPage(
         ? 'סיימתי את הפעילות'
         : 'הגשת העמוד וקבלת ציון',
   }) as HTMLButtonElement;
-  checkButton.disabled = true;
   submitButton.disabled = true;
-
-  const accountButton = elem('button', {
-    class: 'btn btn--ghost',
-    type: 'button',
-    text: session ? 'החשבון שלי' : 'הרשמה / התחברות',
-  });
-
-  accountButton.addEventListener('click', () => {
-    location.hash = '#/login';
-  });
 
   const retryButton = elem('button', {
     class: 'btn btn--ghost',
@@ -262,12 +153,7 @@ export function attachLmsToPage(
     hidden: 'true',
   }) as HTMLButtonElement;
 
-  buttons.append(
-    checkButton,
-    submitButton,
-    retryButton,
-    accountButton,
-  );
+  buttons.append(submitButton, retryButton);
 
   if (isAdminSession()) {
     const adminButton = elem('button', {
@@ -283,7 +169,7 @@ export function attachLmsToPage(
     buttons.append(adminButton);
   }
 
-  panel.append(heading, status, scoreHost, buttons);
+  panel.append(status, scoreHost, buttons);
 
   let draft = defaultDraft(uid, pageNumber);
   let answerKey: AnswerKey = {};
@@ -305,9 +191,7 @@ export function attachLmsToPage(
 
   function progressFor(qid: string): QuestionProgress {
     const existing = draft.questions[qid];
-
     if (existing) return existing;
-
     const created = defaultProgress();
     draft.questions[qid] = created;
     return created;
@@ -316,32 +200,21 @@ export function attachLmsToPage(
   function touch(): void {
     const now = Date.now();
     const delta = Math.floor((now - lastActivityAt) / 1000);
-
-    if (
-      delta > 0 &&
-      delta <= LMS_CONFIG.activityIdleSeconds
-    ) {
+    if (delta > 0 && delta <= LMS_CONFIG.activityIdleSeconds) {
       draft.activeSeconds += delta;
     }
-
     lastActivityAt = now;
     draft.updatedAt = now;
   }
 
-  /* What each state MEANS, in words. The ✓/✕ marks are drawn in CSS for the
-     eye; a screen reader gets the same verdict spoken, because a colour and a
-     glyph both vanish for someone listening. */
   const STATE_WORDS: Record<string, string> = {
     correct: 'נכון',
     wrong: 'לא נכון, אפשר לתקן',
     missing: 'עדיין לא מולא',
-    locked: 'נעול לאחר שלושה ניסיונות',
+    locked: 'נעול לאחר שלושת התיקונים',
     pending: 'נשמר לבדיקת המורה',
   };
 
-  /* The label a target was born with — the question it asks. The verdict is
-     appended to it, never instead of it, so the field keeps saying what it
-     wants even after it has been graded. */
   const baseLabels = new WeakMap<HTMLElement, string>();
 
   function announceState(target: HTMLElement, state: string): void {
@@ -362,7 +235,6 @@ export function attachLmsToPage(
     progress: QuestionProgress,
   ): void {
     let state = 'empty';
-
     if (progress.correct) state = 'correct';
     else if (progress.locked) state = 'locked';
     else if (progress.attempts > 0) state = 'wrong';
@@ -457,7 +329,6 @@ export function attachLmsToPage(
     if (saveTimer !== undefined) {
       window.clearTimeout(saveTimer);
     }
-
     saveTimer = window.setTimeout(() => {
       void persistDraft();
     }, 300);
@@ -466,23 +337,15 @@ export function attachLmsToPage(
   function snapshotAnswers(): void {
     for (const target of targets) {
       const qid = target.dataset.lmsQid;
-
       if (!qid) continue;
-
       const progress = progressFor(qid);
       progress.answer = targetValue(target);
     }
-
     draft.updatedAt = Date.now();
   }
 
   function showScore(score: number): void {
-    /* A perfect page earns a perfect look — Yaniv: „ציון 100 לעשות עיצוב
-       מיוחד יפה זוהר". A gold, glowing badge with a spark, apart from the
-       plain red score of every other page; the shine stops under
-       prefers-reduced-motion, and none of it reaches print. */
     const perfect = score >= LMS_CONFIG.maxScore;
-
     scoreHost.replaceChildren(
       elem(
         'div',
@@ -515,11 +378,6 @@ export function attachLmsToPage(
     );
   }
 
-  /* Grade ONE target against the key, in place. Shared by the page-level check
-     and the per-question „סיימתי שאלה" button, so both count an attempt and
-     lock after three exactly the same way — a target that is already correct
-     or locked is never re-graded, and an empty one is „missing", never wrong.
-     `countAttempt` is true only when the learner actually asked for a check. */
   function gradeTarget(
     target: HTMLElement,
     key: AnswerKey,
@@ -572,9 +430,7 @@ export function attachLmsToPage(
 
     for (const target of targets) {
       if (!target.dataset.lmsQid) continue;
-
       const outcome = gradeTarget(target, answerKey, true);
-
       if (outcome === 'unkeyed') {
         unkeyed += 1;
       } else {
@@ -586,17 +442,12 @@ export function attachLmsToPage(
     refreshQuestions();
     draft.updatedAt = Date.now();
     const draftOutcome = await persistDraft();
-
     const activityOutcome = await persistActivity({
       uid,
       pageNumber,
       type: 'answer_check',
       createdAt: Date.now(),
-      metadata: {
-        keyed,
-        unkeyed,
-        remaining,
-      },
+      metadata: { keyed, unkeyed, remaining },
     });
 
     if (
@@ -619,8 +470,7 @@ export function attachLmsToPage(
         status,
         'הבדיקה הושלמה. נותרו ' +
           String(remaining) +
-          ' תשובות לתיקון. לכל תשובה מותר עד 3 ניסיונות.',
-        'normal',
+          ' תשובות לתיקון. יש ניסיון ראשון ועד 3 אפשרויות תיקון.',
       );
     } else {
       setMessage(
@@ -630,19 +480,13 @@ export function attachLmsToPage(
       );
     }
 
-    return {
-      keyed,
-      unkeyed,
-      remaining,
-    };
+    return { keyed, unkeyed, remaining };
   }
 
   function runCheck(): Promise<CheckSummary> {
     if (checkPromise) return checkPromise;
-    checkButton.disabled = true;
     checkPromise = performCheck().finally(() => {
       checkPromise = null;
-      checkButton.disabled = draft.submitted || submissionInFlight;
     });
     return checkPromise;
   }
@@ -651,7 +495,6 @@ export function attachLmsToPage(
     if (submissionInFlight || draft.submitted) return;
     submissionInFlight = true;
     submitButton.disabled = true;
-    checkButton.disabled = true;
 
     try {
       touch();
@@ -669,8 +512,7 @@ export function attachLmsToPage(
         const keyedEntries = Object.keys(answerKey)
           .map((qid) => draft.questions[qid])
           .filter(
-            (progress): progress is QuestionProgress =>
-              Boolean(progress),
+            (progress): progress is QuestionProgress => Boolean(progress),
           );
 
         const unresolved = keyedEntries.filter(
@@ -678,10 +520,6 @@ export function attachLmsToPage(
         ).length;
 
         if (unresolved > 0 && !submitConfirmPending) {
-          /* Don't trap a learner who does not know one answer: an empty
-             checkable blank never locks on its own, so a hard block would make
-             the page score unreachable forever. The first press explains; the
-             next one finalises and scores the unanswered targets as 0. */
           submitConfirmPending = true;
           setMessage(
             status,
@@ -693,7 +531,6 @@ export function attachLmsToPage(
         }
 
         submitConfirmPending = false;
-
         score = calculatePageScore(
           keyedEntries.map((progress) => ({
             attempts: progress.attempts,
@@ -703,9 +540,7 @@ export function attachLmsToPage(
           true,
         );
 
-        for (const [qid, progress] of Object.entries(
-          draft.questions,
-        )) {
+        for (const [qid, progress] of Object.entries(draft.questions)) {
           attempts[qid] = progress.attempts;
           answers[qid] = progress.answer;
         }
@@ -764,12 +599,7 @@ export function attachLmsToPage(
           'error',
         );
       } else if (uid === 'guest') {
-        setMessage(
-          status,
-          'העמוד נשמר במכשיר במצב אורח. כדי לשמור בענן, להמשיך בכל מכשיר ולהופיע אצל המורה — יש להירשם, וההתקדמות תעבור לחשבון.',
-          'success',
-        );
-        accountButton.textContent = 'הרשמה ושמירת ההתקדמות';
+        setMessage(status, 'העמוד נשמר במכשיר.', 'success');
       } else if (resultOutcome.central === 'saved') {
         setMessage(
           status,
@@ -782,20 +612,14 @@ export function attachLmsToPage(
         setMessage(
           status,
           'ההגשה נשמרה במכשיר בלבד; סנכרון מרכזי אינו פעיל.',
-          'normal',
         );
       }
     } finally {
       submissionInFlight = false;
       submitButton.disabled = draft.submitted;
-      checkButton.disabled = draft.submitted || checkPromise !== null;
       if (draft.submitted) submitButton.textContent = 'העמוד הוגש';
     }
   }
-
-  checkButton.addEventListener('click', () => {
-    void runCheck();
-  });
 
   submitButton.addEventListener('click', () => {
     void submitPage();
@@ -815,24 +639,18 @@ export function attachLmsToPage(
       class: 'btn btn--teacher',
       type: 'button',
       text: 'שמירת התשובות שמולאו כמפתח מורה',
-      title:
-        'מלאו בכל אזור את התשובה הנכונה ולחצו לשמירת המפתח',
+      title: 'מלאו בכל אזור את התשובה הנכונה ולחצו לשמירת המפתח',
     });
 
     keyButton.addEventListener('click', () => {
       const key: AnswerKey = {};
-
       for (const target of targets) {
         const qid = target.dataset.lmsQid;
         const answer = targetValue(target);
-
-        if (qid && answer) {
-          key[qid] = [answer];
-        }
+        if (qid && answer) key[qid] = [answer];
       }
 
       const count = Object.keys(key).length;
-
       if (count === 0) {
         setMessage(
           status,
@@ -847,18 +665,14 @@ export function attachLmsToPage(
           answerKey = key;
           setMessage(
             status,
-            'נשמר מפתח מורה עבור ' +
-              String(count) +
-              ' אזורי תשובה.',
+            'נשמר מפתח מורה עבור ' + String(count) + ' אזורי תשובה.',
             'success',
           );
         })
         .catch((error: unknown) => {
           setMessage(
             status,
-            error instanceof Error
-              ? error.message
-              : 'שמירת המפתח נכשלה.',
+            error instanceof Error ? error.message : 'שמירת המפתח נכשלה.',
             'error',
           );
         });
@@ -868,12 +682,7 @@ export function attachLmsToPage(
   }
 
   targets.forEach((target, index) => {
-    const qid =
-      'p' +
-      String(pageNumber) +
-      '-q' +
-      String(index + 1);
-
+    const qid = 'p' + String(pageNumber) + '-q' + String(index + 1);
     target.dataset.lmsQid = qid;
     target.dataset.lmsEditable = 'true';
     target.setAttribute('role', 'textbox');
@@ -895,36 +704,27 @@ export function attachLmsToPage(
 
     const onInput: EventListener = () => {
       touch();
-
       const progress = progressFor(qid);
       progress.answer = targetValue(target);
       progress.correct = false;
-      /* An edit after the „press again to submit" prompt means the learner
-         is still working — so finalising should be a deliberate press again. */
       submitConfirmPending = false;
 
       if (!progress.locked) {
-        target.dataset.lmsState = progress.answer
-          ? 'filled'
-          : 'empty';
+        target.dataset.lmsState = progress.answer ? 'filled' : 'empty';
       }
 
       scheduleSave();
-
       void persistActivity({
         uid,
         pageNumber,
         type: 'answer_change',
         createdAt: Date.now(),
-        metadata: {
-          qid,
-        },
+        metadata: { qid },
       });
     };
 
     const onKeydown: EventListener = (event) => {
       const keyboardEvent = event as KeyboardEvent;
-
       if (keyboardEvent.key === 'Enter') {
         keyboardEvent.preventDefault();
         target.blur();
@@ -933,19 +733,9 @@ export function attachLmsToPage(
 
     target.addEventListener('input', onInput);
     target.addEventListener('keydown', onKeydown);
-
-    listeners.push({
-      target,
-      input: onInput,
-      keydown: onKeydown,
-    });
+    listeners.push({ target, input: onInput, keydown: onKeydown });
   });
 
-  /* ---- questions: a card the learner finishes and checks on its own -------
-     A „question" is the .q-card the canonical content already groups its
-     blanks into (1,029 of 1,115 blanks sit in one); a blank with no card is
-     its own question. The controls are added here, in the LMS layer, and are
-     no-print — the canonical sheet is never touched. */
   const questionAnchorOf = (target: HTMLElement): HTMLElement =>
     target.closest<HTMLElement>('.q-card') ??
     target.closest<HTMLElement>('li, tr, p, .completion-sentence') ??
@@ -960,7 +750,6 @@ export function attachLmsToPage(
     'aria-live': 'polite',
   });
 
-  /* A question's state is DERIVED from its targets — never stored twice. */
   function deriveQuestion(group: QuestionGroup): QuestionState {
     let hasKeyed = false;
     let allCorrect = true;
@@ -1047,7 +836,6 @@ export function attachLmsToPage(
     });
 
     const state = deriveQuestion(group);
-
     if (
       draftOutcome.central === 'failed' ||
       activityOutcome.central === 'failed'
@@ -1063,9 +851,13 @@ export function attachLmsToPage(
     } else if (state === 'pending') {
       setMessage(status, 'התשובה נשמרה לבדיקת המורה.', 'success');
     } else if (state === 'locked') {
-      setMessage(status, 'נוצלו שלושת הניסיונות בשאלה זו.', 'error');
+      setMessage(
+        status,
+        'נוצלו הניסיון הראשון ושלושת התיקונים בשאלה זו.',
+        'error',
+      );
     } else {
-      setMessage(status, 'עדיין לא נכון — אפשר לנסות שוב.', 'error');
+      setMessage(status, 'עדיין לא נכון — אפשר לתקן ולהגיש שוב.', 'error');
     }
   }
 
@@ -1082,7 +874,9 @@ export function attachLmsToPage(
       const button = elem('button', {
         class: 'btn btn--gold btn--sm lms-qcheck__btn',
         type: 'button',
-        text: 'סיימתי שאלה',
+        text: 'להגיש ←',
+        'aria-label': 'להגיש שאלה לבדיקה',
+        title: 'להגיש שאלה לבדיקה',
       }) as HTMLButtonElement;
       const controls = elem(
         'div',
@@ -1122,35 +916,23 @@ export function attachLmsToPage(
     answerKey = storedKey;
     latestResult = storedResult;
 
-    if (storedDraft) {
-      draft = storedDraft;
-    }
+    if (storedDraft) draft = storedDraft;
 
     for (const target of targets) {
       const qid = target.dataset.lmsQid;
-
       if (!qid) continue;
-
       const progress = progressFor(qid);
-
-      if (progress.answer) {
-        setTargetValue(target, progress.answer);
-      }
-
+      if (progress.answer) setTargetValue(target, progress.answer);
       updateTarget(target, progress);
     }
 
-    if (draft.score !== undefined) {
-      showScore(draft.score);
-    }
+    if (draft.score !== undefined) showScore(draft.score);
 
     refreshQuestions();
-    checkButton.disabled = draft.submitted;
     submitButton.disabled = draft.submitted;
     if (draft.submitted) submitButton.textContent = 'העמוד הוגש';
 
     const keyedCount = Object.keys(answerKey).length;
-
     if (draft.submitted) {
       setMessage(
         status,
@@ -1193,23 +975,18 @@ export function attachLmsToPage(
     pageNumber,
     type: 'page_open',
     createdAt: Date.now(),
-    metadata: {
-      answerTargets: targets.length,
-    },
+    metadata: { answerTargets: targets.length },
   });
 
   const heartbeat = window.setInterval(() => {
     touch();
     scheduleSave();
-
     void persistActivity({
       uid,
       pageNumber,
       type: 'heartbeat',
       createdAt: Date.now(),
-      metadata: {
-        activeSeconds: draft.activeSeconds,
-      },
+      metadata: { activeSeconds: draft.activeSeconds },
     });
   }, LMS_CONFIG.activityHeartbeatSeconds * 1000);
 
@@ -1217,35 +994,22 @@ export function attachLmsToPage(
     panel,
     cleanup: () => {
       window.clearInterval(heartbeat);
-
-      if (saveTimer !== undefined) {
-        window.clearTimeout(saveTimer);
-      }
+      if (saveTimer !== undefined) window.clearTimeout(saveTimer);
 
       touch();
       snapshotAnswers();
       void persistDraft();
-
       void persistActivity({
         uid,
         pageNumber,
         type: 'page_leave',
         createdAt: Date.now(),
-        metadata: {
-          activeSeconds: draft.activeSeconds,
-        },
+        metadata: { activeSeconds: draft.activeSeconds },
       });
 
       for (const listener of listeners) {
-        listener.target.removeEventListener(
-          'input',
-          listener.input,
-        );
-
-        listener.target.removeEventListener(
-          'keydown',
-          listener.keydown,
-        );
+        listener.target.removeEventListener('input', listener.input);
+        listener.target.removeEventListener('keydown', listener.keydown);
       }
 
       window.removeEventListener('online', retryWhenOnline);
