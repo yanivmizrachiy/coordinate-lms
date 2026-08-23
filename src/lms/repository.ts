@@ -96,6 +96,14 @@ function validateDraft(draft: PageDraft): PageDraft {
   };
 }
 
+function guestDraftForStorage(draft: PageDraft): PageDraft {
+  const { score: _score, ...withoutScore } = draft;
+  return validateDraft({
+    ...withoutScore,
+    submitted: false,
+  });
+}
+
 function validateResult(result: PageResult): PageResult {
   if (
     !Number.isInteger(result.pageNumber) ||
@@ -250,11 +258,20 @@ export async function loadDraft(
   pageNumber: number,
 ): Promise<PageDraft | null> {
   const localDrafts = loadMap<PageDraft>(DRAFTS_KEY);
-  const local = localDrafts[compoundKey(uid, pageNumber)];
+  const key = compoundKey(uid, pageNumber);
+  const local = localDrafts[key];
+
+  if (uid === 'guest') {
+    if (!local) return null;
+    const sanitized = guestDraftForStorage(local);
+    localDrafts[key] = sanitized;
+    saveMap(DRAFTS_KEY, localDrafts);
+    return sanitized;
+  }
 
   const session = currentSession();
 
-  if (db && session && session.uid === uid && uid !== 'guest') {
+  if (db && session && session.uid === uid) {
     try {
       const snapshot = await getDoc(
         doc(
@@ -271,7 +288,7 @@ export async function loadDraft(
         const merged = local
           ? mergePageDrafts(remote, local)
           : validateDraft(remote);
-        localDrafts[compoundKey(uid, pageNumber)] = merged;
+        localDrafts[key] = merged;
         saveMap(DRAFTS_KEY, localDrafts);
         return merged;
       }
@@ -289,8 +306,16 @@ export async function saveDraft(
   const validated = validateDraft(draft);
   const localDrafts = loadMap<PageDraft>(DRAFTS_KEY);
   const key = compoundKey(validated.uid, validated.pageNumber);
-  const mergedLocal = mergePageDrafts(localDrafts[key], validated);
-  localDrafts[key] = mergedLocal;
+  const incoming = validated.uid === 'guest'
+    ? guestDraftForStorage(validated)
+    : validated;
+  const existing = validated.uid === 'guest' && localDrafts[key]
+    ? guestDraftForStorage(localDrafts[key])
+    : localDrafts[key];
+  const mergedLocal = mergePageDrafts(existing, incoming);
+  localDrafts[key] = validated.uid === 'guest'
+    ? guestDraftForStorage(mergedLocal)
+    : mergedLocal;
   saveMap(DRAFTS_KEY, localDrafts);
 
   const session = currentSession();
@@ -331,6 +356,13 @@ export async function savePageResult(
   const validated = validateResult(result);
   const localResults = loadMap<PageResult>(RESULTS_KEY);
   const key = compoundKey(validated.uid, validated.pageNumber);
+
+  if (validated.uid === 'guest') {
+    delete localResults[key];
+    saveMap(RESULTS_KEY, localResults);
+    return { localSaved: false, central: 'not-required' };
+  }
+
   const mergedLocal = mergePageResults(localResults[key], validated);
   localResults[key] = mergedLocal;
   saveMap(RESULTS_KEY, localResults);
@@ -340,8 +372,7 @@ export async function savePageResult(
   if (
     db &&
     session &&
-    session.uid === result.uid &&
-    result.uid !== 'guest'
+    session.uid === result.uid
   ) {
     try {
       const reference = doc(
@@ -503,36 +534,33 @@ export async function claimGuestProgress(
   const results = loadMap<PageResult>(RESULTS_KEY);
   const outcomes: PersistenceOutcome[] = [];
 
-  /* A guest can now work on any page, so every guest record moves to the
-     account — not only page 1. Keys are `guest:<pageNumber>`; each draft and
-     result already carries its real pageNumber, so re-saving under the new uid
-     lands it on the right page. */
+  /* Guest answers and attempt counters may live on this device so the
+     three-attempt model cannot be reset by reloading. Guest scores are never
+     part of that transfer: legacy guest result records are purged instead of
+     being copied into a newly registered account. */
   const isGuestKey = (key: string): boolean => key.startsWith('guest:');
   const guestDraftKeys = Object.keys(drafts).filter(isGuestKey);
   const guestResultKeys = Object.keys(results).filter(isGuestKey);
 
+  for (const key of guestResultKeys) delete results[key];
+  if (guestResultKeys.length > 0) saveMap(RESULTS_KEY, results);
+
   for (const key of guestDraftKeys) {
     const guestDraft = drafts[key];
     if (guestDraft) {
-      outcomes.push(await saveDraft({ ...guestDraft, uid, updatedAt: Date.now() }));
-    }
-  }
-
-  for (const key of guestResultKeys) {
-    const guestResult = results[key];
-    if (guestResult) {
-      outcomes.push(await savePageResult({ ...guestResult, uid }));
+      outcomes.push(await saveDraft({
+        ...guestDraftForStorage(guestDraft),
+        uid,
+        updatedAt: Date.now(),
+      }));
     }
   }
 
   const complete = canFinalizeGuestTransfer(outcomes);
   if (complete) {
     const latestDrafts = loadMap<PageDraft>(DRAFTS_KEY);
-    const latestResults = loadMap<PageResult>(RESULTS_KEY);
     for (const key of guestDraftKeys) delete latestDrafts[key];
-    for (const key of guestResultKeys) delete latestResults[key];
     saveMap(DRAFTS_KEY, latestDrafts);
-    saveMap(RESULTS_KEY, latestResults);
     clearSyncError(uid, 1, 'guest-transfer');
   } else {
     recordSyncError({
@@ -541,7 +569,7 @@ export async function claimGuestProgress(
       operation: 'guest-transfer',
       createdAt: Date.now(),
       message:
-        'התקדמות האורח נשמרה במכשיר אך טרם הועברה למערכת המרכזית. נסו שוב לפני המשך העבודה.',
+        'טיוטת התרגול של האורח נשמרה במכשיר אך טרם הועברה למערכת המרכזית. נסו שוב לפני המשך העבודה.',
     });
   }
   return { complete, outcomes };
@@ -687,10 +715,17 @@ export async function loadPageResult(
 ): Promise<PageResult | null> {
   const localResults = loadMap<PageResult>(RESULTS_KEY);
   const key = compoundKey(uid, pageNumber);
+
+  if (uid === 'guest') {
+    delete localResults[key];
+    saveMap(RESULTS_KEY, localResults);
+    return null;
+  }
+
   const local = localResults[key];
   const session = currentSession();
 
-  if (db && session?.uid === uid && uid !== 'guest') {
+  if (db && session?.uid === uid) {
     try {
       const snapshot = await getDoc(
         doc(db, 'students', uid, 'results', 'page-' + String(pageNumber)),
@@ -715,11 +750,24 @@ export async function loadPageResult(
 export async function loadUserResults(
   uid: string,
 ): Promise<PageResult[]> {
+  if (uid === 'guest') {
+    const map = loadMap<PageResult>(RESULTS_KEY);
+    let changed = false;
+    for (const [key, result] of Object.entries(map)) {
+      if (key.startsWith('guest:') || result.uid === 'guest') {
+        delete map[key];
+        changed = true;
+      }
+    }
+    if (changed) saveMap(RESULTS_KEY, map);
+    return [];
+  }
+
   const localResults = Object.values(
     loadMap<PageResult>(RESULTS_KEY),
   ).filter((result) => result.uid === uid);
 
-  if (!db || uid === 'guest') {
+  if (!db) {
     return localResults.sort(
       (a, b) => a.pageNumber - b.pageNumber,
     );
