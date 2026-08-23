@@ -1,6 +1,6 @@
 import '../styles/hint-coach.css';
 
-type HintLevel = 1 | 2 | 3;
+type HintLevel = 1 | 2 | 3 | 4;
 type HintSet = readonly [string, string, string];
 
 const GENERIC: HintSet = [
@@ -9,11 +9,44 @@ const GENERIC: HintSet = [
   'נסחו לעצמכם את הכלל במילים ובדקו אם התשובה החדשה מתאימה לכל הנתונים.',
 ];
 
-/*
- * Hints teach a way of thinking. They deliberately avoid stating the expected
- * word, letter or number. Even the third hint remains a worked direction, not
- * an answer reveal.
- */
+/* The final stage is explanatory but still never gives the current answer. */
+const FINAL_GUIDANCE: Record<string, string> = {
+  generic:
+    'לפני שממשיכים, עצרו ונסחו את הכלל המתמטי של השאלה במילים שלכם. אחר כך הסבירו לעצמכם אילו נתונים מהשאלה מפעילים את הכלל הזה.',
+  'axis-x':
+    'לפני שממשיכים, בנו לעצמכם כלל קבוע שמחבר בין כיוון של ציר לבין האות שלו. בדקו קודם את כיוון הציר המסומן ורק אחר כך הפעילו את הכלל.',
+  'axis-y':
+    'לפני שממשיכים, בנו לעצמכם כלל קבוע שמחבר בין כיוון של ציר לבין האות שלו. בדקו קודם את כיוון הציר המסומן ורק אחר כך הפעילו את הכלל.',
+  letter:
+    'לפני שממשיכים, הפרידו בין שתי החלטות: קודם קובעים את כיוון הציר, ורק אחר כך מתאימים לו את האות לפי הכלל שלמדתם.',
+  property:
+    'לפני שממשיכים, תארו את הקו במילים בלי להשתמש בשם המבוקש: האם הוא נמשך מצד לצד או עולה מלמטה למעלה? מן התיאור אפשר לבחור את המונח המתאים.',
+  'x-tick':
+    'לפני שממשיכים, קבעו מהו גודל מרווח אחד בין שתי שנתות סמוכות. התחילו ממספר ידוע והתקדמו מרווח אחד בכל פעם עד המקום המבוקש.',
+  'y-tick':
+    'לפני שממשיכים, קבעו מהו גודל מרווח אחד בין שתי שנתות סמוכות. התחילו ממספר ידוע והתקדמו מרווח אחד בכל פעם עד המקום המבוקש.',
+  number:
+    'לפני שממשיכים, כתבו לעצמכם שלושה דברים: מספר התחלתי ידוע, גודל כל מרווח וכמה מרווחים עוברים. רק אחר כך חשבו את הערך במקום המבוקש.',
+  origin:
+    'לפני שממשיכים, התמקדו רק בנקודת המפגש של שני הצירים. שאלו מה התפקיד של הנקודה הזאת במערכת ומהו המושג בן שתי המילים שמתאר את התפקיד.',
+  'origin-first':
+    'לפני שממשיכים, אמרו לעצמכם את המושג המלא של נקודת המפגש. בדקו איזו מן המילים מתארת את רעיון ההתחלה, בלי להעתיק תשובה מן הדף.',
+  'origin-second':
+    'לפני שממשיכים, אמרו לעצמכם את המושג המלא של נקודת המפגש. בדקו איזו מן המילים מתייחסת לשני הקווים של המערכת, בלי להעתיק תשובה מן הדף.',
+  direction:
+    'לפני שממשיכים, סמנו נקודת התחלה ונקודת יעד, ואז קראו שני ערכים עוקבים לאורך התנועה. השינוי בין הערכים הוא הבדיקה שלכם לכיוון.',
+  relation:
+    'לפני שממשיכים, בחרו שתי דוגמאות מן הציר וכתבו מה קורה לערכים כשהולכים בכיוון המתואר. המסקנה צריכה להתאים לשתי הדוגמאות, לא רק לאחת.',
+  concept:
+    'לפני שממשיכים, תארו את החלק המסומן לפי התפקיד שלו: מה הוא עושה במערכת, למה משתמשים בו ואיך מזהים אותו. לאחר שהתיאור ברור, חזרו למושג המתמטי.',
+  'pair-x':
+    'לפני שממשיכים, הפרידו בין סדר לבין ערך: קודם קובעים איזה ציר שייך למקום הראשון בזוג הסדור, ורק אחר כך קוראים מן השרטוט את הערך המתאים.',
+  'pair-y':
+    'לפני שממשיכים, הפרידו בין סדר לבין ערך: קודם קובעים איזה ציר שייך למקום השני בזוג הסדור, ורק אחר כך קוראים מן השרטוט את הערך המתאים.',
+};
+
+/* Hints teach a way of thinking and never state the expected word, letter,
+   coordinate or number. */
 const HINTS: Record<string, HintSet> = {
   'axis-x': [
     'בדקו קודם את כיוון הציר המסומן: האם הוא נמשך מצד לצד או מלמטה למעלה?',
@@ -114,20 +147,29 @@ function unresolved(anchor: HTMLElement): HTMLElement[] {
 
 function levelOf(targets: HTMLElement[]): HintLevel {
   const attempts = Math.max(1, ...targets.map((target) => Number(target.dataset['lmsAttempts'] || 0)));
-  return attempts >= 3 ? 3 : attempts === 2 ? 2 : 1;
+  if (attempts >= 4) return 4;
+  if (attempts === 3) return 3;
+  if (attempts === 2) return 2;
+  return 1;
 }
 
 function hintText(anchor: HTMLElement, level: HintLevel): string {
   const targets = unresolved(anchor);
-  const sources = targets.length ? targets : Array.from(anchor.querySelectorAll<HTMLElement>('[data-lms-qid]'));
+  const sources = targets.length
+    ? targets
+    : Array.from(anchor.querySelectorAll<HTMLElement>('[data-lms-qid]'));
   const messages: string[] = [];
+
   for (const target of sources) {
-    const set = HINTS[kindOf(target)] ?? GENERIC;
-    const message = set[level - 1] ?? set[0] ?? GENERIC[0];
+    const kind = kindOf(target);
+    const message = level === 4
+      ? FINAL_GUIDANCE[kind] ?? FINAL_GUIDANCE.generic
+      : (HINTS[kind] ?? GENERIC)[level - 1];
     if (!message) continue;
     if (!messages.includes(message)) messages.push(message);
     if (messages.length === 2) break;
   }
+
   return messages.join(' ');
 }
 
@@ -153,19 +195,37 @@ function attach(control: HTMLElement): () => void {
 
     const anchor = control.parentElement ?? control;
     const level = levelOf(unresolved(anchor));
-    const label = level === 1 ? 'רמז' : level === 2 ? 'כיוון נוסף' : 'הכוונה נוספת';
+    const label = level === 1
+      ? 'רמז'
+      : level === 2
+        ? 'כיוון נוסף'
+        : level === 3
+          ? 'הכוונה נוספת'
+          : 'הסבר לפני שממשיכים';
     hint.dataset['hintLevel'] = String(level);
     hint.textContent = `${label}: ${hintText(anchor, level)}`;
     hint.hidden = false;
   };
 
   const observer = new MutationObserver(refresh);
-  observer.observe(status, { attributes: true, attributeFilter: ['data-qstate'], childList: true, subtree: true });
+  observer.observe(status, {
+    attributes: true,
+    attributeFilter: ['data-qstate'],
+    childList: true,
+    subtree: true,
+  });
   refresh();
-  return () => { observer.disconnect(); hint.remove(); };
+  return () => {
+    observer.disconnect();
+    hint.remove();
+  };
 }
 
 export function installHintCoach(root: ParentNode): () => void {
-  const cleanups = Array.from(root.querySelectorAll<HTMLElement>('.lms-qcheck')).map(attach);
-  return () => { for (const cleanup of cleanups) cleanup(); };
+  const cleanups = Array.from(
+    root.querySelectorAll<HTMLElement>('.lms-qcheck'),
+  ).map(attach);
+  return () => {
+    for (const cleanup of cleanups) cleanup();
+  };
 }
