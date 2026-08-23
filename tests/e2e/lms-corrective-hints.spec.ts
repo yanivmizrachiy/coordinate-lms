@@ -50,7 +50,7 @@ test('a wrong submission teaches, escalates the hint, and still allows correctio
   await expect(target).toHaveAttribute('data-lms-attempts', '3');
 });
 
-test('ordered-pair hints teach the ordering rule without printing the answer template', async ({ page }) => {
+test('final correction gets a distinct explanatory hint without revealing an ordered-pair answer', async ({ page }) => {
   await page.goto('/#/workbook/6');
   const target = page.locator('.pair-blank[data-lms-qid]').first();
   await expect(target).toBeVisible();
@@ -63,9 +63,12 @@ test('ordered-pair hints teach the ordering rule without printing the answer tem
   await submit.click();
   await submit.click();
   await submit.click();
+  await submit.click();
 
+  await expect(target).toHaveAttribute('data-lms-attempts', '4');
   await expect(hint).toBeVisible();
-  await expect(hint).toHaveAttribute('data-hint-level', '3');
+  await expect(hint).toHaveAttribute('data-hint-level', '4');
+  await expect(hint).toContainText('הסבר לפני שממשיכים:');
   await expect(hint).not.toContainText('(x, y)');
   await expect(hint).not.toContainText('(x,y)');
 });
