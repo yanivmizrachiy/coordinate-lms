@@ -2,6 +2,7 @@ import './styles/tokens.css';
 import './styles/base.css';
 import './styles/app.css';
 import './styles/landing.css';
+import './styles/welcome.css';
 import './styles/actions.css';
 import './styles/flipbook.css';
 import './styles/workbook.css';
@@ -21,7 +22,6 @@ import { ensureFreshBuild } from './lib/freshBuild';
 const app = document.getElementById('app');
 if (!app) throw new Error('#app root missing');
 
-/* ---- app bar ----------------------------------------------------------- */
 const homeBtn = elem('button', { class: 'iconbtn iconbtn--primary', type: 'button', text: '⌂ בית', 'aria-label': 'מסך הבית' });
 homeBtn.addEventListener('click', () => navigate('#/'));
 
@@ -29,14 +29,11 @@ const menuBtn = elem('button', { class: 'iconbtn', type: 'button', text: '☰ ת
 menuBtn.addEventListener('click', () => navigate('#/menu'));
 
 const titleEl = elem('div', { class: 'appbar__title', text: 'מערכת צירים — הרביע הראשון' });
-
 const appbar = elem('header', { class: 'appbar no-print' }, homeBtn, menuBtn, titleEl);
 const outlet = elem('main', { class: 'app-main', id: 'main', tabindex: '-1' });
 const skip = elem('a', { class: 'skip-link', href: '#main', text: 'דלגו לתוכן' });
-
 app.append(skip, appbar, outlet);
 
-/* ---- routing ----------------------------------------------------------- */
 const setTitle = (t: string): void => {
   titleEl.textContent = t;
   document.title = `${t} | מערכת צירים`;
@@ -44,6 +41,7 @@ const setTitle = (t: string): void => {
 
 function resolve(match: RouteMatch): Promise<View> {
   switch (match.name) {
+    case 'welcome': return import('./views/welcome').then((m) => m.welcome);
     case 'home': return import('./views/home').then((m) => m.home);
     case 'menu': return import('./views/menu').then((m) => m.menu);
     case 'page': return import('./views/pageViewer')
@@ -69,14 +67,14 @@ function render(match: RouteMatch): void {
   clear(outlet);
 
   const practice = match.name === 'page';
-  homeBtn.style.visibility = match.name === 'home' ? 'hidden' : 'visible';
+  const fullScreen = match.name === 'welcome' || match.name === 'home' || match.name === 'book';
+  homeBtn.style.visibility = fullScreen ? 'hidden' : 'visible';
   homeBtn.textContent = practice ? '⌂' : '⌂ בית';
-  appbar.classList.toggle('appbar--hidden', match.name === 'home' || match.name === 'book');
+  appbar.classList.toggle('appbar--hidden', fullScreen);
   appbar.classList.toggle('appbar--practice', practice);
 
-  /* Computerized practice is a focused student flow. The general utility menu
-     contains print/booklet tools, so it is deliberately not presented inside
-     the practice shell. Secondary practice tools live in the page's own ⋯ menu. */
+  /* Numbered practice is intentionally focused. Print/booklet/account utilities
+     do not appear inside it; the page owns its small practice-only controls. */
   menuBtn.hidden = match.name === 'menu' || practice;
 
   const notice = window.setTimeout(() => {
