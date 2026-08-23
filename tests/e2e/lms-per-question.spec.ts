@@ -21,6 +21,22 @@ async function pickQuestion(page: Page, min: number): Promise<Locator> {
   throw new Error(`no question with ${min} drawing answers`);
 }
 
+test('page 1 vertical-axis box accepts y even though it is visually the first axis-name box', async ({ page }) => {
+  await page.goto('/#/workbook/1');
+  const target = page.locator('[data-grid-answer="axis-y"]');
+  await expect(target).toHaveCount(1);
+  await expect(target).toHaveAttribute('data-lms-answers', /"y"/i);
+
+  const question = target.locator('xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")]');
+  const submit = question.getByRole('button', { name: 'להגיש שאלה לבדיקה' });
+  await target.fill('y');
+  await submit.click();
+
+  // Other blanks in section א may still need work, but this specific answer is correct.
+  await expect(target).toHaveAttribute('data-lms-state', 'correct');
+  await expect(target).toHaveAttribute('contenteditable', 'false');
+});
+
 test('submitting a question grades only it and shows a green ✓ נכון verdict', async ({ page }) => {
   await page.goto('/#/workbook/1');
   const q = await pickQuestion(page, 1);
