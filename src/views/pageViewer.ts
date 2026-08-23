@@ -16,33 +16,6 @@ import { hydrateExplicitAuthoringAnswers } from '../lms/implicitAnswers';
 import { installHintCoach } from '../lms/hintCoach';
 import { installAttemptFeedback } from '../lms/attemptFeedback';
 
-const STUDENT_HIDDEN_ACTIONS = new Set([
-  'בדיקת תשובות',
-  'הרשמה / התחברות',
-  'החשבון שלי',
-]);
-
-/**
- * The LMS engine owns grading/persistence. This viewer owns the student surface.
- * Keep only controls that help solve the current page; teacher/account/general
- * utilities must not leak into the numbered practice flow.
- */
-function applyStudentPracticeUi(panel: HTMLElement, sheet: ParentNode): void {
-  panel.querySelector<HTMLElement>('.lms-panel__heading')?.remove();
-
-  for (const button of panel.querySelectorAll<HTMLButtonElement>('button')) {
-    if (STUDENT_HIDDEN_ACTIONS.has((button.textContent || '').trim())) {
-      button.remove();
-    }
-  }
-
-  for (const button of sheet.querySelectorAll<HTMLButtonElement>('.lms-qcheck__btn')) {
-    button.textContent = 'להגיש ←';
-    button.setAttribute('aria-label', 'להגיש שאלה לבדיקה');
-    button.title = 'להגיש שאלה לבדיקה';
-  }
-}
-
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
     const page = Math.min(Math.max(1, Math.trunc(n) || 1), TOTAL_PAGES);
@@ -102,7 +75,6 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     const lms = data
       ? attachLmsToPage(sheetWrap, page)
       : undefined;
-    if (lms) applyStudentPracticeUi(lms.panel, sheetWrap);
     const hintCleanup = data && lms
       ? installHintCoach(sheetWrap)
       : undefined;
