@@ -63,9 +63,9 @@ function isHebrewWordLike(value: string): boolean {
 }
 
 /**
- * Bounded Damerau-Levenshtein distance for harmless spelling tolerance.
- * This is intentionally used only for Hebrew word-like answers — never for
- * numbers, ordered data or set answers — so mathematical meaning stays strict.
+ * Damerau-Levenshtein is used only for one harmless Hebrew typo. We keep the
+ * allowance intentionally narrow so spelling tolerance can never become a
+ * substitute for mathematical correctness.
  */
 function editDistance(a: string, b: string): number {
   const rows = a.length + 1;
@@ -100,9 +100,7 @@ function editDistance(a: string, b: string): number {
 
 function harmlessHebrewVariant(actual: string, expected: string): boolean {
   if (!isHebrewWordLike(actual) || !isHebrewWordLike(expected)) return false;
-  const longest = Math.max(actual.length, expected.length);
-  const allowed = longest >= 8 ? 2 : 1;
-  return editDistance(actual, expected) <= allowed;
+  return editDistance(actual, expected) <= 1;
 }
 
 export function answersMatch(raw: string, expected: readonly string[]): boolean {
