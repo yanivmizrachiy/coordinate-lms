@@ -793,7 +793,7 @@ export async function loadUserDrafts(
     for (const document of snapshot.docs) {
       const draft = document.data() as PageDraft;
       const current = merged.get(draft.pageNumber);
-      merged.set(result.pageNumber, mergePageDrafts(current, draft));
+      merged.set(draft.pageNumber, mergePageDrafts(current, draft));
     }
 
     return [...merged.values()].sort(
