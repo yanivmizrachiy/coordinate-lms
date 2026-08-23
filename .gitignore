@@ -1,35 +1,38 @@
-
 # build output
+dist/
+standalone/
+.vite/
+
 # dependencies
+node_modules/
+
 # environment & secrets
-# os / editor
-# test / tooling artifacts
+.env
+.env.*
+!.env.example
 *.key
-*.log
 *.pem
 *.secret
 *.secret.*
-*.tmp
+credentials.json
+secrets.json
+.secrets/
+
+# os / editor
 .DS_Store
-.env
-.env.*
+Thumbs.db
+
+# test / tooling artifacts
+coverage/
+playwright-report/
+test-results/
 .playwright/
 .playwright-browsers/
-.secrets/
-.vite/
-Thumbs.db
-coverage/
-credentials.json
-dist/
-node_modules/
-playwright-report/
-secrets.json
-standalone/
-test-results/
+*.log
+*.tmp
+
+# deploy metadata
+.vercel
 
 # תיקיית קלט זמנית של יניב — תוצרים מפרויקט אחר, לא קוד של הריפו
 _CLAUDE_INPUT/
-
-.vercel
-.vercel
-!.env.example
