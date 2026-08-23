@@ -11,6 +11,7 @@ describe('learner answer tolerance', () => {
   it('accepts one harmless Hebrew spelling or full/defective variation', () => {
     expect(answersMatch('אפקי', ['אופקי'])).toBe(true);
     expect(answersMatch('צייר', ['ציר'])).toBe(true);
+    expect(answersMatch('אופקי.', ['אופקי'])).toBe(true);
     expect(answersMatch('אנכי', ['אנכי'])).toBe(true);
   });
 
@@ -24,6 +25,12 @@ describe('learner answer tolerance', () => {
     expect(answersMatch('4', ['4'])).toBe(true);
     expect(answersMatch('4', ['5'])).toBe(false);
     expect(answersMatch('1/2', ['0.5'])).toBe(true);
+  });
+
+  it('preserves punctuation that carries mathematical structure', () => {
+    expect(answersMatch('(2,3)', ['(2,3)'])).toBe(true);
+    expect(answersMatch('23', ['(2,3)'])).toBe(false);
+    expect(answersMatch('(3,2)', ['(2,3)'])).toBe(false);
   });
 
   it('keeps set answers strict despite text tolerance', () => {
