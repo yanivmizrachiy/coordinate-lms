@@ -143,6 +143,25 @@ export function home({ outlet, setTitle }: ViewContext): (() => void) | void {
       ...(sub ? [elem('p', { class: 'ls-section__sub', text: sub })] : []),
     );
 
+  /* Account/save guidance appears once, before practice starts. Numbered
+     workbook pages stay focused only on the mathematics, feedback and hints. */
+  const startPractice = elem('button', { class: 'ls-btn ls-btn--primary', type: 'button', text: 'התחלת תרגול' });
+  startPractice.addEventListener('click', () => navigate('#/workbook/1'));
+  const account = elem('button', { class: 'ls-btn ls-btn--ghost', type: 'button', text: 'הרשמה / התחברות' });
+  account.addEventListener('click', () => navigate('#/login'));
+  root.append(
+    elem('section', { class: 'ls-section ls-section--soft', id: 'practice-start' },
+      elem('div', { class: 'ls-container' },
+        sectionHead(
+          'לפני שמתחילים',
+          'תרגול מתוקשב',
+          'אפשר להתחיל מיד כאורח. הרשמה או התחברות נועדה לשמירת ההתקדמות בחשבון ולהמשך ממכשיר אחר; בזמן התרגול עצמו לא יוצגו הסברי הרשמה.'
+        ),
+        elem('div', { class: 'ls-hero__actions' }, startPractice, account),
+      ),
+    ),
+  );
+
   /* ---- the curriculum film: the misparim facade, player loads on press -- */
   const videoBox = elem('div', { class: 'ls-viewer' });
   const facade = elem('button', {
