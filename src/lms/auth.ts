@@ -1,5 +1,6 @@
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
   updateProfile,
@@ -108,6 +109,39 @@ function requireAvailableBackend(): void {
   );
 }
 
+function authErrorCode(error: unknown): string {
+  if (!error || typeof error !== 'object' || !('code' in error)) return '';
+  return String((error as { code?: unknown }).code || '');
+}
+
+function friendlyAuthError(
+  error: unknown,
+  action: 'register' | 'login',
+): Error {
+  switch (authErrorCode(error)) {
+    case 'auth/email-already-in-use':
+      return new Error('כבר קיים חשבון עם כתובת האימייל הזאת. אפשר לעבור להתחברות.');
+    case 'auth/invalid-email':
+      return new Error('כתובת האימייל אינה תקינה.');
+    case 'auth/weak-password':
+      return new Error('הסיסמה חלשה מדי. בחרו סיסמה של לפחות 6 תווים.');
+    case 'auth/invalid-credential':
+    case 'auth/user-not-found':
+    case 'auth/wrong-password':
+      return new Error('האימייל או הסיסמה אינם נכונים.');
+    case 'auth/too-many-requests':
+      return new Error('בוצעו יותר מדי ניסיונות. נסו שוב בעוד זמן קצר.');
+    case 'auth/network-request-failed':
+      return new Error('לא הצלחנו להתחבר לשרת. בדקו את החיבור לאינטרנט ונסו שוב.');
+    default:
+      return new Error(
+        action === 'register'
+          ? 'ההרשמה לא הושלמה. נסו שוב.'
+          : 'ההתחברות לא הושלמה. נסו שוב.',
+      );
+  }
+}
+
 export function currentSession(): LmsSession | null {
   return safeParse<LmsSession | null>(
     localStorage.getItem(SESSION_KEY),
@@ -131,9 +165,10 @@ export async function registerStudent(
   const fullName = input.fullName.trim();
   const email = input.email.trim().toLowerCase();
   const password = input.password;
+  const school = input.school?.trim() || '';
   const username = input.username?.trim() || email;
 
-  if (!fullName || !email || !password) {
+  if (!fullName || !school || !email || !password) {
     throw new Error('יש למלא שם מלא, בית ספר, אימייל וסיסמה.');
   }
 
@@ -145,37 +180,49 @@ export async function registerStudent(
   const role = roleForEmail(email);
 
   if (firebaseConfigured && auth && db) {
-    const credential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
+    let credential: Awaited<ReturnType<typeof createUserWithEmailAndPassword>>;
+    try {
+      credential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+    } catch (error) {
+      throw friendlyAuthError(error, 'register');
+    }
 
-    await updateProfile(credential.user, {
-      displayName: fullName,
-    });
+    try {
+      await updateProfile(credential.user, {
+        displayName: fullName,
+      });
 
-    const profile: StudentProfile = {
-      uid: credential.user.uid,
-      fullName,
-      username,
-      email,
-      className: input.className?.trim() || '',
-      school: input.school?.trim() || '',
-      role,
-      createdAt,
-      lastSeenAt: createdAt,
-    };
+      const profile: StudentProfile = {
+        uid: credential.user.uid,
+        fullName,
+        username,
+        email,
+        className: input.className?.trim() || '',
+        school,
+        role,
+        createdAt,
+        lastSeenAt: createdAt,
+      };
 
-    await setDoc(
-      doc(db, 'students', credential.user.uid),
-      profile,
-      { merge: true },
-    );
+      await setDoc(
+        doc(db, 'students', credential.user.uid),
+        profile,
+        { merge: true },
+      );
 
-    const session = toSession(profile);
-    persistSession(session);
-    return session;
+      const session = toSession(profile);
+      persistSession(session);
+      return session;
+    } catch {
+      await deleteUser(credential.user).catch(() => undefined);
+      throw new Error(
+        'החשבון לא נשמר במערכת. לא נשמר רישום חלקי; בדקו את החיבור ונסו שוב.',
+      );
+    }
   }
 
   requireAvailableBackend();
@@ -193,7 +240,7 @@ export async function registerStudent(
     username,
     email,
     className: input.className?.trim() || '',
-    school: input.school?.trim() || '',
+    school,
     role,
     createdAt,
     lastSeenAt: createdAt,
@@ -222,11 +269,16 @@ export async function loginStudent(
   }
 
   if (firebaseConfigured && auth && db) {
-    const credential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
+    let credential: Awaited<ReturnType<typeof signInWithEmailAndPassword>>;
+    try {
+      credential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+    } catch (error) {
+      throw friendlyAuthError(error, 'login');
+    }
 
     const profileSnapshot = await getDoc(
       doc(db, 'students', credential.user.uid),
