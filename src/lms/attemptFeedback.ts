@@ -1,4 +1,5 @@
 import '../styles/attempt-feedback.css';
+import { LMS_CONFIG } from './config';
 import { remainingCreditFraction } from './scoring';
 
 interface TargetSnapshot {
@@ -33,6 +34,13 @@ function roundedPoints(value: number): number {
   return Math.round(value);
 }
 
+function attemptLabel(attempts: number): string {
+  if (attempts <= 0) return '';
+  if (attempts === 1) return 'זה היה הניסיון הראשון. נשארו 3 אפשרויות תיקון.';
+  const correction = Math.min(3, attempts - 1);
+  return `זה היה תיקון ${correction} מתוך 3.`;
+}
+
 function messageFor(items: TargetSnapshot[], qstate: string): string {
   const relevant = scoreable(items);
   if (!relevant.length || qstate === 'idle' || qstate === 'pending') return '';
@@ -57,15 +65,15 @@ function messageFor(items: TargetSnapshot[], qstate: string): string {
     if (lostPoints === 0) {
       return 'נכון בניסיון הראשון — נשמרו כל 100 הנקודות של השאלה.';
     }
-    return `נכון. השתמשת ב־${maxAttempt} ניסיונות. בגלל הניסיונות הקודמים ירדו ${lostPoints} נקודות; נשארו ${remainingPoints} מתוך 100 נקודות לשאלה.`;
+    return `נכון. ${attemptLabel(maxAttempt)} בגלל הניסיונות הקודמים ירדו ${lostPoints} נקודות; נשארו ${remainingPoints} מתוך 100 נקודות לשאלה.`;
   }
 
   if (qstate === 'locked') {
-    return 'נוצלו 3 ניסיונות. בחלקים שלא תוקנו לא נשאר ניקוד. קרא את הרמז וההסבר כדי להבין את הדרך לפני שממשיכים.';
+    return 'נוצלו הניסיון הראשון וכל 3 אפשרויות התיקון. בחלקים שלא תוקנו לא נשאר ניקוד. קרא את הרמז וההסבר כדי להבין את הדרך לפני שממשיכים.';
   }
 
-  const attemptText = maxAttempt > 0 ? `ניסיון ${maxAttempt} מתוך 3.` : '';
-  return `${attemptText} עד עכשיו ירדו ${lostPoints} נקודות מהניקוד האפשרי של השאלה; המקסימום שנותר הוא ${remainingPoints} מתוך 100. תקן רק את החלקים שסומנו ונסה שוב.`.trim();
+  const used = Math.min(maxAttempt, LMS_CONFIG.maxAttempts);
+  return `${attemptLabel(used)} עד עכשיו ירדו ${lostPoints} נקודות מהניקוד האפשרי של השאלה; המקסימום שנותר הוא ${remainingPoints} מתוך 100. תקן רק את החלקים שסומנו ונסה שוב.`.trim();
 }
 
 function attach(control: HTMLElement): () => void {
