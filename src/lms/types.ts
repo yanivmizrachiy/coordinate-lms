@@ -81,7 +81,7 @@ export interface SyncErrorRecord {
 }
 
 export interface PersistenceOutcome {
-  localSaved: true;
+  localSaved: boolean;
   central: 'saved' | 'failed' | 'not-required';
   error?: string;
 }
