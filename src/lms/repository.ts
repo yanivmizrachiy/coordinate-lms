@@ -40,7 +40,6 @@ const CENTRAL_SAVE_ERROR =
 
 function safeParse<T>(raw: string | null, fallback: T): T {
   if (!raw) return fallback;
-
   try {
     return JSON.parse(raw) as T;
   } catch {
@@ -49,10 +48,7 @@ function safeParse<T>(raw: string | null, fallback: T): T {
 }
 
 function loadMap<T>(key: string): Record<string, T> {
-  return safeParse<Record<string, T>>(
-    localStorage.getItem(key),
-    {},
-  );
+  return safeParse<Record<string, T>>(localStorage.getItem(key), {});
 }
 
 function saveMap<T>(key: string, value: Record<string, T>): void {
@@ -75,11 +71,7 @@ function maxAttemptCount(
 }
 
 function assertAttemptCount(value: number): void {
-  if (
-    !Number.isInteger(value) ||
-    value < 0 ||
-    value > LMS_CONFIG.maxAttempts
-  ) {
+  if (!Number.isInteger(value) || value < 0 || value > LMS_CONFIG.maxAttempts) {
     throw new Error(
       'מספר הניסיונות חייב להיות מספר שלם בין 0 ל־' +
         String(LMS_CONFIG.maxAttempts) +
@@ -89,28 +81,43 @@ function assertAttemptCount(value: number): void {
 }
 
 function validateDraft(draft: PageDraft): PageDraft {
-  if (
-    !Number.isInteger(draft.pageNumber) ||
-    draft.pageNumber < 1 ||
-    draft.pageNumber > TOTAL_PAGES
-  ) {
+  if (!Number.isInteger(draft.pageNumber) || draft.pageNumber < 1 || draft.pageNumber > TOTAL_PAGES) {
     throw new Error('מספר עמוד לא תקין.');
   }
   for (const progress of Object.values(draft.questions)) {
     assertAttemptCount(progress.attempts);
   }
-  return {
-    ...draft,
-    maxAttemptCount: maxAttemptCount(draft.questions),
-  };
+  return { ...draft, maxAttemptCount: maxAttemptCount(draft.questions) };
+}
+
+function guestDraftForStorage(draft: PageDraft): PageDraft {
+  const { score: _score, ...withoutScore } = draft;
+  return validateDraft({ ...withoutScore, submitted: false });
+}
+
+function sanitizeGuestActivity(event: ActivityEvent): ActivityEvent {
+  if (event.uid !== 'guest' || !event.metadata) return event;
+  const metadata = { ...event.metadata };
+  delete metadata['score'];
+  delete metadata['bestScore'];
+  delete metadata['latestScore'];
+  return { ...event, metadata };
+}
+
+function purgeLegacyGuestResults(): void {
+  const results = loadMap<PageResult>(RESULTS_KEY);
+  let changed = false;
+  for (const key of Object.keys(results)) {
+    if (key.startsWith('guest:') || results[key]?.uid === 'guest') {
+      delete results[key];
+      changed = true;
+    }
+  }
+  if (changed) saveMap(RESULTS_KEY, results);
 }
 
 function validateResult(result: PageResult): PageResult {
-  if (
-    !Number.isInteger(result.pageNumber) ||
-    result.pageNumber < 1 ||
-    result.pageNumber > TOTAL_PAGES
-  ) {
+  if (!Number.isInteger(result.pageNumber) || result.pageNumber < 1 || result.pageNumber > TOTAL_PAGES) {
     throw new Error('מספר עמוד לא תקין.');
   }
   if (
@@ -167,10 +174,7 @@ export function mergePageDrafts(
     ...Object.keys(existing.questions),
     ...Object.keys(validated.questions),
   ])) {
-    const merged = mergeQuestionProgress(
-      existing.questions[qid],
-      validated.questions[qid],
-    );
+    const merged = mergeQuestionProgress(existing.questions[qid], validated.questions[qid]);
     if (merged) questions[qid] = merged;
   }
   return validateDraft({
@@ -196,10 +200,9 @@ export function mergePageResults(
   const validated = validateResult(incoming);
   if (!existing) return validated;
   const normalizedExisting = validateResult(existing);
-  const latest =
-    validated.submittedAt >= normalizedExisting.submittedAt
-      ? validated
-      : normalizedExisting;
+  const latest = validated.submittedAt >= normalizedExisting.submittedAt
+    ? validated
+    : normalizedExisting;
   const bestScore = Math.max(
     normalizedExisting.bestScore ?? normalizedExisting.score,
     validated.bestScore ?? validated.score,
@@ -244,13 +247,7 @@ function failedOutcome(
   pageNumber: number,
   operation: SyncErrorRecord['operation'],
 ): PersistenceOutcome {
-  recordSyncError({
-    uid,
-    pageNumber,
-    operation,
-    createdAt: Date.now(),
-    message: CENTRAL_SAVE_ERROR,
-  });
+  recordSyncError({ uid, pageNumber, operation, createdAt: Date.now(), message: CENTRAL_SAVE_ERROR });
   return { localSaved: true, central: 'failed', error: CENTRAL_SAVE_ERROR };
 }
 
@@ -264,33 +261,27 @@ function savedOutcome(
   return { localSaved: true, central };
 }
 
-export async function loadDraft(
-  uid: string,
-  pageNumber: number,
-): Promise<PageDraft | null> {
+export async function loadDraft(uid: string, pageNumber: number): Promise<PageDraft | null> {
   const localDrafts = loadMap<PageDraft>(DRAFTS_KEY);
-  const local = localDrafts[compoundKey(uid, pageNumber)];
+  const key = compoundKey(uid, pageNumber);
+  const local = localDrafts[key];
+
+  if (uid === 'guest') {
+    if (!local) return null;
+    const sanitized = guestDraftForStorage(local);
+    localDrafts[key] = sanitized;
+    saveMap(DRAFTS_KEY, localDrafts);
+    return sanitized;
+  }
 
   const session = currentSession();
-
-  if (db && session && session.uid === uid && uid !== 'guest') {
+  if (db && session && session.uid === uid) {
     try {
-      const snapshot = await getDoc(
-        doc(
-          db,
-          'students',
-          uid,
-          'drafts',
-          'page-' + String(pageNumber),
-        ),
-      );
-
+      const snapshot = await getDoc(doc(db, 'students', uid, 'drafts', 'page-' + String(pageNumber)));
       if (snapshot.exists()) {
         const remote = snapshot.data() as PageDraft;
-        const merged = local
-          ? mergePageDrafts(remote, local)
-          : validateDraft(remote);
-        localDrafts[compoundKey(uid, pageNumber)] = merged;
+        const merged = local ? mergePageDrafts(remote, local) : validateDraft(remote);
+        localDrafts[key] = merged;
         saveMap(DRAFTS_KEY, localDrafts);
         return merged;
       }
@@ -298,41 +289,28 @@ export async function loadDraft(
       return local || null;
     }
   }
-
   return local || null;
 }
 
-export async function saveDraft(
-  draft: PageDraft,
-): Promise<PersistenceOutcome> {
+export async function saveDraft(draft: PageDraft): Promise<PersistenceOutcome> {
   const validated = validateDraft(draft);
   const localDrafts = loadMap<PageDraft>(DRAFTS_KEY);
   const key = compoundKey(validated.uid, validated.pageNumber);
-  const mergedLocal = mergePageDrafts(localDrafts[key], validated);
-  localDrafts[key] = mergedLocal;
+  const incoming = validated.uid === 'guest' ? guestDraftForStorage(validated) : validated;
+  const existing = validated.uid === 'guest' && localDrafts[key]
+    ? guestDraftForStorage(localDrafts[key])
+    : localDrafts[key];
+  const mergedLocal = mergePageDrafts(existing, incoming);
+  localDrafts[key] = validated.uid === 'guest' ? guestDraftForStorage(mergedLocal) : mergedLocal;
   saveMap(DRAFTS_KEY, localDrafts);
 
   const session = currentSession();
-
-  if (
-    db &&
-    session &&
-    session.uid === draft.uid &&
-    draft.uid !== 'guest'
-  ) {
+  if (db && session && session.uid === draft.uid && draft.uid !== 'guest') {
     try {
-      const reference = doc(
-        db,
-        'students',
-        validated.uid,
-        'drafts',
-        'page-' + String(validated.pageNumber),
-      );
+      const reference = doc(db, 'students', validated.uid, 'drafts', 'page-' + String(validated.pageNumber));
       await runTransaction(db, async (transaction) => {
         const snapshot = await transaction.get(reference);
-        const remote = snapshot.exists()
-          ? (snapshot.data() as PageDraft)
-          : null;
+        const remote = snapshot.exists() ? (snapshot.data() as PageDraft) : null;
         transaction.set(reference, mergePageDrafts(remote, mergedLocal));
       });
       return savedOutcome(validated.uid, validated.pageNumber, 'draft', 'saved');
@@ -340,41 +318,31 @@ export async function saveDraft(
       return failedOutcome(validated.uid, validated.pageNumber, 'draft');
     }
   }
-
   return savedOutcome(validated.uid, validated.pageNumber, 'draft', 'not-required');
 }
 
-export async function savePageResult(
-  result: PageResult,
-): Promise<PersistenceOutcome> {
+export async function savePageResult(result: PageResult): Promise<PersistenceOutcome> {
   const validated = validateResult(result);
   const localResults = loadMap<PageResult>(RESULTS_KEY);
   const key = compoundKey(validated.uid, validated.pageNumber);
+
+  if (validated.uid === 'guest') {
+    delete localResults[key];
+    saveMap(RESULTS_KEY, localResults);
+    return { localSaved: false, central: 'not-required' };
+  }
+
   const mergedLocal = mergePageResults(localResults[key], validated);
   localResults[key] = mergedLocal;
   saveMap(RESULTS_KEY, localResults);
 
   const session = currentSession();
-
-  if (
-    db &&
-    session &&
-    session.uid === result.uid &&
-    result.uid !== 'guest'
-  ) {
+  if (db && session && session.uid === result.uid) {
     try {
-      const reference = doc(
-        db,
-        'students',
-        validated.uid,
-        'results',
-        'page-' + String(validated.pageNumber),
-      );
+      const reference = doc(db, 'students', validated.uid, 'results', 'page-' + String(validated.pageNumber));
       await runTransaction(db, async (transaction) => {
         const snapshot = await transaction.get(reference);
-        const remote = snapshot.exists()
-          ? (snapshot.data() as PageResult)
-          : null;
+        const remote = snapshot.exists() ? (snapshot.data() as PageResult) : null;
         transaction.set(reference, mergePageResults(remote, mergedLocal));
       });
       return savedOutcome(validated.uid, validated.pageNumber, 'result', 'saved');
@@ -382,84 +350,43 @@ export async function savePageResult(
       return failedOutcome(validated.uid, validated.pageNumber, 'result');
     }
   }
-
   return savedOutcome(validated.uid, validated.pageNumber, 'result', 'not-required');
 }
 
-export async function logActivity(
-  event: ActivityEvent,
-): Promise<PersistenceOutcome> {
-  const eventId =
-    event.id ||
-    [
-      event.createdAt,
-      event.type,
-      event.pageNumber,
-      crypto.randomUUID(),
-    ].join('-');
-  const eventWithId: ActivityEvent = {
-    ...event,
-    id: eventId,
-  };
-  const events = safeParse<ActivityEvent[]>(
-    localStorage.getItem(ACTIVITY_KEY),
-    [],
-  );
+export async function logActivity(event: ActivityEvent): Promise<PersistenceOutcome> {
+  const eventId = event.id || [event.createdAt, event.type, event.pageNumber, crypto.randomUUID()].join('-');
+  const eventWithId = sanitizeGuestActivity({ ...event, id: eventId });
+  const events = safeParse<ActivityEvent[]>(localStorage.getItem(ACTIVITY_KEY), []).map(sanitizeGuestActivity);
 
-  if (!events.some((item) => item.id === eventWithId.id)) {
-    events.push(eventWithId);
-  }
-
-  if (events.length > 5000) {
-    events.splice(0, events.length - 5000);
-  }
-
+  if (!events.some((item) => item.id === eventWithId.id)) events.push(eventWithId);
+  if (events.length > 5000) events.splice(0, events.length - 5000);
   localStorage.setItem(ACTIVITY_KEY, JSON.stringify(events));
 
   const session = currentSession();
-
-  if (
-    db &&
-    session &&
-    session.uid === event.uid &&
-    event.uid !== 'guest'
-  ) {
+  if (db && session && session.uid === event.uid && event.uid !== 'guest') {
     try {
-      await setDoc(
-        doc(db, 'students', event.uid, 'activity', eventId),
-        eventWithId,
-      );
+      await setDoc(doc(db, 'students', event.uid, 'activity', eventId), eventWithId);
       return savedOutcome(event.uid, event.pageNumber, 'activity', 'saved');
     } catch {
       return failedOutcome(event.uid, event.pageNumber, 'activity');
     }
   }
-
   return savedOutcome(event.uid, event.pageNumber, 'activity', 'not-required');
 }
 
-export async function loadAnswerKey(
-  pageNumber: number,
-): Promise<AnswerKey> {
+export async function loadAnswerKey(pageNumber: number): Promise<AnswerKey> {
   const defaults = DEFAULT_ANSWER_KEYS[pageNumber] || {};
   const proven = provenAnswerKey(pageNumber);
   const implicit = implicitAnswerKey(pageNumber);
   const customKeys = loadMap<AnswerKey>(ANSWER_KEYS_KEY);
   const local = customKeys[String(pageNumber)] || {};
-
   let remote: AnswerKey = {};
 
   if (db && currentSession()) {
     try {
-      const snapshot = await getDoc(
-        doc(db, 'answerKeys', 'page-' + String(pageNumber)),
-      );
-
+      const snapshot = await getDoc(doc(db, 'answerKeys', 'page-' + String(pageNumber)));
       if (snapshot.exists()) {
-        const data = snapshot.data() as {
-          answers?: AnswerKey;
-        };
-
+        const data = snapshot.data() as { answers?: AnswerKey };
         remote = data.answers || {};
       }
     } catch {
@@ -467,9 +394,6 @@ export async function loadAnswerKey(
     }
   }
 
-  /* Explicit answers authored on the current canonical target are last on
-     purpose: stale positional/default/local/remote keys may supplement a page,
-     but they may never override what the current worksheet itself declares. */
   return {
     ...proven,
     ...defaults,
@@ -479,29 +403,17 @@ export async function loadAnswerKey(
   };
 }
 
-export async function saveAnswerKey(
-  pageNumber: number,
-  key: AnswerKey,
-): Promise<void> {
-  if (!isAdminSession()) {
-    throw new Error('רק מנהל יכול לשמור מפתח תשובות.');
-  }
-
+export async function saveAnswerKey(pageNumber: number, key: AnswerKey): Promise<void> {
+  if (!isAdminSession()) throw new Error('רק מנהל יכול לשמור מפתח תשובות.');
   const customKeys = loadMap<AnswerKey>(ANSWER_KEYS_KEY);
   customKeys[String(pageNumber)] = key;
   saveMap(ANSWER_KEYS_KEY, customKeys);
 
   const session = currentSession();
-
   if (db && session) {
     await setDoc(
       doc(db, 'answerKeys', 'page-' + String(pageNumber)),
-      {
-        pageNumber,
-        answers: key,
-        updatedAt: Date.now(),
-        updatedBy: session.uid,
-      },
+      { pageNumber, answers: key, updatedAt: Date.now(), updatedBy: session.uid },
       { merge: true },
     );
   }
@@ -512,49 +424,36 @@ export interface GuestProgressClaim {
   outcomes: PersistenceOutcome[];
 }
 
-export function canFinalizeGuestTransfer(
-  outcomes: PersistenceOutcome[],
-): boolean {
+export function canFinalizeGuestTransfer(outcomes: PersistenceOutcome[]): boolean {
   return outcomes.every((outcome) => outcome.central !== 'failed');
 }
 
-export async function claimGuestProgress(
-  uid: string,
-): Promise<GuestProgressClaim> {
+export async function claimGuestProgress(uid: string): Promise<GuestProgressClaim> {
   const drafts = loadMap<PageDraft>(DRAFTS_KEY);
-  const results = loadMap<PageResult>(RESULTS_KEY);
   const outcomes: PersistenceOutcome[] = [];
-
-  /* A guest can now work on any page, so every guest record moves to the
-     account — not only page 1. Keys are `guest:<pageNumber>`; each draft and
-     result already carries its real pageNumber, so re-saving under the new uid
-     lands it on the right page. */
   const isGuestKey = (key: string): boolean => key.startsWith('guest:');
   const guestDraftKeys = Object.keys(drafts).filter(isGuestKey);
-  const guestResultKeys = Object.keys(results).filter(isGuestKey);
+
+  /* Guest results are deliberately ephemeral. Purge legacy records from older
+     builds rather than importing a previously displayed guest score. */
+  purgeLegacyGuestResults();
 
   for (const key of guestDraftKeys) {
     const guestDraft = drafts[key];
     if (guestDraft) {
-      outcomes.push(await saveDraft({ ...guestDraft, uid, updatedAt: Date.now() }));
-    }
-  }
-
-  for (const key of guestResultKeys) {
-    const guestResult = results[key];
-    if (guestResult) {
-      outcomes.push(await savePageResult({ ...guestResult, uid }));
+      outcomes.push(await saveDraft({
+        ...guestDraftForStorage(guestDraft),
+        uid,
+        updatedAt: Date.now(),
+      }));
     }
   }
 
   const complete = canFinalizeGuestTransfer(outcomes);
   if (complete) {
     const latestDrafts = loadMap<PageDraft>(DRAFTS_KEY);
-    const latestResults = loadMap<PageResult>(RESULTS_KEY);
     for (const key of guestDraftKeys) delete latestDrafts[key];
-    for (const key of guestResultKeys) delete latestResults[key];
     saveMap(DRAFTS_KEY, latestDrafts);
-    saveMap(RESULTS_KEY, latestResults);
     clearSyncError(uid, 1, 'guest-transfer');
   } else {
     recordSyncError({
@@ -562,116 +461,51 @@ export async function claimGuestProgress(
       pageNumber: 1,
       operation: 'guest-transfer',
       createdAt: Date.now(),
-      message:
-        'התקדמות האורח נשמרה במכשיר אך טרם הועברה למערכת המרכזית. נסו שוב לפני המשך העבודה.',
+      message: 'טיוטת התרגול של האורח נשמרה במכשיר אך טרם הועברה למערכת המרכזית. נסו שוב לפני המשך העבודה.',
     });
   }
   return { complete, outcomes };
 }
 
 function localDashboard(): DashboardSnapshot {
-  const profiles = listLocalProfiles().filter(
-    (profile) => profile.role !== 'admin',
-  );
-  const localResults = Object.values(
-    loadMap<PageResult>(RESULTS_KEY),
-  );
-  const localDrafts = Object.values(
-    loadMap<PageDraft>(DRAFTS_KEY),
-  );
-  const localActivity = safeParse<ActivityEvent[]>(
-    localStorage.getItem(ACTIVITY_KEY),
-    [],
-  );
+  purgeLegacyGuestResults();
+  const profiles = listLocalProfiles().filter((profile) => profile.role !== 'admin');
+  const localResults = Object.values(loadMap<PageResult>(RESULTS_KEY));
+  const localDrafts = Object.values(loadMap<PageDraft>(DRAFTS_KEY));
+  const localActivity = safeParse<ActivityEvent[]>(localStorage.getItem(ACTIVITY_KEY), []).map(sanitizeGuestActivity);
   const syncErrors = loadSyncErrors();
 
   const students: DashboardStudent[] = profiles.map((profile) => ({
     profile,
-    results: localResults
-      .filter((result) => result.uid === profile.uid)
-      .sort((a, b) => a.pageNumber - b.pageNumber),
-    drafts: localDrafts
-      .filter((draft) => draft.uid === profile.uid)
-      .sort((a, b) => a.pageNumber - b.pageNumber),
-    activity: localActivity
-      .filter((event) => event.uid === profile.uid)
-      .sort((a, b) => b.createdAt - a.createdAt),
+    results: localResults.filter((result) => result.uid === profile.uid).sort((a, b) => a.pageNumber - b.pageNumber),
+    drafts: localDrafts.filter((draft) => draft.uid === profile.uid).sort((a, b) => a.pageNumber - b.pageNumber),
+    activity: localActivity.filter((event) => event.uid === profile.uid).sort((a, b) => b.createdAt - a.createdAt),
     syncErrors: syncErrors.filter((error) => error.uid === profile.uid),
   }));
 
-  return {
-    students,
-    generatedAt: Date.now(),
-    source: 'local',
-    syncErrors,
-  };
+  return { students, generatedAt: Date.now(), source: 'local', syncErrors };
 }
 
 export async function loadDashboard(): Promise<DashboardSnapshot> {
-  if (!db || !isAdminSession()) {
-    return localDashboard();
-  }
+  if (!db || !isAdminSession()) return localDashboard();
   const firestore = db;
 
   try {
-    const studentsSnapshot = await getDocs(
-      collection(firestore, 'students'),
-    );
-
+    const studentsSnapshot = await getDocs(collection(firestore, 'students'));
     const studentDocuments = studentsSnapshot.docs.filter(
-      (studentDocument) =>
-        (studentDocument.data() as DashboardStudent['profile']).role !== 'admin',
+      (studentDocument) => (studentDocument.data() as DashboardStudent['profile']).role !== 'admin',
     );
     const students = await Promise.all(studentDocuments.map(async (studentDocument) => {
       const profile = studentDocument.data() as DashboardStudent['profile'];
-
-      const [resultsSnapshot, draftsSnapshot, activitySnapshot] =
-        await Promise.all([
-          getDocs(
-            collection(
-              firestore,
-              'students',
-              studentDocument.id,
-              'results',
-            ),
-          ),
-          getDocs(
-            collection(
-              firestore,
-              'students',
-              studentDocument.id,
-              'drafts',
-            ),
-          ),
-          getDocs(
-            collection(
-              firestore,
-              'students',
-              studentDocument.id,
-              'activity',
-            ),
-          ),
-        ]);
-
-      const results = resultsSnapshot.docs
-        .map((document) => document.data() as PageResult)
-        .sort((a, b) => a.pageNumber - b.pageNumber);
-
-      const drafts = draftsSnapshot.docs
-        .map((document) => document.data() as PageDraft)
-        .sort((a, b) => a.pageNumber - b.pageNumber);
-
-      const activity = activitySnapshot.docs
-        .map((document) => document.data() as ActivityEvent)
-        .sort((a, b) => b.createdAt - a.createdAt);
-
-      return {
-        profile,
-        results,
-        drafts,
-        activity,
-        syncErrors: [],
-      } satisfies DashboardStudent;
+      const [resultsSnapshot, draftsSnapshot, activitySnapshot] = await Promise.all([
+        getDocs(collection(firestore, 'students', studentDocument.id, 'results')),
+        getDocs(collection(firestore, 'students', studentDocument.id, 'drafts')),
+        getDocs(collection(firestore, 'students', studentDocument.id, 'activity')),
+      ]);
+      const results = resultsSnapshot.docs.map((document) => document.data() as PageResult).sort((a, b) => a.pageNumber - b.pageNumber);
+      const drafts = draftsSnapshot.docs.map((document) => document.data() as PageDraft).sort((a, b) => a.pageNumber - b.pageNumber);
+      const activity = activitySnapshot.docs.map((document) => document.data() as ActivityEvent).sort((a, b) => b.createdAt - a.createdAt);
+      return { profile, results, drafts, activity, syncErrors: [] } satisfies DashboardStudent;
     }));
 
     students.sort((a, b) => {
@@ -679,13 +513,7 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
       const bLatest = b.activity[0]?.createdAt || b.profile.lastSeenAt;
       return bLatest - aLatest;
     });
-
-    return {
-      students,
-      generatedAt: Date.now(),
-      source: 'firebase',
-      syncErrors: [],
-    };
+    return { students, generatedAt: Date.now(), source: 'firebase', syncErrors: [] };
   } catch {
     const fallback = localDashboard();
     const dashboardError: SyncErrorRecord = {
@@ -693,35 +521,29 @@ export async function loadDashboard(): Promise<DashboardSnapshot> {
       pageNumber: 1,
       operation: 'dashboard',
       createdAt: Date.now(),
-      message:
-        'טעינת הנתונים המרכזיים נכשלה. הנתונים המקומיים אינם תמונת מצב של הכיתה.',
+      message: 'טעינת הנתונים המרכזיים נכשלה. הנתונים המקומיים אינם תמונת מצב של הכיתה.',
     };
-    return {
-      ...fallback,
-      syncErrors: [dashboardError, ...fallback.syncErrors],
-    };
+    return { ...fallback, syncErrors: [dashboardError, ...fallback.syncErrors] };
   }
 }
 
-export async function loadPageResult(
-  uid: string,
-  pageNumber: number,
-): Promise<PageResult | null> {
+export async function loadPageResult(uid: string, pageNumber: number): Promise<PageResult | null> {
+  if (uid === 'guest') {
+    purgeLegacyGuestResults();
+    return null;
+  }
+
   const localResults = loadMap<PageResult>(RESULTS_KEY);
   const key = compoundKey(uid, pageNumber);
   const local = localResults[key];
   const session = currentSession();
 
-  if (db && session?.uid === uid && uid !== 'guest') {
+  if (db && session?.uid === uid) {
     try {
-      const snapshot = await getDoc(
-        doc(db, 'students', uid, 'results', 'page-' + String(pageNumber)),
-      );
+      const snapshot = await getDoc(doc(db, 'students', uid, 'results', 'page-' + String(pageNumber)));
       if (snapshot.exists()) {
         const remote = snapshot.data() as PageResult;
-        const merged = local
-          ? mergePageResults(remote, local)
-          : validateResult(remote);
+        const merged = local ? mergePageResults(remote, local) : validateResult(remote);
         localResults[key] = merged;
         saveMap(RESULTS_KEY, localResults);
         return merged;
@@ -730,88 +552,58 @@ export async function loadPageResult(
       return local ? validateResult(local) : null;
     }
   }
-
   return local ? validateResult(local) : null;
 }
 
-export async function loadUserResults(
-  uid: string,
-): Promise<PageResult[]> {
-  const localResults = Object.values(
-    loadMap<PageResult>(RESULTS_KEY),
-  ).filter((result) => result.uid === uid);
-
-  if (!db || uid === 'guest') {
-    return localResults.sort(
-      (a, b) => a.pageNumber - b.pageNumber,
-    );
+export async function loadUserResults(uid: string): Promise<PageResult[]> {
+  if (uid === 'guest') {
+    purgeLegacyGuestResults();
+    return [];
   }
 
+  const localResults = Object.values(loadMap<PageResult>(RESULTS_KEY)).filter((result) => result.uid === uid);
+  if (!db) return localResults.sort((a, b) => a.pageNumber - b.pageNumber);
+
   try {
-    const snapshot = await getDocs(
-      collection(db, 'students', uid, 'results'),
-    );
-
+    const snapshot = await getDocs(collection(db, 'students', uid, 'results'));
     const merged = new Map<number, PageResult>();
-
     for (const result of localResults) {
       const current = merged.get(result.pageNumber);
       merged.set(result.pageNumber, mergePageResults(current, result));
     }
-
     for (const document of snapshot.docs) {
       const result = document.data() as PageResult;
       const current = merged.get(result.pageNumber);
       merged.set(result.pageNumber, mergePageResults(current, result));
     }
-
-    return [...merged.values()].sort(
-      (a, b) => a.pageNumber - b.pageNumber,
-    );
+    return [...merged.values()].sort((a, b) => a.pageNumber - b.pageNumber);
   } catch {
-    return localResults.sort(
-      (a, b) => a.pageNumber - b.pageNumber,
-    );
+    return localResults.sort((a, b) => a.pageNumber - b.pageNumber);
   }
 }
 
-export async function loadUserDrafts(
-  uid: string,
-): Promise<PageDraft[]> {
-  const localDrafts = Object.values(
-    loadMap<PageDraft>(DRAFTS_KEY),
-  ).filter((draft) => draft.uid === uid);
-
+export async function loadUserDrafts(uid: string): Promise<PageDraft[]> {
+  const localDrafts = Object.values(loadMap<PageDraft>(DRAFTS_KEY)).filter((draft) => draft.uid === uid);
   if (!db || uid === 'guest') {
-    return localDrafts.sort(
-      (a, b) => a.pageNumber - b.pageNumber,
-    );
+    return localDrafts
+      .map((draft) => uid === 'guest' ? guestDraftForStorage(draft) : draft)
+      .sort((a, b) => a.pageNumber - b.pageNumber);
   }
 
   try {
-    const snapshot = await getDocs(
-      collection(db, 'students', uid, 'drafts'),
-    );
-
+    const snapshot = await getDocs(collection(db, 'students', uid, 'drafts'));
     const merged = new Map<number, PageDraft>();
-
     for (const draft of localDrafts) {
       const current = merged.get(draft.pageNumber);
       merged.set(draft.pageNumber, mergePageDrafts(current, draft));
     }
-
     for (const document of snapshot.docs) {
       const draft = document.data() as PageDraft;
       const current = merged.get(draft.pageNumber);
       merged.set(draft.pageNumber, mergePageDrafts(current, draft));
     }
-
-    return [...merged.values()].sort(
-      (a, b) => a.pageNumber - b.pageNumber,
-    );
+    return [...merged.values()].sort((a, b) => a.pageNumber - b.pageNumber);
   } catch {
-    return localDrafts.sort(
-      (a, b) => a.pageNumber - b.pageNumber,
-    );
+    return localDrafts.sort((a, b) => a.pageNumber - b.pageNumber);
   }
 }
