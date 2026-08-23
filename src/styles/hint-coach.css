@@ -1,0 +1,41 @@
+/* Corrective learning guidance: calm, compact, never neon. */
+.lms-qhint {
+  flex: 1 1 100%;
+  max-width: 680px;
+  margin-top: 2px;
+  padding: 8px 10px;
+  border: 1px solid #d7dee8;
+  border-inline-start: 3px solid #9aacc0;
+  border-radius: 8px;
+  background: #f7f9fb;
+  color: #3d4b5d;
+  font-size: 13px;
+  font-weight: 560;
+  line-height: 1.55;
+  box-shadow: none;
+}
+
+.lms-qhint[data-hint-level="2"] {
+  background: #f5f7fa;
+  border-inline-start-color: #7f93aa;
+}
+
+.lms-qhint[data-hint-level="3"] {
+  background: #f8f5ee;
+  border-color: #ddd5c4;
+  border-inline-start-color: #ad9b72;
+  color: #514a3f;
+}
+
+.lms-qhint[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  .lms-qhint {
+    width: 100%;
+    max-width: none;
+    padding: 8px 9px;
+    font-size: 12.75px;
+  }
+}
