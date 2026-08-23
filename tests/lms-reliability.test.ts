@@ -114,9 +114,10 @@ describe('LMS persistence merging', () => {
     expect(merged.maxAttemptCount).toBe(2);
   });
 
-  test('invalid scores and attempt counts are rejected before storage', () => {
-    expect(() => mergePageResults(null, result(0, 1))).toThrow(/1 ל־100/);
-    expect(() => mergePageResults(null, result(101, 1))).toThrow(/1 ל־100/);
+  test('zero is valid while out-of-range scores and attempts are rejected before storage', () => {
+    expect(() => mergePageResults(null, result(0, 1))).not.toThrow();
+    expect(() => mergePageResults(null, result(-1, 1))).toThrow(/0 ל־100/);
+    expect(() => mergePageResults(null, result(101, 1))).toThrow(/0 ל־100/);
     expect(() =>
       mergePageResults(null, result(50, 1, LMS_CONFIG.maxAttempts + 1)),
     ).toThrow(new RegExp(`0 ל־${String(LMS_CONFIG.maxAttempts)}`));
