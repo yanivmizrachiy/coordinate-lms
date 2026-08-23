@@ -12,6 +12,18 @@
   gap: 8px;
 }
 
+/* Routine engine chatter (including guest/account prompts) does not belong in
+   the worksheet flow. Real errors remain visible and retryable. */
+.pageviewer--practice .lms-panel__status:not([data-kind="error"]) {
+  display: none;
+}
+
+.pageviewer--practice .lms-panel__status[data-kind="error"] {
+  margin-block: 4px;
+  padding: 7px 9px;
+  font-size: 12.5px;
+}
+
 /* The global app bar becomes a slim context bar while a pupil is practising. */
 .appbar--practice {
   min-height: 44px;
@@ -219,29 +231,6 @@
   min-width: 66px;
 }
 
-/* Per-question action: visually small, while the surrounding question keeps */
-/* plenty of whitespace and a clear focus ring for keyboard/touch use.       */
-.pageviewer--practice .lms-qcheck__btn {
-  min-height: 36px;
-  padding: 5px 9px;
-  border-radius: 9px;
-  border-color: #d9e1e9;
-  background: #f8fafb;
-  color: #3b5065;
-  box-shadow: none;
-  font-size: 12.25px;
-  font-weight: 700;
-}
-
-.pageviewer--practice .lms-qcheck__btn:hover {
-  background: #f0f4f7;
-  border-color: #cbd6e0;
-}
-
-.pageviewer--practice .lms-qstatus {
-  font-size: 12.25px;
-}
-
 @media (max-width: 600px) {
   .practice-container {
     width: 100%;
@@ -292,12 +281,6 @@
 
   .practice-tools__panel {
     min-width: min(230px, calc(100vw - 28px));
-  }
-
-  .pageviewer--practice .lms-qcheck__btn {
-    min-height: 35px;
-    padding: 5px 8px;
-    font-size: 12px;
   }
 }
 
