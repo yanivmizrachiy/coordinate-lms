@@ -111,14 +111,16 @@ function attach(control: HTMLElement, questionIndex: number): () => void {
       qstate,
       questionIndex,
     );
-    feedback.textContent = message;
-    feedback.hidden = !message;
+    if (feedback.textContent !== message) feedback.textContent = message;
+    const shouldHide = !message;
+    if (feedback.hidden !== shouldHide) feedback.hidden = shouldHide;
   };
 
+  /* Observe only grading-state attributes. Observing childList here would make
+     our own feedback.textContent update trigger the observer again forever. */
   const observer = new MutationObserver(refresh);
   observer.observe(control.parentElement ?? control, {
     subtree: true,
-    childList: true,
     attributes: true,
     attributeFilter: ['data-qstate', 'data-lms-state', 'data-lms-attempts'],
   });
