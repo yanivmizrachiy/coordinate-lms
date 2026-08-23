@@ -282,22 +282,11 @@
 .lms-admin__controls .btn,
 .lms-menu-actions .btn,
 .lms-progress__actions .btn,
-.lms-keys__toolbar .btn,
-.lms-qcheck .btn {
+.lms-keys__toolbar .btn {
   width: auto;
   min-height: 44px;
   padding: 7px 11px;
   font-size: 13.5px;
-}
-
-.lms-qcheck {
-  gap: 7px;
-  margin-top: 9px;
-}
-
-.lms-qstatus {
-  font-size: 0.9rem;
-  font-weight: 750;
 }
 
 /* ---- Main menu action tiles --------------------------------------------- */
