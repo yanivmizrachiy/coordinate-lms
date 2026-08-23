@@ -93,8 +93,9 @@ RULES.md                     מקור האמת היחיד לכללי הפרוי�
 
 - `RULES.md` — **מקור האמת היחיד** לכללי העבודה והמוצר.
 - `CLAUDE.md` — pointer בלבד אל `RULES.md`.
-- `USER_MEMORY.md` ו־`HANDOFF.md` — היסטוריה, לא סמכות חיה.
-- `MIGRATION_STATUS.md` ודוחות generated — מצב/עדויות נקודתיים; הם אינם כללי מוצר ואינם גוברים על `RULES.md`.
+- `USER_MEMORY.md` — alias תאימות שמפנה ישירות אל `RULES.md`; אין לכתוב בו כללים נפרדים.
+- `HANDOFF.md` ו־`MIGRATION_STATUS.md` — pointers בלבד אל חומר היסטורי/עדויות; הארכיונים המלאים נמצאים תחת `_legacy/` ואינם סמכות חיה.
+- דוחות generated הם מצב/עדויות נקודתיים; הם אינם כללי מוצר ואינם גוברים על `RULES.md`.
 
 ## פרסום
 
