@@ -26,7 +26,7 @@ A current user instruction wins over older wording and this file must be reconci
 
 ## 3. Canonical worksheet: print and computerized practice
 
-- The workbook has **78 numbered pages**. Preserve mathematics, wording, diagrams, RTL behavior, page order and print pagination unless a current content instruction changes them.
+- **החוברת = 78 עמודים ממוספרים**. Preserve mathematics, wording, diagrams, RTL behavior, page order and print pagination unless a current content instruction changes them.
 - **Printable and computerized pages are two renderings of the SAME worksheet** content, never two content products.
 - Any canonical worksheet content change **must propagate automatically to both** printable and computerized renderings. Make the content change once.
 - `#/workbook/:n` must render the canonical page itself and then add the LMS layer. A separately authored computerized worksheet is a defect.
@@ -164,5 +164,9 @@ npm run test:visual
 ```
 
 `npm run verify` must cover answer coverage, typecheck, unit/content tests, Firestore authorization tests, build and visual/e2e checks in one command.
+
+Normal PR CI proves repository engineering health. It may generate `release:report:static` as evidence even when external Firebase configuration, pedagogical review or physical two-device acceptance is still blocked; those external blockers must be reported, not disguised as code failures.
+
+`npm run release:check` is the strict release gate. It must fail while any required production configuration or acceptance evidence is incomplete.
 
 Do not describe the product as production-ready while required external configuration or acceptance evidence is incomplete. Do not merge or deploy to production without the required explicit confirmation.
