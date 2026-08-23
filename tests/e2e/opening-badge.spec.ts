@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 /* The district badge must stand clear of the film — the invariant this file has
-   always guarded. On the landing the badge lives in the dark top bar and the
-   film in its own section card, so they must be visible and disjoint on every
-   viewport, the tall phone included. */
+   always guarded. On the materials landing the badge lives in the dark top bar
+   and the film in its own section card, so they must be visible and disjoint on
+   every viewport, the tall phone included. */
 test('the district badge stays outside the film', async ({ page }) => {
-  await page.goto('/#/');
+  await page.goto('/#/home');
   const badge = page.locator('.ls-topbar__logo');
   const film = page.locator('#opening .ls-viewer');
   await expect(badge).toBeVisible();
