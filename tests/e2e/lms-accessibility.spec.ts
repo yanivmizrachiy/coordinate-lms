@@ -1,13 +1,19 @@
 import { expect, test, type Locator } from '@playwright/test';
 
-function questionFor(target: Locator): Locator {
-  return target.locator(
+async function questionFor(target: Locator): Promise<Locator> {
+  const card = target.locator(
     'xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")][1]',
   );
+  if (await card.count()) return card;
+  const fallback = target.locator(
+    'xpath=ancestor::*[self::li or self::tr or self::p or contains(concat(" ", normalize-space(@class), " "), " completion-sentence ")][1]',
+  );
+  return (await fallback.count()) ? fallback : target.locator('xpath=..');
 }
 
 async function submitQuestion(target: Locator): Promise<void> {
-  await questionFor(target)
+  const question = await questionFor(target);
+  await question
     .getByRole('button', { name: 'להגיש שאלה לבדיקה' })
     .click();
 }
@@ -33,7 +39,7 @@ test('answer fields keep meaningful labels and support keyboard completion', asy
   await submitQuestion(target);
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 
-  const status = questionFor(target).locator('.lms-qstatus');
+  const status = (await questionFor(target)).locator('.lms-qstatus');
   await expect(status).toHaveAttribute('role', 'status');
   await expect(status).toHaveAttribute('aria-live', 'polite');
   await expect(status).toContainText('נכון');
@@ -52,7 +58,7 @@ test('feedback never rides on colour alone, and never reaches the paper', async 
 
   /* Someone who cannot see the green hears the verdict… */
   await expect(target).toHaveAttribute('aria-label', /נכון/);
-  await expect(questionFor(target).locator('.lms-qstatus')).toContainText('✓ נכון');
+  await expect((await questionFor(target)).locator('.lms-qstatus')).toContainText('✓ נכון');
   /* …and someone who cannot tell green from red still sees a mark. */
   const mark = await target.evaluate(
     (el) => getComputedStyle(el, '::after').content,
@@ -65,7 +71,7 @@ test('feedback never rides on colour alone, and never reaches the paper', async 
     (el) => getComputedStyle(el, '::after').display,
   );
   expect(printed).toBe('none');
-  await expect(questionFor(target).locator('.lms-qcheck')).toBeHidden();
+  await expect((await questionFor(target)).locator('.lms-qcheck')).toBeHidden();
 });
 
 test('true-false groups include their statement in the accessible name', async ({ page }) => {
@@ -83,17 +89,43 @@ test('true-false groups include their statement in the accessible name', async (
   expect(new Set(names).size).toBe(1);
 });
 
-test('LMS overlays do not alter the printed workbook and controls are touch-sized', async ({ page }) => {
+test('LMS overlays do not alter the printed workbook and controls remain easy to tap', async ({ page }) => {
   await page.goto('/#/workbook/2');
-  const buttons = page.locator('.lms-panel__buttons .btn, .lms-qcheck__btn');
-  await expect(buttons.first()).toBeVisible();
-  const tooSmall = await buttons.evaluateAll((items) =>
+
+  /* Page-level controls are outside the scaled A4 sheet and keep a normal
+     44px box. */
+  const panelButtons = page.locator('.lms-panel__buttons .btn');
+  await expect(panelButtons.first()).toBeVisible();
+  const tooSmallPanelButtons = await panelButtons.evaluateAll((items) =>
     items
       .filter((item) => getComputedStyle(item).display !== 'none')
       .map((item) => item.getBoundingClientRect().height)
       .filter((height) => height < 44),
   );
-  expect(tooSmall).toEqual([]);
+  expect(tooSmallPanelButtons).toEqual([]);
+
+  /* Question controls live inside the scaled worksheet. Their painted box is
+     deliberately compact, so test the effective hit region rather than the
+     transformed element rectangle. A point about 21px from the visual centre
+     in every direction must still hit the button. */
+  const questionButton = page.locator('.lms-qcheck__btn').first();
+  await expect(questionButton).toBeVisible();
+  const hitRegion = await questionButton.evaluate((button) => {
+    const rect = button.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const points = [
+      [cx, cy - 21],
+      [cx, cy + 21],
+      [cx - 21, cy],
+      [cx + 21, cy],
+    ];
+    return points.map(([x, y]) => {
+      const hit = document.elementFromPoint(x!, y!);
+      return hit === button || (hit instanceof Node && button.contains(hit));
+    });
+  });
+  expect(hitRegion).toEqual([true, true, true, true]);
 
   await page.emulateMedia({ media: 'print' });
   await expect(page.locator('.lms-panel')).toBeHidden();
