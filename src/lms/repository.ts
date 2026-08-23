@@ -104,6 +104,20 @@ function guestDraftForStorage(draft: PageDraft): PageDraft {
   });
 }
 
+function sanitizeGuestActivity(event: ActivityEvent): ActivityEvent {
+  if (event.uid !== 'guest' || !event.metadata) return event;
+
+  const metadata = { ...event.metadata };
+  delete metadata['score'];
+  delete metadata['bestScore'];
+  delete metadata['latestScore'];
+
+  return {
+    ...event,
+    metadata,
+  };
+}
+
 function validateResult(result: PageResult): PageResult {
   if (
     !Number.isInteger(result.pageNumber) ||
@@ -409,14 +423,14 @@ export async function logActivity(
       event.pageNumber,
       crypto.randomUUID(),
     ].join('-');
-  const eventWithId: ActivityEvent = {
+  const eventWithId = sanitizeGuestActivity({
     ...event,
     id: eventId,
-  };
+  });
   const events = safeParse<ActivityEvent[]>(
     localStorage.getItem(ACTIVITY_KEY),
     [],
-  );
+  ).map(sanitizeGuestActivity);
 
   if (!events.some((item) => item.id === eventWithId.id)) {
     events.push(eventWithId);
@@ -588,7 +602,7 @@ function localDashboard(): DashboardSnapshot {
   const localActivity = safeParse<ActivityEvent[]>(
     localStorage.getItem(ACTIVITY_KEY),
     [],
-  );
+  ).map(sanitizeGuestActivity);
   const syncErrors = loadSyncErrors();
 
   const students: DashboardStudent[] = profiles.map((profile) => ({
