@@ -113,8 +113,18 @@ function validateResult(result: PageResult): PageResult {
   ) {
     throw new Error('מספר עמוד לא תקין.');
   }
-  if (!Number.isInteger(result.score) || result.score < 1 || result.score > 100) {
-    throw new Error('הציון חייב להיות מספר שלם בין 1 ל־100.');
+  if (
+    !Number.isInteger(result.score) ||
+    result.score < LMS_CONFIG.minScore ||
+    result.score > LMS_CONFIG.maxScore
+  ) {
+    throw new Error(
+      'הציון חייב להיות מספר שלם בין ' +
+        String(LMS_CONFIG.minScore) +
+        ' ל־' +
+        String(LMS_CONFIG.maxScore) +
+        '.',
+    );
   }
   for (const attempts of Object.values(result.attempts)) {
     assertAttemptCount(attempts);
