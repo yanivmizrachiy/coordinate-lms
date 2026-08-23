@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('computerized practice is focused and carries no print actions', async ({ page }) => {
+test('computerized practice is focused and carries no legacy or print controls', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/#/workbook/1');
 
@@ -13,6 +13,15 @@ test('computerized practice is focused and carries no print actions', async ({ p
   await expect(page.locator('.pageviewer--practice .wsbar')).toHaveCount(0);
   await expect(page.getByText('הדפסה', { exact: true })).toHaveCount(0);
   await expect(page.getByText('הורדת הדף', { exact: true })).toHaveCount(0);
+
+  /* Account/save explanations happen before practice, not inside a worksheet. */
+  await expect(page.getByText(/מצב אורח/)).toHaveCount(0);
+  await expect(page.getByRole('button', { name: /הרשמה|התחברות|החשבון שלי/ })).toHaveCount(0);
+
+  /* Per-question submit is the learner's check action. The legacy whole-page
+     check button could consume attempts unexpectedly and must not be exposed. */
+  await expect(page.getByRole('button', { name: 'בדיקת תשובות' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'להגיש שאלה לבדיקה' }).first()).toBeVisible();
 
   /* The general utility menu contains booklet/print tools, so it is hidden
      while the learner is inside the focused computerized practice flow. */
