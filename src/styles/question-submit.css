@@ -6,13 +6,15 @@
   margin-top: 9px;
 }
 
-/* The control is visually compact, but the worksheet itself is transformed
-   down on phones. A transparent pseudo-element counteracts that transform for
-   hit-testing only, so the effective target remains about 44px without making
-   the painted button bulky or changing worksheet layout. */
+/* The worksheet is scaled as one A4 surface on phones. The button itself is
+   therefore expanded by the inverse sheet scale so its physical hit target
+   remains 44px. Equal negative block margins cancel the extra layout height,
+   keeping the worksheet geometry unchanged. */
 .lms-qcheck__btn {
   position: relative;
-  min-height: 44px;
+  z-index: 1;
+  min-height: calc(44px / var(--sheet-scale, 1));
+  margin-block: calc((44px - (44px / var(--sheet-scale, 1))) / 2);
   padding: 0 10px;
   border: 0;
   border-radius: 0;
@@ -23,29 +25,21 @@
   font-weight: 700;
 }
 
+/* Keep the painted control deliberately small even when its invisible button
+   box grows to preserve touch accessibility after A4 scaling. */
 .lms-qcheck__btn::before {
   content: '';
   position: absolute;
-  inset: 6px 0;
+  inset-inline: 0;
+  top: 50%;
+  height: 32px;
+  transform: translateY(-50%);
   border: 1px solid #cfd8e3;
   border-radius: 8px;
   background: #f8fafc;
   box-shadow: 0 1px 2px rgb(15 23 42 / 4%);
   pointer-events: none;
   transition: background-color 120ms ease, border-color 120ms ease;
-}
-
-/* The sheet uses --sheet-scale on screen. At 0.5 scale a 44px DOM button is
-   only 22px on the glass; this invisible region expands by the exact inverse
-   amount. The question-control layer is stacked above the following card so
-   the lower half of the transparent target cannot be masked by that card. */
-.lms-qcheck__btn::after {
-  content: '';
-  position: absolute;
-  z-index: 1;
-  inset-block: calc((44px - (44px / var(--sheet-scale, 1))) / 2);
-  inset-inline: calc((44px - (44px / var(--sheet-scale, 1))) / 2);
-  pointer-events: auto;
 }
 
 .lms-qcheck__btn:hover::before {
@@ -104,8 +98,7 @@
 
   .lms-qcheck__btn {
     width: auto !important;
-    min-width: 82px;
-    min-height: 44px;
+    min-width: calc(82px / var(--sheet-scale, 1));
     flex: 0 0 auto;
   }
 
