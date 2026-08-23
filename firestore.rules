@@ -21,7 +21,7 @@ service cloud.firestore {
     }
 
     function validScore(value) {
-      return value is int && value >= 1 && value <= 100;
+      return value is int && value >= 0 && value <= 100;
     }
 
     function validAttemptCount(value) {
