@@ -2,6 +2,7 @@ import './styles/tokens.css';
 import './styles/base.css';
 import './styles/app.css';
 import './styles/landing.css';
+import './styles/welcome.css';
 import './styles/actions.css';
 import './styles/flipbook.css';
 import './styles/workbook.css';
@@ -45,14 +46,13 @@ const setTitle = (t: string): void => {
 };
 
 /* Each screen is fetched when it is first opened, not when the site loads.
-   The opening film is the page everyone lands on, and it needs neither the
-   78 sheets nor the Firebase SDK — statically importing every view made the
-   first download carry both (measured: 1.18 MB, 281 kB gzip). The browser
-   caches each chunk after its first visit, so this costs one small request
-   the first time a screen is opened and nothing after that. */
+   The first-entry explanation is intentionally tiny and does not import the
+   Firebase SDK. The rich landing page, workbook and LMS screens remain split
+   into on-demand chunks so the initial download stays small. */
 function resolve(match: RouteMatch): Promise<View> {
   switch (match.name) {
-    case 'home': return import('./views/home').then((m) => m.home);
+    case 'home': return import('./views/welcome').then((m) => m.welcome);
+    case 'landing': return import('./views/home').then((m) => m.home);
     case 'menu': return import('./views/menu').then((m) => m.menu);
     case 'page': return import('./views/pageViewer')
       .then((m) => m.pageViewer(Number(match.params['n'] ?? '1')));
@@ -84,9 +84,12 @@ function render(match: RouteMatch): void {
   if (cleanup) { cleanup(); cleanup = undefined; }
   clear(outlet);
   homeBtn.style.visibility = match.name === 'home' ? 'hidden' : 'visible';
-  /* The landing and the flipbook are whole screens with bars of their own —
-     the app bar would sit on the film or on the book's stage. */
-  appbar.classList.toggle('appbar--hidden', match.name === 'home' || match.name === 'book');
+  /* The first-entry screen, rich landing and flipbook are whole screens with
+     bars of their own — the shared app bar would sit on top of them. */
+  appbar.classList.toggle(
+    'appbar--hidden',
+    match.name === 'home' || match.name === 'landing' || match.name === 'book',
+  );
   menuBtn.style.visibility = match.name === 'menu' ? 'hidden' : 'visible';
 
   /* A screen that arrives instantly (its chunk is cached, or the connection is
