@@ -98,12 +98,21 @@ this file, the current instruction wins and this file must be reconciled.
 
 - Feedback is per QUESTION, not per keystroke. A question is the unit the
   canonical content already groups blanks into — a `.q-card`, or the finest
-  labelled unit (`li`/`tr`/`completion-sentence`) where there is no card. Each
-  question carries its own „סיימתי שאלה" control that checks only its targets.
-- A verdict shows as a shape AND a word, never colour alone: ✓ נכון (all
-  correct), ◐ יש מה לתקן (partial — some right, some not), ✕ נסה שוב (wrong),
-  🔒 (locked after three attempts), ? נשמר לבדיקת המורה (unkeyed/open-ended).
-  Screen readers hear the verdict; none of it appears in print.
+  labelled unit (`li`/`tr`/`completion-sentence`) where there is no card.
+- Each question carries one small submit control displayed as **„להגיש ←”**;
+  its accessible name is **„להגיש שאלה לבדיקה”**. The old wording „סיימתי
+  שאלה” is retired and must not appear as the question-check action.
+- Pressing the question submit control gives immediate feedback beside that
+  same question. A fully correct question shows a clearly visible **green
+  ✓ נכון** verdict. If correction is needed, the verdict must say **יש מה
+  לתקן** (partial) or **נסה שוב** (wrong); the incorrect part remains editable
+  and the same small submit control stays available so the learner can correct
+  and submit again until the three-attempt limit is reached.
+- A verdict always shows as a shape AND a word, never colour alone: ✓ נכון
+  (all correct), ◐ יש מה לתקן (partial — some right, some not), ✕ נסה שוב
+  (wrong), 🔒 (locked after three attempts), ? נשמר לבדיקת המורה
+  (unkeyed/open-ended). Screen readers hear the verdict; none of it appears in
+  print.
 - A correct target is preserved and locked — never re-typed or re-counted; the
   learner fixes only the part still marked. Typing is never an attempt; an
   attempt is counted only when a check is actually run. Reload never resets.
@@ -137,6 +146,9 @@ this file, the current instruction wins and this file must be reconciled.
 - Compact means visually compact, not hard to tap: primary interactive controls
   keep a minimum 44px touch height while using smaller type, tighter padding,
   smaller gaps, and natural wrapping instead of oversized full-width slabs.
+- The per-question **„להגיש ←”** control is deliberately narrow and understated,
+  remains at least 44px high for touch, and sits immediately beside its result
+  so the action and feedback read as one compact unit.
 - Previous/next navigation is distinguished by position, label and arrow rather
   than loud colour. Hover/press feedback is subtle and must not move controls
   enough to feel jumpy on touch devices.
