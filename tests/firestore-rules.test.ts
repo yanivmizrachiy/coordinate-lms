@@ -20,7 +20,7 @@ describe('Firestore production rules contract', () => {
 
   it('bounds page, score, and persisted attempt summary values', () => {
     expect(rules).toContain('value >= 1 && value <= 78');
-    expect(rules).toContain('value >= 1 && value <= 100');
+    expect(rules).toContain('value >= 0 && value <= 100');
     expect(rules).toContain('value >= 0 && value <= 4');
     expect(rules).toContain('validAttemptCount(request.resource.data.maxAttemptCount)');
   });
