@@ -191,7 +191,7 @@ describe('Firestore emulator authorization contract', () => {
     await assertFails(
       setDoc(doc(db, 'students', STUDENT_A, 'drafts', 'page-2'), {
         ...draft(STUDENT_A),
-        maxAttemptCount: 4,
+        maxAttemptCount: 5,
       }),
     );
     await assertFails(
@@ -248,7 +248,7 @@ describe('Firestore emulator authorization contract', () => {
     );
     await assertFails(setDoc(reference, { ...valid, score: 0, latestScore: 0 }));
     await assertFails(
-      setDoc(reference, { ...valid, maxAttemptCount: 4 }),
+      setDoc(reference, { ...valid, maxAttemptCount: 5 }),
     );
     await assertFails(
       setDoc(reference, { ...valid, bestScore: 79 }),
