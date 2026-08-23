@@ -19,7 +19,6 @@ import { startRouter, navigate, type RouteMatch } from './router';
 import { elem, clear } from './lib/dom';
 import type { View, ViewContext } from './views/context';
 import { ensureFreshBuild } from './lib/freshBuild';
-import { refineQuestionSubmitControls } from './lms/questionSubmitUi';
 
 const app = document.getElementById('app');
 if (!app) throw new Error('#app root missing');
@@ -100,7 +99,6 @@ function render(match: RouteMatch): void {
     clear(outlet);
     const ctx: ViewContext = { outlet, setTitle };
     const result = view(ctx);
-    refineQuestionSubmitControls(outlet);
     cleanup = typeof result === 'function' ? result : undefined;
 
     if (CROSSFADE) {
