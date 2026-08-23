@@ -1,0 +1,79 @@
+/* Per-question submit: compact action, immediate readable feedback. */
+.lms-qcheck {
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.lms-qcheck__btn {
+  min-height: 38px;
+  padding: 6px 10px;
+  border-radius: 9px;
+  background: #f7f9fb;
+  border-color: #cfd8e3;
+  color: #334b63;
+  box-shadow: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lms-qcheck__btn:hover {
+  background: #edf2f6;
+  border-color: #bcc9d6;
+}
+
+.lms-qstatus {
+  min-height: 34px;
+  padding: 5px 9px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.lms-qstatus[data-qstate="correct"] {
+  color: #23633a;
+  background: #edf6f0;
+  border-color: #c7ddce;
+}
+
+.lms-qstatus[data-qstate="partial"] {
+  color: #74530b;
+  background: #faf5e8;
+  border-color: #e4d5ab;
+}
+
+.lms-qstatus[data-qstate="wrong"] {
+  color: #8a3640;
+  background: #fbf0f1;
+  border-color: #e5c9cd;
+}
+
+.lms-qstatus[data-qstate="locked"] {
+  color: #59636f;
+  background: #f1f3f5;
+  border-color: #d8dde3;
+}
+
+.lms-qstatus[data-qstate="pending"] {
+  color: #3f5875;
+  background: #eef3f8;
+  border-color: #ced9e5;
+}
+
+@media (max-width: 720px) {
+  .lms-qcheck {
+    align-items: center;
+  }
+
+  .lms-qcheck__btn {
+    width: auto !important;
+    min-width: 88px;
+    min-height: 40px;
+    flex: 0 0 auto;
+  }
+
+  .lms-qstatus {
+    flex: 0 1 auto;
+  }
+}
