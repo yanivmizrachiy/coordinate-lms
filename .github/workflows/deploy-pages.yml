@@ -9,8 +9,9 @@ on:
       guest_preview:
         description: >-
           Publish a GUEST-ONLY site even without Firebase. Guests solve every
-          page and get scores; registration stays fail-closed until the six
-          Firebase secrets are added. Leave false for a full classroom release.
+          page, receive feedback and a temporary score, but scores are not
+          saved. Registration stays fail-closed until the six Firebase secrets
+          are added. Leave false for a full classroom release.
         type: boolean
         default: false
 
@@ -67,7 +68,7 @@ jobs:
 
           if [[ "$missing" -ne 0 ]]; then
             if [[ "${{ inputs.guest_preview }}" == "true" ]]; then
-              echo "::warning title=Guest-only publish::Firebase is not configured — publishing a GUEST-ONLY site. Every page is solvable and scored as a guest (progress stays on the device); registration remains fail-closed and will refuse until the six Firebase secrets are added. This is NOT a full classroom release."
+              echo "::warning title=Guest-only publish::Firebase is not configured — publishing a GUEST-ONLY site. Every page is solvable, feedback is available and a temporary score may be shown, but guest scores are not saved. Draft/attempt state may stay on this device to preserve the three-attempt model. Registration remains fail-closed and will refuse until the six Firebase secrets are added. This is NOT a full classroom release."
             else
               echo "Deployment stopped: central registration must be configured before publishing."
               echo "To publish a guest-only site now, re-run this workflow with guest_preview = true."
