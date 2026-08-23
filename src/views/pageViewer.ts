@@ -17,7 +17,9 @@ import { hydrateGridAnswerInputs } from '../lms/gridInputs';
 import { hydrateChoiceAnswerInputs } from '../lms/choiceInputs';
 import { hydrateExplicitAuthoringAnswers } from '../lms/implicitAnswers';
 import { installHintCoach } from '../lms/hintCoach';
+import { installAttemptFeedback } from '../lms/attemptFeedback';
 import { focusPracticePanel } from '../lms/practiceFocus';
+import { refineQuestionSubmitControls } from '../lms/questionSubmitUi';
 
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
@@ -82,8 +84,12 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       ? attachLmsToPage(sheetWrap, page)
       : undefined;
     if (lms) focusPracticePanel(lms.panel);
+    refineQuestionSubmitControls(sheetWrap);
     const hintCleanup = data && lms
       ? installHintCoach(sheetWrap)
+      : undefined;
+    const attemptFeedbackCleanup = data && lms
+      ? installAttemptFeedback(sheetWrap)
       : undefined;
 
     /* The bottom row: page-turning MUST be comfortable from here too —
@@ -189,6 +195,7 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     return () => {
       window.clearTimeout(settle);
       window.removeEventListener('resize', applyZoom);
+      attemptFeedbackCleanup?.();
       hintCleanup?.();
       choiceCleanup?.();
       gameCleanup?.();
