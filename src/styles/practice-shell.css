@@ -1,0 +1,310 @@
+/* ========================================================================== */
+/* Student practice shell — focused, quiet, app-like.                         */
+/* The worksheet content is shared with print; these controls exist on screen */
+/* only and deliberately avoid print/download affordances.                   */
+/* ========================================================================== */
+
+.practice-container {
+  padding-inline: clamp(6px, 1.8vw, 16px);
+}
+
+.pageviewer--practice {
+  gap: 8px;
+}
+
+/* The global app bar becomes a slim context bar while a pupil is practising. */
+.appbar--practice {
+  min-height: 44px;
+  padding: 5px 8px;
+  gap: 7px;
+  border-bottom: 1px solid #e7ebf0;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1px 3px rgba(25, 38, 54, 0.04);
+  backdrop-filter: blur(10px);
+}
+
+.appbar--practice .appbar__title {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.appbar--practice .iconbtn {
+  min-width: 36px;
+  min-height: 36px;
+  padding: 5px 8px;
+  border-color: #e0e6ed;
+  border-radius: 10px;
+  background: #fff;
+  color: #40546a;
+  box-shadow: none;
+  font-size: 12.5px;
+}
+
+.appbar--practice .iconbtn--primary {
+  background: #f7f9fb;
+  border-color: #dce3ea;
+  color: #30485f;
+}
+
+/* One navigation dock, rather than a toolbar full of equally loud actions. */
+.pagenav--practice {
+  position: sticky;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  z-index: 25;
+  width: max-content;
+  max-width: calc(100vw - 20px);
+  margin: 10px auto 8px;
+  padding: 4px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: 1px solid rgba(207, 216, 226, 0.92);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 8px 26px rgba(31, 42, 55, 0.10);
+  backdrop-filter: blur(14px);
+}
+
+.pagenav--practice .btn--nav {
+  min-height: 36px;
+  padding: 5px 9px;
+  gap: 4px;
+  border-color: transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: #3f5063;
+  box-shadow: none;
+  font-size: 12.5px;
+  font-weight: 680;
+}
+
+.pagenav--practice .btn--nav:hover {
+  background: #f2f5f8;
+  border-color: #e2e8ee;
+}
+
+.pagenav--practice .btn--next {
+  color: #294b67;
+}
+
+.pagenav--practice .btn__arrow {
+  font-size: 15px;
+  font-weight: 760;
+}
+
+.pagenav--practice .btn:disabled {
+  opacity: 0.28;
+}
+
+.pagenav__jump--compact {
+  min-height: 36px;
+  padding-inline: 7px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #7a8795;
+  border-inline: 1px solid #edf0f3;
+}
+
+.pagenav__jump--compact .pagenav__input {
+  width: 38px;
+  min-height: 30px;
+  padding: 2px 3px;
+  border: 1px solid #e0e6ec;
+  border-radius: 8px;
+  background: #f8fafb;
+  color: #2f4154;
+  font-size: 12.5px;
+  font-weight: 750;
+  text-align: center;
+  box-shadow: none;
+}
+
+.pagenav__jump--compact .pagenav__input:focus {
+  outline: 2px solid #a9bacb;
+  outline-offset: 1px;
+  background: #fff;
+}
+
+.pagenav__of {
+  direction: ltr;
+  font-size: 11.5px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+/* Secondary tools live behind one deliberate overflow control. */
+.practice-tools {
+  position: relative;
+}
+
+.practice-tools > summary {
+  list-style: none;
+}
+
+.practice-tools > summary::-webkit-details-marker {
+  display: none;
+}
+
+.practice-tools__trigger {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: #657487;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  user-select: none;
+}
+
+.practice-tools__trigger:hover,
+.practice-tools[open] .practice-tools__trigger {
+  background: #f2f5f8;
+  border-color: #e2e8ee;
+  color: #34485d;
+}
+
+.practice-tools__trigger:focus-visible {
+  outline: 2px solid #8fa5ba;
+  outline-offset: 2px;
+}
+
+.practice-tools__panel {
+  position: absolute;
+  inset-inline-end: 0;
+  bottom: calc(100% + 8px);
+  min-width: 230px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #dce3ea;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 12px 32px rgba(31, 42, 55, 0.14);
+  backdrop-filter: blur(12px);
+}
+
+.practice-tools__panel .iconbtn,
+.practice-tools__panel .zoombtn {
+  min-height: 34px;
+  min-width: 34px;
+  padding: 4px 7px;
+  border-color: #e1e7ed;
+  border-radius: 8px;
+  background: #fff;
+  color: #435467;
+  box-shadow: none;
+  font-size: 12px;
+}
+
+.practice-tools__panel .zoomer {
+  display: inline-flex;
+  border: 0;
+  border-radius: 8px;
+  overflow: visible;
+  gap: 3px;
+}
+
+.practice-tools__panel .zoombtn--label {
+  min-width: 66px;
+}
+
+/* Per-question action: visually small, while the surrounding question keeps */
+/* plenty of whitespace and a clear focus ring for keyboard/touch use.       */
+.pageviewer--practice .lms-qcheck__btn {
+  min-height: 36px;
+  padding: 5px 9px;
+  border-radius: 9px;
+  border-color: #d9e1e9;
+  background: #f8fafb;
+  color: #3b5065;
+  box-shadow: none;
+  font-size: 12.25px;
+  font-weight: 700;
+}
+
+.pageviewer--practice .lms-qcheck__btn:hover {
+  background: #f0f4f7;
+  border-color: #cbd6e0;
+}
+
+.pageviewer--practice .lms-qstatus {
+  font-size: 12.25px;
+}
+
+@media (max-width: 600px) {
+  .practice-container {
+    width: 100%;
+    padding-inline: 4px;
+  }
+
+  .appbar--practice {
+    min-height: 40px;
+    padding: 4px 6px;
+  }
+
+  .appbar--practice .appbar__title {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 12.25px;
+  }
+
+  .appbar--practice .iconbtn {
+    min-width: 34px;
+    min-height: 34px;
+    padding: 4px 7px;
+  }
+
+  .pagenav--practice {
+    width: calc(100vw - 16px);
+    max-width: 430px;
+    padding: 4px;
+    gap: 2px;
+    border-radius: 14px;
+  }
+
+  .pagenav--practice .btn--nav {
+    flex: 1 1 0;
+    min-width: 42px;
+    padding-inline: 7px;
+  }
+
+  .pagenav--practice .btn__label {
+    display: none;
+  }
+
+  .pagenav__jump--compact {
+    flex: 0 0 auto;
+    padding-inline: 6px;
+  }
+
+  .practice-tools__panel {
+    min-width: min(230px, calc(100vw - 28px));
+  }
+
+  .pageviewer--practice .lms-qcheck__btn {
+    min-height: 35px;
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+}
+
+@media print {
+  .pagenav--practice,
+  .practice-tools,
+  .appbar--practice {
+    display: none !important;
+  }
+}
