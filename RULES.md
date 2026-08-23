@@ -34,6 +34,30 @@ this file, the current instruction wins and this file must be reconciled.
   deployment require explicit confirmation for the current operation.
 - Never print, commit, expose, or invent credentials.
 
+## Learning the user's style — corrections become rules
+
+- This file is a **living learning layer**, not a passive log. Read it before
+  every change. After a meaningful user correction, reconcile it so the next
+  similar task starts from the learned preference instead of repeating the old
+  mistake.
+- For every correction, ask what reusable principle it reveals. If the lesson
+  applies beyond the one element that triggered it, encode the generalized rule
+  here and apply it consistently to equivalent screens, controls, questions and
+  future work.
+- Keep one smart source of truth, not a pile of notes. Merge overlapping or
+  repeated feedback into one stronger rule; replace obsolete wording when a
+  newer instruction supersedes it; never create a parallel preference file,
+  shadow rule list or second design source.
+- Distinguish durable style from a local exception. A repeated or clearly
+  general preference becomes project-wide automatically; a genuinely local
+  exception stays local and must not silently alter unrelated behavior.
+- Repetition increases confidence. Repeated requests for smaller/quieter
+  controls, less interface chrome during practice, useful pedagogical feedback,
+  tolerance for harmless input variants, and minimal interruption are part of
+  the project's design language and must be preserved proactively.
+- A correction is not complete until **implementation, tests and this source of
+  truth agree**. No demo-only substitute counts as completion.
+
 ## Canonical workbook integrity
 
 - The canonical booklet has **78 numbered pages** (since the 2026-08-18
@@ -65,9 +89,28 @@ this file, the current instruction wins and this file must be reconciled.
   retry, stale writes, or reconnection must never reset that count.
 - A mistake still has a scoring consequence: a correct answer on the first
   checked attempt earns full credit for that target, on the second checked
-  attempt 75%, and on the third checked attempt 50%. Corrective hints never
-  refund, reset, or hide an attempt; they exist to turn the lost credit into
-  learning rather than punishment without guidance.
+  attempt 75%, and on the third checked attempt 50%. A third wrong checked
+  attempt locks the unresolved target with no credit. Corrective hints never
+  refund, reset or hide an attempt.
+- **The learner must be told the scoring consequence in plain language.** After
+  checking, feedback explains which attempt was used, how much of the
+  question's 100-point local credit has been lost, and how much can still be
+  earned. A first wrong attempt leaves at most 75/100 for that part; a second
+  leaves at most 50/100; a third wrong attempt leaves 0. Correcting on attempt
+  two earns 75/100 and correcting on attempt three earns 50/100. This local
+  explanation mirrors the page-score calculation rather than inventing a
+  separate grading model.
+- **Harmless input variation must not cost a child points.** Latin answer
+  letters such as `x/X` and `y/Y` are case-insensitive. Hebrew textual answers
+  accept tightly bounded spelling variants such as common full/defective
+  spelling and a small typo (for example `אופקי/אפקי` or `ציר/צייר`) when the
+  mathematical concept is still unambiguous. Diacritics, harmless punctuation
+  and spacing are ignored where appropriate.
+- Fuzzy tolerance applies only to word-like textual answers. It must never make
+  a different mathematical concept correct (`אנכי` is not `אופקי`), and it
+  must not loosen numeric answers, ordered data, strict sets or mathematical
+  structures. Numeric equivalence such as `1/2 = 0.5` remains mathematical,
+  not spelling-based.
 - Every page is open to a guest (Yaniv, 2026-08-18): a guest solves, receives
   feedback, and earns a page score exactly like a registered student. A
   guest's progress is saved on the device only — never centrally, never in the
@@ -118,9 +161,14 @@ this file, the current instruction wins and this file must be reconciled.
   pedagogical correction hint beside that same question. The hint must direct
   the learner toward a rule, representation, comparison or step of reasoning;
   it must not merely repeat „לא נכון”.
+- **Hints must never reveal the answer.** This applies on attempt 1, attempt 2
+  and after the third attempt. Increasing support means a clearer strategy,
+  decomposition, comparison, representation or self-check — not printing the
+  missing word, target letter, coordinate or number. Even after lock, explain
+  how to reason without converting the hint into a solution key.
 - Hints are progressive. Attempt 1 gives a concise conceptual clue; attempt 2
   gives a more explicit strategy or worked direction; after attempt 3 / lock,
-  the learner receives a compact explanation of the governing rule. The
+  the learner receives stronger guidance about the governing reasoning. The
   student may keep editing the unresolved part while attempts remain.
 - Hints must be derived from canonical task metadata and mathematical context,
   never from a second hand-authored answer source. Relevant categories include
@@ -128,11 +176,10 @@ this file, the current instruction wins and this file must be reconciled.
   origin, relation, and ordered-pair position. A correct part stays locked and
   the hint addresses only unresolved parts where possible.
 - Coordinate-system guidance must follow the Ministry of Education grade-7
-  teaching emphases: x is the horizontal axis, y the vertical axis; pupils
-  practise both plotting given points and reading coordinates of given points;
-  coordinate systems support orientation, graphs and geometric
-  representation; and scale must be read correctly. The implementation is
-  self-contained and must not fetch curriculum content at runtime.
+  teaching emphases: pupils distinguish the two axes, practise both plotting
+  given points and reading coordinates of given points, use coordinate systems
+  for orientation/graphs/geometric representation, and read scale correctly.
+  Guidance may teach these ideas but must not state the current blank's answer.
 - Registration, login, account and save-mode explanations belong **only on the
   landing/start screen before practice begins**. Once the learner enters any
   numbered `#/workbook/:n` page, the practice surface must not show registration
@@ -142,8 +189,8 @@ this file, the current instruction wins and this file must be reconciled.
 - A verdict always shows as a shape AND a word, never colour alone: ✓ נכון
   (all correct), ◐ יש מה לתקן (partial — some right, some not), ✕ נסה שוב
   (wrong), 🔒 (locked after three attempts), ? נשמר לבדיקת המורה
-  (unkeyed/open-ended). Screen readers hear the verdict and the corrective hint;
-  none of it appears in print.
+  (unkeyed/open-ended). Screen readers hear the verdict, correction guidance
+  and score-loss explanation; none of it appears in print.
 - A correct target is preserved and locked — never re-typed or re-counted; the
   learner fixes only the part still marked. Typing is never an attempt; an
   attempt is counted only when a check is actually run. Reload never resets.
@@ -174,15 +221,16 @@ this file, the current instruction wins and this file must be reconciled.
   navy/slate/white surfaces, thin borders, restrained shadows, and no neon,
   glow, saturated purple/green navigation blocks, sheen sweeps, or decorative
   colour effects.
-- Compact means visually compact, not hard to tap: primary interactive controls
-  keep a minimum 44px touch height while using smaller type, tighter padding,
-  smaller gaps, and natural wrapping instead of oversized full-width slabs.
-- The per-question **„להגיש ←”** control is deliberately narrow and understated,
-  remains at least 44px high for touch, and sits immediately beside its result
-  so the action and feedback read as one compact unit.
-- Corrective hints use a calm neutral panel with restrained borders and no
-  neon/glow. They sit immediately with the question feedback and remain compact
-  enough not to overwhelm the worksheet on mobile.
+- Controls should **look as small and delicate as practical**. The visible
+  shape, typography and padding should be compact; touch accessibility may use
+  a larger invisible/outer hit area where needed rather than making the visible
+  button look bulky.
+- The per-question **„להגיש ←”** control is deliberately narrow and understated
+  and sits immediately beside its result so the action and feedback read as one
+  compact unit. It must never look like a large page-level call-to-action.
+- Corrective hints and score-loss feedback use calm neutral panels with
+  restrained borders and no neon/glow. They sit immediately with the question
+  feedback and remain compact enough not to overwhelm the worksheet on mobile.
 - Previous/next navigation is distinguished by position, label and arrow rather
   than loud colour. Hover/press feedback is subtle and must not move controls
   enough to feel jumpy on touch devices.
