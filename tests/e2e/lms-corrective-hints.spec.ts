@@ -49,3 +49,23 @@ test('a wrong submission teaches, escalates the hint, and still allows correctio
   await expect(hint).toBeHidden();
   await expect(target).toHaveAttribute('data-lms-attempts', '3');
 });
+
+test('ordered-pair hints teach the ordering rule without printing the answer template', async ({ page }) => {
+  await page.goto('/#/workbook/6');
+  const target = page.locator('.pair-blank[data-lms-qid]').first();
+  await expect(target).toBeVisible();
+
+  const question = target.locator('xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")]');
+  const submit = question.getByRole('button', { name: 'להגיש שאלה לבדיקה' });
+  const hint = question.locator('.lms-qhint');
+
+  await target.fill('__שגוי__');
+  await submit.click();
+  await submit.click();
+  await submit.click();
+
+  await expect(hint).toBeVisible();
+  await expect(hint).toHaveAttribute('data-hint-level', '3');
+  await expect(hint).not.toContainText('(x, y)');
+  await expect(hint).not.toContainText('(x,y)');
+});
