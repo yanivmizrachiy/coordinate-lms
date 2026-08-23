@@ -5,6 +5,7 @@ import {
   mergePageDrafts,
   mergePageResults,
 } from '../src/lms/repository';
+import { LMS_CONFIG } from '../src/lms/config';
 import {
   buildDashboardCsv,
   DASHBOARD_CSV_COLUMNS,
@@ -116,7 +117,9 @@ describe('LMS persistence merging', () => {
   test('invalid scores and attempt counts are rejected before storage', () => {
     expect(() => mergePageResults(null, result(0, 1))).toThrow(/1 ל־100/);
     expect(() => mergePageResults(null, result(101, 1))).toThrow(/1 ל־100/);
-    expect(() => mergePageResults(null, result(50, 1, 4))).toThrow(/0 ל־3/);
+    expect(() =>
+      mergePageResults(null, result(50, 1, LMS_CONFIG.maxAttempts + 1)),
+    ).toThrow(new RegExp(`0 ל־${String(LMS_CONFIG.maxAttempts)}`));
   });
 
   test('guest progress is copied before its source records are removed', async () => {
@@ -199,7 +202,7 @@ describe('teacher dashboard CSV', () => {
     const csv = buildDashboardCsv(snapshot);
     const lines = csv.trimEnd().split('\r\n');
     expect(csv.startsWith('\uFEFF')).toBe(true);
-    expect(lines).toHaveLength(79); // header + one row per page (78)
+    expect(lines).toHaveLength(79);
     expect(lines[0]).toContain(DASHBOARD_CSV_COLUMNS.join('\",\"'));
     expect(csv).toContain('1970-01-01T00:00:00.100Z');
     expect(csv).toContain('"נועה, ""כהן""\nכיתה ז"');
