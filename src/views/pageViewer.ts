@@ -16,6 +16,7 @@ import {
 import { hydrateGridAnswerInputs } from '../lms/gridInputs';
 import { hydrateChoiceAnswerInputs } from '../lms/choiceInputs';
 import { hydrateExplicitAuthoringAnswers } from '../lms/implicitAnswers';
+import { installHintCoach } from '../lms/hintCoach';
 
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
@@ -78,6 +79,9 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
 
     const lms = data
       ? attachLmsToPage(sheetWrap, page)
+      : undefined;
+    const hintCleanup = data && lms
+      ? installHintCoach(sheetWrap)
       : undefined;
 
     /* The bottom row: page-turning MUST be comfortable from here too —
@@ -183,6 +187,7 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     return () => {
       window.clearTimeout(settle);
       window.removeEventListener('resize', applyZoom);
+      hintCleanup?.();
       choiceCleanup?.();
       gameCleanup?.();
       lms?.cleanup();
