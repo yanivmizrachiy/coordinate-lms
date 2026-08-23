@@ -5,7 +5,7 @@ import type { ViewContext } from './context';
 const bullet = (text: string): HTMLElement =>
   elem('li', { class: 'lms-welcome__bullet', text });
 
-export function welcome({ outlet, setTitle }: ViewContext): (() => void) {
+export function welcome({ outlet, setTitle }: ViewContext): void {
   setTitle('בחירת דרך תרגול');
 
   const freeButton = elem('button', {
@@ -32,106 +32,82 @@ export function welcome({ outlet, setTitle }: ViewContext): (() => void) {
   const materialsButton = elem('button', {
     class: 'lms-welcome__materials',
     type: 'button',
-    text: 'לחוברת, לסרטון ולחומרי הלימוד ↓',
+    text: 'לחוברת, לסרטון ולחומרי הלימוד',
   });
+  materialsButton.addEventListener('click', () => navigate('#/home'));
 
-  const welcomeRoot = elem(
-    'div',
-    { class: 'lms-welcome' },
-    elem(
-      'section',
-      { class: 'lms-welcome__hero' },
-      elem('div', { class: 'lms-welcome__eyebrow', text: 'מערכת צירים — הרביע הראשון' }),
-      elem('h1', { class: 'lms-welcome__title', text: 'איך תרצו לתרגל?' }),
-      elem('p', {
-        class: 'lms-welcome__lead',
-        text: 'אפשר להתחיל מיד גם בלי רישום. לפני שמתחילים, חשוב לדעת בפשטות מה נשמר ומה לא.',
-      }),
-    ),
+  outlet.append(
     elem(
       'div',
-      { class: 'lms-welcome__grid' },
+      { class: 'lms-welcome' },
       elem(
         'section',
-        { class: 'lms-welcome__card lms-welcome__card--free' },
-        elem('div', { class: 'lms-welcome__icon', text: '▶', 'aria-hidden': 'true' }),
-        elem('div', { class: 'lms-welcome__kicker', text: 'תרגול חופשי' }),
-        elem('h2', { text: 'בלי רישום' }),
+        { class: 'lms-welcome__hero' },
+        elem('div', { class: 'lms-welcome__eyebrow', text: 'מערכת צירים — הרביע הראשון' }),
+        elem('h1', { class: 'lms-welcome__title', text: 'איך תרצו לתרגל?' }),
         elem('p', {
-          class: 'lms-welcome__summary',
-          text: 'נכנסים ומתחילים לפתור. אין צורך בשם, באימייל או בסיסמה.',
+          class: 'lms-welcome__lead',
+          text: 'אפשר להתחיל מיד גם בלי רישום. לפני שמתחילים, חשוב לדעת בפשטות מה נשמר ומה לא.',
         }),
+      ),
+      elem(
+        'div',
+        { class: 'lms-welcome__grid' },
         elem(
-          'ul',
-          { class: 'lms-welcome__list' },
-          bullet('כל עמודי התרגול פתוחים.'),
-          bullet('מקבלים בדיקה, רמזים ומשוב מיידי.'),
-          bullet('אם טעיתם, אפשר לתקן עד 3 פעמים.'),
-          bullet('אפשר לראות ציון בסיום העמוד.'),
-        ),
-        elem(
-          'div',
-          { class: 'lms-welcome__notice', role: 'note' },
-          elem('strong', { text: 'חשוב: ' }),
-          elem('span', {
-            text: 'הציון בתרגול חופשי אינו נשמר. הוא לא עובר למכשיר אחר ולא מופיע אצל המורה.',
+          'section',
+          { class: 'lms-welcome__card lms-welcome__card--free' },
+          elem('div', { class: 'lms-welcome__icon', text: '▶', 'aria-hidden': 'true' }),
+          elem('div', { class: 'lms-welcome__kicker', text: 'תרגול חופשי' }),
+          elem('h2', { text: 'בלי רישום' }),
+          elem('p', {
+            class: 'lms-welcome__summary',
+            text: 'נכנסים ומתחילים לפתור. אין צורך בשם, באימייל או בסיסמה.',
           }),
+          elem(
+            'ul',
+            { class: 'lms-welcome__list' },
+            bullet('כל עמודי התרגול פתוחים.'),
+            bullet('מקבלים בדיקה, רמזים ומשוב מיידי.'),
+            bullet('אם טעיתם, אפשר לתקן עד 3 פעמים.'),
+            bullet('אפשר לראות ציון בסיום העמוד.'),
+          ),
+          elem(
+            'div',
+            { class: 'lms-welcome__notice', role: 'note' },
+            elem('strong', { text: 'חשוב: ' }),
+            elem('span', {
+              text: 'הציון בתרגול חופשי אינו נשמר. הוא לא עובר למכשיר אחר ולא מופיע אצל המורה.',
+            }),
+          ),
+          freeButton,
         ),
-        freeButton,
-      ),
-      elem(
-        'section',
-        { class: 'lms-welcome__card lms-welcome__card--account' },
-        elem('div', { class: 'lms-welcome__icon', text: '✓', 'aria-hidden': 'true' }),
-        elem('div', { class: 'lms-welcome__kicker', text: 'תרגול עם שמירה' }),
-        elem('h2', { text: 'עם רישום' }),
-        elem('p', {
-          class: 'lms-welcome__summary',
-          text: 'נרשמים פעם אחת עם שם מלא, בית ספר, אימייל וסיסמה.',
-        }),
         elem(
-          'ul',
-          { class: 'lms-welcome__list' },
-          bullet('הציונים נשמרים בחשבון.'),
-          bullet('ההתקדמות נשמרת ואפשר להמשיך אחר כך.'),
-          bullet('אפשר להמשיך גם ממכשיר אחר לאחר התחברות.'),
-          bullet('המורה יכול לראות את התוצאות וההתקדמות.'),
+          'section',
+          { class: 'lms-welcome__card lms-welcome__card--account' },
+          elem('div', { class: 'lms-welcome__icon', text: '✓', 'aria-hidden': 'true' }),
+          elem('div', { class: 'lms-welcome__kicker', text: 'תרגול עם שמירה' }),
+          elem('h2', { text: 'עם רישום' }),
+          elem('p', {
+            class: 'lms-welcome__summary',
+            text: 'נרשמים פעם אחת עם שם מלא, בית ספר, אימייל וסיסמה.',
+          }),
+          elem(
+            'ul',
+            { class: 'lms-welcome__list' },
+            bullet('הציונים נשמרים בחשבון.'),
+            bullet('ההתקדמות נשמרת ואפשר להמשיך אחר כך.'),
+            bullet('אפשר להמשיך גם ממכשיר אחר לאחר התחברות.'),
+            bullet('המורה יכול לראות את התוצאות וההתקדמות.'),
+          ),
+          elem('p', {
+            class: 'lms-welcome__plain',
+            text: 'התרגול עצמו נשאר אותו תרגול. הרישום רק מוסיף שמירה של הציונים וההתקדמות.',
+          }),
+          registerButton,
+          loginButton,
         ),
-        elem('p', {
-          class: 'lms-welcome__plain',
-          text: 'התרגול עצמו נשאר אותו תרגול. הרישום רק מוסיף שמירה של הציונים וההתקדמות.',
-        }),
-        registerButton,
-        loginButton,
       ),
+      materialsButton,
     ),
-    materialsButton,
   );
-
-  const landingHost = elem('div', {
-    class: 'lms-welcome__continuation',
-    id: 'learning-materials',
-  });
-
-  materialsButton.addEventListener('click', () => {
-    landingHost.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-
-  outlet.append(welcomeRoot, landingHost);
-
-  let disposed = false;
-  let landingCleanup: (() => void) | undefined;
-
-  /* Keep the established learning site directly below the mandatory intro,
-     while loading it lazily so the first explanation paints immediately. */
-  void import('./home').then(({ home }) => {
-    if (disposed) return;
-    const result = home({ outlet: landingHost, setTitle: () => undefined });
-    landingCleanup = typeof result === 'function' ? result : undefined;
-  });
-
-  return () => {
-    disposed = true;
-    landingCleanup?.();
-  };
 }
