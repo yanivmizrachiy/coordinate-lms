@@ -10,7 +10,7 @@ import type { ViewContext } from './context';
    word in its structure: a dark top bar carrying the district badge and the
    מנח"י credit, a sticky pill nav, a hero that names the unit, a section per
    material, and a dark footer. Only the material itself is ours: the first
-   quadrant, its film, and the 77-page booklet.
+   quadrant, its film, and the 78-page booklet.
    =========================================================================== */
 
 /** The curriculum film Yaniv published — embedded with the misparim facade.
@@ -142,25 +142,6 @@ export function home({ outlet, setTitle }: ViewContext): (() => void) | void {
       elem('h2', { class: 'ls-section__title', text: title }),
       ...(sub ? [elem('p', { class: 'ls-section__sub', text: sub })] : []),
     );
-
-  /* Account/save guidance appears once, before practice starts. Numbered
-     workbook pages stay focused only on the mathematics, feedback and hints. */
-  const startPractice = elem('button', { class: 'ls-btn ls-btn--primary', type: 'button', text: 'התחלת תרגול' });
-  startPractice.addEventListener('click', () => navigate('#/workbook/1'));
-  const account = elem('button', { class: 'ls-btn ls-btn--ghost', type: 'button', text: 'הרשמה / התחברות' });
-  account.addEventListener('click', () => navigate('#/login'));
-  root.append(
-    elem('section', { class: 'ls-section ls-section--soft', id: 'practice-start' },
-      elem('div', { class: 'ls-container' },
-        sectionHead(
-          'לפני שמתחילים',
-          'תרגול מתוקשב',
-          'אפשר להתחיל מיד כאורח. הרשמה או התחברות נועדה לשמירת ההתקדמות בחשבון ולהמשך ממכשיר אחר; בזמן התרגול עצמו לא יוצגו הסברי הרשמה.'
-        ),
-        elem('div', { class: 'ls-hero__actions' }, startPractice, account),
-      ),
-    ),
-  );
 
   /* ---- the curriculum film: the misparim facade, player loads on press -- */
   const videoBox = elem('div', { class: 'ls-viewer' });
