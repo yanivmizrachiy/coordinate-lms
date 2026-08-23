@@ -20,7 +20,7 @@
     "release:report": "node scripts/release-readiness.mjs",
     "release:report:static": "node scripts/release-readiness.mjs --static",
     "release:check": "npm run verify && npm audit --audit-level=high && npm audit --omit=dev --audit-level=high && npm run release:report",
-    "verify": "npm run answers:coverage:check && npm run typecheck && npm test && npm run build && npm run test:visual",
+    "verify": "npm run answers:coverage:check && npm run typecheck && npm test && npm run test:firestore && npm run build && npm run test:visual",
     "pdf": "node scripts/build-pdf.mjs"
   },
   "devDependencies": {
