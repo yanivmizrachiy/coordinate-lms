@@ -1,6 +1,7 @@
 /* Hash-based router — works on any static host (GitHub Pages included) with no
    server rewrites. Routes:
-     #/                  the landing site — the tram film is its front page
+     #/                  first-entry explanation: guest practice vs registration
+     #/home              the landing site — the tram film is its front page
      #/menu              everything you can do
      #/solutions         dynamic solutions (teacher-gated in the LMS)
      #/print-aids        printable coordinate-system aid sheets
@@ -15,6 +16,7 @@
 export interface RouteMatch {
   name:
     | 'home'
+    | 'landing'
     | 'menu'
     | 'solutions'
     | 'page'
@@ -33,6 +35,7 @@ export function parseHash(hash: string): RouteMatch {
   const parts = path.split('/').filter(Boolean);
   const [head, sub] = parts;
 
+  if (head === 'home') return { name: 'landing', params: {} };
   if (head === 'menu') return { name: 'menu', params: {} };
   if (head === 'solutions') return { name: 'solutions', params: {} };
   if (head === 'print-aids') return { name: 'aids', params: {} };
