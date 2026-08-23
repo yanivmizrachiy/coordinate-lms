@@ -457,12 +457,15 @@ export async function loadAnswerKey(
     }
   }
 
+  /* Explicit answers authored on the current canonical target are last on
+     purpose: stale positional/default/local/remote keys may supplement a page,
+     but they may never override what the current worksheet itself declares. */
   return {
-    ...implicit,
     ...proven,
     ...defaults,
     ...local,
     ...remote,
+    ...implicit,
   };
 }
 
@@ -790,7 +793,7 @@ export async function loadUserDrafts(
     for (const document of snapshot.docs) {
       const draft = document.data() as PageDraft;
       const current = merged.get(draft.pageNumber);
-      merged.set(draft.pageNumber, mergePageDrafts(current, draft));
+      merged.set(result.pageNumber, mergePageDrafts(current, draft));
     }
 
     return [...merged.values()].sort(
