@@ -14,11 +14,13 @@ A current user instruction wins over older wording and this file must be reconci
 - Keep CONTENT, PRESENTATION and INTERACTION separate. Mathematical/content changes belong to the canonical workbook. LMS controls, feedback, hints, scores and persistence are an interactive layer. Print styling is a presentation layer.
 - A correction is complete only when **source of truth + implementation + tests agree**. Demo-only or visual-only substitutes do not count.
 
-## 2. Learn from corrections
+## 2. Learn from corrections and repair safely
 
 - Read this file before changing the project.
 - Every meaningful correction from the user must be converted into the most useful reusable rule, not treated as a one-off patch when it clearly applies elsewhere.
 - Merge repeated or overlapping rules. Delete obsolete wording instead of accumulating contradictory notes.
+- During a repair/cleanup pass, change only a **verified defect, direct contradiction with a current requirement, or a demonstrated maintenance hazard**. Do not add opportunistic features or broad redesigns while repairing failures.
+- Before a multi-step repair, keep a short explicit work plan: what is broken, what will change, what must stay untouched, and which gates prove the repair. Finish that repair and its tests before expanding scope.
 - Do not optimize for fewer files. Optimize for one owner per responsibility, less duplication, less dead code and fewer places where the same rule can drift.
 - Do not perform a broad refactor merely because it looks cleaner. A refactor must reduce real complexity or risk and must preserve working behavior.
 - Preserve unrelated work and never rewrite shared history or force-push.
@@ -40,7 +42,7 @@ A current user instruction wins over older wording and this file must be reconci
 - `#/` is the mandatory first-entry screen. It explains, in very simple Hebrew and before practice begins, the difference between **תרגול חופשי — בלי רישום** and **הרשמה ושמירת ציונים**. Existing users also get an obvious sign-in route.
 - The first-entry screen must say plainly that every practice page is open to guests, feedback is immediate, a page score may be shown, but **guest scores are not saved**, are not available on another device and are not visible to the teacher.
 - It must say plainly that registration uses **full name, school, email and password**, and enables saved scores/progress, cross-device continuation and teacher visibility.
-- The rich learning/materials landing remains available separately at `#/home` and may appear below the first-entry explanation. The explanation itself must remain lightweight and must not import Firebase.
+- The rich learning/materials landing is a separate route at `#/home`. It must **not** be auto-loaded underneath `#/`; the first-entry explanation stays lightweight and must not import Firebase or the heavy materials surface.
 - A numbered computerized page is first and foremost a student practice screen. Show only what helps the learner solve, receive feedback, understand progress and move between pages.
 - Registration/login/account/save-mode explanations belong **only before practice**, never inside numbered practice pages.
 - Do not show legacy print/download actions, duplicate reader toolbars, duplicate navigation, a general `בדיקת תשובות` button, or other unrelated chrome inside practice.
@@ -110,6 +112,7 @@ A current user instruction wins over older wording and this file must be reconci
 
 - Practice controls use a **quiet, compact, premium app language**: neutral navy/slate/white surfaces, thin borders, restrained shadows, no neon, no saturated navigation blocks, no sheen and no decorative glow.
 - Controls should **look small and delicate** while remaining easy to tap. Prefer a compact visible button with an adequate touch target rather than a bulky visual block.
+- Touch accessibility is judged at the **final rendered scale on the device**, not by an unscaled CSS number inside the A4 sheet. A larger invisible hit region is preferred when it preserves a compact premium appearance.
 - `להגיש ←` is narrow and understated and sits beside its verdict/feedback. It must not look like a large page-level CTA.
 - Previous/next navigation is one calm navigation system, distinguished by label/arrow/position rather than loud colors.
 - Secondary tools belong behind a quiet overflow control where appropriate. Do not duplicate primary navigation.
