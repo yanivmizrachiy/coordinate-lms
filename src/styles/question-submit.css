@@ -7,14 +7,14 @@
 }
 
 /* The worksheet is scaled as one A4 surface on phones. The button itself is
-   therefore expanded by the inverse sheet scale so its physical hit target
-   remains 44px. Equal negative block margins cancel the extra layout height,
-   keeping the worksheet geometry unchanged. */
+   expanded by the inverse sheet scale so its physical hit target stays safely
+   above the ~44px touch requirement. Equal negative block margins cancel the
+   extra layout height, keeping the canonical worksheet geometry unchanged. */
 .lms-qcheck__btn {
   position: relative;
   z-index: 1;
-  min-height: calc(44px / var(--sheet-scale, 1));
-  margin-block: calc((44px - (44px / var(--sheet-scale, 1))) / 2);
+  min-height: calc(48px / var(--sheet-scale, 1));
+  margin-block: calc((44px - (48px / var(--sheet-scale, 1))) / 2);
   padding: 0 10px;
   border: 0;
   border-radius: 0;
