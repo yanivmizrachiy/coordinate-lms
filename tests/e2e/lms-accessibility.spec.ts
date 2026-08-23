@@ -1,4 +1,16 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Locator } from '@playwright/test';
+
+function questionFor(target: Locator): Locator {
+  return target.locator(
+    'xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")][1]',
+  );
+}
+
+async function submitQuestion(target: Locator): Promise<void> {
+  await questionFor(target)
+    .getByRole('button', { name: 'להגיש שאלה לבדיקה' })
+    .click();
+}
 
 test('answer fields keep meaningful labels and support keyboard completion', async ({ page }) => {
   await page.goto('/#/workbook/10');
@@ -18,12 +30,13 @@ test('answer fields keep meaningful labels and support keyboard completion', asy
   await target.fill(expected);
   await target.press('Enter');
   await expect(target).not.toBeFocused();
-  await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
+  await submitQuestion(target);
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 
-  const status = page.locator('.lms-panel__status');
+  const status = questionFor(target).locator('.lms-qstatus');
   await expect(status).toHaveAttribute('role', 'status');
   await expect(status).toHaveAttribute('aria-live', 'polite');
+  await expect(status).toContainText('נכון');
 });
 
 test('feedback never rides on colour alone, and never reaches the paper', async ({ page }) => {
@@ -34,11 +47,12 @@ test('feedback never rides on colour alone, and never reaches the paper', async 
   )[0] as string;
 
   await target.fill(expected);
-  await page.getByRole('button', { name: 'בדיקת תשובות' }).click();
+  await submitQuestion(target);
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 
   /* Someone who cannot see the green hears the verdict… */
   await expect(target).toHaveAttribute('aria-label', /נכון/);
+  await expect(questionFor(target).locator('.lms-qstatus')).toContainText('✓ נכון');
   /* …and someone who cannot tell green from red still sees a mark. */
   const mark = await target.evaluate(
     (el) => getComputedStyle(el, '::after').content,
@@ -51,6 +65,7 @@ test('feedback never rides on colour alone, and never reaches the paper', async 
     (el) => getComputedStyle(el, '::after').display,
   );
   expect(printed).toBe('none');
+  await expect(questionFor(target).locator('.lms-qcheck')).toBeHidden();
 });
 
 test('true-false groups include their statement in the accessible name', async ({ page }) => {
@@ -70,10 +85,11 @@ test('true-false groups include their statement in the accessible name', async (
 
 test('LMS overlays do not alter the printed workbook and controls are touch-sized', async ({ page }) => {
   await page.goto('/#/workbook/2');
-  const buttons = page.locator('.lms-panel__buttons .btn');
+  const buttons = page.locator('.lms-panel__buttons .btn, .lms-qcheck__btn');
   await expect(buttons.first()).toBeVisible();
   const tooSmall = await buttons.evaluateAll((items) =>
     items
+      .filter((item) => getComputedStyle(item).display !== 'none')
       .map((item) => item.getBoundingClientRect().height)
       .filter((height) => height < 44),
   );
@@ -81,5 +97,6 @@ test('LMS overlays do not alter the printed workbook and controls are touch-size
 
   await page.emulateMedia({ media: 'print' });
   await expect(page.locator('.lms-panel')).toBeHidden();
+  await expect(page.locator('.lms-qcheck').first()).toBeHidden();
   await expect(page.locator('.lms-grid-answer').first()).toBeHidden();
 });
