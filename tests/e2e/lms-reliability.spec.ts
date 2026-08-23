@@ -1,9 +1,14 @@
 import { expect, test, type Locator } from '@playwright/test';
 
-function questionFor(target: Locator): Locator {
-  return target.locator(
+async function questionFor(target: Locator): Promise<Locator> {
+  const card = target.locator(
     'xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")][1]',
   );
+  if (await card.count()) return card;
+  const fallback = target.locator(
+    'xpath=ancestor::*[self::li or self::tr or self::p or contains(concat(" ", normalize-space(@class), " "), " completion-sentence ")][1]',
+  );
+  return (await fallback.count()) ? fallback : target.locator('xpath=..');
 }
 
 test('first attempt plus three corrections survive reload and never reset', async ({ page }) => {
@@ -22,7 +27,8 @@ test('first attempt plus three corrections survive reload and never reset', asyn
     const target = at();
     await expect(target).toBeVisible();
     await target.fill('תשובה שגויה');
-    await questionFor(target)
+    const question = await questionFor(target);
+    await question
       .getByRole('button', { name: 'להגיש שאלה לבדיקה' })
       .click();
     await expect(target).toHaveAttribute(
