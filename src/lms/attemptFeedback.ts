@@ -1,6 +1,7 @@
 import '../styles/attempt-feedback.css';
 import { LMS_CONFIG } from './config';
 import { remainingCreditFraction } from './scoring';
+import { teacherVoice, type TeacherFeedbackState } from './teacherVoice';
 
 interface TargetSnapshot {
   attempts: number;
@@ -41,7 +42,18 @@ function attemptLabel(attempts: number): string {
   return `זה היה תיקון ${correction} מתוך 3.`;
 }
 
-function messageFor(items: TargetSnapshot[], qstate: string): string {
+function feedbackState(qstate: string): TeacherFeedbackState {
+  if (qstate === 'correct' || qstate === 'partial' || qstate === 'locked') {
+    return qstate;
+  }
+  return 'wrong';
+}
+
+function messageFor(
+  items: TargetSnapshot[],
+  qstate: string,
+  questionIndex: number,
+): string {
   const relevant = scoreable(items);
   if (!relevant.length || qstate === 'idle' || qstate === 'pending') return '';
 
@@ -60,23 +72,24 @@ function messageFor(items: TargetSnapshot[], qstate: string): string {
 
   const remainingPoints = roundedPoints(remaining * 100);
   const lostPoints = 100 - remainingPoints;
+  const voice = teacherVoice(feedbackState(qstate), maxAttempt, questionIndex);
 
   if (qstate === 'correct') {
     if (lostPoints === 0) {
-      return 'נכון בניסיון הראשון — נשמרו כל 100 הנקודות של השאלה.';
+      return `${voice} נשמרו כל 100 הנקודות של השאלה.`;
     }
-    return `נכון. ${attemptLabel(maxAttempt)} בגלל הניסיונות הקודמים ירדו ${lostPoints} נקודות; נשארו ${remainingPoints} מתוך 100 נקודות לשאלה.`;
+    return `${voice} ${attemptLabel(maxAttempt)} בגלל הניסיונות הקודמים ירדו ${lostPoints} נקודות; נשארו ${remainingPoints} מתוך 100 נקודות לשאלה.`;
   }
 
   if (qstate === 'locked') {
-    return 'נוצלו הניסיון הראשון וכל 3 אפשרויות התיקון. בחלקים שלא תוקנו לא נשאר ניקוד. קרא את הרמז וההסבר כדי להבין את הדרך לפני שממשיכים.';
+    return `${voice} נוצלו הניסיון הראשון וכל 3 אפשרויות התיקון. בחלקים שלא תוקנו לא נשאר ניקוד. קרא את ההסבר כדי להבין את הדרך לפני שממשיכים.`;
   }
 
   const used = Math.min(maxAttempt, LMS_CONFIG.maxAttempts);
-  return `${attemptLabel(used)} עד עכשיו ירדו ${lostPoints} נקודות מהניקוד האפשרי של השאלה; המקסימום שנותר הוא ${remainingPoints} מתוך 100. תקן רק את החלקים שסומנו ונסה שוב.`.trim();
+  return `${voice} ${attemptLabel(used)} עד עכשיו ירדו ${lostPoints} נקודות מהניקוד האפשרי של השאלה; המקסימום שנותר הוא ${remainingPoints} מתוך 100. תקן רק את החלקים שסומנו ונסה שוב.`.trim();
 }
 
-function attach(control: HTMLElement): () => void {
+function attach(control: HTMLElement, questionIndex: number): () => void {
   const status = control.querySelector<HTMLElement>('.lms-qstatus');
   if (!status) return () => {};
 
@@ -89,7 +102,11 @@ function attach(control: HTMLElement): () => void {
 
   const refresh = (): void => {
     const qstate = status.dataset['qstate'] || 'idle';
-    const message = messageFor(targetsFor(control).map(snapshot), qstate);
+    const message = messageFor(
+      targetsFor(control).map(snapshot),
+      qstate,
+      questionIndex,
+    );
     feedback.textContent = message;
     feedback.hidden = !message;
   };
@@ -112,7 +129,7 @@ function attach(control: HTMLElement): () => void {
 export function installAttemptFeedback(root: ParentNode): () => void {
   const cleanups = Array.from(
     root.querySelectorAll<HTMLElement>('.lms-qcheck'),
-  ).map(attach);
+  ).map((control, index) => attach(control, index));
   return () => {
     for (const cleanup of cleanups) cleanup();
   };
