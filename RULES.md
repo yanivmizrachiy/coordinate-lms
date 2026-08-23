@@ -47,7 +47,7 @@ A current user instruction wins over older wording and this file must be reconci
 
 ## 5. Scoring and correction model
 
-- A learner completes a page and receives a page score. **100 is the maximum possible score.**
+- A learner completes a page and receives a page score. **100 is the maximum possible score; 0 is a valid minimum when no credit was earned.**
 - Correct on the first checked attempt loses no credit: 100% of that target's credit.
 - If the first checked answer is wrong, the learner receives **up to three correction opportunities**: first attempt + correction 1 + correction 2 + correction 3 = at most four checked attempts.
 - Credit after checked mistakes is fixed and transparent:
@@ -119,7 +119,7 @@ A current user instruction wins over older wording and this file must be reconci
 - Guest progress is local-only; registration enables central save, cross-device continuation and teacher-dashboard visibility. Guest history is copied safely before source guest records are removed.
 - Concurrent/stale writes must preserve the latest valid state, best score, highest attempt count and completed/locked states.
 - Students may access only their own data. Class-wide data and answer-key writes are administrator-only.
-- Firestore writes use field allowlists and enforce pages 1–78, scores 1–100, attempt summary 0–4, monotonic progress and bounded document shapes.
+- Firestore writes use field allowlists and enforce pages 1–78, scores 0–100, attempt summary 0–4, monotonic progress and bounded document shapes.
 - Never commit, expose or invent credentials.
 
 ## 11. Engineering discipline
