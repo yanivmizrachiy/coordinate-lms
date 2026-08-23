@@ -1,6 +1,6 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-18
+Updated: 2026-08-23
 
 This is the single source of truth for work in `yanivmizrachiy/coordinate-lms`.
 `USER_MEMORY.md` and `HANDOFF.md` preserve historical workbook decisions, but
@@ -127,6 +127,22 @@ this file, the current instruction wins and this file must be reconciled.
 - Async screen loading must stay honest: a stale navigation is dropped, a wait
   long enough to feel like one is explained, and a screen whose code never
   arrives offers a retry rather than a blank page.
+
+## Interface controls
+
+- Buttons and action controls use a **quiet, compact visual language**: neutral
+  navy/slate/white surfaces, thin borders, restrained shadows, and no neon,
+  glow, saturated purple/green navigation blocks, sheen sweeps, or decorative
+  colour effects.
+- Compact means visually compact, not hard to tap: primary interactive controls
+  keep a minimum 44px touch height while using smaller type, tighter padding,
+  smaller gaps, and natural wrapping instead of oversized full-width slabs.
+- Previous/next navigation is distinguished by position, label and arrow rather
+  than loud colour. Hover/press feedback is subtle and must not move controls
+  enough to feel jumpy on touch devices.
+- This rule applies to buttons, navigation controls, menu action tiles and LMS
+  action controls. It does **not** remove the separate celebratory perfect-100
+  score badge defined in the scoring section.
 
 ## Persistence truth and classroom data
 
