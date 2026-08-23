@@ -3,6 +3,7 @@ import {
   expect,
   test,
   type BrowserContextOptions,
+  type Locator,
   type Page,
 } from '@playwright/test';
 
@@ -25,8 +26,19 @@ async function register(
   await page.getByPlaceholder('בית ספר').fill(school);
   await page.getByPlaceholder('כתובת אימייל').fill(email);
   await page.getByPlaceholder('סיסמה — לפחות 6 תווים').fill(password);
-  await page.getByRole('button', { name: 'הרשמה ושמירת הציון' }).click();
-  await expect(page).toHaveURL(/#\/workbook\/2$/);
+  await page.getByRole('button', { name: 'הרשמה ושמירת ציונים' }).click();
+  await expect(page).toHaveURL(/#\/workbook\/1$/);
+}
+
+async function questionFor(target: Locator): Promise<Locator> {
+  const card = target.locator(
+    'xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")][1]',
+  );
+  if (await card.count()) return card;
+  const fallback = target.locator(
+    'xpath=ancestor::*[self::li or self::tr or self::p or contains(concat(" ", normalize-space(@class), " "), " completion-sentence ")][1]',
+  );
+  return (await fallback.count()) ? fallback : target.locator('xpath=..');
 }
 
 async function studentSnapshot(page: Page): Promise<StudentData> {
@@ -80,15 +92,14 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     await register(
       studentA,
       'נועה כהן',
-      'noa',
+      'בית ספר א',
       'noa-browser@example.test',
       'student-a-password',
     );
+    await studentA.goto('/#/workbook/2');
     const target = studentA.locator('[data-lms-qid="p2-q1"]');
     await target.fill('תשובה שגויה');
-    const question = target.locator(
-      'xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")][1]',
-    );
+    const question = await questionFor(target);
     await question.getByRole('button', { name: 'להגיש שאלה לבדיקה' }).click();
     await expect(target).toHaveAttribute('data-lms-attempts', '1');
     await studentA.reload();
@@ -102,15 +113,19 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     await studentA.getByPlaceholder('כתובת אימייל').fill('noa-browser@example.test');
     await studentA.getByPlaceholder('סיסמה — לפחות 6 תווים').fill('student-a-password');
     await studentA.getByRole('button', { name: 'התחברות' }).click();
-    await expect(studentA).toHaveURL(/#\/workbook\/2$/);
+    await expect(studentA).toHaveURL(/#\/workbook\/1$/);
+    await studentA.goto('/#/workbook/2');
+    await expect(studentA.locator('[data-lms-qid="p2-q1"]'))
+      .toHaveAttribute('data-lms-attempts', '1');
 
     await register(
       studentB,
       'אורי לוי',
-      'uri',
+      'בית ספר א',
       'uri-browser@example.test',
       'student-b-password',
     );
+    await studentB.goto('/#/workbook/2');
     await studentB.locator('[data-lms-qid="p2-q1"]').fill('טיוטת תלמיד ב');
     await expect
       .poll(() =>
@@ -131,7 +146,7 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     await register(
       teacher,
       'מורה',
-      'teacher',
+      'צוות הוראה',
       'yanivmiz77@gmail.com',
       'teacher-password',
     );
