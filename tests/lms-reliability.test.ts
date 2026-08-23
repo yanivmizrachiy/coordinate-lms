@@ -3,6 +3,7 @@ import {
   canFinalizeGuestTransfer,
   claimGuestProgress,
   loadPageResult,
+  logActivity,
   mergePageDrafts,
   mergePageResults,
   saveDraft,
@@ -14,6 +15,7 @@ import {
   escapeCsvCell,
 } from '../src/lms/dashboardCsv';
 import type {
+  ActivityEvent,
   DashboardSnapshot,
   PageDraft,
   PageResult,
@@ -144,6 +146,43 @@ describe('LMS persistence merging', () => {
       localStorage.getItem('coordinate_lms_results_v2') || '{}',
     ) as Record<string, PageResult>;
     expect(results['guest:1']).toBeUndefined();
+  });
+
+  test('guest activity never stores a grade, including legacy activity', async () => {
+    localStorage.setItem(
+      'coordinate_lms_activity_v2',
+      JSON.stringify([
+        {
+          id: 'legacy-score',
+          uid: 'guest',
+          pageNumber: 1,
+          type: 'page_submit',
+          createdAt: 10,
+          metadata: { score: 91, bestScore: 91, latestScore: 91, activeSeconds: 30 },
+        },
+      ] satisfies ActivityEvent[]),
+    );
+
+    await logActivity({
+      id: 'new-score',
+      uid: 'guest',
+      pageNumber: 1,
+      type: 'page_submit',
+      createdAt: 20,
+      metadata: { score: 87, activeSeconds: 40 },
+    });
+
+    const activity = JSON.parse(
+      localStorage.getItem('coordinate_lms_activity_v2') || '[]',
+    ) as ActivityEvent[];
+
+    expect(activity).toHaveLength(2);
+    for (const event of activity) {
+      expect(event.metadata).not.toHaveProperty('score');
+      expect(event.metadata).not.toHaveProperty('bestScore');
+      expect(event.metadata).not.toHaveProperty('latestScore');
+    }
+    expect(activity[1]?.metadata?.['activeSeconds']).toBe(40);
   });
 
   test('guest draft keeps attempts but never stores a submitted score', async () => {
