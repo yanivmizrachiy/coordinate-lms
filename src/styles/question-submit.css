@@ -4,8 +4,10 @@
   margin-top: 9px;
 }
 
-/* The hit target stays 44px for touch, while the painted control is only 32px
-   high. Small-looking must not mean hard to tap. */
+/* The control is visually compact, but the worksheet itself is transformed
+   down on phones. A transparent pseudo-element counteracts that transform for
+   hit-testing only, so the effective target remains about 44px without making
+   the painted button bulky or changing worksheet layout. */
 .lms-qcheck__btn {
   position: relative;
   min-height: 44px;
@@ -29,6 +31,17 @@
   box-shadow: 0 1px 2px rgb(15 23 42 / 4%);
   pointer-events: none;
   transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+/* The sheet uses --sheet-scale on screen. At 0.5 scale a 44px DOM button is
+   only 22px on the glass; this invisible region expands by the exact inverse
+   amount. It does not participate in layout and is removed with the LMS in
+   print. */
+.lms-qcheck__btn::after {
+  content: '';
+  position: absolute;
+  inset-block: calc((44px - (44px / var(--sheet-scale, 1))) / 2);
+  inset-inline: calc((44px - (44px / var(--sheet-scale, 1))) / 2);
 }
 
 .lms-qcheck__btn:hover::before {
