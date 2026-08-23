@@ -1,3 +1,5 @@
+import '../styles/question-submit.css';
+import '../styles/practice-shell.css';
 import { elem, fromHTML } from '../lib/dom';
 import { navigate } from '../router';
 import { hydrateGrids } from '../lib/coordinateGrid';
