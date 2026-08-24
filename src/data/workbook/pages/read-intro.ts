@@ -41,9 +41,11 @@ export const READ_INTRO: WorkbookPageContent = sheet({
 </section>
 </div>
 <section class="q-card">
-<h3>ד. סדרו את הנקודות B, C, D ו־E משמאל לימין.</h3>
+<h3>ד. איזו נקודה מרחקה מציר x זהה למרחקה מציר y?</h3>
 <ul class="tasks compact">
-<li>כתבו את האותיות לפי הסדר: <span class="math-ltr" dir="ltr"><span class="blank" data-missing="x-order" style="--blank-width:4ch"></span> → <span class="blank" data-missing="x-order" style="--blank-width:4ch"></span> → <span class="blank" data-missing="x-order" style="--blank-width:4ch"></span> → <span class="blank" data-missing="x-order" style="--blank-width:4ch"></span></span></li>
+<li>שם הנקודה: <span class="blank" data-missing="letter" style="--blank-width:5ch"></span>.</li>
+<li>שיעורי הנקודה: <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>
+<li>המרחק מכל אחד מהצירים: <span class="blank" data-missing="number" style="--blank-width:5ch"></span> יחידות.</li>
 </ul>
 </section>
 <section class="q-card">
