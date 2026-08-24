@@ -71,12 +71,30 @@ describe('no second repository behind the content', () => {
     }
   });
 
-  it('declares one master in every governing document', () => {
-    expect(read('RULES.md')).toMatch(/the ONLY repository, the ONLY master/);
-    expect(read('RULES.md')).toMatch(/frozen historical\s+archive/);
-    expect(read('RULES.md')).toContain('There must never be more than one live source-of-truth document');
-    expect(read('CLAUDE.md')).toMatch(/ONLY source of truth/);
+  it('declares one master in every governing/pointer document', () => {
+    const rules = read('RULES.md');
+    const claude = read('CLAUDE.md');
+    const agents = read('AGENTS.md');
+
+    expect(rules).toMatch(/the ONLY repository, the ONLY master/);
+    expect(rules).toMatch(/frozen historical\s+archive/);
+    expect(rules).toContain('There must never be more than one live source-of-truth document');
+    expect(rules).toContain('## 14. AI / agent entry protocol');
+
+    expect(claude).toMatch(/pointer only/i);
+    expect(claude).toContain('RULES.md');
+    expect(agents).toMatch(/pointer only/i);
+    expect(agents).toContain('RULES.md');
     expect(read('README.md')).toContain('MASTER היחיד');
+  });
+
+  it('keeps AI entry files as pointers instead of copied rulebooks', () => {
+    for (const file of ['AGENTS.md', 'CLAUDE.md']) {
+      const text = read(file);
+      expect(text, `${file} must point to RULES.md`).toContain('RULES.md');
+      expect(text, `${file} must not grow into a second rulebook`)
+        .not.toMatch(/##\s+(?:1\.|First entry|Scoring|Persistence|Engineering discipline|Required quality gates)/i);
+    }
   });
 });
 
