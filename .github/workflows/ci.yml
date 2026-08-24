@@ -21,7 +21,9 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Apply idempotent grading-policy cleanup
-        run: node scripts/tmp-grading-cleanup.cjs
+        run: |
+          node scripts/tmp-grading-cleanup.cjs
+          node scripts/tmp-page12-source-sync.cjs
       - name: Regenerate answer coverage
         run: npm run answers:coverage
       - name: Verify teacher-review fallback is absent
@@ -45,7 +47,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add RULES.md docs/CLASSROOM_LAUNCH_CHECKLIST.md src/lms/answerCoverage.ts src/lms/repository.ts src/lms/engine.ts tests/answer-coverage.test.ts tests/ssot-guard.test.ts reports/answer-coverage.json reports/answer-coverage.md reports/answer-target-order.json public/answer-review-manifest.json
+          git add RULES.md docs/CLASSROOM_LAUNCH_CHECKLIST.md src/data/solutions/registry.ts src/lms/answerCoverage.ts src/lms/repository.ts src/lms/engine.ts tests/answer-coverage.test.ts tests/ssot-guard.test.ts reports/answer-coverage.json reports/answer-coverage.md reports/answer-target-order.json public/answer-review-manifest.json
           git commit -m "fix: enforce fully automatic deterministic grading"
           git push
 
