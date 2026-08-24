@@ -18,9 +18,12 @@ import { startRouter, navigate, type RouteMatch } from './router';
 import { elem, clear } from './lib/dom';
 import type { View, ViewContext } from './views/context';
 import { ensureFreshBuild } from './lib/freshBuild';
+import { installPageScoreFeedback } from './lms/pageScoreFeedback';
 
 const app = document.getElementById('app');
 if (!app) throw new Error('#app root missing');
+
+installPageScoreFeedback(app);
 
 const homeBtn = elem('button', { class: 'iconbtn iconbtn--primary', type: 'button', text: '⌂ בית', 'aria-label': 'מסך הבית' });
 homeBtn.addEventListener('click', () => navigate('#/'));
