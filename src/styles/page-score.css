@@ -1,0 +1,48 @@
+/* Final page result: the grade itself is always red after submission.
+   The teacher sentence is separate, calm and readable. A perfect 100 may keep
+   its celebratory spark, but the numeric grade never changes to a different
+   colour. */
+.lms-score__circle,
+.lms-score--perfect .lms-score__circle {
+  border-color: #c72637;
+  color: #c72637;
+  background: #fff;
+}
+
+.lms-score--perfect .lms-score__circle {
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.9),
+    0 0 22px 5px rgba(199, 38, 55, 0.24),
+    0 10px 26px rgba(91, 22, 31, 0.16);
+}
+
+.lms-score__num,
+.lms-score__label,
+.lms-score--perfect .lms-score__label {
+  color: #c72637;
+}
+
+.lms-score__teacher {
+  flex: 1 1 100%;
+  margin: 2px 0 0;
+  padding: 10px 12px;
+  border-inline-start: 3px solid #c72637;
+  border-radius: 8px;
+  background: #fff6f7;
+  color: #30394b;
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+  .lms-score__teacher {
+    inline-size: 100%;
+    text-align: right;
+    font-size: 0.92rem;
+  }
+}
+
+@media print {
+  .lms-score__teacher { display: none !important; }
+}

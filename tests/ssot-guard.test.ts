@@ -74,6 +74,7 @@ describe('no second repository behind the content', () => {
   it('declares one master in every governing document', () => {
     expect(read('RULES.md')).toMatch(/the ONLY repository, the ONLY master/);
     expect(read('RULES.md')).toMatch(/frozen historical\s+archive/);
+    expect(read('RULES.md')).toContain('There must never be more than one live source-of-truth document');
     expect(read('CLAUDE.md')).toMatch(/ONLY source of truth/);
     expect(read('README.md')).toContain('MASTER היחיד');
   });
@@ -114,10 +115,12 @@ describe('first entry is explicit, lightweight and separate from practice', () =
     expect(main).toContain("case 'welcome': return import('./views/welcome')");
   });
 
-  it('explains guest score non-persistence before practice, not in pageViewer', () => {
-    expect(welcome).toContain('הציון בתרגול חופשי אינו נשמר');
-    expect(welcome).toContain('אם טעיתם, אפשר לתקן עד 3 פעמים');
+  it('shows exactly the two current practice choices and explains guest non-persistence', () => {
+    expect(welcome).toContain('לתרגל עם רישום');
+    expect(welcome).toContain('לתרגל בלי רישום');
+    expect(welcome).toContain('הציון לא נשמר ולא מופיע אצל המורה');
     expect(welcome).toContain("navigate('#/workbook/1')");
+    expect(welcome).toContain("navigate('#/login')");
     expect(read('src/views/pageViewer.ts')).not.toMatch(/מצב אורח|הרשמה ושמירת ציונים|הציון בתרגול חופשי/);
     expect(rules).toContain('Guest page scores/results must never be persisted locally or centrally');
   });
@@ -125,7 +128,8 @@ describe('first entry is explicit, lightweight and separate from practice', () =
   it('does not pull Firebase or the rich home screen into the welcome module', () => {
     expect(welcome).not.toMatch(/from\s+'firebase|from\s+'\.\.\/lms\//);
     expect(welcome).not.toContain("import('./home')");
-    expect(welcome).toContain("navigate('#/home')");
+    expect(welcome).not.toContain("navigate('#/home')");
+    expect(rules).toContain('do not add a third large competing entry button');
   });
 });
 

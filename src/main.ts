@@ -13,6 +13,7 @@ import './styles/lms.css';
 import './styles/lms-phase3.css';
 import './styles/lms-grid-inputs.css';
 import './styles/controls-refined.css';
+import './styles/page-score.css';
 
 import { startRouter, navigate, type RouteMatch } from './router';
 import { elem, clear } from './lib/dom';
@@ -21,6 +22,9 @@ import { ensureFreshBuild } from './lib/freshBuild';
 
 const app = document.getElementById('app');
 if (!app) throw new Error('#app root missing');
+const appRoot: HTMLElement = app;
+
+let pageScoreFeedbackInstalled = false;
 
 const homeBtn = elem('button', { class: 'iconbtn iconbtn--primary', type: 'button', text: '⌂ בית', 'aria-label': 'מסך הבית' });
 homeBtn.addEventListener('click', () => navigate('#/'));
@@ -32,7 +36,7 @@ const titleEl = elem('div', { class: 'appbar__title', text: 'מערכת צירי
 const appbar = elem('header', { class: 'appbar no-print' }, homeBtn, menuBtn, titleEl);
 const outlet = elem('main', { class: 'app-main', id: 'main', tabindex: '-1' });
 const skip = elem('a', { class: 'skip-link', href: '#main', text: 'דלגו לתוכן' });
-app.append(skip, appbar, outlet);
+appRoot.append(skip, appbar, outlet);
 
 const setTitle = (t: string): void => {
   titleEl.textContent = t;
@@ -72,6 +76,15 @@ function render(match: RouteMatch): void {
   homeBtn.textContent = practice ? '⌂' : '⌂ בית';
   appbar.classList.toggle('appbar--hidden', fullScreen);
   appbar.classList.toggle('appbar--practice', practice);
+
+  /* Keep score-feedback wording out of the lightweight first-entry download.
+     It is loaded only when computerized practice is actually opened. */
+  if (practice && !pageScoreFeedbackInstalled) {
+    pageScoreFeedbackInstalled = true;
+    void import('./lms/pageScoreFeedback').then(({ installPageScoreFeedback }) => {
+      installPageScoreFeedback(appRoot);
+    });
+  }
 
   /* Numbered practice is intentionally focused. Print/booklet/account utilities
      do not appear inside it; the page owns its small practice-only controls. */
