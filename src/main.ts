@@ -22,6 +22,7 @@ import { ensureFreshBuild } from './lib/freshBuild';
 
 const app = document.getElementById('app');
 if (!app) throw new Error('#app root missing');
+const appRoot: HTMLElement = app;
 
 let pageScoreFeedbackInstalled = false;
 
@@ -35,7 +36,7 @@ const titleEl = elem('div', { class: 'appbar__title', text: 'מערכת צירי
 const appbar = elem('header', { class: 'appbar no-print' }, homeBtn, menuBtn, titleEl);
 const outlet = elem('main', { class: 'app-main', id: 'main', tabindex: '-1' });
 const skip = elem('a', { class: 'skip-link', href: '#main', text: 'דלגו לתוכן' });
-app.append(skip, appbar, outlet);
+appRoot.append(skip, appbar, outlet);
 
 const setTitle = (t: string): void => {
   titleEl.textContent = t;
@@ -81,7 +82,7 @@ function render(match: RouteMatch): void {
   if (practice && !pageScoreFeedbackInstalled) {
     pageScoreFeedbackInstalled = true;
     void import('./lms/pageScoreFeedback').then(({ installPageScoreFeedback }) => {
-      installPageScoreFeedback(app);
+      installPageScoreFeedback(appRoot);
     });
   }
 
