@@ -1,18 +1,18 @@
 # Answer-key coverage report
 
-Generated: 2026-08-18T09:30:25.300Z
+Generated: 2026-08-24T21:00:03.720Z
 
-Overall: 729/1150 safely checkable targets (63.4%).
+Overall: 731/1150 safely checkable targets (63.6%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 181 |
-| canonical-metadata-derived | 24 |
+| canonical-metadata-derived | 26 |
 | deterministic-mathematical | 518 |
 | valid-range | 6 |
-| open-ended | 165 |
+| open-ended | 163 |
 | ambiguous | 256 |
 | unsupported | 0 |
 | missing | 0 |
@@ -294,7 +294,7 @@ Overall: 729/1150 safely checkable targets (63.4%).
 
 ### Page 11 — נקודות ברביע הראשון
 
-19/21 safely checkable (90.5%).
+21/21 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -317,8 +317,8 @@ Overall: 729/1150 safely checkable targets (63.4%).
 | p11-q17 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את שיעורי נקודה N: N([…],[…]) |
 | p11-q18 | text:concept | reviewed-explicit | yes | target-bound reviewed proof | בשני הזוגות אותם מספרים, אבל ה[…] שלהם שונה. |
 | p11-q19 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | בנקודה (2,5) ערך ה־x הוא […], ובנקודה (5,2) הוא 5. |
-| p11-q20 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
-| p11-q21 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p11-q20 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | הנקודות (2,5) ו־(5,2) הן אותה נקודה, כי מופיעים בהן אותם מספרים. נכוןלא נכון[…] |
+| p11-q21 | true-false | canonical-metadata-derived | yes | canonical true/false row metadata | כאשר מחליפים את סדר המספרים בזוג סדור, מיקום הנקודה יכול להשתנות. נכוןלא נכון[…] |
 
 ### Page 12 — נקודות ברביע הראשון
 

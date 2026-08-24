@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-18T09:30:25.300Z",
+  "generatedAt": "2026-08-24T21:00:03.720Z",
   "pageCount": 78,
   "targetCount": 1150,
-  "automaticallyCheckableTargets": 729,
-  "coveragePercentage": 63.4,
+  "automaticallyCheckableTargets": 731,
+  "coveragePercentage": 63.6,
   "classifications": {
     "reviewed-explicit": 181,
-    "canonical-metadata-derived": 24,
+    "canonical-metadata-derived": 26,
     "deterministic-mathematical": 518,
     "valid-range": 6,
-    "open-ended": 165,
+    "open-ended": 163,
     "ambiguous": 256,
     "unsupported": 0,
     "missing": 0
@@ -3660,34 +3660,37 @@
         {
           "targetId": "p11-q20",
           "order": 20,
-          "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "true-false",
+          "context": "הנקודות (2,5) ו־(5,2) הן אותה נקודה, כי מופיעים בהן אותם מספרים. נכוןלא נכון[…]",
+          "signature": "179cbdfe",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "canonical true/false row metadata",
+          "sourceEvidence": "tr[data-answer]",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "false",
+            "לא נכון"
+          ]
         },
         {
           "targetId": "p11-q21",
           "order": 21,
-          "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "true-false",
+          "context": "כאשר מחליפים את סדר המספרים בזוג סדור, מיקום הנקודה יכול להשתנות. נכוןלא נכון[…]",
+          "signature": "6173d595",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "canonical true/false row metadata",
+          "sourceEvidence": "tr[data-answer]",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "true",
+            "נכון"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p11-q20",
-        "p11-q21"
-      ],
-      "automaticallyCheckableTargets": 19,
-      "coveragePercentage": 90.5
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 21,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 12,

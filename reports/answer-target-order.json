@@ -1166,13 +1166,13 @@
         },
         {
           "targetId": "p11-q20",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "true-false",
+          "signature": "179cbdfe"
         },
         {
           "targetId": "p11-q21",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "true-false",
+          "signature": "6173d595"
         }
       ]
     },
