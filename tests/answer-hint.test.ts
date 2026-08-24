@@ -19,7 +19,12 @@ const pagesDir = new URL('../src/data/workbook/pages/', import.meta.url);
 const HINT_VOCABULARY = ['אות', 'מספר', 'מילה'];
 
 const hintMapBlock = /ANSWER_HINT_BY_KIND[^{]*\{([\s\S]*?)\}/.exec(engine)?.[1] ?? '';
-const hintKinds = [...hintMapBlock.matchAll(/(\w+):/g)].map((m) => m[1]!);
+/* Object keys may be ordinary identifiers (`letter`) or quoted metadata names
+   (`'x-order'`). Parse both so this guard follows the real object syntax rather
+   than accidentally banning a valid canonical data-missing name. */
+const hintKinds = [...hintMapBlock.matchAll(/(?:'([^']+)'|(\w+))\s*:/g)]
+  .map((m) => m[1] ?? m[2]!)
+  .filter(Boolean);
 const hintValues = [...hintMapBlock.matchAll(/:\s*'([^']+)'/g)].map((m) => m[1]!);
 
 describe('empty answer boxes show a non-revealing type hint', () => {
