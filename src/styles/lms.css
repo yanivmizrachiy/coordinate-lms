@@ -118,6 +118,22 @@
   box-shadow: 0 0 0 2px rgba(224, 172, 31, 0.35);
 }
 
+/* A faint type hint inside an empty answer box: it says WHAT to type — a
+   number, a word, an axis letter — taken from the sheet's own data-missing
+   metadata, never the answer itself. Shown only while the box is empty; the
+   first keystroke flips the box to "filled" and the hint disappears. Screen
+   only — the @media print block below drops it with the rest of the overlay. */
+.sheet [data-lms-editable="true"][data-lms-hint][data-lms-state="empty"]::before {
+  content: attr(data-lms-hint);
+  color: #97a1b0;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.82em;
+  opacity: 0.9;
+  pointer-events: none;
+  user-select: none;
+}
+
 /* Feedback never rides on colour alone — „לא להסתמך על צבע בלבד". Every
    graded state also carries a mark the eye reads as a shape and a screen
    reader reads as a word (the word itself lives in aria-label, set by the
@@ -356,7 +372,8 @@
   .lms-admin,
   .lms-gate,
   [data-lms-editable="true"]::after,
-  /* the ✓/✕/🔒/? verdicts and the per-question controls: screen only */
+  /* the type hint and the ✓/✕/🔒/? verdicts and per-question controls: screen only */
+  [data-lms-editable="true"][data-lms-hint]::before,
   [data-lms-state]::after,
   .lms-qcheck,
   .lms-progress {

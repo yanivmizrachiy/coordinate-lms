@@ -1,0 +1,129 @@
+/* Per-question submit: compact action, immediate readable feedback. */
+.lms-qcheck {
+  position: relative;
+  z-index: 2;
+  gap: 8px;
+  margin-top: 9px;
+  /* The row itself is transparent padding around its controls, yet its z-index
+     let it swallow taps aimed at the expanded hit box of the PREVIOUS
+     question's button underneath. The row never takes a tap; its children do. */
+  pointer-events: none;
+  /* A scale-invariant 16 visual px of clearance after each control row.
+     Adjacent questions' expanded 48px hit boxes overlapped on scaled sheets,
+     so a tap ~21px below one button's centre landed on the next button.
+     Dividing by the sheet scale keeps the on-screen gap the same 16px on any
+     device, which keeps neighbouring hit boxes clear of each other's ~21px
+     touch ring all the way down to the 0.4 minimum scale. */
+  margin-bottom: calc(16px / var(--sheet-scale, 1));
+}
+
+.lms-qcheck > * {
+  pointer-events: auto;
+}
+
+/* The worksheet is scaled as one A4 surface on phones. The button itself is
+   expanded by the inverse sheet scale so its physical hit target stays safely
+   above the ~44px touch requirement. Equal negative block margins cancel the
+   extra layout height, keeping the canonical worksheet geometry unchanged. */
+.lms-qcheck__btn {
+  position: relative;
+  z-index: 1;
+  min-height: calc(48px / var(--sheet-scale, 1));
+  margin-block: calc((44px - (48px / var(--sheet-scale, 1))) / 2);
+  padding: 0 10px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #334b63;
+  box-shadow: none;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+/* Keep the painted control deliberately small even when its invisible button
+   box grows to preserve touch accessibility after A4 scaling. */
+.lms-qcheck__btn::before {
+  content: '';
+  position: absolute;
+  /* Behind the label, not over it. An absolutely-positioned pseudo-element
+     paints ABOVE its element's in-flow text, and this pill's solid fill was
+     covering the „להגיש ←" label — the control rendered as a blank chip. The
+     button is its own stacking context (position + z-index), so -1 keeps the
+     pill inside the button, under the text. */
+  z-index: -1;
+  inset-inline: 0;
+  top: 50%;
+  height: 32px;
+  transform: translateY(-50%);
+  border: 1px solid #cfd8e3;
+  border-radius: 8px;
+  background: #f8fafc;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 4%);
+  pointer-events: none;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.lms-qcheck__btn:hover::before {
+  background: #f1f5f8;
+  border-color: #bac7d4;
+}
+
+.lms-qcheck__btn:focus-visible {
+  outline-offset: -3px;
+}
+
+.lms-qstatus {
+  min-height: 32px;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.lms-qstatus[data-qstate="correct"] {
+  color: #23633a;
+  background: #edf6f0;
+  border-color: #c7ddce;
+}
+
+.lms-qstatus[data-qstate="partial"] {
+  color: #74530b;
+  background: #faf5e8;
+  border-color: #e4d5ab;
+}
+
+.lms-qstatus[data-qstate="wrong"] {
+  color: #8a3640;
+  background: #fbf0f1;
+  border-color: #e5c9cd;
+}
+
+.lms-qstatus[data-qstate="locked"] {
+  color: #59636f;
+  background: #f1f3f5;
+  border-color: #d8dde3;
+}
+
+.lms-qstatus[data-qstate="pending"] {
+  color: #3f5875;
+  background: #eef3f8;
+  border-color: #ced9e5;
+}
+
+@media (max-width: 720px) {
+  .lms-qcheck {
+    align-items: center;
+  }
+
+  .lms-qcheck__btn {
+    width: auto !important;
+    min-width: calc(82px / var(--sheet-scale, 1));
+    flex: 0 0 auto;
+  }
+
+  .lms-qstatus {
+    flex: 0 1 auto;
+  }
+}

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 
 // Relative base so the same build works when opened locally (file/preview)
 // and when served from a GitHub Pages project subpath
-// (https://<user>.github.io/coordinate-first-quadrant/).
+// (https://<user>.github.io/coordinate-lms/).
 export default defineConfig({
   base: './',
   build: {

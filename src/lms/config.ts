@@ -8,9 +8,10 @@ const configuredAdminEmails = String(
 export const ADMIN_EMAILS = new Set(configuredAdminEmails);
 
 export const LMS_CONFIG = {
-  minScore: 1,
+  minScore: 0,
   maxScore: 100,
-  maxAttempts: 3,
+  // One first checked attempt + up to three corrections after a mistake.
+  maxAttempts: 4,
   activityIdleSeconds: 120,
   activityHeartbeatSeconds: 30,
 } as const;

@@ -1,120 +1,101 @@
 # מערכת צירים — הרביע הראשון
 
-אפליקציה אחת ללימוד מערכת הצירים ברביע הראשון: **78 עמודים ממוספרים** (דפי עבודה, דפי חידה מודפסים שעל המסך מארחים את המשחק האינטראקטיבי, ופוסטרים), עמוד שער, עמוד תוכן עניינים, סרט פתיחה, פתרונות למורה, המחשות להדפסה, תצוגת מובייל מלאה והדפסת **A4** מקצועית — הכול בריפו אחד, בכתובת אחת ובקובץ כניסה אחד.
+אפליקציה אחת לחוברת מערכת הצירים ברביע הראשון: **78 עמודים ממוספרים**, תצוגת הדפסה, חוברת דיגיטלית, תרגול מתוקשב, פתרונות למורה, משחקים ודשבורד — מאותו תוכן קנוני.
 
-> **`yanivmizrachiy/coordinate-lms` הוא ה־MASTER היחיד ומקור האמת היחיד של הפרויקט כולו** —
-> תוכן, הדפסה, מתוקשב, ציונים ודשבורד.
-> `yanivmizrachiy/coordinate-first-quadrant` הוא ארכיון היסטורי קפוא לקריאה בלבד
-> (הדלתא האחרונה שלו יובאה לכאן במלואה ב־2026-08-18); אין לכתוב אליו ואין לפתח בו.
+> **`yanivmizrachiy/coordinate-lms` הוא ה־MASTER היחיד של הפרויקט.**
+> `RULES.md` הוא **מקור האמת היחיד לכללי העבודה והמוצר**. קראו אותו לפני כל שינוי.
+> `yanivmizrachiy/coordinate-first-quadrant` הוא ארכיון היסטורי קפוא; אין לפתח בו ואין לטעון ממנו תוכן בזמן ריצה או build.
 
-## מה יש באפליקציה
+## משטחי האפליקציה
 
-- **סרט הפתיחה** (`#/`) — עשר שניות של רכבת קלה בירושלים שמעליהן הרביע הראשון משרטט את עצמו. הוא ממלא את המסך, נושא את הקול שלו, ורץ פעם אחת עד שהוא נח על מערכת הצירים המוגמרת. אין עליו דבר מלבד הלוגו, כפתור קול ו„התחל".
-- **התפריט** (`#/menu`) — תצוגה · הורדה · הדפסה · וואטסאפ, ובוחר עמודים.
-- **דפי העבודה** (`#/workbook/:n`) — 78 עמודים, ניווט עמוד־אחר־עמוד, זום, שמירת המיקום האחרון והדפסת עמוד בודד.
-- **החוברת הנפתחת** (`#/book`) — חוברת דפדוף דיגיטלית: כפולה במסך רחב, דף יחיד בטלפון, גרירת דף, זום, מסך מלא ותוכן עניינים צף.
-- **החוברת הרציפה** (`#/print`) — שער, עמוד תוכן עניינים צבעוני, ואחריהם כל 78 העמודים, A4 אמיתי — מכאן מדפיסים (הכול או דפים נבחרים).
-- **שעשועונים** — 7 שעשועונים, כל אחד עמוד ממוספר בתוך הנושא שלו (אין אזור נפרד), שנבנו כרכיבים מתמטיים מדויקים ולא כתמונות.
-- **מובייל** — RTL מלא, ללא גלילה אופקית, כפתורים גדולים, טעינה מהירה.
-- **הדפסה** — כל עמוד ניתן להדפסה עצמאית ב־A4, כולל הדפסת שחור־לבן שחלה על הדפים בלבד ובחירת טווח עמודים.
+- **פתיחה** (`#/`) — מסך הכניסה לתרגול ולחשבון.
+- **תפריט כללי** (`#/menu`) — כלי צפייה/חוברת/הדפסה ושירותים כלליים.
+- **תרגול מתוקשב** (`#/workbook/:n`) — אותו דף קנוני שעליו מולבשת שכבת LMS: מענה, `להגיש ←` לכל שאלה, משוב, רמזים, ניקוד וניווט. כלי הדפסה/הורדה אינם חלק ממסך התרגול.
+- **חוברת דפדוף** (`#/book`) — קריאת החוברת כדפים.
+- **תצוגת הדפסה** (`#/print`) — שער, תוכן עניינים וכל 78 העמודים להדפסת A4.
+- **פתרונות/מורה** — פתרונות, ניהול מפתחות תשובה ודשבורד בהתאם להרשאות.
+- **משחקים** — 7 משחקים הרשומים במקור אחד: `src/games/index.ts`. כאשר משחק מחובר לעמוד, הוא שכבת מסך ואינו יוצר עותק חדש של דף העבודה.
+
+## עקרונות מבנה חשובים
+
+- תוכן הדף נכתב פעם אחת ב־`src/data/workbook/` וממנו נגזרות ההדפסה והתצוגה המתוקשבת.
+- שכבת התרגול אינה מעתיקה שאלות או שרטוטים; היא מוסיפה אינטראקציה מעל התוכן הקנוני.
+- ממשק התרגול מותאם למובייל, RTL, ללא גלילה אופקית, עם פקדים קומפקטיים ונוחים למגע.
+- שינויי ניקוד, ניסיונות, משוב, רמזים, קבלת תשובות ושמירה מחולקים לבעלים ברורים. מפת הבעלות המדויקת נמצאת ב־`RULES.md`.
 
 ## הרצה מקומית
 
 ```bash
 npm install
-npm run dev          # שרת פיתוח (Vite) עם רענון חם
+npm run dev
 ```
 
-## Build
+## אימות ובנייה
 
 ```bash
-npm run build        # בדיקת טיפוסים + בנייה ל-dist/
-npm run preview      # תצוגה מקדימה של התוצר על http://localhost:4319
+npm run verify
+npm run release:check
 ```
 
-התוצר ב־`dist/` הוא אתר סטטי מלא — קובץ `index.html` אחד ונכסים, ללא שרת וללא תלות ברשת בזמן ריצה.
+`npm run verify` מריץ בחבילה אחת:
 
-## בדיקות
+- בדיקת כיסוי מפתחות תשובה
+- TypeScript typecheck
+- בדיקות unit/content
+- בדיקות הרשאות Firestore מול emulator
+- build
+- בדיקות Playwright/visual
+
+פקודות ממוקדות זמינות גם בנפרד:
 
 ```bash
-npm run verify       # הכול: טיפוסים · בדיקות · בנייה · בדיקות דפדפן
-npm test             # מתמטיקה, משחקים, תוכן החוברת וכללי הפריסה (Vitest)
-npm run test:visual  # בדיקות רינדור end-to-end (Playwright)
-npm run answers:coverage       # דוח תשובות מדויק לכל 78 העמודים
-npm run test:firestore         # כללי הרשאה אמיתיים מול emulator; דורש Java 21
-npm run firebase:check:static  # חוזה קוד ו-workflow בלי לדרוש סודות
-npm run release:report:static  # מצב נפרד: repo · emulator · Firebase · פדגוגיה · שני מכשירים
-npm run release:check          # שער שחרור; נכשל בכוונה אם Firebase חסר
+npm test
+npm run typecheck
+npm run test:firestore
+npm run test:visual
+npm run answers:coverage:check
+npm run build
+npm run firebase:check:static
+npm run release:report:static
 ```
 
-הבדיקות אוכפות את הכללים שב־`RULES.md` ואת חוזה תוכן החוברת ההיסטורי —
-מספור, ניסוח, גודל סרטוטים, גופן, חיתוך עמודים, כיווניות עברית ועוד.
-**כלל שאין לו בדיקה נחשב כלל שלא קיים.**
+`npm run release:check` מוסיף את שערי האבטחה וה־release readiness. הוא עשוי להיכשל במכוון כאשר תצורת production חיצונית עדיין חסרה; כישלון כזה אינו סיבה להציג את המערכת כפרוסה או מוכנה ל־production.
 
-## פרסום ל־GitHub Pages
+## מבנה מרכזי
 
-הפרסום **ידני בלבד**. יש להריץ מלשונית **Actions** את ה־workflow בשם *Deploy to GitHub Pages (manual)*. ה־`base` יחסי (`./`) כך שהאתר עובד גם תחת תת־נתיב.
-
-## מבנה התיקיות
-
-```
-index.html                    קובץ הכניסה היחיד (Vite)
+```text
+index.html
 src/
-  main.ts                     אתחול, סרגל עליון וניתוב
-  router.ts                   נתב מבוסס hash (מתאים ל-Pages)
-  styles/                     מערכת עיצוב: tokens, base, app, workbook, grayscale
-  lib/                        coordinateGrid (SVG), coordinateMath (טהור ונבדק),
-                              fitSheet (ניצול שטח העמוד), dom, storage
-  data/cover.ts               השער המאושר, סרט הפתיחה, ולוגו המחוז
-  data/workbook/pages/        קובץ אחד לכל עמוד, בשם שמתאר מה הוא מלמד
-  data/workbook/authoring.ts  בניית הגיליון: כותרת, מספר, כותרת תחתונה, כלי כתיבה
-  data/workbook/index.ts      BOOK — סדר הקריאה, ומכאן נגזר המספור
-  games/                      8 המשחקים + מנוע "גילוי מילה/קוד" משותף
-  views/                      home (סרט הפתיחה) · menu · pageViewer · book ·
-                              coverSheet · tocSheet · printBar
-public/assets/covers/         תמונת השער המאושרת
-public/assets/cover/          סרט הפתיחה והפריימים שלו
-public/assets/brand/          לוגו המחוז
-public/assets/games/          פוסטרי השעשועונים
-tests/                        בדיקות Vitest + בדיקות e2e של Playwright
+  main.ts                    bootstrap + routing shell
+  data/workbook/             תוכן החוברת הקנוני
+  data/solutions/            פתרונות קנוניים למורה
+  games/                     רישום ומימוש המשחקים
+  lms/                       grading, feedback, hints, persistence, auth
+  styles/                    presentation layers
+  views/                     מסכי האפליקציה
+firestore.rules              גבולות הרשאה ושמירה
+scripts/                     build / coverage / Firebase / release checks
+tests/                       Vitest + Firestore emulator + Playwright
+RULES.md                     מקור האמת היחיד לכללי הפרויקט
 ```
 
-## כיצד להוסיף עמוד
+## שינוי תוכן או הוספת עמוד
 
-1. צרו קובץ חדש ב־`src/data/workbook/pages/` (שם שמתאר מה העמוד מלמד) והשתמשו ב־`sheet({ sectionClass, title, subtitle, content })`. כותבים רק את תוכן העמוד — הכותרת, מספר העמוד והכותרת התחתונה נבנים לבד.
-2. ייצאו אותו מ־`pages/index.ts` ושבצו אותו במקום הנכון ב־`BOOK` שב־`src/data/workbook/index.ts` — המספור מתעדכן לבדו.
-3. סרטוטים נכתבים דרך `grid({ … })`; חישובים דרך `exercise()` / `exerciseGiven()` / `calcBox()`. **אין לכתוב את המרקאפ ביד** — יש בדיקה שאוסרת זאת.
-4. הריצו `npm run verify`.
+1. מתחילים ב־`RULES.md` ומסווגים את השינוי כ־CONTENT או INTERACTION/PRESENTATION.
+2. שינוי תוכן, מתמטיקה, שרטוט או ניסוח נעשה ב־`src/data/workbook/` בלבד.
+3. עמוד חדש מיוצא מ־`src/data/workbook/pages/index.ts` ומשובץ ב־`BOOK` שב־`src/data/workbook/index.ts`; המספור נגזר מן הסדר.
+4. משתמשים בכלי ה־authoring והשרטוט הקיימים במקום לכתוב שכבת תוכן מקבילה.
+5. מריצים `npm run verify`.
 
-## כיצד להוסיף משחק
+לשינויים שאינם תוכן — ניקוד, מגבלת ניסיונות, קבלת תשובות, ניסוחי מורה, רמזים, שמירה, הרשאות או ממשק תרגול — השתמשו ב־**Future change map** שב־`RULES.md`; הוא מגדיר קובץ בעלים לכל אחריות כדי למנוע תיקונים בכמה מקומות.
 
-1. צרו קובץ ב־`src/games/` המייצא `GameDefinition` (או השתמשו ב־`createRevealGame`).
-2. שמרו את **נתוני** המשחק נפרדים מהתצוגה, כדי שאפשר יהיה לבדוק אותם.
-3. רשמו את המשחק במערך `GAMES` שב־`src/games/index.ts`.
-4. הוסיפו בדיקה ב־`tests/games.test.ts` שמוכיחה שהמשחק פתיר ושהתוצאה נכונה.
+## מסמכי הפרויקט
 
-## זיכרון הפרויקט
+- `RULES.md` — **מקור האמת היחיד** לכללי העבודה והמוצר.
+- `CLAUDE.md` — pointer בלבד אל `RULES.md`.
+- דוחות generated (תחת `reports/`) הם מצב/עדויות נקודתיים; הם אינם כללי מוצר ואינם גוברים על `RULES.md`.
+- חומר היסטורי (handoff, migration-status, ארכיוני החלטות והאפליקציה המקורית) אינו סמכות חיה; מקור האמת הוא `RULES.md` בלבד. עותקים היסטוריים נשמרים בהיסטוריית git ובענפי backup ייעודיים.
 
-- `RULES.md` — **דף הכללים היחיד** לעבודת LMS.
-- `USER_MEMORY.md` ו־`HANDOFF.md` — ארכיון החלטות חוברת, לא הרשאת תפעול.
-- `CLAUDE.md` — שלט הפניה בלבד; אין בו כללים משלו.
+## פרסום
 
-## Coordinate LMS migration
-
-This repository preserves the exact printable workbook and adds a student
-practice, scoring, registration, activity tracking and teacher-dashboard layer.
-
-The original Perplexity prototype is preserved under
-`_legacy/perplexity-original`.
-
-Current launch status, measured answer coverage, and external blockers are in
-`MIGRATION_STATUS.md`. The exact human Firebase and two-device steps are in
-`docs/CLASSROOM_LAUNCH_CHECKLIST.md`; absence of those steps is never reported
-as a successful central deployment.
-
-The administrator answer-review studio at `#/keys` is generated from the same
-1,061-target coverage manifest. Its version-2 JSON workflow rejects missing,
-duplicate, unknown, drifted, malformed, or canonical-answer-changing imports
-and requires an explicit activation click after validation. Reviewed automatic
-answers and reviewed open-ended decisions are signature-bound, so a changed
-prompt cannot silently reuse stale grading data.
+GitHub Pages נשאר workflow ידני. מיזוג ל־`main` ופריסת production דורשים אישור מפורש לפעולה הנוכחית, בהתאם ל־`RULES.md`.

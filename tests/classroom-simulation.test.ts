@@ -6,7 +6,7 @@ import {
   registerStudent,
 } from '../src/lms/auth';
 import { buildDashboardCsv } from '../src/lms/dashboardCsv';
-import { canAccessPage } from '../src/lms/engine';
+import { LMS_CONFIG } from '../src/lms/config';
 import {
   claimGuestProgress,
   loadDashboard,
@@ -45,7 +45,7 @@ function draft(uid: string, pageNumber: number, attempts: number): PageDraft {
         answer: '4',
         attempts,
         correct: attempts > 1,
-        locked: attempts === 3,
+        locked: attempts >= LMS_CONFIG.maxAttempts,
       },
     },
     submitted: false,
@@ -74,10 +74,7 @@ beforeEach(() => {
 });
 
 describe('two-student classroom simulation', () => {
-  it('covers guest transfer, registration, page access, persistence, relogin, dashboard, and CSV', async () => {
-    // Every page is open to a guest now — access no longer gates on the page.
-    expect(canAccessPage(1)).toBe(true);
-    expect(canAccessPage(2)).toBe(true);
+  it('covers guest transfer, registration, persistence, relogin, dashboard, and CSV', async () => {
     await saveDraft({ ...draft('guest', 1, 2), pageNumber: 1 });
     await savePageResult({ ...result('guest', 1, 84), pageNumber: 1 });
 
@@ -86,9 +83,9 @@ describe('two-student classroom simulation', () => {
       username: 'noa',
       email: 'noa@example.test',
       password: 'student-a-password',
+      school: 'בית ספר א',
       className: 'ז1',
     });
-    expect(canAccessPage(2)).toBe(true);
     expect((await claimGuestProgress(studentA.uid)).complete).toBe(true);
     await saveDraft(draft(studentA.uid, 2, 3));
     await savePageResult(result(studentA.uid, 2, 91));
@@ -100,8 +97,6 @@ describe('two-student classroom simulation', () => {
       createdAt: 300,
     });
     await logoutStudent();
-    // Even after logout the page stays open — a guest may work anywhere.
-    expect(canAccessPage(2)).toBe(true);
     const reloggedA = await loginStudent(
       'noa@example.test',
       'student-a-password',
@@ -115,6 +110,7 @@ describe('two-student classroom simulation', () => {
       username: 'uri',
       email: 'uri@example.test',
       password: 'student-b-password',
+      school: 'בית ספר א',
       className: 'ז1',
     });
     await saveDraft(draft(studentB.uid, 2, 1));
@@ -133,6 +129,7 @@ describe('two-student classroom simulation', () => {
       username: 'teacher',
       email: 'yanivmiz77@gmail.com',
       password: 'teacher-password',
+      school: 'צוות הוראה',
     });
     expect(currentSession()?.role).toBe('admin');
     const dashboard = await loadDashboard();
@@ -142,7 +139,7 @@ describe('two-student classroom simulation', () => {
     );
     expect(dashboard.students.every((student) => student.results.length > 0)).toBe(true);
     const csv = buildDashboardCsv(dashboard);
-    expect(csv.trimEnd().split('\r\n')).toHaveLength(157); // header + 2 students × 78 pages
+    expect(csv.trimEnd().split('\r\n')).toHaveLength(157);
     expect(csv).toContain(studentA.uid);
     expect(csv).toContain(studentB.uid);
     expect(csv).not.toContain(currentSession()?.uid || 'missing-admin');

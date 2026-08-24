@@ -10,7 +10,7 @@ import type { ViewContext } from './context';
    word in its structure: a dark top bar carrying the district badge and the
    מנח"י credit, a sticky pill nav, a hero that names the unit, a section per
    material, and a dark footer. Only the material itself is ours: the first
-   quadrant, its film, and the 77-page booklet.
+   quadrant, its film, and the 78-page booklet.
    =========================================================================== */
 
 /** The curriculum film Yaniv published — embedded with the misparim facade.

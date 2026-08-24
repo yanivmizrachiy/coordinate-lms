@@ -1,163 +1,166 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-18
+Updated: 2026-08-23
 
-This is the single source of truth for work in `yanivmizrachiy/coordinate-lms`.
-`USER_MEMORY.md` and `HANDOFF.md` preserve historical workbook decisions, but
-they do not override this file. When a current user instruction conflicts with
-this file, the current instruction wins and this file must be reconciled.
+This file is the single source of truth for `yanivmizrachiy/coordinate-lms`.
+Historical notes may explain past decisions, but they never override this file.
+A current user instruction wins over older wording and this file must be reconciled immediately.
 
-## Repository identity — one master, one truth
+## 1. One master, one truth
 
-- **`yanivmizrachiy/coordinate-lms` is the ONLY repository, the ONLY master,
-  and the ONLY source of truth** for the entire project: canonical workbook
-  content, printable rendering, interactive LMS rendering, grading metadata,
-  student persistence, and the teacher dashboard.
-- `yanivmizrachiy/coordinate-first-quadrant` is a **frozen historical
-  archive, read-only forever**. Its final content delta (through commit
-  `b8635c8`, 2026-08-18) was fully imported here. Never commit, push, merge,
-  deploy, or develop there; never read from it at runtime or build time.
-- There is exactly ONE canonical content model: `src/data/workbook/` (pages,
-  authoring, BOOK order) plus `src/data/solutions/` and `src/data/printAids.ts`.
-  Every renderer — print, flipbook, PDF, single-page viewer, LMS practice
-  layer, solutions, teacher views — derives from it. A change made once there
-  appears everywhere; hand-copying content between renderers is forbidden.
-- The layer split is CONTENT / PRESENTATION / INTERACTION. LMS-only behavior
-  (feedback UI, grading, persistence, the on-screen game layer) never edits
-  canonical page HTML; print-only styling never changes LMS behavior.
-- Automated guards (`tests/ssot-guard.test.ts`, `tests/layout-rules.test.ts`)
-  fail the build if a second content source, a stale page count, or a runtime
-  dependency on another repository appears.
-- Preserve unrelated work and never rewrite shared history. Do not use
-  `git reset --hard`, force-push, or forced dependency-audit fixes.
-- A feature branch and draft pull request are allowed. Merging and production
-  deployment require explicit confirmation for the current operation.
-- Never print, commit, expose, or invent credentials.
+- **`yanivmizrachiy/coordinate-lms` is the ONLY repository, the ONLY master, and the ONLY source of truth** for this project: workbook content, printable rendering, computerized practice, grading, persistence and teacher views.
+- `yanivmizrachiy/coordinate-first-quadrant` is a **frozen historical archive**. Never develop, deploy, write to, or load runtime content from it.
+- There is one canonical content model: `src/data/workbook/` plus the canonical solutions/print-aid sources. Never create a second computerized copy of a question, sentence, diagram, number, blank or page.
+- Keep CONTENT, PRESENTATION and INTERACTION separate. Mathematical/content changes belong to the canonical workbook. LMS controls, feedback, hints, scores and persistence are an interactive layer. Print styling is a presentation layer.
+- A correction is complete only when **source of truth + implementation + tests agree**. Demo-only or visual-only substitutes do not count.
 
-## Canonical workbook integrity
+## 2. Learn from corrections and repair safely
 
-- The canonical booklet has **78 numbered pages** (since the 2026-08-18
-  consolidation; previously 77). Preserve all pages, Hebrew RTL behavior,
-  canonical wording, mathematics, diagrams, page order, A4 pagination, and
-  print layout. Page numbers and the topic map derive from position in `BOOK`
-  (`src/data/workbook/index.ts`); nothing is hand-numbered.
-- Every numbered page is a printed worksheet — „המשימות שלנו הן להדפסה"
-  (31.07.2026). The seven interactive games are an ON-SCREEN layer attached to
-  their printed puzzle pages through the `SCREEN_GAMES` map in
-  `src/data/workbook/index.ts`; the games never appear in print and never
-  modify canonical sheet HTML.
-- LMS behavior is an interactive layer. Interactive controls must be hidden or
-  made print-neutral and must not obstruct canonical diagrams.
-- The dynamic solutions module (`src/data/solutions/`, `#/solutions`) is
-  canonical content but is **teacher-gated in the LMS** (admin session only):
-  open solutions would empty the three-attempt practice model. Reversing this
-  gate is a product decision for Yaniv, recorded here when made.
-- Canonical workbook details recorded in `USER_MEMORY.md` remain a historical
-  content contract only where they do not conflict with this file or a current
-  instruction.
+- Read this file before changing the project.
+- Every meaningful correction from the user must be converted into the most useful reusable rule, not treated as a one-off patch when it clearly applies elsewhere.
+- Merge repeated or overlapping rules. Delete obsolete wording instead of accumulating contradictory notes.
+- During a repair/cleanup pass, change only a **verified defect, direct contradiction with a current requirement, or a demonstrated maintenance hazard**. Do not add opportunistic features or broad redesigns while repairing failures.
+- Before a multi-step repair, keep a short explicit work plan: what is broken, what will change, what must stay untouched, and which gates prove the repair. Finish that repair and its tests before expanding scope.
+- Do not optimize for fewer files. Optimize for one owner per responsibility, less duplication, less dead code and fewer places where the same rule can drift.
+- Do not perform a broad refactor merely because it looks cleaner. A refactor must reduce real complexity or risk and must preserve working behavior.
+- Preserve unrelated work and never rewrite shared history or force-push.
+- Feature branches and draft PRs are allowed. Merge and production deployment require explicit confirmation for that operation.
 
-## Scoring, access, and answer policy
+## 3. Canonical worksheet: print and computerized practice
 
-- Every submitted page score is an integer from 1 through 100. The retired
-  0–1200 model must never return. A perfect 100 is shown with a distinct
-  celebratory glowing badge; every other score keeps the plain red badge.
-- Every automatically checked answer allows at most three attempts. Reload,
-  retry, stale writes, or reconnection must never reset that count.
-- Every page is open to a guest (Yaniv, 2026-08-18): a guest solves, receives
-  feedback, and earns a page score exactly like a registered student. A
-  guest's progress is saved on the device only — never centrally, never in the
-  teacher dashboard. Registration (full name, school, email, password — no
-  username or class field; the stored username is derived from the email) adds
-  central save, cross-device resume, and dashboard visibility, and copies the
-  full guest history to the account. The single teacher/admin is Yaniv; only
-  the admin sees class-wide results.
-- An answer may be checked automatically only when it is reviewed explicitly,
-  encoded in canonical metadata, mathematically deterministic, or a verified
-  valid range.
-- Reviewed proofs and reviewed open-ended decisions must be bound to the
-  current target signature and cite canonical source evidence. Prompt drift
-  must make the old decision inapplicable.
-- **Consolidation state (2026-08-18):** the 78-page import renumbered every
-  page and changed wording on 66 pages. 588 of 735 reviewed proofs and 137 of
-  161 reviewed open-ended decisions survived on unchanged prompt signatures
-  and were mechanically re-keyed (`scripts/`-external migration, occurrence-
-  aligned per page, verified by regeneration). The lapsed 147 proofs and 24
-  open-ended decisions, plus the new pages' targets, are deliberately
-  unkeyed until a fresh review cites exact canonical evidence. Current
-  measured coverage: **729/1,150 targets (63.4%)** — see
-  `reports/answer-coverage.json`. Raising it happens ONLY through the review
-  studio or evidence-cited proofs, never by guessing.
-- Unordered answer sets may be accepted only through the strict `set:` format;
-  duplicates, omissions, and extra labels must remain incorrect.
-- Never infer an answer merely from nearby prose. Open-ended, ambiguous,
-  unsupported, and missing targets remain visibly ungraded for teacher review.
-- The generated JSON and Markdown coverage reports must represent all pages
-  1–78 and must remain synchronized with target order and runtime answer keys.
+- **החוברת = 78 עמודים ממוספרים**. Preserve mathematics, wording, diagrams, RTL behavior, page order and print pagination unless a current content instruction changes them.
+- **Printable and computerized pages are two renderings of the SAME worksheet** content, never two content products.
+- Any canonical worksheet content change **must propagate automatically to both** printable and computerized renderings. Make the content change once.
+- `#/workbook/:n` must render the canonical page itself and then add the LMS layer. A separately authored computerized worksheet is a defect.
+- The practice rendering keeps the canonical A4 **width** but is never height-clipped: the interaction layer may make a dense page taller than one printed page, and every question must remain visible and answerable on screen. Print pagination is a print-surface property and stays exactly A4.
+- Before every page change classify it as CONTENT or INTERACTION/PRESENTATION. Content changes affect both renderings; LMS-only changes must not modify printable content.
+- **Print/download controls are utilities for print/booklet surfaces**, not part of computerized student practice. No print/download button belongs inside `#/workbook/:n`.
+- On-screen games may be attached as an LMS layer, but must not fork or rewrite canonical sheet HTML and must never appear in print.
+- Solutions remain teacher-gated in the student LMS so they do not bypass the correction-and-learning process.
 
-## Interactive feedback model (LMS layer)
+## 4. First entry and student practice surface
 
-- Feedback is per QUESTION, not per keystroke. A question is the unit the
-  canonical content already groups blanks into — a `.q-card`, or the finest
-  labelled unit (`li`/`tr`/`completion-sentence`) where there is no card. Each
-  question carries its own „סיימתי שאלה" control that checks only its targets.
-- A verdict shows as a shape AND a word, never colour alone: ✓ נכון (all
-  correct), ◐ יש מה לתקן (partial — some right, some not), ✕ נסה שוב (wrong),
-  🔒 (locked after three attempts), ? נשמר לבדיקת המורה (unkeyed/open-ended).
-  Screen readers hear the verdict; none of it appears in print.
-- A correct target is preserved and locked — never re-typed or re-counted; the
-  learner fixes only the part still marked. Typing is never an attempt; an
-  attempt is counted only when a check is actually run. Reload never resets.
-- Progress counts QUESTIONS completed (correct, locked-out, or saved for
-  review), not raw targets. Question state is DERIVED from target progress and
-  never stored twice.
-- Page submit must always be reachable. An empty checkable blank never locks on
-  its own, so submit warns once when answers are unfinished and finalises on a
-  second press, scoring unanswered targets as 0 — a page score is never made
-  permanently unreachable.
-- The dynamic solutions screen is teacher-gated (admin session only); open
-  solutions would empty the three-attempt practice model.
+- `#/` is the mandatory first-entry screen. It explains, in very simple Hebrew and before practice begins, the difference between **תרגול חופשי — בלי רישום** and **הרשמה ושמירת ציונים**. Existing users also get an obvious sign-in route.
+- The first-entry screen must say plainly that every practice page is open to guests, feedback is immediate, a page score may be shown, but **guest scores are not saved**, are not available on another device and are not visible to the teacher.
+- It must say plainly that registration uses **full name, school, email and password**, and enables saved scores/progress, cross-device continuation and teacher visibility.
+- The rich learning/materials landing is a separate route at `#/home`. It must **not** be auto-loaded underneath `#/`; the first-entry explanation stays lightweight and must not import Firebase or the heavy materials surface.
+- A numbered computerized page is first and foremost a student practice screen. Show only what helps the learner solve, receive feedback, understand progress and move between pages.
+- Registration/login/account/save-mode explanations belong **only before practice**, never inside numbered practice pages.
+- Do not show legacy print/download actions, duplicate reader toolbars, duplicate navigation, a general `בדיקת תשובות` button, or other unrelated chrome inside practice.
+- Each question has one small action displayed as **`להגיש ←`** with accessible name **`להגיש שאלה לבדיקה`**. The old action wording `סיימתי שאלה` is retired.
+- Page submission remains separate: when the learner finishes the page, the page is submitted and receives its final page score.
+- Correct parts stay correct and locked. The learner edits only unresolved parts.
+- Typing/editing is never counted as an attempt. An attempt is counted only when a check is actually requested.
 
-## Bundle and loading
+## 5. Scoring and correction model
 
-- The first download must stay small: every screen is fetched on demand
-  (dynamic `import()` in `main.ts`), and the Firebase SDK is loaded only by the
-  screens that sign a student in. A static view import in `main.ts`, or Firebase
-  reaching the entry module, is a regression — `tests/ssot-guard.test.ts` fails
-  the build on either.
-- Async screen loading must stay honest: a stale navigation is dropped, a wait
-  long enough to feel like one is explained, and a screen whose code never
-  arrives offers a retry rather than a blank page.
+- A learner completes a page and receives a page score. **100 is the maximum possible score; 0 is a valid minimum when no credit was earned.**
+- Correct on the first checked attempt loses no credit: 100% of that target's credit.
+- If the first checked answer is wrong, the learner receives **up to three correction opportunities**: first attempt + correction 1 + correction 2 + correction 3 = at most four checked attempts.
+- Credit after checked mistakes is fixed and transparent:
+  - first attempt correct: 100%
+  - correction 1 correct: 75%
+  - correction 2 correct: 50%
+  - correction 3 correct: 25%
+  - final correction still wrong: unresolved target locks with 0 credit
+- Reload, retry, stale writes, reconnect or device changes must never reset attempts or refund lost credit.
+- After every checked mistake/correction, tell the learner plainly which stage was used, how much credit was lost and how much can still be earned.
+- UI explanations must mirror the real scoring calculation. Never maintain a second display-only grading model.
+- Attempt limits and score fractions must have one code owner/configuration path. Firestore may duplicate a bound only because it executes separately; tests must keep it aligned at 0–4.
+- Page submission must remain reachable. Unanswered targets may score 0; the learner must never be trapped on a page forever.
 
-## Persistence truth and classroom data
+## 6. Feedback: a teacher beside the learner
 
-- Local persistence success and central Firebase synchronization success are
-  distinct states. Never tell a student that data was saved centrally unless
-  the central write actually succeeded.
-- Central failures must be visible and retryable. Retries must be idempotent and
-  must not duplicate results, attempts, or activity events.
-- Guest progress is copied to an account before guest source records are
-  removed. A failed central transfer leaves the guest source intact.
-- Concurrent and stale writes must preserve the latest valid state, the best
-  score, the highest attempt count, and any completed/locked state.
-- Teacher views must distinguish a central class snapshot from local fallback
-  data and expose synchronization errors rather than hiding them.
+- Feedback is per QUESTION, not per keystroke.
+- A fully correct question shows **✓ נכון**. Partial work shows **◐ יש מה לתקן**. A wrong answer shows **✕ נסה שוב**. A locked unresolved answer shows **🔒 נעול**. Open/unkeyed work may show **? נשמר לבדיקת המורה**.
+- The LMS should feel as if a supportive mathematics teacher is beside the learner: warm, specific, truthful, encouraging and pedagogically useful.
+- Use a broad, non-repetitive bank of natural teacher feedback. Avoid mechanically repeating the same praise or correction phrase on consecutive questions.
+- Positive feedback should vary according to context: first-try success, successful correction, persistence, a streak of correct answers, completing a question and completing a page may receive different wording.
+- Examples of the intended tone include `כל הכבוד`, `איזה יופי`, `מצוין`, `יפה מאוד`, `בדיוק`, `מעולה — ממשיכים`, `נהדר, תפסת את הרעיון`, but these are examples, not a fixed list.
+- A wrong/partial answer must also receive encouragement before correction. Examples of tone: `ננסה שוב`, `יש כאן משהו קטן לתקן`, `יפה שניסית — בוא נבדוק את הכיוון`, `כמעט; נשתמש ברמז וננסה שוב`.
+- Never shame, scold, frighten or mock a learner. Never praise a mathematically wrong answer as though it were correct.
+- A wrong verdict may never be the whole response. Every checked wrong/partial answer receives one coherent learning response containing:
+  1. supportive teacher voice;
+  2. a useful mathematical hint/direction;
+  3. the real attempt/score consequence.
+- Keep the response readable and calm; do not create competing popups or visual noise.
 
-## Firebase and authorization
+## 7. Corrective hints
 
-- Production registration fails closed unless all six required Firebase client
-  settings are configured. Browser-only accounts are development-only or
-  require an explicit opt-in that is disabled by production workflows.
-- Never claim Firebase is operational until Authentication, Firestore, GitHub
-  secrets, rules/index deployment, and a real two-device acceptance test have
-  all been verified.
-- Students may read and write only their own profile and subcollections.
-  Dashboard-wide reads and answer-key writes are administrator-only.
-- Firestore writes must use field allowlists and enforce page 1–78, score
-  1–100, attempt summary 0–3, monotonic progress, and bounded document shapes.
-- Keep the client administrator list and the Firestore administrator rule
-  aligned before deployment.
+- Hints **never reveal the current answer**: not the missing word, axis letter, number, coordinate or final result.
+- Support grows progressively:
+  - after the initial mistake: concise conceptual clue;
+  - after correction 1: clearer strategy;
+  - after correction 2: stronger step-by-step direction;
+  - after correction 3 if still unresolved: final explanatory teaching guidance, still without giving the answer.
+- Hints teach the governing idea, representation, comparison, self-check or next reasoning step.
+- Hints derive from canonical task metadata and mathematical context, never from a second hand-authored answer source.
+- For coordinate-system work, guidance follows the grade-7 curriculum ideas: distinguish axes, horizontal/vertical meaning, origin, read scale, read coordinates, plot points, ordered-pair order, movement/direction and use coordinates in graphs/geometric representations.
+- When only part of a multi-part question is wrong, guidance should address the unresolved part; correct parts remain locked.
 
-## Required quality gates
+## 8. Answer acceptance: forgiving language, strict mathematics
+
+- Harmless input variation must not cost points.
+- Axis letters are case-insensitive: `x/X` and `y/Y` are equivalent.
+- Hebrew word-like answers may accept common full/defective spelling and **one small harmless typo** when the intended mathematical concept remains unambiguous (for example `אופקי/אפקי`, `ציר/צייר`).
+- Diacritics and harmless spacing may be ignored. Harmless punctuation may be ignored only for word-like textual answers.
+- Fuzzy spelling must never turn a different concept into a correct answer: `אנכי` is not `אופקי`.
+- Numeric answers, coordinates, ordered data, sets and other mathematical structures remain mathematically strict. Numeric equivalence such as `1/2 = 0.5` is allowed because it is mathematically equivalent, not because of fuzzy text matching.
+- A deterministic answer encoded directly in the canonical target/page metadata is authoritative for that target. Stale positional/default/local/remote keys must not override an explicit canonical answer attached to the current target.
+- Never infer a supposedly correct answer from nearby prose. Ambiguous/open-ended items remain ungraded or teacher-reviewed until supported by canonical evidence.
+
+## 9. Interface design
+
+- Practice controls use a **quiet, compact, premium app language**: neutral navy/slate/white surfaces, thin borders, restrained shadows, no neon, no saturated navigation blocks, no sheen and no decorative glow.
+- Controls should **look small and delicate** while remaining easy to tap. Prefer a compact visible button with an adequate touch target rather than a bulky visual block.
+- Touch accessibility is judged at the **final rendered scale on the device**, not by an unscaled CSS number inside the A4 sheet. A larger invisible hit region is preferred when it preserves a compact premium appearance.
+- `להגיש ←` is narrow and understated and sits beside its verdict/feedback. It must not look like a large page-level CTA.
+- Previous/next navigation is one calm navigation system, distinguished by label/arrow/position rather than loud colors.
+- Secondary tools belong behind a quiet overflow control where appropriate. Do not duplicate primary navigation.
+- Feedback/hint/score-loss panels are compact, calm and readable on mobile and must not overwhelm the worksheet.
+- The special celebration for a perfect page score of 100 is an intentional exception to the otherwise restrained interface.
+
+## 10. Persistence, registration and authorization
+
+- Local save and central Firebase synchronization are different states. Never tell a learner that central save succeeded unless it actually did.
+- Central failures must be visible and retryable without duplicating attempts, results or activity events.
+- **Guest draft/answer/attempt state may be stored locally only to preserve learning continuity and prevent attempt reset. Guest page scores/results must never be persisted locally or centrally.** A legacy guest result from an older build must be ignored/purged, never restored and never transferred into a newly registered account.
+- Registration transfers eligible guest draft/attempt state only after account creation; it never imports an already displayed guest score.
+- Registration requires full name, school, email and password in backend validation as well as the form. Student-facing authentication errors must be plain Hebrew, never raw Firebase codes.
+- If Firebase Authentication creates a user but the required profile write fails, do not leave a known partial registration behind; roll back the just-created auth user where possible and report a clear error.
+- Registration enables central save, cross-device continuation and teacher-dashboard visibility.
+- Concurrent/stale writes must preserve the latest valid state, best score, highest attempt count and completed/locked states.
+- Students may access only their own data. Class-wide data and answer-key writes are administrator-only.
+- Firestore writes use field allowlists and enforce pages 1–78, scores 0–100, attempt summary 0–4, monotonic progress and bounded document shapes.
+- Never commit, expose or invent credentials.
+
+## 11. Engineering discipline
+
+- The first download stays small: screens are dynamically imported and Firebase must not leak into the entry module.
+- Keep one owner for each behavior. Delete dead compatibility/patch code once the canonical implementation owns the behavior and tests prove it is unused.
+- Do not keep stale historical statistics or temporary migration counts in this source-of-truth file. Such data belongs in generated reports/history, because volatile numbers can become false rules.
+- Do not delete a working subsystem merely to reduce file count. Delete/move only code that is demonstrably duplicate, dead, obsolete or contradictory.
+- Automated guards should protect product principles, not incidental filenames or implementation trivia.
+
+## 12. Future change map — edit the owner, not every consumer
+
+- **Worksheet text, mathematics, diagrams, blanks and page order:** `src/data/workbook/`.
+- **First-entry explanation:** `src/views/welcome.ts`; **route ownership:** `src/router.ts`; **first-entry styling:** `src/styles/welcome.css`.
+- **Registration/authentication semantics:** `src/lms/auth.ts` and `src/views/lmsLogin.ts`.
+- **Attempt limit:** `src/lms/config.ts`. The Firestore bound in `firestore.rules` is the only intentional mirror because security rules execute separately; its contract tests must change in the same commit.
+- **Score/credit curve:** `src/lms/scoring.ts`.
+- **Answer normalization/tolerance:** `src/lms/answerValidation.ts`.
+- **Explicit canonical answer capture:** `src/lms/implicitAnswers.ts`; **answer-key precedence/persistence:** `src/lms/repository.ts`.
+- **Guest/result persistence, retries, merge semantics and dashboard loading:** `src/lms/repository.ts` plus dedicated sync modules.
+- **Teacher wording/encouragement:** `src/lms/teacherVoice.ts`.
+- **Pedagogical hints:** `src/lms/hintCoach.ts`.
+- **Per-question grading/state machine and page submission:** `src/lms/engine.ts`.
+- **Computerized page shell/navigation:** `src/views/pageViewer.ts` and its practice-shell styles; do not copy worksheet content there.
+- **Authorization/data boundaries:** `firestore.rules`.
+- Tests should import runtime policy/configuration where possible instead of repeating magic numbers. A test may duplicate a value only when it is deliberately verifying an external contract such as Firestore rules.
+- Do not create another architecture/preferences/rules document. If ownership changes, update this map here.
+
+## 13. Required quality gates
 
 Before presenting a branch as ready for review, run at least:
 
@@ -174,8 +177,10 @@ npm run release:report
 npm run test:visual
 ```
 
-The Firebase readiness command is expected to fail while real configuration is
-absent; report the missing prerequisite exactly. A release must additionally
-have a passing readiness result, deployed authorization rules, and recorded
-two-device acceptance evidence. Do not describe the product as production
-ready while any of those external requirements remain incomplete.
+`npm run verify` must cover answer coverage, typecheck, unit/content tests, Firestore authorization tests, build and visual/e2e checks in one command.
+
+Normal PR CI proves repository engineering health. It may generate `release:report:static` as evidence even when external Firebase configuration, pedagogical review or physical two-device acceptance is still blocked; those external blockers must be reported, not disguised as code failures.
+
+`npm run release:check` is the strict release gate. It must fail while any required production configuration or acceptance evidence is incomplete.
+
+Do not describe the product as production-ready while required external configuration or acceptance evidence is incomplete. Do not merge or deploy to production without the required explicit confirmation.

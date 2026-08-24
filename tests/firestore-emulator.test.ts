@@ -191,13 +191,27 @@ describe('Firestore emulator authorization contract', () => {
     await assertFails(
       setDoc(doc(db, 'students', STUDENT_A, 'drafts', 'page-2'), {
         ...draft(STUDENT_A),
-        maxAttemptCount: 4,
+        maxAttemptCount: 5,
+      }),
+    );
+    await assertSucceeds(
+      setDoc(doc(db, 'students', STUDENT_A, 'drafts', 'page-2'), {
+        ...draft(STUDENT_A),
+        score: 0,
+        submitted: true,
       }),
     );
     await assertFails(
       setDoc(doc(db, 'students', STUDENT_A, 'drafts', 'page-2'), {
         ...draft(STUDENT_A),
-        score: 0,
+        score: -1,
+        submitted: true,
+      }),
+    );
+    await assertFails(
+      setDoc(doc(db, 'students', STUDENT_A, 'drafts', 'page-2'), {
+        ...draft(STUDENT_A),
+        score: 101,
         submitted: true,
       }),
     );
@@ -236,19 +250,34 @@ describe('Firestore emulator authorization contract', () => {
     );
   });
 
-  it('accepts an idempotent result retry but rejects stale or malformed results', async () => {
+  it('accepts an idempotent result retry, including score zero, but rejects stale or malformed results', async () => {
     const db = studentDb(STUDENT_A);
     const reference = doc(db, 'students', STUDENT_A, 'results', 'page-2');
     const valid = result(STUDENT_A);
     await assertSucceeds(setDoc(reference, valid));
     await assertSucceeds(setDoc(reference, valid));
 
+    const zero = {
+      ...result(STUDENT_A, 3),
+      score: 0,
+      bestScore: 0,
+      latestScore: 0,
+    };
+    await assertSucceeds(
+      setDoc(doc(db, 'students', STUDENT_A, 'results', 'page-3'), zero),
+    );
+
     await assertFails(
       setDoc(reference, { ...valid, submittedAt: NOW + 19 }),
     );
-    await assertFails(setDoc(reference, { ...valid, score: 0, latestScore: 0 }));
     await assertFails(
-      setDoc(reference, { ...valid, maxAttemptCount: 4 }),
+      setDoc(reference, { ...valid, score: -1, latestScore: -1 }),
+    );
+    await assertFails(
+      setDoc(reference, { ...valid, score: 101, latestScore: 101, bestScore: 101 }),
+    );
+    await assertFails(
+      setDoc(reference, { ...valid, maxAttemptCount: 5 }),
     );
     await assertFails(
       setDoc(reference, { ...valid, bestScore: 79 }),

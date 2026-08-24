@@ -2,9 +2,12 @@ import { beforeEach, describe, expect, test } from 'vitest';
 import {
   canFinalizeGuestTransfer,
   claimGuestProgress,
+  loadPageResult,
   mergePageDrafts,
   mergePageResults,
+  savePageResult,
 } from '../src/lms/repository';
+import { LMS_CONFIG } from '../src/lms/config';
 import {
   buildDashboardCsv,
   DASHBOARD_CSV_COLUMNS,
@@ -55,24 +58,12 @@ const draft = (
 
 class MemoryStorage implements Storage {
   private readonly values = new Map<string, string>();
-  get length(): number {
-    return this.values.size;
-  }
-  clear(): void {
-    this.values.clear();
-  }
-  getItem(key: string): string | null {
-    return this.values.get(key) ?? null;
-  }
-  key(index: number): string | null {
-    return [...this.values.keys()][index] ?? null;
-  }
-  removeItem(key: string): void {
-    this.values.delete(key);
-  }
-  setItem(key: string, value: string): void {
-    this.values.set(key, value);
-  }
+  get length(): number { return this.values.size; }
+  clear(): void { this.values.clear(); }
+  getItem(key: string): string | null { return this.values.get(key) ?? null; }
+  key(index: number): string | null { return [...this.values.keys()][index] ?? null; }
+  removeItem(key: string): void { this.values.delete(key); }
+  setItem(key: string, value: string): void { this.values.set(key, value); }
 }
 
 beforeEach(() => {
@@ -101,9 +92,7 @@ describe('LMS persistence merging', () => {
 
   test('retrying the same submission is idempotent', () => {
     const first = result(88, 200, 2);
-    expect(mergePageResults(first, first)).toEqual(
-      mergePageResults(null, first),
-    );
+    expect(mergePageResults(first, first)).toEqual(mergePageResults(null, first));
   });
 
   test('draft merging never resets attempts after reload', () => {
@@ -113,13 +102,32 @@ describe('LMS persistence merging', () => {
     expect(merged.maxAttemptCount).toBe(2);
   });
 
-  test('invalid scores and attempt counts are rejected before storage', () => {
-    expect(() => mergePageResults(null, result(0, 1))).toThrow(/1 ל־100/);
-    expect(() => mergePageResults(null, result(101, 1))).toThrow(/1 ל־100/);
-    expect(() => mergePageResults(null, result(50, 1, 4))).toThrow(/0 ל־3/);
+  test('zero is valid while out-of-range scores and attempts are rejected before storage', () => {
+    expect(() => mergePageResults(null, result(0, 1))).not.toThrow();
+    expect(() => mergePageResults(null, result(-1, 1))).toThrow(/0 ל־100/);
+    expect(() => mergePageResults(null, result(101, 1))).toThrow(/0 ל־100/);
+    expect(() =>
+      mergePageResults(null, result(50, 1, LMS_CONFIG.maxAttempts + 1)),
+    ).toThrow(new RegExp(`0 ל־${String(LMS_CONFIG.maxAttempts)}`));
   });
 
-  test('guest progress is copied before its source records are removed', async () => {
+  test('guest page scores are display-only and are never persisted or restored', async () => {
+    const guestResult = { ...result(90, 20, 2), uid: 'guest', pageNumber: 1 };
+    const outcome = await savePageResult(guestResult);
+    expect(outcome.localSaved).toBe(false);
+    expect(outcome.central).toBe('not-required');
+    expect(localStorage.getItem('coordinate_lms_results_v2')).toBe('{}');
+    await expect(loadPageResult('guest', 1)).resolves.toBeNull();
+
+    localStorage.setItem(
+      'coordinate_lms_results_v2',
+      JSON.stringify({ 'guest:1': guestResult }),
+    );
+    await expect(loadPageResult('guest', 1)).resolves.toBeNull();
+    expect(localStorage.getItem('coordinate_lms_results_v2')).toBe('{}');
+  });
+
+  test('registration transfers guest draft attempts but purges any legacy guest result', async () => {
     localStorage.setItem(
       'coordinate_lms_session_v2',
       JSON.stringify({
@@ -133,7 +141,7 @@ describe('LMS persistence merging', () => {
     );
     localStorage.setItem(
       'coordinate_lms_drafts_v2',
-      JSON.stringify({ 'guest:1': { ...draft(20, 2, 'x'), uid: 'guest', pageNumber: 1 } }),
+      JSON.stringify({ 'guest:1': { ...draft(20, 2, 'x'), uid: 'guest', pageNumber: 1, score: 90, submitted: true } }),
     );
     localStorage.setItem(
       'coordinate_lms_results_v2',
@@ -143,16 +151,14 @@ describe('LMS persistence merging', () => {
     const claim = await claimGuestProgress('student-1');
     expect(claim.complete).toBe(true);
 
-    const drafts = JSON.parse(
-      localStorage.getItem('coordinate_lms_drafts_v2') || '{}',
-    ) as Record<string, PageDraft>;
-    const results = JSON.parse(
-      localStorage.getItem('coordinate_lms_results_v2') || '{}',
-    ) as Record<string, PageResult>;
+    const drafts = JSON.parse(localStorage.getItem('coordinate_lms_drafts_v2') || '{}') as Record<string, PageDraft>;
+    const results = JSON.parse(localStorage.getItem('coordinate_lms_results_v2') || '{}') as Record<string, PageResult>;
     expect(drafts['guest:1']).toBeUndefined();
     expect(results['guest:1']).toBeUndefined();
+    expect(results['student-1:1']).toBeUndefined();
     expect(drafts['student-1:1']?.questions['p4-q1']?.attempts).toBe(2);
-    expect(results['student-1:1']?.score).toBe(90);
+    expect(drafts['student-1:1']?.score).toBeUndefined();
+    expect(drafts['student-1:1']?.submitted).toBe(false);
   });
 
   test('guest source progress is not eligible for removal after central failure', () => {
@@ -199,7 +205,7 @@ describe('teacher dashboard CSV', () => {
     const csv = buildDashboardCsv(snapshot);
     const lines = csv.trimEnd().split('\r\n');
     expect(csv.startsWith('\uFEFF')).toBe(true);
-    expect(lines).toHaveLength(79); // header + one row per page (78)
+    expect(lines).toHaveLength(79);
     expect(lines[0]).toContain(DASHBOARD_CSV_COLUMNS.join('\",\"'));
     expect(csv).toContain('1970-01-01T00:00:00.100Z');
     expect(csv).toContain('"נועה, ""כהן""\nכיתה ז"');

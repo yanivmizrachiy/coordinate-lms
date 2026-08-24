@@ -1,0 +1,464 @@
+/* ===========================================================================
+   Refined controls — quiet, compact and touch-friendly.
+
+   Product direction (Yaniv, 2026-08-23): controls should feel small and calm,
+   without neon colours, glowing shadows or decorative shine. A control may look
+   compact, but primary touch targets stay at least 44px high.
+   =========================================================================== */
+:root {
+  --ctl-ink: #26364a;
+  --ctl-muted: #667085;
+  --ctl-border: #d7dee8;
+  --ctl-border-strong: #c3cedb;
+  --ctl-surface: #ffffff;
+  --ctl-surface-soft: #f5f7fa;
+  --ctl-primary: #355b7d;
+  --ctl-primary-hover: #2c4c69;
+  --ctl-primary-soft: #edf2f7;
+  --ctl-warm-soft: #f7f2e7;
+  --ctl-warm-border: #ddd0b2;
+  --ctl-success-soft: #edf5ef;
+  --ctl-success-border: #cbdccc;
+  --ctl-radius: 10px;
+  --ctl-shadow: 0 1px 2px rgba(31, 42, 68, 0.06);
+}
+
+/* ---- Shared buttons ------------------------------------------------------ */
+.btn,
+.iconbtn {
+  min-height: 44px;
+  border-radius: var(--ctl-radius);
+  border: 1px solid var(--ctl-border);
+  background: var(--ctl-surface);
+  color: var(--ctl-ink);
+  box-shadow: var(--ctl-shadow);
+  font-weight: 650;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.btn {
+  gap: 6px;
+  padding: 8px 13px;
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.btn--sm {
+  min-height: 44px;
+  padding: 7px 11px;
+  font-size: 13.5px;
+}
+
+.iconbtn {
+  min-width: 44px;
+  padding: 7px 10px;
+  gap: 5px;
+  font-size: 13.5px;
+}
+
+.btn:hover,
+.iconbtn:hover {
+  background: var(--ctl-surface-soft);
+  border-color: var(--ctl-border-strong);
+  box-shadow: 0 1px 3px rgba(31, 42, 68, 0.08);
+}
+
+.btn:active,
+.iconbtn:active {
+  background: #eef2f6;
+  box-shadow: none;
+}
+
+.btn:focus-visible,
+.iconbtn:focus-visible {
+  outline: 2px solid #617e9a;
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.btn--primary,
+.iconbtn--primary {
+  background: var(--ctl-primary);
+  border-color: var(--ctl-primary);
+  color: #fff;
+  box-shadow: none;
+}
+
+.btn--primary:hover,
+.iconbtn--primary:hover {
+  background: var(--ctl-primary-hover);
+  border-color: var(--ctl-primary-hover);
+  box-shadow: none;
+}
+
+.btn--gold {
+  background: var(--ctl-warm-soft);
+  border-color: var(--ctl-warm-border);
+  color: #4a4130;
+  box-shadow: none;
+}
+
+.btn--gold:hover {
+  background: #f1eadc;
+  border-color: #d1c09a;
+  filter: none;
+}
+
+.btn--ghost {
+  background: var(--ctl-surface);
+  border-color: var(--ctl-border);
+  color: var(--ctl-primary);
+}
+
+.btn--ghost:hover {
+  background: var(--ctl-primary-soft);
+  border-color: var(--ctl-border-strong);
+}
+
+.btn--teacher {
+  background: #eef1f5;
+  border-color: #d4dae3;
+  color: #445267;
+  box-shadow: none;
+}
+
+.btn--teacher:hover {
+  background: #e6ebf1;
+  border-color: #c8d0dc;
+}
+
+/* Previous/next are distinguished by position, text and arrow — not neon. */
+.btn--prev,
+.btn--next {
+  border-color: #cad4df;
+  box-shadow: none;
+}
+
+.btn--prev {
+  background: #fff;
+  color: #43546a;
+}
+
+.btn--next {
+  background: #eaf0f6;
+  color: #294a68;
+}
+
+.btn--prev:hover,
+.btn--next:hover {
+  background: #e2e9f0;
+  border-color: #b9c6d3;
+  filter: none;
+}
+
+.btn__arrow {
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.btn--disabled,
+.btn:disabled {
+  opacity: 0.45;
+}
+
+/* ---- Top app bar --------------------------------------------------------- */
+.appbar {
+  gap: 7px;
+  padding: 6px 10px;
+  box-shadow: 0 1px 4px rgba(31, 42, 68, 0.05);
+}
+
+.appbar__title {
+  font-size: 15px;
+  font-weight: 750;
+}
+
+/* ---- Reader bar ---------------------------------------------------------- */
+.wsbar {
+  gap: 7px;
+  padding: 7px 10px;
+  background: #26384d;
+}
+
+.wsbar__side,
+.wsbar__nav {
+  gap: 5px;
+}
+
+.wsbar .btn--ghost {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #f7f9fb;
+}
+
+.wsbar .btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ---- Bottom page navigation --------------------------------------------- */
+.pagenav {
+  gap: 6px;
+  padding: 7px 8px;
+  margin-top: 7px;
+  background: rgba(250, 251, 252, 0.96);
+  border-top: 1px solid #e1e6ec;
+  backdrop-filter: blur(8px);
+}
+
+.pagenav__indicator {
+  min-width: 72px;
+  font-size: 13px;
+  font-weight: 750;
+  color: #4a596d;
+}
+
+.pagenav__jump {
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--ctl-muted);
+}
+
+.pagenav__input {
+  width: 54px;
+  min-height: 44px;
+  padding: 5px 6px;
+  border-color: var(--ctl-border);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ctl-ink);
+  font-size: 13.5px;
+}
+
+.zoomer {
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.zoombtn {
+  min-width: 42px;
+  min-height: 44px;
+  padding: 6px 9px;
+  border: 1px solid var(--ctl-border);
+  background: #fff;
+  color: var(--ctl-ink);
+  font-size: 13.5px;
+  font-weight: 650;
+}
+
+.zoombtn:first-child,
+.zoombtn:last-child {
+  border-radius: 0;
+}
+
+.zoombtn--label {
+  min-width: 5rem;
+  font-size: 12.5px;
+  color: var(--ctl-muted);
+}
+
+.zoombtn:hover {
+  background: var(--ctl-surface-soft);
+}
+
+/* ---- LMS controls -------------------------------------------------------- */
+.lms-panel__buttons,
+.lms-auth__actions,
+.lms-gate__actions,
+.lms-admin__controls,
+.lms-menu-actions,
+.lms-progress__actions,
+.lms-keys__toolbar {
+  gap: 6px;
+}
+
+.lms-panel__buttons .btn,
+.lms-auth__actions .btn,
+.lms-gate__actions .btn,
+.lms-admin__controls .btn,
+.lms-menu-actions .btn,
+.lms-progress__actions .btn,
+.lms-keys__toolbar .btn {
+  width: auto;
+  min-height: 44px;
+  padding: 7px 11px;
+  font-size: 13.5px;
+}
+
+/* ---- Main menu action tiles --------------------------------------------- */
+.act-row {
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  gap: 8px;
+}
+
+.act {
+  min-height: 78px;
+  gap: 3px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #dfe5ec;
+  color: var(--ctl-ink);
+  box-shadow: 0 1px 3px rgba(31, 42, 68, 0.06);
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease;
+}
+
+.act:hover {
+  transform: translateY(-1px);
+  border-color: #cbd5df;
+  background: #f8fafc;
+  box-shadow: 0 2px 6px rgba(31, 42, 68, 0.08);
+}
+
+.act:active {
+  transform: none;
+  box-shadow: none;
+}
+
+.act__sheen {
+  display: none;
+}
+
+.act__icon {
+  font-size: 23px;
+  filter: none;
+  transition: none;
+}
+
+.act:hover .act__icon {
+  transform: none;
+}
+
+.act__label {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.act__note {
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.act--view {
+  background: #eef3f8;
+  border-color: #ccd8e4;
+  color: #294a68;
+  box-shadow: none;
+}
+
+.act--view .act__note {
+  color: #5f7184;
+}
+
+.act--view:hover {
+  background: #e7eef5;
+  border-color: #bac9d8;
+  box-shadow: 0 2px 6px rgba(31, 42, 68, 0.06);
+}
+
+.act--wa {
+  background: var(--ctl-success-soft);
+  border-color: var(--ctl-success-border);
+  color: #355744;
+  box-shadow: none;
+}
+
+.act--wa .act__note {
+  color: #617367;
+}
+
+.act--wa:hover {
+  background: #e7f0e9;
+  border-color: #bccfbe;
+  box-shadow: 0 2px 6px rgba(31, 42, 68, 0.06);
+}
+
+/* ---- Menu jump controls -------------------------------------------------- */
+.jump {
+  gap: 6px;
+}
+
+.jump__select,
+.jump__go,
+.jump__first,
+.jump__toc {
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid var(--ctl-border);
+  color: var(--ctl-ink);
+  box-shadow: var(--ctl-shadow);
+  font-size: 13.5px;
+  font-weight: 700;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.jump__go {
+  background: var(--ctl-primary);
+  border-color: var(--ctl-primary);
+  color: #fff;
+  box-shadow: none;
+}
+
+.jump__go:hover,
+.jump__first:hover,
+.jump__toc:hover {
+  transform: none;
+  background: var(--ctl-surface-soft);
+  border-color: var(--ctl-border-strong);
+  box-shadow: 0 1px 3px rgba(31, 42, 68, 0.08);
+}
+
+.jump__go:hover {
+  background: var(--ctl-primary-hover);
+  border-color: var(--ctl-primary-hover);
+  color: #fff;
+}
+
+.jump__go:active,
+.jump__first:active,
+.jump__toc:active {
+  transform: none;
+}
+
+/* Mobile: do not turn every action into a loud full-width slab. Let controls
+   wrap naturally while preserving the 44px touch target. */
+@media (max-width: 720px) {
+  .lms-panel__buttons .btn,
+  .lms-auth__actions .btn,
+  .lms-gate__actions .btn,
+  .lms-admin__controls .btn,
+  .lms-menu-actions .btn,
+  .lms-progress__actions .btn,
+  .lms-keys__toolbar .btn {
+    width: auto;
+    flex: 1 1 auto;
+  }
+
+  .pagenav {
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .pagenav .btn,
+  .pagenav .iconbtn,
+  .pagenav .zoombtn {
+    font-size: 13px;
+  }
+
+  .pagenav__indicator {
+    min-width: 58px;
+  }
+}

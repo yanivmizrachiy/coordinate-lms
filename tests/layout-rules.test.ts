@@ -4,7 +4,12 @@ import { WORKBOOK, pageByNumber } from '../src/data/workbook';
 
 /* Yaniv's standing layout rules, as executable checks. Each one here is a bug
    that already reached a printed sheet once — the test is what stops it from
-   coming back the next time a page is edited. */
+   coming back the next time a page is edited.
+
+   The „USER_MEMORY §N" citations below point at the original numbered decision
+   log that seeded these rules. That archive now lives only in git history; the
+   live rule authority is RULES.md. The citations are kept as provenance for why
+   each check exists, not as a pointer to a file still in the tree. */
 
 const css = readFileSync(new URL('../src/styles/workbook.css', import.meta.url), 'utf8');
 const grid = readFileSync(new URL('../src/lib/coordinateGrid.ts', import.meta.url), 'utf8');
@@ -958,13 +963,13 @@ describe('every page is valid markup', () => {
   });
 });
 
-/* USER_MEMORY.md is the single rules page, and it is only worth reading if it
+/* RULES.md is the single rules page, and it is only worth reading if it
    is true. It kept drifting: it named a booklet of 55 pages when there were 74,
    it described a test that had been rewritten, it told the reader the arrow was
    drawn shorter after that had stopped being so. Anything it states in
    backticks about the code is checked here. */
 describe('the rules page still matches the code', () => {
-  const rules = readFileSync(new URL('../USER_MEMORY.md', import.meta.url), 'utf8');
+  const rules = readFileSync(new URL('../RULES.md', import.meta.url), 'utf8');
   const suites = readdirSync(new URL('../tests/e2e', import.meta.url))
     .filter((f) => f.endsWith('.ts'))
     .map((f) => readFileSync(new URL('../tests/e2e/' + f, import.meta.url), 'utf8'))

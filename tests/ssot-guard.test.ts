@@ -1,10 +1,9 @@
 /* Single-source-of-truth guards.
 
-   coordinate-lms is the ONLY master of the whole project (RULES.md,
-   2026-08-18). These tests make the promise structural: a second content
-   source, an orphan page module, interaction markup baked into canonical
-   content, or a runtime dependency on the retired archive repository fails
-   the build instead of drifting quietly. */
+   coordinate-lms is the ONLY master of the whole project. These tests make
+   that promise structural: a second content source, an orphan page module,
+   interaction markup baked into canonical content, or a runtime dependency on
+   the retired archive repository fails the build instead of drifting quietly. */
 import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import {
@@ -80,15 +79,60 @@ describe('no second repository behind the content', () => {
   });
 });
 
+describe('print and computerized practice stay directly linked but operationally separate', () => {
+  const viewer = read('src/views/pageViewer.ts');
+  const rules = read('RULES.md');
+
+  it('renders computerized practice from the canonical workbook page itself', () => {
+    expect(viewer).toContain('pageByNumber(page)');
+    expect(viewer).toContain('fromHTML(data.html)');
+    expect(viewer).not.toMatch(/computerizedPages|digitalPages|lmsPageContent/);
+  });
+
+  it('keeps print and download actions out of the student practice shell', () => {
+    expect(viewer).not.toContain('openActionChooser');
+    expect(viewer).not.toContain('readerBar(');
+    expect(viewer).not.toMatch(/🖨|הדפסה|הורדת הדף/);
+  });
+
+  it('states that a canonical content change updates both renderings', () => {
+    expect(rules).toContain('Printable and computerized pages are two renderings of the SAME worksheet');
+    expect(rules).toContain('must propagate automatically to both');
+    expect(rules).toContain('Print/download controls are utilities for print/booklet surfaces');
+  });
+});
+
+describe('first entry is explicit, lightweight and separate from practice', () => {
+  const router = read('src/router.ts');
+  const main = read('src/main.ts');
+  const welcome = read('src/views/welcome.ts');
+  const rules = read('RULES.md');
+
+  it('routes a normal empty hash to the dedicated welcome screen', () => {
+    expect(router).toContain("if (!head) return { name: 'welcome'");
+    expect(router).toContain("if (head === 'home') return { name: 'home'");
+    expect(main).toContain("case 'welcome': return import('./views/welcome')");
+  });
+
+  it('explains guest score non-persistence before practice, not in pageViewer', () => {
+    expect(welcome).toContain('הציון בתרגול חופשי אינו נשמר');
+    expect(welcome).toContain('אם טעיתם, אפשר לתקן עד 3 פעמים');
+    expect(welcome).toContain("navigate('#/workbook/1')");
+    expect(read('src/views/pageViewer.ts')).not.toMatch(/מצב אורח|הרשמה ושמירת ציונים|הציון בתרגול חופשי/);
+    expect(rules).toContain('Guest page scores/results must never be persisted locally or centrally');
+  });
+
+  it('does not pull Firebase or the rich home screen into the welcome module', () => {
+    expect(welcome).not.toMatch(/from\s+'firebase|from\s+'\.\.\/lms\//);
+    expect(welcome).not.toContain("import('./home')");
+    expect(welcome).toContain("navigate('#/home')");
+  });
+});
+
 describe('the first download stays small', () => {
   const main = read('src/main.ts');
 
   it('reaches every screen through a dynamic import', () => {
-    /* A static `import { x } from './views/…'` in main.ts drags that screen —
-       and everything it touches — into the file every visitor downloads
-       before the opening film can play. That is how the entry chunk once
-       reached 1.18 MB: one static import chain pulled in all 78 sheets and
-       the whole Firebase SDK. Screens are fetched when they are opened. */
     const staticViewImport = /^import\s+\{[^}]*\}\s+from\s+'\.\/views\//m;
     expect(
       staticViewImport.test(main),
@@ -96,7 +140,7 @@ describe('the first download stays small', () => {
     ).toBe(false);
 
     for (const route of [
-      'home', 'menu', 'pageViewer', 'flipbook', 'book',
+      'welcome', 'home', 'menu', 'pageViewer', 'flipbook', 'book',
       'solutions', 'printAids', 'lmsLogin', 'lmsAdmin', 'lmsProgress', 'lmsKeys',
     ]) {
       expect(main, `route ${route} is not lazily imported`)
@@ -105,9 +149,6 @@ describe('the first download stays small', () => {
   });
 
   it('never pulls the Firebase SDK into the entry module', () => {
-    /* Firebase is 683 kB — a third of the old first download — and a reader
-       who only watches the film or prints a sheet never signs in. It must
-       stay behind the LMS screens that actually use it. */
     expect(main).not.toMatch(/from\s+'firebase/);
     expect(main).not.toMatch(/from\s+'\.\/lms\//);
   });

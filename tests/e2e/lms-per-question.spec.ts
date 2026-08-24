@@ -1,18 +1,15 @@
 import { expect, test, type Locator, type Page } from '@playwright/test';
 
-/* The per-question model (spec steps 4–7): each question the learner finishes
-   is checked on its own with „סיימתי שאלה", and the verdict — ✓ correct,
-   ◐ partial, ✕ wrong — appears beside that question. The tests drive the grid
-   answers whose value the canonical drawing publishes in the DOM
-   (data-lms-answers), so they are deterministic without the runtime key. */
+/* The per-question model: each question is submitted on its own with the small
+   „להגיש ←” control. The result appears beside that question immediately:
+   ✓ נכון when complete, or a clear repair state while the incorrect part stays
+   editable and can be submitted again. The tests drive canonical drawing
+   answers published in the DOM (data-lms-answers), so they stay deterministic. */
 
 const firstAnswer = async (t: Locator): Promise<string> =>
   JSON.parse((await t.getAttribute('data-lms-answers')) ?? '[]')[0] as string;
 
-/* A question is whatever the „סיימתי שאלה" control was attached to. Find one
-   that holds at least `min` drawing answers, so the test can complete it. */
 async function pickQuestion(page: Page, min: number): Promise<Locator> {
-  // controls and drawing answers are attached after the page hydrates
   await page.locator('.lms-qcheck').first().waitFor();
   await page.locator('[data-lms-answers]').first().waitFor();
   const controls = page.locator('.lms-qcheck');
@@ -24,38 +21,75 @@ async function pickQuestion(page: Page, min: number): Promise<Locator> {
   throw new Error(`no question with ${min} drawing answers`);
 }
 
-test('finishing a question grades only it, and a correct target earns ✓ נכון', async ({ page }) => {
+test('page 1 canonical vertical-axis y overrides a stale saved answer key', async ({ page }) => {
+  await page.goto('/#/workbook/1');
+  let target = page.locator('[data-grid-answer="axis-y"]');
+  await expect(target).toHaveCount(1);
+  await expect(target).toHaveAttribute('data-lms-answers', /"y"/i);
+
+  const qid = await target.getAttribute('data-lms-qid');
+  expect(qid).toBeTruthy();
+
+  await page.evaluate((id) => {
+    localStorage.setItem(
+      'coordinate_lms_answer_keys_v2',
+      JSON.stringify({ '1': { [id]: ['stale-wrong-answer'] } }),
+    );
+  }, qid!);
+  await page.reload();
+
+  target = page.locator('[data-grid-answer="axis-y"]');
+  const question = target.locator('xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " q-card ")]');
+  const submit = question.getByRole('button', { name: 'להגיש שאלה לבדיקה' });
+  await target.fill('y');
+  await submit.click();
+
+  // The canonical answer attached to the current target is authoritative.
+  await expect(target).toHaveAttribute('data-lms-state', 'correct');
+  await expect(target).toHaveAttribute('contenteditable', 'false');
+});
+
+test('submitting a question grades only it and shows a green ✓ נכון verdict', async ({ page }) => {
   await page.goto('/#/workbook/1');
   const q = await pickQuestion(page, 1);
   const target = q.locator('[data-lms-answers]').first();
+  const submit = q.getByRole('button', { name: 'להגיש שאלה לבדיקה' });
 
+  await expect(submit).toHaveText('להגיש ←');
   await target.fill(await firstAnswer(target));
-  await q.getByRole('button', { name: 'סיימתי שאלה' }).click();
+  await submit.click();
 
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
   await expect(target).toHaveAttribute('aria-label', /נכון/);
+  await expect(q.locator('.lms-qstatus')).toHaveAttribute('data-qstate', 'correct');
+  await expect(q.locator('.lms-qstatus')).toContainText('✓ נכון');
 });
 
-test('a partly-right question shows ◐, keeps the correct part, and lets the wrong part be fixed', async ({ page }) => {
+test('a partly-right question shows repair feedback and can be fixed and submitted again', async ({ page }) => {
   await page.goto('/#/workbook/1');
   const q = await pickQuestion(page, 2);
   const answers = q.locator('[data-lms-answers]');
+  const submit = q.getByRole('button', { name: 'להגיש שאלה לבדיקה' });
 
   await answers.nth(0).fill(await firstAnswer(answers.nth(0)));
   await answers.nth(1).fill('99');
-  await q.getByRole('button', { name: 'סיימתי שאלה' }).click();
+  await submit.click();
 
   await expect(q.locator('.lms-qstatus')).toHaveAttribute('data-qstate', 'partial');
-  // the correct part is preserved and locked; the wrong part stays open to fix
+  await expect(q.locator('.lms-qstatus')).toContainText('יש מה לתקן');
+  await expect(submit).toBeEnabled();
+
+  // The correct part is preserved and locked; only the wrong part stays open.
   await expect(answers.nth(0)).toHaveAttribute('data-lms-state', 'correct');
   await expect(answers.nth(0)).toHaveAttribute('contenteditable', 'false');
   await expect(answers.nth(1)).toHaveAttribute('data-lms-state', 'wrong');
   await expect(answers.nth(1)).toHaveAttribute('contenteditable', 'true');
 
-  // fixing only the wrong target turns it correct, without retyping the first
+  // Fixing only the wrong target turns the whole question correct on resubmit.
   await answers.nth(1).fill(await firstAnswer(answers.nth(1)));
-  await q.getByRole('button', { name: 'סיימתי שאלה' }).click();
+  await submit.click();
   await expect(answers.nth(1)).toHaveAttribute('data-lms-state', 'correct');
+  await expect(q.locator('.lms-qstatus')).toContainText('✓ נכון');
 });
 
 test('progress counts QUESTIONS, and every per-question control is print-hidden', async ({ page }) => {

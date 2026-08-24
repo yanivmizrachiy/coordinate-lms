@@ -1,0 +1,28 @@
+/* Transparent attempt/score feedback: informative, compact, never flashy. */
+.lms-qattempt {
+  flex: 1 1 100%;
+  max-width: 680px;
+  margin-top: 2px;
+  padding: 6px 9px;
+  border: 1px solid #d7dee8;
+  border-radius: 8px;
+  background: #fbfcfd;
+  color: #536174;
+  font-size: 12.5px;
+  font-weight: 520;
+  line-height: 1.5;
+  box-shadow: none;
+}
+
+.lms-qattempt[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  .lms-qattempt {
+    width: 100%;
+    max-width: none;
+    padding: 6px 8px;
+    font-size: 12.25px;
+  }
+}

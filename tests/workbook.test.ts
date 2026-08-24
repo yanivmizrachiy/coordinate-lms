@@ -6,7 +6,7 @@ import { CONTENTS } from '../src/views/tocSheet';
 const FOOTER_F1 = 'יניב רז - מדריך מחוזי חט"ב בעיר ירושלים';
 const FOOTER_F2 = 'הדרכה במחוז ירושלים והעיר ירושלים - מנח"י, בהובלת איילת קריספין';
 
-describe('workbook integrity (USER_MEMORY.md mandatory checks)', () => {
+describe('workbook integrity (RULES.md mandatory checks)', () => {
   it('has pages numbered 1..78 with no holes (worksheets + games interleaved)', () => {
     expect(TOTAL_PAGES).toBe(78);
     for (let n = 1; n <= 78; n++) expect(pageByNumber(n), `page ${n}`).toBeDefined();
