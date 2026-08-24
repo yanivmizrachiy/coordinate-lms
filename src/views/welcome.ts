@@ -2,43 +2,33 @@ import { elem } from '../lib/dom';
 import { navigate } from '../router';
 import type { ViewContext } from './context';
 
-const bullet = (text: string): HTMLElement =>
-  elem('li', { class: 'lms-welcome__bullet', text });
+const choice = (
+  variant: 'account' | 'free',
+  title: string,
+  description: string,
+  onClick: () => void,
+): HTMLElement => {
+  const button = elem('button', {
+    class: `lms-welcome__choice lms-welcome__choice--${variant}`,
+    type: 'button',
+    text: title,
+  });
+  button.addEventListener('click', onClick);
+
+  return elem(
+    'section',
+    { class: `lms-welcome__card lms-welcome__card--${variant}` },
+    button,
+    elem('p', { class: 'lms-welcome__summary', text: description }),
+  );
+};
 
 export function welcome({ outlet, setTitle }: ViewContext): void {
   setTitle('בחירת דרך תרגול');
 
-  const freeButton = elem('button', {
-    class: 'btn btn--gold lms-welcome__primary',
-    type: 'button',
-    text: 'התחלת תרגול חופשי — בלי רישום',
-  });
-  freeButton.addEventListener('click', () => navigate('#/workbook/1'));
-
-  const registerButton = elem('button', {
-    class: 'btn btn--gold lms-welcome__primary',
-    type: 'button',
-    text: 'הרשמה ושמירת ציונים',
-  });
-  registerButton.addEventListener('click', () => navigate('#/login'));
-
-  const loginButton = elem('button', {
-    class: 'btn btn--ghost',
-    type: 'button',
-    text: 'כבר נרשמתי — התחברות',
-  });
-  loginButton.addEventListener('click', () => navigate('#/login'));
-
-  const materialsButton = elem('button', {
-    class: 'lms-welcome__materials',
-    type: 'button',
-    text: 'לחוברת, לסרטון ולחומרי הלימוד',
-  });
-  materialsButton.addEventListener('click', () => navigate('#/home'));
-
   outlet.append(
     elem(
-      'div',
+      'main',
       { class: 'lms-welcome' },
       elem(
         'section',
@@ -47,67 +37,29 @@ export function welcome({ outlet, setTitle }: ViewContext): void {
         elem('h1', { class: 'lms-welcome__title', text: 'איך תרצו לתרגל?' }),
         elem('p', {
           class: 'lms-welcome__lead',
-          text: 'אפשר להתחיל מיד גם בלי רישום. לפני שמתחילים, חשוב לדעת בפשטות מה נשמר ומה לא.',
+          text: 'בחרו דרך אחת והתחילו מיד.',
         }),
       ),
       elem(
         'div',
-        { class: 'lms-welcome__grid' },
-        elem(
-          'section',
-          { class: 'lms-welcome__card lms-welcome__card--free' },
-          elem('div', { class: 'lms-welcome__icon', text: '▶', 'aria-hidden': 'true' }),
-          elem('div', { class: 'lms-welcome__kicker', text: 'תרגול חופשי' }),
-          elem('h2', { text: 'בלי רישום' }),
-          elem('p', {
-            class: 'lms-welcome__summary',
-            text: 'נכנסים ומתחילים לפתור. אין צורך בשם, באימייל או בסיסמה.',
-          }),
-          elem(
-            'ul',
-            { class: 'lms-welcome__list' },
-            bullet('כל עמודי התרגול פתוחים.'),
-            bullet('מקבלים בדיקה, רמזים ומשוב מיידי.'),
-            bullet('אם טעיתם, אפשר לתקן עד 3 פעמים.'),
-            bullet('אפשר לראות ציון בסיום העמוד.'),
-          ),
-          elem(
-            'div',
-            { class: 'lms-welcome__notice', role: 'note' },
-            elem('strong', { text: 'חשוב: ' }),
-            elem('span', {
-              text: 'הציון בתרגול חופשי אינו נשמר. הוא לא עובר למכשיר אחר ולא מופיע אצל המורה.',
-            }),
-          ),
-          freeButton,
+        { class: 'lms-welcome__choices', 'aria-label': 'בחירת דרך תרגול' },
+        choice(
+          'account',
+          'לתרגל עם רישום',
+          'הציונים וההתקדמות נשמרים. אפשר להמשיך ממכשיר אחר והמורה יכול לראות את ההתקדמות.',
+          () => navigate('#/login'),
         ),
-        elem(
-          'section',
-          { class: 'lms-welcome__card lms-welcome__card--account' },
-          elem('div', { class: 'lms-welcome__icon', text: '✓', 'aria-hidden': 'true' }),
-          elem('div', { class: 'lms-welcome__kicker', text: 'תרגול עם שמירה' }),
-          elem('h2', { text: 'עם רישום' }),
-          elem('p', {
-            class: 'lms-welcome__summary',
-            text: 'נרשמים פעם אחת עם שם מלא, בית ספר, אימייל וסיסמה.',
-          }),
-          elem(
-            'ul',
-            { class: 'lms-welcome__list' },
-            bullet('הציונים נשמרים בחשבון.'),
-            bullet('ההתקדמות נשמרת ואפשר להמשיך אחר כך.'),
-            bullet('אפשר להמשיך גם ממכשיר אחר לאחר התחברות.'),
-            bullet('המורה יכול לראות את התוצאות וההתקדמות.'),
-          ),
-          elem('p', {
-            class: 'lms-welcome__plain',
-            text: 'התרגול עצמו נשאר אותו תרגול. הרישום רק מוסיף שמירה של הציונים וההתקדמות.',
-          }),
-          registerButton,
-          loginButton,
+        choice(
+          'free',
+          'לתרגל בלי רישום',
+          'מתחילים מיד ומקבלים משוב וציון. הציון לא נשמר ולא מופיע אצל המורה.',
+          () => navigate('#/workbook/1'),
         ),
       ),
-      materialsButton,
+      elem('p', {
+        class: 'lms-welcome__footnote',
+        text: 'בשני המצבים התרגול עצמו זהה.',
+      }),
     ),
   );
 }
