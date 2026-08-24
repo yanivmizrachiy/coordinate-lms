@@ -38,12 +38,15 @@ export const ORDERED_PAIR_PRACTICE: WorkbookPageContent = sheet({
 <li>בשני הזוגות אותם מספרים, אבל ה<span class="blank" data-missing="concept" style="--blank-width:5ch"></span> שלהם שונה.</li>
 <li>בנקודה <span class="math-ltr" dir="ltr">(2,5)</span> ערך ה־<span class="math-ltr" dir="ltr">x</span> הוא <span class="blank" data-missing="number" style="--blank-width:3ch"></span>, ובנקודה <span class="math-ltr" dir="ltr">(5,2)</span> הוא 5.</li>
 </ul>
-<ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
-</ul>
-<ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
-</ul>
+<p><strong>סמנו נכון או לא נכון.</strong></p>
+<table class="tf-table" data-balanced="true">
+<tbody>
+<tr data-answer="false"><td>הנקודות <span class="math-ltr" dir="ltr">(2,5)</span> ו־<span class="math-ltr" dir="ltr">(5,2)</span> הן אותה נקודה, כי מופיעים בהן אותם מספרים.</td><td>
+<div class="tf-options" role="group" aria-label="סמנו נכון או לא נכון"><label class="tf-option"><input type="radio" name="tf-11-order-1" value="true"><span>נכון</span></label><label class="tf-option"><input type="radio" name="tf-11-order-1" value="false"><span>לא נכון</span></label></div></td></tr>
+<tr data-answer="true"><td>כאשר מחליפים את סדר המספרים בזוג סדור, מיקום הנקודה יכול להשתנות.</td><td>
+<div class="tf-options" role="group" aria-label="סמנו נכון או לא נכון"><label class="tf-option"><input type="radio" name="tf-11-order-2" value="true"><span>נכון</span></label><label class="tf-option"><input type="radio" name="tf-11-order-2" value="false"><span>לא נכון</span></label></div></td></tr>
+</tbody>
+</table>
 </section>
 </div>
 `,
