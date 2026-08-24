@@ -142,11 +142,11 @@ export const SOLUTION_SPECS: SolutionPageSpec[] = [
   {
     source: ORDERED_PAIR_PRACTICE,
     sourceFile: 'src/data/workbook/pages/ordered-pair-practice.ts',
-    sourceBlobSha: 'dceda6daa1733b372bd7fe94790f9eb665ced0da',
+    sourceBlobSha: 'cb08ffdc32def7665188558372fc2c9eb9c97120',
     exercises: [
       { id: 'write', label: 'כותבים זוג סדור', answer: '(4,3); (0,5); (8,0); (2,2).' },
       { id: 'complete', label: 'משלימים זוגות', answer: '(7,4); (3,6); (0,0); (5,0).' },
-      { id: 'order', label: 'הסדר משנה', answer: 'M(2,5); N(5,2); הסדר שונה; ב-(2,5) ערך x הוא 2. לכן אלה נקודות שונות: M שמאלה ומעל N.' },
+      { id: 'order', label: 'הסדר משנה', answer: 'M(2,5); N(5,2); הסדר שונה; ב-(2,5) ערך x הוא 2. הטענה „(2,5) ו-(5,2) הן אותה נקודה” — לא נכון. הטענה „כאשר מחליפים את סדר המספרים בזוג סדור, מיקום הנקודה יכול להשתנות” — נכון.' },
     ],
   },
   {
