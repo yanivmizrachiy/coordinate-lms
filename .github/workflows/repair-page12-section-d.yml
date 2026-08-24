@@ -1,0 +1,164 @@
+name: Repair page 12 section D once
+
+on:
+  push:
+    branches:
+      - fix/deterministic-computerized-grading
+    paths:
+      - .github/workflows/repair-page12-section-d.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: fix/deterministic-computerized-grading
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Replace weak canonical task and strengthen sync contract
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const { execFileSync } = require('child_process');
+
+          function replaceExact(path, from, to) {
+            const src = fs.readFileSync(path, 'utf8');
+            if (!src.includes(from)) throw new Error(`Expected text not found in ${path}`);
+            fs.writeFileSync(path, src.replace(from, to));
+          }
+
+          replaceExact(
+            'src/data/workbook/pages/read-intro.ts',
+            `<section class="q-card">\n<h3>ד. תנו דוגמה לשתי נקודות שערך ה־<span class="math-ltr" dir="ltr">x</span> שלהן שונה, וגם שיעור ה־<span class="math-ltr" dir="ltr">y</span> שלהן שונה.</h3>\n<ul class="tasks compact">\n<li>הנקודה <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> והנקודה <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>\n</ul>\n</section>`,
+            `<section class="q-card">\n<h3>ד. סדרו את הנקודות B, C, D ו־E משמאל לימין.</h3>\n<ul class="tasks compact">\n<li>כתבו את האותיות לפי הסדר: <span class="math-ltr" dir="ltr"><span class="blank" data-missing="x-order" style="--blank-width:4ch"></span> → <span class="blank" data-missing="x-order" style="--blank-width:4ch"></span> → <span class="blank" data-missing="x-order" style="--blank-width:4ch"></span> → <span class="blank" data-missing="x-order" style="--blank-width:4ch"></span></span></li>\n</ul>\n</section>`
+          );
+
+          replaceExact(
+            'RULES.md',
+            '- Any canonical worksheet content change **must propagate automatically to both** printable and computerized renderings unless the difference is an explicitly approved interaction-only adaptation required because exact computerized grading is genuinely impossible in the printed interaction form.',
+            '- **ABSOLUTE PRINT↔COMPUTERIZED SYNC CONTRACT:** every worksheet CONTENT item — question wording, numbers, diagrams, blanks, answer expectation and task order — must be authored exactly once in the canonical workbook source. Any canonical worksheet content change **must propagate automatically to both** printable and computerized renderings from that one edit. Never patch a printed copy and a computerized copy separately; if a content correction would need to be applied twice, the architecture is wrong and release is blocked. The only permitted difference is an explicitly approved interaction-only LMS layer when the original learner action genuinely cannot be graded exactly on screen.'
+          );
+
+          let coverage = fs.readFileSync('src/lms/answerCoverage.ts', 'utf8');
+          for (const line of [
+            "  'p12-q7': '13c747ef',\n",
+            "  'p12-q8': '13c747ef',\n",
+            "  'p12-q9': '13c747ef',\n",
+            "  'p12-q10': '13c747ef',\n",
+          ]) {
+            if (!coverage.includes(line)) throw new Error(`Missing old page-12 reviewed-open marker: ${line.trim()}`);
+            coverage = coverage.replace(line, '');
+          }
+          fs.writeFileSync('src/lms/answerCoverage.ts', coverage);
+
+          replaceExact(
+            'src/lms/engine.ts',
+            "  direction: 'מילה',\n};",
+            "  direction: 'מילה',\n  'x-order': 'אות',\n};"
+          );
+
+          replaceExact(
+            'src/lms/hintCoach.ts',
+            "  'ordered-pair-order':\n    'הסתכלו שוב על השרטוט: אל הנקודה (2,5) מגיעים אחרי 2 צעדים ימינה ו־5 למעלה, ואל (5,2) אחרי 5 צעדים ימינה ו־2 למעלה. השוו לאיזה מקום מגיעים בכל פעם.',",
+            "  'x-order':\n    'כדי לסדר נקודות משמאל לימין, קראו לכל נקודה את שיעור ה־x שלה. שיעור x קטן יותר נמצא שמאלה, ושיעור x גדול יותר נמצא ימינה. סדרו את הערכים מהקטן לגדול ואז החזירו את אותיות הנקודות.',\n  'ordered-pair-order':\n    'הסתכלו שוב על השרטוט: אל הנקודה (2,5) מגיעים אחרי 2 צעדים ימינה ו־5 למעלה, ואל (5,2) אחרי 5 צעדים ימינה ו־2 למעלה. השוו לאיזה מקום מגיעים בכל פעם.',"
+          );
+
+          replaceExact(
+            'src/lms/hintCoach.ts',
+            "  'ordered-pair-order': [\n    'שימו לב לשרטוט: M היא (2,5) ו־N היא (5,2). בדקו אם שתי האותיות נמצאות באותו מקום.',",
+            "  'x-order': [\n    'הסתכלו רק על המיקום האופקי של ארבע הנקודות. איזו מהן הכי שמאלה, ואיזו באה אחריה?',\n    'קראו את שיעור ה־x של B, C, D ו־E. ככל ששיעור x קטן יותר, הנקודה נמצאת שמאלה יותר.',\n    'רשמו ליד כל אחת מארבע האותיות את שיעור ה־x שלה, סדרו את המספרים מהקטן לגדול, ואז כתבו את האותיות באותו סדר.',\n  ],\n  'ordered-pair-order': [\n    'שימו לב לשרטוט: M היא (2,5) ו־N היא (5,2). בדקו אם שתי האותיות נמצאות באותו מקום.',"
+          );
+
+          replaceExact(
+            'src/data/solutions/registry.ts',
+            "      { id: 'd', label: 'ד', answer: 'תשובות רבות אפשריות. לדוגמה A(1,2) ו-B(4,5): גם ערכי x שונים וגם שיעורי y שונים.' },",
+            "      { id: 'd', label: 'ד', answer: 'משמאל לימין: E, B, D, C.' },"
+          );
+
+          replaceExact(
+            'tests/ssot-guard.test.ts',
+            "    expect(rules).toContain('must propagate automatically to both');\n    expect(rules).toContain('Print/download controls are utilities for print/booklet surfaces');",
+            "    expect(rules).toContain('must propagate automatically to both');\n    expect(rules).toContain('must be authored exactly once');\n    expect(rules).toContain('Never patch a printed copy and a computerized copy separately');\n    expect(rules).toContain('Print/download controls are utilities for print/booklet surfaces');"
+          );
+
+          // Update the teacher-solution source binding to the exact canonical page blob.
+          const sourceBlobSha = execFileSync('git', ['hash-object', 'src/data/workbook/pages/read-intro.ts'], { encoding: 'utf8' }).trim();
+          let registry = fs.readFileSync('src/data/solutions/registry.ts', 'utf8');
+          registry = registry.replace(
+            /(sourceFile: 'src\/data\/workbook\/pages\/read-intro\.ts',\n\s*sourceBlobSha: ')[0-9a-f]+(')/,
+            `$1${sourceBlobSha}$2`,
+          );
+          fs.writeFileSync('src/data/solutions/registry.ts', registry);
+          NODE
+
+      - name: Generate provisional coverage to obtain exact target signatures
+        run: npm run answers:coverage
+
+      - name: Bind the four new answers to their exact task signatures
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('reports/answer-coverage.json', 'utf8'));
+          const page = report.pages.find((p) => p.pageNumber === 12);
+          if (!page) throw new Error('Page 12 missing from answer coverage');
+          const answers = {
+            'p12-q7': ['E', 'e'],
+            'p12-q8': ['B', 'b'],
+            'p12-q9': ['D', 'd'],
+            'p12-q10': ['C', 'c'],
+          };
+          const lines = Object.entries(answers).map(([qid, values]) => {
+            const target = page.targets.find((t) => t.targetId === qid);
+            if (!target) throw new Error(`Missing ${qid}`);
+            return `      ['${qid}', '${target.signature}', [${values.map((v) => JSON.stringify(v)).join(', ')}]],`;
+          }).join('\n');
+
+          const path = 'src/lms/provenAnswerKey.ts';
+          let src = fs.readFileSync(path, 'utf8');
+          const needle = `      ['p12-q6', '77b67dfe', [\"F\", \"f\"]],\n      ['p12-q11', '0832a9cf', [\"F\", \"f\"]],`;
+          if (!src.includes(needle)) throw new Error('Page 12 proven-answer insertion point not found');
+          src = src.replace(
+            needle,
+            `      ['p12-q6', '77b67dfe', [\"F\", \"f\"]],\n${lines}\n      ['p12-q11', '0832a9cf', [\"F\", \"f\"]],`,
+          );
+          fs.writeFileSync(path, src);
+          NODE
+
+      - name: Regenerate final answer coverage
+        run: npm run answers:coverage
+
+      - name: Verify page 12 and quality gates
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('reports/answer-coverage.json', 'utf8'));
+          const page = report.pages.find((p) => p.pageNumber === 12);
+          if (!page) throw new Error('Page 12 missing');
+          if (page.automaticallyCheckableTargets !== page.interactiveTargetCount) {
+            throw new Error(`Page 12 is not 100% deterministic: ${page.automaticallyCheckableTargets}/${page.interactiveTargetCount}`);
+          }
+          for (const qid of ['p12-q7','p12-q8','p12-q9','p12-q10']) {
+            const target = page.targets.find((t) => t.targetId === qid);
+            if (!target?.automaticCheckingSafe) throw new Error(`${qid} is not auto-checkable`);
+          }
+          NODE
+          npm run answers:coverage:check
+          npm run typecheck
+          npm test
+          npm run build
+
+      - name: Commit canonical repair and remove this one-time workflow
+        run: |
+          git rm .github/workflows/repair-page12-section-d.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add RULES.md src/data/workbook/pages/read-intro.ts src/data/solutions/registry.ts src/lms/answerCoverage.ts src/lms/provenAnswerKey.ts src/lms/engine.ts src/lms/hintCoach.ts tests/ssot-guard.test.ts reports/answer-coverage.json reports/answer-coverage.md reports/answer-target-order.json public/answer-review-manifest.json
+          git commit -m "fix: replace weak page 12 task with x-order reasoning"
+          git push
