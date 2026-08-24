@@ -98,9 +98,9 @@ describe('answer-key coverage intelligence', () => {
       ),
     );
 
-    /* 137 = reviewed open-ended targets whose prompts survived the 78-page
-       canonical import (2026-08-18) unchanged; 24 lapsed with their wording. */
-    expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(137);
+    /* Two obsolete page-11 explanation blanks became deterministic true/false
+       checks, leaving 135 intentionally reviewed open-ended targets. */
+    expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(135);
     for (const [targetId, signature] of Object.entries(
       REVIEWED_OPEN_ENDED_TARGET_SIGNATURES,
     )) {
@@ -110,6 +110,17 @@ describe('answer-key coverage intelligence', () => {
       expect(target?.classification, targetId).toBe('open-ended');
       expect(target?.automaticCheckingSafe, targetId).toBe(false);
     }
+  });
+
+  test('grades the replacement page-11 order checks deterministically', () => {
+    const page = report.pages.find((candidate) => candidate.pageNumber === 11);
+    const targets = new Map(page?.targets.map((target) => [target.targetId, target] as const));
+    expect(targets.get('p11-q20')?.inputType).toBe('true-false');
+    expect(targets.get('p11-q20')?.automaticCheckingSafe).toBe(true);
+    expect(targets.get('p11-q20')?.answers).toContain('false');
+    expect(targets.get('p11-q21')?.inputType).toBe('true-false');
+    expect(targets.get('p11-q21')?.automaticCheckingSafe).toBe(true);
+    expect(targets.get('p11-q21')?.answers).toContain('true');
   });
 
   test('accepts the new exact coordinate proofs and rejects nearby values', () => {
