@@ -1211,23 +1211,23 @@
         },
         {
           "targetId": "p12-q7",
-          "inputType": "ordered-pair-coordinate",
-          "signature": "13c747ef"
+          "inputType": "text:x-order",
+          "signature": "76941066"
         },
         {
           "targetId": "p12-q8",
-          "inputType": "ordered-pair-coordinate",
-          "signature": "13c747ef"
+          "inputType": "text:x-order",
+          "signature": "76941066"
         },
         {
           "targetId": "p12-q9",
-          "inputType": "ordered-pair-coordinate",
-          "signature": "13c747ef"
+          "inputType": "text:x-order",
+          "signature": "76941066"
         },
         {
           "targetId": "p12-q10",
-          "inputType": "ordered-pair-coordinate",
-          "signature": "13c747ef"
+          "inputType": "text:x-order",
+          "signature": "76941066"
         },
         {
           "targetId": "p12-q11",

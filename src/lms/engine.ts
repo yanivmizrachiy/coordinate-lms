@@ -37,6 +37,7 @@ const ANSWER_HINT_BY_KIND: Record<string, string> = {
   property: 'מילה',
   concept: 'מילה',
   direction: 'מילה',
+  'x-order': 'אות',
 };
 
 function answerHintFor(target: HTMLElement): string {

@@ -41,9 +41,9 @@ export const READ_INTRO: WorkbookPageContent = sheet({
 </section>
 </div>
 <section class="q-card">
-<h3>ד. תנו דוגמה לשתי נקודות שערך ה־<span class="math-ltr" dir="ltr">x</span> שלהן שונה, וגם שיעור ה־<span class="math-ltr" dir="ltr">y</span> שלהן שונה.</h3>
+<h3>ד. סדרו את הנקודות B, C, D ו־E משמאל לימין.</h3>
 <ul class="tasks compact">
-<li>הנקודה <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> והנקודה <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>
+<li>כתבו את האותיות לפי הסדר: <span class="math-ltr" dir="ltr"><span class="blank" data-missing="x-order" style="--blank-width:4ch"></span> → <span class="blank" data-missing="x-order" style="--blank-width:4ch"></span> → <span class="blank" data-missing="x-order" style="--blank-width:4ch"></span> → <span class="blank" data-missing="x-order" style="--blank-width:4ch"></span></span></li>
 </ul>
 </section>
 <section class="q-card">

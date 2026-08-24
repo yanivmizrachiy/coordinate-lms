@@ -152,12 +152,12 @@ export const SOLUTION_SPECS: SolutionPageSpec[] = [
   {
     source: READ_INTRO,
     sourceFile: 'src/data/workbook/pages/read-intro.ts',
-    sourceBlobSha: 'c1437f57cb2b24e72abdb216e152608c49fe8a63',
+    sourceBlobSha: '7ddeaef89125f6e4c9090f6831bf2aed9a38a593',
     exercises: [
       { id: 'a', label: 'א', answer: 'A(1,2); B(4,5); C(7,1); D(6,4); E(3,3); F(8,6).' },
       { id: 'b', label: 'ב', answer: 'B; C; E; F.' },
       { id: 'c', label: 'ג', answer: 'הימנית ביותר F; הגבוהה ביותר F.' },
-      { id: 'd', label: 'ד', answer: 'תשובות רבות אפשריות. לדוגמה A(1,2) ו-B(4,5): גם ערכי x שונים וגם שיעורי y שונים.' },
+      { id: 'd', label: 'ד', answer: 'משמאל לימין: E, B, D, C.' },
       { id: 'e', label: 'ה', answer: 'F. שיעורי הנקודה: F(8,6).' },
     ],
   },

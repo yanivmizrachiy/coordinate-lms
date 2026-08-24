@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-24T21:45:20.792Z",
+  "generatedAt": "2026-08-24T22:20:39.305Z",
   "pageCount": 78,
   "targetCount": 1147,
-  "automaticallyCheckableTargets": 733,
-  "coveragePercentage": 63.9,
+  "automaticallyCheckableTargets": 737,
+  "coveragePercentage": 64.3,
   "classifications": {
     "reviewed-explicit": 180,
     "canonical-metadata-derived": 26,
-    "deterministic-mathematical": 521,
+    "deterministic-mathematical": 525,
     "valid-range": 6,
-    "open-ended": 158,
+    "open-ended": 154,
     "ambiguous": 256,
     "unsupported": 0,
     "missing": 0
@@ -3805,50 +3805,62 @@
         {
           "targetId": "p12-q7",
           "order": 7,
-          "inputType": "ordered-pair-coordinate",
-          "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
-          "signature": "13c747ef",
-          "classification": "open-ended",
-          "currentAnswerSource": "deterministic validator missing",
-          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "text:x-order",
+          "context": "כתבו את האותיות לפי הסדר: […] → […] → […] → […]",
+          "signature": "76941066",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "E",
+            "e"
+          ]
         },
         {
           "targetId": "p12-q8",
           "order": 8,
-          "inputType": "ordered-pair-coordinate",
-          "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
-          "signature": "13c747ef",
-          "classification": "open-ended",
-          "currentAnswerSource": "deterministic validator missing",
-          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "text:x-order",
+          "context": "כתבו את האותיות לפי הסדר: […] → […] → […] → […]",
+          "signature": "76941066",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "B",
+            "b"
+          ]
         },
         {
           "targetId": "p12-q9",
           "order": 9,
-          "inputType": "ordered-pair-coordinate",
-          "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
-          "signature": "13c747ef",
-          "classification": "open-ended",
-          "currentAnswerSource": "deterministic validator missing",
-          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "text:x-order",
+          "context": "כתבו את האותיות לפי הסדר: […] → […] → […] → […]",
+          "signature": "76941066",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "D",
+            "d"
+          ]
         },
         {
           "targetId": "p12-q10",
           "order": 10,
-          "inputType": "ordered-pair-coordinate",
-          "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
-          "signature": "13c747ef",
-          "classification": "open-ended",
-          "currentAnswerSource": "deterministic validator missing",
-          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "text:x-order",
+          "context": "כתבו את האותיות לפי הסדר: […] → […] → […] → […]",
+          "signature": "76941066",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "C",
+            "c"
+          ]
         },
         {
           "targetId": "p12-q11",
@@ -3894,14 +3906,9 @@
           ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p12-q7",
-        "p12-q8",
-        "p12-q9",
-        "p12-q10"
-      ],
-      "automaticallyCheckableTargets": 9,
-      "coveragePercentage": 69.2
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 13,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 13,

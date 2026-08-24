@@ -1,8 +1,8 @@
 # Answer-key coverage report
 
-Generated: 2026-08-24T21:45:20.792Z
+Generated: 2026-08-24T22:20:39.305Z
 
-Overall: 733/1147 safely checkable targets (63.9%).
+Overall: 737/1147 safely checkable targets (64.3%).
 
 ## Classification totals
 
@@ -10,9 +10,9 @@ Overall: 733/1147 safely checkable targets (63.9%).
 |---|---:|
 | reviewed-explicit | 180 |
 | canonical-metadata-derived | 26 |
-| deterministic-mathematical | 521 |
+| deterministic-mathematical | 525 |
 | valid-range | 6 |
-| open-ended | 158 |
+| open-ended | 154 |
 | ambiguous | 256 |
 | unsupported | 0 |
 | missing | 0 |
@@ -322,7 +322,7 @@ Overall: 733/1147 safely checkable targets (63.9%).
 
 ### Page 12 — נקודות ברביע הראשון
 
-9/13 safely checkable (69.2%).
+13/13 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -332,10 +332,10 @@ Overall: 733/1147 safely checkable targets (63.9%).
 | p12-q4 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y שלה הוא 6 ← […] |
 | p12-q5 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הרחוקה ביותר ימינה: […] |
 | p12-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הגבוהה ביותר: […] |
-| p12-q7 | ordered-pair-coordinate | open-ended | no | deterministic validator missing | הנקודה ([…],[…]) והנקודה ([…],[…]). |
-| p12-q8 | ordered-pair-coordinate | open-ended | no | deterministic validator missing | הנקודה ([…],[…]) והנקודה ([…],[…]). |
-| p12-q9 | ordered-pair-coordinate | open-ended | no | deterministic validator missing | הנקודה ([…],[…]) והנקודה ([…],[…]). |
-| p12-q10 | ordered-pair-coordinate | open-ended | no | deterministic validator missing | הנקודה ([…],[…]) והנקודה ([…],[…]). |
+| p12-q7 | text:x-order | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את האותיות לפי הסדר: […] → […] → […] → […] |
+| p12-q8 | text:x-order | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את האותיות לפי הסדר: […] → […] → […] → […] |
+| p12-q9 | text:x-order | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את האותיות לפי הסדר: […] → […] → […] → […] |
+| p12-q10 | text:x-order | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את האותיות לפי הסדר: […] → […] → […] → […] |
 | p12-q11 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | שם הנקודה: […]. |
 | p12-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה: ([…],[…]). |
 | p12-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה: ([…],[…]). |

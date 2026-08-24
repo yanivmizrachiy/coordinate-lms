@@ -117,6 +117,8 @@ describe('print and computerized practice stay directly linked but operationally
   it('states that a canonical content change updates both renderings', () => {
     expect(rules).toContain('Printable and computerized pages are two renderings of the SAME worksheet');
     expect(rules).toContain('must propagate automatically to both');
+    expect(rules).toContain('must be authored exactly once');
+    expect(rules).toContain('Never patch a printed copy and a computerized copy separately');
     expect(rules).toContain('Print/download controls are utilities for print/booklet surfaces');
   });
 });
