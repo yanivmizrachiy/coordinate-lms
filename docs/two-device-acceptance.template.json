@@ -7,7 +7,7 @@
   "testers": [],
   "devices": [],
   "checks": [
-    { "id": "guest-transfer", "status": "blocked", "notes": "" },
+    { "id": "guest-draft-transfer-no-score-transfer", "status": "blocked", "notes": "" },
     { "id": "attempts-survive-reload", "status": "blocked", "notes": "" },
     { "id": "offline-reconnect-truth", "status": "blocked", "notes": "" },
     { "id": "teacher-central-snapshot", "status": "blocked", "notes": "" },
