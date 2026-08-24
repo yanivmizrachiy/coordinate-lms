@@ -80,3 +80,30 @@ jobs:
             playwright-report
             test-results
           retention-days: 7
+
+  capture-page12:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Build and capture page 12
+        run: |
+          VITE_ALLOW_LOCAL_LMS=true npm run build
+          npm run preview > /tmp/coordinate-preview.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4319/ >/dev/null; then break; fi
+            sleep 1
+          done
+          npx playwright screenshot --browser chromium --viewport-size "1440,1800" --full-page "http://127.0.0.1:4319/#/workbook/12" page12-after-fix.png
+          test -s page12-after-fix.png
+      - name: Upload page 12 screenshot
+        uses: actions/upload-artifact@v7
+        with:
+          name: page12-after-fix
+          path: page12-after-fix.png
+          retention-days: 1
