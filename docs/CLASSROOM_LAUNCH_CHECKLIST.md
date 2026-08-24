@@ -68,8 +68,10 @@ before deployment.
 
 Use a real student phone and a separate teacher computer:
 
-1. On the phone, complete page 1 as a guest and record its score and attempts.
-2. Register. Confirm the guest draft/result transfers without disappearing.
+1. On the phone, complete page 1 as a guest and record its displayed score and attempts.
+2. Register. Confirm eligible guest draft/attempt state transfers when applicable,
+   while the already displayed guest page score/result does **not** transfer into
+   the new account and does not appear in the teacher dashboard.
 3. Reload the phone, continue on page 2, and confirm attempts survive reload.
 4. Temporarily disconnect the phone, enter an answer, reconnect, and confirm the
    UI shows the synchronization state accurately.
