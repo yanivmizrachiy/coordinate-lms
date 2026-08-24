@@ -21,6 +21,7 @@ A current user instruction wins over older wording and this file must be reconci
 - **Every project-changing action must be reconciled with this file in the same change set.** If behavior, requirements, ownership, scoring, feedback, persistence or release rules change, update `RULES.md` as part of that work. Do not let implementation move ahead of the source of truth.
 - Keep this file useful rather than noisy: record durable rules and ownership, merge repeated wording, and do not add temporary operational chatter merely to prove that an action happened.
 - Every meaningful correction from the user must be converted into the most useful reusable rule, not treated as a one-off patch when it clearly applies elsewhere.
+- **When refining the product with the user, discuss and test only questions, pages and behavior that actually exist in this repository. Do not invent unrelated sample questions or pretend examples are project content.** If a computerized adaptation is being designed, start from the exact existing worksheet task and make the adaptation explicit.
 - Merge repeated or overlapping rules. Delete obsolete wording instead of accumulating contradictory notes.
 - During a repair/cleanup pass, change only a **verified defect, direct contradiction with a current requirement, or a demonstrated maintenance hazard**. Do not add opportunistic features or broad redesigns while repairing failures.
 - Before a multi-step repair, keep a short explicit work plan: what is broken, what will change, what must stay untouched, and which gates prove the repair. Finish that repair and its tests before expanding scope.
@@ -32,9 +33,11 @@ A current user instruction wins over older wording and this file must be reconci
 ## 3. Canonical worksheet: print and computerized practice
 
 - **החוברת = 78 עמודים ממוספרים**. Preserve mathematics, wording, diagrams, RTL behavior, page order and print pagination unless a current content instruction changes them.
-- **Printable and computerized pages are two renderings of the SAME worksheet** content, never two content products.
-- Any canonical worksheet content change **must propagate automatically to both** printable and computerized renderings. Make the content change once.
-- `#/workbook/:n` must render the canonical page itself and then add the LMS layer. A separately authored computerized worksheet is a defect.
+- **Printable and computerized pages are two renderings of the SAME worksheet learning content**, not two unrelated products.
+- Any canonical worksheet content change **must propagate automatically to both** printable and computerized renderings unless the difference is an intentional interaction-only adaptation required for deterministic computerized grading.
+- `#/workbook/:n` must render the canonical page itself and then add the LMS layer. Do not create a separately authored computerized workbook.
+- **A printed open-ended task may become an interaction-only closed task on screen when that is necessary to make grading exact.** The computerized version must preserve the same mathematical skill and use the real printed task as its source; it may replace an ungradeable free response with four carefully designed choices containing exactly one correct answer and three pedagogically meaningful distractors.
+- Computerized adaptations must never make the printed worksheet change merely to satisfy the LMS. They belong to the interaction layer and must be hidden from print.
 - The practice rendering keeps the canonical A4 **width** but is never height-clipped: the interaction layer may make a dense page taller than one printed page, and every question must remain visible and answerable on screen. Print pagination is a print-surface property and stays exactly A4.
 - Before every page change classify it as CONTENT or INTERACTION/PRESENTATION. Content changes affect both renderings; LMS-only changes must not modify printable content.
 - **Print/download controls are utilities for print/booklet surfaces**, not part of computerized student practice. No print/download button belongs inside `#/workbook/:n`.
@@ -60,6 +63,8 @@ A current user instruction wins over older wording and this file must be reconci
 ## 5. Scoring and correction model
 
 - A learner completes a page and receives a page score. **100 is the maximum possible score; 0 is a valid minimum when no credit was earned.**
+- **Every scored target in computerized practice must have a deterministic correct answer before release. There is no teacher-judgment, ambiguous or unkeyed target inside the computerized page score.**
+- Release/coverage checks must fail if even one computerized answer target cannot be graded deterministically. Open-ended or ambiguous printed work must be adapted on screen before release rather than silently excluded from the denominator.
 - **After the learner submits a page, the final page grade is shown prominently in red.** The numeric grade remains red at every score, including 100; a perfect-score celebration may add restrained decoration without changing the grade colour.
 - Every final page score is accompanied by a short **Hebrew teacher comment appropriate to the score band**. The wording must come from one maintained feedback owner, vary naturally across pages, and remain truthful: strong scores receive positive reinforcement; middle scores combine recognition with a concrete review suggestion; low scores clearly say more practice is needed without shaming the learner.
 - Correct on the first checked attempt loses no credit: 100% of that target's credit.
@@ -80,7 +85,8 @@ A current user instruction wins over older wording and this file must be reconci
 ## 6. Feedback: a teacher beside the learner
 
 - Feedback is per QUESTION, not per keystroke, and final PAGE feedback appears after page submission.
-- A fully correct question shows **✓ נכון**. Partial work shows **◐ יש מה לתקן**. A wrong answer shows **✕ נסה שוב**. A locked unresolved answer shows **🔒 נעול**. Open/unkeyed work may show **? נשמר לבדיקת המורה**.
+- A fully correct question shows **✓ נכון**. Partial work shows **◐ יש מה לתקן**. A wrong answer shows **✕ נסה שוב**. A locked unresolved answer shows **🔒 נעול**.
+- The computerized student flow must not show `נשמר לבדיקת המורה` for a scored worksheet target. A target that would require teacher judgment must be converted to a deterministic computerized interaction before release.
 - The LMS should feel as if a supportive mathematics teacher is beside the learner: warm, specific, truthful, encouraging and pedagogically useful.
 - Use broad, non-repetitive banks of natural, grammatically correct Hebrew teacher feedback. Avoid mechanically repeating the same praise, correction phrase or final-page comment on consecutive work.
 - Positive feedback should vary according to context: first-try success, successful correction, persistence, a streak of correct answers, completing a question and completing a page may receive different wording.
@@ -121,7 +127,8 @@ A current user instruction wins over older wording and this file must be reconci
 - Fuzzy spelling must never turn a different concept into a correct answer: `אנכי` is not `אופקי`.
 - Numeric answers, coordinates, ordered data, sets and other mathematical structures remain mathematically strict. Numeric equivalence such as `1/2 = 0.5` is allowed because it is mathematically equivalent, not because of fuzzy text matching.
 - A deterministic answer encoded directly in the canonical target/page metadata is authoritative for that target. Stale positional/default/local/remote keys must not override an explicit canonical answer attached to the current target.
-- Never infer a supposedly correct answer from nearby prose. Ambiguous/open-ended items remain ungraded or teacher-reviewed until supported by canonical evidence.
+- Never guess a correct answer from nearby prose. If the printed task permits many correct responses or lacks enough information for a unique answer, **the computerized interaction must be redesigned from that exact task into a deterministic form before release**, normally four choices with exactly one correct option and three plausible misconception-based distractors.
+- The four choices must test the same mathematical idea as the printed task. Distractors must be mathematically meaningful and based on realistic student errors, not random filler designed merely to create four buttons.
 
 ## 9. Interface design
 
@@ -156,10 +163,12 @@ A current user instruction wins over older wording and this file must be reconci
 - Do not keep stale historical statistics or temporary migration counts in this source-of-truth file. Such data belongs in generated reports/history, because volatile numbers can become false rules.
 - Do not delete a working subsystem merely to reduce file count. Delete/move only code that is demonstrably duplicate, dead, obsolete or contradictory.
 - Automated guards should protect product principles, not incidental filenames or implementation trivia.
+- **The computerized answer-coverage gate is fail-closed:** release must fail unless every interactive scored target on all 78 computerized pages has a deterministic answer after all screen-only adaptations are applied.
 
 ## 12. Future change map — edit the owner, not every consumer
 
 - **Worksheet text, mathematics, diagrams, blanks and page order:** `src/data/workbook/`.
+- **Screen-only deterministic adaptation of printed open-ended/ambiguous tasks:** one dedicated LMS interaction owner; do not fork the workbook. It must run before LMS target numbering/answer-key capture and must be included in answer-coverage tests.
 - **First-entry explanation:** `src/views/welcome.ts`; **route ownership:** `src/router.ts`; **first-entry styling:** `src/styles/welcome.css`.
 - **Registration/authentication semantics:** `src/lms/auth.ts` and `src/views/lmsLogin.ts`.
 - **Attempt limit:** `src/lms/config.ts`. The Firestore bound in `firestore.rules` is the only intentional mirror because security rules execute separately; its contract tests must change in the same commit.
