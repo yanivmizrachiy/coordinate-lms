@@ -45,6 +45,12 @@
 .lms-qcheck__btn::before {
   content: '';
   position: absolute;
+  /* Behind the label, not over it. An absolutely-positioned pseudo-element
+     paints ABOVE its element's in-flow text, and this pill's solid fill was
+     covering the „להגיש ←" label — the control rendered as a blank chip. The
+     button is its own stacking context (position + z-index), so -1 keeps the
+     pill inside the button, under the text. */
+  z-index: -1;
   inset-inline: 0;
   top: 50%;
   height: 32px;
