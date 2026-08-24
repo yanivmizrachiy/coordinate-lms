@@ -41,9 +41,9 @@ export const ORDERED_PAIR_PRACTICE: WorkbookPageContent = sheet({
 <p><strong>סמנו נכון או לא נכון.</strong></p>
 <table class="tf-table" data-balanced="true">
 <tbody>
-<tr data-answer="false"><td>הנקודות <span class="math-ltr" dir="ltr">(2,5)</span> ו־<span class="math-ltr" dir="ltr">(5,2)</span> הן אותה נקודה, כי מופיעים בהן אותם מספרים.</td><td>
+<tr data-answer="false" data-hint-kind="ordered-pair-order"><td>הנקודות <span class="math-ltr" dir="ltr">(2,5)</span> ו־<span class="math-ltr" dir="ltr">(5,2)</span> הן אותה נקודה, כי מופיעים בהן אותם מספרים.</td><td>
 <div class="tf-options" role="group" aria-label="סמנו נכון או לא נכון"><label class="tf-option"><input type="radio" name="tf-11-order-1" value="true"><span>נכון</span></label><label class="tf-option"><input type="radio" name="tf-11-order-1" value="false"><span>לא נכון</span></label></div></td></tr>
-<tr data-answer="true"><td>כאשר מחליפים את סדר המספרים בזוג סדור, מיקום הנקודה יכול להשתנות.</td><td>
+<tr data-answer="true" data-hint-kind="ordered-pair-order"><td>כאשר מחליפים את סדר המספרים בזוג סדור, מיקום הנקודה יכול להשתנות.</td><td>
 <div class="tf-options" role="group" aria-label="סמנו נכון או לא נכון"><label class="tf-option"><input type="radio" name="tf-11-order-2" value="true"><span>נכון</span></label><label class="tf-option"><input type="radio" name="tf-11-order-2" value="false"><span>לא נכון</span></label></div></td></tr>
 </tbody>
 </table>
