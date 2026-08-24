@@ -47,12 +47,11 @@ export const READ_INTRO: WorkbookPageContent = sheet({
 </ul>
 </section>
 <section class="q-card">
-<h3>ה. שתי דעות — מי צודק?</h3>
+<h3>ה. מצאו נקודה לפי שני תנאים.</h3>
 <ul class="tasks compact">
-<li><b>גיא</b> אומר: „שתי נקודות שקרובות זו לזו חייבות להיות בעלות אותם שיעורים.”</li>
-<li><b>נועה</b> אומרת: „שתי נקודות יכולות להיות קרובות זו לזו, ובכל זאת שיעוריהן שונים.”</li>
-<li>צודק/צודקת: <span class="blank" data-missing="letter" style="--blank-width:5ch"></span>.</li>
-<li>הנימוק: הנקודה <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> והנקודה <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> קרובות זו לזו, ובכל זאת ערך ה־<span class="math-ltr" dir="ltr">x</span> שלהן <span class="blank" data-missing="relation" style="--blank-width:5ch"></span>.</li>
+<li>איזו נקודה נמצאת גם מימין לנקודה D וגם מעל לנקודה B?</li>
+<li>שם הנקודה: <span class="blank" data-missing="letter" style="--blank-width:5ch"></span>.</li>
+<li>שיעורי הנקודה: <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>
 </ul>
 </section>
 `,
