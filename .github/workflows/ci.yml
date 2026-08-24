@@ -5,7 +5,50 @@ on:
     branches: ['**']
   pull_request:
 
+permissions:
+  contents: write
+
 jobs:
+  grading-policy-cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'push' && github.ref_name || github.event.pull_request.head.ref }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Apply idempotent grading-policy cleanup
+        run: node scripts/tmp-grading-cleanup.cjs
+      - name: Regenerate answer coverage
+        run: npm run answers:coverage
+      - name: Verify teacher-review fallback is absent
+        run: |
+          if grep -RInE 'נשמר לבדיקת המורה|התשובה נשמרה לבדיקת המורה|teacher judgment required|open-ended targets require teacher judgment' RULES.md src docs; then
+            echo 'Forbidden teacher-review fallback remains' >&2
+            exit 1
+          fi
+      - name: Focused quality gates
+        run: |
+          npm run answers:coverage:check
+          npm run typecheck
+          npm test
+          npm run build
+      - name: Commit verified cleanup on branch push
+        if: github.event_name == 'push'
+        run: |
+          if git diff --quiet; then
+            echo 'Cleanup already applied.'
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add RULES.md docs/CLASSROOM_LAUNCH_CHECKLIST.md src/lms/answerCoverage.ts src/lms/repository.ts src/lms/engine.ts tests/answer-coverage.test.ts tests/ssot-guard.test.ts reports/answer-coverage.json reports/answer-coverage.md reports/answer-target-order.json public/answer-review-manifest.json
+          git commit -m "fix: enforce fully automatic deterministic grading"
+          git push
+
   build-and-test:
     runs-on: ubuntu-latest
     steps:
