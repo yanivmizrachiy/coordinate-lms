@@ -4,6 +4,21 @@
   z-index: 2;
   gap: 8px;
   margin-top: 9px;
+  /* The row itself is transparent padding around its controls, yet its z-index
+     let it swallow taps aimed at the expanded hit box of the PREVIOUS
+     question's button underneath. The row never takes a tap; its children do. */
+  pointer-events: none;
+  /* A scale-invariant 16 visual px of clearance after each control row.
+     Adjacent questions' expanded 48px hit boxes overlapped on scaled sheets,
+     so a tap ~21px below one button's centre landed on the next button.
+     Dividing by the sheet scale keeps the on-screen gap the same 16px on any
+     device, which keeps neighbouring hit boxes clear of each other's ~21px
+     touch ring all the way down to the 0.4 minimum scale. */
+  margin-bottom: calc(16px / var(--sheet-scale, 1));
+}
+
+.lms-qcheck > * {
+  pointer-events: auto;
 }
 
 /* The worksheet is scaled as one A4 surface on phones. The button itself is

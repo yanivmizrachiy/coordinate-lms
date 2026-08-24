@@ -157,10 +157,6 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     outlet.append(c);
     window.scrollTo({ top: 0 });
 
-    const roomForSheet = (): number => {
-      const docTop = sheetWrap.getBoundingClientRect().top + window.scrollY;
-      return window.innerHeight - docTop - nav.offsetHeight - 14;
-    };
     const applyZoom = (): void => {
       const sheetEl = sheetWrap.querySelector<HTMLElement>('.sheet');
       if (!sheetEl) return;
@@ -169,9 +165,13 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       const w = sheetEl.offsetWidth;
       if (!h || !w) return;
       const z = sheetZoom.get();
+      /* Fit means fit-to-WIDTH. The practice sheet grows below one A4 once the
+         per-question controls are laid in, so fitting the whole height would
+         shrink the type below readability on a phone; vertical scrolling is the
+         natural reading motion for a worksheet. */
       const scale =
         z === 'fit'
-          ? Math.max(0.4, Math.min(1, roomForSheet() / h, sheetWrap.clientWidth / w))
+          ? Math.max(0.4, Math.min(1, sheetWrap.clientWidth / w))
           : Math.min(z, sheetWrap.clientWidth / w);
       sheetWrap.style.setProperty('--sheet-scale', scale.toFixed(3));
       sheetWrap.style.height = `${Math.ceil(h * scale)}px`;

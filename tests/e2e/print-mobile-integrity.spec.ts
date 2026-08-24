@@ -1,20 +1,28 @@
 import { test, expect } from '@playwright/test';
 
 test('every sheet keeps its A4 shape on a phone exactly as on a desktop', async ({ page }) => {
+  /* The print surface is EXACTLY A4 — that is what reaches the printer. The
+     practice surface renders the same canonical A4 page and then lays the
+     interaction rows into it, so it keeps the A4 WIDTH but may legitimately
+     grow TALLER than one printed page; clipping it to 297mm is what used to
+     cut the last questions off a dense page on a phone. A practice sheet may
+     therefore be taller than 1.41, never shorter and never wider. */
   for (const route of ['/#/print', '/#/workbook/18']) {
+    const practice = route.includes('workbook');
     await page.goto(route);
     await page.locator('.sheet').first().waitFor();
     await page.waitForTimeout(600);
-    const off = await page.evaluate(() => {
+    const off = await page.evaluate((grows: boolean) => {
       const bad: string[] = [];
       document.querySelectorAll('.sheet').forEach((el, i) => {
         const r = el.getBoundingClientRect();
         if (r.width < 50) return;
         const ratio = r.height / r.width;
-        if (Math.abs(ratio - 1.414) > 0.03) bad.push(`sheet ${i}: ${ratio.toFixed(2)} instead of 1.41`);
+        const broken = grows ? ratio < 1.414 - 0.03 : Math.abs(ratio - 1.414) > 0.03;
+        if (broken) bad.push(`sheet ${i}: ${ratio.toFixed(2)} instead of ${grows ? '≥1.41' : '1.41'}`);
       });
       return bad;
-    });
+    }, practice);
     expect(off.slice(0, 5), `${route}: ${off.length} sheets lost their A4 shape — ${off.slice(0, 5).join(' | ')}`).toEqual([]);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, `${route} scrolls sideways by ${overflow}px`).toBeLessThanOrEqual(1);

@@ -12,6 +12,27 @@
   gap: 8px;
 }
 
+/* The canonical A4 sheet is authored to FIT 297mm and the print surface clips
+   at exactly that height. Practice adds an interaction layer INSIDE the sheet
+   — a submit row and verdict per question — which legitimately makes a dense
+   page taller than one physical A4. With the print clipping in force, the last
+   questions of such a page were simply cut off on screen: invisible and
+   unanswerable, while submit-with-unanswered still charged them 0. On screen
+   the sheet must grow with its content; print keeps the fixed page. */
+.pageviewer--practice .sheet {
+  height: auto;
+  min-height: 297mm;
+  overflow: visible;
+}
+
+/* The wrap is a flex row, and its default cross-axis stretch handed the sheet
+   the wrap's own reserved height instead of letting height:auto follow the
+   content — which re-pinned the sheet to one A4 through min-height. The sheet
+   sizes itself; the wrap only centres it and reserves the scaled footprint. */
+.pageviewer--practice .pageviewer__sheetwrap {
+  align-items: flex-start;
+}
+
 /* Routine engine chatter (including guest/account prompts) does not belong in
    the worksheet flow. Real errors remain visible and retryable. */
 .pageviewer--practice .lms-panel__status:not([data-kind="error"]) {

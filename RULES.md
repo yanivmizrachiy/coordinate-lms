@@ -32,6 +32,7 @@ A current user instruction wins over older wording and this file must be reconci
 - **Printable and computerized pages are two renderings of the SAME worksheet** content, never two content products.
 - Any canonical worksheet content change **must propagate automatically to both** printable and computerized renderings. Make the content change once.
 - `#/workbook/:n` must render the canonical page itself and then add the LMS layer. A separately authored computerized worksheet is a defect.
+- The practice rendering keeps the canonical A4 **width** but is never height-clipped: the interaction layer may make a dense page taller than one printed page, and every question must remain visible and answerable on screen. Print pagination is a print-surface property and stays exactly A4.
 - Before every page change classify it as CONTENT or INTERACTION/PRESENTATION. Content changes affect both renderings; LMS-only changes must not modify printable content.
 - **Print/download controls are utilities for print/booklet surfaces**, not part of computerized student practice. No print/download button belongs inside `#/workbook/:n`.
 - On-screen games may be attached as an LMS layer, but must not fork or rewrite canonical sheet HTML and must never appear in print.
