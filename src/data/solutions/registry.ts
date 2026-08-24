@@ -152,7 +152,7 @@ export const SOLUTION_SPECS: SolutionPageSpec[] = [
   {
     source: READ_INTRO,
     sourceFile: 'src/data/workbook/pages/read-intro.ts',
-    sourceBlobSha: '9aba4ad511e215a077a09c5e8055af4e0f0cd532',
+    sourceBlobSha: 'c1437f57cb2b24e72abdb216e152608c49fe8a63',
     exercises: [
       { id: 'a', label: 'א', answer: 'A(1,2); B(4,5); C(7,1); D(6,4); E(3,3); F(8,6).' },
       { id: 'b', label: 'ב', answer: 'B; C; E; F.' },

@@ -56,10 +56,12 @@ before deployment.
 
 1. Open a PR and require CI to pass: coverage drift, typecheck, tests, build,
    production audit, Firestore checks, and desktop/mobile Playwright.
-2. Review the answer report in `reports/answer-coverage.md`. Unkeyed ambiguous or
-   open-ended targets require teacher judgment; do not convert them by guessing.
-   Reviewed proof and open-ended entries are bound to target signatures, so any
-   prompt drift must be resolved before release.
+2. Review the answer report in `reports/answer-coverage.md`. Every computerized
+   scored target must have an exact deterministic computer-checkable rule. If any
+   target is still ambiguous or lacks a validator, release is blocked: do not omit
+   it from the score and do not route it to teacher/manual review. Bring the exact
+   real worksheet question to the user, implement the approved resolution, and
+   rerun coverage before release.
 3. Run `npm run release:check` locally or in the release environment.
 4. Manually run **Deploy to GitHub Pages (manual)**. Do not deploy from an
    unreviewed branch and do not enable local LMS fallback in production.

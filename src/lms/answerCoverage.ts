@@ -360,11 +360,11 @@ function classify(
   if (reviewedOpenEndedSignature === signature || isOpenEnded(context)) {
     return {
       classification: 'open-ended',
-      currentAnswerSource: 'teacher judgment required',
+      currentAnswerSource: 'deterministic validator missing',
       sourceEvidence:
         reviewedOpenEndedSignature === signature
-          ? 'signature-bound canonical review: learner-created or dependent response'
-          : 'learner-created or explanatory response',
+          ? 'signature-bound canonical review: deterministic validator still required'
+          : 'deterministic validator still required for this response',
       automaticCheckingSafe: false,
       answers: [],
     };

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-24T21:28:54.978Z",
+  "generatedAt": "2026-08-24T21:45:20.792Z",
   "pageCount": 78,
   "targetCount": 1147,
   "pages": [
@@ -2034,7 +2034,7 @@
           "signature": "e4f4cc55",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שיעורי הנקודה שסימנתם: E([…],[…])."
@@ -2045,7 +2045,7 @@
           "signature": "e4f4cc55",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שיעורי הנקודה שסימנתם: E([…],[…])."
@@ -2056,7 +2056,7 @@
           "signature": "f952afbf",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "המרחק של הנקודה שסימנתם מציר y הוא […] יחידות."
@@ -3256,7 +3256,7 @@
           "signature": "13c747ef",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה ([…],[…]) והנקודה ([…],[…])."
@@ -3267,7 +3267,7 @@
           "signature": "13c747ef",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה ([…],[…]) והנקודה ([…],[…])."
@@ -3278,7 +3278,7 @@
           "signature": "13c747ef",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה ([…],[…]) והנקודה ([…],[…])."
@@ -3289,7 +3289,7 @@
           "signature": "13c747ef",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה ([…],[…]) והנקודה ([…],[…])."
@@ -3557,7 +3557,7 @@
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -3568,7 +3568,7 @@
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -3946,7 +3946,7 @@
           "signature": "e05dfa65",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "לכן כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0)."
@@ -3957,7 +3957,7 @@
           "signature": "714d467f",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "וכל הנקודות שממוקמות על ציר y הן מהצורה (0,[…])."
@@ -4025,7 +4025,7 @@
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -4277,7 +4277,7 @@
           "signature": "6f2b24e6",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…])."
@@ -4288,7 +4288,7 @@
           "signature": "6f2b24e6",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…])."
@@ -4376,7 +4376,7 @@
           "signature": "1b541791",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות."
@@ -4387,7 +4387,7 @@
           "signature": "1b541791",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות."
@@ -4398,7 +4398,7 @@
           "signature": "dddcf268",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות."
@@ -4552,7 +4552,7 @@
           "signature": "64aa47f4",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…])."
@@ -5016,7 +5016,7 @@
           "signature": "aad9137b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "([…],[…])"
@@ -5027,7 +5027,7 @@
           "signature": "aad9137b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "([…],[…])"
@@ -5038,7 +5038,7 @@
           "signature": "aad9137b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "([…],[…])"
@@ -5049,7 +5049,7 @@
           "signature": "aad9137b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "([…],[…])"
@@ -5060,7 +5060,7 @@
           "signature": "aad9137b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "([…],[…])"
@@ -5071,7 +5071,7 @@
           "signature": "aad9137b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "([…],[…])"
@@ -5082,7 +5082,7 @@
           "signature": "aad9137b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "([…],[…])"
@@ -5093,7 +5093,7 @@
           "signature": "aad9137b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "([…],[…])"
@@ -5104,7 +5104,7 @@
           "signature": "aad9137b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "([…],[…])"
@@ -5115,7 +5115,7 @@
           "signature": "aad9137b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "([…],[…])"
@@ -5126,7 +5126,7 @@
           "signature": "39217632",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו על הסרטוט נקודה F שממוקמת על ציר x. שיעוריה: F([…],[…])."
@@ -5151,7 +5151,7 @@
           "signature": "dc459768",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו נקודה G שממוקמת על ציר x וגם מימין לנקודה B. שיעוריה: G([…],[…])."
@@ -5205,7 +5205,7 @@
           "signature": "36d8976b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כל הנקודות שממוקמות על ציר y הן מהצורה (0,[…]), כי ערך ה־x שלהן הוא […]."
@@ -5230,7 +5230,7 @@
           "signature": "69a80635",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0), כי שיעור ה־[…] שלהן הוא 0."
@@ -5385,7 +5385,7 @@
           "signature": "e6d5c219",
           "inputType": "text:text",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "[…] […]"
@@ -5396,7 +5396,7 @@
           "signature": "e6d5c219",
           "inputType": "text:text",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "[…] […]"
@@ -5598,7 +5598,7 @@
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -6287,7 +6287,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
@@ -6298,7 +6298,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
@@ -6309,7 +6309,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
@@ -6320,7 +6320,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
@@ -6353,7 +6353,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -6364,7 +6364,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -6375,7 +6375,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -6386,7 +6386,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -6421,7 +6421,7 @@
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -6619,7 +6619,7 @@
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -7239,7 +7239,7 @@
           "signature": "26cc5405",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]."
@@ -7250,7 +7250,7 @@
           "signature": "8b64bfe5",
           "inputType": "text:direction",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו פקודת תנועה משלכם: הזזה של […] יחידות […]."
@@ -7311,7 +7311,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7322,7 +7322,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7333,7 +7333,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7344,7 +7344,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7355,7 +7355,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7366,7 +7366,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7377,7 +7377,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7388,7 +7388,7 @@
           "signature": "05ec9859",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])."
@@ -7399,7 +7399,7 @@
           "signature": "f221a6b1",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "במסלול שסימנתם יש […] צעדים."
@@ -7476,7 +7476,7 @@
           "signature": "159fcfc6",
           "inputType": "text:direction",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…])."
@@ -7487,7 +7487,7 @@
           "signature": "ee459183",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…])."
@@ -7498,7 +7498,7 @@
           "signature": "ee459183",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…])."
@@ -7553,7 +7553,7 @@
           "signature": "24c657f9",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "מספר הצעדים במסלול שסימנתם […] מסכום שני ההפרשים, כי צריך לעקוף את הקירות."
@@ -7813,7 +7813,7 @@
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -7866,7 +7866,7 @@
           "signature": "08b44ca7",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…])."
@@ -7877,7 +7877,7 @@
           "signature": "08b44ca7",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…])."
@@ -7888,7 +7888,7 @@
           "signature": "08b44ca7",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…])."
@@ -7899,7 +7899,7 @@
           "signature": "08b44ca7",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…])."
@@ -7921,7 +7921,7 @@
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -8405,7 +8405,7 @@
           "signature": "6b34ed80",
           "inputType": "text:property",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודות שסימנתם ממוקמות על קו […] אחד."
@@ -8575,7 +8575,7 @@
           "signature": "f22e876f",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "בחרו מספר והשלימו כלל: שיעור ה־y גדול ב־[…] מערך ה־x."
@@ -8586,7 +8586,7 @@
           "signature": "ae0d10d8",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א."
@@ -8597,7 +8597,7 @@
           "signature": "ae0d10d8",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א."
@@ -8608,7 +8608,7 @@
           "signature": "ae0d10d8",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א."
@@ -8619,7 +8619,7 @@
           "signature": "ae0d10d8",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א."
@@ -8630,7 +8630,7 @@
           "signature": "e7242597",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "בשתי הנקודות שסימנתם, ההפרש בין שיעור ה־y ובין ערך ה־x הוא […]."
@@ -9007,7 +9007,7 @@
           "signature": "b30606ed",
           "inputType": "text:text",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "מה הייתה הטעות? […]"
@@ -9047,7 +9047,7 @@
           "signature": "f659763a",
           "inputType": "text:text",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "תנו דוגמה לנקודה על ציר x: […]"
@@ -9372,7 +9372,7 @@
           "signature": "2d4053e5",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "רמז נוסף שמתאים לנקודה G שסימנתם: ערך ה־x שלה שווה […]."
@@ -9444,7 +9444,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -9455,7 +9455,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -9466,7 +9466,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -9477,7 +9477,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -9532,7 +9532,7 @@
           "signature": "3c53a6a0",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…])."
@@ -9543,7 +9543,7 @@
           "signature": "3c53a6a0",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…])."
@@ -9554,7 +9554,7 @@
           "signature": "3c53a6a0",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…])."
@@ -9565,7 +9565,7 @@
           "signature": "3c53a6a0",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…])."
@@ -9576,7 +9576,7 @@
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -10072,7 +10072,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
@@ -10083,7 +10083,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
@@ -10094,7 +10094,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
@@ -10105,7 +10105,7 @@
           "signature": "2dc8e219",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…])."
@@ -10274,7 +10274,7 @@
           "signature": "eadbaf7c",
           "inputType": "text:letter",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקטע שסימנתם מאונך בהכרח לציר […]."
@@ -10572,7 +10572,7 @@
           "signature": "bd0fcb5c",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ההסבר: […]."
@@ -10718,7 +10718,7 @@
           "signature": "83580dd6",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
@@ -10729,7 +10729,7 @@
           "signature": "83580dd6",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
@@ -10740,7 +10740,7 @@
           "signature": "83580dd6",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
@@ -10751,7 +10751,7 @@
           "signature": "83580dd6",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
@@ -10762,7 +10762,7 @@
           "signature": "83580dd6",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
@@ -10773,7 +10773,7 @@
           "signature": "83580dd6",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
@@ -10784,7 +10784,7 @@
           "signature": "83580dd6",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
@@ -10795,7 +10795,7 @@
           "signature": "83580dd6",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])"
@@ -10806,7 +10806,7 @@
           "signature": "d1ab1133",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "AB=[…]=[…]יח'"
@@ -10817,7 +10817,7 @@
           "signature": "d1ab1133",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "AB=[…]=[…]יח'"
@@ -10828,7 +10828,7 @@
           "signature": "a0030abb",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "BC=[…]=[…]יח'"
@@ -10839,7 +10839,7 @@
           "signature": "a0030abb",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "BC=[…]=[…]יח'"
@@ -10948,7 +10948,7 @@
           "signature": "8b96c886",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])"
@@ -10959,7 +10959,7 @@
           "signature": "8b96c886",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])"
@@ -10970,7 +10970,7 @@
           "signature": "8b96c886",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])"
@@ -10981,7 +10981,7 @@
           "signature": "8b96c886",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])"
@@ -10992,7 +10992,7 @@
           "signature": "8b96c886",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])"
@@ -11003,7 +11003,7 @@
           "signature": "8b96c886",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])"
@@ -11014,7 +11014,7 @@
           "signature": "8b96c886",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])"
@@ -11025,7 +11025,7 @@
           "signature": "8b96c886",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])"
@@ -11328,7 +11328,7 @@
           "signature": "4712f361",
           "inputType": "text:text",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "קודקודי הריבוע: […]"
@@ -11339,7 +11339,7 @@
           "signature": "08b4e4c4",
           "inputType": "text:text",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "קודקודי המלבן: […]"
@@ -11784,7 +11784,7 @@
           "signature": "eea1b535",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו נקודה ששני שיעוריה זהים והיא אינה ממוקמת על אף ציר: ([…],[…])."
@@ -11795,7 +11795,7 @@
           "signature": "eea1b535",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו נקודה ששני שיעוריה זהים והיא אינה ממוקמת על אף ציר: ([…],[…])."
@@ -12152,7 +12152,7 @@
           "signature": "a1d66f9a",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו על הסרטוט את המקום שבו הייתם שמים אפליקציה חדשה, כך שתהיה באותה עמודה של אפליקציית המפות: ([…],[…])."
@@ -12163,7 +12163,7 @@
           "signature": "fd3086ec",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "המרחק בין האפליקציה שסימנתם ובין אפליקציית המפות הוא […] יח'."
@@ -12336,7 +12336,7 @@
           "signature": "08de6460",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "על הכרטיס שלכם יהיה כתוב ([…],[…])."
@@ -12347,7 +12347,7 @@
           "signature": "08de6460",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "על הכרטיס שלכם יהיה כתוב ([…],[…])."
@@ -12358,7 +12358,7 @@
           "signature": "0bab69c9",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "מהכיסא שבחרתם עד הכיסא של נועה יש הפרש של […] שורות."
@@ -12501,7 +12501,7 @@
           "signature": "c9b992da",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…])."
@@ -12512,7 +12512,7 @@
           "signature": "c9b992da",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…])."
@@ -12523,7 +12523,7 @@
           "signature": "06808fd5",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "המרחק שלו מציר y הוא […] יח', וזה בדיוק ערך ה־x שלו."
@@ -12678,7 +12678,7 @@
           "signature": "25b0ff4b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הכתובת שסימנתם היא ([…],[…])."
@@ -12689,7 +12689,7 @@
           "signature": "25b0ff4b",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הכתובת שסימנתם היא ([…],[…])."
@@ -12700,7 +12700,7 @@
           "signature": "bd15e79d",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "AD=[…]=[…]יח'"
@@ -12711,7 +12711,7 @@
           "signature": "bd15e79d",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "AD=[…]=[…]יח'"
@@ -12865,7 +12865,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -12876,7 +12876,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -12887,7 +12887,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -12898,7 +12898,7 @@
           "signature": "7415af8e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…])."
@@ -12970,7 +12970,7 @@
           "signature": "b00458b1",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה שסימנתם רחוקה מציר y ‏[…] יחידות."
@@ -13396,7 +13396,7 @@
           "signature": "c19d5f79",
           "inputType": "text:direction",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה שסימנתם ממוקמת […] מכל הנקודות האחרות בגרף."
@@ -13810,7 +13810,7 @@
           "signature": "06c216c8",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…])."
@@ -13821,7 +13821,7 @@
           "signature": "06c216c8",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…])."
@@ -13832,7 +13832,7 @@
           "signature": "06c216c8",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…])."
@@ -13843,7 +13843,7 @@
           "signature": "06c216c8",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…])."
@@ -13854,7 +13854,7 @@
           "signature": "8ea4981a",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "ביום […] הקדשתם את מספר הדקות הגדול ביותר."
@@ -13890,7 +13890,7 @@
           "signature": "986c6f79",
           "inputType": "text:number",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודה הגבוהה ביותר בגרף שלכם רחוקה מציר x […] יחידות."
@@ -14036,7 +14036,7 @@
           "signature": "dca0bce4",
           "inputType": "text:letter",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "לקטע BC קצה אחד בנקודה B(2,5) והקצה האחר בנקודה […], ולכן הוא מקביל לציר x."
@@ -14389,7 +14389,7 @@
           "signature": "195c6054",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…])."
@@ -14400,7 +14400,7 @@
           "signature": "195c6054",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…])."
@@ -14411,7 +14411,7 @@
           "signature": "195c6054",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…])."
@@ -14422,7 +14422,7 @@
           "signature": "195c6054",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…])."
@@ -14453,7 +14453,7 @@
           "signature": "d690ded0",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…])."
@@ -14464,7 +14464,7 @@
           "signature": "d690ded0",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…])."
@@ -14475,7 +14475,7 @@
           "signature": "d690ded0",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…])."
@@ -14486,7 +14486,7 @@
           "signature": "d690ded0",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…])."
@@ -14572,7 +14572,7 @@
           "signature": "86a530e9",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו נקודה C כך שהזווית ABC תהיה ישרה. הנקודה שסימנתם: C([…],[…])."
@@ -14583,7 +14583,7 @@
           "signature": "86a530e9",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו נקודה C כך שהזווית ABC תהיה ישרה. הנקודה שסימנתם: C([…],[…])."
@@ -14594,7 +14594,7 @@
           "signature": "6e9d9dae",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו נקודה D נוספת ושונה, שגם בה הזווית ABD ישרה: D([…],[…])."
@@ -14605,7 +14605,7 @@
           "signature": "6e9d9dae",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "סמנו נקודה D נוספת ושונה, שגם בה הזווית ABD ישרה: D([…],[…])."
@@ -14643,7 +14643,7 @@
           "signature": "ac7b4206",
           "inputType": "text:letter",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB."
@@ -14654,7 +14654,7 @@
           "signature": "1cf23f6a",
           "inputType": "text:relation",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB."
@@ -14759,7 +14759,7 @@
           "signature": "be5c8b3e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…])."
@@ -14770,7 +14770,7 @@
           "signature": "be5c8b3e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…])."
@@ -14781,7 +14781,7 @@
           "signature": "be5c8b3e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…])."
@@ -14792,7 +14792,7 @@
           "signature": "be5c8b3e",
           "inputType": "ordered-pair-coordinate",
           "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…])."

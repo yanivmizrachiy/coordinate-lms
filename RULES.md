@@ -93,7 +93,8 @@ A current user instruction wins over older wording and this file must be reconci
 
 - Feedback is per QUESTION, not per keystroke, and final PAGE feedback appears after page submission.
 - A fully correct question shows **✓ נכון**. Partial work shows **◐ יש מה לתקן**. A wrong answer shows **✕ נסה שוב**. A locked unresolved answer shows **🔒 נעול**.
-- The computerized student flow must not show `נשמר לבדיקת המורה` for a scored worksheet target. First try to grade the original task exactly with a deterministic mathematical validator; only if that is genuinely impossible may an approved deterministic screen-only adaptation replace the interaction.
+- **There is no teacher-review or manual-grading fallback for computerized worksheet questions.** Every computerized question must be checked by the computer with an exact deterministic grading rule and contribute honestly to the page score.
+- If any real question cannot yet be graded exactly, **stop and ask the user one focused question before changing it**. Until that decision is implemented and verified, the page is blocked from receiving a final computerized score; never mark the response as pending teacher review, silently omit it from the denominator, or invent a grading rule.
 - The LMS should feel as if a supportive mathematics teacher is beside the learner: warm, specific, truthful, encouraging and pedagogically useful.
 - Use broad, non-repetitive banks of natural, grammatically correct Hebrew teacher feedback. Avoid mechanically repeating the same praise, correction phrase or final-page comment on consecutive work.
 - Positive feedback should vary according to context: first-try success, successful correction, persistence, a streak of correct answers, completing a question and completing a page may receive different wording.
@@ -133,7 +134,7 @@ A current user instruction wins over older wording and this file must be reconci
 - Diacritics and harmless spacing may be ignored. Harmless punctuation may be ignored only for word-like textual answers.
 - Fuzzy spelling must never turn a different concept into a correct answer: `אנכי` is not `אופקי`.
 - Numeric answers, coordinates, ordered data, sets and other mathematical structures remain mathematically strict. Numeric equivalence such as `1/2 = 0.5` is allowed because it is mathematically equivalent, not because of fuzzy text matching.
-- A deterministic answer encoded directly in the canonical target/page metadata is authoritative for that target. Stale positional/default/local/remote keys must not override an explicit canonical answer attached to the current target.
+- A deterministic answer encoded directly in canonical target/page metadata or a signature-bound reviewed proof is authoritative for that target. **Stale local/remote/admin answer keys may only fill a genuine gap; they must never override canonical or reviewed repository answers.**
 - Never guess a correct answer from nearby prose. **If the printed task permits many correct responses, first express its actual mathematical condition as a validator and keep the original open interaction.** Multiple correct responses are not a reason to create multiple choice.
 - If a response depends on an earlier learner choice, grade it against that earlier valid choice when the mathematics permits this.
 - Only if the original learner action genuinely cannot be graded exactly by a deterministic rule may a screen-only interaction change be considered, and that real case must be brought to the user before implementation.

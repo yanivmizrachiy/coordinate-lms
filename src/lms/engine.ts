@@ -52,12 +52,12 @@ interface AttachResult {
 }
 
 interface CheckSummary {
-  keyed: number;
-  unkeyed: number;
+  gradable: number;
+  ungradable: number;
   remaining: number;
 }
 
-type TargetOutcome = 'unkeyed' | 'correct' | 'locked' | 'missing' | 'wrong';
+type TargetOutcome = 'ungradable' | 'correct' | 'locked' | 'missing' | 'wrong';
 
 type QuestionState =
   | 'idle'
@@ -65,7 +65,7 @@ type QuestionState =
   | 'partial'
   | 'wrong'
   | 'locked'
-  | 'pending';
+  | 'blocked';
 
 interface QuestionGroup {
   id: string;
@@ -83,7 +83,7 @@ const QUESTION_CHIP: Record<
   partial: { icon: '◐', text: 'יש מה לתקן', done: false },
   wrong: { icon: '✕', text: 'נסה שוב', done: false },
   locked: { icon: '🔒', text: 'נעול — נוצלו שלושת התיקונים', done: true },
-  pending: { icon: '?', text: 'נשמר לבדיקת המורה', done: true },
+  blocked: { icon: '⚠', text: 'הציון חסום', done: false },
 };
 
 function targetValue(target: HTMLElement): string {
@@ -234,7 +234,7 @@ export function attachLmsToPage(
     wrong: 'לא נכון, אפשר לתקן',
     missing: 'עדיין לא מולא',
     locked: 'נעול לאחר שלושת התיקונים',
-    pending: 'נשמר לבדיקת המורה',
+    blocked: 'שגיאת מערכת: לשאלה עדיין אין בדיקה ממוחשבת מדויקת',
   };
 
   const baseLabels = new WeakMap<HTMLElement, string>();
@@ -406,16 +406,15 @@ export function attachLmsToPage(
     countAttempt: boolean,
   ): TargetOutcome {
     const qid = target.dataset.lmsQid;
-    if (!qid) return 'unkeyed';
+    if (!qid) return 'ungradable';
 
     const expected = key[qid] || [];
     const progress = progressFor(qid);
 
     if (expected.length === 0) {
-      const state = progress.answer ? 'pending' : 'empty';
-      target.dataset.lmsState = state;
-      announceState(target, state);
-      return 'unkeyed';
+      target.dataset.lmsState = 'blocked';
+      announceState(target, 'blocked');
+      return 'ungradable';
     }
 
     if (progress.correct || progress.locked) {
@@ -446,17 +445,17 @@ export function attachLmsToPage(
     snapshotAnswers();
     answerKey = await loadAnswerKey(pageNumber);
 
-    let keyed = 0;
-    let unkeyed = 0;
+    let gradable = 0;
+    let ungradable = 0;
     let remaining = 0;
 
     for (const target of targets) {
       if (!target.dataset.lmsQid) continue;
       const outcome = gradeTarget(target, answerKey, true);
-      if (outcome === 'unkeyed') {
-        unkeyed += 1;
+      if (outcome === 'ungradable') {
+        ungradable += 1;
       } else {
-        keyed += 1;
+        gradable += 1;
         if (outcome === 'missing' || outcome === 'wrong') remaining += 1;
       }
     }
@@ -469,7 +468,7 @@ export function attachLmsToPage(
       pageNumber,
       type: 'answer_check',
       createdAt: Date.now(),
-      metadata: { keyed, unkeyed, remaining },
+      metadata: { gradable, ungradable, remaining },
     });
 
     if (
@@ -481,10 +480,12 @@ export function attachLmsToPage(
         'הבדיקה נשמרה במכשיר, אך הסנכרון המרכזי נכשל. אפשר לנסות שוב בכפתור הסנכרון.',
         'error',
       );
-    } else if (keyed === 0 && targets.length > 0) {
+    } else if (ungradable > 0) {
       setMessage(
         status,
-        'לעמוד הזה עדיין לא הוגדר מפתח תשובות. מנהל יכול לפתוח מצב מורה ולשמור את התשובות הנכונות.',
+        'הציון בעמוד חסום: ' +
+          String(ungradable) +
+          ' אזורי מענה עדיין אינם ניתנים לבדיקה ממוחשבת מדויקת. אין ציון חלקי.',
         'error',
       );
     } else if (remaining > 0) {
@@ -497,12 +498,12 @@ export function attachLmsToPage(
     } else {
       setMessage(
         status,
-        'כל התשובות שניתן לבדוק הושלמו. אפשר להגיש את העמוד.',
+        'כל התשובות בעמוד ניתנות לבדיקה ממוחשבת והושלמו. אפשר להגיש את העמוד.',
         'success',
       );
     }
 
-    return { keyed, unkeyed, remaining };
+    return { gradable, ungradable, remaining };
   }
 
   function runCheck(): Promise<CheckSummary> {
@@ -528,16 +529,18 @@ export function attachLmsToPage(
 
       if (targets.length > 0) {
         const summary = await runCheck();
-        if (summary.keyed === 0) return;
+        if (summary.ungradable > 0 || summary.gradable === 0) return;
 
         answerKey = await loadAnswerKey(pageNumber);
-        const keyedEntries = Object.keys(answerKey)
+        const gradableEntries = targets
+          .map((target) => target.dataset.lmsQid)
+          .filter((qid): qid is string => Boolean(qid))
           .map((qid) => draft.questions[qid])
           .filter(
             (progress): progress is QuestionProgress => Boolean(progress),
           );
 
-        const unresolved = keyedEntries.filter(
+        const unresolved = gradableEntries.filter(
           (progress) => !progress.correct && !progress.locked,
         ).length;
 
@@ -554,7 +557,7 @@ export function attachLmsToPage(
 
         submitConfirmPending = false;
         score = calculatePageScore(
-          keyedEntries.map((progress) => ({
+          gradableEntries.map((progress) => ({
             attempts: progress.attempts,
             correct: progress.correct,
             locked: progress.locked,
@@ -776,11 +779,11 @@ export function attachLmsToPage(
   });
 
   function deriveQuestion(group: QuestionGroup): QuestionState {
-    let hasKeyed = false;
+    let hasGradable = false;
     let allCorrect = true;
     let anyCorrect = false;
     let anyAttempt = false;
-    let anyPending = false;
+    let anyUngradable = false;
     let allResolved = true;
 
     for (const target of group.targets) {
@@ -790,17 +793,18 @@ export function attachLmsToPage(
       const keyed = (answerKey[qid] || []).length > 0;
 
       if (keyed) {
-        hasKeyed = true;
+        hasGradable = true;
         if (progress.correct) anyCorrect = true;
         else allCorrect = false;
         if (progress.attempts > 0) anyAttempt = true;
         if (!(progress.correct || progress.locked)) allResolved = false;
-      } else if (progress.answer.trim()) {
-        anyPending = true;
+      } else {
+        anyUngradable = true;
       }
     }
 
-    if (!hasKeyed) return anyPending ? 'pending' : 'idle';
+    if (anyUngradable) return 'blocked';
+    if (!hasGradable) return 'idle';
     if (allCorrect) return 'correct';
     if (anyCorrect) return 'partial';
     if (allResolved) return 'locked';
@@ -814,7 +818,7 @@ export function attachLmsToPage(
     group.chip.dataset.qstate = state;
     group.chip.textContent = chip.icon ? chip.icon + ' ' + chip.text : '';
     group.button.disabled =
-      draft.submitted || state === 'correct' || state === 'locked';
+      draft.submitted || state === 'correct' || state === 'locked' || state === 'blocked';
     return state;
   }
 
@@ -873,8 +877,12 @@ export function attachLmsToPage(
         status,
         'חלק מהתשובות נכונות. תקנו את החלק המסומן והשלימו את השאלה.',
       );
-    } else if (state === 'pending') {
-      setMessage(status, 'התשובה נשמרה לבדיקת המורה.', 'success');
+    } else if (state === 'blocked') {
+      setMessage(
+        status,
+        'השאלה חסומה לציון עד שתוגדר לה בדיקה ממוחשבת מדויקת.',
+        'error',
+      );
     } else if (state === 'locked') {
       setMessage(
         status,
@@ -954,10 +962,13 @@ export function attachLmsToPage(
     if (draft.score !== undefined) showScore(draft.score);
 
     refreshQuestions();
-    submitButton.disabled = draft.submitted;
+    const gradableCount = targets.filter((target) => {
+      const qid = target.dataset.lmsQid;
+      return Boolean(qid && (answerKey[qid] || []).length > 0);
+    }).length;
+    const gradingComplete = gradableCount === targets.length;
+    submitButton.disabled = draft.submitted || !gradingComplete;
     if (draft.submitted) submitButton.textContent = 'העמוד הוגש';
-
-    const keyedCount = Object.keys(answerKey).length;
     if (draft.submitted) {
       setMessage(
         status,
@@ -969,22 +980,21 @@ export function attachLmsToPage(
         status,
         'זהו עמוד פעילות או משחק. בסיום לחצו על כפתור ההשלמה.',
       );
-    } else if (keyedCount > 0) {
+    } else if (gradingComplete) {
       setMessage(
         status,
-        'נמצאו ' +
-          String(targets.length) +
-          ' אזורי מענה. מפתח אוטומטי זמין ל־' +
-          String(keyedCount) +
-          ' תשובות.',
+        'כל ' + String(targets.length) + ' אזורי המענה מוכנים לבדיקה ממוחשבת מדויקת.',
         'success',
       );
     } else {
       setMessage(
         status,
-        'נמצאו ' +
+        'העמוד חסום לציון: רק ' +
+          String(gradableCount) +
+          ' מתוך ' +
           String(targets.length) +
-          ' אזורי מענה. נדרש מפתח תשובות של המורה לעמוד זה.',
+          ' אזורי המענה ניתנים כרגע לבדיקה ממוחשבת מדויקת.',
+        'error',
       );
     }
   }).catch(() => {

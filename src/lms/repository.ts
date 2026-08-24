@@ -395,10 +395,11 @@ export async function loadAnswerKey(pageNumber: number): Promise<AnswerKey> {
   }
 
   return {
-    ...proven,
-    ...defaults,
+    // Local/remote admin keys may fill gaps, but repository-reviewed answers win.
     ...local,
     ...remote,
+    ...proven,
+    ...defaults,
     ...implicit,
   };
 }
