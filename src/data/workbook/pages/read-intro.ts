@@ -35,7 +35,7 @@ export const READ_INTRO: WorkbookPageContent = sheet({
 <section class="q-card">
 <h3>ג. איזו נקודה?</h3>
 <ul class="tasks compact">
-<li>הרחוקה ביותר ימינה: <span class="blank" style="--blank-width:4ch"></span></li>
+<li>איזו נקודה נמצאת במיקום הימני ביותר? <span class="blank" style="--blank-width:4ch"></span></li>
 <li>הגבוהה ביותר: <span class="blank" style="--blank-width:4ch"></span></li>
 </ul>
 </section>
