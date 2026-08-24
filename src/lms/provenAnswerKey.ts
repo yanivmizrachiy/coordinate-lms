@@ -184,7 +184,9 @@ export const PROVEN_ANSWER_PROOFS: Record<
       ['p12-q4', 'ba9f345b', ["F", "f"]],
       ['p12-q5', '0c492695', ["F", "f"]],
       ['p12-q6', '77b67dfe', ["F", "f"]],
-      ['p12-q11', '65ebae81', ["נועה"], 'reviewed-explicit'],
+      ['p12-q11', '0832a9cf', ["F", "f"]],
+      ['p12-q12', '716d7ab2', ["8"]],
+      ['p12-q13', '716d7ab2', ["6"]],
     ],
   ),
   13: pageProofs(

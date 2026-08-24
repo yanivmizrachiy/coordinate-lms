@@ -1,18 +1,18 @@
 # Answer-key coverage report
 
-Generated: 2026-08-24T21:00:03.720Z
+Generated: 2026-08-24T21:28:54.978Z
 
-Overall: 731/1150 safely checkable targets (63.6%).
+Overall: 733/1147 safely checkable targets (63.9%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
-| reviewed-explicit | 181 |
+| reviewed-explicit | 180 |
 | canonical-metadata-derived | 26 |
-| deterministic-mathematical | 518 |
+| deterministic-mathematical | 521 |
 | valid-range | 6 |
-| open-ended | 163 |
+| open-ended | 158 |
 | ambiguous | 256 |
 | unsupported | 0 |
 | missing | 0 |
@@ -322,7 +322,7 @@ Overall: 731/1150 safely checkable targets (63.6%).
 
 ### Page 12 — נקודות ברביע הראשון
 
-7/16 safely checkable (43.8%).
+9/13 safely checkable (69.2%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -336,12 +336,9 @@ Overall: 731/1150 safely checkable targets (63.6%).
 | p12-q8 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
 | p12-q9 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
 | p12-q10 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנקודה ([…],[…]) והנקודה ([…],[…]). |
-| p12-q11 | text:letter | reviewed-explicit | yes | target-bound reviewed proof | צודק/צודקת: […]. |
-| p12-q12 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
-| p12-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
-| p12-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
-| p12-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
-| p12-q16 | text:relation | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
+| p12-q11 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | שם הנקודה: […]. |
+| p12-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה: ([…],[…]). |
+| p12-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה: ([…],[…]). |
 
 ### Page 13 — נקודות ברביע הראשון
 

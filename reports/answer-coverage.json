@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-24T21:00:03.720Z",
+  "generatedAt": "2026-08-24T21:28:54.978Z",
   "pageCount": 78,
-  "targetCount": 1150,
-  "automaticallyCheckableTargets": 731,
-  "coveragePercentage": 63.6,
+  "targetCount": 1147,
+  "automaticallyCheckableTargets": 733,
+  "coveragePercentage": 63.9,
   "classifications": {
-    "reviewed-explicit": 181,
+    "reviewed-explicit": 180,
     "canonical-metadata-derived": 26,
-    "deterministic-mathematical": 518,
+    "deterministic-mathematical": 521,
     "valid-range": 6,
-    "open-ended": 163,
+    "open-ended": 158,
     "ambiguous": 256,
     "unsupported": 0,
     "missing": 0
@@ -3695,7 +3695,7 @@
     {
       "pageNumber": 12,
       "title": "נקודות ברביע הראשון",
-      "interactiveTargetCount": 16,
+      "interactiveTargetCount": 13,
       "targetIds": [
         "p12-q1",
         "p12-q2",
@@ -3709,10 +3709,7 @@
         "p12-q10",
         "p12-q11",
         "p12-q12",
-        "p12-q13",
-        "p12-q14",
-        "p12-q15",
-        "p12-q16"
+        "p12-q13"
       ],
       "targets": [
         {
@@ -3857,90 +3854,54 @@
           "targetId": "p12-q11",
           "order": 11,
           "inputType": "text:letter",
-          "context": "צודק/צודקת: […].",
-          "signature": "65ebae81",
-          "classification": "reviewed-explicit",
+          "context": "שם הנקודה: […].",
+          "signature": "0832a9cf",
+          "classification": "deterministic-mathematical",
           "currentAnswerSource": "target-bound reviewed proof",
           "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
           "automaticCheckingSafe": true,
           "answers": [
-            "נועה"
+            "F",
+            "f"
           ]
         },
         {
           "targetId": "p12-q12",
           "order": 12,
           "inputType": "ordered-pair-coordinate",
-          "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
-          "signature": "049b2a05",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "שיעורי הנקודה: ([…],[…]).",
+          "signature": "716d7ab2",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "8"
+          ]
         },
         {
           "targetId": "p12-q13",
           "order": 13,
           "inputType": "ordered-pair-coordinate",
-          "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
-          "signature": "049b2a05",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
-        },
-        {
-          "targetId": "p12-q14",
-          "order": 14,
-          "inputType": "ordered-pair-coordinate",
-          "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
-          "signature": "049b2a05",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
-        },
-        {
-          "targetId": "p12-q15",
-          "order": 15,
-          "inputType": "ordered-pair-coordinate",
-          "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
-          "signature": "049b2a05",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
-        },
-        {
-          "targetId": "p12-q16",
-          "order": 16,
-          "inputType": "text:relation",
-          "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
-          "signature": "9edf80ab",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "שיעורי הנקודה: ([…],[…]).",
+          "signature": "716d7ab2",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         }
       ],
       "missingOrAmbiguousTargetIds": [
         "p12-q7",
         "p12-q8",
         "p12-q9",
-        "p12-q10",
-        "p12-q12",
-        "p12-q13",
-        "p12-q14",
-        "p12-q15",
-        "p12-q16"
+        "p12-q10"
       ],
-      "automaticallyCheckableTargets": 7,
-      "coveragePercentage": 43.8
+      "automaticallyCheckableTargets": 9,
+      "coveragePercentage": 69.2
     },
     {
       "pageNumber": 13,

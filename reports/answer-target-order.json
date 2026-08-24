@@ -1232,32 +1232,17 @@
         {
           "targetId": "p12-q11",
           "inputType": "text:letter",
-          "signature": "65ebae81"
+          "signature": "0832a9cf"
         },
         {
           "targetId": "p12-q12",
           "inputType": "ordered-pair-coordinate",
-          "signature": "049b2a05"
+          "signature": "716d7ab2"
         },
         {
           "targetId": "p12-q13",
           "inputType": "ordered-pair-coordinate",
-          "signature": "049b2a05"
-        },
-        {
-          "targetId": "p12-q14",
-          "inputType": "ordered-pair-coordinate",
-          "signature": "049b2a05"
-        },
-        {
-          "targetId": "p12-q15",
-          "inputType": "ordered-pair-coordinate",
-          "signature": "049b2a05"
-        },
-        {
-          "targetId": "p12-q16",
-          "inputType": "text:relation",
-          "signature": "9edf80ab"
+          "signature": "716d7ab2"
         }
       ]
     },
