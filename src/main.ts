@@ -19,12 +19,11 @@ import { startRouter, navigate, type RouteMatch } from './router';
 import { elem, clear } from './lib/dom';
 import type { View, ViewContext } from './views/context';
 import { ensureFreshBuild } from './lib/freshBuild';
-import { installPageScoreFeedback } from './lms/pageScoreFeedback';
 
 const app = document.getElementById('app');
 if (!app) throw new Error('#app root missing');
 
-installPageScoreFeedback(app);
+let pageScoreFeedbackInstalled = false;
 
 const homeBtn = elem('button', { class: 'iconbtn iconbtn--primary', type: 'button', text: '⌂ בית', 'aria-label': 'מסך הבית' });
 homeBtn.addEventListener('click', () => navigate('#/'));
@@ -76,6 +75,15 @@ function render(match: RouteMatch): void {
   homeBtn.textContent = practice ? '⌂' : '⌂ בית';
   appbar.classList.toggle('appbar--hidden', fullScreen);
   appbar.classList.toggle('appbar--practice', practice);
+
+  /* Keep score-feedback wording out of the lightweight first-entry download.
+     It is loaded only when computerized practice is actually opened. */
+  if (practice && !pageScoreFeedbackInstalled) {
+    pageScoreFeedbackInstalled = true;
+    void import('./lms/pageScoreFeedback').then(({ installPageScoreFeedback }) => {
+      installPageScoreFeedback(app);
+    });
+  }
 
   /* Numbered practice is intentionally focused. Print/booklet/account utilities
      do not appear inside it; the page owns its small practice-only controls. */
