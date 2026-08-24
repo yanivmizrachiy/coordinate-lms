@@ -152,12 +152,12 @@ export const SOLUTION_SPECS: SolutionPageSpec[] = [
   {
     source: READ_INTRO,
     sourceFile: 'src/data/workbook/pages/read-intro.ts',
-    sourceBlobSha: '7ddeaef89125f6e4c9090f6831bf2aed9a38a593',
+    sourceBlobSha: '7a658bb680a2a57c15cc5847c31e5653e800ba25',
     exercises: [
       { id: 'a', label: 'א', answer: 'A(1,2); B(4,5); C(7,1); D(6,4); E(3,3); F(8,6).' },
       { id: 'b', label: 'ב', answer: 'B; C; E; F.' },
       { id: 'c', label: 'ג', answer: 'הימנית ביותר F; הגבוהה ביותר F.' },
-      { id: 'd', label: 'ד', answer: 'משמאל לימין: E, B, D, C.' },
+      { id: 'd', label: 'ד', answer: 'E(3,3); המרחק מציר x זהה למרחק מציר y, ובשניהם המרחק הוא 3 יחידות.' },
       { id: 'e', label: 'ה', answer: 'F. שיעורי הנקודה: F(8,6).' },
     ],
   },

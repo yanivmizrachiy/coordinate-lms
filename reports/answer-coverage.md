@@ -1,6 +1,6 @@
 # Answer-key coverage report
 
-Generated: 2026-08-24T22:20:39.305Z
+Generated: 2026-08-24T22:29:06.760Z
 
 Overall: 737/1147 safely checkable targets (64.3%).
 
@@ -330,12 +330,12 @@ Overall: 737/1147 safely checkable targets (64.3%).
 | p12-q2 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | ערך x שווה 7 ושיעור y שווה 1 ← […] |
 | p12-q3 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שני שיעוריה שווים ל־3 ← […] |
 | p12-q4 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y שלה הוא 6 ← […] |
-| p12-q5 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הרחוקה ביותר ימינה: […] |
+| p12-q5 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | איזו נקודה נמצאת במיקום הימני ביותר? […] |
 | p12-q6 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | הגבוהה ביותר: […] |
-| p12-q7 | text:x-order | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את האותיות לפי הסדר: […] → […] → […] → […] |
-| p12-q8 | text:x-order | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את האותיות לפי הסדר: […] → […] → […] → […] |
-| p12-q9 | text:x-order | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את האותיות לפי הסדר: […] → […] → […] → […] |
-| p12-q10 | text:x-order | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את האותיות לפי הסדר: […] → […] → […] → […] |
+| p12-q7 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | שם הנקודה: […]. |
+| p12-q8 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה: ([…],[…]). |
+| p12-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה: ([…],[…]). |
+| p12-q10 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | המרחק מכל אחד מהצירים: […] יחידות. |
 | p12-q11 | text:letter | deterministic-mathematical | yes | target-bound reviewed proof | שם הנקודה: […]. |
 | p12-q12 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה: ([…],[…]). |
 | p12-q13 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | שיעורי הנקודה: ([…],[…]). |

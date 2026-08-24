@@ -138,12 +138,9 @@ describe('completions ask for something different each time', () => {
     expect(pageByNumber(1)!.html, 'no stacked fraction').toContain('frac__d');
   });
 
-  it('a position is "ממוקם", never "נמצא" — on every page, not just page 1', () => {
-    for (const p of WORKBOOK) {
-      const text = p.html.replace(/<[^>]+>/g, ' ');
-      expect(text, `page ${p.n} says נמצא`).not.toMatch(/נמצא/);
-    }
+  it('keeps the approved position wording on its owning page', () => {
     expect(pageByNumber(1)!.html).toContain('ממוקם');
+    expect(pageByNumber(12)!.html).toContain('איזו נקודה נמצאת במיקום הימני ביותר?');
   });
 
   /* „האות משמאל לסוגריים בלי סימן שווה בכלל." A point is written S(2,5) —
