@@ -49,7 +49,7 @@ export const READ_INTRO: WorkbookPageContent = sheet({
 <section class="q-card">
 <h3>ה. מצאו נקודה לפי שני תנאים.</h3>
 <ul class="tasks compact">
-<li>איזו נקודה נמצאת גם מימין לנקודה D וגם מעל לנקודה B?</li>
+<li>איזו נקודה ממוקמת גם מימין לנקודה D וגם מעל לנקודה B?</li>
 <li>שם הנקודה: <span class="blank" data-missing="letter" style="--blank-width:5ch"></span>.</li>
 <li>שיעורי הנקודה: <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>
 </ul>
