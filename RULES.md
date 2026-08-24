@@ -1,6 +1,6 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-23
+Updated: 2026-08-24
 
 This file is the single source of truth for `yanivmizrachiy/coordinate-lms`.
 Historical notes may explain past decisions, but they never override this file.
@@ -13,6 +13,7 @@ A current user instruction wins over older wording and this file must be reconci
 - There is one canonical content model: `src/data/workbook/` plus the canonical solutions/print-aid sources. Never create a second computerized copy of a question, sentence, diagram, number, blank or page.
 - Keep CONTENT, PRESENTATION and INTERACTION separate. Mathematical/content changes belong to the canonical workbook. LMS controls, feedback, hints, scores and persistence are an interactive layer. Print styling is a presentation layer.
 - A correction is complete only when **source of truth + implementation + tests agree**. Demo-only or visual-only substitutes do not count.
+- **There must never be more than one live source-of-truth document. `RULES.md` is that document.** Do not create another rules, memory, architecture-preferences or product-authority document. Generated reports and historical evidence are never sources of truth.
 
 ## 2. Learn from corrections and repair safely
 
@@ -40,9 +41,11 @@ A current user instruction wins over older wording and this file must be reconci
 
 ## 4. First entry and student practice surface
 
-- `#/` is the mandatory first-entry screen. It explains, in very simple Hebrew and before practice begins, the difference between **תרגול חופשי — בלי רישום** and **הרשמה ושמירת ציונים**. Existing users also get an obvious sign-in route.
-- The first-entry screen must say plainly that every practice page is open to guests, feedback is immediate, a page score may be shown, but **guest scores are not saved**, are not available on another device and are not visible to the teacher.
-- It must say plainly that registration uses **full name, school, email and password**, and enables saved scores/progress, cross-device continuation and teacher visibility.
+- `#/` is the mandatory first-entry screen. Its main job is an immediate, unmistakable choice between exactly two primary actions: **`לתרגל עם רישום`** and **`לתרגל בלי רישום`**.
+- On phones, **both primary buttons and their short explanations must be fully visible immediately without vertical or horizontal scrolling**, including compact Android phones, iPhone-class widths/heights and phone landscape. Use safe-area-aware viewport sizing (`svh`/equivalent) and automated viewport tests rather than assuming `100vh` is sufficient.
+- The explanation under **`לתרגל עם רישום`** must say briefly that scores/progress are saved, work can continue on another device after sign-in and the teacher can see progress. The registration/sign-in screen may contain the fuller account explanation.
+- The explanation under **`לתרגל בלי רישום`** must say briefly that practice starts immediately with feedback and a page score, but the score is not saved and is not visible to the teacher.
+- Existing users reach sign-in through the **with-registration** path; do not add a third large competing entry button to the first screen.
 - The rich learning/materials landing is a separate route at `#/home`. It must **not** be auto-loaded underneath `#/`; the first-entry explanation stays lightweight and must not import Firebase or the heavy materials surface.
 - A numbered computerized page is first and foremost a student practice screen. Show only what helps the learner solve, receive feedback, understand progress and move between pages.
 - Registration/login/account/save-mode explanations belong **only before practice**, never inside numbered practice pages.
@@ -55,6 +58,8 @@ A current user instruction wins over older wording and this file must be reconci
 ## 5. Scoring and correction model
 
 - A learner completes a page and receives a page score. **100 is the maximum possible score; 0 is a valid minimum when no credit was earned.**
+- **After the learner submits a page, the final page grade is shown prominently in red.** The numeric grade remains red at every score, including 100; a perfect-score celebration may add restrained decoration without changing the grade colour.
+- Every final page score is accompanied by a short **Hebrew teacher comment appropriate to the score band**. The wording must come from one maintained feedback owner, vary naturally across pages, and remain truthful: strong scores receive positive reinforcement; middle scores combine recognition with a concrete review suggestion; low scores clearly say more practice is needed without shaming the learner.
 - Correct on the first checked attempt loses no credit: 100% of that target's credit.
 - If the first checked answer is wrong, the learner receives **up to three correction opportunities**: first attempt + correction 1 + correction 2 + correction 3 = at most four checked attempts.
 - Credit after checked mistakes is fixed and transparent:
@@ -71,18 +76,19 @@ A current user instruction wins over older wording and this file must be reconci
 
 ## 6. Feedback: a teacher beside the learner
 
-- Feedback is per QUESTION, not per keystroke.
+- Feedback is per QUESTION, not per keystroke, and final PAGE feedback appears after page submission.
 - A fully correct question shows **✓ נכון**. Partial work shows **◐ יש מה לתקן**. A wrong answer shows **✕ נסה שוב**. A locked unresolved answer shows **🔒 נעול**. Open/unkeyed work may show **? נשמר לבדיקת המורה**.
 - The LMS should feel as if a supportive mathematics teacher is beside the learner: warm, specific, truthful, encouraging and pedagogically useful.
-- Use a broad, non-repetitive bank of natural teacher feedback. Avoid mechanically repeating the same praise or correction phrase on consecutive questions.
+- Use broad, non-repetitive banks of natural, grammatically correct Hebrew teacher feedback. Avoid mechanically repeating the same praise, correction phrase or final-page comment on consecutive work.
 - Positive feedback should vary according to context: first-try success, successful correction, persistence, a streak of correct answers, completing a question and completing a page may receive different wording.
 - Examples of the intended tone include `כל הכבוד`, `איזה יופי`, `מצוין`, `יפה מאוד`, `בדיוק`, `מעולה — ממשיכים`, `נהדר, תפסת את הרעיון`, but these are examples, not a fixed list.
 - A wrong/partial answer must also receive encouragement before correction. Examples of tone: `ננסה שוב`, `יש כאן משהו קטן לתקן`, `יפה שניסית — בוא נבדוק את הכיוון`, `כמעט; נשתמש ברמז וננסה שוב`.
-- Never shame, scold, frighten or mock a learner. Never praise a mathematically wrong answer as though it were correct.
+- Never shame, scold, frighten or mock a learner. Never praise a mathematically wrong answer or a low final score as though it were excellent.
 - A wrong verdict may never be the whole response. Every checked wrong/partial answer receives one coherent learning response containing:
   1. supportive teacher voice;
   2. a useful mathematical hint/direction;
   3. the real attempt/score consequence.
+- Final page feedback must interpret the result at a high level without inventing mathematical facts not supported by the student's actual page result.
 - Keep the response readable and calm; do not create competing popups or visual noise.
 
 ## 7. Corrective hints
@@ -118,7 +124,8 @@ A current user instruction wins over older wording and this file must be reconci
 - Previous/next navigation is one calm navigation system, distinguished by label/arrow/position rather than loud colors.
 - Secondary tools belong behind a quiet overflow control where appropriate. Do not duplicate primary navigation.
 - Feedback/hint/score-loss panels are compact, calm and readable on mobile and must not overwhelm the worksheet.
-- The special celebration for a perfect page score of 100 is an intentional exception to the otherwise restrained interface.
+- The final submitted page grade is a clear red visual anchor; the teacher comment sits beside/below it in a calm readable panel.
+- The special celebration for a perfect page score of 100 is an intentional exception to the otherwise restrained interface, but the numeric grade itself stays red.
 
 ## 10. Persistence, registration and authorization
 
@@ -149,6 +156,7 @@ A current user instruction wins over older wording and this file must be reconci
 - **Registration/authentication semantics:** `src/lms/auth.ts` and `src/views/lmsLogin.ts`.
 - **Attempt limit:** `src/lms/config.ts`. The Firestore bound in `firestore.rules` is the only intentional mirror because security rules execute separately; its contract tests must change in the same commit.
 - **Score/credit curve:** `src/lms/scoring.ts`.
+- **Final page-score rendering:** `src/lms/engine.ts`; **final score teacher sentence:** `src/lms/teacherVoice.ts` via `src/lms/pageScoreFeedback.ts`; **final score presentation:** `src/styles/page-score.css`.
 - **Answer normalization/tolerance:** `src/lms/answerValidation.ts`.
 - **Explicit canonical answer capture:** `src/lms/implicitAnswers.ts`; **answer-key precedence/persistence:** `src/lms/repository.ts`.
 - **Guest/result persistence, retries, merge semantics and dashboard loading:** `src/lms/repository.ts` plus dedicated sync modules.
@@ -157,7 +165,7 @@ A current user instruction wins over older wording and this file must be reconci
 - **Per-question grading/state machine and page submission:** `src/lms/engine.ts`.
 - **Computerized page shell/navigation:** `src/views/pageViewer.ts` and its practice-shell styles; do not copy worksheet content there.
 - **Authorization/data boundaries:** `firestore.rules`.
-- Tests should import runtime policy/configuration where possible instead of repeating magic numbers. A test may duplicate a value only when it is deliberately verifying an external contract such as Firestore rules.
+- Tests should import runtime policy/configuration where possible instead of repeating magic numbers. A test may duplicate a value only when it is deliberately verifying an external contract such as Firestore rules or a required device viewport.
 - Do not create another architecture/preferences/rules document. If ownership changes, update this map here.
 
 ## 13. Required quality gates
@@ -178,6 +186,8 @@ npm run test:visual
 ```
 
 `npm run verify` must cover answer coverage, typecheck, unit/content tests, Firestore authorization tests, build and visual/e2e checks in one command.
+
+The visual/e2e gate must include a first-entry viewport matrix proving both practice-choice buttons are fully above the fold on compact Android, iPhone-class portrait sizes and phone landscape, and it must verify final page-score presentation/feedback behavior.
 
 Normal PR CI proves repository engineering health. It may generate `release:report:static` as evidence even when external Firebase configuration, pedagogical review or physical two-device acceptance is still blocked; those external blockers must be reported, not disguised as code failures.
 
