@@ -18,6 +18,8 @@ A current user instruction wins over older wording and this file must be reconci
 ## 2. Learn from corrections and repair safely
 
 - Read this file before changing the project.
+- **Every project-changing action must be reconciled with this file in the same change set.** If behavior, requirements, ownership, scoring, feedback, persistence or release rules change, update `RULES.md` as part of that work. Do not let implementation move ahead of the source of truth.
+- Keep this file useful rather than noisy: record durable rules and ownership, merge repeated wording, and do not add temporary operational chatter merely to prove that an action happened.
 - Every meaningful correction from the user must be converted into the most useful reusable rule, not treated as a one-off patch when it clearly applies elsewhere.
 - Merge repeated or overlapping rules. Delete obsolete wording instead of accumulating contradictory notes.
 - During a repair/cleanup pass, change only a **verified defect, direct contradiction with a current requirement, or a demonstrated maintenance hazard**. Do not add opportunistic features or broad redesigns while repairing failures.
@@ -68,6 +70,7 @@ A current user instruction wins over older wording and this file must be reconci
   - correction 2 correct: 50%
   - correction 3 correct: 25%
   - final correction still wrong: unresolved target locks with 0 credit
+- **A learner who answers incorrectly once, receives the first hint and then answers correctly earns 75% of that target's credit, never 100%.** The hint does not erase the checked mistake.
 - Reload, retry, stale writes, reconnect or device changes must never reset attempts or refund lost credit.
 - After every checked mistake/correction, tell the learner plainly which stage was used, how much credit was lost and how much can still be earned.
 - UI explanations must mirror the real scoring calculation. Never maintain a second display-only grading model.
@@ -93,15 +96,20 @@ A current user instruction wins over older wording and this file must be reconci
 
 ## 7. Corrective hints
 
-- Hints **never reveal the current answer**: not the missing word, axis letter, number, coordinate or final result.
+- Hints are written for the learner who **already got the question wrong**. Use very simple, concrete Hebrew that helps that learner take the next step; do not answer difficulty with more terminology.
+- Prefer **one clear idea at a time**. Avoid abstract instructions such as “compare consecutive values” when a simple worked example can show the idea more clearly.
+- When a small example, mini-diagram, number line, axis fragment, arrows or restrained colour would make the idea easier to see, use it. Visual help must stay small, clear and directly connected to the question; it must not add decorative noise.
+- A useful hint may show an **analogous example**. Example for right/left number understanding: `3  →  4` together with simple wording such as `שימו לב לדוגמה: המספר 4 נמצא מימין למספר 3.` The example should teach the move without simply printing the current missing answer.
+- Match the language of the requested answer. **If the question asks for a number, the hint says “number”; do not call it a point.** Use “point” for an actual point/ordered pair context.
+- For a question asking for the number shared where the axes cross, guide with wording such as: `חפשו את המספר שבו גם ציר x וגם ציר y עוברים. זה אותו מספר בשני הצירים.` Do not replace “number” with “point”.
+- Hints do not simply reveal the current missing word, axis letter, number, coordinate or final result. They may give a concrete example or explanation that makes the reasoning accessible.
 - Support grows progressively:
-  - after the initial mistake: concise conceptual clue;
-  - after correction 1: clearer strategy;
-  - after correction 2: stronger step-by-step direction;
-  - after correction 3 if still unresolved: final explanatory teaching guidance, still without giving the answer.
-- Hints teach the governing idea, representation, comparison, self-check or next reasoning step.
+  - after the initial mistake: short, concrete help or example;
+  - after correction 1: a clearer example or next step;
+  - after correction 2: stronger step-by-step guidance, preferably visual when that is clearer;
+  - after correction 3 if still unresolved: final simple teaching explanation, still without merely printing the answer.
 - Hints derive from canonical task metadata and mathematical context, never from a second hand-authored answer source.
-- For coordinate-system work, guidance follows the grade-7 curriculum ideas: distinguish axes, horizontal/vertical meaning, origin, read scale, read coordinates, plot points, ordered-pair order, movement/direction and use coordinates in graphs/geometric representations.
+- For coordinate-system work, use only the concepts necessary for the current question. Do not introduce extra mathematical vocabulary merely because it is related to the topic.
 - When only part of a multi-part question is wrong, guidance should address the unresolved part; correct parts remain locked.
 
 ## 8. Answer acceptance: forgiving language, strict mathematics
@@ -161,53 +169,9 @@ A current user instruction wins over older wording and this file must be reconci
 - **Explicit canonical answer capture:** `src/lms/implicitAnswers.ts`; **answer-key precedence/persistence:** `src/lms/repository.ts`.
 - **Guest/result persistence, retries, merge semantics and dashboard loading:** `src/lms/repository.ts` plus dedicated sync modules.
 - **Teacher wording/encouragement:** `src/lms/teacherVoice.ts`.
-- **Pedagogical hints:** `src/lms/hintCoach.ts`.
+- **Pedagogical hints:** `src/lms/hintCoach.ts` and `src/styles/hint-coach.css` for any small visual hint aid.
 - **Per-question grading/state machine and page submission:** `src/lms/engine.ts`.
 - **Computerized page shell/navigation:** `src/views/pageViewer.ts` and its practice-shell styles; do not copy worksheet content there.
 - **Authorization/data boundaries:** `firestore.rules`.
 - Tests should import runtime policy/configuration where possible instead of repeating magic numbers. A test may duplicate a value only when it is deliberately verifying an external contract such as Firestore rules or a required device viewport.
 - Do not create another architecture/preferences/rules document. If ownership changes, update this map here.
-
-## 13. Required quality gates
-
-Before presenting a branch as ready for review, run at least:
-
-```text
-npm run answers:coverage:check
-npm run typecheck
-npm test
-npm run test:firestore
-npm run build
-npm audit --audit-level=high
-npm audit --omit=dev --audit-level=high
-npm run firebase:check
-npm run release:report
-npm run test:visual
-```
-
-`npm run verify` must cover answer coverage, typecheck, unit/content tests, Firestore authorization tests, build and visual/e2e checks in one command.
-
-The visual/e2e gate must include a first-entry viewport matrix proving both practice-choice buttons are fully above the fold on compact Android, iPhone-class portrait sizes and phone landscape, and it must verify final page-score presentation/feedback behavior.
-
-Normal PR CI proves repository engineering health. It may generate `release:report:static` as evidence even when external Firebase configuration, pedagogical review or physical two-device acceptance is still blocked; those external blockers must be reported, not disguised as code failures.
-
-`npm run release:check` is the strict release gate. It must fail while any required production configuration or acceptance evidence is incomplete.
-
-Do not describe the product as production-ready while required external configuration or acceptance evidence is incomplete. Do not merge or deploy to production without the required explicit confirmation.
-
-## 14. AI / agent entry protocol
-
-This section exists so a future AI, coding agent or human maintainer can enter the repository safely without rediscovering or duplicating the project's rules.
-
-- **First action:** read `RULES.md` completely before proposing or making a change. `AGENTS.md` and `CLAUDE.md` are pointer files only; `README.md`, `docs/` and `reports/` may explain or prove state, but none of them can override this file.
-- **Do not infer duplication from names, formats or visual similarity.** Before deleting, merging or replacing a file, prove its role by checking imports/references, build scripts, generators, tests, runtime consumers and fallbacks.
-- Treat paired assets such as PNG/WebP, JPG/WebP or MP4/WebM as potentially intentional compatibility/performance fallbacks. Treat JSON/Markdown report pairs and source/generated-output pairs as potentially intentional evidence. Delete only after proving the candidate is dead, obsolete, contradictory or a true duplicate with no independent consumer.
-- Before cleanup, classify each candidate as one of: **canonical source, runtime owner, generated artifact, compatibility fallback, test/release evidence, pointer/documentation, or dead duplicate**. Only the last category is presumptively removable.
-- Prefer **one surgical edit in the owning file** over parallel patches in several consumers. Use the Future change map above before searching randomly through the repository.
-- Never create a second governing document to remember a decision. If a reusable product/engineering rule changes, merge it into the relevant section of `RULES.md`, remove obsolete wording, and keep pointer files free of copied rules.
-- Do not perform “cleanup theatre”: no mass reformatting, file moves, renames, dependency swaps, abstraction layers or broad refactors unless they solve a verified defect or maintenance hazard and relevant tests prove behavior is preserved.
-- Do not resurrect code, content or architecture from `coordinate-first-quadrant` merely because it existed historically. History is evidence, not authority.
-- When a current user instruction conflicts with an older rule, the current instruction wins; reconcile `RULES.md` and implementation in the same workstream instead of leaving two truths behind.
-- If a material ambiguity cannot be resolved from this file, code, tests, current user instruction or repository evidence, ask one focused question rather than inventing a requirement.
-- After a change, run the **smallest relevant tests first**, then the required quality gates appropriate to review/release. Do not claim success from a visual check alone, and do not claim production readiness while external release blockers remain.
-- Future agents should leave the repository **simpler to reason about**: fewer conflicting owners, fewer stale branches of behavior, no new source-of-truth documents, and no deletion of useful compatibility or evidence files merely to reduce file count.
