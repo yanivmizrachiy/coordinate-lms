@@ -194,3 +194,20 @@ Normal PR CI proves repository engineering health. It may generate `release:repo
 `npm run release:check` is the strict release gate. It must fail while any required production configuration or acceptance evidence is incomplete.
 
 Do not describe the product as production-ready while required external configuration or acceptance evidence is incomplete. Do not merge or deploy to production without the required explicit confirmation.
+
+## 14. AI / agent entry protocol
+
+This section exists so a future AI, coding agent or human maintainer can enter the repository safely without rediscovering or duplicating the project's rules.
+
+- **First action:** read `RULES.md` completely before proposing or making a change. `AGENTS.md` and `CLAUDE.md` are pointer files only; `README.md`, `docs/` and `reports/` may explain or prove state, but none of them can override this file.
+- **Do not infer duplication from names, formats or visual similarity.** Before deleting, merging or replacing a file, prove its role by checking imports/references, build scripts, generators, tests, runtime consumers and fallbacks.
+- Treat paired assets such as PNG/WebP, JPG/WebP or MP4/WebM as potentially intentional compatibility/performance fallbacks. Treat JSON/Markdown report pairs and source/generated-output pairs as potentially intentional evidence. Delete only after proving the candidate is dead, obsolete, contradictory or a true duplicate with no independent consumer.
+- Before cleanup, classify each candidate as one of: **canonical source, runtime owner, generated artifact, compatibility fallback, test/release evidence, pointer/documentation, or dead duplicate**. Only the last category is presumptively removable.
+- Prefer **one surgical edit in the owning file** over parallel patches in several consumers. Use the Future change map above before searching randomly through the repository.
+- Never create a second governing document to remember a decision. If a reusable product/engineering rule changes, merge it into the relevant section of `RULES.md`, remove obsolete wording, and keep pointer files free of copied rules.
+- Do not perform “cleanup theatre”: no mass reformatting, file moves, renames, dependency swaps, abstraction layers or broad refactors unless they solve a verified defect or maintenance hazard and relevant tests prove behavior is preserved.
+- Do not resurrect code, content or architecture from `coordinate-first-quadrant` merely because it existed historically. History is evidence, not authority.
+- When a current user instruction conflicts with an older rule, the current instruction wins; reconcile `RULES.md` and implementation in the same workstream instead of leaving two truths behind.
+- If a material ambiguity cannot be resolved from this file, code, tests, current user instruction or repository evidence, ask one focused question rather than inventing a requirement.
+- After a change, run the **smallest relevant tests first**, then the required quality gates appropriate to review/release. Do not claim success from a visual check alone, and do not claim production readiness while external release blockers remain.
+- Future agents should leave the repository **simpler to reason about**: fewer conflicting owners, fewer stale branches of behavior, no new source-of-truth documents, and no deletion of useful compatibility or evidence files merely to reduce file count.
