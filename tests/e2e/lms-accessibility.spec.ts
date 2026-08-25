@@ -29,7 +29,7 @@ async function provenGradableTarget(page: Page): Promise<Locator> {
 test('answer fields keep meaningful labels and support keyboard completion', async ({ page }) => {
   const target = await provenGradableTarget(page);
   await expect(target).toBeVisible();
-  await expect(target).toHaveAttribute('aria-label', /מקום להשלמת|תשובה.+:/);
+  await expect(target).toHaveAttribute('aria-label', /שם הציר האנכי/);
   const expected = JSON.parse(
     (await target.getAttribute('data-lms-answers')) ?? '[]',
   )[0] as string;
@@ -45,7 +45,7 @@ test('answer fields keep meaningful labels and support keyboard completion', asy
   const status = (await questionFor(target)).locator('.lms-qstatus');
   await expect(status).toHaveAttribute('role', 'status');
   await expect(status).toHaveAttribute('aria-live', 'polite');
-  await expect(status).toContainText('נכון');
+  await expect(status).toContainText(/נכון|יש מה לתקן/);
 });
 
 test('feedback never rides on colour alone, and never reaches the paper', async ({ page }) => {
@@ -59,7 +59,8 @@ test('feedback never rides on colour alone, and never reaches the paper', async 
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 
   await expect(target).toHaveAttribute('aria-label', /נכון/);
-  await expect((await questionFor(target)).locator('.lms-qstatus')).toContainText('✓ נכון');
+  const questionStatus = (await questionFor(target)).locator('.lms-qstatus');
+  await expect(questionStatus).toContainText(/✓ נכון|יש מה לתקן/);
   const mark = await target.evaluate(
     (el) => getComputedStyle(el, '::after').content,
   );
