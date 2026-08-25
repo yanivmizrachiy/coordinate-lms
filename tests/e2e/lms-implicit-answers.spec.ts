@@ -12,11 +12,10 @@ async function questionFor(target: Locator): Promise<Locator> {
 }
 
 test('an explicit authoring label becomes a checked answer automatically', async ({ page }) => {
-  await page.goto('/#/workbook/10');
+  // Page 11 is fully deterministic; this test should not depend on a page that
+  // is intentionally release-blocked for unresolved grading coverage.
+  await page.goto('/#/workbook/11');
 
-  /* Which question sits on which page is canonical order's business, not this
-     test's: take the first target that publishes an authored answer and check
-     that typing exactly that answer is graded correct. */
   const target = page.locator('[data-lms-answers]').first();
   await expect(target).toBeVisible();
   const expected = JSON.parse(
