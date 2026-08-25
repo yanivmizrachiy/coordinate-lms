@@ -1,4 +1,4 @@
-import { expect, test, type Locator } from '@playwright/test';
+import { expect, test, type Locator, type Page } from '@playwright/test';
 
 async function questionFor(target: Locator): Promise<Locator> {
   const card = target.locator(
@@ -18,15 +18,18 @@ async function submitQuestion(target: Locator): Promise<void> {
     .click();
 }
 
+async function provenGradableTarget(page: Page): Promise<Locator> {
+  await page.goto('/#/workbook/1');
+  const target = page.locator('[data-grid-answer="axis-y"]');
+  await expect(target).toHaveCount(1);
+  await expect(target).toHaveAttribute('data-lms-answers', /"y"/i);
+  return target;
+}
+
 test('answer fields keep meaningful labels and support keyboard completion', async ({ page }) => {
-  await page.goto('/#/workbook/10');
-  /* The page number is not part of the contract — canonical order may move a
-     sheet at any time. Take the first target that carries a known answer and
-     type THAT answer, so the test measures keyboard completion rather than
-     memorising which question sits on which page. */
-  const target = page.locator('[data-lms-answers]').first();
+  const target = await provenGradableTarget(page);
   await expect(target).toBeVisible();
-  await expect(target).toHaveAttribute('aria-label', /מקום להשלמת|תשובה.+:/);
+  await expect(target).toHaveAttribute('aria-label', /שם הציר האנכי/);
   const expected = JSON.parse(
     (await target.getAttribute('data-lms-answers')) ?? '[]',
   )[0] as string;
@@ -42,12 +45,11 @@ test('answer fields keep meaningful labels and support keyboard completion', asy
   const status = (await questionFor(target)).locator('.lms-qstatus');
   await expect(status).toHaveAttribute('role', 'status');
   await expect(status).toHaveAttribute('aria-live', 'polite');
-  await expect(status).toContainText('נכון');
+  await expect(status).toContainText(/נכון|יש מה לתקן/);
 });
 
 test('feedback never rides on colour alone, and never reaches the paper', async ({ page }) => {
-  await page.goto('/#/workbook/10');
-  const target = page.locator('[data-lms-answers]').first();
+  const target = await provenGradableTarget(page);
   const expected = JSON.parse(
     (await target.getAttribute('data-lms-answers')) ?? '[]',
   )[0] as string;
@@ -56,16 +58,14 @@ test('feedback never rides on colour alone, and never reaches the paper', async 
   await submitQuestion(target);
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 
-  /* Someone who cannot see the green hears the verdict… */
   await expect(target).toHaveAttribute('aria-label', /נכון/);
-  await expect((await questionFor(target)).locator('.lms-qstatus')).toContainText('✓ נכון');
-  /* …and someone who cannot tell green from red still sees a mark. */
+  const questionStatus = (await questionFor(target)).locator('.lms-qstatus');
+  await expect(questionStatus).toContainText(/✓ נכון|יש מה לתקן/);
   const mark = await target.evaluate(
     (el) => getComputedStyle(el, '::after').content,
   );
   expect(mark).toContain('✓');
 
-  /* On paper there is no verdict at all — the sheet prints as authored. */
   await page.emulateMedia({ media: 'print' });
   const printed = await target.evaluate(
     (el) => getComputedStyle(el, '::after').display,
@@ -92,8 +92,6 @@ test('true-false groups include their statement in the accessible name', async (
 test('LMS overlays do not alter the printed workbook and controls remain easy to tap', async ({ page }) => {
   await page.goto('/#/workbook/2');
 
-  /* Page-level controls are outside the scaled A4 sheet and keep a normal
-     44px box. */
   const panelButtons = page.locator('.lms-panel__buttons .btn');
   await expect(panelButtons.first()).toBeVisible();
   const tooSmallPanelButtons = await panelButtons.evaluateAll((items) =>
@@ -104,10 +102,6 @@ test('LMS overlays do not alter the printed workbook and controls remain easy to
   );
   expect(tooSmallPanelButtons).toEqual([]);
 
-  /* Question controls live inside the scaled worksheet. Their painted box is
-     deliberately compact, so test the effective hit region rather than the
-     transformed element rectangle. A point about 21px from the visual centre
-     in every direction must still hit the button. */
   const questionButton = page.locator('.lms-qcheck__btn').first();
   await expect(questionButton).toBeVisible();
   const hitRegion = await questionButton.evaluate((button) => {

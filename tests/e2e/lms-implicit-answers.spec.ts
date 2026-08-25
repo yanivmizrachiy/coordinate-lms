@@ -12,13 +12,11 @@ async function questionFor(target: Locator): Promise<Locator> {
 }
 
 test('an explicit authoring label becomes a checked answer automatically', async ({ page }) => {
-  await page.goto('/#/workbook/10');
+  await page.goto('/#/workbook/1');
 
-  /* Which question sits on which page is canonical order's business, not this
-     test's: take the first target that publishes an authored answer and check
-     that typing exactly that answer is graded correct. */
-  const target = page.locator('[data-lms-answers]').first();
-  await expect(target).toBeVisible();
+  const target = page.locator('[data-grid-answer="axis-y"]');
+  await expect(target).toHaveCount(1);
+  await expect(target).toHaveAttribute('data-lms-answers', /"y"/i);
   const expected = JSON.parse(
     (await target.getAttribute('data-lms-answers')) ?? '[]',
   )[0] as string;

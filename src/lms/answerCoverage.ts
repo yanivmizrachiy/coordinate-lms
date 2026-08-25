@@ -95,17 +95,6 @@ export const REVIEWED_OPEN_ENDED_TARGET_SIGNATURES: Readonly<
   'p7-q12': 'e4f4cc55',
   'p7-q13': 'e4f4cc55',
   'p7-q14': 'f952afbf',
-  'p11-q20': 'bd0fcb5c',
-  'p11-q21': 'bd0fcb5c',
-  'p12-q7': '13c747ef',
-  'p12-q8': '13c747ef',
-  'p12-q9': '13c747ef',
-  'p12-q10': '13c747ef',
-  'p12-q12': '049b2a05',
-  'p12-q13': '049b2a05',
-  'p12-q14': '049b2a05',
-  'p12-q15': '049b2a05',
-  'p12-q16': '9edf80ab',
   'p13-q17': 'bd0fcb5c',
   'p13-q18': 'bd0fcb5c',
   'p16-q3': 'e05dfa65',
@@ -367,11 +356,11 @@ function classify(
   if (reviewedOpenEndedSignature === signature || isOpenEnded(context)) {
     return {
       classification: 'open-ended',
-      currentAnswerSource: 'teacher judgment required',
+      currentAnswerSource: 'deterministic validator missing',
       sourceEvidence:
         reviewedOpenEndedSignature === signature
-          ? 'signature-bound canonical review: learner-created or dependent response'
-          : 'learner-created or explanatory response',
+          ? 'signature-bound canonical review: deterministic validator still required'
+          : 'deterministic validator still required for this response',
       automaticCheckingSafe: false,
       answers: [],
     };

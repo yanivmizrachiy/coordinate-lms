@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-18T09:30:25.300Z",
+  "generatedAt": "2026-08-24T22:29:06.760Z",
   "pageCount": 78,
-  "targetCount": 1150,
-  "automaticallyCheckableTargets": 729,
-  "coveragePercentage": 63.4,
+  "targetCount": 1147,
+  "automaticallyCheckableTargets": 737,
+  "coveragePercentage": 64.3,
   "classifications": {
-    "reviewed-explicit": 181,
-    "canonical-metadata-derived": 24,
-    "deterministic-mathematical": 518,
+    "reviewed-explicit": 180,
+    "canonical-metadata-derived": 26,
+    "deterministic-mathematical": 525,
     "valid-range": 6,
-    "open-ended": 165,
+    "open-ended": 154,
     "ambiguous": 256,
     "unsupported": 0,
     "missing": 0
@@ -2371,8 +2371,8 @@
           "context": "שיעורי הנקודה שסימנתם: E([…],[…]).",
           "signature": "e4f4cc55",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -2383,8 +2383,8 @@
           "context": "שיעורי הנקודה שסימנתם: E([…],[…]).",
           "signature": "e4f4cc55",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -2395,8 +2395,8 @@
           "context": "המרחק של הנקודה שסימנתם מציר y הוא […] יחידות.",
           "signature": "f952afbf",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -3660,39 +3660,42 @@
         {
           "targetId": "p11-q20",
           "order": 20,
-          "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "true-false",
+          "context": "הנקודות (2,5) ו־(5,2) הן אותה נקודה, כי מופיעים בהן אותם מספרים. נכוןלא נכון[…]",
+          "signature": "179cbdfe",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "canonical true/false row metadata",
+          "sourceEvidence": "tr[data-answer]",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "false",
+            "לא נכון"
+          ]
         },
         {
           "targetId": "p11-q21",
           "order": 21,
-          "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "true-false",
+          "context": "כאשר מחליפים את סדר המספרים בזוג סדור, מיקום הנקודה יכול להשתנות. נכוןלא נכון[…]",
+          "signature": "6173d595",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "canonical true/false row metadata",
+          "sourceEvidence": "tr[data-answer]",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "true",
+            "נכון"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p11-q20",
-        "p11-q21"
-      ],
-      "automaticallyCheckableTargets": 19,
-      "coveragePercentage": 90.5
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 21,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 12,
       "title": "נקודות ברביע הראשון",
-      "interactiveTargetCount": 16,
+      "interactiveTargetCount": 13,
       "targetIds": [
         "p12-q1",
         "p12-q2",
@@ -3706,10 +3709,7 @@
         "p12-q10",
         "p12-q11",
         "p12-q12",
-        "p12-q13",
-        "p12-q14",
-        "p12-q15",
-        "p12-q16"
+        "p12-q13"
       ],
       "targets": [
         {
@@ -3776,8 +3776,8 @@
           "targetId": "p12-q5",
           "order": 5,
           "inputType": "text:text",
-          "context": "הרחוקה ביותר ימינה: […]",
-          "signature": "0c492695",
+          "context": "איזו נקודה נמצאת במיקום הימני ביותר? […]",
+          "signature": "b2b41627",
           "classification": "deterministic-mathematical",
           "currentAnswerSource": "target-bound reviewed proof",
           "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
@@ -3805,139 +3805,107 @@
         {
           "targetId": "p12-q7",
           "order": 7,
-          "inputType": "ordered-pair-coordinate",
-          "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
-          "signature": "13c747ef",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "text:letter",
+          "context": "שם הנקודה: […].",
+          "signature": "0832a9cf",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "E",
+            "e"
+          ]
         },
         {
           "targetId": "p12-q8",
           "order": 8,
           "inputType": "ordered-pair-coordinate",
-          "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
-          "signature": "13c747ef",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "שיעורי הנקודה: ([…],[…]).",
+          "signature": "716d7ab2",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p12-q9",
           "order": 9,
           "inputType": "ordered-pair-coordinate",
-          "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
-          "signature": "13c747ef",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "שיעורי הנקודה: ([…],[…]).",
+          "signature": "716d7ab2",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p12-q10",
           "order": 10,
-          "inputType": "ordered-pair-coordinate",
-          "context": "הנקודה ([…],[…]) והנקודה ([…],[…]).",
-          "signature": "13c747ef",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "text:number",
+          "context": "המרחק מכל אחד מהצירים: […] יחידות.",
+          "signature": "fa78a310",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "3"
+          ]
         },
         {
           "targetId": "p12-q11",
           "order": 11,
           "inputType": "text:letter",
-          "context": "צודק/צודקת: […].",
-          "signature": "65ebae81",
-          "classification": "reviewed-explicit",
+          "context": "שם הנקודה: […].",
+          "signature": "0832a9cf",
+          "classification": "deterministic-mathematical",
           "currentAnswerSource": "target-bound reviewed proof",
           "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
           "automaticCheckingSafe": true,
           "answers": [
-            "נועה"
+            "F",
+            "f"
           ]
         },
         {
           "targetId": "p12-q12",
           "order": 12,
           "inputType": "ordered-pair-coordinate",
-          "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
-          "signature": "049b2a05",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "שיעורי הנקודה: ([…],[…]).",
+          "signature": "716d7ab2",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "8"
+          ]
         },
         {
           "targetId": "p12-q13",
           "order": 13,
           "inputType": "ordered-pair-coordinate",
-          "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
-          "signature": "049b2a05",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
-        },
-        {
-          "targetId": "p12-q14",
-          "order": 14,
-          "inputType": "ordered-pair-coordinate",
-          "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
-          "signature": "049b2a05",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
-        },
-        {
-          "targetId": "p12-q15",
-          "order": 15,
-          "inputType": "ordered-pair-coordinate",
-          "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
-          "signature": "049b2a05",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
-        },
-        {
-          "targetId": "p12-q16",
-          "order": 16,
-          "inputType": "text:relation",
-          "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […].",
-          "signature": "9edf80ab",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "context": "שיעורי הנקודה: ([…],[…]).",
+          "signature": "716d7ab2",
+          "classification": "deterministic-mathematical",
+          "currentAnswerSource": "target-bound reviewed proof",
+          "sourceEvidence": "src/data/workbook/pages/read-intro.ts — exact plotted points A(1,2), B(4,5), C(7,1), D(6,4), E(3,3), F(8,6)",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "6"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p12-q7",
-        "p12-q8",
-        "p12-q9",
-        "p12-q10",
-        "p12-q12",
-        "p12-q13",
-        "p12-q14",
-        "p12-q15",
-        "p12-q16"
-      ],
-      "automaticallyCheckableTargets": 7,
-      "coveragePercentage": 43.8
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 13,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 13,
@@ -4201,8 +4169,8 @@
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -4213,8 +4181,8 @@
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -4686,8 +4654,8 @@
           "context": "לכן כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0).",
           "signature": "e05dfa65",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -4698,8 +4666,8 @@
           "context": "וכל הנקודות שממוקמות על ציר y הן מהצורה (0,[…]).",
           "signature": "714d467f",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -4771,8 +4739,8 @@
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -5078,8 +5046,8 @@
           "context": "סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]).",
           "signature": "6f2b24e6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -5090,8 +5058,8 @@
           "context": "סמנו על הסרטוט נקודה S משלכם שממוקמת מימין לנקודה P ומתחת לנקודה R, וכתבו את שיעוריה: ([…],[…]).",
           "signature": "6f2b24e6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -5214,8 +5182,8 @@
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות.",
           "signature": "1b541791",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -5226,8 +5194,8 @@
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות.",
           "signature": "1b541791",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -5238,8 +5206,8 @@
           "context": "סמנו על הסרטוט נקודה משלכם שממוקמת בתוך גוף המפרשית, והשלימו את החסר: שיעוריה ([…],[…]), והמרחק שלה מציר x הוא […] יחידות.",
           "signature": "dddcf268",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -5442,8 +5410,8 @@
           "context": "סמנו נקודה חדשה ששיעור ה־y שלה הוא 6, וכתבו את שיעוריה: ([…],[…]).",
           "signature": "64aa47f4",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6027,8 +5995,8 @@
           "context": "([…],[…])",
           "signature": "aad9137b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6039,8 +6007,8 @@
           "context": "([…],[…])",
           "signature": "aad9137b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6051,8 +6019,8 @@
           "context": "([…],[…])",
           "signature": "aad9137b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6063,8 +6031,8 @@
           "context": "([…],[…])",
           "signature": "aad9137b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6075,8 +6043,8 @@
           "context": "([…],[…])",
           "signature": "aad9137b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6087,8 +6055,8 @@
           "context": "([…],[…])",
           "signature": "aad9137b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6099,8 +6067,8 @@
           "context": "([…],[…])",
           "signature": "aad9137b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6111,8 +6079,8 @@
           "context": "([…],[…])",
           "signature": "aad9137b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6123,8 +6091,8 @@
           "context": "([…],[…])",
           "signature": "aad9137b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6135,8 +6103,8 @@
           "context": "([…],[…])",
           "signature": "aad9137b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6147,8 +6115,8 @@
           "context": "סמנו על הסרטוט נקודה F שממוקמת על ציר x. שיעוריה: F([…],[…]).",
           "signature": "39217632",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6174,8 +6142,8 @@
           "context": "סמנו נקודה G שממוקמת על ציר x וגם מימין לנקודה B. שיעוריה: G([…],[…]).",
           "signature": "dc459768",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6232,8 +6200,8 @@
           "context": "כל הנקודות שממוקמות על ציר y הן מהצורה (0,[…]), כי ערך ה־x שלהן הוא […].",
           "signature": "36d8976b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6259,8 +6227,8 @@
           "context": "כל הנקודות שממוקמות על ציר x הן מהצורה ([…],0), כי שיעור ה־[…] שלהן הוא 0.",
           "signature": "69a80635",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6458,8 +6426,8 @@
           "context": "[…] […]",
           "signature": "e6d5c219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6470,8 +6438,8 @@
           "context": "[…] […]",
           "signature": "e6d5c219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -6727,8 +6695,8 @@
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -7580,8 +7548,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "2dc8e219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -7592,8 +7560,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "2dc8e219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -7604,8 +7572,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "2dc8e219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -7616,8 +7584,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "2dc8e219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -7652,8 +7620,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -7664,8 +7632,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -7676,8 +7644,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -7688,8 +7656,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -7726,8 +7694,8 @@
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -7973,8 +7941,8 @@
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -8713,8 +8681,8 @@
           "context": "כתבו פקודת תנועה משלכם: הזזה של […] יחידות […].",
           "signature": "26cc5405",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8725,8 +8693,8 @@
           "context": "כתבו פקודת תנועה משלכם: הזזה של […] יחידות […].",
           "signature": "8b64bfe5",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8845,8 +8813,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8857,8 +8825,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8869,8 +8837,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8881,8 +8849,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8893,8 +8861,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8905,8 +8873,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8917,8 +8885,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8929,8 +8897,8 @@
           "context": "נקודות הפנייה שסימנתם, לפי סדר המסלול: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…]).",
           "signature": "05ec9859",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -8941,8 +8909,8 @@
           "context": "במסלול שסימנתם יש […] צעדים.",
           "signature": "f221a6b1",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9025,8 +8993,8 @@
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]).",
           "signature": "159fcfc6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9037,8 +9005,8 @@
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]).",
           "signature": "ee459183",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9049,8 +9017,8 @@
           "context": "הצעד הראשון שסימנתם הוא צעד […], ואחריו הגעתם אל הנקודה ([…],[…]).",
           "signature": "ee459183",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9109,8 +9077,8 @@
           "context": "מספר הצעדים במסלול שסימנתם […] מסכום שני ההפרשים, כי צריך לעקוף את הקירות.",
           "signature": "24c657f9",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -9448,8 +9416,8 @@
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9505,8 +9473,8 @@
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]).",
           "signature": "08b44ca7",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9517,8 +9485,8 @@
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]).",
           "signature": "08b44ca7",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9529,8 +9497,8 @@
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]).",
           "signature": "08b44ca7",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9541,8 +9509,8 @@
           "context": "שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]).",
           "signature": "08b44ca7",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -9565,8 +9533,8 @@
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -10174,8 +10142,8 @@
           "context": "הנקודות שסימנתם ממוקמות על קו […] אחד.",
           "signature": "6b34ed80",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -10357,8 +10325,8 @@
           "context": "בחרו מספר והשלימו כלל: שיעור ה־y גדול ב־[…] מערך ה־x.",
           "signature": "f22e876f",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -10369,8 +10337,8 @@
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א.",
           "signature": "ae0d10d8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -10381,8 +10349,8 @@
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א.",
           "signature": "ae0d10d8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -10393,8 +10361,8 @@
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א.",
           "signature": "ae0d10d8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -10405,8 +10373,8 @@
           "context": "כתבו שתי נקודות שמתאימות לכלל שלכם: ([…],[…]) ו־([…],[…]), וסמנו אותן על מערכת הצירים שבמשימה א.",
           "signature": "ae0d10d8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -10417,8 +10385,8 @@
           "context": "בשתי הנקודות שסימנתם, ההפרש בין שיעור ה־y ובין ערך ה־x הוא […].",
           "signature": "e7242597",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -10918,8 +10886,8 @@
           "context": "מה הייתה הטעות? […]",
           "signature": "b30606ed",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -10961,8 +10929,8 @@
           "context": "תנו דוגמה לנקודה על ציר x: […]",
           "signature": "f659763a",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -11336,8 +11304,8 @@
           "context": "רמז נוסף שמתאים לנקודה G שסימנתם: ערך ה־x שלה שווה […].",
           "signature": "2d4053e5",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -11451,8 +11419,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -11463,8 +11431,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -11475,8 +11443,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -11487,8 +11455,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -11546,8 +11514,8 @@
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]).",
           "signature": "3c53a6a0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -11558,8 +11526,8 @@
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]).",
           "signature": "3c53a6a0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -11570,8 +11538,8 @@
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]).",
           "signature": "3c53a6a0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -11582,8 +11550,8 @@
           "context": "ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]).",
           "signature": "3c53a6a0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -11594,8 +11562,8 @@
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -12208,8 +12176,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "2dc8e219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -12220,8 +12188,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "2dc8e219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -12232,8 +12200,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "2dc8e219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -12244,8 +12212,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור y זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "2dc8e219",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -12464,8 +12432,8 @@
           "context": "הקטע שסימנתם מאונך בהכרח לציר […].",
           "signature": "eadbaf7c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -12837,8 +12805,8 @@
           "context": "ההסבר: […].",
           "signature": "bd0fcb5c",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -13039,8 +13007,8 @@
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13051,8 +13019,8 @@
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13063,8 +13031,8 @@
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13075,8 +13043,8 @@
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13087,8 +13055,8 @@
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13099,8 +13067,8 @@
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13111,8 +13079,8 @@
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13123,8 +13091,8 @@
           "context": "הקודקודים שבחרתם: A([…],[…]) B([…],[…]) C([…],[…]) D([…],[…])",
           "signature": "83580dd6",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13135,8 +13103,8 @@
           "context": "AB=[…]=[…]יח'",
           "signature": "d1ab1133",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13147,8 +13115,8 @@
           "context": "AB=[…]=[…]יח'",
           "signature": "d1ab1133",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13159,8 +13127,8 @@
           "context": "BC=[…]=[…]יח'",
           "signature": "a0030abb",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13171,8 +13139,8 @@
           "context": "BC=[…]=[…]יח'",
           "signature": "a0030abb",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13328,8 +13296,8 @@
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13340,8 +13308,8 @@
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13352,8 +13320,8 @@
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13364,8 +13332,8 @@
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13376,8 +13344,8 @@
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13388,8 +13356,8 @@
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13400,8 +13368,8 @@
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13412,8 +13380,8 @@
           "context": "כתבו את ארבעת הקודקודים כזוגות סדורים: ([…],[…]) ([…],[…]) ([…],[…]) ([…],[…])",
           "signature": "8b96c886",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13805,8 +13773,8 @@
           "context": "קודקודי הריבוע: […]",
           "signature": "4712f361",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -13817,8 +13785,8 @@
           "context": "קודקודי המלבן: […]",
           "signature": "08b4e4c4",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -14369,8 +14337,8 @@
           "context": "כתבו נקודה ששני שיעוריה זהים והיא אינה ממוקמת על אף ציר: ([…],[…]).",
           "signature": "eea1b535",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -14381,8 +14349,8 @@
           "context": "כתבו נקודה ששני שיעוריה זהים והיא אינה ממוקמת על אף ציר: ([…],[…]).",
           "signature": "eea1b535",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -14795,8 +14763,8 @@
           "context": "סמנו על הסרטוט את המקום שבו הייתם שמים אפליקציה חדשה, כך שתהיה באותה עמודה של אפליקציית המפות: ([…],[…]).",
           "signature": "a1d66f9a",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -14807,8 +14775,8 @@
           "context": "המרחק בין האפליקציה שסימנתם ובין אפליקציית המפות הוא […] יח'.",
           "signature": "fd3086ec",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -15017,8 +14985,8 @@
           "context": "על הכרטיס שלכם יהיה כתוב ([…],[…]).",
           "signature": "08de6460",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -15029,8 +14997,8 @@
           "context": "על הכרטיס שלכם יהיה כתוב ([…],[…]).",
           "signature": "08de6460",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -15041,8 +15009,8 @@
           "context": "מהכיסא שבחרתם עד הכיסא של נועה יש הפרש של […] שורות.",
           "signature": "0bab69c9",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -15220,8 +15188,8 @@
           "context": "הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]).",
           "signature": "c9b992da",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -15232,8 +15200,8 @@
           "context": "הזוג הסדור של הפיקסל שבחרתם הוא ([…],[…]).",
           "signature": "c9b992da",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -15244,8 +15212,8 @@
           "context": "המרחק שלו מציר y הוא […] יח', וזה בדיוק ערך ה־x שלו.",
           "signature": "06808fd5",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -15437,8 +15405,8 @@
           "context": "הכתובת שסימנתם היא ([…],[…]).",
           "signature": "25b0ff4b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -15449,8 +15417,8 @@
           "context": "הכתובת שסימנתם היא ([…],[…]).",
           "signature": "25b0ff4b",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -15461,8 +15429,8 @@
           "context": "AD=[…]=[…]יח'",
           "signature": "bd15e79d",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -15473,8 +15441,8 @@
           "context": "AD=[…]=[…]יח'",
           "signature": "bd15e79d",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -15663,8 +15631,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -15675,8 +15643,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -15687,8 +15655,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -15699,8 +15667,8 @@
           "context": "כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]).",
           "signature": "7415af8e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -15797,8 +15765,8 @@
           "context": "הנקודה שסימנתם רחוקה מציר y ‏[…] יחידות.",
           "signature": "b00458b1",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "learner-created or explanatory response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "deterministic validator still required for this response",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -16313,8 +16281,8 @@
           "context": "הנקודה שסימנתם ממוקמת […] מכל הנקודות האחרות בגרף.",
           "signature": "c19d5f79",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -16819,8 +16787,8 @@
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]).",
           "signature": "06c216c8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -16831,8 +16799,8 @@
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]).",
           "signature": "06c216c8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -16843,8 +16811,8 @@
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]).",
           "signature": "06c216c8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -16855,8 +16823,8 @@
           "context": "הנקודה שמתאימה ליום הראשון היא ([…],[…]), והנקודה שמתאימה ליום השישי היא ([…],[…]).",
           "signature": "06c216c8",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -16867,8 +16835,8 @@
           "context": "ביום […] הקדשתם את מספר הדקות הגדול ביותר.",
           "signature": "8ea4981a",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -16906,8 +16874,8 @@
           "context": "הנקודה הגבוהה ביותר בגרף שלכם רחוקה מציר x […] יחידות.",
           "signature": "986c6f79",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         }
@@ -17088,8 +17056,8 @@
           "context": "לקטע BC קצה אחד בנקודה B(2,5) והקצה האחר בנקודה […], ולכן הוא מקביל לציר x.",
           "signature": "dca0bce4",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17518,8 +17486,8 @@
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]).",
           "signature": "195c6054",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17530,8 +17498,8 @@
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]).",
           "signature": "195c6054",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17542,8 +17510,8 @@
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]).",
           "signature": "195c6054",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17554,8 +17522,8 @@
           "context": "שתי נקודות אפשריות: ([…],[…]) ו־([…],[…]).",
           "signature": "195c6054",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17605,8 +17573,8 @@
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]).",
           "signature": "d690ded0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17617,8 +17585,8 @@
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]).",
           "signature": "d690ded0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17629,8 +17597,8 @@
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]).",
           "signature": "d690ded0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17641,8 +17609,8 @@
           "context": "הנקודות שסימנתם: B([…],[…]) ו־C([…],[…]).",
           "signature": "d690ded0",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17758,8 +17726,8 @@
           "context": "סמנו נקודה C כך שהזווית ABC תהיה ישרה. הנקודה שסימנתם: C([…],[…]).",
           "signature": "86a530e9",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17770,8 +17738,8 @@
           "context": "סמנו נקודה C כך שהזווית ABC תהיה ישרה. הנקודה שסימנתם: C([…],[…]).",
           "signature": "86a530e9",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17782,8 +17750,8 @@
           "context": "סמנו נקודה D נוספת ושונה, שגם בה הזווית ABD ישרה: D([…],[…]).",
           "signature": "6e9d9dae",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17794,8 +17762,8 @@
           "context": "סמנו נקודה D נוספת ושונה, שגם בה הזווית ABD ישרה: D([…],[…]).",
           "signature": "6e9d9dae",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17835,8 +17803,8 @@
           "context": "הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB.",
           "signature": "ac7b4206",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17847,8 +17815,8 @@
           "context": "הקטע BC שסימנתם מקביל לציר […], ולכן הוא […] לקטע AB.",
           "signature": "1cf23f6a",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17984,8 +17952,8 @@
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]).",
           "signature": "be5c8b3e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -17996,8 +17964,8 @@
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]).",
           "signature": "be5c8b3e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -18008,8 +17976,8 @@
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]).",
           "signature": "be5c8b3e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },
@@ -18020,8 +17988,8 @@
           "context": "שתי נקודות שהרחוב החדש יכול לעבור דרכן: ([…],[…]) ו־([…],[…]).",
           "signature": "be5c8b3e",
           "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
+          "currentAnswerSource": "deterministic validator missing",
+          "sourceEvidence": "signature-bound canonical review: deterministic validator still required",
           "automaticCheckingSafe": false,
           "answers": []
         },

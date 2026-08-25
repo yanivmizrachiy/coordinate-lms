@@ -64,6 +64,8 @@ export function hydrateChoiceAnswerInputs(
     const proxy = document.createElement('span');
     proxy.className = 'blank lms-choice-proxy';
     proxy.setAttribute('aria-hidden', 'true');
+    const hintKind = row.dataset['hintKind'];
+    if (hintKind) proxy.dataset['missing'] = hintKind;
 
     if (expected) {
       proxy.dataset['lmsAnswers'] = JSON.stringify([

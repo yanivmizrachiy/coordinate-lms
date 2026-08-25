@@ -10,6 +10,10 @@ import { readFileSync, readdirSync } from 'node:fs';
    that promise true as pages and the engine change. */
 
 const engine = readFileSync(new URL('../src/lms/engine.ts', import.meta.url), 'utf8');
+const correctiveHints = readFileSync(
+  new URL('../src/lms/hintCoach.ts', import.meta.url),
+  'utf8',
+);
 const css = readFileSync(new URL('../src/styles/lms.css', import.meta.url), 'utf8');
 const pagesDir = new URL('../src/data/workbook/pages/', import.meta.url);
 
@@ -19,7 +23,12 @@ const pagesDir = new URL('../src/data/workbook/pages/', import.meta.url);
 const HINT_VOCABULARY = ['אות', 'מספר', 'מילה'];
 
 const hintMapBlock = /ANSWER_HINT_BY_KIND[^{]*\{([\s\S]*?)\}/.exec(engine)?.[1] ?? '';
-const hintKinds = [...hintMapBlock.matchAll(/(\w+):/g)].map((m) => m[1]!);
+/* Object keys may be ordinary identifiers (`letter`) or quoted metadata names
+   (`'x-order'`). Parse both so this guard follows the real object syntax rather
+   than accidentally banning a valid canonical data-missing name. */
+const hintKinds = [...hintMapBlock.matchAll(/(?:'([^']+)'|(\w+))\s*:/g)]
+  .map((m) => m[1] ?? m[2]!)
+  .filter(Boolean);
 const hintValues = [...hintMapBlock.matchAll(/:\s*'([^']+)'/g)].map((m) => m[1]!);
 
 describe('empty answer boxes show a non-revealing type hint', () => {
@@ -46,8 +55,6 @@ describe('empty answer boxes show a non-revealing type hint', () => {
   });
 
   it('derives the hint from canonical metadata on the target itself', () => {
-    /* The hint comes off the blank's own data-missing attribute (or an explicit
-       .word-blank), so it can never drift from the content or invent an answer. */
     expect(engine).toContain('target.dataset.missing');
     expect(engine).toMatch(/dataset\.lmsHint\s*=/);
   });
@@ -61,5 +68,31 @@ describe('empty answer boxes show a non-revealing type hint', () => {
     const printBlock = /@media print\s*\{([\s\S]*?)\n\}/.exec(css)?.[1] ?? '';
     expect(printBlock, 'lms.css has no @media print block').not.toBe('');
     expect(printBlock).toContain('[data-lms-hint]::before');
+  });
+});
+
+describe('corrective hints stay simple for a learner who already made a mistake', () => {
+  it('does not bring back avoidable technical wording when plain Hebrew is clearer', () => {
+    const avoidable = [
+      'שנתה',
+      'שנתות',
+      'קנה מידה',
+      'ערכים עוקבים',
+      'הקרינו את הנקודה',
+      'נסחו לעצמכם את הכלל',
+    ];
+    for (const phrase of avoidable) {
+      expect(correctiveHints, `corrective hint brought back: ${phrase}`).not.toContain(phrase);
+    }
+  });
+
+  it('explains ordered-pair sides explicitly before relying on x/y terminology', () => {
+    expect(correctiveHints).toContain('המספר שבצד השמאלי בתוך הסוגריים הוא שיעור ה־x של הנקודה');
+    expect(correctiveHints).toContain('המספר שבצד הימני בתוך הסוגריים הוא שיעור ה־y של הנקודה');
+  });
+
+  it('builds hints only from unresolved targets in a multi-part question', () => {
+    expect(correctiveHints).toContain("state === 'wrong' || state === 'missing' || state === 'locked'");
+    expect(correctiveHints).toContain('const targets = unresolved(anchor)');
   });
 });

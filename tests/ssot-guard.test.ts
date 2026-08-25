@@ -117,7 +117,39 @@ describe('print and computerized practice stay directly linked but operationally
   it('states that a canonical content change updates both renderings', () => {
     expect(rules).toContain('Printable and computerized pages are two renderings of the SAME worksheet');
     expect(rules).toContain('must propagate automatically to both');
+    expect(rules).toContain('must be authored exactly once');
+    expect(rules).toContain('Never patch a printed copy and a computerized copy separately');
     expect(rules).toContain('Print/download controls are utilities for print/booklet surfaces');
+  });
+});
+
+describe('computerized grading is fail-closed and never routed to teacher review', () => {
+  const engine = read('src/lms/engine.ts');
+  const repository = read('src/lms/repository.ts');
+  const rules = read('RULES.md');
+
+  it('forbids teacher-review fallback and blocks scoring when any target is ungradable', () => {
+    expect(engine).not.toContain('נשמר לבדיקת המורה');
+    expect(engine).not.toContain('התשובה נשמרה לבדיקת המורה');
+    expect(engine).toContain('summary.ungradable > 0');
+    expect(engine).toContain('אין ציון חלקי');
+    expect(rules).toContain('There is no teacher-review or manual-grading fallback');
+  });
+
+  it('keeps repository-reviewed answers above stale local or remote keys', () => {
+    const start = repository.indexOf('export async function loadAnswerKey');
+    const end = repository.indexOf('export async function saveAnswerKey');
+    const loader = repository.slice(start, end);
+    const localPos = loader.indexOf('...local');
+    const remotePos = loader.indexOf('...remote');
+    const provenPos = loader.indexOf('...proven');
+    const defaultsPos = loader.indexOf('...defaults');
+    const implicitPos = loader.indexOf('...implicit');
+    expect(localPos).toBeGreaterThanOrEqual(0);
+    expect(remotePos).toBeGreaterThan(localPos);
+    expect(provenPos).toBeGreaterThan(remotePos);
+    expect(defaultsPos).toBeGreaterThan(provenPos);
+    expect(implicitPos).toBeGreaterThan(defaultsPos);
   });
 });
 

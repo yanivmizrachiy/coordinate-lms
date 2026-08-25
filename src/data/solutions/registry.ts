@@ -142,23 +142,23 @@ export const SOLUTION_SPECS: SolutionPageSpec[] = [
   {
     source: ORDERED_PAIR_PRACTICE,
     sourceFile: 'src/data/workbook/pages/ordered-pair-practice.ts',
-    sourceBlobSha: 'dceda6daa1733b372bd7fe94790f9eb665ced0da',
+    sourceBlobSha: 'cb08ffdc32def7665188558372fc2c9eb9c97120',
     exercises: [
       { id: 'write', label: 'כותבים זוג סדור', answer: '(4,3); (0,5); (8,0); (2,2).' },
       { id: 'complete', label: 'משלימים זוגות', answer: '(7,4); (3,6); (0,0); (5,0).' },
-      { id: 'order', label: 'הסדר משנה', answer: 'M(2,5); N(5,2); הסדר שונה; ב-(2,5) ערך x הוא 2. לכן אלה נקודות שונות: M שמאלה ומעל N.' },
+      { id: 'order', label: 'הסדר משנה', answer: 'M(2,5); N(5,2); הסדר שונה; ב-(2,5) ערך x הוא 2. הטענה „(2,5) ו-(5,2) הן אותה נקודה” — לא נכון. הטענה „כאשר מחליפים את סדר המספרים בזוג סדור, מיקום הנקודה יכול להשתנות” — נכון.' },
     ],
   },
   {
     source: READ_INTRO,
     sourceFile: 'src/data/workbook/pages/read-intro.ts',
-    sourceBlobSha: '429630709c1292a9625f083b76fb675fc209774e',
+    sourceBlobSha: '7a658bb680a2a57c15cc5847c31e5653e800ba25',
     exercises: [
       { id: 'a', label: 'א', answer: 'A(1,2); B(4,5); C(7,1); D(6,4); E(3,3); F(8,6).' },
       { id: 'b', label: 'ב', answer: 'B; C; E; F.' },
       { id: 'c', label: 'ג', answer: 'הימנית ביותר F; הגבוהה ביותר F.' },
-      { id: 'd', label: 'ד', answer: 'תשובות רבות אפשריות. לדוגמה A(1,2) ו-B(4,5): גם ערכי x שונים וגם שיעורי y שונים.' },
-      { id: 'e', label: 'ה', answer: 'נועה צודקת. לדוגמה B(4,5) ו-D(6,4) קרובות יחסית זו לזו, ובכל זאת שני שיעוריהן שונים.' },
+      { id: 'd', label: 'ד', answer: 'E(3,3); המרחק מציר x זהה למרחק מציר y, ובשניהם המרחק הוא 3 יחידות.' },
+      { id: 'e', label: 'ה', answer: 'F. שיעורי הנקודה: F(8,6).' },
     ],
   },
   {

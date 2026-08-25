@@ -12,21 +12,19 @@ async function questionFor(target: Locator): Promise<Locator> {
 }
 
 test('first attempt plus three corrections survive reload and never reset', async ({ page }) => {
-  await page.goto('/#/workbook/10');
+  await page.goto('/#/workbook/1');
 
-  /* Bind to whichever target is first gradable on the page, by its id, so the
-     canonical order can move pages without touching this contract. */
-  const qid = await page
-    .locator('[data-lms-answers]')
-    .first()
-    .getAttribute('data-lms-qid');
+  let target = page.locator('[data-grid-answer="axis-y"]');
+  await expect(target).toHaveCount(1);
+  const qid = await target.getAttribute('data-lms-qid');
+  expect(qid).toBeTruthy();
   const at = (): ReturnType<typeof page.locator> =>
     page.locator(`[data-lms-qid="${qid}"]`);
 
   for (let expectedAttempts = 1; expectedAttempts <= 4; expectedAttempts += 1) {
-    const target = at();
+    target = at();
     await expect(target).toBeVisible();
-    await target.fill('תשובה שגויה');
+    await target.fill('__תשובה_שגויה__');
     const question = await questionFor(target);
     await question
       .getByRole('button', { name: 'להגיש שאלה לבדיקה' })
@@ -48,8 +46,6 @@ test('first attempt plus three corrections survive reload and never reset', asyn
 });
 
 test('rapid duplicate submission creates one durable completion', async ({ page }) => {
-  /* An activity page — one with no gradable targets, so submitting is a single
-     completion rather than a graded check. */
   const ACTIVITY_PAGE = 19;
   await page.goto(`/#/workbook/${ACTIVITY_PAGE}`);
   const submit = page.getByRole('button', { name: 'סיימתי את הפעילות' });
