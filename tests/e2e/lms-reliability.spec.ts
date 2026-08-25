@@ -12,14 +12,15 @@ async function questionFor(target: Locator): Promise<Locator> {
 }
 
 test('first attempt plus three corrections survive reload and never reset', async ({ page }) => {
-  await page.goto('/#/workbook/10');
+  // Page 11 is fully deterministic. Retry persistence should be tested on a
+  // question that is actually releasable under the fail-closed grading rule.
+  await page.goto('/#/workbook/11');
 
-  /* Bind to whichever target is first gradable on the page, by its id, so the
-     canonical order can move pages without touching this contract. */
   const qid = await page
     .locator('[data-lms-answers]')
     .first()
     .getAttribute('data-lms-qid');
+  expect(qid).toBeTruthy();
   const at = (): ReturnType<typeof page.locator> =>
     page.locator(`[data-lms-qid="${qid}"]`);
 
@@ -48,8 +49,6 @@ test('first attempt plus three corrections survive reload and never reset', asyn
 });
 
 test('rapid duplicate submission creates one durable completion', async ({ page }) => {
-  /* An activity page — one with no gradable targets, so submitting is a single
-     completion rather than a graded check. */
   const ACTIVITY_PAGE = 19;
   await page.goto(`/#/workbook/${ACTIVITY_PAGE}`);
   const submit = page.getByRole('button', { name: 'סיימתי את הפעילות' });
