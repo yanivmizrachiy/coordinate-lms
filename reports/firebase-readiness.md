@@ -1,19 +1,19 @@
 # Firebase readiness report
 
-Generated: 2026-08-18T09:36:24.300Z
+Generated: 2026-08-25T20:35:31.503Z
 
 Mode: static
 
-Summary: 14 pass, 8 warning, 0 failure.
+Summary: 20 pass, 2 warning, 0 failure.
 
 | Status | Check | Critical | Message |
 |---|---|:---:|---|
-| warn | runtime:VITE_FIREBASE_API_KEY | no | VITE_FIREBASE_API_KEY is missing locally and was not found in GitHub Actions secrets. |
-| warn | runtime:VITE_FIREBASE_AUTH_DOMAIN | no | VITE_FIREBASE_AUTH_DOMAIN is missing locally and was not found in GitHub Actions secrets. |
-| warn | runtime:VITE_FIREBASE_PROJECT_ID | no | VITE_FIREBASE_PROJECT_ID is missing locally and was not found in GitHub Actions secrets. |
-| warn | runtime:VITE_FIREBASE_STORAGE_BUCKET | no | VITE_FIREBASE_STORAGE_BUCKET is missing locally and was not found in GitHub Actions secrets. |
-| warn | runtime:VITE_FIREBASE_MESSAGING_SENDER_ID | no | VITE_FIREBASE_MESSAGING_SENDER_ID is missing locally and was not found in GitHub Actions secrets. |
-| warn | runtime:VITE_FIREBASE_APP_ID | no | VITE_FIREBASE_APP_ID is missing locally and was not found in GitHub Actions secrets. |
+| pass | runtime:VITE_FIREBASE_API_KEY | no | VITE_FIREBASE_API_KEY exists in GitHub Actions secrets. |
+| pass | runtime:VITE_FIREBASE_AUTH_DOMAIN | no | VITE_FIREBASE_AUTH_DOMAIN exists in GitHub Actions secrets. |
+| pass | runtime:VITE_FIREBASE_PROJECT_ID | no | VITE_FIREBASE_PROJECT_ID exists in GitHub Actions secrets. |
+| pass | runtime:VITE_FIREBASE_STORAGE_BUCKET | no | VITE_FIREBASE_STORAGE_BUCKET exists in GitHub Actions secrets. |
+| pass | runtime:VITE_FIREBASE_MESSAGING_SENDER_ID | no | VITE_FIREBASE_MESSAGING_SENDER_ID exists in GitHub Actions secrets. |
+| pass | runtime:VITE_FIREBASE_APP_ID | no | VITE_FIREBASE_APP_ID exists in GitHub Actions secrets. |
 | pass | initialization:VITE_FIREBASE_API_KEY | yes | Firebase initialization references VITE_FIREBASE_API_KEY. |
 | pass | initialization:VITE_FIREBASE_AUTH_DOMAIN | yes | Firebase initialization references VITE_FIREBASE_AUTH_DOMAIN. |
 | pass | initialization:VITE_FIREBASE_PROJECT_ID | yes | Firebase initialization references VITE_FIREBASE_PROJECT_ID. |

@@ -24,28 +24,6 @@ import type {
 
 const TARGET_SELECTOR = '.blank, .word-blank, .pair-blank';
 
-/* A quiet placeholder for an empty answer box: it names the KIND of answer the
-   learner should type, never the answer. It is derived from the canonical
-   `data-missing` metadata already on the sheet — not a second answer source —
-   so it can never drift from the content or leak a solution. Coordinate slots
-   (`.pair-blank`, no data-missing) stay clean: the parentheses already say a
-   pair goes there. */
-const ANSWER_HINT_BY_KIND: Record<string, string> = {
-  letter: 'אות',
-  number: 'מספר',
-  relation: 'מילה',
-  property: 'מילה',
-  concept: 'מילה',
-  direction: 'מילה',
-};
-
-function answerHintFor(target: HTMLElement): string {
-  const kind = target.dataset.missing;
-  if (kind && kind in ANSWER_HINT_BY_KIND) return ANSWER_HINT_BY_KIND[kind]!;
-  if (target.classList.contains('word-blank')) return 'מילה';
-  return '';
-}
-
 interface AttachResult {
   panel: HTMLElement;
   cleanup: () => void;
@@ -723,9 +701,6 @@ export function attachLmsToPage(
     }
     target.setAttribute('tabindex', '0');
     target.spellcheck = false;
-
-    const answerHint = answerHintFor(target);
-    if (answerHint) target.dataset.lmsHint = answerHint;
 
     const onInput: EventListener = () => {
       touch();

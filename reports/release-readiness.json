@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-18T09:57:18.327Z",
+  "generatedAt": "2026-08-25T20:35:31.584Z",
   "mode": "static",
   "status": "failure",
   "releaseReady": false,
@@ -40,12 +40,6 @@
         "reports/firebase-readiness.json (static)"
       ],
       "blockers": [
-        "VITE_FIREBASE_API_KEY is missing locally and was not found in GitHub Actions secrets.",
-        "VITE_FIREBASE_AUTH_DOMAIN is missing locally and was not found in GitHub Actions secrets.",
-        "VITE_FIREBASE_PROJECT_ID is missing locally and was not found in GitHub Actions secrets.",
-        "VITE_FIREBASE_STORAGE_BUCKET is missing locally and was not found in GitHub Actions secrets.",
-        "VITE_FIREBASE_MESSAGING_SENDER_ID is missing locally and was not found in GitHub Actions secrets.",
-        "VITE_FIREBASE_APP_ID is missing locally and was not found in GitHub Actions secrets.",
         "FIREBASE_SERVICE_ACCOUNT was not found in GitHub Actions secrets."
       ]
     },

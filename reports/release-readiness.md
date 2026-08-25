@@ -1,6 +1,6 @@
 # Classroom release-readiness contract
 
-Generated: 2026-08-18T09:57:18.327Z
+Generated: 2026-08-25T20:35:31.584Z
 
 Mode: static
 
@@ -54,12 +54,6 @@ Evidence:
 
 Blockers:
 
-- VITE_FIREBASE_API_KEY is missing locally and was not found in GitHub Actions secrets.
-- VITE_FIREBASE_AUTH_DOMAIN is missing locally and was not found in GitHub Actions secrets.
-- VITE_FIREBASE_PROJECT_ID is missing locally and was not found in GitHub Actions secrets.
-- VITE_FIREBASE_STORAGE_BUCKET is missing locally and was not found in GitHub Actions secrets.
-- VITE_FIREBASE_MESSAGING_SENDER_ID is missing locally and was not found in GitHub Actions secrets.
-- VITE_FIREBASE_APP_ID is missing locally and was not found in GitHub Actions secrets.
 - FIREBASE_SERVICE_ACCOUNT was not found in GitHub Actions secrets.
 
 ## Pedagogical answer-key review
