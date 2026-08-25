@@ -1,4 +1,4 @@
-import { expect, test, type Locator } from '@playwright/test';
+import { expect, test, type Locator, type Page } from '@playwright/test';
 
 async function questionFor(target: Locator): Promise<Locator> {
   const card = target.locator(
@@ -18,7 +18,7 @@ async function submitQuestion(target: Locator): Promise<void> {
     .click();
 }
 
-async function provenGradableTarget(page: Parameters<typeof test>[0] extends never ? never : any): Promise<Locator> {
+async function provenGradableTarget(page: Page): Promise<Locator> {
   await page.goto('/#/workbook/1');
   const target = page.locator('[data-grid-answer="axis-y"]');
   await expect(target).toHaveCount(1);
