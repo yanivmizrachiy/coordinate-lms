@@ -60,7 +60,7 @@ A current user instruction wins over older wording and this file must be reconci
 ## 5. Scoring and correction model
 
 - A learner completes a page and receives a page score. **100 is the maximum possible score; 0 is a valid minimum when no credit was earned.**
-- **After the learner submits a page, the final page grade is shown prominently in red.** The numeric grade remains red at every score, including 100; a perfect-score celebration may add restrained decoration without changing the grade colour.
+- **After the learner submits a page, the final page grade is shown prominently in red at the TOP of the practice page, above the worksheet.** The numeric grade remains red at every score, including 100; a perfect-score celebration may add restrained decoration without changing the grade colour.
 - Every final page score is accompanied by a short **Hebrew teacher comment appropriate to the score band**. The wording must come from one maintained feedback owner, vary naturally across pages, and remain truthful: strong scores receive positive reinforcement; middle scores combine recognition with a concrete review suggestion; low scores clearly say more practice is needed without shaming the learner.
 - Correct on the first checked attempt loses no credit: 100% of that target's credit.
 - If the first checked answer is wrong, the learner receives **up to three correction opportunities**: first attempt + correction 1 + correction 2 + correction 3 = at most four checked attempts.

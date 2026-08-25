@@ -25,6 +25,12 @@ test('a submitted page shows a red score and a Hebrew teacher comment', async ({
   await expect(page.locator('.lms-score__teacher')).toBeVisible();
   await expect(page.locator('.lms-score__teacher')).not.toHaveText('');
 
+  /* The grade greets the learner at the TOP of the page — the banner renders
+     ABOVE the worksheet, not below it (RULES §5). */
+  const bannerBottom = await page.locator('.lms-score-banner').evaluate((el) => el.getBoundingClientRect().bottom);
+  const sheetTop = await page.locator('.sheet').first().evaluate((el) => el.getBoundingClientRect().top);
+  expect(bannerBottom, 'the score banner must sit above the worksheet').toBeLessThanOrEqual(sheetTop + 1);
+
   const border = await circle.evaluate((el) => getComputedStyle(el).borderTopColor);
   const color = await circle.evaluate((el) => getComputedStyle(el).color);
   expect(border).toBe('rgb(199, 38, 55)');

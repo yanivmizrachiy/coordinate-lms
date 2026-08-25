@@ -26,6 +26,10 @@ const TARGET_SELECTOR = '.blank, .word-blank, .pair-blank';
 
 interface AttachResult {
   panel: HTMLElement;
+  /** The final page grade + teacher comment. The shell places it at the TOP of
+      the practice page, above the sheet — the learner meets the result before
+      the worksheet, per the rules' "prominently in red" requirement. */
+  scoreBanner: HTMLElement;
   cleanup: () => void;
 }
 
@@ -128,7 +132,7 @@ export function attachLmsToPage(
   });
 
   const scoreHost = elem('div', {
-    class: 'lms-panel__scorehost',
+    class: 'lms-score-banner no-print',
     'aria-live': 'polite',
   });
 
@@ -169,7 +173,7 @@ export function attachLmsToPage(
     buttons.append(adminButton);
   }
 
-  panel.append(status, scoreHost, buttons);
+  panel.append(status, buttons);
 
   let draft = defaultDraft(uid, pageNumber);
   let answerKey: AnswerKey = {};
@@ -992,6 +996,7 @@ export function attachLmsToPage(
 
   return {
     panel,
+    scoreBanner: scoreHost,
     cleanup: () => {
       window.clearInterval(heartbeat);
       if (saveTimer !== undefined) window.clearTimeout(saveTimer);

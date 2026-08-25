@@ -150,6 +150,9 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
 
     nav.append(prevB, pagePosition, nextB, tools);
 
+    /* The submitted page grade greets the learner at the TOP of the page,
+       above the worksheet; the action panel stays below the sheet. */
+    if (lms) viewer.append(lms.scoreBanner);
     viewer.append(sheetWrap);
     if (lms) viewer.append(lms.panel);
     viewer.append(nav);

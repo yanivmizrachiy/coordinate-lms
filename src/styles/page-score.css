@@ -2,6 +2,18 @@
    The teacher sentence is separate, calm and readable. A perfect 100 may keep
    its celebratory spark, but the numeric grade never changes to a different
    colour. */
+
+/* The banner sits at the TOP of the practice page, above the worksheet — the
+   learner meets the submitted grade before anything else. Empty (page not
+   submitted yet) it occupies no space at all. */
+.lms-score-banner {
+  width: min(720px, 100%);
+  margin: 2px auto 0;
+}
+
+.lms-score-banner:empty {
+  display: none;
+}
 .lms-score__circle,
 .lms-score--perfect .lms-score__circle {
   border-color: #c72637;
