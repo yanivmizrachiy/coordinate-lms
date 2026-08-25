@@ -72,8 +72,8 @@ A current user instruction wins over older wording and this file must be reconci
   - final correction still wrong: unresolved target locks with 0 credit
 - **A learner who answers incorrectly once, receives the first hint and then answers correctly earns 75% of that target's credit, never 100%.** The hint does not erase the checked mistake.
 - Reload, retry, stale writes, reconnect or device changes must never reset attempts or refund lost credit.
-- After every checked mistake/correction, tell the learner plainly which stage was used, how much credit was lost and how much can still be earned.
-- UI explanations must mirror the real scoring calculation. Never maintain a second display-only grading model.
+- **Per-question notes to the child never explain point arithmetic.** After a checked answer the learner receives encouragement and the next step — including how many correction opportunities remain — but no "points lost / points remaining" accounting. The scoring model still runs exactly as defined above; its numbers surface only in the final page grade.
+- Any number the UI does show must mirror the real scoring calculation. Never maintain a second display-only grading model.
 - Attempt limits and score fractions must have one code owner/configuration path. Firestore may duplicate a bound only because it executes separately; tests must keep it aligned at 0–4.
 - Page submission must remain reachable. Unanswered targets may score 0; the learner must never be trapped on a page forever.
 

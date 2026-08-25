@@ -111,6 +111,15 @@
   transition:
     background-color 120ms ease,
     box-shadow 120ms ease;
+  /* The typed answer must sit clearly ABOVE the writing line, not on it.
+     The canonical blank is a bare 1.2em underline sized for print; on screen
+     the child's letters landed straight on the border and read as struck
+     through. Only the interactive layer lifts them — print keeps the
+     authored geometry because this attribute exists solely in practice. */
+  height: auto;
+  min-height: 1.2em;
+  padding: 0 3px 3px;
+  line-height: 1.25;
 }
 
 .sheet [data-lms-editable="true"]:focus {

@@ -571,6 +571,9 @@ export function attachLmsToPage(
       draft.updatedAt = submittedAt;
       const draftOutcome = await persistDraft();
       showScore(score);
+      /* The banner lives at the TOP of the page; the learner submits from the
+         bottom. Bring the grade to them — on submission only, never on load. */
+      scoreHost.scrollIntoView({ behavior: 'smooth', block: 'center' });
       refreshQuestions();
 
       const activityOutcome = await persistActivity({

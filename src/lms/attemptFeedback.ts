@@ -1,6 +1,5 @@
 import '../styles/attempt-feedback.css';
 import { LMS_CONFIG } from './config';
-import { remainingCreditFraction } from './scoring';
 import { teacherVoice, type TeacherFeedbackState } from './teacherVoice';
 
 interface TargetSnapshot {
@@ -9,8 +8,6 @@ interface TargetSnapshot {
   locked: boolean;
   state: string;
 }
-
-const maxCorrections = LMS_CONFIG.maxAttempts - 1;
 
 function targetsFor(control: HTMLElement): HTMLElement[] {
   const anchor = control.parentElement ?? control;
@@ -33,17 +30,13 @@ function scoreable(items: TargetSnapshot[]): TargetSnapshot[] {
   );
 }
 
-function roundedPoints(value: number): number {
-  return Math.round(value);
-}
-
-function attemptLabel(attempts: number): string {
-  if (attempts <= 0) return '';
-  if (attempts === 1) {
-    return `זה היה הניסיון הראשון. נשארו ${maxCorrections} אפשרויות תיקון.`;
-  }
-  const correction = Math.min(maxCorrections, attempts - 1);
-  return `זה היה תיקון ${correction} מתוך ${maxCorrections}.`;
+/* How many corrections the learner can still use, phrased as an invitation to
+   act — never as arithmetic about points. */
+function correctionsLeftLabel(attempts: number): string {
+  const left = Math.max(0, LMS_CONFIG.maxAttempts - attempts);
+  if (left <= 0) return '';
+  if (left === 1) return 'זו אפשרות התיקון האחרונה, קחו רגע לחשוב.';
+  return `אפשר לתקן עוד ${left} פעמים.`;
 }
 
 function feedbackState(qstate: string): TeacherFeedbackState {
@@ -58,39 +51,23 @@ function messageFor(
   qstate: string,
   questionIndex: number,
 ): string {
+  /* The child hears a teacher, not an accountant: encouragement and the next
+     step only. The scoring model still runs exactly as before — its arithmetic
+     shows up in the final page grade, never inside these notes. */
   const relevant = scoreable(items);
   if (!relevant.length || qstate === 'idle' || qstate === 'pending') return '';
 
   const maxAttempt = Math.max(0, ...relevant.map((item) => item.attempts));
-  const remaining =
-    relevant.reduce(
-      (sum, item) =>
-        sum +
-        remainingCreditFraction({
-          attempts: item.attempts,
-          correct: item.correct,
-          locked: item.locked,
-        }),
-      0,
-    ) / relevant.length;
-
-  const remainingPoints = roundedPoints(remaining * LMS_CONFIG.maxScore);
-  const lostPoints = LMS_CONFIG.maxScore - remainingPoints;
   const voice = teacherVoice(feedbackState(qstate), maxAttempt, questionIndex);
 
-  if (qstate === 'correct') {
-    if (lostPoints === 0) {
-      return `${voice} נשמרו כל ${LMS_CONFIG.maxScore} הנקודות של השאלה.`;
-    }
-    return `${voice} ${attemptLabel(maxAttempt)} בגלל הניסיונות הקודמים ירדו ${lostPoints} נקודות; נשארו ${remainingPoints} מתוך ${LMS_CONFIG.maxScore} נקודות לשאלה.`;
-  }
+  if (qstate === 'correct') return voice;
 
   if (qstate === 'locked') {
-    return `${voice} נוצלו הניסיון הראשון וכל ${maxCorrections} אפשרויות התיקון. בחלקים שלא תוקנו לא נשאר ניקוד. קרא את ההסבר כדי להבין את הדרך לפני שממשיכים.`;
+    return `${voice} נוצלו כל אפשרויות התיקון לשאלה הזאת. קראו את ההסבר כדי להבין את הדרך, וממשיכים הלאה.`;
   }
 
   const used = Math.min(maxAttempt, LMS_CONFIG.maxAttempts);
-  return `${voice} ${attemptLabel(used)} עד עכשיו ירדו ${lostPoints} נקודות מהניקוד האפשרי של השאלה; המקסימום שנותר הוא ${remainingPoints} מתוך ${LMS_CONFIG.maxScore}. תקן רק את החלקים שסומנו ונסה שוב.`.trim();
+  return `${voice} תקנו רק את החלקים שסומנו. ${correctionsLeftLabel(used)}`.trim();
 }
 
 function attach(control: HTMLElement, questionIndex: number): () => void {
