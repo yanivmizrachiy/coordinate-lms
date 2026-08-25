@@ -12,22 +12,19 @@ async function questionFor(target: Locator): Promise<Locator> {
 }
 
 test('first attempt plus three corrections survive reload and never reset', async ({ page }) => {
-  // Page 11 is fully deterministic. Retry persistence should be tested on a
-  // question that is actually releasable under the fail-closed grading rule.
-  await page.goto('/#/workbook/11');
+  await page.goto('/#/workbook/1');
 
-  const qid = await page
-    .locator('[data-lms-answers]')
-    .first()
-    .getAttribute('data-lms-qid');
+  let target = page.locator('[data-grid-answer="axis-y"]');
+  await expect(target).toHaveCount(1);
+  const qid = await target.getAttribute('data-lms-qid');
   expect(qid).toBeTruthy();
   const at = (): ReturnType<typeof page.locator> =>
     page.locator(`[data-lms-qid="${qid}"]`);
 
   for (let expectedAttempts = 1; expectedAttempts <= 4; expectedAttempts += 1) {
-    const target = at();
+    target = at();
     await expect(target).toBeVisible();
-    await target.fill('תשובה שגויה');
+    await target.fill('__תשובה_שגויה__');
     const question = await questionFor(target);
     await question
       .getByRole('button', { name: 'להגיש שאלה לבדיקה' })
