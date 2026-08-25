@@ -12,12 +12,11 @@ async function questionFor(target: Locator): Promise<Locator> {
 }
 
 test('an explicit authoring label becomes a checked answer automatically', async ({ page }) => {
-  // Page 11 is fully deterministic; this test should not depend on a page that
-  // is intentionally release-blocked for unresolved grading coverage.
-  await page.goto('/#/workbook/11');
+  await page.goto('/#/workbook/1');
 
-  const target = page.locator('[data-lms-answers]').first();
-  await expect(target).toBeVisible();
+  const target = page.locator('[data-grid-answer="axis-y"]');
+  await expect(target).toHaveCount(1);
+  await expect(target).toHaveAttribute('data-lms-answers', /"y"/i);
   const expected = JSON.parse(
     (await target.getAttribute('data-lms-answers')) ?? '[]',
   )[0] as string;
