@@ -179,7 +179,14 @@ export function mergePageDrafts(
   }
   return validateDraft({
     ...newest,
-    startedAt: Math.min(existing.startedAt, validated.startedAt),
+    /* The EXISTING document owns its startedAt. Firestore's draft rule pins
+       startedAt as immutable on update, and taking min() here produced a
+       merged draft whose startedAt no longer matched the cloud copy whenever
+       local work began before registration finished — after which every
+       central draft update was rejected forever and sync silently froze.
+       The authoritative side (cloud on load/sync, the older local copy on
+       device) simply keeps the start it already recorded. */
+    startedAt: existing.startedAt,
     updatedAt: Math.max(existing.updatedAt, validated.updatedAt),
     activeSeconds: Math.max(existing.activeSeconds, validated.activeSeconds),
     questions,

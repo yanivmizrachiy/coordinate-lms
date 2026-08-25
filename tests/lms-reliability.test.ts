@@ -102,6 +102,18 @@ describe('LMS persistence merging', () => {
     expect(merged.maxAttemptCount).toBe(2);
   });
 
+  test('the existing draft owns startedAt, so cloud updates pass the immutability rule', () => {
+    /* Firestore pins a draft's startedAt on update. Work that began locally
+       BEFORE registration finished carries an earlier startedAt than the cloud
+       copy created at sign-up; taking the minimum here made every later
+       central update fail forever. The already-stored side keeps its start. */
+    const cloud = { ...draft(200, 1, 'x'), startedAt: 500 };
+    const localEarlier = { ...draft(300, 2, 'y'), startedAt: 10 };
+    expect(mergePageDrafts(cloud, localEarlier).startedAt).toBe(500);
+    const localLater = { ...draft(300, 2, 'y'), startedAt: 900 };
+    expect(mergePageDrafts(cloud, localLater).startedAt).toBe(500);
+  });
+
   test('zero is valid while out-of-range scores and attempts are rejected before storage', () => {
     expect(() => mergePageResults(null, result(0, 1))).not.toThrow();
     expect(() => mergePageResults(null, result(-1, 1))).toThrow(/0 ל־100/);
