@@ -14,6 +14,10 @@ interface StudentData {
   activity: unknown[];
 }
 
+interface AnswerReviewManifest {
+  targetCount: number;
+}
+
 async function register(
   page: Page,
   fullName: string,
@@ -192,10 +196,14 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     expect(csv).toContain('אורי לוי');
     expect(csv.trimEnd().split('\r\n')).toHaveLength(157);
 
+    const manifest = JSON.parse(
+      await readFile('public/answer-review-manifest.json', 'utf8'),
+    ) as AnswerReviewManifest;
     await teacher.goto('/#/keys');
     await expect(teacher.getByRole('heading', { name: 'סטודיו סקירת תשובות' }))
       .toBeVisible();
-    await expect(teacher.locator('.lms-panel__status')).toContainText('מתוך 1150');
+    await expect(teacher.locator('.lms-panel__status'))
+      .toContainText(`מתוך ${manifest.targetCount}`);
     await teacher.getByLabel('סינון לפי מצב סקירה').selectOption('unreviewed');
     await expect(teacher.locator('.lms-keys__card').first()).toBeVisible();
   } finally {
