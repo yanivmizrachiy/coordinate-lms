@@ -18,11 +18,16 @@ async function submitQuestion(target: Locator): Promise<void> {
     .click();
 }
 
+async function provenGradableTarget(page: Parameters<typeof test>[0] extends never ? never : any): Promise<Locator> {
+  await page.goto('/#/workbook/1');
+  const target = page.locator('[data-grid-answer="axis-y"]');
+  await expect(target).toHaveCount(1);
+  await expect(target).toHaveAttribute('data-lms-answers', /"y"/i);
+  return target;
+}
+
 test('answer fields keep meaningful labels and support keyboard completion', async ({ page }) => {
-  // Page 11 is intentionally fully deterministic. Do not use a release-blocked
-  // page here, because this test measures accessibility rather than coverage.
-  await page.goto('/#/workbook/11');
-  const target = page.locator('[data-lms-answers]').first();
+  const target = await provenGradableTarget(page);
   await expect(target).toBeVisible();
   await expect(target).toHaveAttribute('aria-label', /מקום להשלמת|תשובה.+:/);
   const expected = JSON.parse(
@@ -44,8 +49,7 @@ test('answer fields keep meaningful labels and support keyboard completion', asy
 });
 
 test('feedback never rides on colour alone, and never reaches the paper', async ({ page }) => {
-  await page.goto('/#/workbook/11');
-  const target = page.locator('[data-lms-answers]').first();
+  const target = await provenGradableTarget(page);
   const expected = JSON.parse(
     (await target.getAttribute('data-lms-answers')) ?? '[]',
   )[0] as string;
