@@ -5,6 +5,14 @@ item below is complete. Run `npm run release:check` before the first deployment;
 it intentionally exits non-zero while critical Firebase configuration is absent.
 The checker reports setting names and status only, never values.
 
+**Fast path:** `npm run firebase:connect` automates steps 3 and most of 4 — it
+signs in to the maintainer's own Firebase and GitHub accounts, picks or creates
+the project and its Web app, updates `.firebaserc`, stores the six
+`VITE_FIREBASE_*` Actions secrets, accepts the service-account key file, and
+offers to trigger the deploys. Steps 1–2 (enabling Email/Password and creating
+Firestore) remain console actions, and every verification step below still
+applies. The manual instructions are kept as the authoritative fallback.
+
 ## 1. Enable Email/Password authentication
 
 1. Open the Firebase project selected for `coordinate-lms`.

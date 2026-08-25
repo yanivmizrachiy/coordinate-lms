@@ -16,6 +16,7 @@
     "answers:coverage": "node scripts/generate-answer-coverage.mjs",
     "answers:coverage:check": "node scripts/generate-answer-coverage.mjs --check",
     "firebase:check": "node scripts/firebase-readiness.mjs",
+    "firebase:connect": "node scripts/connect-firebase.mjs",
     "firebase:check:static": "node scripts/firebase-readiness.mjs --static",
     "release:report": "node scripts/release-readiness.mjs",
     "release:report:static": "node scripts/release-readiness.mjs --static",
