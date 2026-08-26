@@ -17,6 +17,9 @@ async function expectFocusedGuestPractice(page: import('@playwright/test').Page)
   await expect(page.locator('.lms-panel__identity')).toHaveCount(0);
   await expect(page.getByRole('button', { name: /הרשמה|התחברות|החשבון שלי/ })).toHaveCount(0);
   await expect(page.getByText(/מצב אורח|נשמרת במכשיר בלבד/)).toHaveCount(0);
+  /* Teacher controls belong to the admin session only. A learner (or guest)
+     must never meet the dashboard or answer-key tools inside practice. */
+  await expect(page.getByRole('button', { name: /דשבורד מורה|כמפתח מורה/ })).toHaveCount(0);
 }
 
 test('page one is open to a guest without account chatter', async ({ page }) => {
