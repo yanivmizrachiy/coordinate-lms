@@ -6,6 +6,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { safeParse } from '../lib/json';
 import { ADMIN_EMAILS } from './config';
 import {
   auth,
@@ -34,15 +35,6 @@ interface RegistrationInput {
   school?: string;
   username?: string;
   className?: string;
-}
-
-function safeParse<T>(raw: string | null, fallback: T): T {
-  if (!raw) return fallback;
-  try {
-    return JSON.parse(raw) as T;
-  } catch {
-    return fallback;
-  }
 }
 
 function loadLocalAccounts(): Record<string, LocalAccount> {

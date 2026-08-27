@@ -38,6 +38,3 @@ export const SOLUTION_PAGES: ResolvedSolutionPage[] = SOLUTION_SPECS.map((spec) 
   }
   return { ...spec, page, topic };
 });
-
-export const solutionPageByNumber = (pageNumber: number): ResolvedSolutionPage | undefined =>
-  SOLUTION_PAGES.find((entry) => entry.page.n === pageNumber);
