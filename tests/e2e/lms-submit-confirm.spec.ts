@@ -33,7 +33,10 @@ test('unfinished page can still be submitted on a second press, and scores', asy
   /* The reported clipping happened on exactly this flow: one question solved,
      final submission, score + verdicts injected. The whole canonical footer —
      its top rule included — must stay inside the reserved wrapper footprint,
-     and the LMS panel may begin only after the page has fully ended. */
+     and the LMS panel may begin only after the page has fully ended.
+     The footprint converges asynchronously (observer → applyZoom), so every
+     geometric invariant here is polled — an instant read raced the last
+     synchronization frame on slow CI runners. */
   const wrap = page.locator('.pageviewer__sheetwrap');
   const footer = page.locator('.gz-footer').first();
   await expect(footer).toBeVisible();
@@ -45,13 +48,21 @@ test('unfinished page can still be submitted on a second press, and scores', asy
     message: 'the full canonical footer must stay inside the practice wrapper after a partial submission',
   }).toBeGreaterThanOrEqual(-1);
 
-  const footerTop = await footer.evaluate((el) => el.getBoundingClientRect().top);
-  const wrapTop = await wrap.evaluate((el) => el.getBoundingClientRect().top);
-  expect(footerTop, 'the footer top rule must be visible inside the wrapper').toBeGreaterThan(wrapTop);
+  await expect.poll(async () => {
+    const footerTop = await footer.evaluate((el) => el.getBoundingClientRect().top);
+    const wrapTop = await wrap.evaluate((el) => el.getBoundingClientRect().top);
+    return footerTop - wrapTop;
+  }, {
+    message: 'the footer top rule must be visible inside the wrapper',
+  }).toBeGreaterThan(0);
 
-  const panelTop = await page.locator('.lms-panel').evaluate((el) => el.getBoundingClientRect().top);
-  const footerBottom = await footer.evaluate((el) => el.getBoundingClientRect().bottom);
-  expect(panelTop, 'the LMS panel must begin after the page has ended').toBeGreaterThanOrEqual(footerBottom - 1);
+  await expect.poll(async () => {
+    const panelTop = await page.locator('.lms-panel').evaluate((el) => el.getBoundingClientRect().top);
+    const footerBottom = await footer.evaluate((el) => el.getBoundingClientRect().bottom);
+    return Math.floor(panelTop - footerBottom);
+  }, {
+    message: 'the LMS panel must begin after the page has ended',
+  }).toBeGreaterThanOrEqual(-1);
 
   // No stray horizontal scrolling on any reading surface.
   const overflowX = await page.evaluate(() =>
