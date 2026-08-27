@@ -10,7 +10,10 @@ import {
   saveDraft,
   savePageResult,
 } from './repository';
-import { calculatePageScore } from './scoring';
+import {
+  calculatePageScore,
+  equalQuestionTargetWeights,
+} from './scoring';
 import { answersMatch } from './answerValidation';
 import { runSynchronizationRetry } from './syncRetry';
 import type {
@@ -513,14 +516,34 @@ export function attachLmsToPage(
         if (summary.keyed === 0) return;
 
         answerKey = await loadAnswerKey(pageNumber);
-        const keyedEntries = Object.keys(answerKey)
-          .map((qid) => draft.questions[qid])
-          .filter(
-            (progress): progress is QuestionProgress => Boolean(progress),
-          );
+
+        /* A page is worth 100 as a whole. First split that value equally among
+           the learner-facing question groups, then split each question's share
+           equally among its keyed answer targets. Extra blanks inside one
+           question therefore never make that question worth more. */
+        const targetWeights = equalQuestionTargetWeights(
+          questionGroups.map((group) =>
+            group.targets
+              .map((target) => target.dataset.lmsQid)
+              .filter(
+                (qid): qid is string =>
+                  Boolean(qid && (answerKey[qid] || []).length > 0),
+              ),
+          ),
+        );
+
+        const keyedEntries: Array<{
+          qid: string;
+          weight: number;
+          progress: QuestionProgress;
+        }> = [];
+        for (const [qid, weight] of targetWeights) {
+          const progress = draft.questions[qid];
+          if (progress) keyedEntries.push({ qid, weight, progress });
+        }
 
         const unresolved = keyedEntries.filter(
-          (progress) => !progress.correct && !progress.locked,
+          ({ progress }) => !progress.correct && !progress.locked,
         ).length;
 
         if (unresolved > 0 && !submitConfirmPending) {
@@ -536,10 +559,11 @@ export function attachLmsToPage(
 
         submitConfirmPending = false;
         score = calculatePageScore(
-          keyedEntries.map((progress) => ({
+          keyedEntries.map(({ progress, weight }) => ({
             attempts: progress.attempts,
             correct: progress.correct,
             locked: progress.locked,
+            weight,
           })),
           true,
         );
