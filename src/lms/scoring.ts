@@ -8,6 +8,29 @@ export interface QuestionAttempt {
 }
 
 /**
+ * Split one equal page-question share across the keyed answer targets that
+ * belong to that real learner-facing question. A question with four blanks is
+ * therefore worth exactly the same total as a question with one blank.
+ */
+export function equalQuestionTargetWeights(
+  questionTargetIds: readonly (readonly string[])[],
+): Map<string, number> {
+  const weights = new Map<string, number>();
+
+  for (const targetIds of questionTargetIds) {
+    const uniqueTargetIds = [...new Set(targetIds.filter(Boolean))];
+    if (uniqueTargetIds.length === 0) continue;
+
+    const targetWeight = 1 / uniqueTargetIds.length;
+    for (const targetId of uniqueTargetIds) {
+      weights.set(targetId, targetWeight);
+    }
+  }
+
+  return weights;
+}
+
+/**
  * Credit for a target when it becomes correct on checked attempt N.
  * This is the single code owner of the 100% -> 75% -> 50% -> 25% curve.
  */
@@ -45,6 +68,7 @@ export function calculatePageScore(
     (sum, item) => sum + (item.weight ?? 1),
     0,
   );
+  if (totalWeight <= 0) return 0;
 
   const earnedWeight = items.reduce(
     (sum, item) =>
