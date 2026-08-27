@@ -1,6 +1,6 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-24
+Updated: 2026-08-27
 
 This file is the single source of truth for `yanivmizrachiy/coordinate-lms`.
 Historical notes may explain past decisions, but they never override this file.
@@ -36,6 +36,7 @@ A current user instruction wins over older wording and this file must be reconci
 - Any canonical worksheet content change **must propagate automatically to both** printable and computerized renderings. Make the content change once.
 - `#/workbook/:n` must render the canonical page itself and then add the LMS layer. A separately authored computerized worksheet is a defect.
 - The practice rendering keeps the canonical A4 **width** but is never height-clipped: the interaction layer may make a dense page taller than one printed page, and every question must remain visible and answerable on screen. Print pagination is a print-surface property and stays exactly A4.
+- The practice shell must keep its reserved scaled height synchronized with the live worksheet height after feedback, hints, answer controls or submission state change the sheet. Never allow the footer, last question or bottom content to be hidden behind the LMS panel or navigation because of a stale measured height.
 - Before every page change classify it as CONTENT or INTERACTION/PRESENTATION. Content changes affect both renderings; LMS-only changes must not modify printable content.
 - **Print/download controls are utilities for print/booklet surfaces**, not part of computerized student practice. No print/download button belongs inside `#/workbook/:n`.
 - On-screen games may be attached as an LMS layer, but must not fork or rewrite canonical sheet HTML and must never appear in print.
@@ -59,10 +60,14 @@ A current user instruction wins over older wording and this file must be reconci
 
 ## 5. Scoring and correction model
 
-- A learner completes a page and receives a page score. **100 is the maximum possible score; 0 is a valid minimum when no credit was earned.**
+- A learner completes a page and receives a page score. **Every complete page is worth exactly 100 points; 100 is the maximum possible score and 0 is a valid minimum when no credit was earned.**
+- **The 100 points are divided first, equally, among the real learner-facing questions on that page — the same question groups shown by the progress UI.** A question is not worth more merely because it contains more blanks or answer fields.
+- When one real question contains several automatically graded answer targets/subparts, that question's equal page share is divided equally among its keyed targets. Thus, on an eight-question page each question owns 12.5 points in total; four keyed targets inside one of those questions receive 3.125 points each before attempt-credit reduction.
+- Open/unkeyed teacher-reviewed targets do not create artificial automatic-grading weight. Automatic page-score normalization uses the real question groups that actually contain keyed targets.
+- Fractional internal credit is kept at full precision throughout the page calculation and the **final page score is rounded only once, at the end**, to an integer from 0 to 100.
 - **After the learner submits a page, the final page grade is shown prominently in red at the TOP of the practice page, above the worksheet.** The numeric grade remains red at every score, including 100; a perfect-score celebration may add restrained decoration without changing the grade colour.
 - Every final page score is accompanied by a short **Hebrew teacher comment appropriate to the score band**. The wording must come from one maintained feedback owner, vary naturally across pages, and remain truthful: strong scores receive positive reinforcement; middle scores combine recognition with a concrete review suggestion; low scores clearly say more practice is needed without shaming the learner.
-- Correct on the first checked attempt loses no credit: 100% of that target's credit.
+- Correct on the first checked attempt loses no credit: 100% of that answer target's share within its real question.
 - If the first checked answer is wrong, the learner receives **up to three correction opportunities**: first attempt + correction 1 + correction 2 + correction 3 = at most four checked attempts.
 - Credit after checked mistakes is fixed and transparent:
   - first attempt correct: 100%
@@ -70,7 +75,7 @@ A current user instruction wins over older wording and this file must be reconci
   - correction 2 correct: 50%
   - correction 3 correct: 25%
   - final correction still wrong: unresolved target locks with 0 credit
-- **A learner who answers incorrectly once, receives the first hint and then answers correctly earns 75% of that target's credit, never 100%.** The hint does not erase the checked mistake.
+- **A learner who answers incorrectly once, receives the first hint and then answers correctly earns 75% of that target's share, never 100%.** The hint does not erase the checked mistake.
 - Reload, retry, stale writes, reconnect or device changes must never reset attempts or refund lost credit.
 - **Per-question notes to the child never explain point arithmetic.** After a checked answer the learner receives encouragement and the next step — including how many correction opportunities remain — but no "points lost / points remaining" accounting. The scoring model still runs exactly as defined above; its numbers surface only in the final page grade.
 - Any number the UI does show must mirror the real scoring calculation. Never maintain a second display-only grading model.
@@ -163,7 +168,7 @@ A current user instruction wins over older wording and this file must be reconci
 - **First-entry explanation:** `src/views/welcome.ts`; **route ownership:** `src/router.ts`; **first-entry styling:** `src/styles/welcome.css`.
 - **Registration/authentication semantics:** `src/lms/auth.ts` and `src/views/lmsLogin.ts`.
 - **Attempt limit:** `src/lms/config.ts`. The Firestore bound in `firestore.rules` is the only intentional mirror because security rules execute separately; its contract tests must change in the same commit.
-- **Score/credit curve:** `src/lms/scoring.ts`.
+- **Score/credit curve and equal-question target weighting:** `src/lms/scoring.ts`; **mapping live worksheet targets into learner-facing question groups:** `src/lms/engine.ts`.
 - **Final page-score rendering:** `src/lms/engine.ts`; **final score teacher sentence:** `src/lms/teacherVoice.ts` via `src/lms/pageScoreFeedback.ts`; **final score presentation:** `src/styles/page-score.css`.
 - **Answer normalization/tolerance:** `src/lms/answerValidation.ts`.
 - **Explicit canonical answer capture:** `src/lms/implicitAnswers.ts`; **answer-key precedence/persistence:** `src/lms/repository.ts`.
@@ -171,7 +176,7 @@ A current user instruction wins over older wording and this file must be reconci
 - **Teacher wording/encouragement:** `src/lms/teacherVoice.ts`.
 - **Pedagogical hints:** `src/lms/hintCoach.ts` and `src/styles/hint-coach.css` for any small visual hint aid.
 - **Per-question grading/state machine and page submission:** `src/lms/engine.ts`.
-- **Computerized page shell/navigation:** `src/views/pageViewer.ts` and its practice-shell styles; do not copy worksheet content there.
+- **Computerized page shell/navigation and live sheet-height synchronization:** `src/views/pageViewer.ts` and its practice-shell styles; do not copy worksheet content there.
 - **Authorization/data boundaries:** `firestore.rules`.
 - Tests should import runtime policy/configuration where possible instead of repeating magic numbers. A test may duplicate a value only when it is deliberately verifying an external contract such as Firestore rules or a required device viewport.
 - Do not create another architecture/preferences/rules document. If ownership changes, update this map here.
