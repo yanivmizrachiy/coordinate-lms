@@ -57,14 +57,18 @@ describe('LMS page scoring', () => {
   it('keeps correction credit inside the question share of an eight-question page', () => {
     const groups = Array.from({ length: 8 }, (_, index) => [`q${index + 1}`]);
     const weights = equalQuestionTargetWeights(groups);
-    const score = calculatePageScore([
-      { attempts: 2, correct: true, weight: weights.get('q1') },
-      ...groups.slice(1).map(([qid]) => ({
+    const remaining = groups.slice(1).map((group) => {
+      const qid = group[0]!;
+      return {
         attempts: 4,
         correct: false,
         locked: true,
         weight: weights.get(qid),
-      })),
+      };
+    });
+    const score = calculatePageScore([
+      { attempts: 2, correct: true, weight: weights.get('q1') },
+      ...remaining,
     ]);
 
     // 75% of one 12.5-point question = 9.375, rounded only at page total.
