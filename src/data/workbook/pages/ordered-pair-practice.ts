@@ -36,13 +36,7 @@ export const ORDERED_PAIR_PRACTICE: WorkbookPageContent = sheet({
 </ul>
 <ul class="tasks compact">
 <li>בשני הזוגות אותם מספרים, אבל ה<span class="blank" data-missing="concept" style="--blank-width:5ch"></span> שלהם שונה.</li>
-<li>בנקודה <span class="math-ltr" dir="ltr">(2,5)</span> ערך ה־<span class="math-ltr" dir="ltr">x</span> הוא <span class="blank" data-missing="number" style="--blank-width:3ch"></span>, ובנקודה <span class="math-ltr" dir="ltr">(5,2)</span> הוא 5.</li>
-</ul>
-<ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
-</ul>
-<ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
+<li>בנקודה <span class="math-ltr" dir="ltr">(2,5)</span> ערך ה־<span class="math-ltr" dir="ltr">x</span> הוא <span class="blank" data-missing="number" style="--blank-width:3ch"></span>, ובנקודה <span class="math-ltr" dir="ltr">(5,2)</span> ערך ה־<span class="word-blank word-short" data-missing="letter" aria-label="מקום להשלמת האות x"></span> הוא 5.</li>
 </ul>
 </section>
 </div>

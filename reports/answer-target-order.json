@@ -1162,17 +1162,12 @@
         {
           "targetId": "p11-q19",
           "inputType": "text:number",
-          "signature": "f0c2cba7"
+          "signature": "7be404ad"
         },
         {
           "targetId": "p11-q20",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
-        },
-        {
-          "targetId": "p11-q21",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "word:letter",
+          "signature": "9c68872d"
         }
       ]
     },

@@ -95,8 +95,6 @@ export const REVIEWED_OPEN_ENDED_TARGET_SIGNATURES: Readonly<
   'p7-q12': 'e4f4cc55',
   'p7-q13': 'e4f4cc55',
   'p7-q14': 'f952afbf',
-  'p11-q20': 'bd0fcb5c',
-  'p11-q21': 'bd0fcb5c',
   'p12-q7': '13c747ef',
   'p12-q8': '13c747ef',
   'p12-q9': '13c747ef',

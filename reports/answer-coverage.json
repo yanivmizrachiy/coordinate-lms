@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-18T09:30:25.300Z",
+  "generatedAt": "2026-08-27T18:46:33.836Z",
   "pageCount": 78,
-  "targetCount": 1150,
-  "automaticallyCheckableTargets": 729,
-  "coveragePercentage": 63.4,
+  "targetCount": 1149,
+  "automaticallyCheckableTargets": 730,
+  "coveragePercentage": 63.5,
   "classifications": {
     "reviewed-explicit": 181,
-    "canonical-metadata-derived": 24,
+    "canonical-metadata-derived": 25,
     "deterministic-mathematical": 518,
     "valid-range": 6,
-    "open-ended": 165,
+    "open-ended": 163,
     "ambiguous": 256,
     "unsupported": 0,
     "missing": 0
@@ -3359,7 +3359,7 @@
     {
       "pageNumber": 11,
       "title": "נקודות ברביע הראשון",
-      "interactiveTargetCount": 21,
+      "interactiveTargetCount": 20,
       "targetIds": [
         "p11-q1",
         "p11-q2",
@@ -3380,8 +3380,7 @@
         "p11-q17",
         "p11-q18",
         "p11-q19",
-        "p11-q20",
-        "p11-q21"
+        "p11-q20"
       ],
       "targets": [
         {
@@ -3647,8 +3646,8 @@
           "targetId": "p11-q19",
           "order": 19,
           "inputType": "text:number",
-          "context": "בנקודה (2,5) ערך ה־x הוא […], ובנקודה (5,2) הוא 5.",
-          "signature": "f0c2cba7",
+          "context": "בנקודה (2,5) ערך ה־x הוא […], ובנקודה (5,2) ערך ה־[…] הוא 5.",
+          "signature": "7be404ad",
           "classification": "deterministic-mathematical",
           "currentAnswerSource": "target-bound reviewed proof",
           "sourceEvidence": "src/data/workbook/pages/ordered-pair-practice.ts — exact x/y values, origin definition, and plotted M/N coordinates",
@@ -3660,34 +3659,21 @@
         {
           "targetId": "p11-q20",
           "order": 20,
-          "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
-        },
-        {
-          "targetId": "p11-q21",
-          "order": 21,
-          "inputType": "text:relation",
-          "context": "ההסבר: […].",
-          "signature": "bd0fcb5c",
-          "classification": "open-ended",
-          "currentAnswerSource": "teacher judgment required",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": []
+          "inputType": "word:letter",
+          "context": "בנקודה (2,5) ערך ה־x הוא […], ובנקודה (5,2) ערך ה־[…] הוא 5.",
+          "signature": "9c68872d",
+          "classification": "canonical-metadata-derived",
+          "currentAnswerSource": "explicit canonical authoring label",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x"
+          ]
         }
       ],
-      "missingOrAmbiguousTargetIds": [
-        "p11-q20",
-        "p11-q21"
-      ],
-      "automaticallyCheckableTargets": 19,
-      "coveragePercentage": 90.5
+      "missingOrAmbiguousTargetIds": [],
+      "automaticallyCheckableTargets": 20,
+      "coveragePercentage": 100
     },
     {
       "pageNumber": 12,
