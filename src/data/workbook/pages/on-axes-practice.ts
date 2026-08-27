@@ -45,9 +45,6 @@ ${wordBank(['y', '0'])}
 <ul class="tasks compact">
 <li>אין נקודה אחרת כזאת, כי רק בה גם ערך ה־<span class="math-ltr" dir="ltr">x</span> הוא 0 וגם שיעור ה־<span class="math-ltr" dir="ltr">y</span> הוא <span class="blank" data-missing="number" style="--blank-width:3ch"></span>.</li>
 </ul>
-<ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
-</ul>
 </section>
 </div>
 `,

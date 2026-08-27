@@ -79,7 +79,7 @@ describe('answer-key coverage intelligence', () => {
        with an unchanged prompt signature. 147 of the previous 735 lapsed
        because their wording changed in the archive's content fixes; they may
        return only through a fresh review with cited evidence. */
-    expect(proofs).toHaveLength(588);
+    expect(proofs).toHaveLength(586);
     for (const [targetId, proof] of proofs) {
       const target = targets.get(targetId);
       expect(target, targetId).toBeDefined();
@@ -98,11 +98,12 @@ describe('answer-key coverage intelligence', () => {
       ),
     );
 
-    /* 135 = reviewed open-ended targets bound to their canonical prompt.
-       137 survived the 78-page import (2026-08-18); the two page-11 'הסבר'
-       targets were dropped 2026-08-27 when that item became a keyed
-       x-completion, matching the printed sheet. */
-    expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(135);
+    /* 125 = reviewed open-ended targets bound to their canonical prompt.
+       137 survived the 78-page import (2026-08-18); on 2026-08-27 the open
+       'הסבר'/reasoning blanks across the ordered-pair and read/relations/
+       rectangles/on-axes/missing-coord/distance sheets became concrete keyed
+       completions (or were removed as redundant), matching the printed sheet. */
+    expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(125);
     for (const [targetId, signature] of Object.entries(
       REVIEWED_OPEN_ENDED_TARGET_SIGNATURES,
     )) {

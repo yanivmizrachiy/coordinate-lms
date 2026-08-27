@@ -1,18 +1,18 @@
 # Answer-key coverage report
 
-Generated: 2026-08-27T18:46:33.836Z
+Generated: 2026-08-27T19:39:15.544Z
 
-Overall: 730/1149 safely checkable targets (63.5%).
+Overall: 739/1147 safely checkable targets (64.4%).
 
 ## Classification totals
 
 | Classification | Targets |
 |---|---:|
 | reviewed-explicit | 181 |
-| canonical-metadata-derived | 25 |
-| deterministic-mathematical | 518 |
+| canonical-metadata-derived | 36 |
+| deterministic-mathematical | 516 |
 | valid-range | 6 |
-| open-ended | 163 |
+| open-ended | 152 |
 | ambiguous | 256 |
 | unsupported | 0 |
 | missing | 0 |
@@ -321,7 +321,7 @@ Overall: 730/1149 safely checkable targets (63.5%).
 
 ### Page 12 — נקודות ברביע הראשון
 
-7/16 safely checkable (43.8%).
+8/16 safely checkable (50%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -340,11 +340,11 @@ Overall: 730/1149 safely checkable targets (63.5%).
 | p12-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
 | p12-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
 | p12-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
-| p12-q16 | text:relation | open-ended | no | teacher judgment required | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
+| p12-q16 | word:relation | canonical-metadata-derived | yes | explicit canonical authoring label | הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]. |
 
 ### Page 13 — נקודות ברביע הראשון
 
-16/21 safely checkable (76.2%).
+18/21 safely checkable (85.7%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -364,8 +364,8 @@ Overall: 730/1149 safely checkable targets (63.5%).
 | p13-q14 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | איזו נקודה ממוקמת על ציר y? […] |
 | p13-q15 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | מהם שיעוריה? ([…],[…]) |
 | p13-q16 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | מהם שיעוריה? ([…],[…]) |
-| p13-q17 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
-| p13-q18 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p13-q17 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | שיעור x שלה זהה לזה של הנקודה […], ולכן הוא 6. |
+| p13-q18 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | שיעור y שלה זהה לזה של הנקודה […], ולכן הוא 6. |
 | p13-q19 | ordered-pair-coordinate | ambiguous | no | none | סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…]). |
 | p13-q20 | ordered-pair-coordinate | ambiguous | no | none | סמנו נקודה R ששיעור ה־y שלה זהה לזה של הנקודה K ושיעור ה־x שלה 5, וכתבו: R([…],[…]). |
 | p13-q21 | text:direction | ambiguous | no | none | הנקודה R ממוקמת […] לנקודה K. |
@@ -409,7 +409,7 @@ Overall: 730/1149 safely checkable targets (63.5%).
 
 ### Page 16 — נקודות שעל הצירים
 
-6/9 safely checkable (66.7%).
+6/8 safely checkable (75%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -421,7 +421,6 @@ Overall: 730/1149 safely checkable targets (63.5%).
 | p16-q6 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | הנקודה שממוקמת על שני הצירים יחד היא ראשית הצירים, O([…],[…]). |
 | p16-q7 | text:text | reviewed-explicit | yes | target-bound reviewed proof | […] |
 | p16-q8 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | אין נקודה אחרת כזאת, כי רק בה גם ערך ה־x הוא 0 וגם שיעור ה־y הוא […]. |
-| p16-q9 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 
 ### Page 17 — בודקים ומתקנים סימון
 
@@ -617,7 +616,7 @@ No detected interactive response targets.
 
 ### Page 28 — גדול ב־, קטן ב־ וגדול פי
 
-4/5 safely checkable (80%).
+5/5 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -625,7 +624,7 @@ No detected interactive response targets.
 | p28-q2 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | B([…],6) |
 | p28-q3 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | C(7,[…]) |
 | p28-q4 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | D(8,[…]) |
-| p28-q5 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p28-q5 | word:relation | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו כן או לא: […]. שני הקשרים נפגשים רק בנקודה (2,4). |
 
 ### Page 29 — יחסים בין שיעורים
 
@@ -704,7 +703,7 @@ No detected interactive response targets.
 
 ### Page 33 — מרחק נקודה מהצירים
 
-3/17 safely checkable (17.6%).
+4/17 safely checkable (23.5%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -724,11 +723,11 @@ No detected interactive response targets.
 | p33-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | כתבו שתי נקודות משלכם שיש להן שיעור x זהה: ([…],[…]) ו־([…],[…]). |
 | p33-q15 | text:relation | ambiguous | no | none | אורי חישב את המרחק בין (2,5) ובין (7,5) וקיבל 9 — הוא […] את שני ערכי ה־x במקום לחסר אותם. תרגיל החיסור הנכון: |
 | p33-q16 | text:number | deterministic-mathematical | yes | target-bound reviewed proof | 7 − 2=[…]יח' |
-| p33-q17 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p33-q17 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | בנקודה כזו ערך x שווה לשיעור […]. |
 
 ### Page 34 — מרחק נקודה מהצירים
 
-13/14 safely checkable (92.9%).
+13/13 safely checkable (100%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -743,9 +742,8 @@ No detected interactive response targets.
 | p34-q9 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את שיעורי נקודה Q: Q([…],[…]) |
 | p34-q10 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את שיעורי נקודה R: R([…],[…]) |
 | p34-q11 | ordered-pair-coordinate | deterministic-mathematical | yes | target-bound reviewed proof | כתבו את שיעורי נקודה R: R([…],[…]) |
-| p34-q12 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | לאיזה ציר המסלול קצר יותר? […] בכמה יחידות? […] |
-| p34-q13 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | לאיזה ציר המסלול קצר יותר? […] בכמה יחידות? […] |
-| p34-q14 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p34-q12 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | לאיזה ציר המסלול קצר יותר? ציר […] בכמה יחידות? […] |
+| p34-q13 | word:number | canonical-metadata-derived | yes | explicit canonical authoring label | לאיזה ציר המסלול קצר יותר? ציר […] בכמה יחידות? […] |
 
 ### Page 35 — מזיזים צורה שלמה
 
@@ -853,7 +851,7 @@ No detected interactive response targets.
 
 ### Page 39 — משלימים שיעור חסר ודפוסים
 
-21/28 safely checkable (75%).
+22/27 safely checkable (81.5%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -875,7 +873,7 @@ No detected interactive response targets.
 | p39-q16 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מה משתנה בשיעור y? […] |
 | p39-q17 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | מה הקשר בין שיעור x לשיעור y? […] |
 | p39-q18 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם (6,4) מתאים? […] |
-| p39-q19 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p39-q19 | word:number | canonical-metadata-derived | yes | explicit canonical authoring label | הכלל: שיעור x גדול פי […] משיעור y. |
 | p39-q20 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | שיעור y גדול ב־[…] משיעור x. |
 | p39-q21 | text:text | deterministic-mathematical | yes | target-bound reviewed proof | האם (5,5) מתאים? […] |
 | p39-q22 | text:relation | reviewed-explicit | yes | target-bound reviewed proof | התיאור הזה מתאים ל[…] נקודות, ולא לנקודה אחת. |
@@ -884,7 +882,6 @@ No detected interactive response targets.
 | p39-q25 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q26 | ordered-pair-coordinate | open-ended | no | teacher judgment required | שתי נקודות שמתאימות לו: ([…],[…]) ו־([…],[…]). |
 | p39-q27 | text:letter | ambiguous | no | none | כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]. |
-| p39-q28 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
 
 ### Page 40 — שיעור חסר ודפוסים
 
@@ -1045,7 +1042,7 @@ No detected interactive response targets.
 
 ### Page 46 — קטעים מקבילים לצירים
 
-7/16 safely checkable (43.8%).
+9/17 safely checkable (52.9%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1064,7 +1061,8 @@ No detected interactive response targets.
 | p46-q13 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
 | p46-q14 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
 | p46-q15 | ordered-pair-coordinate | open-ended | no | teacher judgment required | ד. כתבו נקודה נוספת כך שהקטע בינה לבין (3,4) יהיה מקביל לציר x: ([…],[…]). ולציר y: ([…],[…]). |
-| p46-q16 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p46-q16 | word:relation | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו כן או לא: […]. אם גם שיעור x וגם שיעור y זהים, מדובר באותה […]. |
+| p46-q17 | word:concept | canonical-metadata-derived | yes | explicit canonical authoring label | כתבו כן או לא: […]. אם גם שיעור x וגם שיעור y זהים, מדובר באותה […]. |
 
 ### Page 47 — קטעים מקבילים לצירים
 
@@ -1169,7 +1167,7 @@ No detected interactive response targets.
 
 ### Page 52 — המלבן ברביע הראשון
 
-0/14 safely checkable (0%).
+1/14 safely checkable (7.1%).
 
 | Target | Input | Classification | Safe | Source | Context |
 |---|---|---|:---:|---|---|
@@ -1186,7 +1184,7 @@ No detected interactive response targets.
 | p52-q11 | ordered-pair-coordinate | ambiguous | no | none | הקודקוד החסר: ([…],[…]) |
 | p52-q12 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
 | p52-q13 | text:number | ambiguous | no | none | היקף המלבן הוא […] יח'.שטח המלבן הוא […] יח"ר. |
-| p52-q14 | text:relation | open-ended | no | teacher judgment required | ההסבר: […]. |
+| p52-q14 | word:letter | canonical-metadata-derived | yes | explicit canonical authoring label | הקודקוד הרביעי הוא (2,5): ערך x שלו כמו של הקודקוד A, ושיעור y שלו כמו של הקודקוד […]. |
 
 ### Page 53 — המלבן ברביע הראשון
 

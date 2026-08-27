@@ -76,7 +76,7 @@ ${exerciseGiven('', '7 − 2')}
 <section class="q-card">
 <h3>ה. נקודה שמרחקה זהה משני הצירים - מה אפשר לומר על שיעוריה?</h3>
 <ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
+<li>בנקודה כזו ערך <span class="math-ltr" dir="ltr">x</span> שווה לשיעור <span class="word-blank word-short" data-missing="letter" aria-label="מקום להשלמת האות y"></span>.</li>
 </ul>
 </section>
 `,

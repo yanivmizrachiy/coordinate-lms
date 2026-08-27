@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-27T18:46:33.836Z",
+  "generatedAt": "2026-08-27T19:39:15.544Z",
   "pageCount": 78,
-  "targetCount": 1149,
+  "targetCount": 1147,
   "pages": [
     {
       "pageNumber": 1,
@@ -3339,12 +3339,14 @@
         {
           "pageNumber": 12,
           "targetId": "p12-q16",
-          "signature": "9edf80ab",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
+          "signature": "a8d62a68",
+          "inputType": "word:relation",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "שונה"
+          ],
           "context": "הנימוק: הנקודה ([…],[…]) והנקודה ([…],[…]) קרובות זו לזו, ובכל זאת ערך ה־x שלהן […]."
         }
       ]
@@ -3567,24 +3569,28 @@
         {
           "pageNumber": 13,
           "targetId": "p13-q17",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "signature": "7c4b0b21",
+          "inputType": "word:letter",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "M"
+          ],
+          "context": "שיעור x שלה זהה לזה של הנקודה […], ולכן הוא 6."
         },
         {
           "pageNumber": 13,
           "targetId": "p13-q18",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "signature": "a2428cac",
+          "inputType": "word:letter",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "L"
+          ],
+          "context": "שיעור y שלה זהה לזה של הנקודה […], ולכן הוא 6."
         },
         {
           "pageNumber": 13,
@@ -4031,17 +4037,6 @@
             "אפס"
           ],
           "context": "אין נקודה אחרת כזאת, כי רק בה גם ערך ה־x הוא 0 וגם שיעור ה־y הוא […]."
-        },
-        {
-          "pageNumber": 16,
-          "targetId": "p16-q9",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
         }
       ]
     },
@@ -5608,13 +5603,15 @@
         {
           "pageNumber": 28,
           "targetId": "p28-q5",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "signature": "36acd39a",
+          "inputType": "word:relation",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "לא"
+          ],
+          "context": "כתבו כן או לא: […]. שני הקשרים נפגשים רק בנקודה (2,4)."
         }
       ]
     },
@@ -6431,13 +6428,15 @@
         {
           "pageNumber": 33,
           "targetId": "p33-q17",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "signature": "bfb79957",
+          "inputType": "word:letter",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "y"
+          ],
+          "context": "בנקודה כזו ערך x שווה לשיעור […]."
         }
       ]
     },
@@ -6600,42 +6599,28 @@
         {
           "pageNumber": 34,
           "targetId": "p34-q12",
-          "signature": "f5e4a471",
-          "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/distance-practice.ts — exact coordinate-to-axis distances and plotted Q/R endpoints",
+          "signature": "cfbcaaea",
+          "inputType": "word:letter",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "ציר y",
-            "y",
-            "Y"
+            "y"
           ],
-          "context": "לאיזה ציר המסלול קצר יותר? […] בכמה יחידות? […]"
+          "context": "לאיזה ציר המסלול קצר יותר? ציר […] בכמה יחידות? […]"
         },
         {
           "pageNumber": 34,
           "targetId": "p34-q13",
-          "signature": "f5e4a471",
-          "inputType": "text:text",
-          "classification": "deterministic-mathematical",
-          "sourceEvidence": "src/data/workbook/pages/distance-practice.ts — exact coordinate-to-axis distances and plotted Q/R endpoints",
+          "signature": "6634d557",
+          "inputType": "word:number",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
           "automaticCheckingSafe": true,
           "answers": [
-            "2",
-            "שתיים"
+            "2"
           ],
-          "context": "לאיזה ציר המסלול קצר יותר? […] בכמה יחידות? […]"
-        },
-        {
-          "pageNumber": 34,
-          "targetId": "p34-q14",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "context": "לאיזה ציר המסלול קצר יותר? ציר […] בכמה יחידות? […]"
         }
       ]
     },
@@ -7823,13 +7808,15 @@
         {
           "pageNumber": 39,
           "targetId": "p39-q19",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "signature": "9b4758bd",
+          "inputType": "word:number",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "2"
+          ],
+          "context": "הכלל: שיעור x גדול פי […] משיעור y."
         },
         {
           "pageNumber": 39,
@@ -7927,17 +7914,6 @@
           "automaticCheckingSafe": false,
           "answers": [],
           "context": "כדי לקבוע נקודה אחת צריך לדעת גם את ערך ה־x וגם את שיעור ה־[…]."
-        },
-        {
-          "pageNumber": 39,
-          "targetId": "p39-q28",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
         }
       ]
     },
@@ -9586,13 +9562,28 @@
         {
           "pageNumber": 46,
           "targetId": "p46-q16",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "signature": "99578a61",
+          "inputType": "word:relation",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "לא"
+          ],
+          "context": "כתבו כן או לא: […]. אם גם שיעור x וגם שיעור y זהים, מדובר באותה […]."
+        },
+        {
+          "pageNumber": 46,
+          "targetId": "p46-q17",
+          "signature": "7a801c77",
+          "inputType": "word:concept",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "נקודה"
+          ],
+          "context": "כתבו כן או לא: […]. אם גם שיעור x וגם שיעור y זהים, מדובר באותה […]."
         }
       ]
     },
@@ -10582,13 +10573,15 @@
         {
           "pageNumber": 52,
           "targetId": "p52-q14",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "learner-created or explanatory response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "signature": "3329c627",
+          "inputType": "word:letter",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "C"
+          ],
+          "context": "הקודקוד הרביעי הוא (2,5): ערך x שלו כמו של הקודקוד A, ושיעור y שלו כמו של הקודקוד […]."
         }
       ]
     },

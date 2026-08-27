@@ -195,7 +195,7 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     await teacher.goto('/#/keys');
     await expect(teacher.getByRole('heading', { name: 'סטודיו סקירת תשובות' }))
       .toBeVisible();
-    await expect(teacher.locator('.lms-panel__status')).toContainText('מתוך 1149');
+    await expect(teacher.locator('.lms-panel__status')).toContainText('מתוך 1147');
     await teacher.getByLabel('סינון לפי מצב סקירה').selectOption('unreviewed');
     await expect(teacher.locator('.lms-keys__card').first()).toBeVisible();
   } finally {

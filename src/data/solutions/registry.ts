@@ -152,7 +152,7 @@ export const SOLUTION_SPECS: SolutionPageSpec[] = [
   {
     source: READ_INTRO,
     sourceFile: 'src/data/workbook/pages/read-intro.ts',
-    sourceBlobSha: '429630709c1292a9625f083b76fb675fc209774e',
+    sourceBlobSha: '14d02e53a4ef6705d60457883d01cdfffed93e0a',
     exercises: [
       { id: 'a', label: 'א', answer: 'A(1,2); B(4,5); C(7,1); D(6,4); E(3,3); F(8,6).' },
       { id: 'b', label: 'ב', answer: 'B; C; E; F.' },
@@ -164,7 +164,7 @@ export const SOLUTION_SPECS: SolutionPageSpec[] = [
   {
     source: READ_PRACTICE,
     sourceFile: 'src/data/workbook/pages/read-practice.ts',
-    sourceBlobSha: 'bd3086aa745fc33abc9801e0c346ae93a68c7767',
+    sourceBlobSha: 'b4830af53147304f5ac7a716ee4b5dc808bdf309',
     exercises: [
       { id: 'graph-1', label: 'קוראים מן הגרף', answer: 'A(1,2); B(4,5); C(7,3); D(5,0).' },
       { id: 'graph-2', label: 'קוראים ומשווים', answer: 'K(0,4); N(8,5); שיעור y גדול מ-3: K, L, N; על ציר y נמצאת K.' },
@@ -196,7 +196,7 @@ export const SOLUTION_SPECS: SolutionPageSpec[] = [
   {
     source: ON_AXES_PRACTICE,
     sourceFile: 'src/data/workbook/pages/on-axes-practice.ts',
-    sourceBlobSha: '605191289e2f78cb257fbc7eadfe76d458ccf016',
+    sourceBlobSha: '300f95f6bc25ab4336124a7a3cda6a31036fc3a6',
     exercises: [
       { id: 'rule', label: 'מה משותף?', answer: '0; y. על ציר x הצורה היא (x,0); על ציר y הצורה היא (0,y); ראשית הצירים O(0,0).' },
       { id: 'sort', label: 'ממיינים נקודות', answer: 'על ציר x: (3,0), (8,0), וגם (0,0). על ציר y: (0,5), (0,1), וגם (0,0). לא על ציר: (4,2). ראשית הצירים שייכת לשני הצירים.' },

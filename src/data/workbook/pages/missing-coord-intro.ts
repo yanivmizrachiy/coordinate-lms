@@ -45,9 +45,8 @@ export const MISSING_COORD_INTRO: WorkbookPageContent = sheet({
 <div>האם <span class="math-ltr" dir="ltr">(6,4)</span> מתאים? <span class="blank" style="--blank-width:5ch"></span>
 </div>
 </div>
-<p>כתבו כלל במילים:</p>
 <ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
+<li>הכלל: שיעור <span class="math-ltr" dir="ltr">x</span> גדול פי <span class="word-blank word-short" data-missing="number" aria-label="מקום להשלמת המספר 2"></span> משיעור <span class="math-ltr" dir="ltr">y</span>.</li>
 </ul>
 </section>
 <section class="q-card">
@@ -63,9 +62,6 @@ export const MISSING_COORD_INTRO: WorkbookPageContent = sheet({
 <li>התיאור הזה מתאים ל<span class="blank" data-missing="relation" style="--blank-width:6ch"></span> נקודות, ולא לנקודה אחת.</li>
 <li>שתי נקודות שמתאימות לו: <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span> ו־<span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span>.</li>
 <li>כדי לקבוע נקודה <b>אחת</b> צריך לדעת גם את ערך ה־<span class="math-ltr" dir="ltr">x</span> וגם את שיעור ה־<span class="blank" data-missing="letter" style="--blank-width:3ch"></span>.</li>
-</ul>
-<ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
 </ul>
 </section>
 `,

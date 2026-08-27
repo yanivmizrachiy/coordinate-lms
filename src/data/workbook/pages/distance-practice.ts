@@ -42,11 +42,7 @@ export const DISTANCE_PRACTICE: WorkbookPageContent = sheet({
 <h3>המסלול הקצר</h3>
 <p>הנקודה <span class="math-ltr" dir="ltr">M(3,5)</span> יכולה להגיע לציר <span class="math-ltr" dir="ltr">x</span> או לציר <span class="math-ltr" dir="ltr">y</span>.</p>
 <ul class="tasks compact">
-<li>לאיזה ציר המסלול קצר יותר? <span class="blank" style="--blank-width:8ch"></span> &nbsp; בכמה יחידות? <span class="blank" style="--blank-width:4ch"></span></li>
-</ul>
-<p>נמקו.</p>
-<ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
+<li>לאיזה ציר המסלול קצר יותר? ציר <span class="word-blank word-short" data-missing="letter" aria-label="מקום להשלמת האות y"></span> &nbsp; בכמה יחידות? <span class="word-blank word-short" data-missing="number" aria-label="מקום להשלמת המספר 2"></span></li>
 </ul>
 </section>
 </div>

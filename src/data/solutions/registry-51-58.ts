@@ -25,7 +25,7 @@ export const SOLUTION_SPECS_51_58: SolutionPageSpec[] = [
   {
     source: RECTANGLES_INTRO,
     sourceFile: 'src/data/workbook/pages/rectangles-intro.ts',
-    sourceBlobSha: '73875a0eda344d9265935c34efcd7e100f469a2e',
+    sourceBlobSha: '240c5312e19ef1b2807ca1098983e8974528ebef',
     exercises: [
       { id: 'a', label: 'א', answer: 'אותו x: A,D וגם B,C. ל-A ול-B שיעור y=1. הצלעות המקבילות לציר x: AB, CD. המקבילות לציר y: BC, DA.' },
       { id: 'b', label: 'ב', answer: 'AB = 6−1 = 5; BC = 4−1 = 3. היקף = 2·(5+3)=16 יחידות; שטח = 5·3=15 יחידות ריבועיות.', method: 'אורך אופקי לפי הפרש x; אורך אנכי לפי הפרש y.' },
