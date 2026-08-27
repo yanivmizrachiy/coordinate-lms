@@ -199,9 +199,21 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       if (!img.complete) img.addEventListener('load', applyZoom, { once: true });
     }
 
+    /* Feedback, hints and submission verdicts are injected after first render
+       and can make the canonical sheet taller. Keep the scaled wrapper's
+       reserved footprint synchronized with every real sheet-height change so
+       the footer and final question can never be clipped behind the LMS panel. */
+    const observedSheet = sheetWrap.querySelector<HTMLElement>('.sheet');
+    const sheetResizeObserver =
+      observedSheet && typeof ResizeObserver !== 'undefined'
+        ? new ResizeObserver(() => applyZoom())
+        : undefined;
+    sheetResizeObserver?.observe(observedSheet);
+
     return () => {
       window.clearTimeout(settle);
       window.removeEventListener('resize', applyZoom);
+      sheetResizeObserver?.disconnect();
       attemptFeedbackCleanup?.();
       hintCleanup?.();
       choiceCleanup?.();
