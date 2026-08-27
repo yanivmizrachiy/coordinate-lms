@@ -1,15 +1,15 @@
 # Classroom release-readiness contract
 
-Generated: 2026-08-25T20:35:31.584Z
+Generated: 2026-08-27T15:08:52.643Z
 
 Mode: static
 
-Overall status: **failure**
+Overall status: **blocked**
 
 | Domain | Status | Summary |
 |---|---|---|
 | Repository engineering gates | pass | The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent. |
-| Firestore emulator-backed validation | failure | No current passing Firestore emulator result is available. |
+| Firestore emulator-backed validation | pass | Real Firestore operations passed against the demo project with the pinned Firebase CLI. |
 | External Firebase configuration and deployment | blocked | Repository validation cannot supply console settings, service-account configuration, or deployment evidence. |
 | Pedagogical answer-key review | blocked | 729/1150 targets are safely auto-checkable; 137 are signature-bound open-ended tasks; 284 remain unresolved. |
 | Physical two-device classroom acceptance | blocked | No passing real student-phone and separate teacher-computer acceptance record exists. |
@@ -30,17 +30,16 @@ Evidence:
 
 ## Firestore emulator-backed validation
 
-Status: **failure**
+Status: **pass**
 
-No current passing Firestore emulator result is available.
+Real Firestore operations passed against the demo project with the pinned Firebase CLI.
 
 Evidence:
 
-- reports/firestore-emulator.json
-
-Blockers:
-
-- Run npm run test:firestore with Java 21.
+- suite: tests/firestore-emulator.test.ts
+- generatedAt: 2026-08-27T15:04:42.656Z
+- Firebase CLI: 15.25.1
+- contract SHA-256: 4bda5652ae75ec868888d9270204cd259e88d4e66fd475fd1cf494be8594f7e3
 
 ## External Firebase configuration and deployment
 

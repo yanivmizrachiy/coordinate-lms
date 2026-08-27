@@ -10,7 +10,12 @@ import {
   saveDraft,
   savePageResult,
 } from './repository';
-import { calculatePageScore } from './scoring';
+import {
+  calculatePageScore,
+  equalQuestionTargetWeights,
+  SCORE_POLICY_VERSION,
+  scorePolicyOf,
+} from './scoring';
 import { answersMatch } from './answerValidation';
 import { runSynchronizationRetry } from './syncRetry';
 import type {
@@ -495,6 +500,109 @@ export function attachLmsToPage(
     return checkPromise;
   }
 
+  /* A page is worth 100 as a whole. First split that value equally among the
+     learner-facing question groups, then split each question's share equally
+     among its keyed answer targets. Extra blanks inside one question therefore
+     never make that question worth more. Submission and the regrade of a
+     historical score both flow through here — one scoring mechanism. */
+  function collectKeyedEntries(): Array<{
+    qid: string;
+    weight: number;
+    progress: QuestionProgress;
+  }> {
+    const targetWeights = equalQuestionTargetWeights(
+      questionGroups.map((group) =>
+        group.targets
+          .map((target) => target.dataset.lmsQid)
+          .filter(
+            (qid): qid is string =>
+              Boolean(qid && (answerKey[qid] || []).length > 0),
+          ),
+      ),
+    );
+
+    const keyedEntries: Array<{
+      qid: string;
+      weight: number;
+      progress: QuestionProgress;
+    }> = [];
+    for (const [qid, weight] of targetWeights) {
+      const progress = draft.questions[qid];
+      if (progress) keyedEntries.push({ qid, weight, progress });
+    }
+    return keyedEntries;
+  }
+
+  function scoreFromKeyedEntries(
+    keyedEntries: ReturnType<typeof collectKeyedEntries>,
+  ): number {
+    return calculatePageScore(
+      keyedEntries.map(({ progress, weight }) => ({
+        attempts: progress.attempts,
+        correct: progress.correct,
+        locked: progress.locked,
+        weight,
+      })),
+      true,
+    );
+  }
+
+  /* A page submitted before the current scoring policy keeps a score computed
+     under the old rules. When the stored draft still holds the full per-target
+     attempt record, regrade it here — same weights, same credit curve as a
+     fresh submission — and persist the corrected score with its policy stamp.
+     Answers and attempts are never touched; nothing is reset. When the stored
+     record lacks the data to recompute (no keyed progress survived), the
+     legacy score is kept as-is under its legacy policy label rather than
+     inventing a number. Comparing values, not just versions, makes the pass
+     idempotent AND self-healing: a re-run on a correct record writes nothing. */
+  function regradeSubmittedPage(storedQuestionIds: ReadonlySet<string>): void {
+    if (!draft.submitted || targets.length === 0) return;
+    const keyedEntries = collectKeyedEntries();
+    if (keyedEntries.length === 0) return;
+    /* Regrade only from progress the STORED record actually contains. By the
+       time this runs, hydration has already created default (zero-attempt)
+       progress for every live target; grading those defaults would fabricate
+       a zero for a record that merely lacks data. */
+    if (!keyedEntries.every(({ qid }) => storedQuestionIds.has(qid))) return;
+
+    const score = scoreFromKeyedEntries(keyedEntries);
+    const computedAt = Date.now();
+
+    if (
+      draft.score !== score ||
+      scorePolicyOf(draft) !== SCORE_POLICY_VERSION
+    ) {
+      draft.score = score;
+      draft.scorePolicyVersion = SCORE_POLICY_VERSION;
+      draft.scoreComputedAt = computedAt;
+      draft.updatedAt = computedAt;
+      void persistDraft();
+    }
+
+    if (
+      latestResult &&
+      (latestResult.score !== score ||
+        scorePolicyOf(latestResult) !== SCORE_POLICY_VERSION)
+    ) {
+      /* Same submission, regraded: identity fields stay untouched; only the
+         score triple moves to the current policy. bestScore is re-based —
+         a legacy-scale maximum must not shadow the current-policy grade. */
+      latestResult = {
+        ...latestResult,
+        score,
+        latestScore: score,
+        bestScore: score,
+        scorePolicyVersion: SCORE_POLICY_VERSION,
+        scoreComputedAt: computedAt,
+      };
+      const resultToPersist = latestResult;
+      void savePageResult(resultToPersist).then((outcome) => {
+        rememberOutcome('result', outcome);
+      });
+    }
+  }
+
   async function submitPage(): Promise<void> {
     if (submissionInFlight || draft.submitted) return;
     submissionInFlight = true;
@@ -513,14 +621,10 @@ export function attachLmsToPage(
         if (summary.keyed === 0) return;
 
         answerKey = await loadAnswerKey(pageNumber);
-        const keyedEntries = Object.keys(answerKey)
-          .map((qid) => draft.questions[qid])
-          .filter(
-            (progress): progress is QuestionProgress => Boolean(progress),
-          );
+        const keyedEntries = collectKeyedEntries();
 
         const unresolved = keyedEntries.filter(
-          (progress) => !progress.correct && !progress.locked,
+          ({ progress }) => !progress.correct && !progress.locked,
         ).length;
 
         if (unresolved > 0 && !submitConfirmPending) {
@@ -535,14 +639,7 @@ export function attachLmsToPage(
         }
 
         submitConfirmPending = false;
-        score = calculatePageScore(
-          keyedEntries.map((progress) => ({
-            attempts: progress.attempts,
-            correct: progress.correct,
-            locked: progress.locked,
-          })),
-          true,
-        );
+        score = scoreFromKeyedEntries(keyedEntries);
 
         for (const [qid, progress] of Object.entries(draft.questions)) {
           attempts[qid] = progress.attempts;
@@ -560,6 +657,8 @@ export function attachLmsToPage(
         activeSeconds: draft.activeSeconds,
         attempts,
         answers,
+        scorePolicyVersion: SCORE_POLICY_VERSION,
+        scoreComputedAt: submittedAt,
         submissionId: crypto.randomUUID(),
       };
 
@@ -568,6 +667,8 @@ export function attachLmsToPage(
 
       draft.submitted = true;
       draft.score = score;
+      draft.scorePolicyVersion = SCORE_POLICY_VERSION;
+      draft.scoreComputedAt = submittedAt;
       draft.updatedAt = submittedAt;
       const draftOutcome = await persistDraft();
       showScore(score);
@@ -924,6 +1025,7 @@ export function attachLmsToPage(
     latestResult = storedResult;
 
     if (storedDraft) draft = storedDraft;
+    const storedQuestionIds = new Set(Object.keys(draft.questions));
 
     for (const target of targets) {
       const qid = target.dataset.lmsQid;
@@ -932,6 +1034,11 @@ export function attachLmsToPage(
       if (progress.answer) setTargetValue(target, progress.answer);
       updateTarget(target, progress);
     }
+
+    /* Before showing a stored grade, bring it onto the current scoring
+       policy. Runs before showScore so the learner only ever meets the
+       policy-current number. */
+    regradeSubmittedPage(storedQuestionIds);
 
     if (draft.score !== undefined) showScore(draft.score);
 

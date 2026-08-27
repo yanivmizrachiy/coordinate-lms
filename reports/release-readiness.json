@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-25T20:35:31.584Z",
+  "generatedAt": "2026-08-27T15:08:52.643Z",
   "mode": "static",
-  "status": "failure",
+  "status": "blocked",
   "releaseReady": false,
   "domains": [
     {
@@ -22,14 +22,15 @@
     {
       "id": "emulator-validation",
       "label": "Firestore emulator-backed validation",
-      "status": "failure",
-      "summary": "No current passing Firestore emulator result is available.",
+      "status": "pass",
+      "summary": "Real Firestore operations passed against the demo project with the pinned Firebase CLI.",
       "evidence": [
-        "reports/firestore-emulator.json"
+        "suite: tests/firestore-emulator.test.ts",
+        "generatedAt: 2026-08-27T15:04:42.656Z",
+        "Firebase CLI: 15.25.1",
+        "contract SHA-256: 4bda5652ae75ec868888d9270204cd259e88d4e66fd475fd1cf494be8594f7e3"
       ],
-      "blockers": [
-        "Run npm run test:firestore with Java 21."
-      ]
+      "blockers": []
     },
     {
       "id": "external-firebase",

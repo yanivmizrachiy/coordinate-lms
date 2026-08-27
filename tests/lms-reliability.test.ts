@@ -8,6 +8,7 @@ import {
   savePageResult,
 } from '../src/lms/repository';
 import { LMS_CONFIG } from '../src/lms/config';
+import { SCORE_POLICY_VERSION } from '../src/lms/scoring';
 import {
   buildDashboardCsv,
   DASHBOARD_CSV_COLUMNS,
@@ -180,6 +181,109 @@ describe('LMS persistence merging', () => {
         { localSaved: true, central: 'failed', error: 'sync failed' },
       ]),
     ).toBe(false);
+  });
+});
+
+describe('scoring-policy-aware merging', () => {
+  const legacy = (score: number): PageResult => ({
+    ...result(score, 200),
+    submissionId: 'submission-shared',
+  });
+  const regraded = (score: number, computedAt = 900): PageResult => ({
+    ...result(score, 200),
+    submissionId: 'submission-shared',
+    bestScore: score,
+    latestScore: score,
+    scorePolicyVersion: SCORE_POLICY_VERSION,
+    scoreComputedAt: computedAt,
+  });
+
+  test('a regrade of the same submission replaces its higher legacy twin wholesale', () => {
+    for (const merged of [
+      mergePageResults(legacy(80), regraded(50)),
+      mergePageResults(regraded(50), legacy(80)),
+    ]) {
+      expect(merged.score).toBe(50);
+      expect(merged.latestScore).toBe(50);
+      expect(merged.bestScore).toBe(50);
+      expect(merged.scorePolicyVersion).toBe(SCORE_POLICY_VERSION);
+    }
+  });
+
+  test('migrating a record twice changes nothing', () => {
+    const once = mergePageResults(legacy(80), regraded(50));
+    expect(mergePageResults(once, once)).toEqual(once);
+    expect(mergePageResults(once, regraded(50))).toEqual(once);
+  });
+
+  test('within one policy the fresher recomputation of the same submission wins', () => {
+    const stale = regraded(80, 900);
+    const healed = regraded(50, 1000);
+    expect(mergePageResults(stale, healed).score).toBe(50);
+    expect(mergePageResults(healed, stale).score).toBe(50);
+  });
+
+  test('a newer real submission still wins, but bestScore never mixes policies', () => {
+    const legacyOld = { ...result(95, 100), submissionId: 'submission-old' };
+    const currentNew = {
+      ...result(60, 300),
+      submissionId: 'submission-new',
+      scorePolicyVersion: SCORE_POLICY_VERSION,
+      scoreComputedAt: 300,
+    };
+    const merged = mergePageResults(legacyOld, currentNew);
+    expect(merged.latestScore).toBe(60);
+    // The legacy 95 was computed on an incompatible scale; it may not shadow
+    // the current-policy grade through Math.max.
+    expect(merged.bestScore).toBe(60);
+    expect(merged.scorePolicyVersion).toBe(SCORE_POLICY_VERSION);
+  });
+
+  test('draft merges keep the current-policy score over a higher legacy score', () => {
+    const legacyDraft: PageDraft = {
+      ...draft(100, 2, 'x'),
+      submitted: true,
+      score: 80,
+    };
+    const migratedDraft: PageDraft = {
+      ...draft(200, 2, 'x'),
+      submitted: true,
+      score: 50,
+      scorePolicyVersion: SCORE_POLICY_VERSION,
+      scoreComputedAt: 900,
+    };
+    for (const merged of [
+      mergePageDrafts(legacyDraft, migratedDraft),
+      mergePageDrafts(migratedDraft, legacyDraft),
+    ]) {
+      expect(merged.score).toBe(50);
+      expect(merged.scorePolicyVersion).toBe(SCORE_POLICY_VERSION);
+    }
+  });
+
+  test('draft merges inside one policy prefer the fresher recomputation, then max()', () => {
+    const stale: PageDraft = {
+      ...draft(100, 2, 'x'),
+      submitted: true,
+      score: 80,
+      scorePolicyVersion: SCORE_POLICY_VERSION,
+      scoreComputedAt: 900,
+    };
+    const healed: PageDraft = {
+      ...draft(200, 2, 'x'),
+      submitted: true,
+      score: 50,
+      scorePolicyVersion: SCORE_POLICY_VERSION,
+      scoreComputedAt: 1000,
+    };
+    expect(mergePageDrafts(stale, healed).score).toBe(50);
+    expect(mergePageDrafts(healed, stale).score).toBe(50);
+
+    // Records that predate the freshness field keep the stale-write max().
+    const a: PageDraft = { ...draft(100, 2, 'x'), submitted: true, score: 40 };
+    const b: PageDraft = { ...draft(200, 2, 'x'), submitted: true, score: 70 };
+    expect(mergePageDrafts(a, b).score).toBe(70);
+    expect(mergePageDrafts(b, a).score).toBe(70);
   });
 });
 

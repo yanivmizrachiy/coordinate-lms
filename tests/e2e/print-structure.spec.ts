@@ -44,6 +44,10 @@ test('the full booklet opens with the cover, then the contents, then worksheet 1
 });
 
 test('the contents sheet lists every chapter and each button reaches its page', async ({ page }) => {
+  /* Six full renders of the 78-sheet booklet plus fixed settle waits add up to
+     ~25s of honest work — flush against the default 30s budget, which made
+     this test flake under parallel load. Declare the reality: it is slow. */
+  test.slow();
   await page.goto('/#/print');
   await page.waitForTimeout(4000);
   const buttons = page.locator('.toc-sheet .toc-btn');

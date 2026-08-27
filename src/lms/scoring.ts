@@ -8,6 +8,48 @@ export interface QuestionAttempt {
 }
 
 /**
+ * The scoring policy in force. Stored on every submitted score so historical
+ * grades can be told apart from current ones and regraded once enough data
+ * exists.
+ *
+ *   1 — legacy: every keyed blank carried equal weight, so a question with
+ *       more blanks silently outweighed its neighbours.
+ *   2 — current: the page's 100 points split equally among real learner-facing
+ *       questions first; each question's share splits among its keyed targets.
+ */
+export const SCORE_POLICY_VERSION = 2;
+
+/** Records written before the policy field existed are legacy policy 1. */
+export function scorePolicyOf(
+  record: { scorePolicyVersion?: number } | null | undefined,
+): number {
+  return record?.scorePolicyVersion ?? 1;
+}
+
+/**
+ * Split one equal page-question share across the keyed answer targets that
+ * belong to that real learner-facing question. A question with four blanks is
+ * therefore worth exactly the same total as a question with one blank.
+ */
+export function equalQuestionTargetWeights(
+  questionTargetIds: readonly (readonly string[])[],
+): Map<string, number> {
+  const weights = new Map<string, number>();
+
+  for (const targetIds of questionTargetIds) {
+    const uniqueTargetIds = [...new Set(targetIds.filter(Boolean))];
+    if (uniqueTargetIds.length === 0) continue;
+
+    const targetWeight = 1 / uniqueTargetIds.length;
+    for (const targetId of uniqueTargetIds) {
+      weights.set(targetId, targetWeight);
+    }
+  }
+
+  return weights;
+}
+
+/**
  * Credit for a target when it becomes correct on checked attempt N.
  * This is the single code owner of the 100% -> 75% -> 50% -> 25% curve.
  */
@@ -45,6 +87,7 @@ export function calculatePageScore(
     (sum, item) => sum + (item.weight ?? 1),
     0,
   );
+  if (totalWeight <= 0) return 0;
 
   const earnedWeight = items.reduce(
     (sum, item) =>

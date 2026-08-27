@@ -37,6 +37,11 @@ export interface PageDraft {
   questions: Record<string, QuestionProgress>;
   submitted: boolean;
   score?: number;
+  /** Scoring policy the stored score was computed under; absent = legacy 1. */
+  scorePolicyVersion?: number;
+  /** When the stored score value was (re)computed. Lets merges prefer a fresh
+      regrade of the same submission over a stale copy of the same policy. */
+  scoreComputedAt?: number;
   maxAttemptCount?: number;
 }
 
@@ -68,6 +73,11 @@ export interface PageResult {
   answers: Record<string, string>;
   bestScore?: number;
   latestScore?: number;
+  /** Scoring policy the stored score was computed under; absent = legacy 1. */
+  scorePolicyVersion?: number;
+  /** When the stored score value was (re)computed. Lets merges prefer a fresh
+      regrade of the same submission over a stale copy of the same policy. */
+  scoreComputedAt?: number;
   maxAttemptCount?: number;
   submissionId?: string;
 }

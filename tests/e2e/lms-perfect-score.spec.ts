@@ -31,6 +31,23 @@ test('a submitted page shows a red score and a Hebrew teacher comment', async ({
   const sheetTop = await page.locator('.sheet').first().evaluate((el) => el.getBoundingClientRect().top);
   expect(bannerBottom, 'the score banner must sit above the worksheet').toBeLessThanOrEqual(sheetTop + 1);
 
+  /* Regression for the real failure mode: submission injects verdicts, grows
+     the live practice sheet and used to leave the scaled wrapper at its old
+     height. Because the wrapper clips overflow, the canonical footer was then
+     visibly sliced exactly as in the reported screenshot. Wait for the live
+     resize synchronization and require the ENTIRE footer to remain inside the
+     wrapper after an actual scored submission — not after a synthetic probe. */
+  const wrap = page.locator('.pageviewer__sheetwrap');
+  const footer = page.locator('.gz-footer').first();
+  await expect(footer).toBeVisible();
+  await expect.poll(async () => {
+    const wrapBottom = await wrap.evaluate((el) => el.getBoundingClientRect().bottom);
+    const footerBottom = await footer.evaluate((el) => el.getBoundingClientRect().bottom);
+    return Math.floor(wrapBottom - footerBottom);
+  }, {
+    message: 'the full canonical footer must remain inside the practice wrapper after scoring',
+  }).toBeGreaterThanOrEqual(-1);
+
   const border = await circle.evaluate((el) => getComputedStyle(el).borderTopColor);
   const color = await circle.evaluate((el) => getComputedStyle(el).color);
   expect(border).toBe('rgb(199, 38, 55)');
