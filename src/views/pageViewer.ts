@@ -202,18 +202,39 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     /* Feedback, hints and submission verdicts are injected after first render
        and can make the canonical sheet taller. Keep the scaled wrapper's
        reserved footprint synchronized with every real sheet-height change so
-       the footer and final question can never be clipped behind the LMS panel. */
+       the footer and final question can never be clipped behind the LMS panel.
+
+       Two complementary sensors feed the ONE synchronizer (applyZoom):
+       ResizeObserver covers size changes without DOM mutations (late images,
+       font swaps), but its ticks ride the rendering pipeline and were observed
+       to go undelivered under load — a submission's last verdict then left the
+       wrapper a few pixels short and the canonical footer clipped.
+       MutationObserver delivers on the microtask queue, so every DOM change
+       inside the sheet (the LMS layer's verdicts, hints, score chips) reliably
+       re-measures. It watches the SHEET only; applyZoom styles the wrapper,
+       so neither observer can feed back into itself. */
     const observedSheet = sheetWrap.querySelector<HTMLElement>('.sheet');
     let sheetResizeObserver: ResizeObserver | undefined;
+    let sheetMutationObserver: MutationObserver | undefined;
     if (observedSheet && typeof ResizeObserver !== 'undefined') {
       sheetResizeObserver = new ResizeObserver(() => applyZoom());
-      sheetResizeObserver.observe(observedSheet);
+      sheetResizeObserver.observe(observedSheet, { box: 'border-box' });
+    }
+    if (observedSheet && typeof MutationObserver !== 'undefined') {
+      sheetMutationObserver = new MutationObserver(() => applyZoom());
+      sheetMutationObserver.observe(observedSheet, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        characterData: true,
+      });
     }
 
     return () => {
       window.clearTimeout(settle);
       window.removeEventListener('resize', applyZoom);
       sheetResizeObserver?.disconnect();
+      sheetMutationObserver?.disconnect();
       attemptFeedbackCleanup?.();
       hintCleanup?.();
       choiceCleanup?.();
