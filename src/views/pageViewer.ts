@@ -204,11 +204,11 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
        reserved footprint synchronized with every real sheet-height change so
        the footer and final question can never be clipped behind the LMS panel. */
     const observedSheet = sheetWrap.querySelector<HTMLElement>('.sheet');
-    const sheetResizeObserver =
-      observedSheet && typeof ResizeObserver !== 'undefined'
-        ? new ResizeObserver(() => applyZoom())
-        : undefined;
-    sheetResizeObserver?.observe(observedSheet);
+    let sheetResizeObserver: ResizeObserver | undefined;
+    if (observedSheet && typeof ResizeObserver !== 'undefined') {
+      sheetResizeObserver = new ResizeObserver(() => applyZoom());
+      sheetResizeObserver.observe(observedSheet);
+    }
 
     return () => {
       window.clearTimeout(settle);
