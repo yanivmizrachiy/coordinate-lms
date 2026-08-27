@@ -11,6 +11,7 @@ import {
   isAdminSession,
   listLocalProfiles,
 } from './auth';
+import { safeParse } from '../lib/json';
 import { DEFAULT_ANSWER_KEYS } from './answerKey';
 import { LMS_CONFIG } from './config';
 import { scorePolicyOf } from './scoring';
@@ -38,15 +39,6 @@ const SYNC_ERRORS_KEY = 'coordinate_lms_sync_errors_v2';
 
 const CENTRAL_SAVE_ERROR =
   'השמירה במכשיר הצליחה, אבל הסנכרון המרכזי נכשל. בדקו את החיבור ונסו שוב.';
-
-function safeParse<T>(raw: string | null, fallback: T): T {
-  if (!raw) return fallback;
-  try {
-    return JSON.parse(raw) as T;
-  } catch {
-    return fallback;
-  }
-}
 
 function loadMap<T>(key: string): Record<string, T> {
   return safeParse<Record<string, T>>(localStorage.getItem(key), {});
