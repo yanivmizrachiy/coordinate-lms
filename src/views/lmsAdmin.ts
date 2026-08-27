@@ -1,5 +1,6 @@
 import { elem } from '../lib/dom';
 import { currentSession } from '../lms/auth';
+import { LMS_CONFIG } from '../lms/config';
 import { firebaseConfigured } from '../lms/firebase';
 import {
   buildDashboardCsv,
@@ -394,7 +395,9 @@ export function lmsAdmin({
             String(draft.pageNumber) +
             ' (' +
             String(draft.maxAttemptCount || 0) +
-            '/3)',
+            '/' +
+            String(LMS_CONFIG.maxAttempts) +
+            ')',
         )
         .join(', ');
 
