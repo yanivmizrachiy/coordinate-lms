@@ -13,6 +13,7 @@ import {
 } from './auth';
 import { DEFAULT_ANSWER_KEYS } from './answerKey';
 import { LMS_CONFIG } from './config';
+import { scorePolicyOf } from './scoring';
 import { db } from './firebase';
 import { TOTAL_PAGES } from '../data/workbook';
 import { implicitAnswerKey } from './implicitAnswers';
@@ -162,6 +163,43 @@ function mergeQuestionProgress(
   };
 }
 
+/* The stored score travels with its policy version and computation time as one
+   unit, so a merge can never pair one policy's number with another's label.
+   Undefined members are omitted entirely — Firestore rejects undefined field
+   values, and a legacy record simply has no policy fields. */
+function scoredState(
+  record: Pick<PageDraft, 'score' | 'scorePolicyVersion' | 'scoreComputedAt'>,
+): Partial<PageDraft> {
+  return {
+    ...(record.score === undefined ? {} : { score: record.score }),
+    ...(record.scorePolicyVersion === undefined
+      ? {}
+      : { scorePolicyVersion: record.scorePolicyVersion }),
+    ...(record.scoreComputedAt === undefined
+      ? {}
+      : { scoreComputedAt: record.scoreComputedAt }),
+  };
+}
+
+/* Choose which side's final score a merged submitted draft keeps.
+   Scores from different policies are on incompatible scales, so the current
+   policy wins outright — a higher legacy number must not survive via max().
+   Inside one policy a fresher regrade of the same submission wins; only two
+   equally fresh copies fall back to the historical stale-write max(). */
+function mergeDraftScore(a: PageDraft, b: PageDraft): Partial<PageDraft> {
+  if (a.score === undefined) return scoredState(b);
+  if (b.score === undefined) return scoredState(a);
+  if (scorePolicyOf(a) !== scorePolicyOf(b)) {
+    return scoredState(scorePolicyOf(a) > scorePolicyOf(b) ? a : b);
+  }
+  const computedA = a.scoreComputedAt ?? 0;
+  const computedB = b.scoreComputedAt ?? 0;
+  if (computedA !== computedB) {
+    return scoredState(computedA > computedB ? a : b);
+  }
+  return scoredState(a.score >= b.score ? a : b);
+}
+
 export function mergePageDrafts(
   existing: PageDraft | null | undefined,
   incoming: PageDraft,
@@ -177,8 +215,14 @@ export function mergePageDrafts(
     const merged = mergeQuestionProgress(existing.questions[qid], validated.questions[qid]);
     if (merged) questions[qid] = merged;
   }
+  const {
+    score: _newestScore,
+    scorePolicyVersion: _newestPolicy,
+    scoreComputedAt: _newestComputedAt,
+    ...newestWithoutScore
+  } = newest;
   return validateDraft({
-    ...newest,
+    ...newestWithoutScore,
     /* The EXISTING document owns its startedAt. Firestore's draft rule pins
        startedAt as immutable on update, and taking min() here produced a
        merged draft whose startedAt no longer matched the cloud copy whenever
@@ -191,12 +235,7 @@ export function mergePageDrafts(
     activeSeconds: Math.max(existing.activeSeconds, validated.activeSeconds),
     questions,
     submitted: existing.submitted || validated.submitted,
-    score:
-      existing.score === undefined
-        ? validated.score
-        : validated.score === undefined
-          ? existing.score
-          : Math.max(existing.score, validated.score),
+    ...mergeDraftScore(existing, validated),
   });
 }
 
@@ -207,12 +246,35 @@ export function mergePageResults(
   const validated = validateResult(incoming);
   if (!existing) return validated;
   const normalizedExisting = validateResult(existing);
+
+  /* Two records of the SAME submission are one grade in two copies, not two
+     achievements: a regrade under a newer policy replaces its legacy twin
+     wholesale, and within one policy the freshest recomputation wins. Neither
+     may leak the other's score through max() — legacy and current policies
+     score on incompatible scales. */
+  if (normalizedExisting.submissionId === validated.submissionId) {
+    if (scorePolicyOf(normalizedExisting) !== scorePolicyOf(validated)) {
+      return scorePolicyOf(normalizedExisting) > scorePolicyOf(validated)
+        ? normalizedExisting
+        : validated;
+    }
+    const computedExisting = normalizedExisting.scoreComputedAt ?? 0;
+    const computedIncoming = validated.scoreComputedAt ?? 0;
+    if (computedExisting !== computedIncoming) {
+      return computedExisting > computedIncoming
+        ? normalizedExisting
+        : validated;
+    }
+  }
+
   const latest = validated.submittedAt >= normalizedExisting.submittedAt
     ? validated
     : normalizedExisting;
+  /* bestScore compares only submissions graded under the winner's policy. */
   const bestScore = Math.max(
-    normalizedExisting.bestScore ?? normalizedExisting.score,
-    validated.bestScore ?? validated.score,
+    ...[normalizedExisting, validated]
+      .filter((record) => scorePolicyOf(record) === scorePolicyOf(latest))
+      .map((record) => record.bestScore ?? record.score),
   );
   return {
     ...latest,

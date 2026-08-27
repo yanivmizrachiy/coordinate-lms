@@ -3,6 +3,8 @@ import { LMS_CONFIG } from '../src/lms/config';
 import {
   calculatePageScore,
   equalQuestionTargetWeights,
+  SCORE_POLICY_VERSION,
+  scorePolicyOf,
 } from '../src/lms/scoring';
 
 describe('LMS page scoring', () => {
@@ -73,6 +75,19 @@ describe('LMS page scoring', () => {
 
     // 75% of one 12.5-point question = 9.375, rounded only at page total.
     expect(score).toBe(9);
+  });
+
+  it('treats records without a policy stamp as legacy policy 1', () => {
+    expect(scorePolicyOf(undefined)).toBe(1);
+    expect(scorePolicyOf(null)).toBe(1);
+    expect(scorePolicyOf({})).toBe(1);
+    expect(scorePolicyOf({ scorePolicyVersion: SCORE_POLICY_VERSION })).toBe(
+      SCORE_POLICY_VERSION,
+    );
+    // The equal-question weighting is a NEWER policy than the legacy
+    // blank-weighted model; regrades rely on this strict ordering.
+    expect(SCORE_POLICY_VERSION).toBeGreaterThan(1);
+    expect(Number.isInteger(SCORE_POLICY_VERSION)).toBe(true);
   });
 
   it('returns zero when no credit was earned or no scored questions exist', () => {

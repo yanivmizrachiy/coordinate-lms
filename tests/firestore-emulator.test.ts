@@ -287,6 +287,145 @@ describe('Firestore emulator authorization contract', () => {
     );
   });
 
+  it('allows a policy regrade of the same submission but pins the recorded work', async () => {
+    const db = studentDb(STUDENT_A);
+    const reference = doc(db, 'students', STUDENT_A, 'results', 'page-2');
+    const legacy = result(STUDENT_A);
+    await assertSucceeds(setDoc(reference, legacy));
+
+    const regraded = {
+      ...legacy,
+      score: 50,
+      bestScore: 50,
+      latestScore: 50,
+      scorePolicyVersion: 2,
+      scoreComputedAt: NOW + 100,
+    };
+
+    // Lowering the score without declaring a scoring policy stays forbidden.
+    await assertFails(
+      setDoc(reference, { ...legacy, score: 50, bestScore: 50, latestScore: 50 }),
+    );
+    // A regrade may not touch the learner's recorded work.
+    await assertFails(
+      setDoc(reference, { ...regraded, attempts: { 'q-1': 2 } }),
+    );
+    await assertFails(
+      setDoc(reference, { ...regraded, answers: { 'q-1': '5' } }),
+    );
+    await assertFails(
+      setDoc(reference, { ...regraded, submittedAt: NOW + 21 }),
+    );
+    // The faithful regrade of the same submission is accepted.
+    await assertSucceeds(setDoc(reference, regraded));
+    // Idempotent re-run of the same regrade is accepted.
+    await assertSucceeds(setDoc(reference, regraded));
+    // A stored score never regresses to an older policy.
+    await assertFails(setDoc(reference, legacy));
+    await assertFails(
+      setDoc(reference, { ...regraded, scorePolicyVersion: 1 }),
+    );
+    // A genuinely newer submission under the current policy may lower
+    // bestScore only across a policy upgrade, not inside one policy.
+    await assertFails(
+      setDoc(reference, {
+        ...regraded,
+        submittedAt: NOW + 200,
+        submissionId: 'next-submission',
+        score: 40,
+        bestScore: 40,
+        latestScore: 40,
+      }),
+    );
+    await assertSucceeds(
+      setDoc(reference, {
+        ...regraded,
+        submittedAt: NOW + 200,
+        submissionId: 'next-submission',
+        score: 80,
+        bestScore: 80,
+        latestScore: 80,
+      }),
+    );
+  });
+
+  it('regrades a stored document that predates the submissionId field', async () => {
+    const reference = () =>
+      doc(studentDb(STUDENT_A), 'students', STUDENT_A, 'results', 'page-2');
+    const { submissionId: _dropped, ...legacyWithoutId } = result(STUDENT_A);
+    await environment.withSecurityRulesDisabled(async (context) => {
+      await setDoc(
+        doc(context.firestore(), 'students', STUDENT_A, 'results', 'page-2'),
+        legacyWithoutId,
+      );
+    });
+
+    // The same submission is identified by submittedAt; the client always
+    // writes the full current shape, including its fallback submissionId.
+    await assertSucceeds(
+      setDoc(reference(), {
+        ...legacyWithoutId,
+        score: 45,
+        bestScore: 45,
+        latestScore: 45,
+        submissionId: 'reconstructed-fallback-id',
+        scorePolicyVersion: 2,
+        scoreComputedAt: NOW + 100,
+      }),
+    );
+  });
+
+  it('lets only policy-aware draft writes lower a stored draft score', async () => {
+    const db = studentDb(STUDENT_A);
+    const reference = doc(db, 'students', STUDENT_A, 'drafts', 'page-2');
+    const legacy = {
+      ...draft(STUDENT_A),
+      submitted: true,
+      score: 80,
+    };
+    await assertSucceeds(setDoc(reference, legacy));
+
+    // A blind writer cannot lower the score.
+    await assertFails(
+      setDoc(reference, { ...legacy, updatedAt: NOW + 20, score: 50 }),
+    );
+    // A policy-aware regrade can.
+    const regraded = {
+      ...legacy,
+      updatedAt: NOW + 20,
+      score: 50,
+      scorePolicyVersion: 2,
+      scoreComputedAt: NOW + 20,
+    };
+    await assertSucceeds(setDoc(reference, regraded));
+    // The draft's policy never regresses afterwards.
+    await assertFails(
+      setDoc(reference, { ...legacy, updatedAt: NOW + 30 }),
+    );
+    await assertFails(
+      setDoc(reference, {
+        ...regraded,
+        updatedAt: NOW + 30,
+        scorePolicyVersion: 1,
+      }),
+    );
+    // Malformed provenance fields are rejected.
+    await assertFails(
+      setDoc(reference, {
+        ...regraded,
+        updatedAt: NOW + 30,
+        scorePolicyVersion: 0,
+      }),
+    );
+    await assertFails(
+      setDoc(reference, {
+        ...regraded,
+        updatedAt: NOW + 30,
+        scoreComputedAt: 'now',
+      }),
+    );
+  });
+
   it('keeps result queries and deletes administrator-only across identities', async () => {
     await seedProfiles();
     await environment.withSecurityRulesDisabled(async (context) => {

@@ -8,6 +8,25 @@ export interface QuestionAttempt {
 }
 
 /**
+ * The scoring policy in force. Stored on every submitted score so historical
+ * grades can be told apart from current ones and regraded once enough data
+ * exists.
+ *
+ *   1 — legacy: every keyed blank carried equal weight, so a question with
+ *       more blanks silently outweighed its neighbours.
+ *   2 — current: the page's 100 points split equally among real learner-facing
+ *       questions first; each question's share splits among its keyed targets.
+ */
+export const SCORE_POLICY_VERSION = 2;
+
+/** Records written before the policy field existed are legacy policy 1. */
+export function scorePolicyOf(
+  record: { scorePolicyVersion?: number } | null | undefined,
+): number {
+  return record?.scorePolicyVersion ?? 1;
+}
+
+/**
  * Split one equal page-question share across the keyed answer targets that
  * belong to that real learner-facing question. A question with four blanks is
  * therefore worth exactly the same total as a question with one blank.
