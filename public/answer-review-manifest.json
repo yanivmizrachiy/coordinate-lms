@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-18T09:30:25.300Z",
+  "generatedAt": "2026-08-27T18:46:33.836Z",
   "pageCount": 78,
-  "targetCount": 1150,
+  "targetCount": 1149,
   "pages": [
     {
       "pageNumber": 1,
@@ -3122,7 +3122,7 @@
         {
           "pageNumber": 11,
           "targetId": "p11-q19",
-          "signature": "f0c2cba7",
+          "signature": "7be404ad",
           "inputType": "text:number",
           "classification": "deterministic-mathematical",
           "sourceEvidence": "src/data/workbook/pages/ordered-pair-practice.ts — exact x/y values, origin definition, and plotted M/N coordinates",
@@ -3130,29 +3130,20 @@
           "answers": [
             "2"
           ],
-          "context": "בנקודה (2,5) ערך ה־x הוא […], ובנקודה (5,2) הוא 5."
+          "context": "בנקודה (2,5) ערך ה־x הוא […], ובנקודה (5,2) ערך ה־[…] הוא 5."
         },
         {
           "pageNumber": 11,
           "targetId": "p11-q20",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
-        },
-        {
-          "pageNumber": 11,
-          "targetId": "p11-q21",
-          "signature": "bd0fcb5c",
-          "inputType": "text:relation",
-          "classification": "open-ended",
-          "sourceEvidence": "signature-bound canonical review: learner-created or dependent response",
-          "automaticCheckingSafe": false,
-          "answers": [],
-          "context": "ההסבר: […]."
+          "signature": "9c68872d",
+          "inputType": "word:letter",
+          "classification": "canonical-metadata-derived",
+          "sourceEvidence": "aria-label/data-lms-answers",
+          "automaticCheckingSafe": true,
+          "answers": [
+            "x"
+          ],
+          "context": "בנקודה (2,5) ערך ה־x הוא […], ובנקודה (5,2) ערך ה־[…] הוא 5."
         }
       ]
     },

@@ -172,7 +172,7 @@ export const PROVEN_ANSWER_PROOFS: Record<
       ['p11-q16', '8b5027a7', ["5"]],
       ['p11-q17', '8b5027a7', ["2"]],
       ['p11-q18', '2f1c8719', ["סדר", "הסדר"], 'reviewed-explicit'],
-      ['p11-q19', 'f0c2cba7', ["2"]],
+      ['p11-q19', '7be404ad', ["2"]],
     ],
   ),
   12: pageProofs(

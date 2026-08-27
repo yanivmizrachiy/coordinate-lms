@@ -98,9 +98,11 @@ describe('answer-key coverage intelligence', () => {
       ),
     );
 
-    /* 137 = reviewed open-ended targets whose prompts survived the 78-page
-       canonical import (2026-08-18) unchanged; 24 lapsed with their wording. */
-    expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(137);
+    /* 135 = reviewed open-ended targets bound to their canonical prompt.
+       137 survived the 78-page import (2026-08-18); the two page-11 'הסבר'
+       targets were dropped 2026-08-27 when that item became a keyed
+       x-completion, matching the printed sheet. */
+    expect(Object.keys(REVIEWED_OPEN_ENDED_TARGET_SIGNATURES)).toHaveLength(135);
     for (const [targetId, signature] of Object.entries(
       REVIEWED_OPEN_ENDED_TARGET_SIGNATURES,
     )) {

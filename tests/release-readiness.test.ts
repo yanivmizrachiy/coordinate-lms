@@ -57,10 +57,12 @@ describe('separated classroom release contract', () => {
     );
     expect(pedagogical?.status).toBe('blocked');
     /* Measured state after the 78-page consolidation: 588 migrated proofs +
-       implicit/deterministic keys = 729 of 1,150 targets; 137 signature-bound
-       open-ended; 284 (147 lapsed + new-page targets) awaiting review. */
-    expect(pedagogical?.summary).toContain('729/1150');
-    expect(pedagogical?.summary).toContain('137 are signature-bound open-ended');
+       implicit/deterministic keys = 730 of 1,149 targets; 135 signature-bound
+       open-ended; 284 (147 lapsed + new-page targets) awaiting review. (The
+       ordered-pair page-11 item became a keyed x-completion on 2026-08-27:
+       +1 auto-checkable, −2 open-ended, −1 total.) */
+    expect(pedagogical?.summary).toContain('730/1149');
+    expect(pedagogical?.summary).toContain('135 are signature-bound open-ended');
     expect(pedagogical?.summary).toContain('284 remain unresolved');
   });
 

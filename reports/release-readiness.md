@@ -1,6 +1,6 @@
 # Classroom release-readiness contract
 
-Generated: 2026-08-27T15:08:52.643Z
+Generated: 2026-08-27T18:51:43.316Z
 
 Mode: static
 
@@ -11,7 +11,7 @@ Overall status: **blocked**
 | Repository engineering gates | pass | The repository contract, generated manifests, emulator command, CI runtime, and patch hygiene are internally consistent. |
 | Firestore emulator-backed validation | pass | Real Firestore operations passed against the demo project with the pinned Firebase CLI. |
 | External Firebase configuration and deployment | blocked | Repository validation cannot supply console settings, service-account configuration, or deployment evidence. |
-| Pedagogical answer-key review | blocked | 729/1150 targets are safely auto-checkable; 137 are signature-bound open-ended tasks; 284 remain unresolved. |
+| Pedagogical answer-key review | blocked | 730/1149 targets are safely auto-checkable; 135 are signature-bound open-ended tasks; 284 remain unresolved. |
 | Physical two-device classroom acceptance | blocked | No passing real student-phone and separate teacher-computer acceptance record exists. |
 
 ## Repository engineering gates
@@ -59,7 +59,7 @@ Blockers:
 
 Status: **blocked**
 
-729/1150 targets are safely auto-checkable; 137 are signature-bound open-ended tasks; 284 remain unresolved.
+730/1149 targets are safely auto-checkable; 135 are signature-bound open-ended tasks; 284 remain unresolved.
 
 Evidence:
 

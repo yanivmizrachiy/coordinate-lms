@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-27T15:08:52.643Z",
+  "generatedAt": "2026-08-27T18:51:43.316Z",
   "mode": "static",
   "status": "blocked",
   "releaseReady": false,
@@ -48,7 +48,7 @@
       "id": "pedagogical-review",
       "label": "Pedagogical answer-key review",
       "status": "blocked",
-      "summary": "729/1150 targets are safely auto-checkable; 137 are signature-bound open-ended tasks; 284 remain unresolved.",
+      "summary": "730/1149 targets are safely auto-checkable; 135 are signature-bound open-ended tasks; 284 remain unresolved.",
       "evidence": [
         "reports/answer-coverage.json",
         "public/answer-review-manifest.json"
