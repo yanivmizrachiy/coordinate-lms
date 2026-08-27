@@ -92,6 +92,27 @@ test('a partly-right question shows repair feedback and can be fixed and submitt
   await expect(q.locator('.lms-qstatus')).toContainText('✓ נכון');
 });
 
+test('practice wrapper follows live sheet height changes instead of clipping the footer', async ({ page }) => {
+  await page.goto('/#/workbook/1');
+  const wrap = page.locator('.pageviewer__sheetwrap');
+  const sheet = wrap.locator('.sheet');
+  await expect(sheet).toBeVisible();
+
+  const before = await wrap.evaluate((el) => Number.parseFloat((el as HTMLElement).style.height) || 0);
+  expect(before).toBeGreaterThan(0);
+
+  await sheet.evaluate((el) => {
+    const probe = document.createElement('div');
+    probe.setAttribute('data-height-probe', 'true');
+    probe.style.height = '240px';
+    el.append(probe);
+  });
+
+  await expect.poll(async () =>
+    wrap.evaluate((el) => Number.parseFloat((el as HTMLElement).style.height) || 0),
+  ).toBeGreaterThan(before + 50);
+});
+
 test('progress counts QUESTIONS, and every per-question control is print-hidden', async ({ page }) => {
   await page.goto('/#/workbook/1');
   const progress = page.locator('.lms-progress');
