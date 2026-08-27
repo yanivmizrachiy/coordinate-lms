@@ -38,12 +38,9 @@ export const READ_PRACTICE: WorkbookPageContent = sheet({
 <ul class="tasks compact">
 <li>מהם שיעוריה? <span class="pair math-ltr" dir="ltr">(<span class="pair-blank"></span>,<span class="pair-blank"></span>)</span></li>
 </ul>
-<p>נמקו בעזרת הביטויים <b>שיעור <span class="math-ltr" dir="ltr">x</span> זהה</b> ו־<b>שיעור <span class="math-ltr" dir="ltr">y</span> זהה</b>.</p>
 <ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
-</ul>
-<ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
+<li>שיעור <span class="math-ltr" dir="ltr">x</span> שלה זהה לזה של הנקודה <span class="word-blank word-short" data-missing="letter" aria-label="מקום להשלמת האות M"></span>, ולכן הוא 6.</li>
+<li>שיעור <span class="math-ltr" dir="ltr">y</span> שלה זהה לזה של הנקודה <span class="word-blank word-short" data-missing="letter" aria-label="מקום להשלמת האות L"></span>, ולכן הוא 6.</li>
 </ul>
 </section>
 <section class="q-card">

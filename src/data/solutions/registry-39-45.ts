@@ -13,7 +13,7 @@ export const SOLUTION_SPECS_39_45: SolutionPageSpec[] = [
   {
     source: MISSING_COORD_INTRO,
     sourceFile: 'src/data/workbook/pages/missing-coord-intro.ts',
-    sourceBlobSha: 'c23861814bf306efac7180051d4b520d43057d95',
+    sourceBlobSha: 'ce97206190b346d914cfb33ec2427d1095f6174d',
     exercises: [
       { id: 'a', label: 'א', answer: 'A(5,0); B(0,4); C(3,3); D(3,6); E(2,5); F(7,3).' },
       { id: 'b', label: 'ב', answer: '(6,0); (0,5); (4,4); (3,2); (5,4).' },

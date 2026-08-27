@@ -107,7 +107,7 @@ export const SOLUTION_SPECS_17_29: SolutionPageSpec[] = [
   {
     source: RELATIONS_INTRO,
     sourceFile: 'src/data/workbook/pages/relations-intro.ts',
-    sourceBlobSha: '1d737a4f7e143ca657024ae4915bafd2d4dc2481',
+    sourceBlobSha: '8b6e87af2c96536b54644f7bcc73094b52c29962',
     exercises: [
       { id: 'a', label: 'א', answer: '(2,4).' },
       { id: 'b', label: 'ב', answer: '(5,2).' },

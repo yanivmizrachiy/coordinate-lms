@@ -36,7 +36,7 @@ export const SOLUTION_SPECS_30_38: SolutionPageSpec[] = [
   {
     source: DISTANCE_INTRO,
     sourceFile: 'src/data/workbook/pages/distance-intro.ts',
-    sourceBlobSha: 'e4f08bc6d9453a25d57d6f5e79f5fc8bad9e082a',
+    sourceBlobSha: 'd3c42196df0c21c7dbead189c3a0d92e7d12096d',
     exercises: [
       { id: 'intro', label: 'פתיח', answer: '0; x.' },
       { id: 'a', label: 'א', answer: 'A(3,5): 3, (0,5), 5, (3,0). B(7,2): 7, (0,2), 2, (7,0). C(4,4): 4, (0,4), 4, (4,0). D(1,6): 1, (0,6), 6, (1,0).' },
@@ -49,7 +49,7 @@ export const SOLUTION_SPECS_30_38: SolutionPageSpec[] = [
   {
     source: DISTANCE_PRACTICE,
     sourceFile: 'src/data/workbook/pages/distance-practice.ts',
-    sourceBlobSha: '20257ab6099f8b5dc2834982f8e52167876e3bc3',
+    sourceBlobSha: '12bd9cbe781846d9f8c381dfa53bb01dd9eabe41',
     exercises: [
       { id: 'axes-distance', label: 'מרחק מן הצירים', answer: '5; x; 0.' },
       { id: 'to-axes', label: 'אל הצירים', answer: 'מ-(7,3) לציר y: 7 יחידות שמאלה. מ-(4,5) לציר x: 5 יחידות למטה. מ-(3,6) לציר x מתקבלת (3,0).' },

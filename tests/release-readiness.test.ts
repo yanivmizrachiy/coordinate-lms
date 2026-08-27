@@ -57,13 +57,14 @@ describe('separated classroom release contract', () => {
     );
     expect(pedagogical?.status).toBe('blocked');
     /* Measured state after the 78-page consolidation: 588 migrated proofs +
-       implicit/deterministic keys = 730 of 1,149 targets; 135 signature-bound
-       open-ended; 284 (147 lapsed + new-page targets) awaiting review. (The
-       ordered-pair page-11 item became a keyed x-completion on 2026-08-27:
-       +1 auto-checkable, −2 open-ended, −1 total.) */
-    expect(pedagogical?.summary).toContain('730/1149');
-    expect(pedagogical?.summary).toContain('135 are signature-bound open-ended');
-    expect(pedagogical?.summary).toContain('284 remain unresolved');
+       implicit/deterministic keys = 739 of 1,147 targets; 125 signature-bound
+       open-ended; 283 awaiting review. (On 2026-08-27 the open 'הסבר'/reasoning
+       blanks across the ordered-pair and read/relations/rectangles/on-axes/
+       missing-coord/distance sheets became concrete keyed completions or were
+       removed as redundant: more auto-checkable, fewer open-ended targets.) */
+    expect(pedagogical?.summary).toContain('739/1147');
+    expect(pedagogical?.summary).toContain('125 are signature-bound open-ended');
+    expect(pedagogical?.summary).toContain('283 remain unresolved');
   });
 
   it('publishes the same domain contract in Markdown', () => {

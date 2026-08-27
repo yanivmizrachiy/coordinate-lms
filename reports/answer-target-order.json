@@ -1251,8 +1251,8 @@
         },
         {
           "targetId": "p12-q16",
-          "inputType": "text:relation",
-          "signature": "9edf80ab"
+          "inputType": "word:relation",
+          "signature": "a8d62a68"
         }
       ]
     },
@@ -1341,13 +1341,13 @@
         },
         {
           "targetId": "p13-q17",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "word:letter",
+          "signature": "7c4b0b21"
         },
         {
           "targetId": "p13-q18",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "word:letter",
+          "signature": "a2428cac"
         },
         {
           "targetId": "p13-q19",
@@ -1533,11 +1533,6 @@
           "targetId": "p16-q8",
           "inputType": "text:number",
           "signature": "1e603965"
-        },
-        {
-          "targetId": "p16-q9",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
         }
       ]
     },
@@ -2204,8 +2199,8 @@
         },
         {
           "targetId": "p28-q5",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "word:relation",
+          "signature": "36acd39a"
         }
       ]
     },
@@ -2553,8 +2548,8 @@
         },
         {
           "targetId": "p33-q17",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "word:letter",
+          "signature": "bfb79957"
         }
       ]
     },
@@ -2618,18 +2613,13 @@
         },
         {
           "targetId": "p34-q12",
-          "inputType": "text:text",
-          "signature": "f5e4a471"
+          "inputType": "word:letter",
+          "signature": "cfbcaaea"
         },
         {
           "targetId": "p34-q13",
-          "inputType": "text:text",
-          "signature": "f5e4a471"
-        },
-        {
-          "targetId": "p34-q14",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "word:number",
+          "signature": "6634d557"
         }
       ]
     },
@@ -3132,8 +3122,8 @@
         },
         {
           "targetId": "p39-q19",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "word:number",
+          "signature": "9b4758bd"
         },
         {
           "targetId": "p39-q20",
@@ -3174,11 +3164,6 @@
           "targetId": "p39-q27",
           "inputType": "text:letter",
           "signature": "197e7954"
-        },
-        {
-          "targetId": "p39-q28",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
         }
       ]
     },
@@ -3867,8 +3852,13 @@
         },
         {
           "targetId": "p46-q16",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "word:relation",
+          "signature": "99578a61"
+        },
+        {
+          "targetId": "p46-q17",
+          "inputType": "word:concept",
+          "signature": "7a801c77"
         }
       ]
     },
@@ -4297,8 +4287,8 @@
         },
         {
           "targetId": "p52-q14",
-          "inputType": "text:relation",
-          "signature": "bd0fcb5c"
+          "inputType": "word:letter",
+          "signature": "3329c627"
         }
       ]
     },

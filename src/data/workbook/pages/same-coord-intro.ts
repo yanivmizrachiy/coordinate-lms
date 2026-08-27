@@ -49,7 +49,7 @@ ${wordBank(['y'])}
 <section class="q-card">
 <h3>ו. האם יכולות להיות שתי נקודות שונות בעלות אותו שיעור x וגם אותו שיעור y?</h3>
 <ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
+<li>כתבו כן או לא: <span class="word-blank word-short" data-missing="relation" aria-label="מקום להשלמת המילה לא"></span>. אם גם שיעור <span class="math-ltr" dir="ltr">x</span> וגם שיעור <span class="math-ltr" dir="ltr">y</span> זהים, מדובר באותה <span class="word-blank word-short" data-missing="concept" aria-label="מקום להשלמת המילה נקודה"></span>.</li>
 </ul>
 </section>
 `,

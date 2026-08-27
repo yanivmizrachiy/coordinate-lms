@@ -50,7 +50,7 @@ ${calcBox({ lines: 1, perimeter: true, area: true })}
 <div class="choice-row"><span class="choice"><span class="math-ltr" dir="ltr">(2,5)</span></span><span class="choice"><span class="math-ltr" dir="ltr">(5,2)</span></span><span class="choice"><span class="math-ltr" dir="ltr">(5,7)</span></span>
 </div>
 <ul class="tasks compact">
-<li>ההסבר: <span class="blank" data-missing="relation" style="--blank-width:24ch"></span>.</li>
+<li>הקודקוד הרביעי הוא <span class="math-ltr" dir="ltr">(2,5)</span>: ערך <span class="math-ltr" dir="ltr">x</span> שלו כמו של הקודקוד <span class="math-ltr" dir="ltr">A</span>, ושיעור <span class="math-ltr" dir="ltr">y</span> שלו כמו של הקודקוד <span class="word-blank word-short" data-missing="letter" aria-label="מקום להשלמת האות C"></span>.</li>
 </ul>
 </section>
 `,

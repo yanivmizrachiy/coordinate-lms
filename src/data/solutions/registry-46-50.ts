@@ -11,7 +11,7 @@ export const SOLUTION_SPECS_46_50: SolutionPageSpec[] = [
   {
     source: SAME_COORD_INTRO,
     sourceFile: 'src/data/workbook/pages/same-coord-intro.ts',
-    sourceBlobSha: '76bb0348dcb56b757ea34f8c9baac8926b5b9920',
+    sourceBlobSha: 'd47ae58e6572fb272f36b7f996b2275dc8d97601',
     exercises: [
       { id: 'a', label: 'א', answer: 'ל-A ול-B שיעור x זהה, והוא 2; לכן AB מקביל לציר y.' },
       { id: 'b', label: 'ב', answer: 'ל-B ול-C שיעור y זהה, והוא 5. בדוגמה משלכם לשיעור x זהה יש לבחור שתי נקודות בעלות אותו x.' },
