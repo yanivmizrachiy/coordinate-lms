@@ -1,11 +1,11 @@
 import { expect, test, type Locator } from '@playwright/test';
 
-/* A learner who leaves a checkable answer unfilled must still be able to hand
-   the page in and get a score — an empty blank never locks on its own, so the
-   old hard block made the page score unreachable forever. The first press
-   explains; a second finalises and scores unanswered targets as 0. */
+/* One press hands the page in and scores it. The submit checks every answer
+   and finalises immediately — a learner who left a checkable answer unfilled
+   still gets a score, with unfilled targets scored as 0. There is no second
+   confirming press. */
 
-test('unfinished page can still be submitted on a second press, and scores', async ({ page }) => {
+test('one press checks the whole page and shows a score', async ({ page }) => {
   await page.goto('/#/workbook/1');
   await page.locator('.lms-qcheck').first().waitFor();
   await page.locator('[data-lms-answers]').first().waitFor();
@@ -17,12 +17,7 @@ test('unfinished page can still be submitted on a second press, and scores', asy
 
   const submit = page.getByRole('button', { name: /הגשת העמוד/ });
 
-  // first press: explained, not submitted, no score yet
-  await submit.click();
-  await expect(page.locator('.lms-panel__status')).toContainText('ללחוץ');
-  await expect(page.locator('.lms-score')).toHaveCount(0);
-
-  // second press: finalised with a real 0–100 score
+  // a SINGLE press checks everything and finalises with a real 0–100 score
   await submit.click();
   await expect(page.locator('.lms-score__circle')).toBeVisible();
   const score = Number(await page.locator('.lms-score__circle').textContent());
