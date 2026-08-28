@@ -34,7 +34,7 @@ function iso(value: number | undefined): string {
   return new Date(value).toISOString();
 }
 
-function latestActivityAt(student: DashboardStudent): number {
+export function latestActivityAt(student: DashboardStudent): number {
   return student.activity[0]?.createdAt || student.profile.lastSeenAt;
 }
 
