@@ -331,6 +331,77 @@
   font-size: 0.86rem;
 }
 
+/* Search + result count above the roster. */
+.lms-admin__filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.lms-admin__search {
+  flex: 1 1 260px;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 1px solid #cfd9e8;
+  border-radius: 10px;
+  background: #fff;
+  color: #16376a;
+  font: inherit;
+}
+
+.lms-admin__search:focus-visible {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 1px;
+  border-color: #1d4ed8;
+}
+
+.lms-admin__count {
+  color: #68758b;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* Sortable header: the whole cell is one clickable button. */
+.lms-table th.is-sortable {
+  padding: 0;
+}
+
+.lms-sort {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-weight: 700;
+  color: inherit;
+  text-align: right;
+  cursor: pointer;
+}
+
+.lms-sort:hover {
+  background: #e2ecfd;
+}
+
+.lms-sort.is-active {
+  color: #1d4ed8;
+}
+
+.lms-sort:focus-visible {
+  outline: 2px solid #1d4ed8;
+  outline-offset: -2px;
+}
+
+.lms-sort__arrow {
+  font-size: 0.9em;
+  line-height: 1;
+}
+
 .lms-menu-actions {
   justify-content: center;
   margin: 18px 0;
@@ -348,6 +419,10 @@
 
   .lms-summary {
     grid-template-columns: 1fr;
+  }
+
+  .lms-admin__search {
+    flex-basis: 100%;
   }
 
   .lms-panel__buttons .btn,

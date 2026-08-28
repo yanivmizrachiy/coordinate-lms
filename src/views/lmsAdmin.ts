@@ -110,6 +110,132 @@ function exportCsv(snapshot: DashboardSnapshot): void {
   URL.revokeObjectURL(url);
 }
 
+/* A teacher scans this by name, by who is behind, and by who is active —
+   so every measurable column is sortable, and a search box narrows a full
+   class to one student. The two rightmost columns are free-text detail and
+   are not sortable. `sortValue` returns a number for numeric columns and a
+   Hebrew-lowercased string for text ones. */
+type SortKey =
+  | 'name'
+  | 'class'
+  | 'registered'
+  | 'activity'
+  | 'page'
+  | 'submitted'
+  | 'average'
+  | 'time';
+
+interface Column {
+  label: string;
+  key?: SortKey;
+  sortValue?: (student: DashboardStudent) => number | string;
+}
+
+const COLUMNS: Column[] = [
+  { label: 'שם', key: 'name', sortValue: (s) => s.profile.fullName.toLocaleLowerCase('he') },
+  { label: 'כיתה', key: 'class', sortValue: (s) => (s.profile.className || '').toLocaleLowerCase('he') },
+  { label: 'נרשם', key: 'registered', sortValue: (s) => s.profile.createdAt },
+  { label: 'פעילות אחרונה', key: 'activity', sortValue: (s) => latestActivityAt(s) },
+  { label: 'עמוד נוכחי', key: 'page', sortValue: (s) => currentPage(s) },
+  { label: 'הוגשו', key: 'submitted', sortValue: (s) => s.results.length },
+  { label: 'ממוצע', key: 'average', sortValue: (s) => averageScore(s) },
+  { label: 'זמן פעיל', key: 'time', sortValue: (s) => totalActiveSeconds(s) },
+  { label: 'מה עשה לאחרונה' },
+  { label: 'ציונים' },
+];
+
+function studentMatchesQuery(student: DashboardStudent, query: string): boolean {
+  if (!query) return true;
+  return [
+    student.profile.fullName,
+    student.profile.username,
+    student.profile.email,
+    student.profile.className || '',
+  ].some((field) => field.toLocaleLowerCase('he').includes(query));
+}
+
+function compareStudents(
+  a: DashboardStudent,
+  b: DashboardStudent,
+  key: SortKey,
+): number {
+  const column = COLUMNS.find((c) => c.key === key);
+  const value = column?.sortValue;
+  if (!value) return 0;
+  const av = value(a);
+  const bv = value(b);
+  if (typeof av === 'number' && typeof bv === 'number') return av - bv;
+  return String(av).localeCompare(String(bv), 'he');
+}
+
+function buildStudentRow(student: DashboardStudent): HTMLElement {
+  const row = elem('tr');
+
+  const identity = elem('td');
+  identity.append(
+    elem('strong', { text: student.profile.fullName }),
+    elem('small', {
+      text: student.profile.username + ' · ' + student.profile.email,
+    }),
+  );
+
+  const details = student.results
+    .map(
+      (result) =>
+        'עמוד ' +
+        String(result.pageNumber) +
+        ': אחרון ' +
+        String(resultLatestScore(result)) +
+        ' · מיטבי ' +
+        String(resultBestScore(result)) +
+        ' · ניסיונות ' +
+        String(resultAttemptCount(result)),
+    )
+    .join(', ');
+
+  const openDrafts = student.drafts
+    .filter((draft) => !draft.submitted)
+    .map(
+      (draft) =>
+        'עמוד ' +
+        String(draft.pageNumber) +
+        ' (' +
+        String(draft.maxAttemptCount || 0) +
+        '/' +
+        String(LMS_CONFIG.maxAttempts) +
+        ')',
+    )
+    .join(', ');
+
+  const studentErrors = student.syncErrors
+    .map((error) => error.message)
+    .join(' ');
+
+  row.append(
+    identity,
+    elem('td', { text: student.profile.className || '—' }),
+    elem('td', { text: formatDate(student.profile.createdAt) }),
+    elem('td', { text: formatDate(latestActivityAt(student)) }),
+    elem('td', { text: String(currentPage(student)) }),
+    elem('td', { text: String(student.results.length) }),
+    elem('td', { text: String(averageScore(student)) }),
+    elem('td', { text: formatDuration(totalActiveSeconds(student)) }),
+    elem('td', {
+      class: 'lms-table__details',
+      text: activityLabel(student.activity[0]),
+    }),
+    elem('td', {
+      class: 'lms-table__details',
+      text:
+        (details || 'טרם הוגש עמוד') +
+        (openDrafts ? ' · טיוטות פעילות: ' + openDrafts : '') +
+        (studentErrors ? ' · שגיאת סנכרון: ' + studentErrors : ''),
+    }),
+  );
+
+  return row;
+}
+
 export function lmsAdmin({
   outlet,
   setTitle,
@@ -215,6 +341,12 @@ export function lmsAdmin({
   });
 
   let currentSnapshot: DashboardSnapshot | null = null;
+  let sortKey: SortKey = 'name';
+  let sortDir: 1 | -1 = 1;
+  let query = '';
+  /* Repaint callbacks for the sortable header arrows, rebuilt on every full
+     render; the header click handlers close over this stable variable. */
+  let headerPainters: Array<() => void> = [];
 
   async function renderDashboard(): Promise<void> {
     content.replaceChildren(
@@ -309,138 +441,121 @@ export function lmsAdmin({
       ),
     );
 
-    const tableWrap = elem('div', {
-      class: 'lms-tablewrap',
-    });
+    const body = elem('tbody');
+    const countNote = elem('span', { class: 'lms-admin__count' });
 
-    const table = elem('table', {
-      class: 'lms-table',
-    });
+    /* Re-draws only the rows and the count — the header, search box and
+       summary stay put while the teacher sorts or searches. */
+    function renderRows(): void {
+      const visible = snapshot.students
+        .filter((student) => studentMatchesQuery(student, query))
+        .sort((a, b) => compareStudents(a, b, sortKey) * sortDir);
 
+      body.replaceChildren();
+
+      if (snapshot.students.length === 0) {
+        countNote.textContent = '';
+        const emptyRow = elem('tr');
+        emptyRow.append(
+          elem('td', {
+            colspan: String(COLUMNS.length),
+            text: 'עדיין אין תלמידים רשומים.',
+          }),
+        );
+        body.append(emptyRow);
+        return;
+      }
+
+      countNote.textContent = query
+        ? 'מציג ' +
+          String(visible.length) +
+          ' מתוך ' +
+          String(snapshot.students.length) +
+          ' תלמידים'
+        : String(snapshot.students.length) + ' תלמידים';
+
+      if (visible.length === 0) {
+        const emptyRow = elem('tr');
+        emptyRow.append(
+          elem('td', {
+            colspan: String(COLUMNS.length),
+            text: 'אין תלמיד שמתאים לחיפוש.',
+          }),
+        );
+        body.append(emptyRow);
+        return;
+      }
+
+      for (const student of visible) {
+        body.append(buildStudentRow(student));
+      }
+    }
+
+    const table = elem('table', { class: 'lms-table' });
     const head = elem('thead');
     const headRow = elem('tr');
 
-    for (const label of [
-      'שם',
-      'כיתה',
-      'נרשם',
-      'פעילות אחרונה',
-      'עמוד נוכחי',
-      'הוגשו',
-      'ממוצע',
-      'זמן פעיל',
-      'מה עשה לאחרונה',
-      'ציונים',
-    ]) {
-      headRow.append(elem('th', { text: label }));
+    headerPainters = [];
+    for (const column of COLUMNS) {
+      const th = elem('th');
+      if (column.key) {
+        const key = column.key;
+        th.classList.add('is-sortable');
+        const button = elem('button', {
+          type: 'button',
+          class: 'lms-sort',
+        });
+        const arrow = elem('span', { class: 'lms-sort__arrow', 'aria-hidden': 'true' });
+        button.append(document.createTextNode(column.label + ' '), arrow);
+
+        const paint = (): void => {
+          const active = sortKey === key;
+          th.setAttribute('aria-sort', active ? (sortDir === 1 ? 'ascending' : 'descending') : 'none');
+          button.classList.toggle('is-active', active);
+          arrow.textContent = active ? (sortDir === 1 ? '↑' : '↓') : '';
+        };
+
+        button.addEventListener('click', () => {
+          if (sortKey === key) {
+            sortDir = sortDir === 1 ? -1 : 1;
+          } else {
+            sortKey = key;
+            sortDir = 1;
+          }
+          for (const repaint of headerPainters) repaint();
+          renderRows();
+        });
+
+        headerPainters.push(paint);
+        th.append(button);
+      } else {
+        th.textContent = column.label;
+      }
+      headRow.append(th);
     }
 
     head.append(headRow);
-    table.append(head);
+    table.append(head, body);
 
-    const body = elem('tbody');
+    const search = elem('input', {
+      class: 'lms-admin__search',
+      type: 'search',
+      placeholder: 'חיפוש לפי שם, כיתה או אימייל',
+      'aria-label': 'חיפוש תלמיד',
+    }) as HTMLInputElement;
+    search.value = query;
+    search.addEventListener('input', () => {
+      query = search.value.trim().toLocaleLowerCase('he');
+      renderRows();
+    });
 
-    if (snapshot.students.length === 0) {
-      const emptyRow = elem('tr');
-      emptyRow.append(
-        elem('td', {
-          colspan: '10',
-          text: 'עדיין אין תלמידים רשומים.',
-        }),
-      );
-      body.append(emptyRow);
-    }
+    const filterBar = elem('div', { class: 'lms-admin__filter' });
+    filterBar.append(search, countNote);
 
-    for (const student of snapshot.students) {
-      const row = elem('tr');
+    for (const paint of headerPainters) paint();
+    renderRows();
 
-      const identity = elem('td');
-      identity.append(
-        elem('strong', {
-          text: student.profile.fullName,
-        }),
-        elem('small', {
-          text:
-            student.profile.username +
-            ' · ' +
-            student.profile.email,
-        }),
-      );
-
-      const details = student.results
-        .map(
-          (result) =>
-            'עמוד ' +
-            String(result.pageNumber) +
-            ': אחרון ' +
-            String(resultLatestScore(result)) +
-            ' · מיטבי ' +
-            String(resultBestScore(result)) +
-            ' · ניסיונות ' +
-            String(resultAttemptCount(result)),
-        )
-        .join(', ');
-
-      const openDrafts = student.drafts
-        .filter((draft) => !draft.submitted)
-        .map(
-          (draft) =>
-            'עמוד ' +
-            String(draft.pageNumber) +
-            ' (' +
-            String(draft.maxAttemptCount || 0) +
-            '/' +
-            String(LMS_CONFIG.maxAttempts) +
-            ')',
-        )
-        .join(', ');
-
-      const studentErrors = student.syncErrors
-        .map((error) => error.message)
-        .join(' ');
-
-      row.append(
-        identity,
-        elem('td', {
-          text: student.profile.className || '—',
-        }),
-        elem('td', {
-          text: formatDate(student.profile.createdAt),
-        }),
-        elem('td', {
-          text: formatDate(latestActivityAt(student)),
-        }),
-        elem('td', {
-          text: String(currentPage(student)),
-        }),
-        elem('td', {
-          text: String(student.results.length),
-        }),
-        elem('td', {
-          text: String(averageScore(student)),
-        }),
-        elem('td', {
-          text: formatDuration(
-            totalActiveSeconds(student),
-          ),
-        }),
-        elem('td', {
-          class: 'lms-table__details',
-          text: activityLabel(student.activity[0]),
-        }),
-        elem('td', {
-          class: 'lms-table__details',
-          text:
-            (details || 'טרם הוגש עמוד') +
-            (openDrafts ? ' · טיוטות פעילות: ' + openDrafts : '') +
-            (studentErrors ? ' · שגיאת סנכרון: ' + studentErrors : ''),
-        }),
-      );
-
-      body.append(row);
-    }
-
-    table.append(body);
+    const tableWrap = elem('div', { class: 'lms-tablewrap' });
     tableWrap.append(table);
 
     const syncAlert = snapshot.syncErrors.length > 0
@@ -457,12 +572,11 @@ export function lmsAdmin({
     content.replaceChildren(
       ...(syncAlert ? [syncAlert] : []),
       summary,
+      filterBar,
       tableWrap,
       elem('p', {
         class: 'lms-admin__generated',
-        text:
-          'עודכן: ' +
-          formatDate(snapshot.generatedAt),
+        text: 'עודכן: ' + formatDate(snapshot.generatedAt),
       }),
     );
   }

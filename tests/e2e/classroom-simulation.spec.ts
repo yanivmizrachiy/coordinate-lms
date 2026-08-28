@@ -181,6 +181,19 @@ test('isolated two-student and teacher fallback workflow is explicit and durable
     await expect(teacher.getByText('אורי לוי')).toBeVisible();
     await expect(teacher.getByText('מורה', { exact: true })).toHaveCount(0);
 
+    // the roster search narrows to a single student, then restores
+    const rosterSearch = teacher.getByRole('searchbox', { name: 'חיפוש תלמיד' });
+    await rosterSearch.fill('נועה');
+    await expect(teacher.getByText('אורי לוי')).toHaveCount(0);
+    await expect(teacher.getByText('נועה כהן')).toBeVisible();
+    await rosterSearch.fill('');
+    await expect(teacher.getByText('אורי לוי')).toBeVisible();
+
+    // a column header sorts the roster and marks itself sorted
+    await teacher.getByRole('button', { name: 'ממוצע', exact: true }).click();
+    await expect(teacher.locator('th.is-sortable[aria-sort="ascending"]'))
+      .toContainText('ממוצע');
+
     const downloadPromise = teacher.waitForEvent('download');
     await teacher.getByRole('button', { name: 'ייצוא CSV מלא' }).click();
     const download = await downloadPromise;
