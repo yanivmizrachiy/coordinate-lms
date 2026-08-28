@@ -6,6 +6,7 @@ import {
   buildDashboardCsv,
   dashboardCurrentPage,
   dashboardTotalActiveSeconds,
+  latestActivityAt,
   resultAttemptCount,
   resultBestScore,
   resultLatestScore,
@@ -63,13 +64,6 @@ function totalActiveSeconds(
   student: DashboardStudent,
 ): number {
   return dashboardTotalActiveSeconds(student);
-}
-
-function latestActivityAt(student: DashboardStudent): number {
-  return (
-    student.activity[0]?.createdAt ||
-    student.profile.lastSeenAt
-  );
 }
 
 function currentPage(student: DashboardStudent): number {
