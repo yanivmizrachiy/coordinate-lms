@@ -188,7 +188,6 @@ export function attachLmsToPage(
   let draftSyncFailed = false;
   let resultSyncFailed = false;
   let submissionInFlight = false;
-  let submitConfirmPending = false;
   let checkPromise: Promise<CheckSummary> | null = null;
   const pendingActivity = new Map<string, ActivityEvent>();
 
@@ -623,22 +622,9 @@ export function attachLmsToPage(
         answerKey = await loadAnswerKey(pageNumber);
         const keyedEntries = collectKeyedEntries();
 
-        const unresolved = keyedEntries.filter(
-          ({ progress }) => !progress.correct && !progress.locked,
-        ).length;
-
-        if (unresolved > 0 && !submitConfirmPending) {
-          submitConfirmPending = true;
-          setMessage(
-            status,
-            'נותרו ' +
-              String(unresolved) +
-              ' תשובות שלא הושלמו. אפשר להמשיך לתרגל, או ללחוץ „הגשת העמוד" שוב כדי לקבל ציון על מה שנפתר.',
-          );
-          return;
-        }
-
-        submitConfirmPending = false;
+        // One press does everything: runCheck() above already verified every
+        // answer, and the page is scored and finalised now — unfilled targets
+        // simply score as 0. No second confirming press.
         score = scoreFromKeyedEntries(keyedEntries);
 
         for (const [qid, progress] of Object.entries(draft.questions)) {
@@ -815,7 +801,6 @@ export function attachLmsToPage(
       const progress = progressFor(qid);
       progress.answer = targetValue(target);
       progress.correct = false;
-      submitConfirmPending = false;
 
       if (!progress.locked) {
         target.dataset.lmsState = progress.answer ? 'filled' : 'empty';
