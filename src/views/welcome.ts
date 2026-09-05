@@ -1,4 +1,5 @@
 import { elem } from '../lib/dom';
+import { beginGuestPracticeSession } from '../lms/guestPracticeSession';
 import { navigate } from '../router';
 import type { ViewContext } from './context';
 
@@ -53,7 +54,10 @@ export function welcome({ outlet, setTitle }: ViewContext): void {
           'free',
           'לתרגל בלי רישום',
           'מתחילים מיד ומקבלים משוב וציון. הציון לא נשמר ולא מופיע אצל המורה.',
-          () => navigate('#/workbook/1'),
+          () => {
+            beginGuestPracticeSession();
+            navigate('#/workbook/1');
+          },
         ),
       ),
       elem('p', {
