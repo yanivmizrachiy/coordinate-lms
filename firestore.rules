@@ -138,6 +138,57 @@ service cloud.firestore {
         && request.resource.data.submissionId.size() <= 200;
     }
 
+    // The ONLY legal attempt reset is an explicit restart after submission.
+    // It creates a new run boundary and carries no prior score/attempt state.
+    function submittedDraftRestart() {
+      return resource.data.submitted == true
+        && request.resource.data.submitted == false
+        && request.resource.data.startedAt >= resource.data.updatedAt
+        && request.resource.data.updatedAt >= request.resource.data.startedAt
+        && request.resource.data.activeSeconds == 0
+        && request.resource.data.questions.size() == 0
+        && request.resource.data.maxAttemptCount == 0
+        && !request.resource.data.keys().hasAny([
+          'score', 'scorePolicyVersion', 'scoreComputedAt'
+        ]);
+    }
+
+    function normalDraftUpdate() {
+      return request.resource.data.startedAt == resource.data.startedAt
+        && request.resource.data.updatedAt >= resource.data.updatedAt
+        && request.resource.data.activeSeconds >= resource.data.activeSeconds
+        && (!resource.data.keys().hasAny(['maxAttemptCount'])
+          || request.resource.data.maxAttemptCount >= resource.data.maxAttemptCount)
+        && (!resource.data.submitted || request.resource.data.submitted)
+        && policyOf(request.resource.data) >= policyOf(resource.data)
+        && (!resource.data.keys().hasAny(['score'])
+          || (request.resource.data.keys().hasAny(['score'])
+            && (request.resource.data.score >= resource.data.score
+              || request.resource.data.keys().hasAny(['scorePolicyVersion']))));
+    }
+
+    function newerResultSubmission() {
+      return request.resource.data.submittedAt > resource.data.submittedAt
+        && request.resource.data.startedAt >= resource.data.submittedAt
+        && request.resource.data.submissionId != resource.data.get('submissionId', '')
+        && (policyOf(request.resource.data) > policyOf(resource.data)
+          || !resource.data.keys().hasAny(['bestScore'])
+          || request.resource.data.bestScore >= resource.data.bestScore);
+    }
+
+    function sameSubmissionRegrade() {
+      return request.resource.data.startedAt == resource.data.startedAt
+        && (!resource.data.keys().hasAny(['submissionId'])
+          || request.resource.data.submissionId == resource.data.submissionId)
+        && request.resource.data.submittedAt == resource.data.submittedAt
+        && request.resource.data.attempts == resource.data.attempts
+        && request.resource.data.answers == resource.data.answers
+        && request.resource.data.activeSeconds == resource.data.activeSeconds
+        && (!resource.data.keys().hasAny(['maxAttemptCount'])
+          || request.resource.data.maxAttemptCount >= resource.data.maxAttemptCount)
+        && request.resource.data.keys().hasAny(['scorePolicyVersion']);
+    }
+
     function validActivity(uid, document) {
       return request.resource.data.keys().hasAll([
           'id', 'uid', 'pageNumber', 'type', 'createdAt'
@@ -196,20 +247,7 @@ service cloud.firestore {
         allow update: if (owner(uid) || admin())
           && validDraft(uid, document)
           && request.resource.data.pageNumber == resource.data.pageNumber
-          && request.resource.data.startedAt == resource.data.startedAt
-          && request.resource.data.updatedAt >= resource.data.updatedAt
-          && request.resource.data.activeSeconds >= resource.data.activeSeconds
-          && (!resource.data.keys().hasAny(['maxAttemptCount'])
-            || request.resource.data.maxAttemptCount >= resource.data.maxAttemptCount)
-          && (!resource.data.submitted || request.resource.data.submitted)
-          // A stored score never regresses to an older scoring policy.
-          && policyOf(request.resource.data) >= policyOf(resource.data)
-          // A score may only drop when a policy-aware client regrades it under
-          // the current policy; blind writers stay bound to monotonic scores.
-          && (!resource.data.keys().hasAny(['score'])
-            || (request.resource.data.keys().hasAny(['score'])
-              && (request.resource.data.score >= resource.data.score
-                || request.resource.data.keys().hasAny(['scorePolicyVersion']))));
+          && (normalDraftUpdate() || submittedDraftRestart());
         allow delete: if admin();
       }
 
@@ -219,33 +257,14 @@ service cloud.firestore {
         allow update: if (owner(uid) || admin())
           && validResult(uid, document)
           && request.resource.data.pageNumber == resource.data.pageNumber
-          && request.resource.data.startedAt == resource.data.startedAt
-          // A stored score never regresses to an older scoring policy.
+          // Stored scoring policy never regresses. A fresh run may have fewer
+          // attempts than the previous run; attempt monotonicity is therefore
+          // scoped to a single submission, not to the lifetime result record.
           && policyOf(request.resource.data) >= policyOf(resource.data)
-          && (!resource.data.keys().hasAny(['maxAttemptCount'])
-            || request.resource.data.maxAttemptCount >= resource.data.maxAttemptCount)
           && (
-            // Exact idempotent retry of the stored document.
             request.resource.data == resource.data
-            // A genuinely newer submission — it always carries a fresh
-            // submissionId. bestScore stays monotonic within one policy; a
-            // policy upgrade re-bases the scale and may lower it. Stored
-            // documents from before the submissionId field simply lack it.
-            || (request.resource.data.submittedAt > resource.data.submittedAt
-              && request.resource.data.submissionId != resource.data.get('submissionId', '')
-              && (policyOf(request.resource.data) > policyOf(resource.data)
-                || !resource.data.keys().hasAny(['bestScore'])
-                || request.resource.data.bestScore >= resource.data.bestScore))
-            // A regrade of the SAME submission by a policy-aware client: the
-            // learner's recorded work is pinned; only the score fields move.
-            // A pre-submissionId document is identified by its submittedAt.
-            || ((!resource.data.keys().hasAny(['submissionId'])
-                || request.resource.data.submissionId == resource.data.submissionId)
-              && request.resource.data.submittedAt == resource.data.submittedAt
-              && request.resource.data.attempts == resource.data.attempts
-              && request.resource.data.answers == resource.data.answers
-              && request.resource.data.activeSeconds == resource.data.activeSeconds
-              && request.resource.data.keys().hasAny(['scorePolicyVersion']))
+            || newerResultSubmission()
+            || sameSubmissionRegrade()
           );
         allow delete: if admin();
       }
