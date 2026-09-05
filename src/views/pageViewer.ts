@@ -15,6 +15,7 @@ import { hydrateChoiceAnswerInputs } from '../lms/choiceInputs';
 import { hydrateExplicitAuthoringAnswers } from '../lms/implicitAnswers';
 import { installHintCoach } from '../lms/hintCoach';
 import { installAttemptFeedback } from '../lms/attemptFeedback';
+import { installPageRunControls } from '../lms/pageRunControls';
 
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
@@ -80,6 +81,9 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       : undefined;
     const attemptFeedbackCleanup = data && lms
       ? installAttemptFeedback(sheetWrap)
+      : undefined;
+    const pageRunCleanup = lms
+      ? installPageRunControls(lms.panel, lms.scoreBanner, page)
       : undefined;
 
     /* One calm app-like navigation row. Page turning is primary; contents,
@@ -235,6 +239,7 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       window.removeEventListener('resize', applyZoom);
       sheetResizeObserver?.disconnect();
       sheetMutationObserver?.disconnect();
+      pageRunCleanup?.();
       attemptFeedbackCleanup?.();
       hintCleanup?.();
       choiceCleanup?.();
