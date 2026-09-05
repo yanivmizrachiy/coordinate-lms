@@ -5,6 +5,7 @@ export interface GuestPracticeSession {
 }
 
 const SESSION_KEY = 'coordinate_lms_guest_practice_session_v1';
+const DRAFTS_KEY = 'coordinate_lms_drafts_v2';
 let memorySession: GuestPracticeSession | null = null;
 
 function localDay(timestamp = Date.now()): string {
@@ -41,7 +42,34 @@ function parseStoredSession(raw: string | null, today: string): GuestPracticeSes
   return null;
 }
 
+function clearStoredGuestDrafts(): void {
+  if (typeof localStorage === 'undefined') return;
+  try {
+    const raw = localStorage.getItem(DRAFTS_KEY);
+    if (!raw) return;
+    const drafts = JSON.parse(raw) as Record<string, { uid?: unknown }>;
+    let changed = false;
+    for (const [key, value] of Object.entries(drafts)) {
+      if (key.startsWith('guest:') || value?.uid === 'guest') {
+        delete drafts[key];
+        changed = true;
+      }
+    }
+    if (changed) localStorage.setItem(DRAFTS_KEY, JSON.stringify(drafts));
+  } catch {
+    /* An unreadable draft map is already unusable by the LMS. Leave it alone;
+       repository parsing will fail closed instead of risking registered data. */
+  }
+}
+
 export function beginGuestPracticeSession(): GuestPracticeSession {
+  /* This action means "a new unregistered learner starts now". Old guest
+     drafts have no account owner and must never cross that boundary. Remove
+     only guest records; registered learners' local drafts remain untouched.
+     Reloading an existing guest session does NOT call this function, so normal
+     refresh continuity and attempt history are preserved. */
+  clearStoredGuestDrafts();
+
   const startedAt = Date.now();
   const session: GuestPracticeSession = {
     id: newId(),
