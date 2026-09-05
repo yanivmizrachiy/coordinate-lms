@@ -79,25 +79,27 @@ export function beginGuestPracticeSession(): GuestPracticeSession {
      drafts have no account owner and must never cross that boundary. Remove
      only guest records; registered learners' local drafts remain untouched.
      Reloading an existing guest session does NOT call this function, so normal
-     refresh continuity and attempt history are preserved. */
+     refresh continuity and attempt history are preserved.
+
+     Session identity, not millisecond ordering, is the isolation boundary.
+     The first draft object is created synchronously by the LMS and is stamped
+     with this session id on its first save. Using 0 here avoids rejecting that
+     legitimate first save if view creation and session startup occur in the
+     same event turn. Any draft already stamped by another guest session is
+     still rejected by id before it can be re-labelled. */
   clearStoredGuestDrafts();
 
-  const startedAt = Date.now();
   return storeBrowserSession({
     id: newId(),
-    day: localDay(startedAt),
-    startedAt,
+    day: localDay(),
+    startedAt: 0,
   });
 }
 
 function beginDirectGuestPracticeSession(): GuestPracticeSession {
   /* A learner may enter a numbered practice URL directly instead of pressing
-     the welcome button. The LMS draft is created synchronously before its first
-     save, so using Date.now() as the session boundary here could make that
-     brand-new draft appear older than the session by a few milliseconds and be
-     rejected as stale. There cannot be an in-flight draft from a prior page
-     when sessionStorage has no session marker; clear any historical guest
-     drafts and use the start of this browser session as an open boundary. */
+     the welcome button. Historical guest drafts are removed and a fresh
+     browser-session identity becomes authoritative. */
   clearStoredGuestDrafts();
   return storeBrowserSession({
     id: newId(),
@@ -132,8 +134,7 @@ export function currentGuestPracticeSession(): GuestPracticeSession {
   } catch {
     // Storage can be blocked. Fall back to this module instance's memory only.
     if (memorySession?.day === today) return memorySession;
-    const startedAt = Date.now();
-    memorySession = { id: newId(), day: today, startedAt };
+    memorySession = { id: newId(), day: today, startedAt: 0 };
     return memorySession;
   }
 }
