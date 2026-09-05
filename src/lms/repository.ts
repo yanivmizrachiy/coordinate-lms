@@ -95,6 +95,23 @@ function belongsToCurrentGuestSession(draft: PageDraft): boolean {
   return draft.guestSessionId === sessionId;
 }
 
+/* Browser guest drafts are allowed to JOIN the active session only while they
+   are genuinely from that session. A new draft created by the current page may
+   not have its session id stamped yet, so its startedAt is compared with the
+   active session boundary. This is deliberately stricter than merely looking
+   at uid='guest': an async save from the previous learner can finish after a
+   new learner has pressed "לתרגל בלי רישום", and must be rejected instead of
+   being relabelled with the new learner's id. */
+function canWriteGuestDraftToCurrentSession(draft: PageDraft): boolean {
+  if (draft.uid !== 'guest') return true;
+  const session = currentGuestPracticeSession();
+  if (session.id === null) return draft.guestSessionId === undefined;
+  if (draft.guestSessionId !== undefined) {
+    return draft.guestSessionId === session.id;
+  }
+  return draft.startedAt >= session.startedAt;
+}
+
 function guestDraftForCurrentSession(draft: PageDraft): PageDraft {
   const sanitized = guestDraftForStorage(draft);
   const sessionId = currentGuestPracticeSession().id;
@@ -102,7 +119,10 @@ function guestDraftForCurrentSession(draft: PageDraft): PageDraft {
     const { guestSessionId: _guestSessionId, ...legacyCompatible } = sanitized;
     return validateDraft(legacyCompatible);
   }
-  return validateDraft({ ...sanitized, guestSessionId: sessionId });
+  return validateDraft({
+    ...sanitized,
+    guestSessionId: sanitized.guestSessionId ?? sessionId,
+  });
 }
 
 function draftWithoutGuestSession(draft: PageDraft): PageDraft {
@@ -377,6 +397,14 @@ export async function loadDraft(uid: string, pageNumber: number): Promise<PageDr
 
 export async function saveDraft(draft: PageDraft): Promise<PersistenceOutcome> {
   const validated = validateDraft(draft);
+
+  /* A page from an older anonymous learner can still have an async save in
+     flight while the welcome screen starts a fresh guest session. Never let
+     that old write cross the session boundary or acquire the new session id. */
+  if (validated.uid === 'guest' && !canWriteGuestDraftToCurrentSession(validated)) {
+    return { localSaved: false, central: 'not-required' };
+  }
+
   const localDrafts = loadMap<PageDraft>(DRAFTS_KEY);
   const key = compoundKey(validated.uid, validated.pageNumber);
   const incoming = validated.uid === 'guest' ? guestDraftForCurrentSession(validated) : validated;
