@@ -36,6 +36,8 @@ export interface PageDraft {
   activeSeconds: number;
   questions: Record<string, QuestionProgress>;
   submitted: boolean;
+  /** Browser-session marker used only for unregistered guest drafts. */
+  guestSessionId?: string;
   score?: number;
   /** Scoring policy the stored score was computed under; absent = legacy 1. */
   scorePolicyVersion?: number;
