@@ -10,16 +10,28 @@ async function submitFirstQuestion(page: import('@playwright/test').Page): Promi
 
 async function guestStorageState(page: import('@playwright/test').Page): Promise<{
   sessionId: string | null;
+  sessionStartedAt: number | null;
   guestDraft: unknown;
+  guestActivityTypes: string[];
 }> {
   return page.evaluate(() => {
     const rawSession = sessionStorage.getItem('coordinate_lms_guest_practice_session_v1');
     const rawDrafts = localStorage.getItem('coordinate_lms_drafts_v2');
-    const session = rawSession ? JSON.parse(rawSession) as { id?: unknown } : null;
+    const rawActivity = localStorage.getItem('coordinate_lms_activity_v2');
+    const session = rawSession
+      ? JSON.parse(rawSession) as { id?: unknown; startedAt?: unknown }
+      : null;
     const drafts = rawDrafts ? JSON.parse(rawDrafts) as Record<string, unknown> : {};
+    const activity = rawActivity
+      ? JSON.parse(rawActivity) as Array<{ uid?: unknown; type?: unknown }>
+      : [];
     return {
       sessionId: typeof session?.id === 'string' ? session.id : null,
+      sessionStartedAt: typeof session?.startedAt === 'number' ? session.startedAt : null,
       guestDraft: drafts['guest:1'],
+      guestActivityTypes: activity
+        .filter((item) => item?.uid === 'guest' && typeof item?.type === 'string')
+        .map((item) => item.type as string),
     };
   });
 }
@@ -29,14 +41,21 @@ test('guest reload keeps this session but a new guest start is clean', async ({ 
   await page.getByRole('button', { name: 'לתרגל בלי רישום', exact: true }).click();
   await expect(page).toHaveURL(/#\/workbook\/1$/);
 
+  const initialSession = await guestStorageState(page);
+  expect(initialSession.sessionId).not.toBeNull();
+  expect(initialSession.sessionStartedAt).not.toBeNull();
+
   const target = page.locator('[data-lms-qid="p1-q1"]');
   await target.fill('x');
   await submitFirstQuestion(page);
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 
+  await expect.poll(async () => (await guestStorageState(page)).guestActivityTypes).toContain('answer_check');
+  const afterCheck = await guestStorageState(page);
+  expect(afterCheck.sessionId).toBe(initialSession.sessionId);
+
   await expect.poll(async () => (await guestStorageState(page)).guestDraft).toBeDefined();
   const firstSession = await guestStorageState(page);
-  expect(firstSession.sessionId).not.toBeNull();
 
   // Reloading the same practice session must preserve answers and attempts.
   await page.reload();
