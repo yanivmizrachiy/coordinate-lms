@@ -61,24 +61,32 @@ export function beginGuestPracticeSession(): GuestPracticeSession {
 
 export function currentGuestPracticeSession(): GuestPracticeSession {
   const today = localDay();
-  if (memorySession?.day === today) return memorySession;
 
   /* Node/unit-test environments do not have sessionStorage. Keep legacy test
      fixtures usable there; browser sessions always receive a real id. */
   if (typeof sessionStorage === 'undefined') {
+    if (memorySession?.day === today) return memorySession;
     memorySession = { id: null, day: today, startedAt: 0 };
     return memorySession;
   }
 
+  /* sessionStorage is the browser-session authority. Read it on every call
+     instead of trusting a module-local cache: code-split chunks may retain
+     separate module memory, while the storage marker is shared by the page.
+     This prevents an old chunk from re-attaching a previous learner's draft
+     after the welcome screen deliberately starts a fresh guest session. */
   try {
     const stored = parseStoredSession(sessionStorage.getItem(SESSION_KEY), today);
     if (stored) {
       memorySession = stored;
       return stored;
     }
+    return beginGuestPracticeSession();
   } catch {
-    // Fall through to a fresh browser session.
+    // Storage can be blocked. Fall back to this module instance's memory only.
+    if (memorySession?.day === today) return memorySession;
+    const startedAt = Date.now();
+    memorySession = { id: newId(), day: today, startedAt };
+    return memorySession;
   }
-
-  return beginGuestPracticeSession();
 }
