@@ -33,9 +33,10 @@ test('guest reload keeps this session but a new guest start is clean', async ({ 
   await target.fill('x');
   await submitFirstQuestion(page);
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
+
+  await expect.poll(async () => (await guestStorageState(page)).guestDraft).toBeDefined();
   const firstSession = await guestStorageState(page);
   expect(firstSession.sessionId).not.toBeNull();
-  expect(firstSession.guestDraft).toBeDefined();
 
   // Reloading the same practice session must preserve answers and attempts.
   await page.reload();
