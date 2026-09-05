@@ -62,20 +62,7 @@ function clearStoredGuestDrafts(): void {
   }
 }
 
-export function beginGuestPracticeSession(): GuestPracticeSession {
-  /* This action means "a new unregistered learner starts now". Old guest
-     drafts have no account owner and must never cross that boundary. Remove
-     only guest records; registered learners' local drafts remain untouched.
-     Reloading an existing guest session does NOT call this function, so normal
-     refresh continuity and attempt history are preserved. */
-  clearStoredGuestDrafts();
-
-  const startedAt = Date.now();
-  const session: GuestPracticeSession = {
-    id: newId(),
-    day: localDay(startedAt),
-    startedAt,
-  };
+function storeBrowserSession(session: GuestPracticeSession): GuestPracticeSession {
   memorySession = session;
   if (typeof sessionStorage !== 'undefined') {
     try {
@@ -85,6 +72,38 @@ export function beginGuestPracticeSession(): GuestPracticeSession {
     }
   }
   return session;
+}
+
+export function beginGuestPracticeSession(): GuestPracticeSession {
+  /* This action means "a new unregistered learner starts now". Old guest
+     drafts have no account owner and must never cross that boundary. Remove
+     only guest records; registered learners' local drafts remain untouched.
+     Reloading an existing guest session does NOT call this function, so normal
+     refresh continuity and attempt history are preserved. */
+  clearStoredGuestDrafts();
+
+  const startedAt = Date.now();
+  return storeBrowserSession({
+    id: newId(),
+    day: localDay(startedAt),
+    startedAt,
+  });
+}
+
+function beginDirectGuestPracticeSession(): GuestPracticeSession {
+  /* A learner may enter a numbered practice URL directly instead of pressing
+     the welcome button. The LMS draft is created synchronously before its first
+     save, so using Date.now() as the session boundary here could make that
+     brand-new draft appear older than the session by a few milliseconds and be
+     rejected as stale. There cannot be an in-flight draft from a prior page
+     when sessionStorage has no session marker; clear any historical guest
+     drafts and use the start of this browser session as an open boundary. */
+  clearStoredGuestDrafts();
+  return storeBrowserSession({
+    id: newId(),
+    day: localDay(),
+    startedAt: 0,
+  });
 }
 
 export function currentGuestPracticeSession(): GuestPracticeSession {
@@ -109,7 +128,7 @@ export function currentGuestPracticeSession(): GuestPracticeSession {
       memorySession = stored;
       return stored;
     }
-    return beginGuestPracticeSession();
+    return beginDirectGuestPracticeSession();
   } catch {
     // Storage can be blocked. Fall back to this module instance's memory only.
     if (memorySession?.day === today) return memorySession;
