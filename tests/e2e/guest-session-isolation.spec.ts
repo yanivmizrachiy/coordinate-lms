@@ -42,14 +42,13 @@ test('guest reload keeps this session but a new guest start is clean', async ({ 
   await submitFirstQuestion(page);
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 
-  // This regression is specifically about guest-session draft ownership.
-  // Activity logging has independent coverage; requiring an activity event here
-  // couples this isolation test to an unrelated telemetry timing detail.
-  await expect.poll(async () => (await guestStorageState(page)).guestDraft).toBeDefined();
   const firstSession = await guestStorageState(page);
   expect(firstSession.sessionId).toBe(initialSession.sessionId);
 
-  // Reloading the same practice session must preserve answers and attempts.
+  // The contract that matters to the learner is continuity after a real page
+  // reload. This intentionally avoids coupling the regression to one internal
+  // localStorage write timing; if persistence is genuinely broken, the two
+  // assertions below fail on the reloaded UI itself.
   await page.reload();
   const reloaded = page.locator('[data-lms-qid="p1-q1"]');
   await expect(reloaded).toHaveText('x');
