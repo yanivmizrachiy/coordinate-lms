@@ -1,5 +1,4 @@
 import { elem } from '../lib/dom';
-import { beginGuestPracticeSession } from '../lms/guestPracticeSession';
 import { navigate } from '../router';
 import type { ViewContext } from './context';
 
@@ -55,8 +54,12 @@ export function welcome({ outlet, setTitle }: ViewContext): void {
           'לתרגל בלי רישום',
           'מתחילים מיד ומקבלים משוב וציון. הציון לא נשמר ולא מופיע אצל המורה.',
           () => {
-            beginGuestPracticeSession();
-            navigate('#/workbook/1');
+            /* Keep first entry lightweight. Guest-session state is needed only
+               after the learner explicitly chooses unregistered practice. */
+            void import('../lms/guestPracticeSession').then(({ beginGuestPracticeSession }) => {
+              beginGuestPracticeSession();
+              navigate('#/workbook/1');
+            });
           },
         ),
       ),
