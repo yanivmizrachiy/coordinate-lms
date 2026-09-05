@@ -13,6 +13,7 @@ const contractFiles = [
   'firebase.json',
   'vitest.emulator.config.ts',
   'tests/firestore-emulator.test.ts',
+  'tests/firestore-reset-retry-emulator.test.ts',
 ];
 const contractHash = createHash('sha256');
 for (const path of contractFiles) {
@@ -43,7 +44,7 @@ const report = {
   projectId,
   firebaseCli,
   status: passed ? 'pass' : 'failure',
-  suite: 'tests/firestore-emulator.test.ts',
+  suite: 'tests/firestore-emulator.test.ts + tests/firestore-reset-retry-emulator.test.ts',
   contractFiles,
   contractSha256: contractHash.digest('hex'),
   exitCode: result.status,
