@@ -7,6 +7,7 @@ export default defineConfig({
     exclude: [
       'tests/e2e/**',
       'tests/firestore-emulator.test.ts',
+      'tests/firestore-reset-retry-emulator.test.ts',
       'node_modules/**',
       'dist/**',
     ],
