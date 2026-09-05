@@ -105,6 +105,11 @@ function guestDraftForCurrentSession(draft: PageDraft): PageDraft {
   return validateDraft({ ...sanitized, guestSessionId: sessionId });
 }
 
+function draftWithoutGuestSession(draft: PageDraft): PageDraft {
+  const { guestSessionId: _guestSessionId, ...withoutGuestSession } = draft;
+  return validateDraft(withoutGuestSession);
+}
+
 function sanitizeGuestActivity(event: ActivityEvent): ActivityEvent {
   if (event.uid !== 'guest' || !event.metadata) return event;
   const metadata = { ...event.metadata };
@@ -529,8 +534,9 @@ export async function claimGuestProgress(uid: string): Promise<GuestProgressClai
   for (const key of guestDraftKeys) {
     const guestDraft = drafts[key];
     if (guestDraft) {
+      const transferableDraft = draftWithoutGuestSession(guestDraftForStorage(guestDraft));
       outcomes.push(await saveDraft({
-        ...guestDraftForStorage(guestDraft),
+        ...transferableDraft,
         uid,
         updatedAt: Date.now(),
       }));
