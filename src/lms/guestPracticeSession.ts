@@ -74,6 +74,22 @@ function storeBrowserSession(session: GuestPracticeSession): GuestPracticeSessio
   return session;
 }
 
+function clearFreshNavigationMarker(session: GuestPracticeSession): void {
+  if (typeof window === 'undefined' || session.id === null) return;
+  try {
+    const url = new URL(window.location.href);
+    if (url.searchParams.get('guestStart') !== session.id) return;
+    url.searchParams.delete('guestStart');
+    window.history.replaceState(
+      null,
+      '',
+      url.pathname + url.search + url.hash,
+    );
+  } catch {
+    // URL cleanup is cosmetic; session isolation must not depend on it.
+  }
+}
+
 export function beginGuestPracticeSession(): GuestPracticeSession {
   /* This action means "a new unregistered learner starts now". Old guest
      drafts have no account owner and must never cross that boundary. Remove
@@ -131,6 +147,7 @@ export function currentGuestPracticeSession(): GuestPracticeSession {
     const stored = parseStoredSession(sessionStorage.getItem(SESSION_KEY), today);
     if (stored) {
       memorySession = stored;
+      clearFreshNavigationMarker(stored);
       return stored;
     }
     return beginDirectGuestPracticeSession();
