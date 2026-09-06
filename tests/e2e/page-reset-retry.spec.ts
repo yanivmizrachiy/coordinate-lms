@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+const GUEST_SESSION_KEY = 'coordinate_lms_guest_practice_session_v1';
+
 async function acceptNextDialog(page: import('@playwright/test').Page): Promise<void> {
   page.once('dialog', async (dialog) => {
     await dialog.accept();
@@ -34,12 +36,24 @@ test('clear preserves checked attempts and retry starts a genuinely fresh guest 
   await expect(target).toHaveAttribute('data-lms-state', 'wrong');
   await expect(target).toHaveAttribute('data-lms-attempts', '1');
 
+  const guestSessionBeforeClear = await page.evaluate(
+    (key) => sessionStorage.getItem(key),
+    GUEST_SESSION_KEY,
+  );
+  expect(guestSessionBeforeClear).not.toBeNull();
+
   const clearButton = page.getByRole('button', { name: 'ניקוי התשובות בעמוד', exact: true });
   await expect(clearButton).toBeVisible();
   const beforeClearReload = await page.evaluate(() => performance.timeOrigin);
   await acceptNextDialog(page);
   await clearButton.click();
   await waitForDocumentReload(page, beforeClearReload);
+
+  const guestSessionAfterClear = await page.evaluate(
+    (key) => sessionStorage.getItem(key),
+    GUEST_SESSION_KEY,
+  );
+  expect(guestSessionAfterClear).toBe(guestSessionBeforeClear);
 
   const cleared = page.locator('[data-lms-qid="p1-q1"]');
   await expect(cleared).toHaveText('');
