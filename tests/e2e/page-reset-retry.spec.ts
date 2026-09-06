@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 const GUEST_SESSION_KEY = 'coordinate_lms_guest_practice_session_v1';
+const DRAFTS_KEY = 'coordinate_lms_drafts_v2';
 
 async function acceptNextDialog(page: import('@playwright/test').Page): Promise<void> {
   page.once('dialog', async (dialog) => {
@@ -27,6 +28,17 @@ async function submitFirstQuestion(page: import('@playwright/test').Page): Promi
   await question.getByRole('button', { name: 'להגיש שאלה לבדיקה' }).click();
 }
 
+async function waitForGuestDraft(page: import('@playwright/test').Page): Promise<void> {
+  await page.waitForFunction(
+    ({ sessionKey, draftsKey }) => {
+      if (!sessionStorage.getItem(sessionKey)) return false;
+      const drafts = JSON.parse(localStorage.getItem(draftsKey) || '{}') as Record<string, unknown>;
+      return drafts['guest:1'] !== undefined;
+    },
+    { sessionKey: GUEST_SESSION_KEY, draftsKey: DRAFTS_KEY },
+  );
+}
+
 test('clear preserves checked attempts and retry starts a genuinely fresh guest run', async ({ page }) => {
   await page.goto('/#/workbook/1');
 
@@ -35,6 +47,12 @@ test('clear preserves checked attempts and retry starts a genuinely fresh guest 
   await submitFirstQuestion(page);
   await expect(target).toHaveAttribute('data-lms-state', 'wrong');
   await expect(target).toHaveAttribute('data-lms-attempts', '1');
+
+  /* The question-check handler persists asynchronously after painting its
+     verdict. Wait for that durable boundary before testing an immediately
+     following clear action; otherwise the test races the write it is meant to
+     preserve rather than exercising the user-facing reset contract. */
+  await waitForGuestDraft(page);
 
   const guestSessionBeforeClear = await page.evaluate(
     (key) => sessionStorage.getItem(key),
