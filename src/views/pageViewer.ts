@@ -47,6 +47,38 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
       choiceCleanup = hydrateChoiceAnswerInputs(sheetWrap);
       hydrateExplicitAuthoringAnswers(sheetWrap);
       fitSheets(sheetWrap);
+
+      /* A fresh anonymous learner must start from persisted state, never from
+         Chrome's session-history restoration of contenteditable/radio DOM.
+         The one-use guestStart marker exists only for an explicit new guest
+         boundary and is removed by guestPracticeSession once the LMS reads the
+         new session. Clear only transient learner UI here; canonical answer
+         metadata (data-lms-answers) and the worksheet itself stay untouched. */
+      if (new URL(window.location.href).searchParams.has('guestStart')) {
+        for (const target of sheetWrap.querySelectorAll<HTMLElement>('[data-lms-qid]')) {
+          target.textContent = '';
+          delete target.dataset.lmsState;
+          delete target.dataset.lmsAttempts;
+          target.removeAttribute('contenteditable');
+          const label = target.getAttribute('aria-label');
+          if (label) {
+            target.setAttribute(
+              'aria-label',
+              label.replace(
+                /\s+—\s+(?:נכון|לא נכון, אפשר לתקן|עדיין לא מולא|נעול לאחר שלושת התיקונים|נשמר לבדיקת המורה)$/,
+                '',
+              ),
+            );
+          }
+        }
+        for (const input of sheetWrap.querySelectorAll<HTMLInputElement>(
+          'input[type="radio"], input[type="checkbox"]',
+        )) {
+          input.checked = false;
+          input.disabled = false;
+        }
+      }
+
       if (data.gameId) {
         let host = sheetWrap.querySelector<HTMLElement>('[data-game-host]');
         if (!host) {
