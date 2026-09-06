@@ -6,6 +6,7 @@ export interface GuestPracticeSession {
 
 const SESSION_KEY = 'coordinate_lms_guest_practice_session_v1';
 const DRAFTS_KEY = 'coordinate_lms_drafts_v2';
+const RESTORED_STATE_SUFFIX = /\s+—\s+(?:נכון|לא נכון, אפשר לתקן|עדיין לא מולא|נעול לאחר שלושת התיקונים|נשמר לבדיקת המורה)$/;
 let memorySession: GuestPracticeSession | null = null;
 
 function localDay(timestamp = Date.now()): string {
@@ -74,11 +75,32 @@ function storeBrowserSession(session: GuestPracticeSession): GuestPracticeSessio
   return session;
 }
 
+function clearBrowserRestoredAnswerState(): void {
+  if (typeof document === 'undefined') return;
+  for (const target of document.querySelectorAll<HTMLElement>('.blank, .word-blank, .pair-blank')) {
+    target.textContent = '';
+    delete target.dataset.lmsState;
+    delete target.dataset.lmsAttempts;
+    const label = target.getAttribute('aria-label');
+    if (label) target.setAttribute('aria-label', label.replace(RESTORED_STATE_SUFFIX, ''));
+    if (target.dataset.lmsEditable === 'true' || target.hasAttribute('contenteditable')) {
+      target.contentEditable = 'true';
+    }
+  }
+}
+
 function clearFreshNavigationMarker(session: GuestPracticeSession): void {
   if (typeof window === 'undefined' || session.id === null) return;
   try {
     const url = new URL(window.location.href);
     if (url.searchParams.get('guestStart') !== session.id) return;
+
+    /* Chromium can restore contenteditable DOM state independently of
+       localStorage when a document is recreated. The one-use marker proves
+       this is a fresh learner boundary, so erase only transient answer UI
+       before repository hydration applies the new session's (empty) draft. */
+    clearBrowserRestoredAnswerState();
+
     url.searchParams.delete('guestStart');
     window.history.replaceState(
       null,
