@@ -81,25 +81,28 @@ export function beginGuestPracticeSession(): GuestPracticeSession {
      Reloading an existing guest session does NOT call this function, so normal
      refresh continuity and attempt history are preserved.
 
-     Session identity, not millisecond ordering, is the isolation boundary.
-     The first draft object is created synchronously by the LMS and is stamped
-     with this session id on its first save. Using 0 here avoids rejecting that
-     legitimate first save if view creation and session startup occur in the
-     same event turn. Any draft already stamped by another guest session is
-     still rejected by id before it can be re-labelled. */
+     The explicit start time is also a write barrier for an untagged draft that
+     still belongs to the previous practice view. If that old view finishes an
+     async save after this new learner starts, repository.ts rejects it because
+     its startedAt predates this boundary. Once a draft is stamped, the session
+     id is the stronger identity check. */
   clearStoredGuestDrafts();
 
+  const startedAt = Date.now();
   return storeBrowserSession({
     id: newId(),
-    day: localDay(),
-    startedAt: 0,
+    day: localDay(startedAt),
+    startedAt,
   });
 }
 
 function beginDirectGuestPracticeSession(): GuestPracticeSession {
   /* A learner may enter a numbered practice URL directly instead of pressing
-     the welcome button. Historical guest drafts are removed and a fresh
-     browser-session identity becomes authoritative. */
+     the welcome button. In that path the LMS can create its first in-memory
+     draft just before repository access creates the session marker, so there
+     is no safe earlier timestamp boundary to impose. Clear historical guest
+     drafts, accept that first untagged draft, then let the session id become
+     authoritative on its first stored copy. */
   clearStoredGuestDrafts();
   return storeBrowserSession({
     id: newId(),
