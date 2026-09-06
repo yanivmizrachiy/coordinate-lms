@@ -55,15 +55,10 @@ export function welcome({ outlet, setTitle }: ViewContext): void {
           'מתחילים מיד ומקבלים משוב וציון. הציון לא נשמר ולא מופיע אצל המורה.',
           () => {
             /* Keep first entry lightweight. Guest-session state is needed only
-               after the learner explicitly chooses unregistered practice. A
-               fresh learner must also get a fresh document instance: async LMS
-               work from the previous practice view can otherwise finish after
-               the new session starts and repaint the old answer into the new
-               view even though its stored draft was correctly deleted. */
+               after the learner explicitly chooses unregistered practice. */
             void import('../lms/guestPracticeSession').then(({ beginGuestPracticeSession }) => {
               beginGuestPracticeSession();
-              window.history.replaceState(null, '', '#/workbook/1');
-              window.location.reload();
+              navigate('#/workbook/1');
             });
           },
         ),
