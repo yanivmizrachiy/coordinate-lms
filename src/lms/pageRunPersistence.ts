@@ -37,10 +37,15 @@ export async function restartSubmittedPage(draft: PageDraft): Promise<Persistenc
     return { localSaved: true, central: 'not-required' };
   }
 
+  /* A registered retry changes the authoritative draft boundary. If Firebase
+     or the authenticated owner session is unavailable, do NOT manufacture a
+     local-only fresh run: the next cloud load could resurrect the submitted
+     draft or, worse, let the learner work in a run the teacher never sees.
+     Registered retry is therefore fail-closed until the central state can be
+     changed atomically. */
   const session = currentSession();
   if (!db || !session || session.uid !== draft.uid) {
-    storeLocalDraft(fresh);
-    return { localSaved: true, central: 'not-required' };
+    return { localSaved: false, central: 'failed', error: RESTART_ERROR };
   }
 
   try {
