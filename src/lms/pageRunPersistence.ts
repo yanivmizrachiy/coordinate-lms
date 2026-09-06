@@ -55,6 +55,15 @@ export async function restartSubmittedPage(draft: PageDraft): Promise<Persistenc
       if (!snapshot.exists()) throw new Error('missing submitted draft');
       const remote = snapshot.data() as PageDraft;
       if (!remote.submitted) throw new Error('draft is not submitted');
+
+      /* Do not let a stale tab reset a newer run that another tab/device has
+         already submitted. startedAt is the durable run identity used by the
+         Firestore contract, so the transaction may restart only the exact run
+         the learner is currently looking at. */
+      if (remote.startedAt !== draft.startedAt) {
+        throw new Error('submitted draft changed');
+      }
+
       transaction.set(reference, fresh);
     });
     storeLocalDraft(fresh);
