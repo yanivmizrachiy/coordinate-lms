@@ -46,7 +46,6 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
         target.textContent = '';
         delete target.dataset.lmsState;
         delete target.dataset.lmsAttempts;
-        target.removeAttribute('contenteditable');
         const label = target.getAttribute('aria-label');
         if (label) {
           target.setAttribute(
@@ -199,7 +198,8 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     /* Chrome can restore contenteditable/form state only after controls join
        the live document. Re-assert the fresh-guest boundary after insertion,
        then once more on the next task so restored UI can never outrun the
-       session-backed draft source of truth. */
+       session-backed draft source of truth. Editability itself belongs to the
+       LMS engine and is deliberately not changed here. */
     let freshGuestResetTimer: number | undefined;
     if (freshGuestStart) {
       clearFreshGuestUi();
