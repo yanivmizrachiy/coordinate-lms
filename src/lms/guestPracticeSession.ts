@@ -136,16 +136,17 @@ export function beginGuestPracticeSession(): GuestPracticeSession {
 
 function beginDirectGuestPracticeSession(): GuestPracticeSession {
   /* A learner may enter a numbered practice URL directly instead of pressing
-     the welcome button. In that path the LMS can create its first in-memory
-     draft just before repository access creates the session marker, so there
-     is no safe earlier timestamp boundary to impose. Clear historical guest
-     drafts, accept that first untagged draft, then let the session id become
-     authoritative on its first stored copy. */
+     the welcome button. pageViewer establishes this session before the LMS
+     creates its in-memory draft, so this path can use the same real timestamp
+     write barrier as an explicit welcome-screen start. That closes the old
+     startedAt=0 loophole in which a delayed untagged write could be adopted by
+     a later anonymous session. */
   clearStoredGuestDrafts();
+  const startedAt = Date.now();
   return storeBrowserSession({
     id: newId(),
-    day: localDay(),
-    startedAt: 0,
+    day: localDay(startedAt),
+    startedAt,
   });
 }
 
@@ -176,7 +177,7 @@ export function currentGuestPracticeSession(): GuestPracticeSession {
   } catch {
     // Storage can be blocked. Fall back to this module instance's memory only.
     if (memorySession?.day === today) return memorySession;
-    memorySession = { id: newId(), day: today, startedAt: 0 };
+    memorySession = { id: newId(), day: today, startedAt: Date.now() };
     return memorySession;
   }
 }
