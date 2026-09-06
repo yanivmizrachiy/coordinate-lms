@@ -15,6 +15,8 @@ import { hydrateChoiceAnswerInputs } from '../lms/choiceInputs';
 import { hydrateExplicitAuthoringAnswers } from '../lms/implicitAnswers';
 import { installHintCoach } from '../lms/hintCoach';
 import { installAttemptFeedback } from '../lms/attemptFeedback';
+import { currentSession } from '../lms/auth';
+import { currentGuestPracticeSession } from '../lms/guestPracticeSession';
 
 export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void {
   return ({ outlet, setTitle }) => {
@@ -52,6 +54,12 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
         freshGuestUrl.pathname + freshGuestUrl.search + freshGuestUrl.hash,
       );
     }
+
+    /* Direct numbered URLs are also valid guest entry points. Establish their
+       guest identity before attachLmsToPage creates its default draft so the
+       direct session receives a real timestamp barrier rather than an
+       unbounded startedAt=0 compatibility window. */
+    if (!currentSession()) currentGuestPracticeSession();
 
     const clearFreshGuestUi = (): void => {
       for (const target of sheetWrap.querySelectorAll<HTMLElement>(
