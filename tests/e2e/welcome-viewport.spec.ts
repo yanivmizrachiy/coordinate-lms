@@ -53,8 +53,13 @@ for (const phone of phones) {
 
 test('welcome choices navigate to the correct practice modes', async ({ page }) => {
   await page.goto('/#/');
+  const previousDocument = await page.evaluate(() => performance.timeOrigin);
   await page.getByRole('button', { name: 'לתרגל בלי רישום', exact: true }).click();
   await expect(page).toHaveURL(/#\/workbook\/1$/);
+  await page.waitForFunction(
+    (before) => performance.timeOrigin !== before,
+    previousDocument,
+  );
 
   await page.goto('/#/');
   await page.getByRole('button', { name: 'לתרגל עם רישום', exact: true }).click();

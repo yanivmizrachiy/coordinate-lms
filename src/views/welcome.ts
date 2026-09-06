@@ -54,11 +54,18 @@ export function welcome({ outlet, setTitle }: ViewContext): void {
           'לתרגל בלי רישום',
           'מתחילים מיד ומקבלים משוב וציון. הציון לא נשמר ולא מופיע אצל המורה.',
           () => {
-            /* Keep first entry lightweight. Guest-session state is needed only
-               after the learner explicitly chooses unregistered practice. */
+            /* An explicit guest start is a learner boundary, not ordinary SPA
+               navigation. Start the new guest identity, point the URL at page
+               1, then reload the document once. Destroying the previous JS
+               document guarantees that no delayed callback, timer or stale DOM
+               reference from the previous learner can repaint their answers
+               into the fresh learner view. sessionStorage survives this same-
+               tab reload, so the new identity is retained and normal reload
+               continuity after entry still works. */
             void import('../lms/guestPracticeSession').then(({ beginGuestPracticeSession }) => {
               beginGuestPracticeSession();
               navigate('#/workbook/1');
+              window.location.reload();
             });
           },
         ),

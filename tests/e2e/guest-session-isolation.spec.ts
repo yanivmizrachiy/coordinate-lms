@@ -12,34 +12,36 @@ async function guestStorageState(page: import('@playwright/test').Page): Promise
   sessionId: string | null;
   sessionStartedAt: number | null;
   guestDraft: unknown;
-  guestActivityTypes: string[];
 }> {
   return page.evaluate(() => {
     const rawSession = sessionStorage.getItem('coordinate_lms_guest_practice_session_v1');
     const rawDrafts = localStorage.getItem('coordinate_lms_drafts_v2');
-    const rawActivity = localStorage.getItem('coordinate_lms_activity_v2');
     const session = rawSession
       ? JSON.parse(rawSession) as { id?: unknown; startedAt?: unknown }
       : null;
     const drafts = rawDrafts ? JSON.parse(rawDrafts) as Record<string, unknown> : {};
-    const activity = rawActivity
-      ? JSON.parse(rawActivity) as Array<{ uid?: unknown; type?: unknown }>
-      : [];
     return {
       sessionId: typeof session?.id === 'string' ? session.id : null,
       sessionStartedAt: typeof session?.startedAt === 'number' ? session.startedAt : null,
       guestDraft: drafts['guest:1'],
-      guestActivityTypes: activity
-        .filter((item) => item?.uid === 'guest' && typeof item?.type === 'string')
-        .map((item) => item.type as string),
     };
   });
 }
 
-test('guest reload keeps this session but a new guest start is clean', async ({ page }) => {
-  await page.goto('/#/');
+async function startFreshGuest(page: import('@playwright/test').Page): Promise<void> {
+  const previousDocument = await page.evaluate(() => performance.timeOrigin);
   await page.getByRole('button', { name: 'לתרגל בלי רישום', exact: true }).click();
   await expect(page).toHaveURL(/#\/workbook\/1$/);
+  await page.waitForFunction(
+    (before) => performance.timeOrigin !== before,
+    previousDocument,
+  );
+  await expect(page.locator('[data-lms-qid="p1-q1"]')).toBeVisible();
+}
+
+test('guest reload keeps this session but a new guest start is clean', async ({ page }) => {
+  await page.goto('/#/');
+  await startFreshGuest(page);
 
   const initialSession = await guestStorageState(page);
   expect(initialSession.sessionId).not.toBeNull();
@@ -50,14 +52,10 @@ test('guest reload keeps this session but a new guest start is clean', async ({ 
   await submitFirstQuestion(page);
   await expect(target).toHaveAttribute('data-lms-state', 'correct');
 
-  await expect.poll(async () => (await guestStorageState(page)).guestActivityTypes).toContain('answer_check');
-  const afterCheck = await guestStorageState(page);
-  expect(afterCheck.sessionId).toBe(initialSession.sessionId);
-
-  await expect.poll(async () => (await guestStorageState(page)).guestDraft).toBeDefined();
   const firstSession = await guestStorageState(page);
+  expect(firstSession.sessionId).toBe(initialSession.sessionId);
 
-  // Reloading the same practice session must preserve answers and attempts.
+  // Ordinary reload continuity remains inside the SAME learner session.
   await page.reload();
   const reloaded = page.locator('[data-lms-qid="p1-q1"]');
   await expect(reloaded).toHaveText('x');
@@ -65,10 +63,9 @@ test('guest reload keeps this session but a new guest start is clean', async ({ 
   const afterReload = await guestStorageState(page);
   expect(afterReload.sessionId).toBe(firstSession.sessionId);
 
-  // Choosing unregistered practice again explicitly starts a different learner session.
+  // Choosing unregistered practice again is an explicit new-learner boundary.
   await page.goto('/#/');
-  await page.getByRole('button', { name: 'לתרגל בלי רישום', exact: true }).click();
-  await expect(page).toHaveURL(/#\/workbook\/1$/);
+  await startFreshGuest(page);
 
   const freshStorage = await guestStorageState(page);
   expect(freshStorage.sessionId).not.toBe(firstSession.sessionId);

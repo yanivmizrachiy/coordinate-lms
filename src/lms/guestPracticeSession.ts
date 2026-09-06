@@ -62,20 +62,7 @@ function clearStoredGuestDrafts(): void {
   }
 }
 
-export function beginGuestPracticeSession(): GuestPracticeSession {
-  /* This action means "a new unregistered learner starts now". Old guest
-     drafts have no account owner and must never cross that boundary. Remove
-     only guest records; registered learners' local drafts remain untouched.
-     Reloading an existing guest session does NOT call this function, so normal
-     refresh continuity and attempt history are preserved. */
-  clearStoredGuestDrafts();
-
-  const startedAt = Date.now();
-  const session: GuestPracticeSession = {
-    id: newId(),
-    day: localDay(startedAt),
-    startedAt,
-  };
+function storeBrowserSession(session: GuestPracticeSession): GuestPracticeSession {
   memorySession = session;
   if (typeof sessionStorage !== 'undefined') {
     try {
@@ -85,6 +72,43 @@ export function beginGuestPracticeSession(): GuestPracticeSession {
     }
   }
   return session;
+}
+
+export function beginGuestPracticeSession(): GuestPracticeSession {
+  /* This action means "a new unregistered learner starts now". Old guest
+     drafts have no account owner and must never cross that boundary. Remove
+     only guest records; registered learners' local drafts remain untouched.
+     Reloading an existing guest session does NOT call this function, so normal
+     refresh continuity and attempt history are preserved.
+
+     The explicit start time is also a write barrier for an untagged draft that
+     still belongs to the previous practice view. If that old view finishes an
+     async save after this new learner starts, repository.ts rejects it because
+     its startedAt predates this boundary. Once a draft is stamped, the session
+     id is the stronger identity check. */
+  clearStoredGuestDrafts();
+
+  const startedAt = Date.now();
+  return storeBrowserSession({
+    id: newId(),
+    day: localDay(startedAt),
+    startedAt,
+  });
+}
+
+function beginDirectGuestPracticeSession(): GuestPracticeSession {
+  /* A learner may enter a numbered practice URL directly instead of pressing
+     the welcome button. In that path the LMS can create its first in-memory
+     draft just before repository access creates the session marker, so there
+     is no safe earlier timestamp boundary to impose. Clear historical guest
+     drafts, accept that first untagged draft, then let the session id become
+     authoritative on its first stored copy. */
+  clearStoredGuestDrafts();
+  return storeBrowserSession({
+    id: newId(),
+    day: localDay(),
+    startedAt: 0,
+  });
 }
 
 export function currentGuestPracticeSession(): GuestPracticeSession {
@@ -109,12 +133,11 @@ export function currentGuestPracticeSession(): GuestPracticeSession {
       memorySession = stored;
       return stored;
     }
-    return beginGuestPracticeSession();
+    return beginDirectGuestPracticeSession();
   } catch {
     // Storage can be blocked. Fall back to this module instance's memory only.
     if (memorySession?.day === today) return memorySession;
-    const startedAt = Date.now();
-    memorySession = { id: newId(), day: today, startedAt };
+    memorySession = { id: newId(), day: today, startedAt: 0 };
     return memorySession;
   }
 }
