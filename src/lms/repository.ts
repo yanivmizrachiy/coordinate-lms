@@ -14,6 +14,7 @@ import {
 import { safeParse } from '../lib/json';
 import { DEFAULT_ANSWER_KEYS } from './answerKey';
 import { LMS_CONFIG } from './config';
+import { currentGuestPracticeSession } from './guestPracticeSession';
 import { scorePolicyOf } from './scoring';
 import { db } from './firebase';
 import { TOTAL_PAGES } from '../data/workbook';
@@ -86,6 +87,47 @@ function validateDraft(draft: PageDraft): PageDraft {
 function guestDraftForStorage(draft: PageDraft): PageDraft {
   const { score: _score, ...withoutScore } = draft;
   return validateDraft({ ...withoutScore, submitted: false });
+}
+
+function belongsToCurrentGuestSession(draft: PageDraft): boolean {
+  const sessionId = currentGuestPracticeSession().id;
+  if (sessionId === null) return draft.guestSessionId === undefined;
+  return draft.guestSessionId === sessionId;
+}
+
+/* Browser guest drafts are allowed to JOIN the active session only while they
+   are genuinely from that session. A new draft created by the current page may
+   not have its session id stamped yet, so its startedAt is compared with the
+   active session boundary. This is deliberately stricter than merely looking
+   at uid='guest': an async save from the previous learner can finish after a
+   new learner has pressed "לתרגל בלי רישום", and must be rejected instead of
+   being relabelled with the new learner's id. */
+function canWriteGuestDraftToCurrentSession(draft: PageDraft): boolean {
+  if (draft.uid !== 'guest') return true;
+  const session = currentGuestPracticeSession();
+  if (session.id === null) return draft.guestSessionId === undefined;
+  if (draft.guestSessionId !== undefined) {
+    return draft.guestSessionId === session.id;
+  }
+  return draft.startedAt >= session.startedAt;
+}
+
+function guestDraftForCurrentSession(draft: PageDraft): PageDraft {
+  const sanitized = guestDraftForStorage(draft);
+  const sessionId = currentGuestPracticeSession().id;
+  if (sessionId === null) {
+    const { guestSessionId: _guestSessionId, ...legacyCompatible } = sanitized;
+    return validateDraft(legacyCompatible);
+  }
+  return validateDraft({
+    ...sanitized,
+    guestSessionId: sanitized.guestSessionId ?? sessionId,
+  });
+}
+
+function draftWithoutGuestSession(draft: PageDraft): PageDraft {
+  const { guestSessionId: _guestSessionId, ...withoutGuestSession } = draft;
+  return validateDraft(withoutGuestSession);
 }
 
 function sanitizeGuestActivity(event: ActivityEvent): ActivityEvent {
@@ -328,7 +370,7 @@ export async function loadDraft(uid: string, pageNumber: number): Promise<PageDr
   const local = localDrafts[key];
 
   if (uid === 'guest') {
-    if (!local) return null;
+    if (!local || !belongsToCurrentGuestSession(local)) return null;
     const sanitized = guestDraftForStorage(local);
     localDrafts[key] = sanitized;
     saveMap(DRAFTS_KEY, localDrafts);
@@ -355,14 +397,25 @@ export async function loadDraft(uid: string, pageNumber: number): Promise<PageDr
 
 export async function saveDraft(draft: PageDraft): Promise<PersistenceOutcome> {
   const validated = validateDraft(draft);
+
+  /* A page from an older anonymous learner can still have an async save in
+     flight while the welcome screen starts a fresh guest session. Never let
+     that old write cross the session boundary or acquire the new session id. */
+  if (validated.uid === 'guest' && !canWriteGuestDraftToCurrentSession(validated)) {
+    return { localSaved: false, central: 'not-required' };
+  }
+
   const localDrafts = loadMap<PageDraft>(DRAFTS_KEY);
   const key = compoundKey(validated.uid, validated.pageNumber);
-  const incoming = validated.uid === 'guest' ? guestDraftForStorage(validated) : validated;
-  const existing = validated.uid === 'guest' && localDrafts[key]
-    ? guestDraftForStorage(localDrafts[key])
-    : localDrafts[key];
+  const incoming = validated.uid === 'guest' ? guestDraftForCurrentSession(validated) : validated;
+  const stored = localDrafts[key];
+  const existing = validated.uid === 'guest'
+    ? stored && belongsToCurrentGuestSession(stored)
+      ? guestDraftForStorage(stored)
+      : undefined
+    : stored;
   const mergedLocal = mergePageDrafts(existing, incoming);
-  localDrafts[key] = validated.uid === 'guest' ? guestDraftForStorage(mergedLocal) : mergedLocal;
+  localDrafts[key] = validated.uid === 'guest' ? guestDraftForCurrentSession(mergedLocal) : mergedLocal;
   saveMap(DRAFTS_KEY, localDrafts);
 
   const session = currentSession();
@@ -492,8 +545,15 @@ export function canFinalizeGuestTransfer(outcomes: PersistenceOutcome[]): boolea
 export async function claimGuestProgress(uid: string): Promise<GuestProgressClaim> {
   const drafts = loadMap<PageDraft>(DRAFTS_KEY);
   const outcomes: PersistenceOutcome[] = [];
-  const isGuestKey = (key: string): boolean => key.startsWith('guest:');
-  const guestDraftKeys = Object.keys(drafts).filter(isGuestKey);
+  const isCurrentGuestDraft = (key: string): boolean => {
+    const draft = drafts[key];
+    return Boolean(
+      key.startsWith('guest:') &&
+      draft?.uid === 'guest' &&
+      belongsToCurrentGuestSession(draft),
+    );
+  };
+  const guestDraftKeys = Object.keys(drafts).filter(isCurrentGuestDraft);
 
   /* Guest results are deliberately ephemeral. Purge legacy records from older
      builds rather than importing a previously displayed guest score. */
@@ -502,8 +562,9 @@ export async function claimGuestProgress(uid: string): Promise<GuestProgressClai
   for (const key of guestDraftKeys) {
     const guestDraft = drafts[key];
     if (guestDraft) {
+      const transferableDraft = draftWithoutGuestSession(guestDraftForStorage(guestDraft));
       outcomes.push(await saveDraft({
-        ...guestDraftForStorage(guestDraft),
+        ...transferableDraft,
         uid,
         updatedAt: Date.now(),
       }));
@@ -644,7 +705,9 @@ export async function loadUserResults(uid: string): Promise<PageResult[]> {
 }
 
 export async function loadUserDrafts(uid: string): Promise<PageDraft[]> {
-  const localDrafts = Object.values(loadMap<PageDraft>(DRAFTS_KEY)).filter((draft) => draft.uid === uid);
+  const localDrafts = Object.values(loadMap<PageDraft>(DRAFTS_KEY)).filter(
+    (draft) => draft.uid === uid && (uid !== 'guest' || belongsToCurrentGuestSession(draft)),
+  );
   if (!db || uid === 'guest') {
     return localDrafts
       .map((draft) => uid === 'guest' ? guestDraftForStorage(draft) : draft)

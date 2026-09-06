@@ -1,6 +1,6 @@
 # Coordinate LMS engineering rules
 
-Updated: 2026-08-27
+Updated: 2026-09-05
 
 This file is the single source of truth for `yanivmizrachiy/coordinate-lms`.
 Historical notes may explain past decisions, but they never override this file.
@@ -147,8 +147,8 @@ A current user instruction wins over older wording and this file must be reconci
 
 - Local save and central Firebase synchronization are different states. Never tell a learner that central save succeeded unless it actually did.
 - Central failures must be visible and retryable without duplicating attempts, results or activity events.
-- **Guest draft/answer/attempt state may be stored locally only to preserve learning continuity and prevent attempt reset. Guest page scores/results must never be persisted locally or centrally.** A legacy guest result from an older build must be ignored/purged, never restored and never transferred into a newly registered account.
-- Registration transfers eligible guest draft/attempt state only after account creation; it never imports an already displayed guest score.
+- **Guest draft/answer/attempt state may be stored locally only for the active guest practice session, so reloads preserve the current learner without leaking answers to the next learner. Choosing `לתרגל בלי רישום` starts a fresh guest session; stale or legacy guest drafts from another session must never hydrate into it. Opening a numbered page directly starts a fresh guest session when no current-day browser session exists. Guest page scores/results must never be persisted locally or centrally.** A legacy guest result from an older build must be ignored/purged, never restored and never transferred into a newly registered account.
+- Registration transfers eligible guest draft/attempt state only from the active guest practice session and only after account creation; it never imports an already displayed guest score or a stale draft from another guest session.
 - Registration requires full name, school, email and password in backend validation as well as the form. Student-facing authentication errors must be plain Hebrew, never raw Firebase codes.
 - If Firebase Authentication creates a user but the required profile write fails, do not leave a known partial registration behind; roll back the just-created auth user where possible and report a clear error.
 - Registration enables central save, cross-device continuation and teacher-dashboard visibility.
@@ -171,6 +171,7 @@ A current user instruction wins over older wording and this file must be reconci
 - **Worksheet text, mathematics, diagrams, blanks and page order:** `src/data/workbook/`.
 - **First-entry explanation:** `src/views/welcome.ts`; **route ownership:** `src/router.ts`; **first-entry styling:** `src/styles/welcome.css`.
 - **Registration/authentication semantics:** `src/lms/auth.ts` and `src/views/lmsLogin.ts`.
+- **Guest practice-session identity/reset boundary:** `src/lms/guestPracticeSession.ts`; **guest draft persistence/transfer enforcement:** `src/lms/repository.ts`.
 - **Attempt limit:** `src/lms/config.ts`. The Firestore bound in `firestore.rules` is the only intentional mirror because security rules execute separately; its contract tests must change in the same commit.
 - **Score/credit curve, equal-question target weighting and the scoring-policy version:** `src/lms/scoring.ts`; **mapping live worksheet targets into learner-facing question groups and the historical-score regrade on page load:** `src/lms/engine.ts`; **policy-aware score merge semantics:** `src/lms/repository.ts`.
 - **Final page-score rendering:** `src/lms/engine.ts`; **final score teacher sentence:** `src/lms/teacherVoice.ts` via `src/lms/pageScoreFeedback.ts`; **final score presentation:** `src/styles/page-score.css`.

@@ -53,7 +53,30 @@ export function welcome({ outlet, setTitle }: ViewContext): void {
           'free',
           'לתרגל בלי רישום',
           'מתחילים מיד ומקבלים משוב וציון. הציון לא נשמר ולא מופיע אצל המורה.',
-          () => navigate('#/workbook/1'),
+          () => {
+            /* An explicit guest start is a learner boundary, not ordinary SPA
+               navigation. Chrome may restore contenteditable DOM state when a
+               document is merely reloaded, even after localStorage has been
+               cleared. Give the new learner a one-use URL marker so the browser
+               performs a genuinely new document navigation. The session module
+               removes that marker from the visible URL after the new document
+               has started, while sessionStorage keeps the new learner identity. */
+            void import('../lms/guestPracticeSession').then(({ beginGuestPracticeSession }) => {
+              const guestSession = beginGuestPracticeSession();
+
+              // Keep the established route transition contract, then replace
+              // the document with a unique URL before any stale browser-restored
+              // editable state can become authoritative for the new learner.
+              navigate('#/workbook/1');
+              const nextUrl = new URL(window.location.href);
+              nextUrl.searchParams.set(
+                'guestStart',
+                guestSession.id ?? String(guestSession.startedAt),
+              );
+              nextUrl.hash = '#/workbook/1';
+              window.location.replace(nextUrl.toString());
+            });
+          },
         ),
       ),
       elem('p', {
