@@ -330,6 +330,7 @@ describe('Firestore emulator authorization contract', () => {
     await assertFails(
       setDoc(reference, {
         ...regraded,
+        startedAt: NOW + 150,
         submittedAt: NOW + 200,
         submissionId: 'next-submission',
         score: 40,
@@ -340,6 +341,7 @@ describe('Firestore emulator authorization contract', () => {
     await assertSucceeds(
       setDoc(reference, {
         ...regraded,
+        startedAt: NOW + 150,
         submittedAt: NOW + 200,
         submissionId: 'next-submission',
         score: 80,
