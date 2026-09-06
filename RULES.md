@@ -55,7 +55,9 @@ A current user instruction wins over older wording and this file must be reconci
 - Do not show legacy print/download actions, duplicate reader toolbars, duplicate navigation, a general `בדיקת תשובות` button, or other unrelated chrome inside practice.
 - Each question has one small action displayed as **`להגיש ←`** with accessible name **`להגיש שאלה לבדיקה`**. The old action wording `סיימתי שאלה` is retired.
 - Page submission remains separate: when the learner finishes the page, the page is submitted and receives its final page score.
-- Correct parts stay correct and locked. The learner edits only unresolved parts.
+- **All page-reset/retry actions are explicit Hebrew controls placed beside the practice actions they affect.** While a page is still in progress, provide **`ניקוי התשובות בעמוד`** as a secondary action. It clears only the learner's currently editable/unresolved text after an explicit confirmation; it does **not** erase checked-attempt history, unlock resolved work or refund lost credit.
+- **After final page submission, the final-score area must provide `לתרגל שוב מההתחלה`.** This starts a genuinely new run of the same page with empty answers, fresh per-question attempt counters and a new start time. The previously submitted result is not deleted.
+- Correct parts stay correct and locked during one run. The learner edits only unresolved parts. A deliberate new run after final submission is the only normal student action that starts that page with fresh attempts.
 - Typing/editing is never counted as an attempt. An attempt is counted only when a check is actually requested.
 
 ## 5. Scoring and correction model
@@ -70,6 +72,8 @@ A current user instruction wins over older wording and this file must be reconci
 - Scores from different policy versions are on incompatible scales. Merges never mix them through max(); a regrade replaces its legacy twin wholesale, including `bestScore`, which is re-based to the current policy. Student and teacher views both show the stored policy-current score once the regrade has persisted; until a legacy record's owner next opens that page, the stored legacy score remains visible under its legacy label.
 - **After the learner submits a page, the final page grade is shown prominently in red at the TOP of the practice page, above the worksheet.** The numeric grade remains red at every score, including 100; a perfect-score celebration may add restrained decoration without changing the grade colour.
 - Every final page score is accompanied by a short **Hebrew teacher comment appropriate to the score band**. The wording must come from one maintained feedback owner, vary naturally across pages, and remain truthful: strong scores receive positive reinforcement; middle scores combine recognition with a concrete review suggestion; low scores clearly say more practice is needed without shaming the learner.
+- **Submission is a recorded result, not a permanent lock on the page.** A registered learner's submitted result remains stored when `לתרגל שוב מההתחלה` begins a new run. On the next submission, `latestScore` becomes the new run's score and `bestScore` remains the highest submitted score under the same scoring policy. Progress/teacher views must not lose the earlier achievement merely because the learner chose to practise again.
+- For guest practice, the same retry control is available, but guest scores continue to follow the guest rule below: they are shown for the completed run and are not persisted as account results.
 - Correct on the first checked attempt loses no credit: 100% of that answer target's share within its real question.
 - If the first checked answer is wrong, the learner receives **up to three correction opportunities**: first attempt + correction 1 + correction 2 + correction 3 = at most four checked attempts.
 - Credit after checked mistakes is fixed and transparent:
@@ -79,7 +83,7 @@ A current user instruction wins over older wording and this file must be reconci
   - correction 3 correct: 25%
   - final correction still wrong: unresolved target locks with 0 credit
 - **A learner who answers incorrectly once, receives the first hint and then answers correctly earns 75% of that target's share, never 100%.** The hint does not erase the checked mistake.
-- Reload, retry, stale writes, reconnect or device changes must never reset attempts or refund lost credit.
+- Reload, retry, stale writes, reconnect or device changes must never reset attempts or refund lost credit. Only the explicit **post-submission** action `לתרגל שוב מההתחלה` creates a new run with fresh attempts; it never rewrites the score or attempt history of the already submitted run.
 - **Per-question notes to the child never explain point arithmetic.** After a checked answer the learner receives encouragement and the next step — including how many correction opportunities remain — but no "points lost / points remaining" accounting. The scoring model still runs exactly as defined above; its numbers surface only in the final page grade.
 - Any number the UI does show must mirror the real scoring calculation. Never maintain a second display-only grading model.
 - Attempt limits and score fractions must have one code owner/configuration path. Firestore may duplicate a bound only because it executes separately; tests must keep it aligned at 0–4.
@@ -137,6 +141,7 @@ A current user instruction wins over older wording and this file must be reconci
 - Controls should **look small and delicate** while remaining easy to tap. Prefer a compact visible button with an adequate touch target rather than a bulky visual block.
 - Touch accessibility is judged at the **final rendered scale on the device**, not by an unscaled CSS number inside the A4 sheet. A larger invisible hit region is preferred when it preserves a compact premium appearance.
 - `להגיש ←` is narrow and understated and sits beside its verdict/feedback. It must not look like a large page-level CTA.
+- `ניקוי התשובות בעמוד` is visibly secondary and must require confirmation before it clears editable text. `לתרגל שוב מההתחלה` belongs beside the completed-page score/feedback so the learner understands that the previous run is already recorded and the next run is new.
 - Previous/next navigation is one calm navigation system, distinguished by label/arrow/position rather than loud colors.
 - Secondary tools belong behind a quiet overflow control where appropriate. Do not duplicate primary navigation.
 - Feedback/hint/score-loss panels are compact, calm and readable on mobile and must not overwhelm the worksheet.
@@ -152,10 +157,12 @@ A current user instruction wins over older wording and this file must be reconci
 - Registration requires full name, school, email and password in backend validation as well as the form. Student-facing authentication errors must be plain Hebrew, never raw Firebase codes.
 - If Firebase Authentication creates a user but the required profile write fails, do not leave a known partial registration behind; roll back the just-created auth user where possible and report a clear error.
 - Registration enables central save, cross-device continuation and teacher-dashboard visibility.
-- Concurrent/stale writes must preserve the latest valid state, the best score within one scoring policy, highest attempt count and completed/locked states. Score conflicts resolve by policy version first (higher wins), then by computation freshness (`scoreComputedAt`) for the same submission, and only then by the historical stale-write max(). Local persistence and Firebase must converge to the same score.
+- **Starting a new run after submission resets only the active draft for that page. It must never delete the registered learner's submitted result.** The reset must be atomic enough that a stale async save from the completed run cannot overwrite or merge back into the fresh run. The new draft receives a new start identity/time and may synchronize across devices like any other registered draft.
+- Concurrent/stale writes must preserve the latest valid state, the best score within one scoring policy, highest attempt count and completed/locked states **within one run**. A deliberate new-run reset after submission is a separate transition and must be represented explicitly rather than achieved by weakening stale-write protections globally.
+- Score conflicts resolve by policy version first (higher wins), then by computation freshness (`scoreComputedAt`) for the same submission, and only then by the historical stale-write max(). Local persistence and Firebase must converge to the same score.
 - Firestore permits a stored score to drop only in a policy-aware regrade write that pins the submission's attempts, answers and identity fields; writers that do not declare a scoring-policy version stay bound to monotonic scores.
 - Students may access only their own data. Class-wide data and answer-key writes are administrator-only.
-- Firestore writes use field allowlists and enforce pages 1–78, scores 0–100, attempt summary 0–4, monotonic progress and bounded document shapes.
+- Firestore writes use field allowlists and enforce pages 1–78, scores 0–100, attempt summary 0–4, monotonic progress and bounded document shapes. Rules may allow the explicit submitted-run → fresh-run draft transition only when the owner, page identity and reset contract prove it is a new run; ordinary stale writes still may not lower attempts or reopen a run.
 - Never commit, expose or invent credentials.
 
 ## 11. Engineering discipline
@@ -174,7 +181,7 @@ A current user instruction wins over older wording and this file must be reconci
 - **Guest practice-session identity/reset boundary:** `src/lms/guestPracticeSession.ts`; **guest draft persistence/transfer enforcement:** `src/lms/repository.ts`.
 - **Attempt limit:** `src/lms/config.ts`. The Firestore bound in `firestore.rules` is the only intentional mirror because security rules execute separately; its contract tests must change in the same commit.
 - **Score/credit curve, equal-question target weighting and the scoring-policy version:** `src/lms/scoring.ts`; **mapping live worksheet targets into learner-facing question groups and the historical-score regrade on page load:** `src/lms/engine.ts`; **policy-aware score merge semantics:** `src/lms/repository.ts`.
-- **Final page-score rendering:** `src/lms/engine.ts`; **final score teacher sentence:** `src/lms/teacherVoice.ts` via `src/lms/pageScoreFeedback.ts`; **final score presentation:** `src/styles/page-score.css`.
+- **Final page-score rendering and page reset/retry controls:** `src/lms/engine.ts`; **draft reset persistence contract:** `src/lms/repository.ts`; **final score teacher sentence:** `src/lms/teacherVoice.ts` via `src/lms/pageScoreFeedback.ts`; **final score/reset presentation:** `src/styles/page-score.css` and the LMS control styles.
 - **Answer normalization/tolerance:** `src/lms/answerValidation.ts`.
 - **Explicit canonical answer capture:** `src/lms/implicitAnswers.ts`; **answer-key precedence/persistence:** `src/lms/repository.ts`.
 - **Guest/result persistence, retries, merge semantics and dashboard loading:** `src/lms/repository.ts` plus dedicated sync modules.
@@ -205,7 +212,7 @@ npm run test:visual
 
 `npm run verify` must cover answer coverage, typecheck, unit/content tests, Firestore authorization tests, build and visual/e2e checks in one command.
 
-The visual/e2e gate must include a first-entry viewport matrix proving both practice-choice buttons are fully above the fold on compact Android, iPhone-class portrait sizes and phone landscape, and it must verify final page-score presentation/feedback behavior.
+The visual/e2e gate must include a first-entry viewport matrix proving both practice-choice buttons are fully above the fold on compact Android, iPhone-class portrait sizes and phone landscape, and it must verify final page-score presentation/feedback behavior. It must also prove that `ניקוי התשובות בעמוד` cannot refund attempts, and that `לתרגל שוב מההתחלה` starts a fresh run while preserving the previously submitted registered result/best score.
 
 Normal PR CI proves repository engineering health. It may generate `release:report:static` as evidence even when external Firebase configuration, pedagogical review or physical two-device acceptance is still blocked; those external blockers must be reported, not disguised as code failures.
 
