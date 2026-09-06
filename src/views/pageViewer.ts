@@ -37,7 +37,21 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     const zoom = elem('div', { class: 'zoomer', role: 'group', 'aria-label': 'גודל התצוגה' }, zoomOut, zoomLabel, zoomIn);
     let gameCleanup: (() => void) | undefined;
     let choiceCleanup: (() => void) | undefined;
-    const freshGuestStart = new URL(window.location.href).searchParams.has('guestStart');
+
+    /* guestStart is a one-document marker. Consume it synchronously here,
+       before any LMS hydration, so an ordinary reload of this same guest
+       session can never be mistaken for another learner boundary. Keep only
+       the boolean for the two transient-UI cleanup passes below. */
+    const freshGuestUrl = new URL(window.location.href);
+    const freshGuestStart = freshGuestUrl.searchParams.has('guestStart');
+    if (freshGuestStart) {
+      freshGuestUrl.searchParams.delete('guestStart');
+      window.history.replaceState(
+        null,
+        '',
+        freshGuestUrl.pathname + freshGuestUrl.search + freshGuestUrl.hash,
+      );
+    }
 
     const clearFreshGuestUi = (): void => {
       for (const target of sheetWrap.querySelectorAll<HTMLElement>(
