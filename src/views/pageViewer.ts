@@ -50,12 +50,14 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
 
       /* A fresh anonymous learner must start from persisted state, never from
          Chrome's session-history restoration of contenteditable/radio DOM.
-         The one-use guestStart marker exists only for an explicit new guest
-         boundary and is removed by guestPracticeSession once the LMS reads the
-         new session. Clear only transient learner UI here; canonical answer
-         metadata (data-lms-answers) and the worksheet itself stay untouched. */
+         This runs before attachLmsToPage assigns qids, so select the canonical
+         answer surfaces themselves. The one-use guestStart marker exists only
+         for an explicit new guest boundary and is removed once the LMS reads
+         the new session. Canonical answer metadata stays untouched. */
       if (new URL(window.location.href).searchParams.has('guestStart')) {
-        for (const target of sheetWrap.querySelectorAll<HTMLElement>('[data-lms-qid]')) {
+        for (const target of sheetWrap.querySelectorAll<HTMLElement>(
+          '.blank, .word-blank, .pair-blank',
+        )) {
           target.textContent = '';
           delete target.dataset.lmsState;
           delete target.dataset.lmsAttempts;
