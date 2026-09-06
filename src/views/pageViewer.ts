@@ -37,6 +37,34 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     const zoom = elem('div', { class: 'zoomer', role: 'group', 'aria-label': 'גודל התצוגה' }, zoomOut, zoomLabel, zoomIn);
     let gameCleanup: (() => void) | undefined;
     let choiceCleanup: (() => void) | undefined;
+    const freshGuestStart = new URL(window.location.href).searchParams.has('guestStart');
+
+    const clearFreshGuestUi = (): void => {
+      for (const target of sheetWrap.querySelectorAll<HTMLElement>(
+        '.blank, .word-blank, .pair-blank',
+      )) {
+        target.textContent = '';
+        delete target.dataset.lmsState;
+        delete target.dataset.lmsAttempts;
+        target.removeAttribute('contenteditable');
+        const label = target.getAttribute('aria-label');
+        if (label) {
+          target.setAttribute(
+            'aria-label',
+            label.replace(
+              /\s+—\s+(?:נכון|לא נכון, אפשר לתקן|עדיין לא מולא|נעול לאחר שלושת התיקונים|נשמר לבדיקת המורה)$/,
+              '',
+            ),
+          );
+        }
+      }
+      for (const input of sheetWrap.querySelectorAll<HTMLInputElement>(
+        'input[type="radio"], input[type="checkbox"]',
+      )) {
+        input.checked = false;
+        input.disabled = false;
+      }
+    };
 
     if (data) {
       /* One source of truth: this exact canonical HTML also feeds print. The
@@ -50,36 +78,11 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
 
       /* A fresh anonymous learner must start from persisted state, never from
          Chrome's session-history restoration of contenteditable/radio DOM.
-         This runs before attachLmsToPage assigns qids, so select the canonical
-         answer surfaces themselves. The one-use guestStart marker exists only
-         for an explicit new guest boundary and is removed once the LMS reads
-         the new session. Canonical answer metadata stays untouched. */
-      if (new URL(window.location.href).searchParams.has('guestStart')) {
-        for (const target of sheetWrap.querySelectorAll<HTMLElement>(
-          '.blank, .word-blank, .pair-blank',
-        )) {
-          target.textContent = '';
-          delete target.dataset.lmsState;
-          delete target.dataset.lmsAttempts;
-          target.removeAttribute('contenteditable');
-          const label = target.getAttribute('aria-label');
-          if (label) {
-            target.setAttribute(
-              'aria-label',
-              label.replace(
-                /\s+—\s+(?:נכון|לא נכון, אפשר לתקן|עדיין לא מולא|נעול לאחר שלושת התיקונים|נשמר לבדיקת המורה)$/,
-                '',
-              ),
-            );
-          }
-        }
-        for (const input of sheetWrap.querySelectorAll<HTMLInputElement>(
-          'input[type="radio"], input[type="checkbox"]',
-        )) {
-          input.checked = false;
-          input.disabled = false;
-        }
-      }
+         This first pass clears any restoration that happened while the
+         canonical controls were being built. A second pass after insertion
+         into the live document handles Chrome's later form-state restoration.
+         Canonical answer metadata (data-lms-answers) stays untouched. */
+      if (freshGuestStart) clearFreshGuestUi();
 
       if (data.gameId) {
         let host = sheetWrap.querySelector<HTMLElement>('[data-game-host]');
@@ -192,6 +195,17 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
     viewer.append(nav);
     c.append(viewer);
     outlet.append(c);
+
+    /* Chrome can restore contenteditable/form state only after controls join
+       the live document. Re-assert the fresh-guest boundary after insertion,
+       then once more on the next task so restored UI can never outrun the
+       session-backed draft source of truth. */
+    let freshGuestResetTimer: number | undefined;
+    if (freshGuestStart) {
+      clearFreshGuestUi();
+      freshGuestResetTimer = window.setTimeout(clearFreshGuestUi, 0);
+    }
+
     window.scrollTo({ top: 0 });
 
     const applyZoom = (): void => {
@@ -266,6 +280,7 @@ export function pageViewer(n: number): (ctx: ViewContext) => (() => void) | void
 
     return () => {
       window.clearTimeout(settle);
+      if (freshGuestResetTimer !== undefined) window.clearTimeout(freshGuestResetTimer);
       window.removeEventListener('resize', applyZoom);
       sheetResizeObserver?.disconnect();
       sheetMutationObserver?.disconnect();
